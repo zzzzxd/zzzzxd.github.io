@@ -191,6 +191,20 @@
 
                         
                         <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -205,21 +219,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/photography/">Photography</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -322,9 +322,18 @@
 <blockquote>
 <p>需要注意的是：一台主机可能既是Client，也是Server。所以会同时拥有authorized_keys和known_hosts。</p>
 </blockquote>
-<h4 id="有关文件的常见疑问"><a href="#有关文件的常见疑问" class="headerlink" title="有关文件的常见疑问"></a>有关文件的常见疑问</h4><h5 id="known-hosts中存储的内容是什么？"><a href="#known-hosts中存储的内容是什么？" class="headerlink" title="known_hosts中存储的内容是什么？"></a>known_hosts中存储的内容是什么？</h5><p>​    known_hosts中存储是已认证的远程主机host key，每个SSH Server都有一个<strong>secret, unique ID, called a host key</strong>。    </p>
-<h5 id="host-key何时加入known-hosts的？"><a href="#host-key何时加入known-hosts的？" class="headerlink" title="host key何时加入known_hosts的？"></a>host key何时加入known_hosts的？</h5><p>​    当我们第一次通过SSH登录远程主机的时候</p>
-<h5 id="为什么需要known-hosts？"><a href="#为什么需要known-hosts？" class="headerlink" title="为什么需要known_hosts？"></a>为什么需要known_hosts？</h5><p>​    最后探讨下为什么需要known_hosts，这个文件主要是通过Client和Server的双向认证，从而避免中间人（<strong>man-in-the-middle attack</strong>）攻击，每次Client向Server发起连接的时候，不仅仅Server要验证Client的合法性，Client同样也需要验证Server的身份，SSH client就是通过known_hosts中的host key来验证Server的身份的。</p>
+<h4 id="有关文件的常见疑问"><a href="#有关文件的常见疑问" class="headerlink" title="有关文件的常见疑问"></a>有关文件的常见疑问</h4><ol>
+<li>known_hosts中存储的内容是什么？</li>
+</ol>
+<p>​    known_hosts中存储是已认证的远程主机host key，每个SSH Server都有一个<strong>secret, unique ID, called a host key</strong>。    </p>
+<ol>
+<li>host key何时加入known_hosts的？</li>
+</ol>
+<p>​    当我们第一次通过SSH登录远程主机的时候</p>
+<ol>
+<li>为什么需要known_hosts？</li>
+</ol>
+<p>​    最后探讨下为什么需要known_hosts，这个文件主要是通过Client和Server的双向认证，从而避免中间人（<strong>man-in-the-middle attack</strong>）攻击，每次Client向Server发起连接的时候，不仅仅Server要验证Client的合法性，Client同样也需要验证Server的身份，SSH client就是通过known_hosts中的host key来验证Server的身份的。</p>
 <blockquote>
 <p>这中方案足够安全吗？当然不，比如第一次连接一个未知Server的时候，known_hosts还没有该Server的host key，这不也可能遭到<strong>中间人</strong>攻击吗？这可能只是安全性和可操作性之间的折中吧。</p>
 </blockquote>
@@ -454,7 +463,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#初识SSH"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">初识SSH</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSH原理"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">SSH原理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#口令认证"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">口令认证</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#公钥认证"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">公钥认证</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSH的最佳实践"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">SSH的最佳实践</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#SSH生成的文件"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">SSH生成的文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#有关文件的常见疑问"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">有关文件的常见疑问</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#known-hosts中存储的内容是什么？"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">known_hosts中存储的内容是什么？</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#host-key何时加入known-hosts的？"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">host key何时加入known_hosts的？</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#为什么需要known-hosts？"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">为什么需要known_hosts？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用命令"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">使用命令</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#初识SSH"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">初识SSH</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSH原理"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">SSH原理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#口令认证"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">口令认证</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#公钥认证"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">公钥认证</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSH的最佳实践"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">SSH的最佳实践</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#SSH生成的文件"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">SSH生成的文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#有关文件的常见疑问"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">有关文件的常见疑问</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用命令"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">使用命令</span></a></li></ol></li></ol>
             
           
           </div>
