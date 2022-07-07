@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          HTTPS对称与非对称加密协议 - Dante&#39;s blog
+          HTTPS与&#34;中间人攻击&#34; - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/06/Httptps对称与非对称加密协议/">
+    <link rel="canonical" href="https://dusign.net/2022/07/07/HTTPS与中间人攻击/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,23 +112,21 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#https" title="https">https</a>
-                            
-                              <a class="tag" href="/tags/#加密算法" title="加密算法">加密算法</a>
+                              <a class="tag" href="/tags/#Https" title="Https">Https</a>
                             
                         </div>
-                        <h1>HTTPS对称与非对称加密协议</h1>
+                        <h1>HTTPS与&#34;中间人攻击&#34;</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-06
+                            2022-07-07
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">2.3k</span> and
-                                Reading Time <span class="post-count">7</span> Minutes
+                                Words <span class="post-count">1.9k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -272,56 +270,102 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>众所周知，WEB服务存在http和https两种通信方式，http默认采用80作为通讯端口，对于传输采用不加密的方式，https默认采用443，对于传输的数据进行加密传输。本文重点介绍https涉及到的对称加密和非对称加密协议原理。</p>
-</blockquote>
-<p>首先我们先不谈https，先从一个简单的通讯原理图讲起：</p>
+                <h3 id="引导问题"><a href="#引导问题" class="headerlink" title="引导问题"></a>引导问题</h3><ol>
+<li><p>为什么使用Https是安全的？</p>
+</li>
+<li><p>Https的底层原理如何实现？</p>
+</li>
+<li><p>使用Https是绝对安全的吗？</p>
+</li>
+</ol>
+<h3 id="Https实现原理"><a href="#Https实现原理" class="headerlink" title="Https实现原理"></a>Https实现原理</h3><p>Https协议在内容传输上使用的加密是“对称加密”，而“非对称加密”只作用于证书验证阶段。Https的整体实现过程分为“证书验证”和“数据传输”两个阶段，过程如下所示：</p>
+<ul>
+<li>Https协议在内容传输上使用的加密是“对称加密”，而“非对称加密”只作用于证书验证阶段。</li>
+<li>Https的整体实现过程分为“证书验证”和“数据传输”两个阶段，过程如下所示：</li>
+</ul>
 <p>​    <img src="1.png" alt="0"></p>
-<h4 id="http通信原理"><a href="#http通信原理" class="headerlink" title="http通信原理"></a>http通信原理</h4><p>客户端发送一句client hello给服务器端，服务器端返回一句serverhello给客户端，鉴于本文讨论是https的加密主题，我们只讨论信息传输的加密问题实现客户端和服务端发送的信息client hello 和server hello，即使中间的包被窃取了，也无法解密传输的内容</p>
-<p>http：client hello和server hello在通讯的过程中，以明文的形式进行传输，采用wireshark抓包的效果如下图：</p>
+<p><strong>证书验证阶段</strong></p>
+<ol>
+<li><p>浏览器发起Https请求；</p>
+</li>
+<li><p>服务器端返回Https证书；</p>
+</li>
+<li><p>浏览器客户端验证证书是否合法，若不合法则提示警告</p>
+</li>
+</ol>
+<p><strong>数据传输阶段</strong></p>
+<ol>
+<li><p>当证书验证合法后，在客户端本地生成随机数；</p>
+</li>
+<li><p>通过公钥加密随机数，并将加密后的随机数传输到服务端；</p>
+</li>
+<li><p>服务端通过私钥对接收到的加密随机数进行解密操作；</p>
+</li>
+<li><p>服务端通过客户端传入的随机数构造对称加密算法，对返回结果内容进行加密操作后再进行内容传输。</p>
+</li>
+</ol>
+<h3 id="为什么数据传输是用对称加密？"><a href="#为什么数据传输是用对称加密？" class="headerlink" title="为什么数据传输是用对称加密？"></a>为什么数据传输是用对称加密？</h3><p>首先，非对称加密的加密效率是非常低的，而http的应用场景通常存在着端与端之间的大量数据交互，从效率来说是无法接受的；</p>
+<p>其次，在Https场景中只有服务端保存了私钥，而一对公私钥只能实现单向的加解密（即服务端无法使用私钥对传回浏览器客户端的数据进行加密，只能用于解密），所以Https中内容传输加密采取的是对称加密，而不是非对称加密（此处随机数则是对称加密的介体，即客户端和服务器端所拥有的随机数都是一致的，能够进行双向加解密）。</p>
+<h3 id="为什么需要CA认证机构颁发证书？"><a href="#为什么需要CA认证机构颁发证书？" class="headerlink" title="为什么需要CA认证机构颁发证书？"></a>为什么需要CA认证机构颁发证书？</h3><p>Http协议被认为不安全是因为传输过程容易被监听者勾线监听、伪造服务器，而Https协议主要就是解决网络传输的安全性问题。</p>
+<p>首先，我们假设不存在认证机构，任何人都可以制作证书，这存在的风险便是经典的“中间人攻击”问题。具体过程如下：</p>
 <p>​    <img src="2.png" alt="0"></p>
-<p>有没有感觉这个的信息传输是完全暴露在互联网上面，你请求的所有信息都可以被窥测到，是不是感觉心一凉，不过不用担心，我们的安全信息现在都是采用https的传输，后面讲到https的时候大家心里会顿时轻松。但这不是最关键的，http的传输最大的隐患是信息劫持和篡改，如下图：</p>
-<p>​    <img src="3.png" alt="0"></p>
-<p>可以看到，http的信息传输中，信息很容易被×××给劫持，更有甚者，×××可以伪装服务器将篡改后的信息返回给用户，试想一下，如果×××劫持的是你的银行信息，是不是很可怕。所以对于http传出存在的问题可以总结如下：</p>
-<p>（1）信息篡改：修改通信的内容</p>
-<p>（2）信息劫持：拦截到信息通信的内容</p>
-<p>这些是http不安全的体现，说完http，我们回到本文的主题https，看下人家是怎么保护信息的，所有的请求信息都采用了TLS加密，如果没有秘钥是无法解析传输的是什么信息</p>
-<p>​    <img src="4.png" alt="0"></p>
-<h4 id="对于加密传输存在对称加密和非对称加密"><a href="#对于加密传输存在对称加密和非对称加密" class="headerlink" title="对于加密传输存在对称加密和非对称加密"></a>对于加密传输存在对称加密和非对称加密</h4><h5 id="对称加密-——对称加密传输"><a href="#对称加密-——对称加密传输" class="headerlink" title="对称加密 ——对称加密传输"></a>对称加密 ——对称加密传输</h5><p>​    <img src="5.png" alt="0"></p>
-<p>当客户端发送Hello字符串的时候，在进行信息传输前，采用加密算法（上图中的秘钥S）将hello加密程JDuEW8&amp;*21!@#进行传输，即使中间被×××劫持了，如果没有对应的秘钥S也无法知道传出的信息为何物，在上图中信息的加密和解密都是通过同一个秘钥进行的，对于这种加密我们称之为对称加密，只要A和B之间知道加解密的秘钥，任何第三方都无法获取秘钥S，则在一定条件下，基本上解决了信息通信的安全问题。但在现实的情况下（www），实际的通讯模型远比上图复杂，下图为实际的通信模型</p>
-<p>​    <img src="6.png" alt="0"></p>
-<p>server和所有的client都采用同一个秘钥S进行加解密，但大家思考下，如果这样的话，无异于没有加密，请做下思考</p>
-<p>由于server和所有的client都采用同一个秘钥S，则×××们作为一个client也可以获取到秘钥S，此地无银三百两。所以在实际的通讯中，一般不会采用同一个秘钥，而是采用不同的秘钥加解密，如下图——通过协商的方式获取不同的秘钥</p>
-<p>​    <img src="7.png" alt="0"></p>
-<p>如上图，A和server通信采用对称加密A算法，B和server通信采用对称秘钥B算法，因此可以很好的解决了不同的客户端采用相同的秘钥进行通讯的问题</p>
-<p>那现在又存在问题了，A通过明文传输和server协商采用了加密算法A，但这条信息本身是没有加密的，因此×××们还是可以窃取到秘钥的，整个的通讯仍然存在风险。那该如何处理呢？有人说，把这条信息（协调秘钥的过程）再次加密，那是不是还要协商加密秘钥，如此反复，永无止境。从根本上无法解决信息通讯的安全问题</p>
-<h5 id="如何对协商过程进行加密-（-非对称加密原理图）"><a href="#如何对协商过程进行加密-（-非对称加密原理图）" class="headerlink" title="如何对协商过程进行加密 （ 非对称加密原理图）"></a>如何对协商过程进行加密 （ 非对称加密原理图）</h5><p>​    <img src="8.png" alt="0"></p>
-<p>在密码学跟对称加密一起出现的，应用最广的加密机制“非对称加密”，如上图，特点是私钥加密后的密文，只要是公钥，都可以解密，但是反过来公钥加密后的密文，只有私钥可以解密。私钥只有一个人有，而公钥可以发给所有的人。</p>
-<p>基于上述的特点，我们可以得出如下结论：</p>
-<p>（1）公钥是开放给所有人的，但私钥是需要保密的，存在于服务端</p>
-<p>（2）服务器端server向client端（A、B…）的信息传输是不安全的：因为所有人都可以获取公钥</p>
-<p>（3）但client端（A、B…）向server端的信息传输确实安全的：因为私钥只有server端存在</p>
-<p>因此，如何协商加密算法的问题，我们解决了，非对称加密算法进行对称加密算法协商过程。</p>
-<p>​    <img src="9.png" alt="0"></p>
-<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p>信息通信采用http是不安全的，存在信息劫持、篡改的风险，https是加密传输，是安全的通信，对于https加密的过程，我们首先介绍的对称加密，采用对称加密进行通信存在秘钥协商过程的不安全性，因此我们采用了非对称加密算法解决了对协商过程的加密，因此https是集对称加密和非对称加密为一体的加密过程</p>
-<p><strong>安全的获取公钥</strong></p>
-<p>细心的人可能已经注意到了如果使用非对称加密算法，我们的客户端A，B需要一开始就持有公钥，要不没法开展加密行为啊。</p>
-<p>这下，我们又遇到新问题了，如何让A、B客户端安全地得到公钥？</p>
-<p>​    <img src="10.png" alt="0"></p>
-<p>client获取公钥最最直接的方法是服务器端server将公钥发送给每一个client用户，但这个时候就出现了公钥被劫持的问题，如上图，client请求公钥，在请求返回的过程中被×××劫持，那么我们将采用劫持后的假秘钥进行通信，则后续的通讯过程都是采用假秘钥进行，数据库的风险仍然存在。在获取公钥的过程中，我们又引出了一个新的话题：如何安全的获取公钥，并确保公钥的获取是安全的， 那就需要用到终极武器了：SSL 证书（需要购买）和CA机构</p>
-<p>​    <img src="11.png" alt="0"></p>
-<p>如上图所示，在第 ② 步时服务器发送了一个SSL证书给客户端，SSL 证书中包含的具体内容有证书的颁发机构、有效期、公钥、证书持有者、签名，通过第三方的校验保证了身份的合法，解决了公钥获取的安全性</p>
-<p>以浏览器为例说明如下整个的校验过程：</p>
-<p>（1）首先浏览器读取证书中的证书所有者、有效期等信息进行一一校验</p>
-<p>（2）浏览器开始查找操作系统中已内置的受信任的证书发布机构CA，与服务器发来的证书中的颁发者CA比对，用于校验证书是否为合法机构颁发</p>
-<p>（3）如果找不到，浏览器就会报错，说明服务器发来的证书是不可信任的。</p>
-<p>（4）如果找到，那么浏览器就会从操作系统中取出 颁发者CA 的公钥，然后对服务器发来的证书里面的签名进行解密</p>
-<p>（5）浏览器使用相同的hash算法计算出服务器发来的证书的hash值，将这个计算的hash值与证书中签名做对比</p>
-<p>（6）对比结果一致，则证明服务器发来的证书合法，没有被冒充</p>
-<p>（7）此时浏览器就可以读取证书中的公钥，用于后续加密了</p>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>​        HTTPS要使客户端与服务器端的通信过程得到安全保证，必须使用的对称加密算法，但是协商对称加密算法的过程，需要使用非对称加密算法来保证安全，然而直接使用非对称加密的过程本身也不安全，会有中间人篡改公钥的可能性，所以客户端与服务器不直接使用公钥，而是使用数字证书签发机构颁发的证书来保证非对称加密过程本身的安全。这样通过这些机制协商出一个对称加密算法，就此双方使用该算法进行加密解密。从而解决了客户端与服务器端之间的通信安全问题。</p>
+<h3 id="“中间人攻击”原理"><a href="#“中间人攻击”原理" class="headerlink" title="“中间人攻击”原理"></a>“中间人攻击”原理</h3><ol>
+<li><p>客户端请求被劫持（如DNS劫持等），所有的客户端请求均被转发至中间人的服务器；</p>
+</li>
+<li><p>中间人服务器返回中间人伪造的“伪证书”（包含伪公钥）；</p>
+</li>
+<li><p>客户端创建随机数，通过中间人证书的伪公钥对随机数进行加密后传输给中间人，然后凭随机数构造对称加密算法对要进行传输的数据内容进行对称加密后传输；</p>
+</li>
+<li><p>中间人因为拥有客户端生成的随机数，从而能够通过对称加密算法进行数据内容解密；</p>
+</li>
+<li><p>中间人再以“伪客户端”的身份向正规的服务端发起请求；</p>
+</li>
+<li><p>因为中间人与服务器之间的通信过程是合法的，正规服务端通过建立的安全通道返回加密后的数据内容；</p>
+</li>
+<li><p>中间人凭借与正规服务器建立的对称加密算法进行数据内容解密；</p>
+</li>
+<li><p>中间人再通过与客户端建立的对称加密算法对正规服务器返回的数据内容进行加密传输；</p>
+</li>
+<li><p>客户端通过中间人建立的对称加密算法对返回的数据内容进行解密；</p>
+</li>
+</ol>
+<p>由于缺少对证书的真伪性验证，所有客户端即使发起了Https请求，但客户端完全不知道自己发送的请求已经被第三方拦截，导致其中传输的数据内容被中间人窃取。</p>
+<h3 id="浏览器如何确保CA证书的合法性？"><a href="#浏览器如何确保CA证书的合法性？" class="headerlink" title="浏览器如何确保CA证书的合法性？"></a>浏览器如何确保CA证书的合法性？</h3><ol>
+<li>证书包含的主要信息：</li>
+</ol>
+<ul>
+<li>颁发机构信息</li>
+<li>公钥</li>
+<li>公司信息</li>
+<li>域名</li>
+<li>有效期</li>
+<li>指纹</li>
+<li>等等</li>
+</ul>
+<ol>
+<li>证书的合法性依据</li>
+</ol>
+<p>首先，权威机构是需要通过认证的。其次证书的可信性基于信任制，CA认证机构需要对其颁发的证书进行信用担保，只要是CA认证机构颁发的证书，我们就认为是合法的。CA认证机构会对证书申请人的信息进行审核的。</p>
+<ol>
+<li><p>浏览器如何验证证书的合法性？</p>
+<p>浏览器发起https请求时，服务器会返回网站的SSL证书，浏览器需要对证书做以下验证：</p>
+</li>
+</ol>
+<ul>
+<li>验证域名、有效期等信息是否正确；</li>
+<li>判断证书来源是否合法。每份签发证书都可以根据验证链查找到对应的根证书，操作系统、浏览器会在本地存储权威机构的根证书，利用本地根证书可以对对应机构签发的证书进行来源验证；</li>
+<li>判断证书是否被篡改。需要与CA服务器进行对比校验；</li>
+<li>判断证书是否已被吊销。通过CRL(Certificate Revocation List 证书注销列表) 和 OCSP（Online Certificate Status Protocol 在线证书状态协议）实现，其中OCSP可用于第3步中以减少与CA服务器的交互，提高验证效率。</li>
+</ul>
+<p>以上任意一步都同时满足的情况下，浏览器才认为证书是合法的。</p>
+<h3 id="只有认证机构可以生产证书吗？"><a href="#只有认证机构可以生产证书吗？" class="headerlink" title="只有认证机构可以生产证书吗？"></a>只有认证机构可以生产证书吗？</h3><p>如果需要浏览器不提示安全风险，那只能通过认证机构签发的证书。但浏览器通常只是会提示安全风险，并不会限制网站的访问，所有从技术上来说，谁都可以生产证书，只要有证书就能够完成网站的https传输。</p>
+<h3 id="客户端的本地随机数被窃取了怎么办？"><a href="#客户端的本地随机数被窃取了怎么办？" class="headerlink" title="客户端的本地随机数被窃取了怎么办？"></a>客户端的本地随机数被窃取了怎么办？</h3><p>其实https并不包含对随机数的安全保证，https保证的只是数据传输过程安全，而随机数存储于本地，本地的安全属于另一安全范畴，应对的措施有安装杀毒软件、反木马、浏览器升级修复漏洞等。（这也反映了Https协议并不是绝对的安全的）</p>
+<h3 id="使用Https被抓包了会怎样？"><a href="#使用Https被抓包了会怎样？" class="headerlink" title="使用Https被抓包了会怎样？"></a>使用Https被抓包了会怎样？</h3><p>由于Https的数据是加密，常规下抓包工具代理请求后抓到的包内容是加密状态的，无法直接查看。</p>
+<p>但是，浏览器只会提示安全风险，如果用户授权仍然继续访问网站，完成请求。那么，只有客户端是我们自己的终端，我们授权的情况下，便能够建立中间人网络，而抓包工具作为中间人的代理。</p>
+<p>通常， HTTPS 抓包工具的使用方法是会生成一个证书，用户需要手动把证书安装到客户端中，然后终端发起的所有请求通过该证书完成与抓包工具的交互，然后抓包工具再转发请求到服务器，最后把服务器返回的结果在控制台输出后再返回给终端，从而完成整个请求的闭环。</p>
+<p>即是，HTTPS 只防止用户在不知情的情况下通信被监听，如果用户主动授信，是可以构建“中间人”网络，代理软件可以对传输内容进行解密。</p>
 <blockquote>
-<p>引用：<a href="https://blog.csdn.net/weixin_42504145/article/details/85207103/" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42504145/article/details/85207103/</a></p>
+<p>引用:<a href="https://blog.csdn.net/Jop_qq/article/details/104362064" target="_blank" rel="noopener">https://blog.csdn.net/Jop_qq/article/details/104362064</a></p>
 </blockquote>
 
                 
@@ -329,13 +373,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2022/07/06/ArrayList源码解析/" data-toggle="tooltip" data-placement="top" title="ArrayList源码解析">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2022/07/06/HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥/" data-toggle="tooltip" data-placement="top" title="HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥">Next Post &rarr;</a>
+                        <a href="/2022/07/06/HashSet与TreeSet源码解析/" data-toggle="tooltip" data-placement="top" title="HashSet与TreeSet源码解析">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -448,7 +488,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#http通信原理"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">http通信原理</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#对于加密传输存在对称加密和非对称加密"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">对于加密传输存在对称加密和非对称加密</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#对称加密-——对称加密传输"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">对称加密 ——对称加密传输</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#如何对协商过程进行加密-（-非对称加密原理图）"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">如何对协商过程进行加密 （ 非对称加密原理图）</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#小结："><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">小结：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#总结："><span class="toc-nav-number">3.</span> <span class="toc-nav-text">总结：</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#引导问题"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">引导问题</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Https实现原理"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Https实现原理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#为什么数据传输是用对称加密？"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">为什么数据传输是用对称加密？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#为什么需要CA认证机构颁发证书？"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">为什么需要CA认证机构颁发证书？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#“中间人攻击”原理"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">“中间人攻击”原理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#浏览器如何确保CA证书的合法性？"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">浏览器如何确保CA证书的合法性？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#只有认证机构可以生产证书吗？"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">只有认证机构可以生产证书吗？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#客户端的本地随机数被窃取了怎么办？"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">客户端的本地随机数被窃取了怎么办？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用Https被抓包了会怎样？"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">使用Https被抓包了会怎样？</span></a></li></ol>
             
           
           </div>
@@ -470,9 +510,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#https" title="https">https</a>
-                        
-                          <a class="tag" href="/tags/#加密算法" title="加密算法">加密算法</a>
+                          <a class="tag" href="/tags/#Https" title="Https">Https</a>
                         
                     </div>
                 </section>
