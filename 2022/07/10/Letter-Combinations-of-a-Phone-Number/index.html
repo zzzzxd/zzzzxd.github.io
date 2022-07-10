@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          TreeMap与LinkedHashMap源码解析 - Dante&#39;s blog
+           Letter Combinations of a Phone Number - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/06/TreeMap与LinkedHashMap源码解析/">
+    <link rel="canonical" href="https://dusign.net/2022/07/10/Letter-Combinations-of-a-Phone-Number/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,19 +112,21 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#recursion" title="recursion">recursion</a>
+                            
                         </div>
-                        <h1>TreeMap与LinkedHashMap源码解析</h1>
+                        <h1> Letter Combinations of a Phone Number</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-06
+                            2022-07-10
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">0</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">341</span> and
+                                Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -185,20 +187,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -214,6 +202,20 @@
                         
                         <li>
                             <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -268,19 +270,39 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h3><p>​    <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" rel="noopener">https://leetcode.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>​    Given a string containing digits from <code>2-9</code> inclusive, return all possible letter combinations that the number could represent. Return the answer in <strong>any order</strong>.</p>
+<p>A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.</p>
+<p><img src="https://assets.leetcode.com/uploads/2022/03/15/1200px-telephone-keypad2svg.png" alt="img"></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: digits &#x3D; &quot;23&quot;</span><br><span class="line">Output: [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: digits &#x3D; &quot;&quot;</span><br><span class="line">Output: []</span><br></pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: digits &#x3D; &quot;2&quot;</span><br><span class="line">Output: [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span><br></pre></td></tr></table></figure>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= digits.length &lt;= 4</code></li>
+<li><code>digits[i]</code> is a digit in the range <code>[&#39;2&#39;, &#39;9&#39;]</code>.</li>
+</ul>
+<p>​    </p>
+<h3 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h3><ul>
+<li>不难，主要是考察会不会写递归，在递归中收集组合</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">char</span>[][] phone = &#123; </span><br><span class="line">			&#123; <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span> &#125;, <span class="comment">// 2    0</span></span><br><span class="line">			&#123; <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span> &#125;, <span class="comment">// 3    1</span></span><br><span class="line">			&#123; <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span> &#125;, <span class="comment">// 4    2</span></span><br><span class="line">			&#123; <span class="string">'j'</span>, <span class="string">'k'</span>, <span class="string">'l'</span> &#125;, <span class="comment">// 5    3</span></span><br><span class="line">			&#123; <span class="string">'m'</span>, <span class="string">'n'</span>, <span class="string">'o'</span> &#125;, <span class="comment">// 6    </span></span><br><span class="line">			&#123; <span class="string">'p'</span>, <span class="string">'q'</span>, <span class="string">'r'</span>, <span class="string">'s'</span> &#125;, <span class="comment">// 7 </span></span><br><span class="line">			&#123; <span class="string">'t'</span>, <span class="string">'u'</span>, <span class="string">'v'</span> &#125;,   <span class="comment">// 8</span></span><br><span class="line">			&#123; <span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span> &#125;, <span class="comment">// 9</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// "23"</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">letterCombinations</span><span class="params">(String digits)</span> </span>&#123;</span><br><span class="line">		List&lt;String&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">if</span> (digits == <span class="keyword">null</span> || digits.length() == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> ans;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">char</span>[] str = digits.toCharArray();</span><br><span class="line">		<span class="keyword">char</span>[] path = <span class="keyword">new</span> <span class="keyword">char</span>[str.length];</span><br><span class="line">		process(str, <span class="number">0</span>, path, ans);</span><br><span class="line">		<span class="keyword">return</span> ans;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">int</span> index, <span class="keyword">char</span>[] path, List&lt;String&gt; ans)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (index == str.length) &#123;</span><br><span class="line">			ans.add(String.valueOf(path));</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">char</span>[] cands = phone[str[index] - <span class="string">'2'</span>];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">char</span> cur : cands) &#123;</span><br><span class="line">				path[index] = cur;</span><br><span class="line">				process(str, index + <span class="number">1</span>, path, ans);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/06/HashSet与TreeSet源码解析/" data-toggle="tooltip" data-placement="top" title="HashSet与TreeSet源码解析">&larr; Previous Post</a>
+                        <a href="/2022/07/10/19-Remove-Nth-Node-From-End-of-List/" data-toggle="tooltip" data-placement="top" title="19. Remove Nth Node From End of List">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/06/LinkList源码解析/" data-toggle="tooltip" data-placement="top" title="LinkedList源码解析">Next Post &rarr;</a>
+                        <a href="/2022/07/10/15-3Sum/" data-toggle="tooltip" data-placement="top" title="15. 3Sum">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -388,6 +410,17 @@
 
     
       
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目链接"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目链接</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目解析"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">题目解析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#代码"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">代码</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
     
 
                 
@@ -404,6 +437,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#recursion" title="recursion">recursion</a>
+                        
                     </div>
                 </section>
                 

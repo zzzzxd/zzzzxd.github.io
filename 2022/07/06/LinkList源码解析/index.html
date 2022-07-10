@@ -112,6 +112,10 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                              <a class="tag" href="/tags/#源码" title="源码">源码</a>
+                            
                         </div>
                         <h1>LinkedList源码解析</h1>
                         <h2 class="subheading"></h2>
@@ -123,8 +127,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">0</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">1.5k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -185,20 +189,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -214,6 +204,20 @@
                         
                         <li>
                             <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -268,14 +272,84 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><ol>
+<li><p>整体结构</p>
+<p>LinkedList也是常用的一种数据结构,它和ArrayList在逻辑上都是线性结构，而在物理存储上ArrayList是连续存储，LinkedList是非连续存储。LinkedList实现是一个双向链表。Node节点源码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">     E item;</span><br><span class="line">     Node&lt;E&gt; next;</span><br><span class="line">     Node&lt;E&gt; prev;</span><br><span class="line">   </span><br><span class="line">     Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">         <span class="keyword">this</span>.item = element;</span><br><span class="line">         <span class="keyword">this</span>.next = next;</span><br><span class="line">         <span class="keyword">this</span>.prev = prev;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>只要稍微熟悉点数据结构对这种实现就不陌生，典型的链表结构，整体的图示如下:</p>
+</li>
+</ol>
+<ol>
+<li><p>类注释信息</p>
+<pre><code>    1. 没有实现线程同步，多线程的时候需要外部来做同步。
+</code></pre><ol>
+<li>ListIterator也是有“fail-fast”机制的。</li>
+</ol>
+</li>
+<li><p>常见属性</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">transient int size &#x3D; 0;</span><br><span class="line">&#x2F;**</span><br><span class="line">     * Pointer to first node.</span><br><span class="line">     * Invariant: (first &#x3D;&#x3D; null &amp;&amp; last &#x3D;&#x3D; null) ||</span><br><span class="line">     *            (first.prev &#x3D;&#x3D; null &amp;&amp; first.item !&#x3D; null)</span><br><span class="line">     *&#x2F;</span><br><span class="line">transient Node&lt;E&gt; first;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line">     * Pointer to last node.</span><br><span class="line">     * Invariant: (first &#x3D;&#x3D; null &amp;&amp; last &#x3D;&#x3D; null) ||</span><br><span class="line">     *            (last.next &#x3D;&#x3D; null &amp;&amp; last.item !&#x3D; null)</span><br><span class="line">     *&#x2F;</span><br><span class="line">transient Node&lt;E&gt; last;</span><br></pre></td></tr></table></figure>
+<h3 id="常用操作解析"><a href="#常用操作解析" class="headerlink" title="常用操作解析"></a>常用操作解析</h3><ol>
+<li><p>添加</p>
+<ol>
+<li><p>从头插入</p>
+<p>因为比较简单，都是最基础的数据结构，就不过多解释了，源码如下：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        linkFirst(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从头部追加</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">linkFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//头节点赋值给临时变量</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; f = first;</span><br><span class="line">        <span class="comment">//新建节点，前一个节点指向null，e是新建节点的值，f 是新建节点的下一个节点</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(<span class="keyword">null</span>, e, f);</span><br><span class="line">        <span class="comment">//新建节点成为头节点</span></span><br><span class="line">        first = newNode;</span><br><span class="line">        <span class="comment">//头节点为空，就是链表唯恐，头尾节点是一个节点。</span></span><br><span class="line">        <span class="keyword">if</span> (f == <span class="keyword">null</span>)</span><br><span class="line">            last = newNode;</span><br><span class="line">        <span class="comment">//上一个头节点的前一个节点就是当前节点</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            f.prev = newNode;</span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>从尾巴插入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        linkLast(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从尾部开始追加节点</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">linkLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 把尾节点数据暂存</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; l = last;</span><br><span class="line">        <span class="comment">//新建新的节点，l 是前一个节点，e 是当前节点的值，后一个节点是 null</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(l, e, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">//新建的节点放在尾部</span></span><br><span class="line">        last = newNode;</span><br><span class="line">        <span class="comment">//如果链表为空，头部和尾部是同一个节点，都是新建的节点</span></span><br><span class="line">        <span class="keyword">if</span> (l == <span class="keyword">null</span>)</span><br><span class="line">            first = newNode;</span><br><span class="line">        <span class="comment">//否则把前尾节点的下一个节点，指向当前尾节点。</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l.next = newNode;</span><br><span class="line">        <span class="comment">//大小和版本更改</span></span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>删除</p>
+<ol>
+<li>从头删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; f = first;</span><br><span class="line">        <span class="keyword">if</span> (f == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">        <span class="keyword">return</span> unlinkFirst(f);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从头删除节点 f 是链表头节点</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> E <span class="title">unlinkFirst</span><span class="params">(Node&lt;E&gt; f)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 拿出头节点的值，作为方法的返回值</span></span><br><span class="line">        <span class="keyword">final</span> E element = f.item;</span><br><span class="line">        <span class="comment">// 拿出头节点的下一个节点</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; next = f.next;</span><br><span class="line">        <span class="comment">//帮助 GC 回收头节点</span></span><br><span class="line">        f.item = <span class="keyword">null</span>;</span><br><span class="line">        f.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 头节点的下一个节点成为头节点</span></span><br><span class="line">        first = next;</span><br><span class="line">        <span class="comment">//如果 next 为空，表明链表为空</span></span><br><span class="line">        <span class="keyword">if</span> (next == <span class="keyword">null</span>)</span><br><span class="line">            last = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//链表不为空，头节点的前一个节点指向 null</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            next.prev = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//修改链表大小和版本</span></span><br><span class="line">        size--;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>从尾巴删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">final</span> Node&lt;E&gt; l = last;</span><br><span class="line">       <span class="keyword">if</span> (l == <span class="keyword">null</span>)</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">       <span class="keyword">return</span> unlinkLast(l);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> E <span class="title">unlinkLast</span><span class="params">(Node&lt;E&gt; l)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">assert</span> l == last &amp;&amp; l != <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">final</span> E element = l.item;</span><br><span class="line">        <span class="comment">//删除之前先保留前一个节点，last前移做准备</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; prev = l.prev;</span><br><span class="line">        l.item = <span class="keyword">null</span>;</span><br><span class="line">        l.prev = <span class="keyword">null</span>; <span class="comment">// help GC</span></span><br><span class="line">        last = prev;</span><br><span class="line">        <span class="keyword">if</span> (prev == <span class="keyword">null</span>)</span><br><span class="line">            first = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            prev.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//修改版本</span></span><br><span class="line">        size--;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>迭代</p>
+<p>有关迭代器相关的知识，在ArrayList文章中已经解释的比较详细了，这里就重点看下源码好了，比较简单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ListItr</span> <span class="keyword">implements</span> <span class="title">ListIterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>LinkedList是双向链表，所以实现的接口也是双向迭代器,继承关系如下:</p>
+<p><img src="2.png" alt=""></p>
+<p>接下来我们看下，它的向前，向后的迭代方法</p>
+<ol>
+<li>　向后迭代</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断还有没有下一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> nextIndex &lt; size;<span class="comment">//下一个节点的索引小于链表的大小，就有</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取下一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">//检查期望版本号有无发生变化</span></span><br><span class="line">  checkForComodification();</span><br><span class="line">  <span class="keyword">if</span> (!hasNext())<span class="comment">//再次检查</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">  <span class="comment">// next 是当前节点</span></span><br><span class="line">  lastReturned = next;</span><br><span class="line">  <span class="comment">// next 是下一个节点了，为下次迭代做准备</span></span><br><span class="line">  next = next.next;</span><br><span class="line">  nextIndex++;</span><br><span class="line">  <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>向前</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果上次节点索引位置大于 0，就还有节点可以迭代</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasPrevious</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> nextIndex &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取前一个节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">previous</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  checkForComodification();</span><br><span class="line">  <span class="keyword">if</span> (!hasPrevious())</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">  <span class="comment">// next 为空场景：说明是第一次迭代，取尾节点(last)</span></span><br><span class="line">  <span class="comment">// next 不为空场景：说明已经发生过迭代了，直接取前一个节点即可(next.prev)</span></span><br><span class="line">  lastReturned = next = (next == <span class="keyword">null</span>) ? last : next.prev;</span><br><span class="line">  <span class="comment">// 索引位置变化</span></span><br><span class="line">  nextIndex--;</span><br><span class="line">  <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>迭代器删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  checkForComodification();</span><br><span class="line">  <span class="comment">// lastReturned 为空，说明没有执行 next 或者 previos，直接报错</span></span><br><span class="line">  <span class="comment">// lastReturned = next() 方法执行的结果</span></span><br><span class="line">  <span class="keyword">if</span> (lastReturned == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">  Node&lt;E&gt; lastNext = lastReturned.next;</span><br><span class="line">  <span class="comment">//删除当前节点</span></span><br><span class="line">  unlink(lastReturned);</span><br><span class="line">  <span class="comment">// 从尾到头递归顺序，并且是第一次迭代，并且要删除最后一个元素的情况下</span></span><br><span class="line">  <span class="comment">// 这种情况下，previous 方法里面设置了 lastReturned = next = last。</span></span><br><span class="line">  <span class="comment">// 我们必须把 next 设置成 null，这样在下次递归时，previous 方法才会让队尾最后一个节点赋值给 next</span></span><br><span class="line">  <span class="keyword">if</span> (next == lastReturned)</span><br><span class="line">    next = lastNext;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    nextIndex--;</span><br><span class="line">  lastReturned = <span class="keyword">null</span>;</span><br><span class="line">  expectedModCount++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    LinkedList无非是链表的封装，使用起来也很简单，它的插入与删除都是O(1) 的复杂度，虽然ArrayList也是O(1)的，但那是在均摊分析下的，LinkedList是真正的O (1)操作，主要是它不需要考虑动态的扩容缩容操作。</p>
+<p>此外，LinkedList也常用来作为DeQueue的实现。Queue接口，我觉得它主要就是拿来做并发用的，有关它的知识点，有机会来介绍一下。</p>
+</li>
+</ol>
+
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/06/TreeMap与LinkedHashMap源码解析/" data-toggle="tooltip" data-placement="top" title="TreeMap与LinkedHashMap源码解析">&larr; Previous Post</a>
+                        <a href="/2022/07/06/TreeMap源码解析/" data-toggle="tooltip" data-placement="top" title="TreeMap源码解析">&larr; Previous Post</a>
                     </li>
                     
                     
@@ -388,6 +462,17 @@
 
     
       
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整体结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">整体结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常用操作解析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">常用操作解析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
     
 
                 
@@ -404,6 +489,10 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                          <a class="tag" href="/tags/#源码" title="源码">源码</a>
+                        
                     </div>
                 </section>
                 
