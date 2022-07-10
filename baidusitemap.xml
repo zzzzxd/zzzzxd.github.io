@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dusign.net/2022/07/10/Regular-Expression-Matching/</loc>
+    <loc>https://dusign.net/2022/07/10/44-Wildcard-Matching/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/42-Trapping-Rain-Water/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/41-First-Missing-Positive/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/38-Count-and-Say/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/36-Valid-Sudoku/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/Find-First-and-Last-Position-of-Element-in-Sorted-Array/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/33-Search-in-Rotated-Sorted-Array/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/29-Divide-Two-Integers/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/28-Implement-strStr/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/26-Remove-Duplicates-from-Sorted-Array/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/23-Merge-k-Sorted-Lists/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/22-Generate-Parentheses/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/21-Merge-Two-Sorted-Lists/</loc>
     <lastmod>2022-07-10</lastmod>
   </url>
   <url>
     <loc>https://dusign.net/2022/07/10/20-Valid-Parentheses/</loc>
+    <lastmod>2022-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2022/07/10/Regular-Expression-Matching/</loc>
     <lastmod>2022-07-10</lastmod>
   </url>
   <url>
