@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dusign.net/2022/07/12/128-Longest-Consecutive-Sequence/</loc>
+    
+    <lastmod>2022-07-11T16:46:01.063Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dusign.net/2022/07/12/127-Word-Ladder/</loc>
     
-    <lastmod>2022-07-11T16:10:22.804Z</lastmod>
+    <lastmod>2022-07-11T16:29:53.263Z</lastmod>
     
   </url>
   
@@ -527,14 +534,14 @@
   </url>
   
   <url>
-    <loc>https://dusign.net/categories/index.html</loc>
+    <loc>https://dusign.net/about/index.html</loc>
     
     <lastmod>2022-06-20T08:50:41.367Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://dusign.net/about/index.html</loc>
+    <loc>https://dusign.net/categories/index.html</loc>
     
     <lastmod>2022-06-20T08:50:41.367Z</lastmod>
     

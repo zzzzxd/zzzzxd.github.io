@@ -112,7 +112,7 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Trie" title="Trie">Trie</a>
+                              <a class="tag" href="/tags/#Graph" title="Graph">Graph</a>
                             
                         </div>
                         <h1>127. Word Ladder</h1>
@@ -125,8 +125,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">0</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">756</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -270,11 +270,42 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h3><p>​    <a href="https://leetcode.com/problems/word-ladder/" target="_blank" rel="noopener">https://leetcode.com/problems/word-ladder/</a></p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>​    A <strong>transformation sequence</strong> from word <code>beginWord</code> to word <code>endWord</code> using a dictionary <code>wordList</code> is a sequence of words <code>beginWord -&gt; s1 -&gt; s2 -&gt; ... -&gt; sk</code> such that:</p>
+<ul>
+<li>Every adjacent pair of words differs by a single letter.</li>
+<li>Every <code>si</code> for <code>1 &lt;= i &lt;= k</code> is in <code>wordList</code>. Note that <code>beginWord</code> does not need to be in <code>wordList</code>.</li>
+<li><code>sk == endWord</code></li>
+</ul>
+<p>Given two words, <code>beginWord</code> and <code>endWord</code>, and a dictionary <code>wordList</code>, return <em>the <strong>number of words</strong> in the <strong>shortest transformation sequence</strong> from</em> <code>beginWord</code> <em>to</em> <code>endWord</code><em>, or</em> <code>0</code> <em>if no such sequence exists.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: beginWord &#x3D; &quot;hit&quot;, endWord &#x3D; &quot;cog&quot;, wordList &#x3D; [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: One shortest transformation sequence is &quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; cog&quot;, which is 5 words long.</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: beginWord &#x3D; &quot;hit&quot;, endWord &#x3D; &quot;cog&quot;, wordList &#x3D; [&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: The endWord &quot;cog&quot; is not in wordList, therefore there is no valid transformation sequence.</span><br></pre></td></tr></table></figure>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= beginWord.length &lt;= 10</code></li>
+<li><code>endWord.length == beginWord.length</code></li>
+<li><code>1 &lt;= wordList.length &lt;= 5000</code></li>
+<li><code>wordList[i].length == beginWord.length</code></li>
+<li><code>beginWord</code>, <code>endWord</code>, and <code>wordList[i]</code> consist of lowercase English letters.</li>
+<li><code>beginWord != endWord</code></li>
+<li>All the words in <code>wordList</code> are <strong>unique</strong>.</li>
+</ul>
+<h3 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h3><ul>
+<li>这个题其实就是图，以每个单词为顶点，相邻的顶点是差一个字母的单词，构造出邻接表之后，把起点也加到图中，那么就是求起点到终点的最短路径问题，单源最短路径有迪杰斯特拉算法 或者更简单的BFS即可。</li>
+<li>再构造邻接表的时候注意，对这个单词寻找邻居时候，不要直接遍历单词表，而是对这个单词的每个字母去调整出新单词，判断单词表中是否存在，这样会更快.</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String[] vToStr;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> HashMap&lt;String,Integer&gt; strToMap;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">ladderLength</span><span class="params">(String beginWord, String endWord, List&lt;String&gt; wordList)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N = wordList.size()+<span class="number">1</span>;</span><br><span class="line">        vToStr = <span class="keyword">new</span> String[N];</span><br><span class="line">        strToMap =  <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        wordList.add(beginWord);</span><br><span class="line">        <span class="comment">// 处理映射</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            vToStr[i] = wordList.get(i);</span><br><span class="line">            strToMap.put(vToStr[i],i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">final</span> Integer end = strToMap.get(endWord);</span><br><span class="line">        <span class="keyword">if</span>(end == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">final</span> List&lt;List&lt;Integer&gt;&gt; adjectTb = getAdjectTb();</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> bfs = bfs(adjectTb,N,strToMap.get(beginWord),end);</span><br><span class="line">        <span class="keyword">return</span> bfs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;List&lt;Integer&gt;&gt; getAdjectTb()&#123;</span><br><span class="line">        <span class="keyword">final</span> List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vToStr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">final</span> String str = vToStr[i];</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">char</span>[] chars = str.toCharArray();</span><br><span class="line">            <span class="keyword">final</span> ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i1 = <span class="number">0</span>; i1 &lt; chars.length; i1++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">char</span> k = <span class="string">'a'</span>;k &lt;= <span class="string">'z'</span>;k++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(chars[i1] == k)&#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">char</span> tmp = chars[i1];</span><br><span class="line">                    chars[i1] = k;</span><br><span class="line">                    <span class="keyword">final</span> String s = <span class="keyword">new</span> String(chars);</span><br><span class="line">                    <span class="keyword">final</span> Integer con = strToMap.get(s);</span><br><span class="line">                    <span class="keyword">if</span>(con != <span class="keyword">null</span>)&#123;</span><br><span class="line">                        list.add(con);</span><br><span class="line">                    &#125;</span><br><span class="line">                    chars[i1] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(list);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bfs</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; adjectTb ,<span class="keyword">int</span> N,<span class="keyword">int</span> begin,<span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] queue = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        <span class="keyword">int</span> front = <span class="number">0</span>,rear = <span class="number">0</span>;</span><br><span class="line">        queue[rear++] = begin;</span><br><span class="line">        <span class="keyword">boolean</span>[] visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[N];</span><br><span class="line">        <span class="keyword">int</span> step = <span class="number">1</span>;</span><br><span class="line">        visited[begin] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">int</span> batchSize = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (front != rear)&#123;</span><br><span class="line">            <span class="keyword">int</span> next_batch = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; batchSize;i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = queue[front++];</span><br><span class="line">                <span class="keyword">if</span>(tmp == end)</span><br><span class="line">                    <span class="keyword">return</span> step;</span><br><span class="line">                <span class="keyword">final</span> List&lt;Integer&gt; adjents = adjectTb.get(tmp);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; adjents.size(); j++) &#123;</span><br><span class="line">                    <span class="keyword">final</span> Integer t = adjents.get(j);</span><br><span class="line">                    <span class="keyword">if</span>(!visited[t])&#123;</span><br><span class="line">                        queue[rear++] = t;</span><br><span class="line">                        visited[t] = <span class="keyword">true</span>;</span><br><span class="line">                        next_batch++;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            step++;</span><br><span class="line">            batchSize = next_batch;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/12/128-Longest-Consecutive-Sequence/" data-toggle="tooltip" data-placement="top" title="128. Longest Consecutive Sequence">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">
@@ -386,6 +417,17 @@
 
     
       
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目链接"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目链接</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目解析"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">题目解析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#代码"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">代码</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
     
 
                 
@@ -402,7 +444,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Trie" title="Trie">Trie</a>
+                          <a class="tag" href="/tags/#Graph" title="Graph">Graph</a>
                         
                     </div>
                 </section>
