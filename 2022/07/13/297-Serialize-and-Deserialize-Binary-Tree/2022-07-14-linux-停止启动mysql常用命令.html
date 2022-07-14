@@ -1,0 +1,30 @@
+<hr>
+<p>title: linux 停止启动mysql常用命令<br>catalog: true<br>comments: true<br>indexing: true<br>header-img: ../../../../img/default.jpg<br>top: false<br>tocnum: true<br>date: 2022-07-14 19:56:29<br>subtitle:<br>tags:</p>
+<ul>
+<li>mysql<br>categories:</li>
+<li>Mysql</li>
+</ul>
+<hr>
+<h3 id="查看mysql版本"><a href="#查看mysql版本" class="headerlink" title="查看mysql版本"></a>查看mysql版本</h3><p>方法一：status;</p>
+<p>方法二：select version();</p>
+<h3 id="Mysql启动、停止、重启常用命令"><a href="#Mysql启动、停止、重启常用命令" class="headerlink" title="Mysql启动、停止、重启常用命令"></a>Mysql启动、停止、重启常用命令</h3><pre><code class="lang-mysql">a、启动方式
+1、使用 service 启动：
+    [root@localhost /]# service mysqld start (5.0版本是mysqld)
+    [root@szxdb etc]# service mysql start (5.5.7版本是mysql)
+2、使用 mysqld 脚本启动：
+    /etc/inint.d/mysqld start
+3、使用 safe_mysqld 启动：
+    safe_mysqld&amp;
+b、停止
+    1、使用 service 启动：
+        service mysqld stop
+    2、使用 mysqld 脚本启动：
+        /etc/inint.d/mysqld stop
+    3、mysqladmin shutdown
+c、重启
+    1、使用 service 启动：
+        service mysqld restart
+        service mysql restart (5.5.7版本命令)
+    2、使用 mysqld 脚本启动：
+        /etc/init.d/mysqld restart
+</code></pre>

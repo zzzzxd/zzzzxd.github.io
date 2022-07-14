@@ -4,6 +4,294 @@
   
     
     <entry>
+      <title>git的回退操作</title>
+      <link href="/2022/07/15/git%E7%9A%84%E5%9B%9E%E9%80%80%E6%93%8D%E4%BD%9C/"/>
+      <url>/2022/07/15/git%E7%9A%84%E5%9B%9E%E9%80%80%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h3 id="查看提交的log日志"><a href="#查看提交的log日志" class="headerlink" title="查看提交的log日志"></a>查看提交的log日志</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure><h3 id="回退提交点"><a href="#回退提交点" class="headerlink" title="回退提交点"></a>回退提交点</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commidId</span><br></pre></td></tr></table></figure><h3 id="显示所有提交点"><a href="#显示所有提交点" class="headerlink" title="显示所有提交点"></a>显示所有提交点</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure><blockquote><p>有时候回退回去，还想回退回来，这时候 git log 就已经删除了所有commit id了，只能用这个命令，这个日志 包括所有的 分之合并等提交点都会显示，但是注意，只是显示本地进行的操作，如果从git拉取下来后，不是在本地进行的提交，直接回退后，可能 git reflog 也不显示提交点，这时候直接用 git pull 拉取下来就行了，然后到你指定的位移.</p></blockquote><h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h3 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>自建项目上传github常用操作</title>
+      <link href="/2022/07/15/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0github%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"/>
+      <url>/2022/07/15/%E8%87%AA%E5%BB%BA%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0github%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<p><strong>在idea 初始化本地项目后</strong></p><ol><li><p>在github创建仓库</p></li><li><p>添加git远程仓库绑定:git remote add origin <a href="https://github.com/zzzzxd/xxxx" target="_blank" rel="noopener">https://github.com/zzzzxd/xxxx</a> 当前没有追踪远程分支,拉取时候绑定远程分支:git pull origin master </p></li></ol><p><strong>常见的其他操作</strong></p><ul><li><ul><li>删除项目当前分支对远程分支的关联</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure></li><li><ul><li>项目以http方式重新关联</li></ul></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin http://gitlab.xxxxxxxx.cn:xxxx/xxxxxx/mall.git</span><br></pre></td></tr></table></figure><ul><li><ul><li>项目中本地分支和远程分支关联</li></ul></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull git branch --set-upstream-to=origin/de</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>红黑树等价树2-3树</title>
+      <link href="/2022/07/14/%E7%BA%A2%E9%BB%91%E6%A0%91%E7%AD%89%E4%BB%B7%E6%A0%912-3%E6%A0%91/"/>
+      <url>/2022/07/14/%E7%BA%A2%E9%BB%91%E6%A0%91%E7%AD%89%E4%BB%B7%E6%A0%912-3%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><blockquote><p>一提到红黑树大家应该都不陌生，jdk集合容器底层大量应用红黑树来实现，是一种高性能应用广泛的数据结构。可是，对于它的性质原理很多人理解起来都比较困难，在&lt;&lt;算法&gt;&gt;本书中，作者也是红黑树的作者，采用2-3树来引入的方式介绍红黑树的原理，所以我们接下来要聊的2-3树是理解红黑树很重要的数据结构，可以这么说，看懂了本篇，再了解红黑树和2-3树的等价关系，就很容易理解红黑树的性质了。</p></blockquote><h3 id="初见2-3树"><a href="#初见2-3树" class="headerlink" title="初见2-3树"></a>初见2-3树</h3><h4 id="2-3树基本性质"><a href="#2-3树基本性质" class="headerlink" title="2-3树基本性质"></a>2-3树基本性质</h4><ul><li>2-3树是一种绝对平衡的树 即平衡因子为0；</li><li>2-3树也是一种BST，满足二分搜索树的基本性质</li><li>2-3树，只有两种节点，2节点（节点有两个孩子）和3节点（节点有3个孩子）</li><li>2-3树 每插入一个元素，一定是插在叶子节点上，再去进行调整。</li></ul><h3 id="2-3树插入过程"><a href="#2-3树插入过程" class="headerlink" title="2-3树插入过程"></a>2-3树插入过程</h3><p>​    假设你已经具备BST、AVL平衡树的基础，那么基本性质了解以后，我们再看一下插入过程，基本上就搞定2-3树了</p><p>​    以 42、37、12、18、6、11、5 元素插入为例，详细的插入过程如下图:    <img src="1.png" alt=""></p><p>  详细解释一下:</p><pre><code>1. 第一次插入元素42时，整树为空，形成根节点1. 接着插入37，要和根节点先合并，检查是不是形成4节点，没有则无需调整。1. 插入12，此时只有根节点这个叶节点，先合并，检查形成4节点，需要拆分，37成根1. 插入18，和BST一样的插入顺序，来到12点叶节点位置，合并，检查无需拆分。1. 插入6，又来到12点叶节点，形成4节点，拆分。1. 插入11，来到6节点的位置，无需拆分。1. 插入5，此时引起了连锁的拆分反应，最终12成根。</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol><li>可以发现，2-3 树由于这种插入调整的规则，使得它在任何时刻都是绝对平衡，2-3树可能是我们见到的唯一绝对平衡的数据结构。</li><li>2-3树 每次插入一定是插入在叶节点上，再去考虑调整。</li><li>2-3树不难，它的绝对平衡的特性，使得它查找迅速，并且插入速度并不是特别慢</li><li>先牢记插入合并以及拆分的过程，等理解红黑树性质时会有大用。</li></ol><p>​    </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 - 经典数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>优化Mysql数据导入的几种方法</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-%E4%BC%98%E5%8C%96Mysql%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-%E4%BC%98%E5%8C%96Mysql%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分析sql执行效率的方法</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-%E5%88%86%E6%9E%90sql%E6%89%A7%E8%A1%8C%E6%95%88%E7%8E%87%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-%E5%88%86%E6%9E%90sql%E6%89%A7%E8%A1%8C%E6%95%88%E7%8E%87%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql ONLY_FULL_BY_GROUP_MODE模式</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-ONLY-FULL-BY-GROUP-MODE%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-ONLY-FULL-BY-GROUP-MODE%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<p><strong>ONLY_FULL_BY_GROUP_MODE</strong></p><p>​    如果此模式不开启，则对mysql的扩展生效 此时与标准sql 有两个明显的区别：</p><p>​    <strong>允许在select list，having condition 和 order by 中使用没有出现在group by 中的字段，此时mysql会随机选择没有出现在group by字段中的值，其效果和使用ANY—VALUE效果是一样的</strong></p><p><strong>允许在having condition 中使用select list 中的alias</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql DateTime与Timestamp区别</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-DateTime%E4%B8%8ETimestamp%E5%8C%BA%E5%88%AB/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-DateTime%E4%B8%8ETimestamp%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql 创建用户相关操作常用命令</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<p><strong>创建用户</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#39;username&#39;@&#39;%&#39; IDENTIFIED BY &#39;password&#39;;</span><br></pre></td></tr></table></figure><p>eg:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">CREATE USER &#39;pig&#39;@&#39;192.168.1.101_&#39; IDENDIFIED BY &#39;123456&#39;;</span><br><span class="line">CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;;</span><br><span class="line">CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;&#39;;CREATE USER &#39;pig&#39;@&#39;%&#39;;</span><br></pre></td></tr></table></figure><p><strong>赋予权限</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;</span><br></pre></td></tr></table></figure><p>eg:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;</span><br><span class="line">GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;</span><br><span class="line">GRANT ALL ON maindataplus.* TO &#39;pig&#39;@&#39;%&#39;;</span><br></pre></td></tr></table></figure><p><strong>刷新权限</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure><p><strong>删除用户</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP USER &#39;username&#39;@&#39;host&#39;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql dump 命令</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-dump-%E5%91%BD%E4%BB%A4/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql-dump-%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="命令及解释"><a href="#命令及解释" class="headerlink" title="命令及解释"></a>命令及解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -ubackup -p123456 -h 192.168.1.2 backup_test &gt; D:\bak\bakcup.sql </span><br><span class="line">在这段命令中：mysqldump 是myqldump的程序名了；</span><br><span class="line">  -u 是数据库的用户名，后面紧跟着用户名backup；</span><br><span class="line">  -p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；</span><br><span class="line">  -h 是数据库的地址，如果没有此项表明是备份本地的数据库；</span><br><span class="line">(对我们用的阿里云，就是rds暴露在外的公网地址  xxxx.mysql.rds.aliyuncs.com)</span><br><span class="line">backup_test 要备份的数据库名称；</span><br><span class="line">表明该数据库备份到后面的文件，紧跟当然是备份文件的地址了，注意要用绝对文件路径，文件的后缀也可以用.txt。</span><br><span class="line">一旦执行该命令后，mysqldump立即执行备份操作。远程备份数据库要似乎网络的情况，一般远程备份需要一定的时间的。</span><br></pre></td></tr></table></figure><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>实际mysql dump记住两条命令就够了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">导入：</span><br><span class="line">mysql -u root -p database &lt; data.sql</span><br><span class="line">导出：</span><br><span class="line">（整个数据库）</span><br><span class="line">mysqldump -u 账户 -p密码 数据库名字 &gt; data.sql</span><br><span class="line">（单个表）</span><br><span class="line">mysqldump  -u 账户 -p密码 数据库名字 表名字 &gt; data.sql</span><br></pre></td></tr></table></figure><blockquote><p>补充：</p><p>导出一个表，只有表结构</p><p>mysqldump -u用户名 -p 密码 -d数据库名 表名&gt; 导出的文件名</p><p>C:\Users\jack&gt; mysqldump -uroot -pmysql -d sva_rec date_rec_drv&gt; e:\date_rec_drv.sql</p><p>导出一个数据库结构</p><p>C:\Users\jack&gt; mysqldump -uroot -pmysql -d sva_rec &gt; e:\sva_rec.sql</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux 停止启动mysql常用命令</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-linux-%E5%81%9C%E6%AD%A2%E5%90%AF%E5%8A%A8mysql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-linux-%E5%81%9C%E6%AD%A2%E5%90%AF%E5%8A%A8mysql%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="查看mysql版本"><a href="#查看mysql版本" class="headerlink" title="查看mysql版本"></a>查看mysql版本</h3><p>方法一：status;</p><p>方法二：select version();</p><h3 id="Mysql启动、停止、重启常用命令"><a href="#Mysql启动、停止、重启常用命令" class="headerlink" title="Mysql启动、停止、重启常用命令"></a>Mysql启动、停止、重启常用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">a、启动方式</span><br><span class="line">1、使用 service 启动：</span><br><span class="line">    [root@localhost &#x2F;]# service mysqld start (5.0版本是mysqld)</span><br><span class="line">    [root@szxdb etc]# service mysql start (5.5.7版本是mysql)</span><br><span class="line">2、使用 mysqld 脚本启动：</span><br><span class="line">    &#x2F;etc&#x2F;inint.d&#x2F;mysqld start</span><br><span class="line">3、使用 safe_mysqld 启动：</span><br><span class="line">    safe_mysqld&amp;</span><br><span class="line">b、停止</span><br><span class="line">    1、使用 service 启动：</span><br><span class="line">    service mysqld stop</span><br><span class="line">    2、使用 mysqld 脚本启动：</span><br><span class="line">    &#x2F;etc&#x2F;inint.d&#x2F;mysqld stop</span><br><span class="line">    3、mysqladmin shutdown</span><br><span class="line">c、重启</span><br><span class="line">    1、使用 service 启动：</span><br><span class="line">    service mysqld restart</span><br><span class="line">    service mysql restart (5.5.7版本命令)</span><br><span class="line">    2、使用 mysqld 脚本启动：</span><br><span class="line">    &#x2F;etc&#x2F;init.d&#x2F;mysqld restart</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mysql中Binlog常用命令</title>
+      <link href="/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql%E4%B8%ADBinlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2022/07/14/297-Serialize-and-Deserialize-Binary-Tree/2022-07-14-Mysql%E4%B8%ADBinlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Binlog使用场景"><a href="#Binlog使用场景" class="headerlink" title="Binlog使用场景"></a>Binlog使用场景</h3><ul><li>主从数据库复制： Mysql Replication在Master端开启Binlog，Master把日志传递给Slavers，以达到    Master-slavers主从数据同步。</li><li>数据恢复： 使用mysqlbinlog工具来恢复数据</li></ul><h3 id="Binlog常用命令"><a href="#Binlog常用命令" class="headerlink" title="Binlog常用命令"></a>Binlog常用命令</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"># 查看是否启用Binlog日志</span><br><span class="line">show variables like &#39;log_bin&#39;;</span><br><span class="line"></span><br><span class="line"># 查看详细的日志配置信息</span><br><span class="line">show global variables like &#39;%log%&#39;;</span><br><span class="line"></span><br><span class="line"># Mysql数据存储目录</span><br><span class="line">show variables like &#39;%dir%&#39;;</span><br><span class="line"></span><br><span class="line"># 查看binlog数据目录</span><br><span class="line">show global variables like &#39;%log_bin%&#39;;</span><br><span class="line"></span><br><span class="line">##以下命令需要super权限</span><br><span class="line"># 查看当前服务器binlog文件及大小</span><br><span class="line">show binary logs;</span><br><span class="line"></span><br><span class="line"># 查看 binlog 内容</span><br><span class="line">show binlog events;</span><br><span class="line"></span><br><span class="line"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br><span class="line">show binlog events in &#39;master.000003&#39;;</span><br><span class="line"></span><br><span class="line"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="line">set global expire_log_days&#x3D;3; </span><br><span class="line"></span><br><span class="line"># 删除当前的binlog文件</span><br><span class="line">reset master; </span><br><span class="line"></span><br><span class="line"># 删除slave的中继日志</span><br><span class="line">reset slave;</span><br><span class="line"></span><br><span class="line"># 删除指定日期前的日志索引中binlog日志文件</span><br><span class="line">purge master logs before &#39;2019-03-12 21:54:00&#39;;</span><br><span class="line"></span><br><span class="line"># 删除指定日志文件</span><br><span class="line">purge master logs to &#39;master.000001&#39;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>conda、pip、virtualenv的几点区别</title>
+      <link href="/2022/07/14/conda%E3%80%81pip%E3%80%81virtualenv%E7%9A%84%E5%87%A0%E7%82%B9%E5%8C%BA%E5%88%AB/"/>
+      <url>/2022/07/14/conda%E3%80%81pip%E3%80%81virtualenv%E7%9A%84%E5%87%A0%E7%82%B9%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h3 id="conda"><a href="#conda" class="headerlink" title="conda"></a><strong>conda</strong></h3><p>首先，<strong>conda是一个通用的包管理器</strong>，意思是什么语言的包都可以用其进行管理，自然也就包括Python了。在安装Anaconda或者Miniconda时，会对conda进行一同安装。其中Anaconda作为Python的发行版，相当于在Python的基础上自带了常用第三方库，而Miniconda则相当于是一个conda环境的安装程序，只包含了conda及其依赖项，这样就可以减少一些不需要的第三方库的安装，所以Miniconda所占用的空间很小。</p><h3 id="pip"><a href="#pip" class="headerlink" title="pip"></a>pip</h3><p>Pip同conda一样，也是一个包管理器，并且是Python官方认可的包管理器。其中pip的含义是Pip Installs Packages。最常用于安装在Python包索引（PyPI, Python Package Index <a href="https://pypi.python.org/pypi）上发布的包。因此，在通过conda" target="_blank" rel="noopener">https://pypi.python.org/pypi）上发布的包。因此，在通过conda</a> list命令查看当前环境下已安装的包时，通过pip的源是pypi。</p><p>​    <img src="1.png" alt="在这里插入图片描述"></p><h3 id="conda和pip安装库的区别"><a href="#conda和pip安装库的区别" class="headerlink" title="conda和pip安装库的区别"></a>conda和pip安装库的区别</h3><p>在Anaconda中，<strong>无论在哪个环境下</strong>，只要通过conda install xxx的方式安装的库都会放在Anaconda的pkgs目录下，如:E:\python\anaconda\pkgs\numpy-1.18.1-py36h48dd78f_1。这样的好处就是，当在某个环境下已经下载好了某个库，再在另一个环境中还需要这个库时，就可以直接从pkgs目录下将该库复制至新环境（将这个库的Lib\site-packages中的文件复制到当前新环境下Lib中的第三方库中，也即Lib\site-packages中，这个过程相当于通过pip install xxx进行了安装）而不用重复下载。</p><h3 id="conda和pip卸载库的区别"><a href="#conda和pip卸载库的区别" class="headerlink" title="conda和pip卸载库的区别"></a>conda和pip卸载库的区别</h3><p>pip是在<strong>特定的环境</strong>中进行库的安装，所以卸载库也是一样的道理，通过pip uninstall xxx就可以将该环境下Lib\site-packages中对应的库进行卸载了。</p><p>如果通过conda uninstall xxx删除当前环境下某个库时，删除的只是当前环境下site-packages目录中该库的内容，它的效果和通过pip uninstall xxx是一样的。如果再到另一个环境中通过conda install xxx下载这个库，则还是通过将pkgs目录下的库复制到当前环境。若要清空这个pkgs下的已下载库，可以通过命令conda clean -h进行实现。</p><h3 id="conda和virtualenv的区别"><a href="#conda和virtualenv的区别" class="headerlink" title="conda和virtualenv的区别"></a>conda和virtualenv的区别</h3><p>virtualenv和conda都可以做包隔离，类似java中的maven管理，实现一个项目一个独立的环境，简单的包隔离，用virtualenv就可以实现，它本质就是创建一个文件夹，作为一个独立的环境，运行文件夹bin下的激活脚本就进入这个独立的环境，在这个环境中，所有运行的python命令，安装的脚本都是在这个目录下的，是独立全局的python环境的。但有一个缺点就是virtualenv使用哪个版本的pip命令就会安装到当前目录的bin下，那么用virtualenv创建的虚拟环境就是这个版本的环境，是不能实现版本切换的，换句话说创建出的所有环境都是同一个python版本，要想实现多版本的环境就得用conda，很好的工具，可以详细学习一下。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>454. 4Sum II</title>
       <link href="/2022/07/14/454-4Sum-II/"/>
       <url>/2022/07/14/454-4Sum-II/</url>
@@ -1385,9 +1673,9 @@
       
         <tags>
             
-            <tag> Dynamic Programming </tag>
-            
             <tag> Array </tag>
+            
+            <tag> Dynamic Programming </tag>
             
         </tags>
       
@@ -3040,7 +3328,7 @@
       
       <categories>
           
-          <category> 算法 -	leetcode高频面试题 </category>
+          <category> 算法 - leetcode高频面试题 </category>
           
       </categories>
       
@@ -3392,7 +3680,7 @@
     
     
     <entry>
-      <title>1.Two Sum</title>
+      <title>1. Two Sum</title>
       <link href="/2018/08/01/1-Two-Sum/"/>
       <url>/2018/08/01/1-Two-Sum/</url>
       
