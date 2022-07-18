@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          ArrayList源码解析 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/06/源码-jdk-2022-07-06-ArrayList源码解析/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                              <a class="tag" href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                            
+                        </div>
+                        <h1>ArrayList源码解析</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-06
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.8k</span> and
+                                Reading Time <span class="post-count">11</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>ArrayList几乎是最常用的一种数据结构,本篇就研究一下ArrayList的常用操作的底层实现。通过学习底层实现的细节，帮助自己写出更优秀的代码 。</p>
+</blockquote>
+<h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><ol>
+<li>结构图</li>
+</ol>
+<p>​    ArrayList实际上就是封装了一个数组 ,代码体现如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//封装的数组</span></span><br><span class="line"><span class="keyword">transient</span>  Object[] elementData;</span><br></pre></td></tr></table></figure>
+<p><img src="1.jpg" alt=""></p>
+<ol>
+<li>类注释信息        </li>
+</ol>
+<ul>
+<li>允许 put null 值，会自动扩容；</li>
+<li>size、isEmpty、get、set、add 等方法时间复杂度都是 O (1)；</li>
+</ul>
+<ol>
+<li>常见属性</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认数组大小10</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"> <span class="comment">//数组使用的大小</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line">  <span class="keyword">transient</span>  Object[] elementData;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DEFAULT_CAPACITY 表示数组的初始大小，默认是 10，这个数字要记住；</li>
+<li>size 表示当前数组的大小，类型 int，没有使用 volatile 修饰，非线程安全的；</li>
+<li>还有一个特别重要的变量,继承自AbstractList </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">transient</span> <span class="keyword">int</span> modCount = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>​        这个变量与ArrayList源码注释中提到的”fail-fast”有关，这个变量源码中有详细的解释，翻译过来大致如下 ：</p>
+<blockquote>
+<p>此列表在结构上被修改的次数。结构修改是指改变列表的大小，或以某种方式干扰列表，使正在进行的迭代可能产生不正确的结果。</p>
+<p>该字段由迭代器和列表迭代器方法返回的迭代器和列表迭代器实现使用。如果此字段的值意外更改，迭代器（或列表迭代器）将抛出ConcurrentModificationException，以响应下一个、删除、上一个、设置或添加操作。这提供了快速失效行为，而不是在迭代过程中面对并发修改时的不确定性行为。</p>
+<p>子类使用此字段是可选的。如果子类希望提供故障快速迭代器（和列表迭代器），那么它只需在其add（int，E）和remove（int）方法（以及它覆盖的任何其他导致列表结构修改的方法）中增加该字段。对add（int，E）或remove（int）的单个调用只能向该字段添加一个，否则迭代器（和列表迭代器）将抛出虚假的ConcurrentModificationException。如果实现不希望提供故障快速迭代器，则可以忽略此字段。</p>
+</blockquote>
+<p>什么意思呢，所谓的”fail-fast”就是指如果在迭代时，容器发生结构性的改变，元素减少或者增多（注意更新不算）,那么遍历时会立刻抛出异常结束迭代，而这个”fail-fast”机制就是通过检查modCount变量来实现的，下文在源码中我会再详细解释。 算法导论中 也曾提过 “循环不变性”,是指如果在循环的某一次迭代开始之前是正确的，那么在下一次迭代开始之前，也是正确的，感觉是有一丢丢的联系。在很多框架的实现中也见过类似的操作，对List中的元素，会先copy一份出来，再去迭代，目的就是避免迭代过程中容器发生变更而必须加锁的操作。</p>
+<h3 id="常用操作的源码解析"><a href="#常用操作的源码解析" class="headerlink" title="常用操作的源码解析"></a>常用操作的源码解析</h3><ol>
+<li>初始化</li>
+</ol>
+<p>​        初始化代码有3种:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指定容量</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                         initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//  无参数构造器，默认是空数组</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//指定初始数据初始化</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//elementData 是保存数组的容器，默认为 null</span></span><br><span class="line">    elementData = c.toArray();</span><br><span class="line">    <span class="comment">//如果给定的集合（c）数据有值，则进行拷贝赋值操作</span></span><br><span class="line">    <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">      <span class="comment">//如果集合元素类型不是 Object 类型，才开始拷贝，否则不执行</span></span><br><span class="line">      <span class="keyword">if</span> (elementData.getClass() != Object[]<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">        elementData = Arrays.copyOf(elementData, size, Object[]<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 给定集合（c）无值，则默认空数组</span></span><br><span class="line">      <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>注意: ArrayList 无参构造器初始化时，默认大小是空数组，并不是10，10 是在第一次 add 的时候扩容的数组值。</p>
+<ol>
+<li>新增与扩容</li>
+</ol>
+<p>​    添加元素的逻辑很简单，首先判断是不是需要扩容，保证容量够用，然后添加元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//确保数组大小足够，不够需要扩容</span></span><br><span class="line">    ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">    <span class="comment">//直接赋值，线程不安全的</span></span><br><span class="line">    elementData[size++] = e;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>继续看 ensureCapacityInternal()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果是空数组，就从最小容量和默认容量10之间取最大值</span></span><br><span class="line">    <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">      minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//确保容积足够</span></span><br><span class="line">    ensureExplicitCapacity(minCapacity);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//记录数组被修改</span></span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="comment">// 如果我们希望的最小容量大于目前数组的长度，那么就扩容</span></span><br><span class="line">    <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</span><br><span class="line">      grow(minCapacity);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>最终实际是在grow方法中进行了扩容，并且做了旧值的拷贝</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//老的数组大小2倍，最后把现有数据拷贝到新的数组里面去</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="comment">// oldCapacity &gt;&gt; 1 是把 oldCapacity / 2 的意思</span></span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果扩容后的值 &lt; 我们的期望值，扩容后的值就等于我们的期望值</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">      newCapacity = minCapacity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果扩容后的值 &gt; jvm 所能分配的数组的最大值，那么就去 Integer 的最大值</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">      newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">    <span class="comment">// 通过复制进行扩容</span></span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>添加以及扩容操作也比较简单，有两个细节，需要注意一下</p>
+<ul>
+<li><p>扩容的规则并不是翻倍，是原来容量大小 + 容量大小的一半，直白来说，扩容后的大小是 原来容量的 1.5 倍；</p>
+</li>
+<li><p>ArrayList 中的数组的最大值是 Integer.MAX_VALUE，超过这个值， JVM 就不会给数组 分配内存空间了。</p>
+</li>
+</ul>
+<ol>
+<li>扩容的具体实现</li>
+</ol>
+<p>​    实际上，我们看到最终调用的扩容，不过是用工具类新生成了一个数组，而这个工具类的底层实际调用的也是系统类，进行数组的拷贝</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Params:</span><br><span class="line">  src – the source array.</span><br><span class="line">  srcPos – starting position in the source array.</span><br><span class="line">  dest – the destination array.</span><br><span class="line">  destPos – starting position in the destination data.</span><br><span class="line">  length – the number of array elements to be copied</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object src,  <span class="keyword">int</span>  srcPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        Object dest, <span class="keyword">int</span> destPos,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        <span class="keyword">int</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>删除</li>
+</ol>
+<p>​    删除元素有两种，一种是根据下标删除，一种是根据值删除</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据数组下标去删除</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line">      System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index,</span><br><span class="line">                       numMoved);</span><br><span class="line">    elementData[--size] = <span class="keyword">null</span>; <span class="comment">// clear to let GC do its work</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> oldValue;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据值去删除</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 如果值是空的，找到第一个值是空的删除</span></span><br><span class="line">    <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</span><br><span class="line">        <span class="keyword">if</span> (elementData[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">          fastRemove(index);</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 值不为空，找到第一个和入参相等的删除</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; size; index++)</span><br><span class="line">        <span class="comment">// 这里是根据  equals 来判断值相等的</span></span><br><span class="line">        <span class="keyword">if</span> (o.equals(elementData[index])) &#123;</span><br><span class="line">          fastRemove(index);</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>迭代器遍历</li>
+</ol>
+<p>​    Iterator我们来详细解释一下，这种遍历的思想在国外的很多企业算法面试题中都有涉及，并且它还是一种设计模式，同时我们再看下上文中提到的modCount是如何来实现“fail-fast”机制的。</p>
+<p>首先看一下ArrayList的iterator方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//源码带注释 * &lt;p&gt;The returned iterator is &lt;a href="#fail-fast"&gt;&lt;i&gt;fail-fast&lt;/i&gt;&lt;/a&gt;.</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Itr();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际就是返回来一个Iterator接口的实现<code>private class Itr implements Iterator&lt;E&gt;</code></p>
+<p>我们先看一下Iterator接口，再看一下在ArrayList中的实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">"remove"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">forEachRemaining</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; action)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(action);</span><br><span class="line">        <span class="keyword">while</span> (hasNext())</span><br><span class="line">            action.accept(next());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口中就这几个方法，其中<code>hasNext()</code>、<code>next()</code>、<code>remove()</code>方法通常是迭代器重点使用的方法,而<code>forEachRemaining()</code>方法我们也看到实际调用的也是迭代器，它是传入的是一个函数式接口, 接下来我们重点关注前三种方法的实现，先看下Iterator在ArrayList中的实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">  <span class="comment">// 迭代过程中，下一个元素的位置，从 0 开始，用来控制拿下一个元素</span></span><br><span class="line">    <span class="keyword">int</span> cursor;       <span class="comment">// index of next element to return</span></span><br><span class="line">    <span class="comment">// 新增时表示上一次迭代过程中，索引的位置，删除成功时为 -1</span></span><br><span class="line">    <span class="keyword">int</span> lastRet = -<span class="number">1</span>; <span class="comment">// index of last element returned; -1 if no such</span></span><br><span class="line">    <span class="comment">// 迭代过程中期望数组修改版本号</span></span><br><span class="line">    <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">  	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">forEachRemaining</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> E&gt; consumer)</span></span>&#123;...&#125;</span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>hasNext()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> cursor != size;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>next()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">//迭代过程中，判断版本号有无被修改，有被修改，抛 ConcurrentModificationException 异常</span></span><br><span class="line">      checkForComodification();</span><br><span class="line">      <span class="comment">//本次迭代过程中，元素的索引位置</span></span><br><span class="line">      <span class="keyword">int</span> i = cursor;</span><br><span class="line">      <span class="keyword">if</span> (i &gt;= size)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">      Object[] elementData = ArrayList.<span class="keyword">this</span>.elementData;</span><br><span class="line">      <span class="keyword">if</span> (i &gt;= elementData.length)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">      <span class="comment">// 下一次迭代时，元素的位置</span></span><br><span class="line">      cursor = i + <span class="number">1</span>;</span><br><span class="line">      <span class="comment">// 返回元素值</span></span><br><span class="line">      <span class="keyword">return</span> (E) elementData[lastRet = i];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>有关这个”fail-fast”,我们看下checkForComodification()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>迭代器一创建出来，就会赋值expectedModCount，然后每次操作前会比较modCount与它的值，用来做检查，而迭代器删除的时候，会重新赋值<code>expectedModCount = modCount</code>,保证可以通过检查，下面我们也会看到。</p>
+<p>remove()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 如果上一次操作时，数组的位置已经小于 0 了，说明数组已经被删除完了</span></span><br><span class="line">      <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">      <span class="comment">//迭代过程中，判断版本号有无被修改，有被修改，抛 ConcurrentModificationException 异常</span></span><br><span class="line">      checkForComodification();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        ArrayList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">        cursor = lastRet;</span><br><span class="line">        <span class="comment">// -1 表示元素已经被删除，这里也防止重复删除</span></span><br><span class="line">        lastRet = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 删除元素时 modCount 的值已经发生变化，再此赋值给 expectedModCount</span></span><br><span class="line">        expectedModCount = modCount;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>​    ArrayList 有线程安全问题的本质，是因为 ArrayList 自身的 elementData、size、modConut 在进行各种操作时，都没有加锁，而且这些变量的类型并非是可见（volatile）的，所以如果多 个线程对这些变量进行操作时，可能会有值被覆盖的情况。</p>
+<p>类注释中推荐我们使用 Collections#synchronizedList 来保证线程安全，SynchronizedList 是 通过在每个方法上面加上锁来实现，虽然实现了线程安全，但是性能大大降低，具体实现源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123; </span><br><span class="line">  <span class="keyword">synchronized</span> (mutex) &#123;<span class="comment">// synchronized 是一种 重量级锁，但具有锁升级的概念，mutex 表示一把互斥锁 </span></span><br><span class="line">    <span class="keyword">return</span> c.add(e); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    本文从 ArrayList 整体架构出发，落地到初始化、新增、扩容、删除、迭代等核心源码实现，我 们发现 ArrayList 其实就是围绕底层数组结构，各个 API 都是对数组的操作进行封装，让使用者 无需感知底层实现，只需关注如何使用即可。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/06/源码-jdk-2022-07-06-LinkList源码解析/" data-toggle="tooltip" data-placement="top" title="LinkedList源码解析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/06/network-2022-07-06-Httptps对称与非对称加密协议/" data-toggle="tooltip" data-placement="top" title="HTTPS对称与非对称加密协议">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整体结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">整体结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常用操作的源码解析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">常用操作的源码解析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线程安全"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">线程安全</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                          <a class="tag" href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

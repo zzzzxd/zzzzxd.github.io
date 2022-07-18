@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          SSH协议原理及最佳实践 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/07/network-2022-07-07-SSH协议原理及最佳实践/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#https" title="https">https</a>
+                            
+                              <a class="tag" href="/tags/#ssh" title="ssh">ssh</a>
+                            
+                              <a class="tag" href="/tags/#network" title="network">network</a>
+                            
+                        </div>
+                        <h1>SSH协议原理及最佳实践</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-07
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.3k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="初识SSH"><a href="#初识SSH" class="headerlink" title="初识SSH"></a>初识SSH</h3><p>​    维基百科是这样描述ssh协议的 ：</p>
+<blockquote>
+<p><strong>Secure Shell</strong>（安全外壳协议，简称<strong>SSH</strong>）是一种加密的<a href="https://zh.m.wikipedia.org/wiki/网络传输协议" target="_blank" rel="noopener">网络传输协议</a>，可在不安全的网络中为网络服务提供安全的传输环境<a href="https://zh.m.wikipedia.org/zh-cn/Secure_Shell#cite_note-rfc4251-1" target="_blank" rel="noopener">[1]</a>。SSH通过在网络中创建<a href="https://zh.m.wikipedia.org/w/index.php?title=安全隧道&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">安全隧道</a>（英语：<a href="https://en.wikipedia.org/wiki/secure_channel" target="_blank" rel="noopener">secure channel</a>）来实现SSH客户端与服务器之间的连接<a href="https://zh.m.wikipedia.org/zh-cn/Secure_Shell#cite_note-rfc4252-2" target="_blank" rel="noopener">[2]</a>。SSH最常见的用途是远程登录系统，人们通常利用SSH来传输<a href="https://zh.m.wikipedia.org/wiki/命令行界面" target="_blank" rel="noopener">命令行界面</a>和远程执行命令。</p>
+</blockquote>
+<p>通常是用来建立一条相对安全的连接，而不是明文传输。</p>
+<h3 id="SSH原理"><a href="#SSH原理" class="headerlink" title="SSH原理"></a>SSH原理</h3><p>同样，SSH协议也要解决三个问题，即</p>
+<ul>
+<li>如何保证信息的保密性？</li>
+<li>如和保证信息的完整性？</li>
+<li>如何识别对方身份？</li>
+</ul>
+<p>其中前两个问题，通过使用对称加密与非对称加密、数字签名可以解决，在之前的HTTPS相关的文章中都有详细的解释，现在我们重点讨论第三个问题，如何识别对方身份？我们知道HTTPS是通过CA机构颁发证书的方式来确认对方的身份，而SSH的公钥和私钥是客户端自己生成，所以没有CA机构认证。SSH协议有两种识别对方身份的方式</p>
+<ul>
+<li>基于口令的认证</li>
+<li>基于公钥认证</li>
+</ul>
+<h4 id="口令认证"><a href="#口令认证" class="headerlink" title="口令认证"></a>口令认证</h4><p>基于口令的认证，我个人认为，实际上基于口令的认证是第一次的时候需要与 “正确的对方”建立连接,次此连接之后给主机生成一个唯一的host_key，相当于”认识“了这台主机，下次建立链接时，如果与一台错误的主机建立链接时，通过host_key便可以识别出来！</p>
+<p> 如下图，第一登陆的时候:</p>
+<p><img src="1.png" alt=""></p>
+<p>图中显是的是，先通过RSA算法对域名+ip这个key结合公钥对应的唯一信息生成加密串,然后做一个hash提取一个比较短的摘要作为指纹（实际上这只是通俗的解释，指纹的生成用到ECDSA算法，这个算法比较复杂，本人也没详细了解就不做过多的介绍了）,询问你是否继续连接</p>
+<p><img src="2.png" alt=""></p>
+<p>其中know hosts用来存放已经接受识别的身份。</p>
+<p>再下一步就是输入密码进行登录了，其实验证是双向的，指纹验证是验证服务器，用户密码就是服务器再验证客户端了。</p>
+<h4 id="公钥认证"><a href="#公钥认证" class="headerlink" title="公钥认证"></a>公钥认证</h4><p>第一种验证方式，再服务器验证客户端的时候，每次都得使用密码来进行验证，所以通过有了第二种方式来进行免密登录。</p>
+<p>具体流程如下:</p>
+<ol>
+<li>Client将自己的公钥存放在Server上，追加在文件authorized_keys中。</li>
+<li>Server端接收到Client的连接请求后，会在authorized_keys中匹配到Client的公钥pubKey，并生成随机数R，用Client的公钥对该随机数进行加密得到pubKey(R)<br> ，然后将加密后信息发送给Client。</li>
+<li>Client端通过私钥进行解密得到随机数R，然后对随机数R和本次会话的SessionKey利用MD5生成摘要Digest1，发送给Server端。</li>
+<li>Server端会也会对R和SessionKey利用同样摘要算法生成Digest2。</li>
+<li>Server端会最后比较Digest1和Digest2是否相同，完成认证过程。</li>
+</ol>
+<p><img src="3.png" alt="img"></p>
+<blockquote>
+<p>在步骤1中，Client将自己的公钥存放在Server上。需要用户手动将公钥copy到server上。这就是在配置ssh的时候进程进行的操作。下图是GitHub上SSH keys设置视图：</p>
+</blockquote>
+<p><img src="4.png" alt=""></p>
+<h3 id="SSH的最佳实践"><a href="#SSH的最佳实践" class="headerlink" title="SSH的最佳实践"></a>SSH的最佳实践</h3><h4 id="SSH生成的文件"><a href="#SSH生成的文件" class="headerlink" title="SSH生成的文件"></a>SSH生成的文件</h4><p><img src="5.png" alt=""></p>
+<ol>
+<li>d_rsa：保存私钥</li>
+<li>id_rsa.pub：保存公钥</li>
+<li>authorized_keys：保存已授权的客户端公钥</li>
+<li>known_hosts：保存已认证的远程主机ID</li>
+</ol>
+<p><img src="6.png" alt=""></p>
+<blockquote>
+<p>需要注意的是：一台主机可能既是Client，也是Server。所以会同时拥有authorized_keys和known_hosts。</p>
+</blockquote>
+<h4 id="有关文件的常见疑问"><a href="#有关文件的常见疑问" class="headerlink" title="有关文件的常见疑问"></a>有关文件的常见疑问</h4><ol>
+<li>known_hosts中存储的内容是什么？</li>
+</ol>
+<p>​    known_hosts中存储是已认证的远程主机host key，每个SSH Server都有一个<strong>secret, unique ID, called a host key</strong>。    </p>
+<ol>
+<li>host key何时加入known_hosts的？</li>
+</ol>
+<p>​    当我们第一次通过SSH登录远程主机的时候</p>
+<ol>
+<li>为什么需要known_hosts？</li>
+</ol>
+<p>​    最后探讨下为什么需要known_hosts，这个文件主要是通过Client和Server的双向认证，从而避免中间人（<strong>man-in-the-middle attack</strong>）攻击，每次Client向Server发起连接的时候，不仅仅Server要验证Client的合法性，Client同样也需要验证Server的身份，SSH client就是通过known_hosts中的host key来验证Server的身份的。</p>
+<blockquote>
+<p>这中方案足够安全吗？当然不，比如第一次连接一个未知Server的时候，known_hosts还没有该Server的host key，这不也可能遭到<strong>中间人</strong>攻击吗？这可能只是安全性和可操作性之间的折中吧。</p>
+</blockquote>
+<h4 id="使用命令"><a href="#使用命令" class="headerlink" title="使用命令"></a>使用命令</h4><p>记住三步走:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.客户端生成公钥私钥 </span><br><span class="line">ssh-keygen</span><br><span class="line">2.上传公钥到服务器</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.100</span><br><span class="line">3.免密登录</span><br><span class="line">ssh root@192.168.1.100</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考:<a href="https://www.jianshu.com/p/33461b619d53" target="_blank" rel="noopener">https://www.jianshu.com/p/33461b619d53</a></p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-4-Median-of-Two-Sorted-Arrays/" data-toggle="tooltip" data-placement="top" title="4. Median of Two Sorted Arrays">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/07/network-2022-07-07-HTTPS与中间人攻击/" data-toggle="tooltip" data-placement="top" title="HTTPS与"中间人攻击"">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#初识SSH"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">初识SSH</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSH原理"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">SSH原理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#口令认证"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">口令认证</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#公钥认证"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">公钥认证</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#SSH的最佳实践"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">SSH的最佳实践</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#SSH生成的文件"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">SSH生成的文件</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#有关文件的常见疑问"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">有关文件的常见疑问</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用命令"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">使用命令</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#https" title="https">https</a>
+                        
+                          <a class="tag" href="/tags/#ssh" title="ssh">ssh</a>
+                        
+                          <a class="tag" href="/tags/#network" title="network">network</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          HashMap源码解析 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2018/10/05/源码-jdk-2022-07-05-HashMap源码解析/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                              <a class="tag" href="/tags/#源码" title="源码">源码</a>
+                            
+                        </div>
+                        <h1>HashMap源码解析</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2018-10-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3k</span> and
+                                Reading Time <span class="post-count">12</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>HashMap是特别常用的数据结构，源码很长,但底层原理并不复杂，本篇主要介绍hashmap的存储原理以及底层用到的数据结构，并对核心代码进行分析。</p>
+</blockquote>
+<h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><ol>
+<li><p>结构图</p>
+<p>HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时， 链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表，整体的数据结构 如下：</p>
+<p><img src="1.jpg" alt="结构图"></p>
+</li>
+<li><p>类注释信息</p>
+<ul>
+<li>允许 null 值，不同于 HashTable ，是线程不安全的;</li>
+<li>load factor（影响因子） 默认值是 0.75， 是均衡了时间和空间损耗算出来的值，较高的 值会减少空间开销（扩容减少，数组大小增长速度变慢），但增加了查找成本（hash 冲突增加，链表长度变长），不扩容的条件：数组容量 &gt; 需要的数组大小 /load factor;</li>
+<li>如果有很多数据需要储存到 HashMap 中，建议 HashMap 的容量一开始就设置成足够的 大小，这样可以防止在其过程中不断的扩容，影响性能；</li>
+<li>HashMap 是非线程安全的，我们可以自己在外部加锁，或者通过Collections#synchronizedMap 来实现线程安全，Collections#synchronizedMap 的实 现是在每个方法上加上了 synchronized 锁；</li>
+<li>在迭代过程中，如果 HashMap 的结构被修改，会快速失败。</li>
+</ul>
+</li>
+<li><p>常见属性</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始容量</span></span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span></span><br><span class="line">   <span class="comment">//最大容量</span></span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br><span class="line">  <span class="comment">//负载因子默认值</span></span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line">   <span class="comment">//bin(桶)容量大于等于8时，链表转化成红黑树</span></span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TREEIFY_THRESHOLD = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//bin(桶)容量小于等于6时，红黑树转化成链表</span></span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//容量最小64时才会转会成红黑树</span></span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="number">64</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//用于fail-fast的，记录HashMap结构发生变化(数量变化或rehash)的数目</span></span><br><span class="line">   <span class="keyword">transient</span> <span class="keyword">int</span> modCount;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//HashMap 的实际大小，可能不准(因为当你拿到这个值的时候，可能又发生了变化)</span></span><br><span class="line">   <span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 扩容的门槛，如果初始化时，给定数组大小的话，通过tableSizeFor 方法计算，永远接近于 2 的幂次方</span></span><br><span class="line">   <span class="comment">// 如果是通过 resize 方法进行扩容后，大小 = 数组容量 * 0.75</span></span><br><span class="line">   <span class="keyword">int</span> threshold;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//存放数据的数组</span></span><br><span class="line">   <span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br></pre></td></tr></table></figure>
+<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><ol>
+<li><p>整体流程</p>
+<p>新增 key，value 大概的步骤如下：</p>
+<ol>
+<li>空数组有无初始化，没有的话初始化；</li>
+<li>如果通过 key 的 hash 能够直接找到值，跳转到 6，否则到 3；</li>
+<li>如果 hash 冲突，两种解决方案：链表 or 红黑树；</li>
+<li>如果是链表，递归循环，把新元素追加到队尾；</li>
+<li>如果是红黑树，调用红黑树新增的方法；</li>
+<li>通过 2、4、5 将新元素追加成功，再根据 onlyIfAbsent 判断是否需要覆盖；</li>
+<li>判断是否需要扩容，需要扩容进行扩容，结束。</li>
+</ol>
+</li>
+</ol>
+<p>​    我们来画一张示意图来描述下：</p>
+<p>​    <img src="2.jpg" alt="添加元素流程图"></p>
+<ol>
+<li><p>源码实现</p>
+<ol>
+<li>添加元素 </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">        <span class="comment">//如果数组为空，初始化</span></span><br><span class="line">        <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">        <span class="comment">// hashCode的算法先右移16 在并上数组大小-1</span></span><br><span class="line">        <span class="comment">// 如果当前索引位置是空的，直接生成新的节点在当前索引位置上</span></span><br><span class="line">        <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">            tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">// 如果hash冲突，当前索引上有值</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            Node&lt;K,V&gt; e; K k;</span><br><span class="line">            <span class="comment">// 如果key equals都相等，那么当前节点就是我们要新增的</span></span><br><span class="line">            <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">                ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            <span class="comment">// 如果是红黑树，使用红黑树的方式新增</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">            <span class="comment">// 是个链表</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                    <span class="comment">//如果是最后一个，还找不到和新增的元素相等的，直接新增</span></span><br><span class="line">                    <span class="comment">//节点是新增到链表最后的</span></span><br><span class="line">                    <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">//p.next是新增的节点，但是e仍然是null</span></span><br><span class="line">                        <span class="comment">//e和p.next都是持有对null的引用,即使p.next后来赋予了值</span></span><br><span class="line">                        <span class="comment">// 只是改变了p.next指向的引用，和e没有关系</span></span><br><span class="line">                        p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                        <span class="comment">//新增时，链表的长度大于等于8时，链表转红黑树</span></span><br><span class="line">                        <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//链表中有元素和新增的元素相等，结束循环</span></span><br><span class="line">                    <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="comment">//更改循环的当前元素</span></span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//说明新增的元素table中原来就有</span></span><br><span class="line">            <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                <span class="comment">// 当前节点移动到队尾</span></span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                <span class="keyword">return</span> oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        <span class="comment">//如果kv的实际大小大于扩容的门槛，开始扩容</span></span><br><span class="line">        <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        <span class="comment">// 删除不经常使用的元素</span></span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>链表添加细节</p>
+<p> 链表的添加比较简单，和LinkedList的追加实现是一样的，上面代码中描述的很清楚了，注意一点，当链表长度大于等于 8 时，此时的链表就会转化成红黑树，转化的方法是：treeifyBin，此方法 有一个判断，当链表长度大于等于 8，并且整个数组大小大于 64 时，才会转成红黑树，当数组 大小小于 64 时，只会触发扩容，不会转化成红黑树 ，转化成红黑树的过程也比较简单，此处不再赘述 。</p>
+<p>至于为什么是8 才会转红黑树，源码中有注释，可以参照,大概意思如下文:</p>
+<blockquote>
+<p>链表查询的时间复杂度是 O (n)，红黑树的查询复杂度是 O (log (n))。在链表数据不多的时候， 使用链表进行遍历也比较快，只有当链表数据比较多的时候，才会转化成红黑树，但红黑树需要 的占用空间是链表的 2 倍，考虑到转化时间和空间损耗，所以我们需要定义出转化的边界值。</p>
+<p>在考虑设计 8 这个值的时候，我们参考了泊松分布概率函数，由泊松分布中得出结论，链表各 个长度的命中概率为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* 0:    0.60653066</span><br><span class="line">* 1:    0.30326533</span><br><span class="line">* 2:    0.07581633</span><br><span class="line">* 3:    0.01263606</span><br><span class="line">* 4:    0.00157952</span><br><span class="line">* 5:    0.00015795</span><br><span class="line">* 6:    0.00001316</span><br><span class="line">* 7:    0.00000094</span><br><span class="line">* 8:    0.00000006</span><br><span class="line">* more: less than 1 in ten million</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>意思是，当链表的长度是 8 的时候，出现的概率是 0.00000006，不到千万分之一，所以说正常 情况下，链表的长度不可能到达 8 ，而一旦到达 8 时，肯定是 hash 算法出了问题，所以在这 种情况下，为了让 HashMap 仍然有较高的查询性能，所以让链表转化成红黑树，我们正常写 代码， 使用 HashMap 时， 几乎不会碰到链表转化成红黑树的情况， 毕竟概念只有千万分之 一。</p>
+</li>
+<li><p>红黑树添加细节</p>
+<p>红黑树是一种动态平衡的数据结构 和AVL树、跳表类似，都具有动态平衡的特点，其实本身没多难，只是插入元素和删除元素后，需要平衡调整-“打补丁”操作,具体的调整规则就不再叙述了，红黑树不了解的可先跳过。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//红黑树中加入节点</span></span><br><span class="line">        <span class="comment">//在计算新增的节点挂在那个节点上，是线程不安全的，</span></span><br><span class="line">        <span class="comment">//关键在于没有锁住tab,table可能是在动态的变化的</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//1:首先判断新增的节点在红黑树上是不是已经存在。</span></span><br><span class="line">        <span class="comment">//2:不在的话，根据hashcode，或者自定义的comparTo,递归找到要挂载的节点</span></span><br><span class="line">        <span class="comment">//3:和要挂载的节点建立父子，前后关系</span></span><br><span class="line">        <span class="comment">//4:判断是否需要着色，旋转。</span></span><br><span class="line">        <span class="comment">//5:对红黑树的根节点进行校验</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//h：key 的hash值</span></span><br><span class="line">        <span class="function"><span class="keyword">final</span> TreeNode&lt;K,V&gt; <span class="title">putTreeVal</span><span class="params">(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab,</span></span></span><br><span class="line"><span class="function"><span class="params">                                       <span class="keyword">int</span> h, K k, V v)</span> </span>&#123;</span><br><span class="line">            Class&lt;?&gt; kc = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">boolean</span> searched = <span class="keyword">false</span>;</span><br><span class="line">            <span class="comment">//找到根节点</span></span><br><span class="line">            TreeNode&lt;K,V&gt; root = (parent != <span class="keyword">null</span>) ? root() : <span class="keyword">this</span>;</span><br><span class="line">            <span class="comment">//自旋</span></span><br><span class="line">            <span class="keyword">for</span> (TreeNode&lt;K,V&gt; p = root;;) &#123;</span><br><span class="line">                <span class="keyword">int</span> dir, ph; K pk;</span><br><span class="line">                <span class="comment">// p hash 值大于 h，说明 p 在 h 的右边</span></span><br><span class="line">                <span class="keyword">if</span> ((ph = p.hash) &gt; h)</span><br><span class="line">                    dir = -<span class="number">1</span>;</span><br><span class="line">                <span class="comment">// p hash 值小于 h，说明 p 在 h 的左边</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (ph &lt; h)</span><br><span class="line">                    dir = <span class="number">1</span>;</span><br><span class="line">                <span class="comment">//要放进去key在当前树中已经存在了(equals来判断)</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> ((pk = p.key) == k || (k != <span class="keyword">null</span> &amp;&amp; k.equals(pk)))</span><br><span class="line">                    <span class="keyword">return</span> p;</span><br><span class="line">                <span class="comment">//自己实现的Comparable的话，不能用hashcode比较了，需要用compareTo</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> ((kc == <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                          <span class="comment">//得到key的Class类型，如果key没有实现Comparable就是null</span></span><br><span class="line">                          (kc = comparableClassFor(k)) == <span class="keyword">null</span>) ||</span><br><span class="line">                          <span class="comment">//当前节点pk和入参k不等</span></span><br><span class="line">                         (dir = compareComparables(kc, k, pk)) == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!searched) &#123;</span><br><span class="line">                        TreeNode&lt;K,V&gt; q, ch;</span><br><span class="line">                        searched = <span class="keyword">true</span>;</span><br><span class="line">                        <span class="keyword">if</span> (((ch = p.left) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                             (q = ch.find(h, k, kc)) != <span class="keyword">null</span>) ||</span><br><span class="line">                            ((ch = p.right) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                             (q = ch.find(h, k, kc)) != <span class="keyword">null</span>))</span><br><span class="line">                            <span class="keyword">return</span> q;</span><br><span class="line">                    &#125;</span><br><span class="line">                    dir = tieBreakOrder(k, pk);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                TreeNode&lt;K,V&gt; xp = p;</span><br><span class="line">                <span class="comment">//找到和当前hashcode值相近的节点(当前节点的左右子节点其中一个为空即可)</span></span><br><span class="line">                <span class="keyword">if</span> ((p = (dir &lt;= <span class="number">0</span>) ? p.left : p.right) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    Node&lt;K,V&gt; xpn = xp.next;</span><br><span class="line">                    <span class="comment">//生成新的节点</span></span><br><span class="line">                    TreeNode&lt;K,V&gt; x = map.newTreeNode(h, k, v, xpn);</span><br><span class="line">                    <span class="comment">//把新节点放在当前子节点为空的位置上</span></span><br><span class="line">                    <span class="keyword">if</span> (dir &lt;= <span class="number">0</span>)</span><br><span class="line">                        xp.left = x;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                        xp.right = x;</span><br><span class="line">                    <span class="comment">//当前节点和新节点建立父子，前后关系</span></span><br><span class="line">                    xp.next = x;</span><br><span class="line">                    x.parent = x.prev = xp;</span><br><span class="line">                    <span class="keyword">if</span> (xpn != <span class="keyword">null</span>)</span><br><span class="line">                        ((TreeNode&lt;K,V&gt;)xpn).prev = x;</span><br><span class="line">                    <span class="comment">//balanceInsertion 对红黑树进行着色或旋转，以达到更多的查找效率，着色或旋转的几种场景如下</span></span><br><span class="line">                    <span class="comment">//着色：新节点总是为红色；如果新节点的父亲是黑色，则不需要重新着色；如果父亲是红色，那么必须通过重新</span></span><br><span class="line">                    <span class="comment">//着色或者旋转的方法，再次达到红黑树的5个约束条件</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">//旋转： 父亲是红色，叔叔是黑色时(前提是当前)</span></span><br><span class="line">                    <span class="comment">//如果当前节点是父亲的右节点，则进行左旋</span></span><br><span class="line">                    <span class="comment">//如果当前节点是父亲的左节点，则进行右旋</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">//moveRootToFront 方法是把算出来的root放到根节点上</span></span><br><span class="line">                    moveRootToFront(tab, balanceInsertion(root, x));</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><p>HashMap 的查找主要分为以下三步：</p>
+<ol>
+<li><p>根据hashcode,算出数组的索引，找到槽点,槽点的key和查询的key相等，直接返回</p>
+</li>
+<li><p>判断当前节点有无 next 节点，有的话判断是链表类型，还是红黑树类型。</p>
+</li>
+<li><p>分别走链表和红黑树不同类型的查找方法。</p>
+<ol>
+<li><p>链表查找</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 采用自旋方式从链表中查找 key，e 初始为为链表的头节点 </span></span><br><span class="line"><span class="keyword">do</span> &#123; <span class="comment">// 如果当前节点 hash 等于 key 的 hash，并且 equals 相等，当前节点就是我们要找的节点 </span></span><br><span class="line">  <span class="comment">// 当 hash 冲突时，同一个 hash 值上是一个链表的时候，我们是通过 equals 方法来比较 key 是否相同</span></span><br><span class="line">  <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">    <span class="keyword">return</span> e; </span><br><span class="line">  <span class="comment">// 否则，把当前节点的下一个节点拿出来继续寻找 &#125; </span></span><br><span class="line">&#125;<span class="keyword">while</span> ((e = e.next) != <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>红黑树查找</p>
+<p>说下思路:</p>
+<ol>
+<li><p>从根节点递归查找；</p>
+</li>
+<li><p>根据 hashcode，比较查找节点，左边节点，右边节点之间的大小，根本红黑树左小右大</p>
+<p>的特性进行判断；</p>
+</li>
+<li><p>判断查找节点在第 2 步有无定位节点位置，有的话返回，没有的话重复 2，3 两步；</p>
+</li>
+<li><p>一直自旋到定位到节点位置为止。</p>
+<p>如果红黑树比较平衡的话，每次查找的次数就是树的深度。</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>​        HashMap 的内容虽然较多，但大多数 api 都只是对数组 + 链表 + 红黑树这种数据结构进行封 装而已，本文我们从新增和查找两个角度进行了源码的深入分析，分析了是如何对数组、链表 和红黑树进行操作的,更详细的内容可以自行阅读源码。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/06/network-2022-07-06-HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥/" data-toggle="tooltip" data-placement="top" title="HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/08/03/leetcode-leetcode高频-2022-07-05-3-Longest-Substring-Without-Repeating-Characters/" data-toggle="tooltip" data-placement="top" title="3. Longest Substring Without Repeating Characters">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整体结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">整体结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#添加元素"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">添加元素</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查找元素"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">查找元素</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#小结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">小结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                          <a class="tag" href="/tags/#源码" title="源码">源码</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

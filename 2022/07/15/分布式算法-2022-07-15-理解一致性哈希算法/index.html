@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          理解一致性哈希算法 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/15/分布式算法-2022-07-15-理解一致性哈希算法/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#一 致性Hash" title="一 致性Hash">一 致性Hash</a>
+                            
+                              <a class="tag" href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                            
+                        </div>
+                        <h1>理解一致性哈希算法</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-15
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.8k</span> and
+                                Reading Time <span class="post-count">14</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>转载:<a href="https://segmentfault.com/a/1190000021199728" target="_blank" rel="noopener">https://segmentfault.com/a/1190000021199728</a></p>
+</blockquote>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>要了解一致性哈希，首先我们必须了解传统的哈希及其在大规模分布式系统中的局限性。简单地说，哈希就是一个键值对存储，在给定键的情况下，可以非常高效地找到所关联的值。假设我们要根据其邮政编码查找城市中的街道名称。一种最简单的实现方式是将此信息以哈希字典的形式进行存储 <code>&lt;Zip Code，Street Name&gt;</code>。</p>
+<p>当数据太大而无法存储在一个节点或机器上时，问题变得更加有趣，系统中需要多个这样的节点或机器来存储它。比如，使用多个 Web 缓存中间件的系统。<strong>那如何确定哪个 key 存储在哪个节点上？针对该问题，最简单的解决方案是使用哈希取模来确定。</strong> 给定一个 key，先对 key 进行哈希运算，将其除以系统中的节点数，然后将该 key 放入该节点。同样，在获取 key 时，对 key 进行哈希运算，再除以节点数，然后转到该节点并获取值。上述过程对应的哈希算法定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node_number &#x3D; hash(key) % N # 其中 N 为节点数。</span><br></pre></td></tr></table></figure>
+<p>下图描绘了多节点系统中的传统的哈希取模算法，基于该算法可以实现简单的负载均衡。</p>
+<p><img src="traditional-hashing.png" alt="traditional-hashing"></p>
+<h3 id="一、传统哈希取模算法的局限性"><a href="#一、传统哈希取模算法的局限性" class="headerlink" title="一、传统哈希取模算法的局限性"></a>一、传统哈希取模算法的局限性</h3><p>下面我们来分析一下传统的哈希及其在大规模分布式系统中的局限性。这里我们直接使用我之前所写文章 <a href="https://segmentfault.com/a/1190000021136424" target="_blank" rel="noopener">布隆过滤器你值得拥有的开发利器</a> 中定义的 SimpleHash 类，然后分别对 <strong>semlinker、kakuqo 和 test</strong> 3 个键进行哈希运算并取余，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class SimpleHash &#123;</span><br><span class="line">    private int cap;</span><br><span class="line">    private int seed;</span><br><span class="line"></span><br><span class="line">    public SimpleHash(int cap, int seed) &#123;</span><br><span class="line">        this.cap &#x3D; cap;</span><br><span class="line">        this.seed &#x3D; seed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int hash(String value) &#123;</span><br><span class="line">        int result &#x3D; 0;</span><br><span class="line">        int len &#x3D; value.length();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">            result &#x3D; seed * result + value.charAt(i);</span><br><span class="line">        &#125;</span><br><span class="line">        return (cap - 1) &amp; result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SimpleHash simpleHash &#x3D; new SimpleHash(2 &lt;&lt; 12, 8);</span><br><span class="line">        System.out.println(&quot;node_number&#x3D;hash(\&quot;semlinker\&quot;) % 3 -&gt; &quot; + </span><br><span class="line">          simpleHash.hash(&quot;semlinker&quot;) % 3);</span><br><span class="line">        System.out.println(&quot;node_number&#x3D;hash(\&quot;kakuqo\&quot;) % 3 -&gt; &quot; + </span><br><span class="line">          simpleHash.hash(&quot;kakuqo&quot;) % 3);</span><br><span class="line">        System.out.println(&quot;node_number&#x3D;hash(\&quot;test\&quot;) % 3 -&gt; &quot; + </span><br><span class="line">          simpleHash.hash(&quot;test&quot;) % 3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码成功运行后，在控制台会输出以下结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node_number&#x3D;hash(&quot;semlinker&quot;) % 3 -&gt; 1</span><br><span class="line">node_number&#x3D;hash(&quot;kakuqo&quot;) % 3 -&gt; 2</span><br><span class="line">node_number&#x3D;hash(&quot;test&quot;) % 3 -&gt; 0</span><br></pre></td></tr></table></figure>
+<p>基于以上的输出结果，我们可以创建以下表格：</p>
+<p><img src="ch-three-nodes-hash.png" alt="ch-three-nodes-hash"></p>
+<h4 id="1-1-节点减少的场景"><a href="#1-1-节点减少的场景" class="headerlink" title="1.1 节点减少的场景"></a>1.1 节点减少的场景</h4><p><strong>在分布式多节点系统中，出现故障很常见。任何节点都可能在没有任何事先通知的情况下挂掉，针对这种情况我们期望系统只是出现性能降低，正常的功能不会受到影响。</strong> 对于原始示例，当节点出现故障时会发生什么？原始示例中有的 3 个节点，假设其中 1 个节点出现故障，这时节点数发生了变化，节点个数从 3 减少为 2，此时表格的状态发生了变化：</p>
+<p><img src="ch-two-nodes-hash.png" alt="ch-two-nodes-hash"></p>
+<p>很明显节点的减少会导致键与节点的映射关系发生变化，这个变化对于新的键来说并不会产生任何影响，但对于已有的键来说，将导致节点映射错误，以 “semlinker” 为例，变化前系统有 3 个节点，该键对应的节点编号为 1，当出现故障时，节点数减少为 2 个，此时该键对应的节点编号为 0。</p>
+<h4 id="1-2-节点增加的场景"><a href="#1-2-节点增加的场景" class="headerlink" title="1.2 节点增加的场景"></a>1.2 节点增加的场景</h4><p><strong>在分布式多节点系统中，对于某些场景比如节日大促，就需要对服务节点进行扩容，以应对突发的流量。</strong> 对于原始示例，当增加节点会发生什么？原始示例中有的 3 个节点，假设进行扩容临时增加了 1 个节点，这时节点数发生了变化，节点个数从 3 增加为 4 个，此时表格的状态发生了变化：</p>
+<p><img src="ch-four-nodes-hash.png" alt="ch-four-nodes-hash"></p>
+<p>很明显节点的增加也会导致键与节点的映射关系发生变化，这个变化对于新的键来说并不会产生任何影响，但对于已有的键来说，将导致节点映射错误，同样以 “semlinker” 为例，变化前系统有 3 个节点，该键对应的节点编号为 1，当增加节点时，节点数增加为 4 个，此时该键对应的节点编号为 2。</p>
+<p>当集群中节点的数量发生变化时，之前的映射规则就可能发生变化。如果集群中每个机器提供的服务没有差别，这不会有什么影响。<strong>但对于分布式缓存这种的系统而言，映射规则失效就意味着之前缓存的失效，若同一时刻出现大量的缓存失效，则可能会出现 “缓存雪崩”，这将会造成灾难性的后果。</strong></p>
+<p><strong>要解决此问题，我们必须在其余节点上重新分配所有现有键，这可能是非常昂贵的操作，并且可能对正在运行的系统产生不利影响。当然除了重新分配所有现有键的方案之外，还有另一种更好的方案即使用一致性哈希算法。</strong></p>
+<h3 id="二、一致性哈希算法"><a href="#二、一致性哈希算法" class="headerlink" title="二、一致性哈希算法"></a>二、一致性哈希算法</h3><p>一致性哈希算法在 1997 年由麻省理工学院提出，是一种特殊的哈希算法，在移除或者添加一个服务器时，能够尽可能小地改变已存在的服务请求与处理请求服务器之间的映射关系。一致性哈希解决了简单哈希算法在分布式<a href="https://baike.baidu.com/item/哈希表/5981869" target="_blank" rel="noopener">哈希表</a>（Distributed Hash Table，DHT）中存在的动态伸缩等问题 。</p>
+<h4 id="2-1-一致性哈希算法优点"><a href="#2-1-一致性哈希算法优点" class="headerlink" title="2.1 一致性哈希算法优点"></a>2.1 一致性哈希算法优点</h4><ul>
+<li><p>可扩展性。一致性哈希算法保证了增加或减少服务器时，数据存储的改变最少，相比传统哈希算法大大节省了数据移动的开销 。</p>
+</li>
+<li><p>更好地适应数据的快速增长。采用一致性哈希算法分布数据，当数据不断增长时，部分虚拟节点中可能包含很多数据、造成数据在虚拟节点上分布不均衡，此时可以将包含数据多的虚拟节点分裂，这种分裂仅仅是将原有的虚拟节点一分为二、不需要对全部的数据进行重新哈希和划分。</p>
+<p>虚拟节点分裂后，如果物理服务器的负载仍然不均衡，只需在服务器之间调整部分虚拟节点的存储分布。这样可以随数据的增长而动态的扩展物理服务器的数量，且代价远比传统哈希算法重新分布所有数据要小很多。</p>
+</li>
+</ul>
+<h4 id="2-2-一致性哈希算法与哈希算法的关系"><a href="#2-2-一致性哈希算法与哈希算法的关系" class="headerlink" title="2.2 一致性哈希算法与哈希算法的关系"></a>2.2 一致性哈希算法与哈希算法的关系</h4><p>一致性哈希算法是在哈希算法基础上提出的，在动态变化的分布式环境中，哈希算法应该满足的几个条件：平衡性、单调性和分散性。</p>
+<ul>
+<li>平衡性：是指 hash 的结果应该平均分配到各个节点，这样从算法上解决了负载均衡问题。</li>
+<li>单调性：是指在新增或者删减节点时，不影响系统正常运行。</li>
+<li>分散性：是指数据应该分散地存放在分布式集群中的各个节点（节点自己可以有备份），不必每个节点都存储所有的数据。</li>
+</ul>
+<h3 id="三、一致性哈希算法原理"><a href="#三、一致性哈希算法原理" class="headerlink" title="三、一致性哈希算法原理"></a>三、一致性哈希算法原理</h3><p>一致性哈希算法通过一个叫作一致性哈希环的数据结构实现。这个环的起点是 0，终点是 2^32 - 1，并且起点与终点连接，故这个环的整数分布范围是 [0, 2^32-1]，如下图所示：</p>
+<p><img src="hash-ring.png" alt="hash-ring"></p>
+<h4 id="3-1-将对象放置到哈希环"><a href="#3-1-将对象放置到哈希环" class="headerlink" title="3.1 将对象放置到哈希环"></a>3.1 将对象放置到哈希环</h4><p>假设我们有 “semlinker”、”kakuqo”、”lolo”、”fer” 四个对象，分别简写为 o1、o2、o3 和 o4，然后使用哈希函数计算这个对象的 hash 值，值的范围是 [0, 2^32-1]：</p>
+<p><img src="hash-ring-hash-objects.png" alt="hash-ring-hash-objects"></p>
+<p>图中对象的映射关系如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash(o1) &#x3D; k1; hash(o2) &#x3D; k2;</span><br><span class="line">hash(o3) &#x3D; k3; hash(o4) &#x3D; k4;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-将服务器放置到哈希环"><a href="#3-2-将服务器放置到哈希环" class="headerlink" title="3.2 将服务器放置到哈希环"></a>3.2 将服务器放置到哈希环</h4><p>接着使用同样的哈希函数，我们将服务器也放置到哈希环上，可以选择服务器的 IP 或主机名作为键进行哈希，这样每台服务器就能确定其在哈希环上的位置。这里假设我们有 3 台缓存服务器，分别为 cs1、cs2 和 cs3：</p>
+<p><img src="/hash-ring-hash-servers.png" alt="hash-ring-hash-servers"></p>
+<p>图中服务器的映射关系如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hash(cs1) &#x3D; t1; hash(cs2) &#x3D; t2; hash(cs3) &#x3D; t3; # Cache Server</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-为对象选择服务器"><a href="#3-3-为对象选择服务器" class="headerlink" title="3.3 为对象选择服务器"></a>3.3 为对象选择服务器</h4><p>将对象和服务器都放置到同一个哈希环后，在哈希环上顺时针查找距离这个对象的 hash 值最近的机器，即是这个对象所属的机器。以 o2 对象为例，顺序针找到最近的机器是 cs2，故服务器 cs2 会缓存 o2 对象。而服务器 cs1 则缓存 o1，o3 对象，服务器 cs3 则缓存 o4 对象。</p>
+<p><img src="hash-ring-objects-servers.png" alt="hash-ring-objects-servers"></p>
+<h4 id="3-4-服务器增加的情况"><a href="#3-4-服务器增加的情况" class="headerlink" title="3.4 服务器增加的情况"></a>3.4 服务器增加的情况</h4><p>假设由于业务需要，我们需要增加一台服务器 cs4，经过同样的 hash 运算，该服务器最终落于 t1 和 t2 服务器之间，具体如下图所示：</p>
+<p><img src="http://cdn.semlinker.com/hash-ring-add-server.jpg" alt="hash-ring-add-server"></p>
+<p>对于上述的情况，只有 t1 和 t2 服务器之间的对象需要重新分配。在以上示例中只有 o3 对象需要重新分配，即它被重新到 cs4 服务器。在前面我们已经分析过，如果使用简单的取模方法，当新添加服务器时可能会导致大部分缓存失效，而使用一致性哈希算法后，这种情况得到了较大的改善，因为只有少部分对象需要重新分配。</p>
+<h4 id="3-5-服务器减少的情况"><a href="#3-5-服务器减少的情况" class="headerlink" title="3.5 服务器减少的情况"></a>3.5 服务器减少的情况</h4><p>假设 cs3 服务器出现故障导致服务下线，这时原本存储于 cs3 服务器的对象 o4，需要被重新分配至 cs2 服务器，其它对象仍存储在原有的机器上。</p>
+<p><img src="hash-ring-remove-server.png" alt="hash-ring-remove-server"></p>
+<h4 id="3-6-虚拟节点"><a href="#3-6-虚拟节点" class="headerlink" title="3.6 虚拟节点"></a>3.6 虚拟节点</h4><p>到这里一致性哈希的基本原理已经介绍完了，但对于新增服务器的情况还存在一些问题。新增的服务器 cs4 只分担了 cs1 服务器的负载，服务器 cs2 和 cs3 并没有因为 cs4 服务器的加入而减少负载压力。如果 cs4 服务器的性能与原有服务器的性能一致甚至可能更高，那么这种结果并不是我们所期望的。</p>
+<p><strong>针对这个问题，我们可以通过引入虚拟节点来解决负载不均衡的问题。即将每台物理服务器虚拟为一组虚拟服务器，将虚拟服务器放置到哈希环上，如果要确定对象的服务器，需先确定对象的虚拟服务器，再由虚拟服务器确定物理服务器。</strong></p>
+<p><img src="ch-virtual-nodes.png" alt="ch-virtual-nodes"></p>
+<p>图中 o1 和 o2 表示对象，v1 ~ v6 表示虚拟服务器，s1 ~ s3 表示物理服务器。</p>
+<h3 id="四、一致性哈希算法实现"><a href="#四、一致性哈希算法实现" class="headerlink" title="四、一致性哈希算法实现"></a>四、一致性哈希算法实现</h3><p>这里我们只介绍不带虚拟节点的一致性哈希算法实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">import java.util.SortedMap;</span><br><span class="line">import java.util.TreeMap;</span><br><span class="line"></span><br><span class="line">public class ConsistentHashingWithoutVirtualNode &#123;</span><br><span class="line">    &#x2F;&#x2F;待添加入Hash环的服务器列表</span><br><span class="line">    private static String[] servers &#x3D; &#123;&quot;192.168.0.1:8888&quot;, &quot;192.168.0.2:8888&quot;, </span><br><span class="line">      &quot;192.168.0.3:8888&quot;&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;key表示服务器的hash值，value表示服务器</span><br><span class="line">    private static SortedMap&lt;Integer, String&gt; sortedMap &#x3D; new TreeMap&lt;Integer, String&gt;();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;程序初始化，将所有的服务器放入sortedMap中</span><br><span class="line">    static &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; servers.length; i++) &#123;</span><br><span class="line">            int hash &#x3D; getHash(servers[i]);</span><br><span class="line">            System.out.println(&quot;[&quot; + servers[i] + &quot;]加入集合中, 其Hash值为&quot; + hash);</span><br><span class="line">            sortedMap.put(hash, servers[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;得到应当路由到的结点</span><br><span class="line">    private static String getServer(String key) &#123;</span><br><span class="line">        &#x2F;&#x2F;得到该key的hash值</span><br><span class="line">        int hash &#x3D; getHash(key);</span><br><span class="line">        &#x2F;&#x2F;得到大于该Hash值的所有Map</span><br><span class="line">        SortedMap&lt;Integer, String&gt; subMap &#x3D; sortedMap.tailMap(hash);</span><br><span class="line">        if (subMap.isEmpty()) &#123;</span><br><span class="line">            &#x2F;&#x2F;如果没有比该key的hash值大的，则从第一个node开始</span><br><span class="line">            Integer i &#x3D; sortedMap.firstKey();</span><br><span class="line">            &#x2F;&#x2F;返回对应的服务器</span><br><span class="line">            return sortedMap.get(i);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F;第一个Key就是顺时针过去离node最近的那个结点</span><br><span class="line">            Integer i &#x3D; subMap.firstKey();</span><br><span class="line">            &#x2F;&#x2F;返回对应的服务器</span><br><span class="line">            return subMap.get(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;使用FNV1_32_HASH算法计算服务器的Hash值</span><br><span class="line">    private static int getHash(String str) &#123;</span><br><span class="line">        final int p &#x3D; 16777619;</span><br><span class="line">        int hash &#x3D; (int) 2166136261L;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; str.length(); i++)</span><br><span class="line">            hash &#x3D; (hash ^ str.charAt(i)) * p;</span><br><span class="line">        hash +&#x3D; hash &lt;&lt; 13;</span><br><span class="line">        hash ^&#x3D; hash &gt;&gt; 7;</span><br><span class="line">        hash +&#x3D; hash &lt;&lt; 3;</span><br><span class="line">        hash ^&#x3D; hash &gt;&gt; 17;</span><br><span class="line">        hash +&#x3D; hash &lt;&lt; 5;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 如果算出来的值为负数则取其绝对值</span><br><span class="line">        if (hash &lt; 0)</span><br><span class="line">            hash &#x3D; Math.abs(hash);</span><br><span class="line">        return hash;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String[] keys &#x3D; &#123;&quot;semlinker&quot;, &quot;kakuqo&quot;, &quot;fer&quot;&#125;;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; keys.length; i++)</span><br><span class="line">            System.out.println(&quot;[&quot; + keys[i] + &quot;]的hash值为&quot; + getHash(keys[i])</span><br><span class="line">                    + &quot;, 被路由到结点[&quot; + getServer(keys[i]) + &quot;]&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码成功运行后，在控制台会输出以下结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[192.168.0.1:8888]加入集合中, 其Hash值为1326271016</span><br><span class="line">[192.168.0.2:8888]加入集合中, 其Hash值为1132535844</span><br><span class="line">[192.168.0.3:8888]加入集合中, 其Hash值为115798597</span><br><span class="line"></span><br><span class="line">[semlinker]的hash值为1549041406, 被路由到结点[192.168.0.3:8888]</span><br><span class="line">[kakuqo]的hash值为463104755, 被路由到结点[192.168.0.2:8888]</span><br><span class="line">[fer]的hash值为1677150790, 被路由到结点[192.168.0.3:8888]</span><br></pre></td></tr></table></figure>
+<p>上面我们只介绍了不带虚拟节点的一致性哈希算法实现，如果有的小伙伴对带虚拟节点的一致性哈希算法感兴趣，可以参考 <a href="https://blog.csdn.net/suifeng629/article/details/81567777" target="_blank" rel="noopener">一致性Hash(Consistent Hashing)原理剖析及Java实现</a> 这篇文章。</p>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>​    本文通过示例介绍了传统的哈希取模算法在分布式系统中的局限性，进而在针对该问题的解决方案中引出了一致性哈希算法。一致性哈希算法在 1997 年由麻省理工学院提出，是一种特殊的哈希算法，在移除或者添加一个服务器时，能够尽可能小地改变已存在的服务请求与处理请求服务器之间的映射关系。在介绍完一致性哈希算法的作用和优点等相关知识后，我们以图解的形式生动介绍了一致性哈希算法的原理，最后给出了不带虚拟节点的一致性哈希算法的 Java 实现。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/15/微服务-2022-07-15-分布式AKF拆分原则/" data-toggle="tooltip" data-placement="top" title="分布式AKF拆分原则">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/14/数据结构与算法-2022-07-14-红黑树等价树2-3树/" data-toggle="tooltip" data-placement="top" title="红黑树等价树2-3树">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一、传统哈希取模算法的局限性"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">一、传统哈希取模算法的局限性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-1-节点减少的场景"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1.1 节点减少的场景</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-2-节点增加的场景"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">1.2 节点增加的场景</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#二、一致性哈希算法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">二、一致性哈希算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1-一致性哈希算法优点"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">2.1 一致性哈希算法优点</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2-一致性哈希算法与哈希算法的关系"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2.2 一致性哈希算法与哈希算法的关系</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三、一致性哈希算法原理"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">三、一致性哈希算法原理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-1-将对象放置到哈希环"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">3.1 将对象放置到哈希环</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-2-将服务器放置到哈希环"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">3.2 将服务器放置到哈希环</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-3-为对象选择服务器"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">3.3 为对象选择服务器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-4-服务器增加的情况"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">3.4 服务器增加的情况</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-5-服务器减少的情况"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">3.5 服务器减少的情况</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-6-虚拟节点"><span class="toc-nav-number">4.6.</span> <span class="toc-nav-text">3.6 虚拟节点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#四、一致性哈希算法实现"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">四、一致性哈希算法实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#五、总结"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">五、总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#一 致性Hash" title="一 致性Hash">一 致性Hash</a>
+                        
+                          <a class="tag" href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

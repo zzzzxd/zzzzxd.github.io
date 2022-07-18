@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          LinkedList源码解析 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/06/源码-jdk-2022-07-06-LinkList源码解析/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                              <a class="tag" href="/tags/#源码" title="源码">源码</a>
+                            
+                        </div>
+                        <h1>LinkedList源码解析</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-06
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.5k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><ol>
+<li><p>整体结构</p>
+<p>LinkedList也是常用的一种数据结构,它和ArrayList在逻辑上都是线性结构，而在物理存储上ArrayList是连续存储，LinkedList是非连续存储。LinkedList实现是一个双向链表。Node节点源码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">     E item;</span><br><span class="line">     Node&lt;E&gt; next;</span><br><span class="line">     Node&lt;E&gt; prev;</span><br><span class="line">   </span><br><span class="line">     Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">         <span class="keyword">this</span>.item = element;</span><br><span class="line">         <span class="keyword">this</span>.next = next;</span><br><span class="line">         <span class="keyword">this</span>.prev = prev;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>只要稍微熟悉点数据结构对这种实现就不陌生，典型的链表结构，整体的图示如下:</p>
+</li>
+</ol>
+<ol>
+<li><p>类注释信息</p>
+<pre><code>    1. 没有实现线程同步，多线程的时候需要外部来做同步。
+</code></pre><ol>
+<li>ListIterator也是有“fail-fast”机制的。</li>
+</ol>
+</li>
+<li><p>常见属性</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">transient int size &#x3D; 0;</span><br><span class="line">&#x2F;**</span><br><span class="line">     * Pointer to first node.</span><br><span class="line">     * Invariant: (first &#x3D;&#x3D; null &amp;&amp; last &#x3D;&#x3D; null) ||</span><br><span class="line">     *            (first.prev &#x3D;&#x3D; null &amp;&amp; first.item !&#x3D; null)</span><br><span class="line">     *&#x2F;</span><br><span class="line">transient Node&lt;E&gt; first;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line">     * Pointer to last node.</span><br><span class="line">     * Invariant: (first &#x3D;&#x3D; null &amp;&amp; last &#x3D;&#x3D; null) ||</span><br><span class="line">     *            (last.next &#x3D;&#x3D; null &amp;&amp; last.item !&#x3D; null)</span><br><span class="line">     *&#x2F;</span><br><span class="line">transient Node&lt;E&gt; last;</span><br></pre></td></tr></table></figure>
+<h3 id="常用操作解析"><a href="#常用操作解析" class="headerlink" title="常用操作解析"></a>常用操作解析</h3><ol>
+<li><p>添加</p>
+<ol>
+<li><p>从头插入</p>
+<p>因为比较简单，都是最基础的数据结构，就不过多解释了，源码如下：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        linkFirst(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从头部追加</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">linkFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//头节点赋值给临时变量</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; f = first;</span><br><span class="line">        <span class="comment">//新建节点，前一个节点指向null，e是新建节点的值，f 是新建节点的下一个节点</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(<span class="keyword">null</span>, e, f);</span><br><span class="line">        <span class="comment">//新建节点成为头节点</span></span><br><span class="line">        first = newNode;</span><br><span class="line">        <span class="comment">//头节点为空，就是链表唯恐，头尾节点是一个节点。</span></span><br><span class="line">        <span class="keyword">if</span> (f == <span class="keyword">null</span>)</span><br><span class="line">            last = newNode;</span><br><span class="line">        <span class="comment">//上一个头节点的前一个节点就是当前节点</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            f.prev = newNode;</span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>从尾巴插入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        linkLast(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从尾部开始追加节点</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">linkLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 把尾节点数据暂存</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; l = last;</span><br><span class="line">        <span class="comment">//新建新的节点，l 是前一个节点，e 是当前节点的值，后一个节点是 null</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(l, e, <span class="keyword">null</span>);</span><br><span class="line">        <span class="comment">//新建的节点放在尾部</span></span><br><span class="line">        last = newNode;</span><br><span class="line">        <span class="comment">//如果链表为空，头部和尾部是同一个节点，都是新建的节点</span></span><br><span class="line">        <span class="keyword">if</span> (l == <span class="keyword">null</span>)</span><br><span class="line">            first = newNode;</span><br><span class="line">        <span class="comment">//否则把前尾节点的下一个节点，指向当前尾节点。</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l.next = newNode;</span><br><span class="line">        <span class="comment">//大小和版本更改</span></span><br><span class="line">        size++;</span><br><span class="line">        modCount++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>删除</p>
+<ol>
+<li>从头删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; f = first;</span><br><span class="line">        <span class="keyword">if</span> (f == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">        <span class="keyword">return</span> unlinkFirst(f);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从头删除节点 f 是链表头节点</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> E <span class="title">unlinkFirst</span><span class="params">(Node&lt;E&gt; f)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 拿出头节点的值，作为方法的返回值</span></span><br><span class="line">        <span class="keyword">final</span> E element = f.item;</span><br><span class="line">        <span class="comment">// 拿出头节点的下一个节点</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; next = f.next;</span><br><span class="line">        <span class="comment">//帮助 GC 回收头节点</span></span><br><span class="line">        f.item = <span class="keyword">null</span>;</span><br><span class="line">        f.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 头节点的下一个节点成为头节点</span></span><br><span class="line">        first = next;</span><br><span class="line">        <span class="comment">//如果 next 为空，表明链表为空</span></span><br><span class="line">        <span class="keyword">if</span> (next == <span class="keyword">null</span>)</span><br><span class="line">            last = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//链表不为空，头节点的前一个节点指向 null</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            next.prev = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//修改链表大小和版本</span></span><br><span class="line">        size--;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>从尾巴删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">removeLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">final</span> Node&lt;E&gt; l = last;</span><br><span class="line">       <span class="keyword">if</span> (l == <span class="keyword">null</span>)</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">       <span class="keyword">return</span> unlinkLast(l);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> E <span class="title">unlinkLast</span><span class="params">(Node&lt;E&gt; l)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">assert</span> l == last &amp;&amp; l != <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">final</span> E element = l.item;</span><br><span class="line">        <span class="comment">//删除之前先保留前一个节点，last前移做准备</span></span><br><span class="line">        <span class="keyword">final</span> Node&lt;E&gt; prev = l.prev;</span><br><span class="line">        l.item = <span class="keyword">null</span>;</span><br><span class="line">        l.prev = <span class="keyword">null</span>; <span class="comment">// help GC</span></span><br><span class="line">        last = prev;</span><br><span class="line">        <span class="keyword">if</span> (prev == <span class="keyword">null</span>)</span><br><span class="line">            first = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            prev.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//修改版本</span></span><br><span class="line">        size--;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>迭代</p>
+<p>有关迭代器相关的知识，在ArrayList文章中已经解释的比较详细了，这里就重点看下源码好了，比较简单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ListItr</span> <span class="keyword">implements</span> <span class="title">ListIterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>LinkedList是双向链表，所以实现的接口也是双向迭代器,继承关系如下:</p>
+<p><img src="2.png" alt=""></p>
+<p>接下来我们看下，它的向前，向后的迭代方法</p>
+<ol>
+<li>　向后迭代</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断还有没有下一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> nextIndex &lt; size;<span class="comment">//下一个节点的索引小于链表的大小，就有</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取下一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">//检查期望版本号有无发生变化</span></span><br><span class="line">  checkForComodification();</span><br><span class="line">  <span class="keyword">if</span> (!hasNext())<span class="comment">//再次检查</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">  <span class="comment">// next 是当前节点</span></span><br><span class="line">  lastReturned = next;</span><br><span class="line">  <span class="comment">// next 是下一个节点了，为下次迭代做准备</span></span><br><span class="line">  next = next.next;</span><br><span class="line">  nextIndex++;</span><br><span class="line">  <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>向前</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果上次节点索引位置大于 0，就还有节点可以迭代</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasPrevious</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> nextIndex &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取前一个节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">previous</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  checkForComodification();</span><br><span class="line">  <span class="keyword">if</span> (!hasPrevious())</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">  <span class="comment">// next 为空场景：说明是第一次迭代，取尾节点(last)</span></span><br><span class="line">  <span class="comment">// next 不为空场景：说明已经发生过迭代了，直接取前一个节点即可(next.prev)</span></span><br><span class="line">  lastReturned = next = (next == <span class="keyword">null</span>) ? last : next.prev;</span><br><span class="line">  <span class="comment">// 索引位置变化</span></span><br><span class="line">  nextIndex--;</span><br><span class="line">  <span class="keyword">return</span> lastReturned.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>迭代器删除</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  checkForComodification();</span><br><span class="line">  <span class="comment">// lastReturned 为空，说明没有执行 next 或者 previos，直接报错</span></span><br><span class="line">  <span class="comment">// lastReturned = next() 方法执行的结果</span></span><br><span class="line">  <span class="keyword">if</span> (lastReturned == <span class="keyword">null</span>)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">  Node&lt;E&gt; lastNext = lastReturned.next;</span><br><span class="line">  <span class="comment">//删除当前节点</span></span><br><span class="line">  unlink(lastReturned);</span><br><span class="line">  <span class="comment">// 从尾到头递归顺序，并且是第一次迭代，并且要删除最后一个元素的情况下</span></span><br><span class="line">  <span class="comment">// 这种情况下，previous 方法里面设置了 lastReturned = next = last。</span></span><br><span class="line">  <span class="comment">// 我们必须把 next 设置成 null，这样在下次递归时，previous 方法才会让队尾最后一个节点赋值给 next</span></span><br><span class="line">  <span class="keyword">if</span> (next == lastReturned)</span><br><span class="line">    next = lastNext;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    nextIndex--;</span><br><span class="line">  lastReturned = <span class="keyword">null</span>;</span><br><span class="line">  expectedModCount++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​    LinkedList无非是链表的封装，使用起来也很简单，它的插入与删除都是O(1) 的复杂度，虽然ArrayList也是O(1)的，但那是在均摊分析下的，LinkedList是真正的O (1)操作，主要是它不需要考虑动态的扩容缩容操作。</p>
+<p>此外，LinkedList也常用来作为DeQueue的实现。Queue接口，我觉得它主要就是拿来做并发用的，有关它的知识点，有机会来介绍一下。</p>
+</li>
+</ol>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/06/源码-jdk-2022-07-06-TreeMap源码解析/" data-toggle="tooltip" data-placement="top" title="TreeMap源码解析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/06/源码-jdk-2022-07-06-ArrayList源码解析/" data-toggle="tooltip" data-placement="top" title="ArrayList源码解析">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整体结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">整体结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常用操作解析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">常用操作解析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                          <a class="tag" href="/tags/#源码" title="源码">源码</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
