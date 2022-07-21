@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          mysql的QC - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/19/mysql-2022-07-19-mysql的QC/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                            
+                        </div>
+                        <h1>mysql的QC</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-19
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.6k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。</p>
+<blockquote>
+<p>关于 QC 的详细定义，可以查询 <a href="https://dev.mysql.com/doc/refman/5.7/en/query-cache.html" target="_blank" rel="noopener">MySQL 5.7 官方手册</a></p>
+</blockquote>
+<p>那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。</p>
+<h2 id="认识-QC"><a href="#认识-QC" class="headerlink" title="认识 QC"></a>认识 QC</h2><p>QC 需要缓存最新数据结果，因此表数据发生任何变化（insert、update、delete 等操作时），都会导致 QC 被刷新。</p>
+<p>查询缓存相关的参数主要有：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">"%query_cache%"</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="1.png" alt="图片描述"></p>
+<blockquote>
+<p><strong>这里解释一下上面几个参数</strong></p>
+<p>have_query_cache：服务器在安装时是否已经配置了高速缓存<br>query_cache_limit：单条查询能够使用的缓存区大小<br>query_cache_min_res_unit：查询缓存分配内存块的最小单位<br>query_cache_size：缓存区的大小，单位为 MB<br>query_cache_type：缓存类型，有三个值可选：</p>
+<ul>
+<li>0 或者 off：关闭缓存</li>
+<li>1 或者 on：打开缓存</li>
+<li>2 或者 demand：只缓存带有 sql_cache 的 select 语句。</li>
+</ul>
+<p>query_cache_wlock_invalidate：如果某个数据表被其它的连接锁住，是否仍然从查询缓存中返回结果</p>
+</blockquote>
+<p>通过下面命令，可以监视查询缓存的使用情况：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">"qcache%"</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="2.png" alt="图片描述"></p>
+<blockquote>
+<p><strong>这里解释一下各个参数的意义</strong></p>
+<p>Qcache_free_blocks：查询缓存中的空闲内存块的数目</p>
+<p>Qcache_free_memory：查询缓存的空闲内存总数</p>
+<p>Qcache_hits：缓存命中次数</p>
+<p>Qcache_inserts：被加入到缓存中的查询数目</p>
+<p>Qcache_lowmem_prunes：因为缺少内存而从缓存中删除的查询数目</p>
+<p>Qcache_not_cached：没有被缓存的查询数目</p>
+<p>Qcache_queries_in_cache：在缓存中已注册的查询数目</p>
+<p>Qcache_total_blocks：查询缓存中的块的总数目</p>
+</blockquote>
+<h2 id="QC-的优劣"><a href="#QC-的优劣" class="headerlink" title="QC 的优劣"></a>QC 的优劣</h2><p>在讲到底要不要开启 QC 之前，我们先聊聊 QC 的优劣。</p>
+<p>QC 优势：</p>
+<ul>
+<li>提高查询速度：使用查询缓存在单行数据的表中搜索要比不使用查询缓存快 238%（数据来源：<a href="https://dev.mysql.com/doc/refman/5.7/en/query-cache.html" target="_blank" rel="noopener">MySQL 5.7 官方手册</a>）。</li>
+</ul>
+<p>劣势：</p>
+<ul>
+<li>比如执行的 SQL 都很简单（比如从只有一行的表中查询数据），但每次查询都不一样的话，打开 QC 后，额外的开销为 13% 左右；</li>
+<li>如果表数据发生了修改，使用该表的所有缓存查询都将实效，并且从缓存中删除；</li>
+<li>QC 要求前后两次请求的 SQL 完全一样，不同数据库、不同协议版本或不同默认字符集的查询，都会被认为是不同的查询。甚至包括大小写，比如下面两条 SQL ，查询缓存就会认为是两个不同的查询：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tbl_name</span><br><span class="line"><span class="keyword">Select</span> * <span class="keyword">from</span> tbl_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每次更新 QC 的内存块都需要进行锁定；</li>
+<li>可能会导致 SQL 查询时间不稳定，比如<a href="https://www.percona.com/blog/2012/09/05/write-contentions-on-the-query-cache/" target="_blank" rel="noopener">这个例子</a>。</li>
+</ul>
+<h2 id="是否需要开启-QC"><a href="#是否需要开启-QC" class="headerlink" title="是否需要开启 QC"></a>是否需要开启 QC</h2><p>通过上面讲解的 QC 优劣，对于是否需要开启 QC 这个问题，我们大概能总结出：</p>
+<p>如果线上环境中 99% 以上都是只读，很少更新，可以考虑全局开启 QC，也就是设置 query_cache_type 为 1。</p>
+<p>很多时候，我们希望缓存的是几张更新频率很低的表，其它表不考虑使用查询缓存，就可以考虑将 query_cache_type 设置成 2 或者 DEMAND，这样就只缓存下面这类 SQL：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">sql_cache</span> ......;</span><br></pre></td></tr></table></figure>
+<p>结合前面讲的 QC 的劣势，其它情况就不建议开启 QC 了。</p>
+<h2 id="4-怎样开启和关闭-QC"><a href="#4-怎样开启和关闭-QC" class="headerlink" title="4 怎样开启和关闭 QC"></a>4 怎样开启和关闭 QC</h2><p>全局开启 QC：</p>
+<p>在配置文件 my.cnf 中设置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query_cache_type = 1</span><br><span class="line">query_cache_size = 50M</span><br></pre></td></tr></table></figure>
+<p>只开启部分表的 QC：</p>
+<p>在配置文件 my.cnf 中设置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query_cache_type = 2</span><br><span class="line">query_cache_size = 50M</span><br></pre></td></tr></table></figure>
+<p>前面也提到了，这种情况，如果要使用 QC，查询语句需要加上 select sql_cache。</p>
+<p>关闭 QC：</p>
+<p>在配置文件 my.cnf 中设置：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">query_cache_type = 0</span><br><span class="line">query_cache_size = 0</span><br></pre></td></tr></table></figure>
+<p>或者源码编译安装 MySQL 的话，编译时增加参数 —without-query-cache 即可。</p>
+<h2 id="开启-QC-的注意事项"><a href="#开启-QC-的注意事项" class="headerlink" title="开启 QC 的注意事项"></a>开启 QC 的注意事项</h2><p>如果要开启 QC，建议不要设置过大，通常几十兆就好。如果设置过大，会增加维护缓存所需要的开销。</p>
+<p>另外要注意一些即使开启 QC 也不能使用 QC 的场景（这里参考的是 MySQL 5.7 官方手册第 8.10.3.1 节： <a href="https://dev.mysql.com/doc/refman/5.7/en/query-cache-operation.html" target="_blank" rel="noopener">How the Query Cache Operates</a> ）：</p>
+<ul>
+<li>分区表不支持，如果涉及分区表的查询，将自动禁用查询缓存</li>
+<li>子查询或者外层查询</li>
+<li>存储过程、触发器中使用的 SQL</li>
+<li>读取系统库时</li>
+<li>类似下面 SQL 时：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ... <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share</span> <span class="keyword">mode</span></span><br><span class="line"><span class="keyword">select</span> ... <span class="keyword">for</span> <span class="keyword">update</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>用到临时表</li>
+<li>产生了 warning 的查询</li>
+<li>显示增加了 SQL_NO_CACHE 关键字的</li>
+<li>如果没有全部库、表的 select 权限，则也不会使用 QC</li>
+<li>使用了一些函数：比如 now ()，user ()，password () 等</li>
+</ul>
+<p>了解上面的场景，我们就能知道：开了查询缓存，前后 SQL 一模一样，为什么后面这一次执行也使用不了缓存的原因了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>查询环境会存储 select 语句的文本以及发送到客户端的结果。</p>
+<p>如果使用查询缓存在单行数据的表中搜索要比不使用查询缓存快 238%。</p>
+<p>如果线上环境中 99% 以上都是只读，很少更新，可以考虑全局开启 QC。如果希望缓存的是几张更新频率很低的表，其它表不考虑使用查询缓存，就可以考虑将 query_cache_type 设置成 2，这些需要使用查询缓存的表，使用时加上 select sql_cache 即可。</p>
+<p>但是考虑到 QC 存在下面这些缺点，因此，其它情况就不建议开启 QC 了。</p>
+<ul>
+<li>每次查询不一样，会额外增加开销</li>
+<li>需要前后两条 SQL 完全一样才能使用</li>
+<li>只要存在更新，就会清空这张表的查询缓存</li>
+<li>等等</li>
+</ul>
+<p>当然开启 QC 的情况下，部分查询是无法走 QC 的，需要留意到这些场景。</p>
+<blockquote>
+<p>参考资料</p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/query-cache.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/query-cache.html</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/query-cache-operation.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/query-cache-operation.html</a></p>
+<p><a href="https://www.percona.com/blog/2012/09/05/write-contentions-on-the-query-cache/" target="_blank" rel="noopener">https://www.percona.com/blog/2012/09/05/write-contentions-on-the-query-cache/</a></p>
+<p>《深入浅出 MySQL》第 2 版：23.2.2 使用查询缓存}</p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/" data-toggle="tooltip" data-placement="top" title="读写分离注意问题">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/" data-toggle="tooltip" data-placement="top" title="设置自增主键的好处">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#认识-QC"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">认识 QC</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#QC-的优劣"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">QC 的优劣</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#是否需要开启-QC"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">是否需要开启 QC</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-怎样开启和关闭-QC"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">4 怎样开启和关闭 QC</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#开启-QC-的注意事项"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">开启 QC 的注意事项</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

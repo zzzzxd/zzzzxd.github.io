@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          删除大量数据的经验 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/19/mysql-2022-07-19-删除大量数据的经验/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                            
+                        </div>
+                        <h1>删除大量数据的经验</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-19
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2k</span> and
+                                Reading Time <span class="post-count">7</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>为了防止单张表过大，很多情况下，我们需要对历史数据做归档或者删除操作。那么如何高效删除大量无用数据呢？今天就来总结一下。</p>
+<p>在聊数据删除前，我们先来看看 MySQL 的共享表空间和独立表空间。</p>
+<h2 id="共享表空间和独立表空间"><a href="#共享表空间和独立表空间" class="headerlink" title="共享表空间和独立表空间"></a>共享表空间和独立表空间</h2><p>InnoDB 数据是按照表空间进行存放的，其表空间分为共享表空间和独立表空间。</p>
+<h3 id="共享表空间"><a href="#共享表空间" class="headerlink" title="共享表空间"></a>共享表空间</h3><p>共享表空间：表的数据放在系统共享表空间，也就是跟数据字典放一起。文件名为 ibdata1。可以通过参数 innodb_data_file_path 进行设置。在 my.cnf 中配置，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">innodb_data_file_path = ibdata1:1G;ibdata2:1G:autoextend</span><br></pre></td></tr></table></figure>
+<p>表示用两个文件（ibdata1 和 ibdata2）组成表空间，文件 ibdata1 的大小为 1G，文件 ibdata2 的大小为 1G，autoextend 表示用完 1G 可以自动增长。</p>
+<h3 id="独立表空间"><a href="#独立表空间" class="headerlink" title="独立表空间"></a>独立表空间</h3><p>独立表空间：每个 InnoDB 表数据存储在一个以 .idb 为后缀的文件中。</p>
+<p>由参数 innodb_file_per_table 控制。</p>
+<p>设置为 on 表示使用独立表空间；</p>
+<p>设置为 off 表示使用共享表空间。</p>
+<blockquote>
+<p><strong>经验分享</strong></p>
+<p>一般情况下建议设置为独立表空间，原因是：如果某张表被 drop 掉，会直接删除该表对应的文件，如果放在共享表空间中，即使执行了 drop table 操作，空间还是不能回收。</p>
+</blockquote>
+<p>基于上面的经验分享，因此建议使用独立表空间，而本节后面提到的几种删除数据的情况，都是基于独立表空间的情况。</p>
+<h2 id="几种数据删除形式"><a href="#几种数据删除形式" class="headerlink" title="几种数据删除形式"></a>几种数据删除形式</h2><h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><p>如果是某张表（假如表名为 t29）的数据和表结构都不需要使用了，那么可以考虑 drop 掉。出于安全考虑，建议的步骤如下：</p>
+<ul>
+<li>1、首先将表名改为 t29_bak_20191011：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> t29 <span class="keyword">rename</span> t29_bak_20191011;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、然后等待半个月，观察是否有程序因为找不到表 t29 而报错；</li>
+<li>3、如果没有跟表 t29 相关的报错，则半个月后直接 drop 掉 t29_bak_20191011：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t29_bak_20191011;</span><br></pre></td></tr></table></figure>
+<h3 id="清空表"><a href="#清空表" class="headerlink" title="清空表"></a>清空表</h3><p>如果是某张表（假如表名为 t29）的历史数据不需要使用了，要做一次清空，则可以考虑使用 truncate。</p>
+<p>建议的步骤如下：</p>
+<p>1、创建一张与 t29 表结构相同的临时表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t29_bak_20191011 <span class="keyword">like</span> t29;</span><br></pre></td></tr></table></figure>
+<p>2、并将数据拷贝到临时表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t29_bak_20191011  <span class="keyword">select</span> * <span class="keyword">from</span> t29;</span><br></pre></td></tr></table></figure>
+<p>3、再清空该表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> t29;</span><br></pre></td></tr></table></figure>
+<p>4、如果空间不够，观察半个月后，考虑转移 t29_bak_20191011 的数据到备份机器上。然后删除表 t29_bak_20191011：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> t29_bak_20191011;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>经验分享</strong></p>
+<p>我不止一次遇到类似的情况：需要清空表而使用 delete from table_name，导致主从延迟和磁盘 IO 跑满的情况。 原因是 binlog 为行模式的情况下，执行全表 delete 会生成每一行对应的删除操作，因此可能导致单个删除事务非常大。而 truncate 可以理解为 drop + create，在 binlog 为 row 模式的情况下，也只会产生一行 truncate 操作。所以，建议清空表时使用 truncate 而不使用 delete。</p>
+</blockquote>
+<h3 id="非分区表删除部分记录"><a href="#非分区表删除部分记录" class="headerlink" title="非分区表删除部分记录"></a>非分区表删除部分记录</h3><p>实际更多的情况，我们是需要删除表中一部分数据，在没有配置分区表的情况下，就只能用 delete 了。也许我们有时会发现，在 delete 很多数据后，实际表文件大小没变化。这是什么原因呢？</p>
+<p>原因是，如果通过 delete 删除某条记录，InnoDB 引擎会把这条记录标记为删除，但是磁盘文件的大小并不会缩小。如果之后要在这中间插入一条数据，则可以复用这个位置，如果一直没有数据插入，就会形成一个 “空洞”。因此 delete 命令是不能回收空间的，这也是 delete 后表文件大小没变化的原因。</p>
+<p>对于非分区表删除部分记录（比如删除 2017 年之前的数据，语句为：delete from table_name where date&lt;‘2017-01-01’;），建议的步骤是：</p>
+<ul>
+<li>1、首先备份全表；</li>
+<li>2、确保 date 字段有索引，如果没有索引，则需要添加索引（目的是避免执行删除命令时，全表扫描）；</li>
+<li>3、如果要删除的数据比较多，建议写一个循环，每次删除满足条件记录的 1000 条（目的是避免大事务），删完为止：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> table_name <span class="keyword">where</span> <span class="built_in">date</span>&lt;<span class="string">'2017-01-01'</span> <span class="keyword">limit</span> <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4、最后重建表（目的是释放表空间，但是会锁表，建议在业务低峰执行）：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> table_name <span class="keyword">engine</span>=<span class="keyword">InnoDB</span>;</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">optimize</span> <span class="keyword">table</span> student;</span><br></pre></td></tr></table></figure>
+<h3 id="分区表删除部分分区"><a href="#分区表删除部分分区" class="headerlink" title="分区表删除部分分区"></a>分区表删除部分分区</h3><p>从 MySQL 5.1 开始，支持分区。MySQL 分区是指将一张表按照某种规则（比如时间范围或者哈希等），划分为多个区块，各个区块所属的数据文件是相互独立的。</p>
+<p>比如对于一些日志表，我们可以创建成分区表，建表语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> muke;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> t29_log ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t29_log (</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">INT</span>,</span><br><span class="line">	log_info <span class="built_in">VARCHAR</span> (<span class="number">100</span>),</span><br><span class="line">	<span class="built_in">date</span> datetime</span><br><span class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span> <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="keyword">YEAR</span>(<span class="built_in">date</span>))(</span><br><span class="line">	<span class="keyword">PARTITION</span> p2016</span><br><span class="line">	<span class="keyword">VALUES</span></span><br><span class="line">		<span class="keyword">less</span> <span class="keyword">THAN</span> (<span class="number">2017</span>),</span><br><span class="line">		<span class="keyword">PARTITION</span> p2017</span><br><span class="line">	<span class="keyword">VALUES</span></span><br><span class="line">		<span class="keyword">less</span> <span class="keyword">THAN</span> (<span class="number">2018</span>),</span><br><span class="line">		<span class="keyword">PARTITION</span> p2018</span><br><span class="line">	<span class="keyword">VALUES</span></span><br><span class="line">		<span class="keyword">less</span> <span class="keyword">THAN</span> (<span class="number">2019</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>在上表的分区表中，表示：</p>
+<ul>
+<li>当日期的年份小于 2017 时，则数据存放在 p2016 分区；</li>
+<li>当日期的年份大于等于 2017 小于 2018 时，则数据存放在 p2017 分区；</li>
+<li>当日期的年份大于等于 2018 小于 2019 时，则数据存放在 p2018 分区。</li>
+</ul>
+<p>对于分区表，其物理文件是由建立分区时的各个分区 idb 文件组成，如下：</p>
+<p><img src="1.png" alt="图片描述"></p>
+<p>这里写入几条数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t29_log <span class="keyword">select</span> <span class="number">1</span>,<span class="string">'aaa'</span>,<span class="string">'2016-01-01'</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t29_log <span class="keyword">select</span> <span class="number">2</span>,<span class="string">'bbb'</span>,<span class="string">'2016-06-01'</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t29_log <span class="keyword">select</span> <span class="number">3</span>,<span class="string">'ccc'</span>,<span class="string">'2017-01-01'</span>;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t29_log <span class="keyword">select</span> <span class="number">4</span>,<span class="string">'ddd'</span>,<span class="string">'2018-01-01'</span>;</span><br></pre></td></tr></table></figure>
+<p>因为表 t29_log 是根据 date 来分区的，因此数据是根据 date 值的范围存放在不同的物理文件中，可以通过 information_schema 库下的 partitions 表来查看各个分区的具体信息：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> TABLE_SCHEMA,TABLE_NAME,PARTITION_NAME,TABLE_ROWS <span class="keyword">from</span> information_schema.partitions <span class="keyword">where</span> table_schema=<span class="string">'muke'</span> <span class="keyword">and</span> table_name=<span class="string">'t29_log'</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="/2.png" alt="图片描述"><br>TABLE_ROWS 表示每个分区中的记录数。</p>
+<p>我们查询下 t29_log 全表的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t29_log;</span><br></pre></td></tr></table></figure>
+<p><img src="3.png" alt="图片描述"><br>比如上面例子中 t29_log 需要删除 2016 年全年的数据，那么可以直接把 p2016 分区 drop 掉：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> t29_log <span class="keyword">drop</span> <span class="keyword">partition</span> p2016;</span><br></pre></td></tr></table></figure>
+<p><img src="4.png" alt="图片描述"></p>
+<p>相对慢慢 delete，这种方式删除历史数据效率高很多。</p>
+<p>因此，对于要经常删除历史数据的表，建议配置成分区表。以方便后续历史数据删除。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节首先提到了共享表空间和独立表空间，考虑到独立表空间的情况下，如果 drop 一张表，空间可以回收。因此一般建议设置为独立表空间。</p>
+<p>如果要清空表，建议使用 truncate，而不使用 delete。</p>
+<p>原因是 binlog 为行模式的情况下，执行全表 delete 会生成每一行对应的删除操作，因此可能导致单个删除事务非常大。而 truncate 可以理解为 drop + create，在 binlog 为 row 模式的情况下，也只会产生一行 truncate 操作。所以，建议清空表时使用 truncate 而不使用 delete。</p>
+<p>本节提到了几种常见删除数据的情况，并提供了一些方法，其核心是删除前，需要备份数据。以防万一，另外就是尽可能的去避免删除数据时产生大事务。</p>
+<p>考虑到非分区表删除部分记录会比较麻烦，因此如果知道某张表（比如日志类表）会进程删除几年前的数据，那么建议设置成分区表，删除历史数据将非常方便高效。</p>
+<blockquote>
+<p>参考资料</p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-multiple-tablespaces.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/innodb-multiple-tablespaces.html</a></p>
+<p>《MySQL 技术内幕：InnoDB 存储引擎》3.6.1 表空间文件、4.8 分区表</p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/19/mysql-2022-07-19-应用层的优化点总结/" data-toggle="tooltip" data-placement="top" title="应用层的优化点总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/" data-toggle="tooltip" data-placement="top" title="mysql的分库分表">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#共享表空间和独立表空间"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">共享表空间和独立表空间</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#共享表空间"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">共享表空间</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#独立表空间"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">独立表空间</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#几种数据删除形式"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">几种数据删除形式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除表"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">删除表</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#清空表"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">清空表</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#非分区表删除部分记录"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">非分区表删除部分记录</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分区表删除部分分区"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">分区表删除部分分区</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

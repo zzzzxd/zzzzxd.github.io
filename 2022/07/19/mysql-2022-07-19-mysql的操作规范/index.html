@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          mysql的操作规范 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                            
+                        </div>
+                        <h1>mysql的操作规范</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-07-19
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.8k</span> and
+                                Reading Time <span class="post-count">6</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天来看一下，比较通用的规范操作。</p>
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；</p>
+<p>1.2、库、表、字段全部采用小写；</p>
+<p>MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。</p>
+<p>1.3、避免用 MySQL 的保留字， MySQL 保留字请参考<a href="https://dev.mysql.com/doc/refman/5.7/en/keywords.html" target="_blank" rel="noopener">官方手册：9.3 Keywords and Reserved Words</a>；</p>
+<p>1.4、命名（包括表名、列名）禁止超过 30 个字符；</p>
+<p>1.5、临时库、表名必须以 tmp 为前缀，并以日期为后缀，如：tmp_shop_info_20190404；</p>
+<p>1.6、备份库、表必须以 bak 为前缀，并以日期为后缀，如：bak_shop_info_20190404；</p>
+<p>1.7、索引命名：</p>
+<ul>
+<li>非唯一索引必须按照“idx_字段名称”进行命名；</li>
+<li>唯一索引必须按照“uniq_字段名称”进行命名。</li>
+</ul>
+<h2 id="设计规范"><a href="#设计规范" class="headerlink" title="设计规范"></a>设计规范</h2><ol>
+<li>主键：</li>
+</ol>
+<ul>
+<li>表必须有主键；</li>
+<li>不使用更新频繁的列做主键；</li>
+<li>尽量不选择字符串列做主键；</li>
+<li>不使用 UUID MD5 HASH 做主键；</li>
+<li>默认使用非空的唯一键。</li>
+</ul>
+<ol>
+<li><p>如无特殊要求，建议都使用 InnoDB 引擎；</p>
+</li>
+<li><p>默认使用 utf8mb4 字符集，数据排序规则使用 utf8mb4_general_ci；</p>
+</li>
+</ol>
+<p>原因：utf8mb4 为万国码，无乱码风险；与 utf8 编码相比，utf8mb4 能支持 Emoji 表情。</p>
+<ol>
+<li>所有表、字段都需要增加 comment 来描述此表、字段所表示的含义；</li>
+</ol>
+<p>比如：data_status TINYINT NOT NULL DEFAULT ‘1’ COMMENT ‘1代表记录有效，0代表记录无效’。</p>
+<ol>
+<li><p>、如无说明，表必须包含 create_time 和 update_time 字段，即表必须包含记录创建时间和修改时间的字段；</p>
+</li>
+<li><p>用尽量少的存储空间来存数一个字段的数据：</p>
+</li>
+</ol>
+<ul>
+<li>能用 int 的就不用 char 或者 varchar；</li>
+<li>能用 tinyint 的就不用 int；</li>
+<li>使用 UNSIGNED 存储非负数值；</li>
+<li>只存储年使用 YEAR 类型；</li>
+<li>只存储日期使用 DATE 类型。</li>
+</ul>
+<ol>
+<li>存储精确浮点数必须使用 DECIMAL 替代 FLOAT 和 DOUBLE；</li>
+</ol>
+<p>原因：在存储的时候，FLOAT 和 DOUBLE 都存在精度损失的问题，很可能在比较值的时候，得到不正确的结果。</p>
+<ol>
+<li>尽可能不使用 TEXT、BLOB 类型；</li>
+</ol>
+<p>原因：会浪费更多的磁盘和内存空间，非必要的大量大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能。如果实在有某个字段过长需要使用 TEXT、BLOB 类型，则建议独立出来一张表，用主键来对应，避免影响原表的查询效率。</p>
+<ol>
+<li><p>禁止在数据库中存储明文密码；</p>
+</li>
+<li><p>索引设计规范：</p>
+</li>
+</ol>
+<ul>
+<li><p>需要添加索引的字段</p>
+<ul>
+<li><p>UPDATE、DELETE 语句的 WHERE 条件列；</p>
+</li>
+<li><p>ORDER BY、GROUP BY、DISTINCT 的字段（原因可复习<a href="https://www.imooc.com/read/43/article/686" target="_blank" rel="noopener">第 6 节</a>）；</p>
+</li>
+<li><p>多表 JOIN 的字段（原因可复习<a href="https://www.imooc.com/read/43/article/688" target="_blank" rel="noopener">第 8 节</a>）。</p>
+</li>
+</ul>
+</li>
+<li><p>单表索引建议控制在 5 个以内；</p>
+</li>
+<li><p>适当配置联合索引；</p>
+</li>
+</ul>
+<p>比如方便查询能走覆盖索引，或者几个字段同时作为条件的概率很高时，当然还有其他很多种情况可以设置联合索引.</p>
+<ul>
+<li>业务上具有唯一性的字段，添加成唯一索引；</li>
+</ul>
+<p>遇到过几次字段在业务场景上要求唯一，但是该字段在数据库里的数据却出现了重复。因此在代码层考虑外，还需要在 MySQL 上的对应字段添加唯一索引。</p>
+<ul>
+<li>在 varchar 字段上建立索引时，建议根据实际文本区分度指定索引长度；</li>
+</ul>
+<p>原因：可以降低索引所占用的空间，并且很多时候，比如字符串基本是长度大于 20，但是只要建立长度为 20 的索引，就已经有很高的区分度了。可以使用 count(distinct left(列名, 索引长度))/count(*) 的区分度来确定。</p>
+<ul>
+<li><p>索引禁忌：</p>
+<ul>
+<li><p>不在低基数列上建立索引，例如：性别字段。</p>
+</li>
+<li><p>不在索引列进行数学运算和函数运算（原因，做函数操作可能会导致使用不了索引）</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>不建议使用外键；</li>
+</ol>
+<p>原因：外键会导致表与表之间耦合，update 与 delete 操作都会涉及相关联的表，十分影响 sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能。</p>
+<ol>
+<li>禁止使用存储过程、视图、触发器、Event ；</li>
+</ol>
+<p>原因：高并发的情况下，这些功能很可能将数据库拖死，业务逻辑放到服务层具备更好的扩展性。</p>
+<ol>
+<li><p>单表列数目建议小于 30；</p>
+</li>
+<li><p>表示例：</p>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student_info (</span><br><span class="line"> <span class="keyword">id</span> <span class="built_in">INT</span> (<span class="number">11</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'主键'</span>,</span><br><span class="line"> stu_name <span class="built_in">VARCHAR</span> (<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'姓名'</span>,</span><br><span class="line"> stu_class <span class="built_in">VARCHAR</span> (<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'班级'</span>,</span><br><span class="line"> stu_num <span class="built_in">INT</span> (<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'学号'</span>,</span><br><span class="line"> stu_score <span class="built_in">SMALLINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'总分'</span>,</span><br><span class="line"> tuition <span class="built_in">DECIMAL</span> (<span class="number">5</span>, <span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'学费'</span>,</span><br><span class="line"> phone_number <span class="built_in">VARCHAR</span> (<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'电话号码'</span>,</span><br><span class="line"> create_time datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'记录创建时间'</span>,</span><br><span class="line"> update_time datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'记录更新时间'</span>,</span><br><span class="line"> <span class="keyword">status</span> <span class="built_in">TINYINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'1'</span> <span class="keyword">COMMENT</span> <span class="string">'1代表记录有效，0代表记录无效'</span>,</span><br><span class="line"> PRIMARY <span class="keyword">KEY</span> (<span class="keyword">id</span>),</span><br><span class="line"> <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> uniq_stu_num (stu_num),</span><br><span class="line"> <span class="keyword">KEY</span> idx_stu_score (stu_score),</span><br><span class="line"> <span class="keyword">KEY</span> idx_update_time_tuition (update_time, tuition)</span><br><span class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">INNODB</span> <span class="keyword">charset</span> = utf8mb4 <span class="keyword">COMMENT</span> <span class="string">'学生信息表'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="SQL语句规范"><a href="#SQL语句规范" class="headerlink" title="SQL语句规范"></a>SQL语句规范</h2><ol>
+<li>避免隐式转换；</li>
+</ol>
+<p>具体原因可以看一下前文。</p>
+<ol>
+<li>尽量不使用select *,只 select 需要的字段 ；</li>
+</ol>
+<p>原因：读取不需要的列会增加 CPU、IO、NET 消耗，并且不能有效的利用覆盖索引。使用 SELECT * 容易在增加或者删除字段后导致程序报错。</p>
+<ol>
+<li>禁止使用 INSERT INTO t_xxx VALUES (xxx)，必须显示指定插入的列属性 ；</li>
+</ol>
+<p>原因：容易在增加或者删除字段后导致程序报错。</p>
+<ol>
+<li>尽量不使用负向查询；</li>
+</ol>
+<p>比如 not in/like。</p>
+<ol>
+<li>禁止以 % 开头的模糊查询。</li>
+</ol>
+<p>原因：使用不了索引</p>
+<ol>
+<li><p>禁止单条 SQL 语句同时更新多个表；</p>
+</li>
+<li><p>统计记录数使用 select count(*)，而不是 select count(primary_key)或者 select count(普通字段名)；</p>
+</li>
+</ol>
+<p>原因：可能会导致走的索引不是最优的或者导致统计数字不准确。</p>
+<ol>
+<li><p>建议将子查询转换为关联查询；</p>
+</li>
+<li><p>建议应用程序捕获 SQL 异常，并有相应处理；</p>
+</li>
+<li><p>SQL 中不建议使用 sleep()，如特殊需求需要用到 sleep()，请提前告知 DBA；</p>
+</li>
+<li><p>避免大表的 join。</p>
+</li>
+</ol>
+<h2 id="行为规范"><a href="#行为规范" class="headerlink" title="行为规范"></a>行为规范</h2><ol>
+<li><p>批量导入、导出数据必须提前通知 DBA 协助观察；</p>
+</li>
+<li><p>有可能导致 MySQL QPS 上升的活动，提前告知DBA；</p>
+</li>
+<li><p>同一张表的多个 alter 合成一次操作；</p>
+</li>
+<li><p>不在业务高峰期批量更新、查询数据库；</p>
+</li>
+<li><p>删除表或者库要求尽量先 rename，观察几天，确定对业务没影响，再 drop。</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节讲解了 MySQL 的一些操作规范，主要讲解了下面这些场景的规范：</p>
+<ol>
+<li>命名规范；</li>
+<li>设计规范；</li>
+<li>SQL 语句规范；</li>
+<li>行为规范。</li>
+</ol>
+<p>当然，各个公司可能都有自己独有的 MySQL 使用规范，因此这篇文章仅供参考。</p>
+<p>当制定出合理的 MySQL 使用规范，并严格按照规范操作，很多问题都可以在源头上避免掉。</p>
+<blockquote>
+<p>参考资料</p>
+<p>《MySQL 工作笔记》第 4 章：SQL 开发规范和基础</p>
+<p>《阿里巴巴Java开发手册》第五章：MySQL 数据库</p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/07/19/mysql-2022-07-19-应用层的优化点总结/" data-toggle="tooltip" data-placement="top" title="应用层的优化点总结">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#命名规范"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">命名规范</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#设计规范"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">设计规范</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#SQL语句规范"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">SQL语句规范</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#行为规范"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">行为规范</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

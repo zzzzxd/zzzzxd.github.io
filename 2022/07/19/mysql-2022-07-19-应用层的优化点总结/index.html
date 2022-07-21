@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          Regular Expression Matching - Dante&#39;s blog
+          应用层的优化点总结 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/10/leetcode-leetcode高频-2022-07-10-Regular-Expression-Matching/">
+    <link rel="canonical" href="https://dusign.net/2022/07/19/mysql-2022-07-19-应用层的优化点总结/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,21 +112,21 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#recursion" title="recursion">recursion</a>
+                              <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
                             
                         </div>
-                        <h1>Regular Expression Matching</h1>
+                        <h1>应用层的优化点总结</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-10
+                            2022-07-19
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">456</span> and
-                                Reading Time <span class="post-count">2</span> Minutes
+                                Words <span class="post-count">1.3k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -187,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -201,7 +194,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -216,6 +209,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -270,28 +270,61 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h3><p>​    <a href="https://leetcode.com/problems/regular-expression-matching/" target="_blank" rel="noopener">https://leetcode.com/problems/regular-expression-matching/</a></p>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>​    Given an input string <code>s</code> and a pattern <code>p</code>, implement regular expression matching with support for <code>&#39;.&#39;</code> and <code>&#39;*&#39;</code> where:</p>
-<ul>
-<li><code>&#39;.&#39;</code> Matches any single character.</li>
-<li><code>&#39;*&#39;</code> Matches zero or more of the preceding element.</li>
-</ul>
-<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;aa&quot;, p &#x3D; &quot;a&quot;</span><br><span class="line">Output: false</span><br><span class="line">Explanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.</span><br></pre></td></tr></table></figure>
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;aa&quot;, p &#x3D; &quot;a*&quot;</span><br><span class="line">Output: true</span><br><span class="line">Explanation: &#39;*&#39; means zero or more of the preceding element, &#39;a&#39;. Therefore, by repeating &#39;a&#39; once, it becomes &quot;aa&quot;.</span><br></pre></td></tr></table></figure>
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;ab&quot;, p &#x3D; &quot;.*&quot;</span><br><span class="line">Output: true</span><br><span class="line">Explanation: &quot;.*&quot; means &quot;zero or more (*) of any character (.)&quot;.</span><br></pre></td></tr></table></figure>
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>1 &lt;= s.length &lt;= 20</code></li>
-<li><code>1 &lt;= p.length &lt;= 30</code></li>
-<li><code>s</code> contains only lowercase English letters.</li>
-<li><code>p</code> contains only lowercase English letters, <code>&#39;.&#39;</code>, and <code>&#39;*&#39;</code>.</li>
-<li>It is guaranteed for each appearance of the character <code>&#39;*&#39;</code>, there will be a previous valid character to match.</li>
-</ul>
-<h3 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h3><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s, String p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!validCheck(p)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">".*"</span>.equals(p)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[s.length()+<span class="number">1</span>][p.length()+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> process(s.toCharArray(),p.toCharArray(),<span class="number">0</span>,<span class="number">0</span>,dp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">process</span><span class="params">(<span class="keyword">char</span>[] s,<span class="keyword">char</span>[] p,<span class="keyword">int</span> si,<span class="keyword">int</span> ei,<span class="keyword">int</span>[][] dp)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ei == p.length)&#123; <span class="comment">//ex表达式没了，看s没了没有</span></span><br><span class="line">            <span class="keyword">return</span> si == s.length;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(dp[si][ei] != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> dp[si][ei]==<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//ex表达式还有,*不会单独匹配</span></span><br><span class="line">        <span class="keyword">if</span>(ei+<span class="number">1</span> == p.length || p[ei+<span class="number">1</span>]!= <span class="string">'*'</span>)&#123; <span class="comment">//意味着当前字符必须匹配</span></span><br><span class="line">            <span class="keyword">return</span> si != s.length &amp;&amp; (s[si]==p[ei] || p[ei] == <span class="string">'.'</span>) &amp;&amp; process(s,p,si+<span class="number">1</span>,ei+<span class="number">1</span>,dp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//下个位置有'.'</span></span><br><span class="line">        <span class="keyword">while</span> (si != s.length &amp;&amp; (p[ei] == s[si]||p[ei] == <span class="string">'.'</span>))&#123;</span><br><span class="line">            <span class="keyword">if</span>(process(s,p,si,ei+<span class="number">2</span>,dp))&#123;</span><br><span class="line">                dp[si][ei] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[si][ei] = -<span class="number">1</span>;</span><br><span class="line">            si++;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[si][ei] = process(s, p, si, ei + <span class="number">2</span>, dp) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> dp[si][ei]==<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">boolean</span> <span class="title">validCheck</span><span class="params">(String  p)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (p.length() == <span class="number">0</span> ) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> i = p.indexOf(<span class="string">"*"</span>);</span><br><span class="line">        <span class="keyword">if</span>(i==-<span class="number">1</span>)<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">0</span> || p.charAt(i-<span class="number">1</span>)== <span class="string">'?'</span> ||p.charAt(i-<span class="number">1</span>)== <span class="string">'*'</span> ) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    对于数据库的使用，我们不仅仅要考虑 MySQL 本身的优化，还需要考虑应用层的优化。因为有些线上问题，就是由于应用层设置不合理导致的。下面看一下常见的优化点。</p>
+<h2 id="使用连接池"><a href="#使用连接池" class="headerlink" title="使用连接池"></a>使用连接池</h2><p>MySQL 如果频繁创建和断开连接，那 MySQL 的开销会比较大，可能会占用过多的服务器内存资源，甚至导致响应时间变慢。此时就可以考虑使用连接池来改进性能。</p>
+<p>连接池可以理解为：创建一些持久连接的“池”，新的请求可以使用这些连接池，减少创建和断开连接的次数。</p>
+<p>其大致原理是：</p>
+<ol>
+<li>当进程启动时，创建相应的数据库连接池对象；</li>
+<li>如果程序需要请求数据库，则直接从连接池获取到一个连接；</li>
+<li>数据库请求完成后，释放数据库连接池。</li>
+</ol>
+<p><strong>那么连接池会不会导致服务器连接过多呢？</strong></p>
+<p>通常情况下，连接池不会导致服务器连接过多，因为它们会在进程间排队和共享连接。</p>
+<blockquote>
+<p>在《高性能 MySQL》第 14 章：应用层优化中就提到：当遇到连接池完全占满时，应该将连接请求进行排队，而不是扩展连接池。这样可以避免将压力都转到 MySQL 上而导致 MySQL 连接数过多。</p>
+</blockquote>
+<h2 id="减少对-MySQL-的访问"><a href="#减少对-MySQL-的访问" class="headerlink" title="减少对 MySQL 的访问"></a>减少对 MySQL 的访问</h2><p>避免对同一行数据做重复检索，比如查询某个用户信息。</p>
+<p>首先查出这个用户的联系方式：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> phone <span class="keyword">from</span> user_info <span class="keyword">where</span> user_id=<span class="number">111</span>;</span><br></pre></td></tr></table></figure>
+<p>然后再查出这个用户的姓名：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">name</span> <span class="keyword">from</span> user_info <span class="keyword">where</span> user_id=<span class="number">111</span>;</span><br></pre></td></tr></table></figure>
+<p>显然上面的方式并不是最优的，可以将两条 SQL 合并成一条：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> phone,<span class="keyword">name</span>  <span class="keyword">from</span> user_info <span class="keyword">where</span> user_id=<span class="number">111</span>;</span><br></pre></td></tr></table></figure>
+<p>然后返回给客户端。这样跟数据库建立连接的次数从 2 次降低到 1 次，从而节省了部分建立连接所花费的内存和时间。</p>
+<h2 id="增加-Redis-缓存层"><a href="#增加-Redis-缓存层" class="headerlink" title="增加 Redis 缓存层"></a>增加 Redis 缓存层</h2><p>在很多业务场景，Redis 充当着不可或缺的角色。这里介绍几种通过 Redis 环境 MySQL 压力的场景：</p>
+<h3 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h3><p>当统计数增加，则在 Redis 中执行下面的命令让计数器加 1：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INCR t1_count</span><br></pre></td></tr></table></figure>
+<p>通过这种方式缓解在 MySQL 中执行 update 的压力。</p>
+<h3 id="K-V-数据缓存"><a href="#K-V-数据缓存" class="headerlink" title="K-V 数据缓存"></a>K-V 数据缓存</h3><p>在 MySQL 中，如果某个字段会被频繁查询，而该字段内容变化的概率又不是很大，就可以考虑使用 Redis 缓存。比如电商业务，查看上个季度某类型商品的销量排行，如果这一个功能放在主页，点击量可能会非常高，因此可以考虑放在 Redis 中。</p>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>Redis 中可以非常方便的使用消息队列。</p>
+<p>生产者通过 lpush 将消息放在 list 中，消费者通过 rpop 取出该消息。</p>
+<p>比如使用 Redis 实现短信消息队列。如果用户在 APP 上点击注册用户名密码，需要填下手机号验证，程序会将该用户的手机号放在 Redis 的 list 中，然后另外一个程序一直去消费 list 中的手机号，取出手机后，则调用第三方短信接口，发送手机短信息给到用户。</p>
+<h2 id="单表过大及时归档"><a href="#单表过大及时归档" class="headerlink" title="单表过大及时归档"></a>单表过大及时归档</h2><p>比如单张表过大，可能有下面这些影响：</p>
+<ol>
+<li>在修改表结构时导致长时间主从延迟；</li>
+<li>备份时间过久；</li>
+<li>查询速度可能也会变慢。</li>
+</ol>
+<p>因此，可以考虑对历史数据归档（比如日志数据），控制单表的数据量。</p>
+<h2 id="代码层读写分离"><a href="#代码层读写分离" class="headerlink" title="代码层读写分离"></a>代码层读写分离</h2><p>在配置了 MySQL 主从环境的情况下，可以考虑使用读写分离，通过程序配置的这种方式，在专栏<a href="https://www.imooc.com/read/43/article/707" target="_blank" rel="noopener">第 27 节</a>有提到过。更新走主库，查询走从库。</p>
+<p>当然，主从同步可能因为大事务或者网络等原因导致同步延迟，在使用读写分离是也需要考虑到延迟这一点。</p>
+<h2 id="表的索引提前规划"><a href="#表的索引提前规划" class="headerlink" title="表的索引提前规划"></a>表的索引提前规划</h2><p>当开发或者 DBA 在创建新表时，就应该考虑在表的条件字段添加合适索引。这样可以避免业务上线后，数据量一上来就出现大量慢查询而导致 MySQL 服务器高负载。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节讲解了使用 MySQL 时，应用层的一些优化。</p>
+<p>提到了以下几点优化方案：</p>
+<p>1、使用连接池；</p>
+<p>2、减少对 MySQL 的访问；</p>
+<p>3、增加 Redis 缓存层；</p>
+<p>4、单表过大及时归档；</p>
+<p>5、代码层读写分离；</p>
+<p>6、表的索引提前规划；</p>
+<p>······</p>
+<p>实际工作中也是，不单单 DBA 要去优化 MySQL，开发也应该考虑在应用层去做一些优化，以保证业务稳定高效。</p>
+<blockquote>
+<p>参考资料</p>
+<p>《深入浅出 MySQL》第 23 章：应用优化</p>
+<p>《高性能 MySQL》第 14 章：应用层优化</p>
+</blockquote>
 
                 
                 <hr>
@@ -299,12 +332,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-11-Container-With-Most-Water/" data-toggle="tooltip" data-placement="top" title="11. Container With Most Water">&larr; Previous Post</a>
+                        <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/" data-toggle="tooltip" data-placement="top" title="mysql的操作规范">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-8-String-to-Integer-atoi/" data-toggle="tooltip" data-placement="top" title="8. String to Integer (atoi)">Next Post &rarr;</a>
+                        <a href="/2022/07/19/mysql-2022-07-19-删除大量数据的经验/" data-toggle="tooltip" data-placement="top" title="删除大量数据的经验">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -417,7 +450,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目链接"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目链接</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目描述"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">题目描述</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目解析"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">题目解析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#代码"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">代码</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用连接池"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用连接池</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#减少对-MySQL-的访问"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">减少对 MySQL 的访问</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#增加-Redis-缓存层"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">增加 Redis 缓存层</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#计数器"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">计数器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#K-V-数据缓存"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">K-V 数据缓存</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#消息队列"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">消息队列</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#单表过大及时归档"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">单表过大及时归档</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#代码层读写分离"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">代码层读写分离</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#表的索引提前规划"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">表的索引提前规划</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">总结</span></a></li></ol>
             
           
           </div>
@@ -439,7 +472,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#recursion" title="recursion">recursion</a>
+                          <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
                         
                     </div>
                 </section>
@@ -643,7 +676,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -653,21 +686,6 @@
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

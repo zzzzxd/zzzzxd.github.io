@@ -20,7 +20,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/18/mysql锁机制-间隙锁/">
+    <link rel="canonical" href="https://dusign.net/2022/07/18/mysql-2022-07-18-mysql锁机制-间隙锁/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -187,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -201,7 +194,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -216,6 +209,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -419,9 +419,9 @@
 <p>可能你会问？为什么 session3 的 insert 会出现等待？</p>
 <p>我们看看下图：<br><img src="5.png" alt="图片描述"><br>如图，所有记录都有 X 锁，除此之外，每个 GAP 也被加上了 GAP 锁。因此这张表在执行完 select * from t17 where b=1 for update; 到 commit 之前，除了不加锁的快照读，其它任何加锁的 SQL，都会等待，如果这是线上业务表，那就是件非常恐怖的事情了。</p>
 <p>总结：<strong>RR 隔离级别下，非索引字段做条件的当前读不但会把每条记录都加上 X 锁，还会把每个 GAP 加上 GAP 锁。再次说明，条件字段加索引的重要性。</strong></p>
-<h2 id="4-RR-隔离级别下的唯一索引当前读是否会用到-GAP-锁"><a href="#4-RR-隔离级别下的唯一索引当前读是否会用到-GAP-锁" class="headerlink" title="4 RR 隔离级别下的唯一索引当前读是否会用到 GAP 锁"></a>4 RR 隔离级别下的唯一索引当前读是否会用到 GAP 锁</h2><p>GAP 锁的目的是：为了防止同一事务两次当前读，出现幻读的情况。如果能确保索引字段唯一，那其实一个等值查询，最多就返回一条记录，而且相同索引记录的值，一定不会再新增，因此不会出现 GAP 锁。</p>
+<h2 id="RR-隔离级别下的唯一索引当前读是否会用到-GAP-锁"><a href="#RR-隔离级别下的唯一索引当前读是否会用到-GAP-锁" class="headerlink" title="RR 隔离级别下的唯一索引当前读是否会用到 GAP 锁"></a>RR 隔离级别下的唯一索引当前读是否会用到 GAP 锁</h2><p>GAP 锁的目的是：为了防止同一事务两次当前读，出现幻读的情况。如果能确保索引字段唯一，那其实一个等值查询，最多就返回一条记录，而且相同索引记录的值，一定不会再新增，因此不会出现 GAP 锁。</p>
 <p>因此以唯一索引为条件的当前读，不会有 GAP 锁。所以 RR 隔离级别下的唯一索引当前读加锁情况与 RC 隔离级别下的唯一索引当前读加锁情况一致。这里就不再实验了。</p>
-<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><p>本节讲解了 RC 隔离级别出现幻读的情况，而 RR 通过 GAP 锁解决了幻读，但是 RR 隔离级别相对于 RC，锁的范围可能更大了，特别是对没有索引的字段进行当前读（比如增、删、改或者 select … for update）时，会阻塞除快照读以外所有的并发 SQL。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节讲解了 RC 隔离级别出现幻读的情况，而 RR 通过 GAP 锁解决了幻读，但是 RR 隔离级别相对于 RC，锁的范围可能更大了，特别是对没有索引的字段进行当前读（比如增、删、改或者 select … for update）时，会阻塞除快照读以外所有的并发 SQL。</p>
 <p>而后面我们又聊了以唯一索引做为条件的当前读不会用到 GAP 锁，因为根据唯一索引查询最多就一条记录，而且相同索引记录的值，一定不会再新增。</p>
 
                 
@@ -429,9 +429,13 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2022/07/18/mysql-2022-07-18-mysql死锁的发生与解决/" data-toggle="tooltip" data-placement="top" title="mysql死锁的发生与解决">&larr; Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2022/07/18/mysql锁机制-行锁/" data-toggle="tooltip" data-placement="top" title="mysql锁机制-行锁">Next Post &rarr;</a>
+                        <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-行锁/" data-toggle="tooltip" data-placement="top" title="mysql锁机制-行锁">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -544,7 +548,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RC下的幻读"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">RC下的幻读</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RR-隔离级别下的非唯一索引查询"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">RR 隔离级别下的非唯一索引查询</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RR-隔离级别下的非索引字段查询"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">RR 隔离级别下的非索引字段查询</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-RR-隔离级别下的唯一索引当前读是否会用到-GAP-锁"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">4 RR 隔离级别下的唯一索引当前读是否会用到 GAP 锁</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#5-总结"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">5 总结</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RC下的幻读"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">RC下的幻读</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RR-隔离级别下的非唯一索引查询"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">RR 隔离级别下的非唯一索引查询</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RR-隔离级别下的非索引字段查询"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">RR 隔离级别下的非索引字段查询</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RR-隔离级别下的唯一索引当前读是否会用到-GAP-锁"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">RR 隔离级别下的唯一索引当前读是否会用到 GAP 锁</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">总结</span></a></li></ol>
             
           
           </div>
@@ -770,7 +774,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -780,21 +784,6 @@
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
