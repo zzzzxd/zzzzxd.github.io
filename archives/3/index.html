@@ -164,20 +164,6 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -185,7 +171,21 @@
 
                         
                         <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -621,9 +621,83 @@
 
     
 
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/18/mysql-2022-07-18-mvcc实现/">
+                <h2 class="post-title">
+                    mvcc实现
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    本节跟大家一起聊聊 MVCC。
+什么是 MVCC？在说 MVCC 之前，大家先看看下面这个例子。
+首先创建表并写入测试数据：
+1234567891011use muke;drop table if exists t20;CREATE TABLE `t20` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-18
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/18/mysql-2022-07-18-事务与事务持久化/">
+                <h2 class="post-title">
+                    事务与事务持久化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言 思考两个问题，数据库突然断电会丢失数据吗？数据库中的事务是如何记录的？带着两个疑问，我们继续往下看。
+什么是事务？根据《高性能 MySQL》第 3 版 1.3 事务一节中定义：
+
+事务就是一组原子性的 SQL 查询，或者说一个独立的工作单元。如果数据库引擎能够成功地对数据库应用该组查询的全部语句，那么就执行该组查询。如果其中有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-18
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -941,79 +1015,6 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/15/微服务-2022-07-15-分布式AKF拆分原则/">
-                <h2 class="post-title">
-                    分布式AKF拆分原则
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-转载 :https://blog.csdn.net/tomcosin/article/details/119332084
-
-前言​    当我们需要分布式系统提供更强的性能时，该怎样扩展系统呢？什么时候该加机器？什么时候该重构代码？扩容时，究竟该选择哈希算法还是最小连接数算法，才能有效提升性能？
-在面对 Scalability 可伸缩性问题时，我们必须有一个系统的方法论，才能应对日益复杂的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#微服务" title="微服务">微服务</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/15/分布式算法-2022-07-15-理解一致性哈希算法/">
-                <h2 class="post-title">
-                    理解一致性哈希算法
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-转载:https://segmentfault.com/a/1190000021199728
-
-前言要了解一致性哈希，首先我们必须了解传统的哈希及其在大规模分布式系统中的局限性。简单地说，哈希就是一个键值对存储，在给定键的情况下，可以非常高效地找到所关联的值。假设我们要根据其邮政编码查找城市中的街道名称。一种最简单的实现方式是将此信息以哈希字典的形式进行存储 &lt;Zip Code，St......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#一 致性Hash" title="一 致性Hash">一 致性Hash</a>
-                    
-                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1075,7 +1076,7 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
     <div class="tags">
         
             
-            <a href="/tags/#SSM" title="SSM" rel="6">SSM</a>
+        
             
         
             
@@ -1091,7 +1092,7 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             
         
             
-        
+            <a href="/tags/#SSM" title="SSM" rel="6">SSM</a>
             
         
             
@@ -1109,7 +1110,7 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+        
             
         
             
@@ -1118,6 +1119,8 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
             
         
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1149,9 +1152,9 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             
         
             
-            <a href="/tags/#Math" title="Math" rel="8">Math</a>
-            
         
+            
+            <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
             
@@ -1181,9 +1184,9 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             
         
             
-            <a href="/tags/#LeetCode" title="LeetCode" rel="31">LeetCode</a>
-            
         
+            
+            <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
             
         
             
@@ -1260,23 +1263,23 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
     <ul>
       
         <li>
-          <a href="/2022/07/22/Servlet%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8ESpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8/">Servlet过滤器与SpringMVC拦截器</a>
+          <a href="/2022/07/22/docker-tag%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/">docker tag命令解释</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F/">框架中的三种配置方式</a>
+          <a href="/2022/07/22/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">docker 常用命令记录</a>
         </li>
       
         <li>
-          <a href="/2022/07/21/%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%A8%A1%E7%89%88%E5%BC%95%E6%93%8E/">视图解析与模版引擎</a>
+          <a href="/2022/07/22/ssm-2022-07-22-Servlet%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8ESpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8/">Servlet过滤器与SpringMVC拦截器</a>
         </li>
       
         <li>
-          <a href="/2022/07/21/SpringMVC%E7%94%A8Map%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%88%86%E6%9E%90/">SpringMVC用Map接收请求参数分析</a>
+          <a href="/2022/07/22/ssm-2022-07-22-%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F/">框架中的三种配置方式</a>
         </li>
       
         <li>
-          <a href="/2022/07/21/requestParam%E4%B8%8E-Param/"> @requestParam与@Param</a>
+          <a href="/2022/07/21/ssm-2022-07-21-%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%A8%A1%E7%89%88%E5%BC%95%E6%93%8E/">视图解析与模版引擎</a>
         </li>
       
     </ul>
@@ -1291,7 +1294,7 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">181</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">183</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1302,21 +1305,23 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
     <div class="widget">
       <ul>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#Hbase"><li>Hbase</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
         
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         

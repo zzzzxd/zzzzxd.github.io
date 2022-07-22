@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-           @requestParam与@Param - Dante&#39;s blog
+          springmvc Controller 页面跳转 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/21/requestParam与-Param/">
+    <link rel="canonical" href="https://dusign.net/2022/07/21/ssm-2022-07-21-springmvc-Controller-页面跳转/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,7 +115,7 @@
                               <a class="tag" href="/tags/#SSM" title="SSM">SSM</a>
                             
                         </div>
-                        <h1> @requestParam与@Param</h1>
+                        <h1>springmvc Controller 页面跳转</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">385</span> and
+                                Words <span class="post-count">413</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,20 +187,6 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -208,7 +194,21 @@
 
                         
                         <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -270,21 +270,42 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><strong>@RequestParam</strong> 用于controller层，是Spring的注解</p>
-<p>解决前台参数名称与后台接收参数变量名称不一致的问题，等价于request.getParam</p>
-<ul>
-<li>value：参数名字，即入参的请求参数名字，如username表示请求的参数区中的name为username的参数的值将传入；</li>
-<li>required：是否必须，默认是true，表示请求中一定要有相应的参数，否则将报404错误码；</li>
-<li>defaultValue：默认值，表示如果请求中没有同名参数时的默认值，默认值可以是SpEL表达式，如<code>“#{systemProperties[&#39;java.vm.version&#39;]}”</code></li>
+                <ul>
+<li><strong>如果返回值为</strong>ModelAndView<strong>，在处理方法中，返回</strong>null<strong>时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。</strong></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"login"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@RequestParam(value = <span class="string">"username"</span>)</span> <span class="keyword">final</span> String username,</span></span><br><span class="line"><span class="function">                        @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"password"</span>,required = <span class="keyword">false</span>)</span> <span class="keyword">final</span> String password,</span></span><br><span class="line"><span class="function">                        @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"valcode"</span>,required = <span class="keyword">false</span>)</span> <span class="keyword">final</span> String valcode) </span>&#123;</span><br><span class="line">                        &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>@Param</strong> 用于dao层，是mybatis中的注解</p>
-<p>使得mapper.xml中的参数与后台的参数对应上，也增强了可读性</p>
-<p>如果两者参数名一致得话，spring会自动进行封装，不一致的时候就需要手动去使其对应上。</p>
-<p>即：用注解来简化xml配置的时候,@Param注解的作用是给参数命名,参数命名后就能根据名字得到参数值,正确的将参数传入sql语句中 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Mapper</span> </span>&#123; </span><br><span class="line">   </span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select s_id id,s_name name,class_id classid"</span>+ </span><br><span class="line">        <span class="string">"from student where  s_name= #&#123;aaaa&#125; and class_id = #&#123;bbbb&#125;"</span>) </span><br><span class="line"> <span class="function"><span class="keyword">public</span> Student <span class="title">select</span><span class="params">(@Param(<span class="string">"aaaa"</span>)</span> String name,@<span class="title">Param</span><span class="params">(<span class="string">"bbbb"</span>)</span><span class="keyword">int</span> class_id)</span>;  </span><br><span class="line">   </span><br><span class="line"><span class="meta">@Delete</span>...... </span><br><span class="line"></span><br><span class="line"><span class="meta">@Insert</span>...... </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在dao层，用来给参数命名，在Mybatis的mapper中加上该注解，传递的参数与Sql中的字段名一致</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Employee&gt;getAllEmployeeByPage(<span class="meta">@Param</span>(<span class="string">"page"</span>) Integer page,</span><br><span class="line">					 <span class="meta">@Param</span>(<span class="string">"size"</span>) Integer size);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>结果：</strong> <img src="1.png" alt="0"></p>
+<ul>
+<li><strong>如果返回值为</strong>ModelAndView,<strong>在处理方法中，指定视图名称，那么将跳转到指定的视图名。跳转结果会根据视图解析器来跳转。</strong>——-<font face = "黑体" color = green><strong>使用最多</strong></font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong><img src="2.png" alt="0"></p>
+<ul>
+<li><strong>返回值为</strong>void<strong>，在处理方法中，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong> <img src="3.png" alt=""></p>
+<ul>
+<li><strong>返回值为</strong>void,<strong>在处理方法中通过</strong>ServletAPI<strong>来进行跳转：</strong>—-<strong><font color=green>不用视图解析器</font></strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">(HttpServletRequest req,HttpServletResponse resp)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        req.getRequestDispatcher(<span class="string">"hello.jsp"</span>).forward(req, resp);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果：</strong> <img src="4.png" alt="0"></p>
+<ul>
+<li><p><strong>返回值为</strong>String,默认情况下，将会以返回值为视图名通过视图解析器来找到跳转的页面。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>结果：</strong> <img src="5.png" alt="0">)</p>
+<ul>
+<li>返回值为<strong>String</strong>，在处理方法中，返回<strong>null</strong>时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>结果</strong>： <img src="6.png" alt="0"></p>
+<ul>
+<li>返回值为<strong>String,</strong>为返回值加上前缀<strong>”redirect:”或者”forward:”那么将会根据返回值去进行转发或重定向，</strong><font color = green>不使用视图解析器：</font></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"forward:/index.jsp"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>结果：<img src="7.png" alt="0"></p>
 
                 
                 <hr>
@@ -292,12 +313,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/21/SpringMVC用Map接收请求参数分析/" data-toggle="tooltip" data-placement="top" title="SpringMVC用Map接收请求参数分析">&larr; Previous Post</a>
+                        <a href="/2022/07/21/ssm-2022-07-21-requestParam与-Param/" data-toggle="tooltip" data-placement="top" title=" @requestParam与@Param">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/21/springmvc-Controller-页面跳转/" data-toggle="tooltip" data-placement="top" title="springmvc Controller 页面跳转">Next Post &rarr;</a>
+                        <a href="/2022/07/21/mysql-2022-07-21-mvcc原理解释/" data-toggle="tooltip" data-placement="top" title="mvcc原理解释">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

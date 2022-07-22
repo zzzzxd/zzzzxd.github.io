@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          SpringMVC用Map接收请求参数分析 - Dante&#39;s blog
+          视图解析与模版引擎 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/21/SpringMVC用Map接收请求参数分析/">
+    <link rel="canonical" href="https://dusign.net/2022/07/21/ssm-2022-07-21-视图解析与模版引擎/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,7 +115,7 @@
                               <a class="tag" href="/tags/#SSM" title="SSM">SSM</a>
                             
                         </div>
-                        <h1>SpringMVC用Map接收请求参数分析</h1>
+                        <h1>视图解析与模版引擎</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">494</span> and
+                                Words <span class="post-count">322</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,20 +187,6 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -208,7 +194,21 @@
 
                         
                         <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -270,32 +270,36 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="第一种情况，什么也不设置，无参数传递"><a href="#第一种情况，什么也不设置，无参数传递" class="headerlink" title="第一种情况，什么也不设置，无参数传递"></a><strong>第一种情况</strong>，什么也不设置，无参数传递</h3><p>注解为 @Controller @RequestMapping</p>
-<p><img src="1.png" alt="img"></p>
-<p>可以看到传递的为SpringMVC的BindingAwareModelMap类型，SpringMVC中的隐含模型就是这个类型，其作用域等价于 request 域，当添加Model、ModelMap参数时，SpringMVC实际传入的就是这个隐含模型；向这个隐含模型种设置值后，在返回的页面中就能通过request域取值。</p>
-<h3 id="第二种情况，加个参数试试-gt-…-testmap-test1-2342"><a href="#第二种情况，加个参数试试-gt-…-testmap-test1-2342" class="headerlink" title="第二种情况，加个参数试试 =&gt; …/testmap?test1=2342"></a><strong>第二种情况</strong>，加个参数试试 =&gt; …/testmap?test1=2342</h3><p>结果类型还是一样，且参数不会被传入，当然使用request肯定能取出来。</p>
-<p><img src="2.png" alt="img"> </p>
-<h3 id="第三种情况，给Map参数添加-RequestParam注解"><a href="#第三种情况，给Map参数添加-RequestParam注解" class="headerlink" title="第三种情况，给Map参数添加@RequestParam注解"></a><strong>第三种情况</strong>，给Map参数添加@RequestParam注解</h3><p>　　1、Get请求 =&gt; <a href="http://localhost:8080/ssm/v2/testmap?test1=234234" target="_blank" rel="noopener">http://localhost:8080/ssm/v2/testmap?test1=234234</a></p>
-<p>　　成功传入了参数，注意这个Map类型为LinkedHashMap，而不是隐含模型了</p>
-<p><img src="3.png" alt="img"></p>
-<p>　　再添加个Model参数看看，隐含模型中依然没有值</p>
-<p>　　所以添加@RequestParam注解后，SpringMVC会将 Get 请求中封装进对应的参数中，如果参数是Map就封装称LinkedHashMap而不再传入隐含模型</p>
-<p><img src="4.png" alt="img"></p>
-<p>　　2、Post请求， 再测试测试Post请求</p>
-<p>　　与Get的结果一致：参数无@RequestParam注解时，Map接收隐含模型；添加@RequestParam注解时，Map接收LinkedHashMap；隐含模型中无值。</p>
-<p><img src="5.png" alt="img"></p>
-<h3 id="第四种情况，给Map参数添加-RequestBody注解，且请求方式为Post"><a href="#第四种情况，给Map参数添加-RequestBody注解，且请求方式为Post" class="headerlink" title="第四种情况，给Map参数添加@RequestBody注解，且请求方式为Post"></a><strong>第四种情况</strong>，给Map参数添加@RequestBody注解，且请求方式为Post</h3><p>出乎意料的也成功传入了，与@RequestParam注解结果类似，也是LinkedHashMap</p>
-<p><img src="6.png" alt="img"></p>
-<p><img src="7.png" alt="img"></p>
-<p>复杂点的Json数据也能解析接收成功</p>
-<p><img src="8.png" alt="img"> <img src="9.png" alt="img"> </p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><ul>
-<li><p>SpringMVC处理请求用Map类型接收参数时，如果参数无注解，则会传入BindingAwareModelMap类型，等价于Model、ModelMap参数；</p>
+                <p><strong>ModelAndView</strong></p>
+<ul>
+<li><p>ModelAndView对象是指”模型(数据)与视图(界面)”对象</p>
 </li>
-<li><p>参数添加@RequestParam注解时，会将参数包装称LinkedHashMap对象，参数的key为Map的key，参数值为Map的key，支持Get、Post方法（应该支持Put、Delete，没有测，俩方法与Post类似）；</p>
+<li><p>通过ModelAndView可将包含数据对象与模板引擎进行绑定</p>
 </li>
-<li><p>添加@RequestBody注解时，接收Json类型数据，也会包装成LinkedHashMap对象，该注解不支持Get请求，Get请求没有请求体不能传Json。</p>
+<li><p>SpringMVC中默认的View是JSP,也可以配置其他模板引擎</p>
 </li>
+</ul>
+<p><strong>视图解析器作用</strong></p>
+<p>一般地视图解析器配置如下：      </p>
+<p>假如Controller类中返回值为hello，那么根据视图解析器可得将要跳转的页面路径为：/WebContent/jsp/hello.jsp</p>
+<p><strong>注意：</strong></p>
+<p>视图解析器的作用是只对Controller类中每个函数返回值那里的String类型前后加路径，而不对@RequestMapping处加路径，对@RequestMapping处无影响！</p>
+<p><strong>模版引擎</strong></p>
+<ul>
+<li><p>模板引擎的目标是”数据+模板=结果”</p>
+</li>
+<li><p>模板引擎将数据与展现有效”解耦”</p>
+</li>
+</ul>
+<p>​    <img src="1.png" alt="0"></p>
+<p>  常见的模版引擎像jsp、freemarker、Thymeleaf等。</p>
+<p>  <strong>小结：</strong></p>
+<ul>
+<li>​    SpringMVC的MAV，实际就是把数据和视图绑定在一起，程序员写逻辑出数据，前端写对应的视图页面，</li>
+</ul>
+<p>用MAV绑定在一起，跳到模版引擎，比如jsp，它能调用java代码，就可以拿到后端写的数据进行展示，这样就可以进行数据的渲染</p>
+<ul>
+<li>视图解析器和模版引擎是配合使用的，默认的InternalResourceViewResolver只解析成jsp页面，Freemarker和Velocity的视频解析器：FreemarkerViewResolver和VelocityViewResolver</li>
 </ul>
 
                 
@@ -304,12 +308,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/21/视图解析与模版引擎/" data-toggle="tooltip" data-placement="top" title="视图解析与模版引擎">&larr; Previous Post</a>
+                        <a href="/2022/07/22/ssm-2022-07-22-框架中的三种配置方式/" data-toggle="tooltip" data-placement="top" title="框架中的三种配置方式">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/21/requestParam与-Param/" data-toggle="tooltip" data-placement="top" title=" @requestParam与@Param">Next Post &rarr;</a>
+                        <a href="/2022/07/21/ssm-2022-07-21-SpringMVC用Map接收请求参数分析/" data-toggle="tooltip" data-placement="top" title="SpringMVC用Map接收请求参数分析">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -416,17 +420,6 @@
             <!-- Table of Contents -->
 
     
-      
-        <aside id="sidebar">
-          <div id="toc" class="toc-article">
-          <strong class="toc-title">Contents</strong>
-          
-            
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第一种情况，什么也不设置，无参数传递"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">第一种情况，什么也不设置，无参数传递</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第二种情况，加个参数试试-gt-…-testmap-test1-2342"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">第二种情况，加个参数试试 &#x3D;&gt; …&#x2F;testmap?test1&#x3D;2342</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第三种情况，给Map参数添加-RequestParam注解"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">第三种情况，给Map参数添加@RequestParam注解</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#第四种情况，给Map参数添加-RequestBody注解，且请求方式为Post"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">第四种情况，给Map参数添加@RequestBody注解，且请求方式为Post</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">总结</span></a></li></ol>
-            
-          
-          </div>
-        </aside>
       
     
 

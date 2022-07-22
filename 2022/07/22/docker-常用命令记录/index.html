@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          springmvc Controller 页面跳转 - Dante&#39;s blog
+          docker 常用命令记录 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/21/springmvc-Controller-页面跳转/">
+    <link rel="canonical" href="https://dusign.net/2022/07/22/docker-常用命令记录/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,20 +112,20 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#SSM" title="SSM">SSM</a>
+                              <a class="tag" href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
                             
                         </div>
-                        <h1>springmvc Controller 页面跳转</h1>
+                        <h1>docker 常用命令记录</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-21
+                            2022-07-22
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">413</span> and
+                                Words <span class="post-count">474</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,20 +187,6 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -208,7 +194,21 @@
 
                         
                         <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -270,42 +270,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <ul>
-<li><strong>如果返回值为</strong>ModelAndView<strong>，在处理方法中，返回</strong>null<strong>时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p> <strong>结果：</strong> <img src="1.png" alt="0"></p>
-<ul>
-<li><strong>如果返回值为</strong>ModelAndView,<strong>在处理方法中，指定视图名称，那么将跳转到指定的视图名。跳转结果会根据视图解析器来跳转。</strong>——-<font face = "黑体" color = green><strong>使用最多</strong></font></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>结果：</strong><img src="2.png" alt="0"></p>
-<ul>
-<li><strong>返回值为</strong>void<strong>，在处理方法中，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>结果：</strong> <img src="3.png" alt=""></p>
-<ul>
-<li><strong>返回值为</strong>void,<strong>在处理方法中通过</strong>ServletAPI<strong>来进行跳转：</strong>—-<strong><font color=green>不用视图解析器</font></strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">(HttpServletRequest req,HttpServletResponse resp)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        req.getRequestDispatcher(<span class="string">"hello.jsp"</span>).forward(req, resp);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>结果：</strong> <img src="4.png" alt="0"></p>
-<ul>
-<li><p><strong>返回值为</strong>String,默认情况下，将会以返回值为视图名通过视图解析器来找到跳转的页面。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>结果：</strong> <img src="5.png" alt="0">)</p>
-<ul>
-<li>返回值为<strong>String</strong>，在处理方法中，返回<strong>null</strong>时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>结果</strong>： <img src="6.png" alt="0"></p>
-<ul>
-<li>返回值为<strong>String,</strong>为返回值加上前缀<strong>”redirect:”或者”forward:”那么将会根据返回值去进行转发或重定向，</strong><font color = green>不使用视图解析器：</font></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/hello.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello================"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"forward:/index.jsp"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>结果：<img src="7.png" alt="0"></p>
+                <pre><code>### 查看镜像/容器
+</code></pre> <figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看镜像信息列表 镜像是静态的</span><br><span class="line">docker ps -a 查看运行中的所有容器</span><br><span class="line">docker pull  [images]:[version]从dockerhub拉取指定镜像</span><br><span class="line">docker rm [containerID] 删除容器</span><br><span class="line">docker rmi [imageID] 删除镜像</span><br><span class="line">docker cp [YourHostFilePath] [containerID]:[DockerPath]  将宿主机内的指定文件传输至容器内部的指定地址。</span><br></pre></td></tr></table></figure>
+<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> -p 8000:80 -tdi --privileged [imageID] [<span class="built_in">command</span>]  </span></span><br><span class="line">后台启动docker,并指定宿主机端口和docker映射端口。</span><br><span class="line">    -i:以交互模式运行容器，通常与 -t 同时使用；</span><br><span class="line">    -d:后台运行容器，并返回容器ID；</span><br><span class="line">    -t:为容器重新分配一个伪输入终端，通常与 -i 同时使用；</span><br><span class="line">    --privileged 容器将拥有访问主机所有设备的权限</span><br><span class="line">    通常情况下 [command] 填下 /bin/bash 即可。</span><br><span class="line">    特殊情况下，如需要在centos镜像中使用systemctl . 则应添加--privileged 并设置[command ]为 init。</span><br><span class="line">当镜像通过<span class="keyword">run</span><span class="bash"> 启动后，便会载入到一个动态的container(容器)中运行，此时若需要进入终端交互模式：</span></span><br><span class="line">sudo docker exec -it [containerID] /bin/bash</span><br><span class="line">交互模式中，使用ctrl+p+q退出交互 保持运行,使用 exit命令退出并停止容器。</span><br><span class="line">非交互模式中 docker  start/stop 命令启动/停止已部署的容器服务。</span><br></pre></td></tr></table></figure>
+<h3 id="镜像制作"><a href="#镜像制作" class="headerlink" title="镜像制作"></a>镜像制作</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker commit [containerID] [ImageName]:[Version] 将修改后的容器重新打包成镜像</span><br><span class="line">docker commit -a <span class="string">"runoob.com"</span> -m <span class="string">"my apache"</span> a404c6c174a2 mymysql:v1 将容器a404c6c174a2 保存为新的镜像,并添加提交人信息和说明信息。</span><br><span class="line">    -a :提交的镜像作者；</span><br><span class="line">    -c :使用Dockerfile指令来创建镜像；</span><br><span class="line">    -m :提交时的说明文字；</span><br><span class="line">    -p :在commit时，将容器暂停。</span><br><span class="line">docker push [ImageID] [repertory_address]提交镜像到云仓库</span><br></pre></td></tr></table></figure>
+<h3 id="修改景象名称"><a href="#修改景象名称" class="headerlink" title="修改景象名称"></a>修改景象名称</h3><figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker images</span></span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">pujh/centos         tomcat-centos       <span class="number">70</span>ff7873d7cd        About an hour ago   <span class="number">612</span> MB</span><br><span class="line">docker.io/centos    latest              <span class="number">9</span>f38484d220f        <span class="number">11</span> days ago         <span class="number">202</span> MB</span><br><span class="line">[root@localhost ~]<span class="comment"># docker tag 70ff7873d7cd my_centos:tomcat-centos</span></span><br></pre></td></tr></table></figure>
 
                 
                 <hr>
@@ -313,12 +282,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/21/requestParam与-Param/" data-toggle="tooltip" data-placement="top" title=" @requestParam与@Param">&larr; Previous Post</a>
+                        <a href="/2022/07/22/docker-tag命令解释/" data-toggle="tooltip" data-placement="top" title="docker tag命令解释">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/21/mvcc原理解释/" data-toggle="tooltip" data-placement="top" title="mvcc原理解释">Next Post &rarr;</a>
+                        <a href="/2022/07/22/ssm-2022-07-22-Servlet过滤器与SpringMVC拦截器/" data-toggle="tooltip" data-placement="top" title="Servlet过滤器与SpringMVC拦截器">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -426,6 +395,17 @@
 
     
       
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#交互"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">交互</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#镜像制作"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">镜像制作</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改景象名称"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">修改景象名称</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
     
 
                 
@@ -442,7 +422,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#SSM" title="SSM">SSM</a>
+                          <a class="tag" href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
                         
                     </div>
                 </section>
