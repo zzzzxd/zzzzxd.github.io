@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>查看磁盘和目录空间df和du</title>
+      <link href="/2022/07/22/%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%BA%E9%97%B4df%E5%92%8Cdu/"/>
+      <url>/2022/07/22/%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%BA%E9%97%B4df%E5%92%8Cdu/</url>
+      
+        <content type="html"><![CDATA[<h3 id="du和df的区别："><a href="#du和df的区别：" class="headerlink" title="du和df的区别："></a><strong>du和df的区别：</strong></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间(最常见的就是文件已经删除，但是程序并没有释放空间)。</span><br><span class="line">du命令是面向文件的，只会计算文件或目录占用的</span><br></pre></td></tr></table></figure><h3 id="查看磁盘整体情况"><a href="#查看磁盘整体情况" class="headerlink" title="查看磁盘整体情况"></a><strong>查看磁盘整体情况</strong></h3><h4 id="查看整体挂载情况"><a href="#查看整体挂载情况" class="headerlink" title="查看整体挂载情况"></a>查看整体挂载情况</h4><pre><code>     <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure></code></pre><p><img src="1.png" alt="WeChat069a76a447ca86aad5fec1408ef2fbde"></p><h4 id="查看指定目录"><a href="#查看指定目录" class="headerlink" title="查看指定目录"></a>查看指定目录</h4>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h /opt/data/</span><br></pre></td></tr></table></figure><p><img src="2.png" alt="WeChatfddb958643be29daa7380f9e2a7f2ab3"></p><p><strong>查看文件夹的占用情况</strong></p><h4 id="查看当前目录每个文件夹的情况。"><a href="#查看当前目录每个文件夹的情况。" class="headerlink" title="查看当前目录每个文件夹的情况。"></a>查看当前目录每个文件夹的情况。</h4><pre><code>    <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h</span><br></pre></td></tr></table></figure></code></pre><p><img src="3.png" alt="WeChatfddb958643be29daa7380f9e2a7f2ab3"></p><h4 id="指定目录"><a href="#指定目录" class="headerlink" title="指定目录"></a>指定目录</h4><pre><code>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h  /opt/data/</span><br></pre></td></tr></table></figure></code></pre><p><img src="4.png" alt="WeChat0e80cc2a684da5f972f3d507563465d2"></p><h4 id="计算文件夹大小"><a href="#计算文件夹大小" class="headerlink" title="计算文件夹大小"></a>计算文件夹大小</h4><p>(<strong>为了快算显示，同时也只是想查看目录整体占用大小。可以直接使用du -sh 命令，如果想查看指定目录，直接在命令后根目录即可</strong>)</p><pre><code>      <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh /usr/</span><br></pre></td></tr></table></figure></code></pre><p><img src="5.png" alt="WeChat0dadf840b9fa7087478e4c7700ef1761"></p><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>其中df -h和du -sh使用的比较多，一个统计整体磁盘情况，一个看单独目录点用情况，而命令du —max-depth=1 -h查看了目录下文件夹占用情况，使用比较少，可以用du -sh代替，而且命令较长，当然并不是说它没用。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LINUX </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>yum换源的详细操作</title>
       <link href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/"/>
       <url>/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/</url>
@@ -2601,9 +2626,9 @@
       
         <tags>
             
-            <tag> Array </tag>
-            
             <tag> Dynamic Programming </tag>
+            
+            <tag> Array </tag>
             
         </tags>
       

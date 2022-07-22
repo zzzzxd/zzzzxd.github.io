@@ -171,14 +171,14 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -637,9 +637,45 @@
 
     
 
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/ssm-2022-07-22-框架中的三种配置方式/">
+                <h2 class="post-title">
+                    框架中的三种配置方式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言:
+
+java中对配置的方式有三种，配置文件（xml、properties、yml等）、注解式配置、代码配置类，配置文件配置不用修改源码，并且适合模块的划分管理，一般适合大型项目，不好处就是配置文件太多，尤其像ssm的xml整合配置等，冗杂繁琐，对程序员极其不友好，于是有了注解式配置，注解配置对开发人员友好，但是不好处就是改注解相当于改代码，改代码就得重新编译、部署，但对于程序员来说，可......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -966,40 +1002,6 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/">
-                <h2 class="post-title">
-                    mysql的分库分表
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    使用数据库时，我们经常会聊到分库分表，那么分库分表有哪些方式？什么情况应该考虑分库分表呢？这次我们来看下这些问题。
-MySQL 分库分表是指：把 MySQL 数据库物理地拆分到多个实例或者机器上去。从而降低单台 MySQL 实例的负载。那么这里讲的拆分究竟以什么方式实现的呢？这里就先来看看 MySQL 分库分表的拆分方法：
-MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1083,8 +1085,6 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
-        
-            
             <a href="/tags/#SSM" title="SSM" rel="6">SSM</a>
             
         
@@ -1099,8 +1099,6 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
         
             
         
@@ -1110,6 +1108,10 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
             
         
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1133,9 +1135,9 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
-        
-            
             <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+            
+        
             
         
             
@@ -1173,9 +1175,9 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
-            <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
         
+            
+            <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
             
         
             
@@ -1250,6 +1252,10 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
     <ul>
       
         <li>
+          <a href="/2022/07/22/%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%BA%E9%97%B4df%E5%92%8Cdu/">查看磁盘和目录空间df和du</a>
+        </li>
+      
+        <li>
           <a href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/">yum换源的详细操作</a>
         </li>
       
@@ -1265,10 +1271,6 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
           <a href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/">利用docker部署hadoop集群的记录</a>
         </li>
       
-        <li>
-          <a href="/2022/07/22/Docker%E5%AE%B9%E5%99%A8%E4%BA%92%E8%AE%BF%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/">Docker容器互访三种方式</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1281,7 +1283,7 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">189</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">190</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1304,15 +1306,15 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
-        
           <a href="categories/#SSM"><li>SSM</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
           <a href="categories/#微服务"><li>微服务</li></a>
         
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
