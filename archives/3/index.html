@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -625,9 +625,230 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/">
+                <h2 class="post-title">
+                    读写分离注意问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
+通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
+但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
+你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的QC/">
+                <h2 class="post-title">
+                    mysql的QC
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。
+
+关于 QC 的详细定义，可以查询 MySQL 5.7 官方手册
+
+那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。
+认识 QCQC 需要缓存最新数据结果，因......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/">
+                <h2 class="post-title">
+                    设置自增主键的好处
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
+关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
+1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-sql注入攻击和预防/">
+                <h2 class="post-title">
+                    sql注入攻击和预防
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言很多时候，我们关心的是程序是否能实现我们的预期功能，而忽视了 SQL 安全，这就存在 SQL 注入的风险，本节就一起来聊聊 SQL 注入及防御。
+认识 SQL 注入SQL 注入是利用某些数据库的外部接口将用户数据插入到实际的数据库操作语句中，从而达到入侵数据库乃至操作系统的目的。
+SQL 注入产生的主要原因是：程序对用户输入的数据没有进行严格的过滤，导致非法数据库查询语句的执行。
+SQL......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的分布式事务/">
+                <h2 class="post-title">
+                    mysql的分布式事务
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言今天我们看一下mysql提供的分布式事务，有关分布式事务的更多详细解释以及更多的解决方案，可以看博客的其它文章。
+认识分布式事务分布式事务是指一个大的事务由很多小操作组成，小操作分布在不同的服务器上或者不同的应用程序上。分布式事务需要保证这些小操作要么全部成功，要么全部失败。MySQL 从 5.0.3 开始支持分布式事务。
+分布式事务使用两阶段提交协议：
+
+第一阶段：所有分支事务都开始准......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-有关事务的使用习惯/">
+                <h2 class="post-title">
+                    有关事务的使用习惯
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言有时好的事务习惯也影响着业务访问速度。接下来我们看一下事务的使用习惯。
+我们先来看看一些不好的事务习惯：
+不好的事务习惯在循环中提交在大多数情况下，MySQL 都是开启自动提交的，如果遇到循环执行 SQL，则相当于每个循环中都会进行一次提交，实际这算一个不好的事务习惯了。下面我创建一张测试表，并定义两个循环写入数据的存储过程：一个是自动提交，另一个是在循环前开启一个事务，在循环后一次性提......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -781,240 +1002,6 @@ set session tran......
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-行锁/">
-                <h2 class="post-title">
-                    mysql锁机制-行锁
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言MySQL 5.5 之前的默认存储引擎是 MyISAM，5.5 之后改成了 InnoDB。InnoDB 后来居上最主要的原因就是：
-
-InnoDB 支持事务：适合在并发条件下要求数据一致的场景。
-InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
-
-本节就一起来探讨 InnoDB 的行锁。
-在讲解行锁之前，我们首先来看一下两阶段锁协议。
-两阶段锁传统的关系型数据库加锁的一个原则......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-18
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-全局锁与表锁/">
-                <h2 class="post-title">
-                    mysql锁机制-全局锁与表锁
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
-本章就来介绍一下不同场景下的锁机制。
-根据加锁的范围，MySQL 中的锁可分为三类：
-
-全局锁
-表级锁
-行锁
-
-本节来重点讲解一下全局锁和表锁。
-1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/16/数据结构与算法-2022-07-16-详解红黑树性质与实现/">
-                <h2 class="post-title">
-                    详解红黑树性质与实现
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-本文将从2-3树与红黑树的联系入手，详细解释红黑树的性质与代码实现，让各位清楚红黑树为何如此定义以及性质是如何推导出来的。本文需要前章2-3树的知识
-[红黑树等价树2-3树]: http://www.icanfly.tech/2022/07/14/%E7%BA%A2%E9%BB%91%E6%A0%91%E7%AD%89%E4%BB%B7%E6%A0%912-3%E6%A0%91/
-
-初见红......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#红黑树" title="红黑树">红黑树</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/15/git-2022-07-14-git的回退操作/">
-                <h2 class="post-title">
-                    git的回退操作
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    查看提交的log日志1git log
-回退提交点1git reset --hard commidId
-显示所有提交点1git reflog
-
-有时候回退回去，还想回退回来，这时候 git log 就已经删除了所有commit id了，只能用这个命令，这个日志 包括所有的 分之合并等提交点都会显示，但是注意，只是显示本地进行的操作，如果从git拉取下来后，不是在本地进行的提交，直接回退后，可能......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#git" title="git">git</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/15/git-2022-07-14-自建项目上传github常用操作/">
-                <h2 class="post-title">
-                    自建项目上传github常用操作
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    在idea 初始化本地项目后
-
-在github创建仓库
-
-添加git远程仓库绑定:git remote add origin https://github.com/zzzzxd/xxxx 当前没有追踪远程分支,拉取时候绑定远程分支:git pull origin master 
-
-
-常见的其他操作
-
-
-删除项目当前分支对远程分支的关联
-
-1git remote rm origin
-
-
-项目以......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#git" title="git">git</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/15/hbase-2022-07-15-Hbase-数据倾斜原因及解决方案/">
-                <h2 class="post-title">
-                    Hbase 数据倾斜原因及解决方案
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-最近公司在做ip维度表，数据量比较大，上亿条数据了，拿hbase存储，进行实时关联。发现ip存到region上倾斜的比较严重，考虑到基数比较大，后期增量相对比较少，可以做一个预分区，使数据分布均衡，借此机会，从网上搜集了一下资料，总结一下常见的解决方案。
-
-热点与数据倾斜热点：
-​    热点发生在大量的client直接访问集群的一个或极少数个节点（访问可能是读，写或者其他操作。
-​   ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#hbase" title="hbase">hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1080,7 +1067,15 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             
         
             
+        
+            
+        
+            
             <a href="/tags/#mysql" title="mysql" rel="23">mysql</a>
+            
+        
+            
+        
             
         
             
@@ -1106,9 +1101,7 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
             
         
             
-        
-            
-        
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1117,10 +1110,6 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1263,23 +1252,23 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
     <ul>
       
         <li>
-          <a href="/2022/07/22/docker-tag%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/">docker tag命令解释</a>
+          <a href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/">yum换源的详细操作</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">docker 常用命令记录</a>
+          <a href="/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/">yum源解释</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/ssm-2022-07-22-Servlet%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8ESpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8/">Servlet过滤器与SpringMVC拦截器</a>
+          <a href="/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/">top命令的Load average 含义及性能参考基值</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/ssm-2022-07-22-%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F/">框架中的三种配置方式</a>
+          <a href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/">利用docker部署hadoop集群的记录</a>
         </li>
       
         <li>
-          <a href="/2022/07/21/ssm-2022-07-21-%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%A8%A1%E7%89%88%E5%BC%95%E6%93%8E/">视图解析与模版引擎</a>
+          <a href="/2022/07/22/Docker%E5%AE%B9%E5%99%A8%E4%BA%92%E8%AE%BF%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/">Docker容器互访三种方式</a>
         </li>
       
     </ul>
@@ -1294,7 +1283,7 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">183</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">189</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1307,17 +1296,19 @@ InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#Hbase"><li>Hbase</li></a>
         
+          <a href="categories/#Mysql"><li>Mysql</li></a>
+        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#Python"><li>Python</li></a>
+        
+          <a href="categories/#SSM"><li>SSM</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         

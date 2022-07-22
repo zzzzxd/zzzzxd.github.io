@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -625,9 +625,239 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/yum换源的详细操作/">
+                <h2 class="post-title">
+                    yum换源的详细操作
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    1yum install wget
+备份原来的源
+1sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk
+下载阿里源
+1cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo
+ 更改阿里yu......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/yum源解释/">
+                <h2 class="post-title">
+                    yum源解释
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。
+
+yum是什么，yum源又是什么   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/top命令的Load-average-含义及性能参考基值/">
+                <h2 class="post-title">
+                    top命令的Load average 含义及性能参考基值
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                     12$uptime11:12:26 up3:44,4users,load average:0.38,0.31,0.19
+系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：
+
+它没有在等待I/O操作的结果
+它没有主动进入等待状态(也就是没有调用’wait’)
+没有被停止(例如：等待终止)
+
+上面的输出，load average后面分别......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/利用docker部署hadoop集群的记录/">
+                <h2 class="post-title">
+                    利用docker部署hadoop集群的记录
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。
+理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。
+启动容器：
+
+启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了
+ 1docker exec -i......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/Docker容器互访三种方式/">
+                <h2 class="post-title">
+                    Docker容器互访三种方式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    我们都知道docker容器之间是互相隔离的，不能互相访问，但如果有些依赖关系的服务要怎么办呢。下面介绍三种方法解决容器互访问题。
+方式一、虚拟ip访问安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。
+1234567891011[root@33fcf82ab4dd &#x2F;]# [root@CentO......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/docker启动后自动停止的原因及解决/">
+                <h2 class="post-title">
+                    docker启动后自动停止的原因及解决
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    问题描述：centos 启动一个容器添加了-d 参数，但是docker ps 或者docker ps -a查看却已经退出了
+12docker run -d centosa44b2b88559b68a2221c9574490a0e708bff49d88ca21f9e59d3eb245c7c0547docker ps
+
+退出原因
+docker容器运行必须有一个前台进程， 如果没有前台进程执行，容......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -764,226 +994,6 @@ java中对配置的方式有三种，配置文件（xml、properties、yml等）
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/ssm-2022-07-21-视图解析与模版引擎/">
-                <h2 class="post-title">
-                    视图解析与模版引擎
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ModelAndView
-
-ModelAndView对象是指”模型(数据)与视图(界面)”对象
-
-通过ModelAndView可将包含数据对象与模板引擎进行绑定
-
-SpringMVC中默认的View是JSP,也可以配置其他模板引擎
-
-
-视图解析器作用
-一般地视图解析器配置如下：      
-假如Controller类中返回值为hello，那么根据视图解析器可得将要跳转的页面路径为：/WebC......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/ssm-2022-07-21-SpringMVC用Map接收请求参数分析/">
-                <h2 class="post-title">
-                    SpringMVC用Map接收请求参数分析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    第一种情况，什么也不设置，无参数传递注解为 @Controller @RequestMapping
-
-可以看到传递的为SpringMVC的BindingAwareModelMap类型，SpringMVC中的隐含模型就是这个类型，其作用域等价于 request 域，当添加Model、ModelMap参数时，SpringMVC实际传入的就是这个隐含模型；向这个隐含模型种设置值后，在返回的页面中就......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/ssm-2022-07-21-requestParam与-Param/">
-                <h2 class="post-title">
-                     @requestParam与@Param
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    @RequestParam 用于controller层，是Spring的注解
-解决前台参数名称与后台接收参数变量名称不一致的问题，等价于request.getParam
-
-value：参数名字，即入参的请求参数名字，如username表示请求的参数区中的name为username的参数的值将传入；
-required：是否必须，默认是true，表示请求中一定要有相应的参数，否则将报404错误码......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/ssm-2022-07-21-springmvc-Controller-页面跳转/">
-                <h2 class="post-title">
-                    springmvc Controller 页面跳转
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-如果返回值为ModelAndView，在处理方法中，返回null时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。
-
-12345@RequestMapping("/hello.do")    public ModelAndView hello()&#123;        System.out.println("hello================");        ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/mysql-2022-07-21-mvcc原理解释/">
-                <h2 class="post-title">
-                    mvcc原理解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章的时候,感觉到网上的资料在讲这块知识点上写的五花八门,好像大家的理解并没有一致。
-这里将自己所理解的做一个总结,个人会觉得这是一篇含金量挺高的一篇文章(哈哈),所以请你坚持认真的看下去,一定会对你有收获。
-如果文章中哪里没有理解,或者认为我讲的不对的地方，都欢迎留言一起交流哈。
-前言一些基本概念我这里不在做阐述了。好比什么是事务?......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/mysql-2022-07-21-一文详解脏读、不可重复读、幻读/">
-                <h2 class="post-title">
-                    一文详解脏读、不可重复读、幻读
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-在MySQL的众多存储引擎中，只有InnoDB支持事务，所有这里说的事务隔离级别指的是InnoDB下的事务隔离级别。
-
-MySQL 是支持多事务并发执行的。否则来一个事务处理一个请求，处理一个人请求的时候，其它事务都等着，那估计都没人敢用MySQL作为数据库,因为用户体验太差，估计都要砸键盘了。
-既然事务可以并发操作,这里就有一些问题：一个事务在写数据的时候，另一个事务要读这行数据，该......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1045,7 +1055,15 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
             
         
             
+        
+            
+        
+            
             <a href="/tags/#mysql" title="mysql" rel="23">mysql</a>
+            
+        
+            
+        
             
         
             
@@ -1071,9 +1089,7 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
             
         
             
-        
-            
-        
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1082,10 +1098,6 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1228,23 +1240,23 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
     <ul>
       
         <li>
-          <a href="/2022/07/22/docker-tag%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/">docker tag命令解释</a>
+          <a href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/">yum换源的详细操作</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">docker 常用命令记录</a>
+          <a href="/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/">yum源解释</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/ssm-2022-07-22-Servlet%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8ESpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8/">Servlet过滤器与SpringMVC拦截器</a>
+          <a href="/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/">top命令的Load average 含义及性能参考基值</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/ssm-2022-07-22-%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F/">框架中的三种配置方式</a>
+          <a href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/">利用docker部署hadoop集群的记录</a>
         </li>
       
         <li>
-          <a href="/2022/07/21/ssm-2022-07-21-%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%A8%A1%E7%89%88%E5%BC%95%E6%93%8E/">视图解析与模版引擎</a>
+          <a href="/2022/07/22/Docker%E5%AE%B9%E5%99%A8%E4%BA%92%E8%AE%BF%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/">Docker容器互访三种方式</a>
         </li>
       
     </ul>
@@ -1259,7 +1271,7 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">183</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">189</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1272,17 +1284,19 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#Hbase"><li>Hbase</li></a>
         
+          <a href="categories/#Mysql"><li>Mysql</li></a>
+        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#Python"><li>Python</li></a>
+        
+          <a href="categories/#SSM"><li>SSM</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         

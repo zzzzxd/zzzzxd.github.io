@@ -4,6 +4,156 @@
   
     
     <entry>
+      <title>yum换源的详细操作</title>
+      <link href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/"/>
+      <url>/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure><p><strong>备份原来的源</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk</span><br></pre></td></tr></table></figure><p><strong>下载阿里源</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure><p> <strong>更改阿里yum源为默认源</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv Centos-7.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure><p><strong>更新本地yum缓存</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum clean all # 全部清除</span><br><span class="line">sudo yum list # 更新列表 </span><br><span class="line">sudo yum makecache# 缓存yum包信息到本机，提高搜索速度</span><br></pre></td></tr></table></figure><p><strong>国内yum源</strong></p><p>阿里yum源:<a href="http://mirrors.aliyun.com/repo/" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/</a></p><p>163(网易)yum源: <a href="http://mirrors.163.com/.help/" target="_blank" rel="noopener">http://mirrors.163.com/.help/</a></p><p>中科大的Linux安装镜像源：<a href="http://centos.ustc.edu.cn/" target="_blank" rel="noopener">http://centos.ustc.edu.cn/</a></p><p>搜狐的Linux安装镜像源：<a href="http://mirrors.sohu.com/" target="_blank" rel="noopener">http://mirrors.sohu.com/</a></p><p>北京首都在线科技：<a href="http://mirrors.yun-idc.com/" target="_blank" rel="noopener">http://mirrors.yun-idc.com/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LINUX </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>yum源解释</title>
+      <link href="/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/"/>
+      <url>/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。</p></blockquote><h3 id="yum是什么，yum源又是什么"><a href="#yum是什么，yum源又是什么" class="headerlink" title="yum是什么，yum源又是什么"></a>yum是什么，yum源又是什么</h3><p>   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不同的发行linux有不同工具，例如红帽（read hat）linux就使用的rpm全称就是read hat package manager 红帽软件包管理工具。</p><p>   yum源是什么呢？我们安装软件的时候需要下载软件，将很多软件放在一起就是源。软件安装包的来源。所以yum源就是软件安装包来源。如果我们是在线的，他会在网上给你下载安装包，如果是离线的没有网络。那么就只能配置本地的yum源了。</p><h3 id="本地yum源是什么呢？"><a href="#本地yum源是什么呢？" class="headerlink" title="本地yum源是什么呢？"></a>本地yum源是什么呢？</h3><p>   上面说过yum源就是软件安装包的来源，但是这些安装包哪里有呢？其实在linux的安装镜像中就有的，linux已经将常见的安装包放到了linux镜像中。如果你使用压缩文件打开linux的iso镜像文件，你会发现在根目录下有个文件夹：packages</p><p><img src="1.png" alt="WeChat40190bf3ee24416d2daacfa56f1f172d"></p><p>   上图就是使用压缩软件打开的系统盘内部情况，比如我们常用的工具vim，就是在这里面的。所以说： 系统的安装镜像就可以当作yum源。</p><h3 id="与yum源相关的配置文件"><a href="#与yum源相关的配置文件" class="headerlink" title="与yum源相关的配置文件"></a>与yum源相关的配置文件</h3><p> <img src="2.png" alt="WeChat5b86da0c7a3647cb6d31f02d5c5e2cbe"></p><p>   上图就是yun源相关的配置，在路径/etc/yum.repos.d/目录下，一共4个文件，说下两个常用的。</p><p>   CentOS-Base.repo：有网的环境下默认使用这个，这个是第一优先级。因为没网，所以修改文件名，设置成备份文件。这样系统就会使用第二优先级的文件。</p><p>   CentOS-Media.repo：没网的环境下使用这个，在上图中会发现他默认配置了4个路径，第4个yumsource是我自己加的。意思是说，如果系统检测yum使用了离线安装，那么会从上到下从这4个路径中查找安装软件。所以我们只要把光盘挂载在这四个目录下的任意一个目录即可。同时，该配置文件默认是不启用的，如果想使用需要 修改倒数第二行的enabled为1，否则该文件无效。</p><h3 id="media目录与mnt目录"><a href="#media目录与mnt目录" class="headerlink" title="media目录与mnt目录"></a>media目录与mnt目录</h3><p>   挂载光盘或者u盘等使用的mount命令，但是你百度所有会说有挂在media目录下，也有挂载在mnt目录下的。这两个目录区别是什么呢？</p><p>   media：挂载一些移动设备，例如光盘，U盘等。</p><p>   mnt：挂载一些硬盘等设备。所以我们的光盘应该挂载在media目录下，从yum给的默认配置文件也能看出。</p><h3 id="挂载光盘到系统上"><a href="#挂载光盘到系统上" class="headerlink" title="挂载光盘到系统上"></a>挂载光盘到系统上</h3><p>  <img src="3.png" alt="WeChatbc41627d35f3138e31bd97db231c8a8d"></p><p>   如上图，首先执行df -h命令发现当前系统没有光盘信息，然后挂载目录之后，在查看就发现我们把光盘挂载到了系统上，光盘大小4.2G。</p><p>-o loop ：指定挂载文件类型，说简单点就是我要挂载的是光盘这种设备。</p><h3 id="卸载光盘"><a href="#卸载光盘" class="headerlink" title="卸载光盘"></a>卸载光盘</h3><p><img src="4.png" alt="WeChat418e1c2e32e31f4f22bcc4d12f0e5b33"></p><p>   执行df -h发现光盘是挂载的，然后执行umount命令之后，在查看发现设备被卸载了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LINUX </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>top命令的Load average 含义及性能参考基值</title>
+      <link href="/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/"/>
+      <url>/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/</url>
+      
+        <content type="html"><![CDATA[ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">uptime</span></span><br><span class="line">11:12:26 up3:44,4users,load average:0.38,0.31,0.19</span><br></pre></td></tr></table></figure><p>系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：</p><ul><li>它没有在等待I/O操作的结果</li><li>它没有主动进入等待状态(也就是没有调用’wait’)</li><li>没有被停止(例如：等待终止)</li></ul><p>上面的输出，load average后面分别是1分钟、5分钟、15分钟的负载情况。数据是每隔5秒钟检查一次活跃的进程数，然后根据这个数值算出来的。如果这个数除以CPU 的数目，结果高于5的时候就表明系统在超负荷运转了。</p><p>Linux系统Load average负载详细解释 　我们知道判断一个系统的负载可以使用top，uptime等命令去查看，它分别记录了一分钟、五分钟、以及十五分钟的系统平均负载</p><p>　　例如我的某台服务器：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> uptime  　09:50:21 up 200 days, 15:07, 1 user, load average: 0.27, 0.33, 0.37</span></span><br></pre></td></tr></table></figure><p>　　大部分的人都认为这个数字越小越好，其实有很多关联的提示信息，今天看到这个好文，应该可以给大家说清楚很多问题，转一下：</p><p>　　原文链接： <a href="http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages" target="_blank" rel="noopener">http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages</a></p><p>　　你可能对于 Linux 的负载均值（load averages）已有了充分的了解。负载均值在 uptime 或者 top 命令中可以看到，它们可能会显示成这个样子：</p><pre><code>         <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load average: 0.09, 0.05, 0.01</span><br></pre></td></tr></table></figure></code></pre><p>　　很多人会这样理解负载均值：三个数分别代表不同时间段的系统平均负载（一分钟、五 分钟、以及十五分钟），它们的数字当然是越小越好。数字越高，说明服务器的负载越 大，这也可能是服务器出现某种问题的信号。</p><p>　　而事实不完全如此，是什么因素构成了负载均值的大小，以及如何区分它们目前的状况是 “好”还是“糟糕”？什么时候应该注意哪些不正常的数值？</p><p>　　回答这些问题之前，首先需要了解下这些数值背后的些知识。我们先用最简单的例子说明， 一台只配备一块单核处理器的服务器。</p><p>　　行车过桥</p><p>　　一只单核的处理器可以形象得比喻成一条单车道。设想下，你现在需要收取这条道路的过桥 费 — 忙于处理那些将要过桥的车辆。你首先当然需要了解些信息，例如车辆的载重、以及 还有多少车辆正在等待过桥。如果前面没有车辆在等待，那么你可以告诉后面的司机通过。 如果车辆众多，那么需要告知他们可能需要稍等一会。</p><p>　　因此，需要些特定的代号表示目前的车流情况，例如：</p><p>　　0.00 表示目前桥面上没有任何的车流。 实际上这种情况与 0.00 和 1.00 之间是相同的，总而言之很通畅，过往的车辆可以丝毫不用等待的通过。</p><p>　　1.00 表示刚好是在这座桥的承受范围内。 这种情况不算糟糕，只是车流会有些堵，不过这种情况可能会造成交通越来越慢。</p><p>　　超过 1.00，那么说明这座桥已经超出负荷，交通严重的拥堵。 那么情况有多糟糕？ 例如 2.00 的情况说明车流已经超出了桥所能承受的一倍，那么将有多余过桥一倍的车辆正在焦急的等待。3.00 的话情况就更不妙了，说明这座桥基本上已经快承受不了，还有超出桥负载两倍多的车辆正在等待。</p><p>　　上面的情况和处理器的负载情况非常相似。一辆汽车的过桥时间就好比是处理器处理某线程 的实际时间。Unix 系统定义的进程运行时长为所有处理器内核的处理时间加上线程 在队列中等待的时间。</p><p>　　和收过桥费的管理员一样，你当然希望你的汽车（操作）不会被焦急的等待。所以，理想状态 下，都希望负载平均值小于 1.00 。当然不排除部分峰值会超过 1.00，但长此以往保持这 个状态，就说明会有问题，这时候你应该会很焦急。</p><p>　　“所以你说的理想负荷为 1.00 ？”</p><p>　　嗯，这种情况其实并不完全正确。负荷 1.00 说明系统已经没有剩余的资源了。在实际情况中 ，有经验的系统管理员都会将这条线划在<font color = red> 0.70</font>：</p><p>　　<font color = green>“需要进行调查法则”</font>： 如果长期你的系统负载在 0.70 上下，那么你需要在事情变得更糟糕之前，花些时间了解其原因。</p><p>　　<font color = green>“现在就要修复法则”</font>：1.00 。 如果你的服务器系统负载长期徘徊于 1.00，那么就应该马上解决这个问题。否则，你将半夜接到你上司的电话，这可不是件令人愉快的事情。</p><p>　　<font color = green>“凌晨三点半锻炼身体法则”</font>：5.00。 如果你的服务器负载超过了 5.00 这个数字，那么你将失去你的睡眠，还得在会议中说明这情况发生的原因，总之千万不要让它发生。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LINUX </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>利用docker部署hadoop集群的记录</title>
+      <link href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/"/>
+      <url>/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<p><strong>计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。</strong></p><p><strong>理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。</strong></p><p>启动容器：</p><ol><li><p>启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了</p> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it /bin/bash</span><br></pre></td></tr></table></figure></li><li><p>拿docker容器部署多个服务，所以只能用最基础的centos 镜像，docker容器内的内核是受限制的，默认不能使用sytemctl命令，启动时候，要允许使用特权</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">报错:</span><br><span class="line">    [root@4decd9c3c3aa /]# systemctl start sshd</span><br><span class="line">    Failed to get D-Bus connection: Operation not permitted</span><br><span class="line">报错： </span><br><span class="line">  System has not been booted with systemd as init system (PID 1). Can't operate.    </span><br><span class="line">  Failed to connect to bus: Host is down</span><br><span class="line">解决：</span><br><span class="line"> docker run -itd   --privileged --name myCentos centos /usr/sbin/init</span><br></pre></td></tr></table></figure></li></ol><p>3.docker 部署的多个容器肯定是要通信的，可以直接建立一个桥接网络，启动容器时候，加入到网络中</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --privileged --name t4 --network docker_net hub.c.163.com/library/centos  /usr/sbin/init bash</span><br></pre></td></tr></table></figure><p>4.节点间肯定是要传数据的，可以使用docker cp 实现宿主机和容器的互传，使用scp依赖ssh服务</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">安装完以后报如下的错:</span><br><span class="line">    The authenticity of host 'oradb24 (192.168.1.24)' can't be established.</span><br><span class="line">RSA key fingerprint is e0:fb:fb:67:a0:fc:cd:a5:dc:c8:bc:68:67:b1:93:3f.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added 'oradb24,192.168.1.24' (RSA) to the list of known hosts.</span><br><span class="line">root@oradb24's password: </span><br><span class="line">bash: scp: command not found</span><br><span class="line">lost connection</span><br><span class="line">注意，拷贝文件的双方服务器都要安装ssh服务，并且服务端和客户端都要安装完整才行</span><br><span class="line">yum install -y openssh-server</span><br><span class="line">yum install -y openssh-clients</span><br><span class="line">systemctl restart sshd #启动ssh服务</span><br></pre></td></tr></table></figure><ol><li><p>一些常用的命令，直接yum安装不行，不是直接的命令，是在一个包下，会提示找不到</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">netstat、telnet 命令</span><br><span class="line">    yum install net-tools</span><br><span class="line">pstree 命令</span><br><span class="line">    yum install psmisc -y</span><br><span class="line">    </span><br><span class="line">有时候不一定什么样，学会搜学，学会通用的本领</span><br><span class="line">yum list | grep telnet</span><br></pre></td></tr></table></figure></li><li><p>scp装完之后，想要用的话，是需要登陆账户的，默认root账户密码，你自己是不知道的，修改文件太麻烦，所以，注意启动容器第一件事就是先修改root密码</p></li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@06e23c44de37 /]# passwd root</span><br><span class="line">Changing password for user root.</span><br><span class="line">New password: </span><br><span class="line">BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: </span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure><ol><li>在一台节点上，装好所有的服务，做好一个容器，保存为一个镜像，然后，利用这个镜像启动多个容器，注意启动时候的命令</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a &quot;zhangxiaodong&quot; -m &quot;bigdata centos7&quot; 5d8e05402c40  mycentos:v1</span><br></pre></td></tr></table></figure><ol><li>防止出现意外，把镜像提交到docker.hub仓库中去</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一：网易镜像仓库，但是现在需要企业认证才让推，坑爹</span><br><span class="line">二：官方的hub.docker</span><br><span class="line">    docker tag masternode:v1  12345678900100/masternode:v1  #这一步是重新标记镜像，得按照 注册用户名/镜像名  这个规范来才能推送上去</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DOCKER </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Docker容器互访三种方式</title>
+      <link href="/2022/07/22/Docker%E5%AE%B9%E5%99%A8%E4%BA%92%E8%AE%BF%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+      <url>/2022/07/22/Docker%E5%AE%B9%E5%99%A8%E4%BA%92%E8%AE%BF%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<p>我们都知道docker容器之间是互相隔离的，不能互相访问，但如果有些依赖关系的服务要怎么办呢。下面介绍三种方法解决容器互访问题。</p><h3 id="方式一、虚拟ip访问"><a href="#方式一、虚拟ip访问" class="headerlink" title="方式一、虚拟ip访问"></a><strong>方式一、虚拟ip访问</strong></h3><p>安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@33fcf82ab4dd &#x2F;]# [root@CentOS ~]# ifconfig</span><br><span class="line">......</span><br><span class="line">docker0: flags&#x3D;4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.17.0.1  netmask 255.255.0.0  broadcast 0.0.0.0</span><br><span class="line">        inet6 fe80::42:35ff:feac:66d8  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 02:42:35:ac:66:d8  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 4018  bytes 266467 (260.2 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 4226  bytes 33935667 (32.3 MiB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">......</span><br></pre></td></tr></table></figure><p>运行一个centos镜像， 查看ip地址得到：172.17.0.7</p><pre><code>          <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# docker run -it --name centos-1 docker.io/centos:latest</span><br><span class="line">[root@6d214ff8d70a /]# ifconfig</span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.17.0.7  netmask 255.255.0.0  broadcast 0.0.0.0</span><br><span class="line">        inet6 fe80::42:acff:fe11:7  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 02:42:ac:11:00:07  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 16  bytes 1296 (1.2 KiB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 8  bytes 648 (648.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></code></pre><p>以同样的命令再起一个容器，查看ip地址得到：172.17.0.8</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# docker run -it --name centos-2 docker.io/centos:latest</span><br><span class="line">[root@33fcf82ab4dd /]# ifconfig</span><br><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.17.0.8  netmask 255.255.0.0  broadcast 0.0.0.0</span><br><span class="line">        inet6 fe80::42:acff:fe11:8  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 02:42:ac:11:00:08  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 8  bytes 648 (648.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 8  bytes 648 (648.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure><p>容器内部ping测试结果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@33fcf82ab4dd /]# ping 172.17.0.7</span><br><span class="line">PING 172.17.0.7 (172.17.0.7) 56(84) bytes of data.</span><br><span class="line">64 bytes from 172.17.0.7: icmp_seq=1 ttl=64 time=0.205 ms</span><br><span class="line">64 bytes from 172.17.0.7: icmp_seq=2 ttl=64 time=0.119 ms</span><br><span class="line">64 bytes from 172.17.0.7: icmp_seq=3 ttl=64 time=0.118 ms</span><br><span class="line">64 bytes from 172.17.0.7: icmp_seq=4 ttl=64 time=0.101 ms</span><br></pre></td></tr></table></figure><p>这种方式必须知道每个容器的ip，在实际使用中并不实用。</p><p><strong>方式二、link</strong></p><p>运行容器的时候加上参数link</p><p>运行第一个容器</p><pre><code>      <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# docker run -it --name centos-1 docker.io/centos:latest</span><br></pre></td></tr></table></figure></code></pre><p>运行第二个容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# docker run -it --name centos-2--link centos-1:centos-1 docker.io/centos:latest</span><br></pre></td></tr></table></figure><p>—link：参数中第一个centos-1是<strong>容器名</strong>，第二个centos-1是定义的<strong>容器别名</strong>（使用别名访问容器），为了方便使用，一般别名默认容器名。</p><p>测试结果如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@e0841aa13c5b /]# ping centos-1</span><br><span class="line">PING centos-1 (172.17.0.7) 56(84) bytes of data.</span><br><span class="line">64 bytes from centos-1 (172.17.0.7): icmp_seq=1 ttl=64 time=0.210 ms</span><br><span class="line">64 bytes from centos-1 (172.17.0.7): icmp_seq=2 ttl=64 time=0.116 ms</span><br><span class="line">64 bytes from centos-1 (172.17.0.7): icmp_seq=3 ttl=64 time=0.112 ms</span><br><span class="line">64 bytes from centos-1 (172.17.0.7): icmp_seq=4 ttl=64 time=0.114 ms</span><br></pre></td></tr></table></figure><p> 此方法对容器创建的顺序有要求，如果集群内部多个容器要互访，使用就不太方便。</p><p><strong>方式三、创建bridge网络</strong></p><p>1.安装好docker后，运行如下命令创建bridge网络：docker network create testnet</p><p>查询到新创建的bridge testnet。</p><p>   <img src="1.png" alt="WeChat314744afd88365f3f0d8d8c97c8544e9"></p><p>2.运行容器连接到testnet网络。</p><p>使用方法：docker run -it —name &lt;容器名&gt; —-network —network-alias &lt;网络别名&gt; &lt;镜像名&gt;</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS ~]# docker run -it --name centos-1 --network testnet --network-alias centos-1 docker.io/centos:latesta</span><br><span class="line">[root@CentOS ~]# docker run -it --name centos-2 --network testnet --network-alias centos-2 docker.io/centos:latest</span><br></pre></td></tr></table></figure><p>3.从一个容器ping另外一个容器，测试结果如下：</p>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@fafe2622f2af /]# ping centos-1</span><br><span class="line">PING centos-1 (172.20.0.2) 56(84) bytes of data.</span><br><span class="line">64 bytes from centos-1.testnet (172.20.0.2): icmp_seq=1 ttl=64 time=0.158 ms</span><br><span class="line">64 bytes from centos-1.testnet (172.20.0.2): icmp_seq=2 ttl=64 time=0.108 ms</span><br><span class="line">64 bytes from centos-1.testnet (172.20.0.2): icmp_seq=3 ttl=64 time=0.112 ms</span><br><span class="line">64 bytes from centos-1.testnet (172.20.0.2): icmp_seq=4 ttl=64 time=0.113 ms</span><br></pre></td></tr></table></figure><p>4.若访问容器中服务，可以使用这用方式访问 &lt;网络别名&gt;：&lt;服务端口号&gt; </p><p>推荐使用这种方法，自定义网络，因为使用的是网络别名，可以不用顾虑ip是否变动，只要连接到docker内部bright网络即可互访。bridge也可以建立多个，隔离在不同的网段。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DOCKER </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker启动后自动停止的原因及解决</title>
+      <link href="/2022/07/22/docker%E5%90%AF%E5%8A%A8%E5%90%8E%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3/"/>
+      <url>/2022/07/22/docker%E5%90%AF%E5%8A%A8%E5%90%8E%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3/</url>
+      
+        <content type="html"><![CDATA[<h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>centos 启动一个容器添加了-d 参数，但是docker ps 或者docker ps -a查看却已经退出了</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d centosa44b2b88559b68a2221c9574490a0e708bff49d88ca21f9e59d3eb245c7c0547</span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure><p><img src="1.png" alt="WeChat497baa8def4c0ee1d65fa1d8a7b1e555"></p><h3 id="退出原因"><a href="#退出原因" class="headerlink" title="退出原因"></a>退出原因</h3><ol><li><p>docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出</p></li><li><p>容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出</p></li><li><p>这个是 docker 的机制问题</p></li></ol><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h5 id="方案1："><a href="#方案1：" class="headerlink" title="方案1："></a>方案1：</h5><p>网上有很多介绍，就是起一个死循环进程，让他不停的循环下去，前台永远有进程执行，那么容器就不会退出了,以centos为例</p>   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d centos /bin/sh -c "while true; do echo hello world; sleep 1; done"</span><br></pre></td></tr></table></figure><p>缺点： 命令太冗长了，还占用一个终端</p><h5 id="方案2："><a href="#方案2：" class="headerlink" title="方案2："></a>方案2：</h5> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit centos /bin/bash</span><br></pre></td></tr></table></figure><p>添加-it 参数交互运行</p><p>添加-d 参数后台运行</p><p>这样就能启动一个一直停留在后台运行的Centos了。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure><p>容器运行起来了               <img src="2.png" alt="WeChatf6376383dead7cd5df001a7f289d65d8"></p><p>进入容器的方法：</p><p>使用exec，不要使用attach命令</p><p>attach命令就是使用现有终端，如果你要退出容器操作，那么bash结束，容器也就退出了</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it /bin/bash //新建一个bash</span><br></pre></td></tr></table></figure><p><img src="3.png" alt="WeChat7921d95cf39d8ef42a04cf42d1d5d5e3"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> DOCKER </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>docker tag命令解释</title>
       <link href="/2022/07/22/docker-tag%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/"/>
       <url>/2022/07/22/docker-tag%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A/</url>
@@ -2451,9 +2601,9 @@
       
         <tags>
             
-            <tag> Dynamic Programming </tag>
-            
             <tag> Array </tag>
+            
+            <tag> Dynamic Programming </tag>
             
         </tags>
       
