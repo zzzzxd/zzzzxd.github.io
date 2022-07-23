@@ -4,9 +4,109 @@
   
     
     <entry>
+      <title>log4j日志不输出</title>
+      <link href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/"/>
+      <url>/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/</url>
+      
+        <content type="html"><![CDATA[<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>log4j日志不输出，或者没有按照预定的级别输出</p><h3 id="常见原因"><a href="#常见原因" class="headerlink" title="常见原因"></a>常见原因</h3><p>原因一：配置文件没配置对，这种低级错误就不说了</p><p>原因二：依赖冲突</p><p>​    多半是因为，引入的底层实现类出现了冲突，这样就得排查maven的冲突，那怎么知道哪些冲突了呢？如果</p><p>真是一点一点查，那就麻烦了，注意，一定要看提示</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SLF4J: Class path contains multiple SLF4J bindings.</span><br><span class="line">SLF4J: Found binding in [jar:file:/Users/qindongliang/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.3/log4j-slf4j-impl-2.3.jar!/org/slf4j/impl/StaticLoggerBinder.class]</span><br><span class="line">SLF4J: Found binding in [jar:file:/Users/qindongliang/.m2/repository/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar!/org/slf4j/impl/StaticLoggerBinder.class]</span><br><span class="line">SLF4J: See http:<span class="comment">//www.slf4j.org/codes.html#multiple_bindings for an explanation.</span></span><br><span class="line">SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]</span><br></pre></td></tr></table></figure><p>看到吗？提示两个类，一个是来自log4j-slf4j-impl/2.3/log4j-slf4j-impl-2.3.jar!/org/slf4j/impl/</p><p>一个来自org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar!/org/slf4j/impl/</p><p>是来自两个jar包，一个是2.x的一个是1.x的slf4j-log4j12，都是StaticLoggerBinder.class 这两个冲突了，然后有目的的去在依赖图里搜索这个jar，一般用的是2.x 把1.x的jar排除掉就可以了</p><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul><li><p>看日志提示，看日志，看日志，看日志报错，寻找有用信息，不要盲目猜测</p></li><li><p>学会在maven 依赖中搜索</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 常见问题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Trouble Shooting </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git常见报错</title>
+      <link href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/"/>
+      <url>/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/</url>
+      
+        <content type="html"><![CDATA[<p>错误一：Failed to connect to github.com port 443: Operation timed out</p><p>​    这个多半是由于网络问题，正常情况不会拉取，推送失败，多半是网络原因</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">考虑更换ip（自己没遇到过这个问题）：</span><br><span class="line">1、查询可以用的IP</span><br><span class="line">在https://www.ipaddress.com/上分别搜索</span><br><span class="line">github.com、github.global-ssl.fastly.net</span><br><span class="line">2、修改host文件</span><br><span class="line">     操作：sudo vi /etc/hosts，替换成以下ip即可</span><br><span class="line">151.101.185.194 github.global-ssl.fastly.net</span><br><span class="line">192.30.253.112  github.com</span><br></pre></td></tr></table></figure><p>错误二：LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 60</p><p>​     这个多半是因为自己的git仓库没有配 公钥，配一下即可              </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GIT </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PrepareStatement未关闭导致内存泄漏</title>
+      <link href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/"/>
+      <url>/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>堆内存飙升，GC次数明显提升</p><h3 id="原因"><a href="#原因" class="headerlink" title="原因:"></a>原因:</h3><p>第三方的数据库连接池，使用的时候，获取到Connection之后，使用完成，调用的关闭方法（close()） ，并没有将Connection关闭，只是放回到连接池中，如果调用的这个方法，而没有手动关闭PreparedStatement等，则这个PreparedStatement并没有关闭，这样会使得开发的程序内存急速增长，java的内存回收机制可能跟不上速度，最终造成Out of memory Error</p><p>今天，就犯了一个很离谱的错误，ps没关，不断new新的ps，导致堆内存不断飙升，GC就是回收不了，结果OOM～</p><p>GC不掉的原因</p><p>引用百度问答的一段话：</p><p>1.你创建了100个PS的实例，但是你只关闭了最后一个。1楼说的GC会回收另外99个，没错，但GC能自动回收的只是JAVA创建的资源。preparedstatement为jdbc得api，他还会创建跟具体数据库有关的其他资源。close方法就是用来施放那些资源的。如果你没有每个都close，会导致内存泄漏。</p><p>2.不可以。——————补充：当然有非java创建的资源 jdbc可以说是一个和数据库通信的驱动。你建立jdbc的对象，调用它的方法。jdbc会去调用你使用的数据库的api，实现对数据库的操作。那些数据库的api会创建很多资源。java的gc（垃圾回收器）只会释放掉那些java对象所占的内存。无法释放数据库api创建的资源。只有通过jdbc相关的close方法才能释放。你只要记住，所有有close方法的jdbc对象在使用完成后都需要手动释放。另外，就是内存泄漏，相应的资源在内存中没有被引用，而又没有被操作系统回收。对，就是这个意思，除了JDBC还有很多根操作系统api有关的java api都有close方法，他们都是用来释放相应的非java资源的。</p><p>引用几篇文章，了解一下这个ps和现场排查的过程</p><p><a href="https://www.jianshu.com/p/50a33f2046dd" target="_blank" rel="noopener">JDBC：深入理解PreparedStatement和Statement</a></p><p><a href="http://www.jiaqili.me/post/oom-profiling-report-20181121/" target="_blank" rel="noopener"><strong>故障分析报告 - Java应用PS未关闭导致的OOM错误</strong></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 常见问题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Trouble Shooting </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>TCP拆包与粘包</title>
+      <link href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/"/>
+      <url>/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/</url>
+      
+        <content type="html"><![CDATA[<h3 id="粘包产生的原因"><a href="#粘包产生的原因" class="headerlink" title="粘包产生的原因"></a>粘包产生的原因</h3><p>如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。</p><h4 id="传输层的UDP协议是否会发生粘包或者拆包问题？"><a href="#传输层的UDP协议是否会发生粘包或者拆包问题？" class="headerlink" title="传输层的UDP协议是否会发生粘包或者拆包问题？"></a>传输层的UDP协议是否会发生粘包或者拆包问题？</h4><p>​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。</p><h4 id="传输层的TCP协议是否会发生粘包或者拆包问题？"><a href="#传输层的TCP协议是否会发生粘包或者拆包问题？" class="headerlink" title="传输层的TCP协议是否会发生粘包或者拆包问题？"></a>传输层的TCP协议是否会发生粘包或者拆包问题？</h4><p>会。原因有以下两点：</p><ol><li><p>TCP是基于字节流的，虽然应用层和传输层之间的数据交互是大小不等的数据块，但是TCP把这些数据块仅仅看成一连串无结构的字节流，没有边界；</p></li><li><p>在TCP的首部没有表示数据长度的字段，基于上面两点，在使用TCP传输数据时，才有粘包或者拆包现象发生的可能。（翻阅TCP协议）</p></li></ol><h3 id="粘包-拆包的表现形式"><a href="#粘包-拆包的表现形式" class="headerlink" title="粘包/拆包的表现形式"></a>粘包/拆包的表现形式</h3><p>现在假设客户端向服务端连续发送了两个数据包，用packet1和packet2来表示，那么服务端收到的数据可以分为三种，现列举如下：</p><p>第一种情况，接收端正常收到两个数据包，即没有发生拆包和粘包的现象，此种情况不在本文的讨论范围内。</p><p><img src="1.png" alt="WeChat1864b7a354427497fe010c4845961b18"></p><p>第二种情况，接收端只收到一个数据包，由于TCP是不会出现丢包的，所以这一个数据包中包含了发送端发送的两个数据包的信息，这种现象即为粘包。这种情况由于接收端不知道这两个数据包的界限，所以对于接收端来说很难处理。</p><p><img src="2.png" alt="WeChatda0ba87973b06e3a58eff0a87b7dd23f"></p><p>第三种情况，这种情况有两种表现形式，如下图。接收端收到了两个数据包，但是这两个数据包要么是不完整的，要么就是多出来一块，这种情况即发生了拆包和粘包。这两种情况如果不加特殊处理，对于接收端同样是不好处理的。</p><p><img src="3.png" alt="WeChat09cb12a8193cdd8f3b06dd8d2bf46e22"></p><h3 id="粘包-拆包发生的原因"><a href="#粘包-拆包发生的原因" class="headerlink" title="粘包/拆包发生的原因"></a>粘包/拆包发生的原因</h3><p>发生TCP粘包或拆包有很多原因，现列出常见的几点：</p><p>1、要发送的数据大于TCP发送缓冲区剩余空间大小[操作系统socket内核缓冲区是tcp协议buffer（滑动窗口）的具体实现]，将会发生拆包。</p><p>2、待发送数据大于MSS（最大报文长度），TCP在传输前将进行拆包。</p><p>3、要发送的数据小于TCP发送缓冲区的大小，TCP将多次写入缓冲区的数据一次发送出去，将会发生粘包。</p><p>4、接收数据端的应用层没有及时读取接收缓冲区中的数据，将发生粘包。</p><h3 id="粘包-拆包的解决办法"><a href="#粘包-拆包的解决办法" class="headerlink" title="粘包/拆包的解决办法"></a>粘包/拆包的解决办法</h3><p>通过以上分析，我们清楚了粘包或拆包发生的原因，那么如何解决这个问题呢？解决问题的关键在于如何给每个数据包添加边界信息，常用的方法有如下几个：</p><ol><li>发送端给每个数据包添加包首部，首部中应该至少包含数据包的长度，这样接收端在接收到数据后，通过读取包首部的长度字段，便知道每一个数据包的实际长度了。</li><li>发送端将每个数据包封装为固定长度（不够的可以通过补0填充），这样接收端每次从接收缓冲区中读取固定长度的数据就自然而然的把每个数据包拆分开来。</li><li>可以在数据包之间设置边界，如添加特殊符号，这样，接收端通过这个边界就可以将不同的数据包拆分开。</li></ol><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul><li>贴出来当时测试，包发生粘包的代码，仔细看打的日志</li></ul><p>​        <a href="https://paste.ubuntu.com/p/PxCxHhMH5R/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/PxCxHhMH5R/</a></p><ul><li>注意，一定要注意，协议本身没问题，你也不要考虑协议的什么问题，我觉着主要就是内核缓冲buffer，不一定什么时候发送，一口气发送出去，或者你这个内容太大，给你拆成两个包，结果正好一个包在接收方那端收着了，另一个还没发，这不就是拆包了，或者说，在接收方，迟迟不调接收的buffer，来了一个包的数据进到了buffer，来了一个进来了，应用级别，一读，整个buffer过去了，这不是就是相当于一个包过来的了，就是粘包，没啥好说的，主要就是内核的socket buffer不一定什么时候操作，和内核page cache一个原理。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> network </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TCP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>自定义注解</title>
-      <link href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
-      <url>/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
+      <link href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
+      <url>/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
       
         <content type="html"><![CDATA[<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过使用注解简化了代码并提高的编码效率</p><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul><li><p>提供信息给编译器： 编译器可以利用注解来探测错误和警告信息，如 @Override、@Deprecated。</p></li><li><p>编译阶段时的处理： 软件工具可以用来利用注解信息来生成代码、Html 文档或者做其它相应处理，如 @Param、@Return、@See、@Author 用于生成 Javadoc 文档。</p></li><li><p>运行时的处理： 某些注解可以在程序运行的时候接受代码的提取，值得注意的是，注解不是代码本身的一部分。如Spring 2.5 开始注解配置，减少了配置。</p></li></ul><h3 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h3><ol><li><strong>根据注解参数的个数:</strong></li></ol><ul><li><p>标记注解:一个没有成员定义的Annotation类型被称为标记注解。</p></li><li><p>单值注解:只有一个值</p></li><li><p>完整注解:拥有多个值</p></li></ul><ol><li><strong>根据注解使用方法和用途:</strong></li></ol><ul><li><p>JDK内置系统注解</p></li><li><p>元注解</p></li><li><p>自定义注解</p></li></ul><h3 id="元数据注解"><a href="#元数据注解" class="headerlink" title="元数据注解"></a><strong>元数据注解</strong></h3><p>​    元注解的作用就是负责注解其他注解。Java5.0定义了4个标准的meta-annotation类型，它们被用来提供对其它 annotation类型作说明。Java5.0定义的元注解有四个，</p><p>​    (这些类型和它们所支持的类在java.lang.annotation包中可以找到)</p><h4 id="Target"><a href="#Target" class="headerlink" title="@Target"></a><strong>@Target</strong></h4><p>​    用于描述注解的使用范围（即：被描述的注解可以用在什么地方）。表示支持注解的程序元素的种类，一些可能的值有TYPE, METHOD, CONSTRUCTOR, FIELD等等。如果Target元注解不存在，那么该注解就可以使用在任何程序元素之上。</p><p>  取值(ElementType)有：</p><ul><li><p>CONSTRUCTOR:用于描述构造器</p></li><li><p>FIELD:用于描述属性</p></li><li>LOCAL_VARIABLE:用于描述局部变量</li><li>METHOD:用于描述方法</li><li>PACKAGE:用于描述包</li><li>PARAMETER:用于描述参数</li><li>TYPE:用于描述类、接口(包括注解类型) 或enum声明</li></ul><p>此时在空注解中加入@Target元注解如: //此注解只能用在方法上 @Target(ElementType.METHOD) @interface TestMethod {}  </p><h4 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a><strong>@Retention</strong></h4><p>​     表示需要在什么级别保存该注释信息，用于描述注解的生命周期（即：被描述的注解在什么范围内有效）表示注解类型保留时间的长短。</p><p>​    取值(RetentionPoicy)有：</p><ul><li><p>SOURCE:在源文件中有效（即源文件保留）</p></li><li><p>CLASS:在class文件中有效（即class保留）</p></li><li>RUNTIME:在运行时有效（即运行时保留）</li></ul><p>此时在上述注解中加入@Retention元注解如: </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此注解可以用于注解类、接口(包括注解类型) 或enum声明</span></span><br><span class="line"> <span class="meta">@Target</span>(ElementType.TYPE) </span><br><span class="line"><span class="comment">//该注解运行时有效。注解处理器可以通过反射，获取到该注解的属性值，从而去做一些运行时的逻辑处理</span></span><br><span class="line"> <span class="meta">@Retention</span>(RetentionPolicy.RUNTIME) <span class="meta">@interface</span> TestRn&#123; &#125;</span><br></pre></td></tr></table></figure><h4 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a><strong>@Documented</strong></h4><p>​    表示使用该注解的元素应被javadoc或类似工具文档化，它应用于类型声明，类型声明的注解会影响客户端对注解元素的使用。如果一个类型声明添加了Documented注解，那么它的注解会成为被注解元素的公共API的一部分，@Documented是一个标记注解。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以被例如javadoc此类的工具文档化`</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="meta">@interface</span> TestDoc&#123; &#125;</span><br></pre></td></tr></table></figure><h4 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a><strong>@Inherited</strong></h4><p>​    表示一个注解类型会被自动继承，如果用户在类声明的时候查询注解类型，同时类声明中也没有这个类型的注解，那么注解类型会自动查询该类的父类，这个过程将会不停地重复，直到该类型的注解被找到为止，或是到达类结构的顶层（Object）。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//被子类继承的注解</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="meta">@interface</span> TestInheri&#123;&#125;</span><br></pre></td></tr></table></figure><h3 id="注解处理器"><a href="#注解处理器" class="headerlink" title="注解处理器"></a><strong>注解处理器</strong></h3><p>​    说白了，注解就是一种标识，与原程序无关，那既然进行了标识，关键在于解析这些标识，具有什么样的标识，就触发什么样的逻辑。</p><p>   AnnotatedElement 接口是所有程序元素（Class、Method和Constructor）的父接口，所以程序通过反射获取了某个类的AnnotatedElement对象之后，程序就可以调用该对象的如下四个个方法来访问Annotation信息：</p><p>① T getAnnotation(Class annotationClass): 返回该程序元素上存在的、指定类型的注解，如果该类型注解不存在，则返回null。</p><p> ②Annotation[] getAnnotations():返回该程序元素上存在的所有注解。</p><p> ③boolean isAnnotationPresent(Class annotationClass):判断该程序元素上是否包含指定类型的注解，存在则返回true，否则返回false.</p><p> ④Annotation[] getDeclaredAnnotations()：返回直接存在于此元素上的所有注释。与此接口中的其他方法不同，该方法将忽略继承的注释。（如果没有注释直接存在于此元素上，则返回长度为零的一个数组。）该方法的调用者可以随意修改返回的数组；这不会对其他调用者返回的数组产生任何影响。</p><h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>以token校验注解为例，看一下自定义注解的使用</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> dante</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021/1/27</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> TokenCheck &#123;</span><br><span class="line">    <span class="comment">// 是否校验token</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">required</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"拦截器进入"</span>);</span><br><span class="line"></span><br><span class="line">        String token = request.getHeader(<span class="string">"token"</span>);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(token)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> TokenException(<span class="string">"token 为空"</span>);</span><br><span class="line"><span class="comment">////         return false;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        HandlerMethod handlerMethod = (HandlerMethod) handler;</span><br><span class="line">        Method method = handlerMethod.getMethod();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (method.isAnnotationPresent(TokenCheck<span class="class">.<span class="keyword">class</span>)) </span>&#123;</span><br><span class="line">            TokenCheck annotation = method.getAnnotation(TokenCheck<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">            <span class="keyword">if</span> (annotation.required()) &#123;</span><br><span class="line">                <span class="comment">// 校验token</span></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    JwtUtil.parseToken(token);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
       

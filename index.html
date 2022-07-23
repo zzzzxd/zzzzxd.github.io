@@ -663,6 +663,14 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -671,7 +679,145 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/自定义注解/">
+            <a href="/2022/07/24/log4j日志不输出/">
+                <h2 class="post-title">
+                    log4j日志不输出
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    问题log4j日志不输出，或者没有按照预定的级别输出
+常见原因原因一：配置文件没配置对，这种低级错误就不说了
+原因二：依赖冲突
+​    多半是因为，引入的底层实现类出现了冲突，这样就得排查maven的冲突，那怎么知道哪些冲突了呢？如果
+真是一点一点查，那就麻烦了，注意，一定要看提示
+12345SLF4J: Class path contains multiple SLF4J binding......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/24/git-2022-07-24-git常见报错/">
+                <h2 class="post-title">
+                    git常见报错
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    错误一：Failed to connect to github.com port 443: Operation timed out
+​    这个多半是由于网络问题，正常情况不会拉取，推送失败，多半是网络原因
+12345678考虑更换ip（自己没遇到过这个问题）：1、查询可以用的IP	在https://www.ipaddress.com/上分别搜索	github.com、github.glo......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#GIT" title="GIT">GIT</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/24/PrepareStatement未关闭导致内存泄漏/">
+                <h2 class="post-title">
+                    PrepareStatement未关闭导致内存泄漏
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    现象堆内存飙升，GC次数明显提升
+原因:第三方的数据库连接池，使用的时候，获取到Connection之后，使用完成，调用的关闭方法（close()） ，并没有将Connection关闭，只是放回到连接池中，如果调用的这个方法，而没有手动关闭PreparedStatement等，则这个PreparedStatement并没有关闭，这样会使得开发的程序内存急速增长，java的内存回收机制可能跟不......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/network-2022-07-23-TCP拆包与粘包/">
+                <h2 class="post-title">
+                    TCP拆包与粘包
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    粘包产生的原因如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。
+传输层的UDP协议是否会发生粘包或者拆包问题？​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
+传输层的TCP协议是否会......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#TCP" title="TCP">TCP</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/ssm-2022-07-23-自定义注解/">
                 <h2 class="post-title">
                     自定义注解
                 </h2>
@@ -881,150 +1027,6 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
-                <h2 class="post-title">
-                    字库表、编码字符集、字符编码
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#MYSQL" title="MYSQL">MYSQL</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/linux-2022-07-23-screen命令/">
-                <h2 class="post-title">
-                    screen命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Screen简介在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。
-简而言之：
-远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。
-而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。
-常用screen命令123456s......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/linux-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
-                <h2 class="post-title">
-                     linux下 bin和 usr bin和 usr local bin的区别
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    123/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。
-...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/linux-2022-07-23-linux不同版本的服务管理/">
-                <h2 class="post-title">
-                    linux不同版本的服务管理
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。
-Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。
-
-
-
-
-动作
-Rhel6 旧指令
-Rhel7新指令
-
-
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1082,7 +1084,7 @@ Rhel7新指令
     <div class="tags">
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+        
             
         
             
@@ -1126,6 +1128,12 @@ Rhel7新指令
             
         
             
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
@@ -1136,17 +1144,19 @@ Rhel7新指令
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1165,8 +1175,6 @@ Rhel7新指令
         
             
             <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
-            
-        
             
         
             
@@ -1279,23 +1287,23 @@ Rhel7新指令
     <ul>
       
         <li>
-          <a href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/jvm-2022-07-23-%E5%B8%B8%E9%87%8F%E6%B1%A0/">常量池</a>
+          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/IO-2022-07-23-IO%E5%AE%9E%E9%AA%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">IO实验的一些常用命令总结</a>
+          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%9A%848%E4%B8%AA%E5%8F%98%E9%87%8F/">mysql的8个变量</a>
+          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%BC%96%E7%A0%81%E9%94%99%E8%BF%9B%E9%94%99%E5%87%BA%E8%A7%A3%E9%87%8A/">mysql编码错进错出解释</a>
+          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
         </li>
       
     </ul>
@@ -1310,7 +1318,7 @@ Rhel7新指令
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">202</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1321,33 +1329,37 @@ Rhel7新指令
     <div class="widget">
       <ul>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#常见问题"><li>常见问题</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
+          <a href="categories/#git"><li>git</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#mysql"><li>mysql</li></a>
         
+          <a href="categories/#Python"><li>Python</li></a>
+        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#微服务"><li>微服务</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         

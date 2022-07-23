@@ -663,9 +663,173 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/15/git-2022-07-14-git的回退操作/">
+                <h2 class="post-title">
+                    git的回退操作
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    查看提交的log日志1git log
+回退提交点1git reset --hard commidId
+显示所有提交点1git reflog
+
+有时候回退回去，还想回退回来，这时候 git log 就已经删除了所有commit id了，只能用这个命令，这个日志 包括所有的 分之合并等提交点都会显示，但是注意，只是显示本地进行的操作，如果从git拉取下来后，不是在本地进行的提交，直接回退后，可能......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#git" title="git">git</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/15/git-2022-07-14-自建项目上传github常用操作/">
+                <h2 class="post-title">
+                    自建项目上传github常用操作
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    在idea 初始化本地项目后
+
+在github创建仓库
+
+添加git远程仓库绑定:git remote add origin https://github.com/zzzzxd/xxxx 当前没有追踪远程分支,拉取时候绑定远程分支:git pull origin master 
+
+
+常见的其他操作
+
+
+删除项目当前分支对远程分支的关联
+
+1git remote rm origin
+
+
+项目以......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#git" title="git">git</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/15/hbase-2022-07-15-Hbase-数据倾斜原因及解决方案/">
+                <h2 class="post-title">
+                    Hbase 数据倾斜原因及解决方案
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+最近公司在做ip维度表，数据量比较大，上亿条数据了，拿hbase存储，进行实时关联。发现ip存到region上倾斜的比较严重，考虑到基数比较大，后期增量相对比较少，可以做一个预分区，使数据分布均衡，借此机会，从网上搜集了一下资料，总结一下常见的解决方案。
+
+热点与数据倾斜热点：
+​    热点发生在大量的client直接访问集群的一个或极少数个节点（访问可能是读，写或者其他操作。
+​   ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#hbase" title="hbase">hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/15/微服务-2022-07-15-分布式AKF拆分原则/">
+                <h2 class="post-title">
+                    分布式AKF拆分原则
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+转载 :https://blog.csdn.net/tomcosin/article/details/119332084
+
+前言​    当我们需要分布式系统提供更强的性能时，该怎样扩展系统呢？什么时候该加机器？什么时候该重构代码？扩容时，究竟该选择哈希算法还是最小连接数算法，才能有效提升性能？
+在面对 Scalability 可伸缩性问题时，我们必须有一个系统的方法论，才能应对日益复杂的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#微服务" title="微服务">微服务</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -866,143 +1030,6 @@
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-创建用户相关操作常用命令/">
-                <h2 class="post-title">
-                    Mysql 创建用户相关操作常用命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    创建用户
-1CREATE USER &#39;username&#39;@&#39;%&#39; IDENTIFIED BY &#39;password&#39;;
-eg:
-1234CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#3......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-dump-命令/">
-                <h2 class="post-title">
-                    Mysql dump 命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    命令及解释123456789mysqldump -ubackup -p123456 -h 192.168.1.2 backup_test &gt; D:\bak\bakcup.sql 	在这段命令中：mysqldump 是myqldump的程序名了；  -u 是数据库的用户名，后面紧跟着用户名backup；  -p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；  -h......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/mysql-2022-07-14-linux-停止启动mysql常用命令/">
-                <h2 class="post-title">
-                    linux 停止启动mysql常用命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    查看mysql版本方法一：status;
-方法二：select version();
-Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启动方式1、使用 service 启动：    [root@localhost &#x2F;]# service mysqld start (5.0版本是mysqld)    [root@szxdb etc]......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql中Binlog常用命令/">
-                <h2 class="post-title">
-                    Mysql中Binlog常用命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Binlog使用场景
-主从数据库复制： Mysql Replication在Master端开启Binlog，Master把日志传递给Slavers，以达到    Master-slavers主从数据同步。
-数据恢复： 使用mysqlbinlog工具来恢复数据
-
-Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1064,7 +1091,7 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <div class="tags">
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+        
             
         
             
@@ -1108,6 +1135,12 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
             
         
             
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
@@ -1118,17 +1151,19 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1147,8 +1182,6 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
         
             
             <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
-            
-        
             
         
             
@@ -1261,23 +1294,23 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <ul>
       
         <li>
-          <a href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/jvm-2022-07-23-%E5%B8%B8%E9%87%8F%E6%B1%A0/">常量池</a>
+          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/IO-2022-07-23-IO%E5%AE%9E%E9%AA%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">IO实验的一些常用命令总结</a>
+          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%9A%848%E4%B8%AA%E5%8F%98%E9%87%8F/">mysql的8个变量</a>
+          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%BC%96%E7%A0%81%E9%94%99%E8%BF%9B%E9%94%99%E5%87%BA%E8%A7%A3%E9%87%8A/">mysql编码错进错出解释</a>
+          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
         </li>
       
     </ul>
@@ -1292,7 +1325,7 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">202</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1303,33 +1336,37 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <div class="widget">
       <ul>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#常见问题"><li>常见问题</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
+          <a href="categories/#git"><li>git</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#mysql"><li>mysql</li></a>
         
+          <a href="categories/#Python"><li>Python</li></a>
+        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#微服务"><li>微服务</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         

@@ -663,9 +663,160 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/docker-2022-07-22-利用docker部署hadoop集群的记录/">
+                <h2 class="post-title">
+                    利用docker部署hadoop集群的记录
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。
+理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。
+启动容器：
+
+启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了
+ 1docker exec -i......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/docker-2022-07-22-Docker容器互访三种方式/">
+                <h2 class="post-title">
+                    Docker容器互访三种方式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    我们都知道docker容器之间是互相隔离的，不能互相访问，但如果有些依赖关系的服务要怎么办呢。下面介绍三种方法解决容器互访问题。
+方式一、虚拟ip访问安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。
+1234567891011[root@33fcf82ab4dd &#x2F;]# [root@CentO......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/docker-2022-07-22-docker启动后自动停止的原因及解决/">
+                <h2 class="post-title">
+                    docker启动后自动停止的原因及解决
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    问题描述：centos 启动一个容器添加了-d 参数，但是docker ps 或者docker ps -a查看却已经退出了
+12docker run -d centosa44b2b88559b68a2221c9574490a0e708bff49d88ca21f9e59d3eb245c7c0547docker ps
+
+退出原因
+docker容器运行必须有一个前台进程， 如果没有前台进程执行，容......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/docker-2022-07-22-docker-tag命令解释/">
+                <h2 class="post-title">
+                    docker tag命令解释
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    命令1docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+示例演示
+比如我现在有一个 centos 镜像：
+
+123[root@localhost ~]$ docker imagesREPOSITORY          TAG                 IMAGE ID            CREATED             SIZ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -879,149 +1030,6 @@ required：是否必须，默认是true，表示请求中一定要有相应的�
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/ssm-2022-07-21-springmvc-Controller-页面跳转/">
-                <h2 class="post-title">
-                    springmvc Controller 页面跳转
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-如果返回值为ModelAndView，在处理方法中，返回null时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。
-
-12345@RequestMapping("/hello.do")    public ModelAndView hello()&#123;        System.out.println("hello================");        ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/mysql-2022-07-21-mvcc原理解释/">
-                <h2 class="post-title">
-                    mvcc原理解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章的时候,感觉到网上的资料在讲这块知识点上写的五花八门,好像大家的理解并没有一致。
-这里将自己所理解的做一个总结,个人会觉得这是一篇含金量挺高的一篇文章(哈哈),所以请你坚持认真的看下去,一定会对你有收获。
-如果文章中哪里没有理解,或者认为我讲的不对的地方，都欢迎留言一起交流哈。
-前言一些基本概念我这里不在做阐述了。好比什么是事务?......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/21/mysql-2022-07-21-一文详解脏读、不可重复读、幻读/">
-                <h2 class="post-title">
-                    一文详解脏读、不可重复读、幻读
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-在MySQL的众多存储引擎中，只有InnoDB支持事务，所有这里说的事务隔离级别指的是InnoDB下的事务隔离级别。
-
-MySQL 是支持多事务并发执行的。否则来一个事务处理一个请求，处理一个人请求的时候，其它事务都等着，那估计都没人敢用MySQL作为数据库,因为用户体验太差，估计都要砸键盘了。
-既然事务可以并发操作,这里就有一些问题：一个事务在写数据的时候，另一个事务要读这行数据，该......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
-                <h2 class="post-title">
-                    mysql的操作规范
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言今天来看一下，比较通用的规范操作。
-命名规范1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；
-1.2、库、表、字段全部采用小写；
-MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。
-1.3、避免用 MySQL 的保留字， MySQL 保留字请参考官方手册：9.3 Keyword......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1083,7 +1091,7 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
     <div class="tags">
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+        
             
         
             
@@ -1127,6 +1135,12 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
             
         
             
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
         
             
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
@@ -1137,17 +1151,19 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1166,8 +1182,6 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
         
             
             <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
-            
-        
             
         
             
@@ -1280,23 +1294,23 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
     <ul>
       
         <li>
-          <a href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/jvm-2022-07-23-%E5%B8%B8%E9%87%8F%E6%B1%A0/">常量池</a>
+          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/IO-2022-07-23-IO%E5%AE%9E%E9%AA%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">IO实验的一些常用命令总结</a>
+          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%9A%848%E4%B8%AA%E5%8F%98%E9%87%8F/">mysql的8个变量</a>
+          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%BC%96%E7%A0%81%E9%94%99%E8%BF%9B%E9%94%99%E5%87%BA%E8%A7%A3%E9%87%8A/">mysql编码错进错出解释</a>
+          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
         </li>
       
     </ul>
@@ -1311,7 +1325,7 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">202</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1322,33 +1336,37 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
     <div class="widget">
       <ul>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#常见问题"><li>常见问题</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
+          <a href="categories/#git"><li>git</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#mysql"><li>mysql</li></a>
         
+          <a href="categories/#Python"><li>Python</li></a>
+        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#微服务"><li>微服务</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
