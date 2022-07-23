@@ -171,14 +171,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -639,6 +639,30 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -647,350 +671,351 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/查看磁盘和目录空间df和du/">
+            <a href="/2022/07/23/自定义注解/">
                 <h2 class="post-title">
-                    查看磁盘和目录空间df和du
+                    自定义注解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    du和df的区别：12df命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间(最常见的就是文件已经删除，但是程序并没有释放空间)。du命令是面向文件的，只会计算文件或目录占用的
-查看磁盘整体情况查看整体挂载情况     1df -h
-
-查看指定目录  1df -h /opt/data/
-
-查看文件夹的占用情况
-查看当前目录每个文件夹的情况。    1du --m......
+                    概念​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/yum换源的详细操作/">
-                <h2 class="post-title">
-                    yum换源的详细操作
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    1yum install wget
-备份原来的源
-1sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk
-下载阿里源
-1cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo
- 更改阿里yu......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/yum源解释/">
-                <h2 class="post-title">
-                    yum源解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。
-
-yum是什么，yum源又是什么   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/top命令的Load-average-含义及性能参考基值/">
-                <h2 class="post-title">
-                    top命令的Load average 含义及性能参考基值
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                     12$uptime11:12:26 up3:44,4users,load average:0.38,0.31,0.19
-系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：
-
-它没有在等待I/O操作的结果
-它没有主动进入等待状态(也就是没有调用’wait’)
-没有被停止(例如：等待终止)
-
-上面的输出，load average后面分别......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/利用docker部署hadoop集群的记录/">
-                <h2 class="post-title">
-                    利用docker部署hadoop集群的记录
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。
-理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。
-启动容器：
-
-启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了
- 1docker exec -i......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/Docker容器互访三种方式/">
-                <h2 class="post-title">
-                    Docker容器互访三种方式
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    我们都知道docker容器之间是互相隔离的，不能互相访问，但如果有些依赖关系的服务要怎么办呢。下面介绍三种方法解决容器互访问题。
-方式一、虚拟ip访问安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。
-1234567891011[root@33fcf82ab4dd &#x2F;]# [root@CentO......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/docker启动后自动停止的原因及解决/">
-                <h2 class="post-title">
-                    docker启动后自动停止的原因及解决
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    问题描述：centos 启动一个容器添加了-d 参数，但是docker ps 或者docker ps -a查看却已经退出了
-12docker run -d centosa44b2b88559b68a2221c9574490a0e708bff49d88ca21f9e59d3eb245c7c0547docker ps
-
-退出原因
-docker容器运行必须有一个前台进程， 如果没有前台进程执行，容......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/docker-tag命令解释/">
-                <h2 class="post-title">
-                    docker tag命令解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    命令1docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
-示例演示
-比如我现在有一个 centos 镜像：
-
-123[root@localhost ~]$ docker imagesREPOSITORY          TAG                 IMAGE ID            CREATED             SIZ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/docker-常用命令记录/">
-                <h2 class="post-title">
-                    docker 常用命令记录
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ### 查看镜像/容器
- 123456docker images 查看镜像信息列表 镜像是静态的docker ps -a 查看运行中的所有容器docker pull  [images]:[version]从dockerhub拉取指定镜像docker rm [containerID] 删除容器docker rmi [imageID] 删除镜像docker cp [YourHostFilePat......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/ssm-2022-07-22-Servlet过滤器与SpringMVC拦截器/">
-                <h2 class="post-title">
-                    Servlet过滤器与SpringMVC拦截器
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/jvm-2022-07-23-常量池/">
+                <h2 class="post-title">
+                    常量池
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+提到常量池一直容易混，今天一次性彻底搞定。
+
+class文件常量池（class constant pool）我们都知道，class文件中除了包含类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池(constant pool table)，用于存放编译器生成的各种字面量(Literal)和符号引用(Symbolic References)。字面量就是我们所说的常量概念，如文本字符......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/IO-2022-07-23-IO实验的一些常用命令总结/">
+                <h2 class="post-title">
+                    IO实验的一些常用命令总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    必须熟练使用的指令以及注意事项
+stat：可以查看文件的详细信息 1stat msb.txt
+ln：建立符号连接、硬连接1ln   [s]    已有的    不存在的
+dd：用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换
+https://www.cnblogs.com/fantasyxo/p/10519662.html
+
+12345678if=文件名：输入文件名，缺省为标准输入。......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-mysql的8个变量/">
+                <h2 class="post-title">
+                    mysql的8个变量
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+　本篇会简单介绍在 MySQL 中关于 8个 character_set 变量的基本作用。
+
+　使用下列SQL语句可以查看 MySQL中8个 character_set 变量
+1SHOW VARIABLES LIKE&#39;%char%&#39;;
+8个 character_set 变量：
+　　一、character_set_client
+　　二、character_set_connec......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#MYSQL" title="MYSQL">MYSQL</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-mysql编码错进错出解释/">
+                <h2 class="post-title">
+                    mysql编码错进错出解释
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    相关变量123SET character_set_client &#x3D; charset_name;SET character_set_results &#x3D; charset_name;SET character_set_connection &#x3D; charset_name;
+过程复现及原理解释123先假设客户端bash都是utf8SET character_set_cli......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#MYSQL" title="MYSQL">MYSQL</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-理解和解决MySQL乱码问题/">
+                <h2 class="post-title">
+                    理解和解决MySQL乱码问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+转载网络好文:http://cenalulu.github.io/mysql/mysql-mojibake/
+本文将详细介绍MySQL乱码的成因和具体的解决方案
+在阅读本文之前，强烈建议对字符集编码概念还比较模糊的同学 阅读下博主之前对相关概念的一篇科普：十分钟搞清字符集和字符编码
+
+MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理解：从客户端发起请求，到MySQL存储数据，再......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#MYSQL" title="MYSQL">MYSQL</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
+                <h2 class="post-title">
+                    字库表、编码字符集、字符编码
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#MYSQL" title="MYSQL">MYSQL</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/linux-2022-07-23-screen命令/">
+                <h2 class="post-title">
+                    screen命令
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Screen简介在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。
+简而言之：
+远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。
+而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。
+常用screen命令123456s......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/linux-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
+                <h2 class="post-title">
+                     linux下 bin和 usr bin和 usr local bin的区别
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    123/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。
+...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/linux-2022-07-23-linux不同版本的服务管理/">
+                <h2 class="post-title">
+                    linux不同版本的服务管理
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。
+Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。
+
+
+
+
+动作
+Rhel6 旧指令
+Rhel7新指令
+
+
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1057,9 +1082,19 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
     <div class="tags">
         
             
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
         
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
@@ -1079,8 +1114,6 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="6">SSM</a>
-            
         
             
         
@@ -1092,6 +1125,10 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
         
             
         
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1100,12 +1137,6 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1129,9 +1160,11 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
             
         
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
             
         
             
@@ -1246,23 +1279,23 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
     <ul>
       
         <li>
-          <a href="/2022/07/22/%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%BA%E9%97%B4df%E5%92%8Cdu/">查看磁盘和目录空间df和du</a>
+          <a href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/">yum换源的详细操作</a>
+          <a href="/2022/07/23/jvm-2022-07-23-%E5%B8%B8%E9%87%8F%E6%B1%A0/">常量池</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/">yum源解释</a>
+          <a href="/2022/07/23/IO-2022-07-23-IO%E5%AE%9E%E9%AA%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">IO实验的一些常用命令总结</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/">top命令的Load average 含义及性能参考基值</a>
+          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%9A%848%E4%B8%AA%E5%8F%98%E9%87%8F/">mysql的8个变量</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/">利用docker部署hadoop集群的记录</a>
+          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%BC%96%E7%A0%81%E9%94%99%E8%BF%9B%E9%94%99%E5%87%BA%E8%A7%A3%E9%87%8A/">mysql编码错进错出解释</a>
         </li>
       
     </ul>
@@ -1277,7 +1310,7 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">190</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">202</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1288,27 +1321,33 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
     <div class="widget">
       <ul>
         
+          <a href="categories/#SSM"><li>SSM</li></a>
+        
+          <a href="categories/#IO"><li>IO</li></a>
+        
           <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
+        
+          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         

@@ -171,14 +171,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -639,6 +639,30 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -647,21 +671,24 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-优化Mysql数据导入的几种方法/">
+            <a href="/2022/07/18/mysql-2022-07-18-事务与事务持久化/">
                 <h2 class="post-title">
-                    优化Mysql数据导入的几种方法
+                    事务与事务持久化
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言 思考两个问题，数据库突然断电会丢失数据吗？数据库中的事务是如何记录的？带着两个疑问，我们继续往下看。
+什么是事务？根据《高性能 MySQL》第 3 版 1.3 事务一节中定义：
+
+事务就是一组原子性的 SQL 查询，或者说一个独立的工作单元。如果数据库引擎能够成功地对数据库应用该组查询的全部语句，那么就执行该组查询。如果其中有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
@@ -679,21 +706,26 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-分析sql执行效率的方法/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql死锁的发生与解决/">
                 <h2 class="post-title">
-                    分析sql执行效率的方法
+                    mysql死锁的发生与解决
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
+认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+InnoDB 中解决死锁问题有两种方式：
+
+检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
+等查询的时间达到锁等待超时的设......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
@@ -711,24 +743,34 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-ONLY-FULL-BY-GROUP-MODE模式/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-间隙锁/">
                 <h2 class="post-title">
-                    Mysql ONLY_FULL_BY_GROUP_MODE模式
+                    mysql锁机制-间隙锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ONLY_FULL_BY_GROUP_MODE
-​    如果此模式不开启，则对mysql的扩展生效 此时与标准sql 有两个明显的区别：
-​    允许在select list，having condition 和 order by 中使用没有出现在group by 中的字段，此时mysql会随机选择没有出现在group by字段中的值，其效果和使用ANY—VALUE效果是一样的
-允许在h......
+                    前言​    上节我们聊到了 RC 隔离级别的各种情况的锁，这节我们就来一起看看 RR 隔离级别各种情况下的锁，同时揭晓间隙锁的意义。
+RC下的幻读下面我们来做一个实验：
+
+
+
+
+session1
+session2
+
+
+
+
+set session transaction_isolation=‘READ-COMMITTED’;/* 设置会话隔离级别为 RC*/
+set session tran......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
@@ -746,21 +788,28 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-DateTime与Timestamp区别/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-行锁/">
                 <h2 class="post-title">
-                    Mysql DateTime与Timestamp区别
+                    mysql锁机制-行锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言MySQL 5.5 之前的默认存储引擎是 MyISAM，5.5 之后改成了 InnoDB。InnoDB 后来居上最主要的原因就是：
+
+InnoDB 支持事务：适合在并发条件下要求数据一致的场景。
+InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
+
+本节就一起来探讨 InnoDB 的行锁。
+在讲解行锁之前，我们首先来看一下两阶段锁协议。
+两阶段锁传统的关系型数据库加锁的一个原则......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
@@ -776,24 +825,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-创建用户相关操作常用命令/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-全局锁与表锁/">
                 <h2 class="post-title">
-                    Mysql 创建用户相关操作常用命令
+                    mysql锁机制-全局锁与表锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    创建用户
-1CREATE USER &#39;username&#39;@&#39;%&#39; IDENTIFIED BY &#39;password&#39;;
-eg:
-1234CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#3......
+                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
+本章就来介绍一下不同场景下的锁机制。
+根据加锁的范围，MySQL 中的锁可分为三类：
+
+全局锁
+表级锁
+行锁
+
+本节来重点讲解一下全局锁和表锁。
+1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
@@ -811,25 +866,29 @@ eg:
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-dump-命令/">
+            <a href="/2022/07/16/数据结构与算法-2022-07-16-详解红黑树性质与实现/">
                 <h2 class="post-title">
-                    Mysql dump 命令
+                    详解红黑树性质与实现
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    命令及解释123456789mysqldump -ubackup -p123456 -h 192.168.1.2 backup_test &gt; D:\bak\bakcup.sql 	在这段命令中：mysqldump 是myqldump的程序名了；  -u 是数据库的用户名，后面紧跟着用户名backup；  -p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；  -h......
+                    
+本文将从2-3树与红黑树的联系入手，详细解释红黑树的性质与代码实现，让各位清楚红黑树为何如此定义以及性质是如何推导出来的。本文需要前章2-3树的知识
+[红黑树等价树2-3树]: http://www.icanfly.tech/2022/07/14/%E7%BA%A2%E9%BB%91%E6%A0%91%E7%AD%89%E4%BB%B7%E6%A0%912-3%E6%A0%91/
+
+初见红......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#红黑树" title="红黑树">红黑树</a>
                     
                 </div>
             
@@ -843,27 +902,29 @@ eg:
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-linux-停止启动mysql常用命令/">
+            <a href="/2022/07/15/git-2022-07-14-git的回退操作/">
                 <h2 class="post-title">
-                    linux 停止启动mysql常用命令
+                    git的回退操作
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    查看mysql版本方法一：status;
-方法二：select version();
-Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启动方式1、使用 service 启动：    [root@localhost &#x2F;]# service mysqld start (5.0版本是mysqld)    [root@szxdb etc]......
+                    查看提交的log日志1git log
+回退提交点1git reset --hard commidId
+显示所有提交点1git reflog
+
+有时候回退回去，还想回退回来，这时候 git log 就已经删除了所有commit id了，只能用这个命令，这个日志 包括所有的 分之合并等提交点都会显示，但是注意，只是显示本地进行的操作，如果从git拉取下来后，不是在本地进行的提交，直接回退后，可能......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#git" title="git">git</a>
                     
                 </div>
             
@@ -877,29 +938,40 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql中Binlog常用命令/">
+            <a href="/2022/07/15/git-2022-07-14-自建项目上传github常用操作/">
                 <h2 class="post-title">
-                    Mysql中Binlog常用命令
+                    自建项目上传github常用操作
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Binlog使用场景
-主从数据库复制： Mysql Replication在Master端开启Binlog，Master把日志传递给Slavers，以达到    Master-slavers主从数据同步。
-数据恢复： 使用mysqlbinlog工具来恢复数据
+                    在idea 初始化本地项目后
 
-Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
+在github创建仓库
+
+添加git远程仓库绑定:git remote add origin https://github.com/zzzzxd/xxxx 当前没有追踪远程分支,拉取时候绑定远程分支:git pull origin master 
+
+
+常见的其他操作
+
+
+删除项目当前分支对远程分支的关联
+
+1git remote rm origin
+
+
+项目以......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#git" title="git">git</a>
                     
                 </div>
             
@@ -913,25 +985,30 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/python-2022-07-14-conda、pip、virtualenv的几点区别/">
+            <a href="/2022/07/15/hbase-2022-07-15-Hbase-数据倾斜原因及解决方案/">
                 <h2 class="post-title">
-                    conda、pip、virtualenv的几点区别
+                    Hbase 数据倾斜原因及解决方案
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    conda首先，conda是一个通用的包管理器，意思是什么语言的包都可以用其进行管理，自然也就包括Python了。在安装Anaconda或者Miniconda时，会对conda进行一同安装。其中Anaconda作为Python的发行版，相当于在Python的基础上自带了常用第三方库，而Miniconda则相当于是一个conda环境的安装程序，只包含了conda及其依赖项，这样就可以减少一些不......
+                    
+最近公司在做ip维度表，数据量比较大，上亿条数据了，拿hbase存储，进行实时关联。发现ip存到region上倾斜的比较严重，考虑到基数比较大，后期增量相对比较少，可以做一个预分区，使数据分布均衡，借此机会，从网上搜集了一下资料，总结一下常见的解决方案。
+
+热点与数据倾斜热点：
+​    热点发生在大量的client直接访问集群的一个或极少数个节点（访问可能是读，写或者其他操作。
+​   ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#python" title="python">python</a>
+                      <a href="/tags/#hbase" title="hbase">hbase</a>
                     
                 </div>
             
@@ -945,30 +1022,29 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/leetcode-leetcode高频-2022-07-14-454-4Sum-II/">
+            <a href="/2022/07/15/微服务-2022-07-15-分布式AKF拆分原则/">
                 <h2 class="post-title">
-                    454. 4Sum II
+                    分布式AKF拆分原则
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/4sum-ii/
-题目描述​    Given four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:
+                    
+转载 :https://blog.csdn.net/tomcosin/article/details/119332084
 
-0 &lt;= i, j,......
+前言​    当我们需要分布式系统提供更强的性能时，该怎样扩展系统呢？什么时候该加机器？什么时候该重构代码？扩容时，究竟该选择哈希算法还是最小连接数算法，才能有效提升性能？
+在面对 Scalability 可伸缩性问题时，我们必须有一个系统的方法论，才能应对日益复杂的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Array" title="Array">Array</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#微服务" title="微服务">微服务</a>
                     
                 </div>
             
@@ -1039,9 +1115,19 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <div class="tags">
         
             
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
         
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
@@ -1061,8 +1147,6 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="6">SSM</a>
-            
         
             
         
@@ -1074,6 +1158,10 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
         
             
         
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1082,12 +1170,6 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1111,9 +1193,11 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
             
         
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
             
         
             
@@ -1228,23 +1312,23 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <ul>
       
         <li>
-          <a href="/2022/07/22/%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%BA%E9%97%B4df%E5%92%8Cdu/">查看磁盘和目录空间df和du</a>
+          <a href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/">yum换源的详细操作</a>
+          <a href="/2022/07/23/jvm-2022-07-23-%E5%B8%B8%E9%87%8F%E6%B1%A0/">常量池</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/">yum源解释</a>
+          <a href="/2022/07/23/IO-2022-07-23-IO%E5%AE%9E%E9%AA%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">IO实验的一些常用命令总结</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/">top命令的Load average 含义及性能参考基值</a>
+          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%9A%848%E4%B8%AA%E5%8F%98%E9%87%8F/">mysql的8个变量</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/">利用docker部署hadoop集群的记录</a>
+          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%BC%96%E7%A0%81%E9%94%99%E8%BF%9B%E9%94%99%E5%87%BA%E8%A7%A3%E9%87%8A/">mysql编码错进错出解释</a>
         </li>
       
     </ul>
@@ -1259,7 +1343,7 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">190</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">202</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1270,27 +1354,33 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <div class="widget">
       <ul>
         
+          <a href="categories/#SSM"><li>SSM</li></a>
+        
+          <a href="categories/#IO"><li>IO</li></a>
+        
           <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
+        
+          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         

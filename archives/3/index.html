@@ -171,14 +171,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -639,6 +639,30 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -647,339 +671,344 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/">
+            <a href="/2022/07/22/docker-2022-07-22-docker-常用命令记录/">
                 <h2 class="post-title">
-                    mysql的分库分表
+                    docker 常用命令记录
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    使用数据库时，我们经常会聊到分库分表，那么分库分表有哪些方式？什么情况应该考虑分库分表呢？这次我们来看下这些问题。
-MySQL 分库分表是指：把 MySQL 数据库物理地拆分到多个实例或者机器上去。从而降低单台 MySQL 实例的负载。那么这里讲的拆分究竟以什么方式实现的呢？这里就先来看看 MySQL 分库分表的拆分方法：
-MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆......
+                    ### 查看镜像/容器
+ 123456docker images 查看镜像信息列表 镜像是静态的docker ps -a 查看运行中的所有容器docker pull  [images]:[version]从dockerhub拉取指定镜像docker rm [containerID] 删除容器docker rmi [imageID] 删除镜像docker cp [YourHostFilePat......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/ssm-2022-07-22-Servlet过滤器与SpringMVC拦截器/">
+                <h2 class="post-title">
+                    Servlet过滤器与SpringMVC拦截器
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/22/ssm-2022-07-22-框架中的三种配置方式/">
+                <h2 class="post-title">
+                    框架中的三种配置方式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言:
+
+java中对配置的方式有三种，配置文件（xml、properties、yml等）、注解式配置、代码配置类，配置文件配置不用修改源码，并且适合模块的划分管理，一般适合大型项目，不好处就是配置文件太多，尤其像ssm的xml整合配置等，冗杂繁琐，对程序员极其不友好，于是有了注解式配置，注解配置对开发人员友好，但是不好处就是改注解相当于改代码，改代码就得重新编译、部署，但对于程序员来说，可......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/21/ssm-2022-07-21-视图解析与模版引擎/">
+                <h2 class="post-title">
+                    视图解析与模版引擎
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ModelAndView
+
+ModelAndView对象是指”模型(数据)与视图(界面)”对象
+
+通过ModelAndView可将包含数据对象与模板引擎进行绑定
+
+SpringMVC中默认的View是JSP,也可以配置其他模板引擎
+
+
+视图解析器作用
+一般地视图解析器配置如下：      
+假如Controller类中返回值为hello，那么根据视图解析器可得将要跳转的页面路径为：/WebC......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/21/ssm-2022-07-21-SpringMVC用Map接收请求参数分析/">
+                <h2 class="post-title">
+                    SpringMVC用Map接收请求参数分析
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    第一种情况，什么也不设置，无参数传递注解为 @Controller @RequestMapping
+
+可以看到传递的为SpringMVC的BindingAwareModelMap类型，SpringMVC中的隐含模型就是这个类型，其作用域等价于 request 域，当添加Model、ModelMap参数时，SpringMVC实际传入的就是这个隐含模型；向这个隐含模型种设置值后，在返回的页面中就......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/21/ssm-2022-07-21-requestParam与-Param/">
+                <h2 class="post-title">
+                     @requestParam与@Param
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    @RequestParam 用于controller层，是Spring的注解
+解决前台参数名称与后台接收参数变量名称不一致的问题，等价于request.getParam
+
+value：参数名字，即入参的请求参数名字，如username表示请求的参数区中的name为username的参数的值将传入；
+required：是否必须，默认是true，表示请求中一定要有相应的参数，否则将报404错误码......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/21/ssm-2022-07-21-springmvc-Controller-页面跳转/">
+                <h2 class="post-title">
+                    springmvc Controller 页面跳转
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+如果返回值为ModelAndView，在处理方法中，返回null时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。
+
+12345@RequestMapping("/hello.do")    public ModelAndView hello()&#123;        System.out.println("hello================");        ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/21/mysql-2022-07-21-mvcc原理解释/">
+                <h2 class="post-title">
+                    mvcc原理解释
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章的时候,感觉到网上的资料在讲这块知识点上写的五花八门,好像大家的理解并没有一致。
+这里将自己所理解的做一个总结,个人会觉得这是一篇含金量挺高的一篇文章(哈哈),所以请你坚持认真的看下去,一定会对你有收获。
+如果文章中哪里没有理解,或者认为我讲的不对的地方，都欢迎留言一起交流哈。
+前言一些基本概念我这里不在做阐述了。好比什么是事务?......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/21/mysql-2022-07-21-一文详解脏读、不可重复读、幻读/">
+                <h2 class="post-title">
+                    一文详解脏读、不可重复读、幻读
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+在MySQL的众多存储引擎中，只有InnoDB支持事务，所有这里说的事务隔离级别指的是InnoDB下的事务隔离级别。
+
+MySQL 是支持多事务并发执行的。否则来一个事务处理一个请求，处理一个人请求的时候，其它事务都等着，那估计都没人敢用MySQL作为数据库,因为用户体验太差，估计都要砸键盘了。
+既然事务可以并发操作,这里就有一些问题：一个事务在写数据的时候，另一个事务要读这行数据，该......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
+                <h2 class="post-title">
+                    mysql的操作规范
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言今天来看一下，比较通用的规范操作。
+命名规范1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；
+1.2、库、表、字段全部采用小写；
+MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。
+1.3、避免用 MySQL 的保留字， MySQL 保留字请参考官方手册：9.3 Keyword......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
                     2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/">
-                <h2 class="post-title">
-                    读写分离注意问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
-通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
-但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
-你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的QC/">
-                <h2 class="post-title">
-                    mysql的QC
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。
-
-关于 QC 的详细定义，可以查询 MySQL 5.7 官方手册
-
-那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。
-认识 QCQC 需要缓存最新数据结果，因......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/">
-                <h2 class="post-title">
-                    设置自增主键的好处
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
-关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
-1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-sql注入攻击和预防/">
-                <h2 class="post-title">
-                    sql注入攻击和预防
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言很多时候，我们关心的是程序是否能实现我们的预期功能，而忽视了 SQL 安全，这就存在 SQL 注入的风险，本节就一起来聊聊 SQL 注入及防御。
-认识 SQL 注入SQL 注入是利用某些数据库的外部接口将用户数据插入到实际的数据库操作语句中，从而达到入侵数据库乃至操作系统的目的。
-SQL 注入产生的主要原因是：程序对用户输入的数据没有进行严格的过滤，导致非法数据库查询语句的执行。
-SQL......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分布式事务/">
-                <h2 class="post-title">
-                    mysql的分布式事务
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言今天我们看一下mysql提供的分布式事务，有关分布式事务的更多详细解释以及更多的解决方案，可以看博客的其它文章。
-认识分布式事务分布式事务是指一个大的事务由很多小操作组成，小操作分布在不同的服务器上或者不同的应用程序上。分布式事务需要保证这些小操作要么全部成功，要么全部失败。MySQL 从 5.0.3 开始支持分布式事务。
-分布式事务使用两阶段提交协议：
-
-第一阶段：所有分支事务都开始准......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-有关事务的使用习惯/">
-                <h2 class="post-title">
-                    有关事务的使用习惯
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言有时好的事务习惯也影响着业务访问速度。接下来我们看一下事务的使用习惯。
-我们先来看看一些不好的事务习惯：
-不好的事务习惯在循环中提交在大多数情况下，MySQL 都是开启自动提交的，如果遇到循环执行 SQL，则相当于每个循环中都会进行一次提交，实际这算一个不好的事务习惯了。下面我创建一张测试表，并定义两个循环写入数据的存储过程：一个是自动提交，另一个是在循环前开启一个事务，在循环后一次性提......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/18/mysql-2022-07-18-mvcc实现/">
-                <h2 class="post-title">
-                    mvcc实现
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言​    本节跟大家一起聊聊 MVCC。
-什么是 MVCC？在说 MVCC 之前，大家先看看下面这个例子。
-首先创建表并写入测试数据：
-1234567891011use muke;drop table if exists t20;CREATE TABLE `t20` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/18/mysql-2022-07-18-事务与事务持久化/">
-                <h2 class="post-title">
-                    事务与事务持久化
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言 思考两个问题，数据库突然断电会丢失数据吗？数据库中的事务是如何记录的？带着两个疑问，我们继续往下看。
-什么是事务？根据《高性能 MySQL》第 3 版 1.3 事务一节中定义：
-
-事务就是一组原子性的 SQL 查询，或者说一个独立的工作单元。如果数据库引擎能够成功地对数据库应用该组查询的全部语句，那么就执行该组查询。如果其中有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/18/mysql-2022-07-18-mysql死锁的发生与解决/">
-                <h2 class="post-title">
-                    mysql死锁的发生与解决
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
-认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
-InnoDB 中解决死锁问题有两种方式：
-
-检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
-等查询的时间达到锁等待超时的设......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-18
                 </p>
                 <div class="tags">
                     
@@ -1054,9 +1083,19 @@ InnoDB 中解决死锁问题有两种方式：
     <div class="tags">
         
             
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
         
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
@@ -1076,8 +1115,6 @@ InnoDB 中解决死锁问题有两种方式：
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="6">SSM</a>
-            
         
             
         
@@ -1089,6 +1126,10 @@ InnoDB 中解决死锁问题有两种方式：
         
             
         
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1097,12 +1138,6 @@ InnoDB 中解决死锁问题有两种方式：
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1126,9 +1161,11 @@ InnoDB 中解决死锁问题有两种方式：
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
             
         
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
             
         
             
@@ -1243,23 +1280,23 @@ InnoDB 中解决死锁问题有两种方式：
     <ul>
       
         <li>
-          <a href="/2022/07/22/%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%BA%E9%97%B4df%E5%92%8Cdu/">查看磁盘和目录空间df和du</a>
+          <a href="/2022/07/23/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/yum%E6%8D%A2%E6%BA%90%E7%9A%84%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C/">yum换源的详细操作</a>
+          <a href="/2022/07/23/jvm-2022-07-23-%E5%B8%B8%E9%87%8F%E6%B1%A0/">常量池</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/yum%E6%BA%90%E8%A7%A3%E9%87%8A/">yum源解释</a>
+          <a href="/2022/07/23/IO-2022-07-23-IO%E5%AE%9E%E9%AA%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">IO实验的一些常用命令总结</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/top%E5%91%BD%E4%BB%A4%E7%9A%84Load-average-%E5%90%AB%E4%B9%89%E5%8F%8A%E6%80%A7%E8%83%BD%E5%8F%82%E8%80%83%E5%9F%BA%E5%80%BC/">top命令的Load average 含义及性能参考基值</a>
+          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%9A%848%E4%B8%AA%E5%8F%98%E9%87%8F/">mysql的8个变量</a>
         </li>
       
         <li>
-          <a href="/2022/07/22/%E5%88%A9%E7%94%A8docker%E9%83%A8%E7%BD%B2hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%B0%E5%BD%95/">利用docker部署hadoop集群的记录</a>
+          <a href="/2022/07/23/mysql-2022-07-23-mysql%E7%BC%96%E7%A0%81%E9%94%99%E8%BF%9B%E9%94%99%E5%87%BA%E8%A7%A3%E9%87%8A/">mysql编码错进错出解释</a>
         </li>
       
     </ul>
@@ -1274,7 +1311,7 @@ InnoDB 中解决死锁问题有两种方式：
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">190</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">202</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
 
         <hr>
@@ -1285,27 +1322,33 @@ InnoDB 中解决死锁问题有两种方式：
     <div class="widget">
       <ul>
         
+          <a href="categories/#SSM"><li>SSM</li></a>
+        
+          <a href="categories/#IO"><li>IO</li></a>
+        
           <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
+        
+          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
