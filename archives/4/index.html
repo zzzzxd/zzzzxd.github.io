@@ -671,6 +671,334 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -679,28 +1007,27 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/ssm-2022-07-21-springmvc-Controller-页面跳转/">
+            <a href="/2022/09/16/jvm-2022-09-16-minorGC前后的几种特殊情况/">
                 <h2 class="post-title">
-                    springmvc Controller 页面跳转
+                    minorGC前后的几种特殊情况
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-如果返回值为ModelAndView，在处理方法中，返回null时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。
-
-12345@RequestMapping("/hello.do")    public ModelAndView hello()&#123;        System.out.println("hello================");        ......
+                    大对象直接进入老年代 相关参数 -XX:PretenureSizeThreshold
+动态年龄判断 minor gc 后，一批对象总大小超过了 survivor 区的 50%，那么就让大于等于这批对象年龄的对象直接进入老年代 具体规则是，从年龄1的对象开始，把 年龄1 + 年龄2 + 年龄n 多个年龄的对象的总和超过survivor区的50%，就此时就会把年龄 n 以上的对象放入老年代
+老年......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-09-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -714,29 +1041,28 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/mysql-2022-07-21-mvcc原理解释/">
+            <a href="/2022/09/16/jvm-2022-09-16-FullGC的发生时机/">
                 <h2 class="post-title">
-                    mvcc原理解释
+                    FullGC的发生时机
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章的时候,感觉到网上的资料在讲这块知识点上写的五花八门,好像大家的理解并没有一致。
-这里将自己所理解的做一个总结,个人会觉得这是一篇含金量挺高的一篇文章(哈哈),所以请你坚持认真的看下去,一定会对你有收获。
-如果文章中哪里没有理解,或者认为我讲的不对的地方，都欢迎留言一起交流哈。
-前言一些基本概念我这里不在做阐述了。好比什么是事务?......
+                    Major GC / Full GC基于分代收集理论，目前的JVM堆内存大多分为了==新生代、老年代、方法区==。
+JVM在进行GC时，并非每次都对上面三个内存区域（新生代、老年代；方法区）一起回收的，大部分时候回收的都是指新生代。
+针对Hotspot VM的实现，它里面的GC按照回收区域又分为两大种类型：一种是部分收集（Partial GC），一种是整堆收集（Full GC）。
+部分收集：......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-09-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -750,29 +1076,44 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/mysql-2022-07-21-一文详解脏读、不可重复读、幻读/">
+            <a href="/2022/09/15/jvm-2022-09-15-JVM参数分类/">
                 <h2 class="post-title">
-                    一文详解脏读、不可重复读、幻读
+                    JVM参数分类
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-在MySQL的众多存储引擎中，只有InnoDB支持事务，所有这里说的事务隔离级别指的是InnoDB下的事务隔离级别。
+                    JVM参数分类
 
-MySQL 是支持多事务并发执行的。否则来一个事务处理一个请求，处理一个人请求的时候，其它事务都等着，那估计都没人敢用MySQL作为数据库,因为用户体验太差，估计都要砸键盘了。
-既然事务可以并发操作,这里就有一些问题：一个事务在写数据的时候，另一个事务要读这行数据，该......
+
+
+类别
+说明
+
+
+
+
+标准参数（-）
+所有的JVM实现都必须实现这些参数的功能，而且向后兼容；
+
+
+非标准参数（-X）
+这些参数不是虚拟机规范规定的。因此，不是所有VM的实现(如:HotSpot,JRockit,J9等)都支持这些配置参数。
+
+
+非稳定参数（-XX）
+这些参数是虚拟机规范中规定的。这些参数指定虚拟机实例在运行时的各种行为，从而对虚拟机的运行时性能有很大影响......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-09-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -786,29 +1127,27 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
+            <a href="/2022/08/17/JSON字符串的嵌套机制/">
                 <h2 class="post-title">
-                    mysql的操作规范
+                    JSON字符串的嵌套机制
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言今天来看一下，比较通用的规范操作。
-命名规范1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；
-1.2、库、表、字段全部采用小写；
-MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。
-1.3、避免用 MySQL 的保留字， MySQL 保留字请参考官方手册：9.3 Keyword......
+                    转义机制的嵌套：转义机制被任意嵌套、组合，只要识别方的处理逻辑是正确的，就不会发生命令识别错误或数据识别错误。转义机制是一个安全性完备的机制。
+每增加一层转义机制，就需要增加一层还原机制。
+JSON字符串的多层嵌套12345678910111213141516171819202122232425&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-08-17
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#JSON" title="JSON">JSON</a>
                     
                 </div>
             
@@ -822,27 +1161,27 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-应用层的优化点总结/">
+            <a href="/2022/08/02/Mac必备工具之brew/">
                 <h2 class="post-title">
-                    应用层的优化点总结
+                    Mac必备工具之brew
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    对于数据库的使用，我们不仅仅要考虑 MySQL 本身的优化，还需要考虑应用层的优化。因为有些线上问题，就是由于应用层设置不合理导致的。下面看一下常见的优化点。
-使用连接池MySQL 如果频繁创建和断开连接，那 MySQL 的开销会比较大，可能会占用过多的服务器内存资源，甚至导致响应时间变慢。此时就可以考虑使用连接池来改进性能。
-连接池可以理解为：创建一些持久连接的“池”，新的请......
+                    
+brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具
+
+安装可以使用如下命令进行安装:
+1/usr/bin/ruby -e "$(curl -fsSL https://raw......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-08-02
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -856,28 +1195,23 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-删除大量数据的经验/">
+            <a href="/2022/07/24/数据结构与算法-2022-07-24-组合数计算的方法总结/">
                 <h2 class="post-title">
-                    删除大量数据的经验
+                    组合数计算的方法总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言为了防止单张表过大，很多情况下，我们需要对历史数据做归档或者删除操作。那么如何高效删除大量无用数据呢？今天就来总结一下。
-在聊数据删除前，我们先来看看 MySQL 的共享表空间和独立表空间。
-共享表空间和独立表空间InnoDB 数据是按照表空间进行存放的，其表空间分为共享表空间和独立表空间。
-共享表空间共享表空间：表的数据放在系统共享表空间，也就是跟数据字典放一起。文件名为 ibdata......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-24
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -891,27 +1225,32 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/">
+            <a href="/2022/07/24/数据结构与算法-2022-07-24-算法题目中常见的计算技巧总结/">
                 <h2 class="post-title">
-                    mysql的分库分表
+                    算法题目中常见的计算技巧总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    使用数据库时，我们经常会聊到分库分表，那么分库分表有哪些方式？什么情况应该考虑分库分表呢？这次我们来看下这些问题。
-MySQL 分库分表是指：把 MySQL 数据库物理地拆分到多个实例或者机器上去。从而降低单台 MySQL 实例的负载。那么这里讲的拆分究竟以什么方式实现的呢？这里就先来看看 MySQL 分库分表的拆分方法：
-MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆......
+                    
+今天我们对算法题目中与数学运算相关的一些常用的知识进行简单总结，需要刻意记忆，如果对相关知识点不熟悉需要翻越更详细的资料。
+
+最大公约数与最小公倍数最大公约数正整数a,b的最大公约数是指a与b的所有公约数中最大的那个公约数。求解最大公约数常用的是欧几里得算法(即辗转相除法),假设 a,b 均为正整数，则gcd=(a,b) = gcd(b,a%b)
+代码如下:
+123int gcd(int ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#MATH" title="MATH">MATH</a>
                     
                 </div>
             
@@ -925,28 +1264,30 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/">
+            <a href="/2022/07/24/问题-2022-07-24-log4j日志不输出/">
                 <h2 class="post-title">
-                    读写分离注意问题
+                    log4j日志不输出
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
-通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
-但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
-你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
+                    问题log4j日志不输出，或者没有按照预定的级别输出
+常见原因原因一：配置文件没配置对，这种低级错误就不说了
+原因二：依赖冲突
+​    多半是因为，引入的底层实现类出现了冲突，这样就得排查maven的冲突，那怎么知道哪些冲突了呢？如果
+真是一点一点查，那就麻烦了，注意，一定要看提示
+12345SLF4J: Class path contains multiple SLF4J binding......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
                     
                 </div>
             
@@ -960,30 +1301,27 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的QC/">
+            <a href="/2022/07/24/git-2022-07-24-git常见报错/">
                 <h2 class="post-title">
-                    mysql的QC
+                    git常见报错
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。
-
-关于 QC 的详细定义，可以查询 MySQL 5.7 官方手册
-
-那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。
-认识 QCQC 需要缓存最新数据结果，因......
+                    错误一：Failed to connect to github.com port 443: Operation timed out
+​    这个多半是由于网络问题，正常情况不会拉取，推送失败，多半是网络原因
+12345678考虑更换ip（自己没遇到过这个问题）：1、查询可以用的IP	在https://www.ipaddress.com/上分别搜索	github.com、github.glo......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#git" title="git">git</a>
                     
                 </div>
             
@@ -997,27 +1335,26 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/">
+            <a href="/2022/07/24/问题-2022-07-24-PrepareStatement未关闭导致内存泄漏/">
                 <h2 class="post-title">
-                    设置自增主键的好处
+                    PrepareStatement未关闭导致内存泄漏
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
-关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
-1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
+                    现象堆内存飙升，GC次数明显提升
+原因:第三方的数据库连接池，使用的时候，获取到Connection之后，使用完成，调用的关闭方法（close()） ，并没有将Connection关闭，只是放回到连接池中，如果调用的这个方法，而没有手动关闭PreparedStatement等，则这个PreparedStatement并没有关闭，这样会使得开发的程序内存急速增长，java的内存回收机制可能跟不......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
                     
                 </div>
             
@@ -1098,15 +1435,15 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
         
             
             <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="23">mysql</a>
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
             
         
             
@@ -1125,6 +1462,12 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
             
         
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
             
         
             
@@ -1133,6 +1476,48 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
             
             <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1150,20 +1535,6 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
             
         
@@ -1178,27 +1549,13 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
+            
+        
             
         
             
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="10">Tree</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1217,6 +1574,22 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
             
         
             
@@ -1291,23 +1664,23 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
     <ul>
       
         <li>
-          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
+          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
+          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
+          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
+          <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture%E8%AF%A6%E8%A7%A3/">CompletableFuture详解</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/09/27/JUC-2022-09-27-Future%E6%A8%A1%E5%BC%8F/">Future模式</a>
         </li>
       
     </ul>
@@ -1322,7 +1695,7 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1333,25 +1706,23 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
     <div class="widget">
       <ul>
         
-          <a href="categories/#常见问题"><li>常见问题</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#git"><li>git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
@@ -1361,13 +1732,23 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
+          <a href="categories/#Hive"><li>Hive</li></a>
         
       </ul>
     </div>

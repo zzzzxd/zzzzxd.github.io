@@ -671,6 +671,334 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -679,29 +1007,29 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-380-Insert-Delete-GetRandom-O-1/">
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
                 <h2 class="post-title">
-                    380. Insert Delete GetRandom O(1)
+                    mysql的操作规范
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/insert-delete-getrandom-o1/
-题目描述​    Implement the RandomizedSet class:
-
-RandomizedSet() Initializes the RandomizedSet object.
-bool insert(int val) Inserts an......
+                    前言今天来看一下，比较通用的规范操作。
+命名规范1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；
+1.2、库、表、字段全部采用小写；
+MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。
+1.3、避免用 MySQL 的保留字， MySQL 保留字请参考官方手册：9.3 Keyword......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -715,26 +1043,27 @@ bool insert(int val) Inserts an......
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-378-Kth-Smallest-Element-in-a-Sorted-Matrix/">
+            <a href="/2022/07/19/mysql-2022-07-19-应用层的优化点总结/">
                 <h2 class="post-title">
-                    378. Kth Smallest Element in a Sorted Matrix
+                    应用层的优化点总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
-题目描述​    Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smalle......
+                    前言​    对于数据库的使用，我们不仅仅要考虑 MySQL 本身的优化，还需要考虑应用层的优化。因为有些线上问题，就是由于应用层设置不合理导致的。下面看一下常见的优化点。
+使用连接池MySQL 如果频繁创建和断开连接，那 MySQL 的开销会比较大，可能会占用过多的服务器内存资源，甚至导致响应时间变慢。此时就可以考虑使用连接池来改进性能。
+连接池可以理解为：创建一些持久连接的“池”，新的请......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -748,30 +1077,28 @@ bool insert(int val) Inserts an......
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-371-Sum-of-Two-Integers/">
+            <a href="/2022/07/19/mysql-2022-07-19-删除大量数据的经验/">
                 <h2 class="post-title">
-                    371. Sum of Two Integers
+                    删除大量数据的经验
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/sum-of-two-integers/
-题目描述​    Given two integers a and b, return the sum of the two integers without using the operators + and -.
-Example 1:
-12Input: a &#x3D;......
+                    前言为了防止单张表过大，很多情况下，我们需要对历史数据做归档或者删除操作。那么如何高效删除大量无用数据呢？今天就来总结一下。
+在聊数据删除前，我们先来看看 MySQL 的共享表空间和独立表空间。
+共享表空间和独立表空间InnoDB 数据是按照表空间进行存放的，其表空间分为共享表空间和独立表空间。
+共享表空间共享表空间：表的数据放在系统共享表空间，也就是跟数据字典放一起。文件名为 ibdata......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Bit Manipulation" title="Bit Manipulation">Bit Manipulation</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -785,26 +1112,27 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-350-Intersection-of-Two-Arrays-II/">
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/">
                 <h2 class="post-title">
-                    350. Intersection of Two Arrays II
+                    mysql的分库分表
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/intersection-of-two-arrays-ii/
-题目描述​    Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appea......
+                    使用数据库时，我们经常会聊到分库分表，那么分库分表有哪些方式？什么情况应该考虑分库分表呢？这次我们来看下这些问题。
+MySQL 分库分表是指：把 MySQL 数据库物理地拆分到多个实例或者机器上去。从而降低单台 MySQL 实例的负载。那么这里讲的拆分究竟以什么方式实现的呢？这里就先来看看 MySQL 分库分表的拆分方法：
+MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -818,29 +1146,28 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-347-Top-K-Frequent-Elements/">
+            <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/">
                 <h2 class="post-title">
-                    347. Top K Frequent Elements
+                    读写分离注意问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/top-k-frequent-elements/
-题目描述​    Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
-E......
+                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
+通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
+但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
+你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Heap" title="Heap">Heap</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -854,29 +1181,30 @@ E......
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-344-Reverse-String/">
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的QC/">
                 <h2 class="post-title">
-                    344. Reverse String
+                    mysql的QC
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/reverse-string/
-题目描述​    Write a function that reverses a string. The input string is given as an array of characters s.
-You must do this by modifying the inp......
+                    前言从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。
+
+关于 QC 的详细定义，可以查询 MySQL 5.7 官方手册
+
+那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。
+认识 QCQC 需要缓存最新数据结果，因......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Array" title="Array">Array</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -890,21 +1218,94 @@ You must do this by modifying the inp......
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-341-Flatten-Nested-List-Iterator/">
+            <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/">
                 <h2 class="post-title">
-                    341. Flatten Nested List Iterator
+                    设置自增主键的好处
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
+关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
+1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-sql注入攻击和预防/">
+                <h2 class="post-title">
+                    sql注入攻击和预防
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言很多时候，我们关心的是程序是否能实现我们的预期功能，而忽视了 SQL 安全，这就存在 SQL 注入的风险，本节就一起来聊聊 SQL 注入及防御。
+认识 SQL 注入SQL 注入是利用某些数据库的外部接口将用户数据插入到实际的数据库操作语句中，从而达到入侵数据库乃至操作系统的目的。
+SQL 注入产生的主要原因是：程序对用户输入的数据没有进行严格的过滤，导致非法数据库查询语句的执行。
+SQL......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/19/mysql-2022-07-19-mysql的分布式事务/">
+                <h2 class="post-title">
+                    mysql的分布式事务
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言今天我们看一下mysql提供的分布式事务，有关分布式事务的更多详细解释以及更多的解决方案，可以看博客的其它文章。
+认识分布式事务分布式事务是指一个大的事务由很多小操作组成，小操作分布在不同的服务器上或者不同的应用程序上。分布式事务需要保证这些小操作要么全部成功，要么全部失败。MySQL 从 5.0.3 开始支持分布式事务。
+分布式事务使用两阶段提交协议：
+
+第一阶段：所有分支事务都开始准......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
@@ -920,91 +1321,27 @@ You must do this by modifying the inp......
 
         <div class="post-preview">
 
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-334-Increasing-Triplet-Subsequence/">
+            <a href="/2022/07/19/mysql-2022-07-19-有关事务的使用习惯/">
                 <h2 class="post-title">
-                    334. Increasing Triplet Subsequence
+                    有关事务的使用习惯
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/increasing-triplet-subsequence/
-题目描述​    Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i &lt; j &lt; k and ......
+                    前言有时好的事务习惯也影响着业务访问速度。接下来我们看一下事务的使用习惯。
+我们先来看看一些不好的事务习惯：
+不好的事务习惯在循环中提交在大多数情况下，MySQL 都是开启自动提交的，如果遇到循环执行 SQL，则相当于每个循环中都会进行一次提交，实际这算一个不好的事务习惯了。下面我创建一张测试表，并定义两个循环写入数据的存储过程：一个是自动提交，另一个是在循环前开启一个事务，在循环后一次性提......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-13
+                    2022-07-19
                 </p>
                 <div class="tags">
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-329-Longest-Increasing-Path-in-a-Matrix/">
-                <h2 class="post-title">
-                    329. Longest Increasing Path in a Matrix
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​     https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
-题目描述​    Given an m x n integers matrix, return the length of the longest increasing path in matrix.
-From each cell, you......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/13/leetcode-leetcode高频-2022-07-13-328-Odd-Even-Linked-List/">
-                <h2 class="post-title">
-                    328. Odd Even Linked List
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/odd-even-linked-list/
-题目描述​    Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LinkedList" title="LinkedList">LinkedList</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1085,15 +1422,15 @@ From each cell, you......
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
         
             
             <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="23">mysql</a>
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
             
         
             
@@ -1112,6 +1449,12 @@ From each cell, you......
         
             
         
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
             
         
             
@@ -1120,6 +1463,48 @@ From each cell, you......
         
             
             <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1137,20 +1522,6 @@ From each cell, you......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
             
         
@@ -1165,27 +1536,13 @@ From each cell, you......
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
+            
+        
             
         
             
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="10">Tree</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1204,6 +1561,22 @@ From each cell, you......
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
             
         
             
@@ -1278,23 +1651,23 @@ From each cell, you......
     <ul>
       
         <li>
-          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
+          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
+          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
+          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
+          <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture%E8%AF%A6%E8%A7%A3/">CompletableFuture详解</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/09/27/JUC-2022-09-27-Future%E6%A8%A1%E5%BC%8F/">Future模式</a>
         </li>
       
     </ul>
@@ -1309,7 +1682,7 @@ From each cell, you......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1320,25 +1693,23 @@ From each cell, you......
     <div class="widget">
       <ul>
         
-          <a href="categories/#常见问题"><li>常见问题</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#git"><li>git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
@@ -1348,13 +1719,23 @@ From each cell, you......
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
+          <a href="categories/#Hive"><li>Hive</li></a>
         
       </ul>
     </div>

@@ -671,6 +671,334 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -679,298 +1007,224 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/源码-jdk-2022-07-06-HashSet与TreeSet源码解析/">
+            <a href="/2020/09/21/企业高频算法面试题-2020-09-21-Problem-37-Nim博/">
                 <h2 class="post-title">
-                    HashSet与TreeSet源码解析
+                    Problem 37 Nim博弈
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    题目Nim博弈. 给定一个正数数组arr 先手和后手每次可以选择在一个位置拿走若干值，值要大于0，但是要小于该处的剩余 谁最先拿空arr，谁赢。根据arr，返回谁赢
+题目解析
+题目理解之后。需要转换思路。如果先手能保证每次拿一个数之后，异或值是0 ，不断的拿之后，最后后手面对异或和为0的情况 一定全是0，所以先手只能能保证当前异或值不是0，那就每次拿成0，这样 先手一定赢。
+有一点在于，能不......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2020-09-21
                 </p>
                 <div class="tags">
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/06/源码-jdk-2022-07-06-TreeMap源码解析/">
-                <h2 class="post-title">
-                    TreeMap源码解析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-TreeMap是一种常用的key有序的数据结构,底层原理主要是用到动态平衡树，之前研究过了HashMap，解决冲突时链表会转化红黑树，同样这里平衡树依然是红黑树,可见这个数据结构的重要性了。如果红黑树原理不熟悉，那么涉及到具体的操作源码 可先跳过，有关红黑树只需要记住一点，红黑树和AVL都是动态平衡树的一种，都是在BST的基础上改进而来，基础的查询操作和BST一模一样，插入元素与删除元素，......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/06/源码-jdk-2022-07-06-LinkList源码解析/">
-                <h2 class="post-title">
-                    LinkedList源码解析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    整体结构
-整体结构
-LinkedList也是常用的一种数据结构,它和ArrayList在逻辑上都是线性结构，而在物理存储上ArrayList是连续存储，LinkedList是非连续存储。LinkedList实现是一个双向链表。Node节点源码如下:
-1234567891011private static class Node&lt;E&gt; &#123;     E item;     N......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/06/源码-jdk-2022-07-06-ArrayList源码解析/">
-                <h2 class="post-title">
-                    ArrayList源码解析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-ArrayList几乎是最常用的一种数据结构,本篇就研究一下ArrayList的常用操作的底层实现。通过学习底层实现的细节，帮助自己写出更优秀的代码 。
-
-整体结构
-结构图
-
-​    ArrayList实际上就是封装了一个数组 ,代码体现如下:
-12//封装的数组transient  Object[] elementData;
-
-
-类注释信息        
-
-
-允许 put null ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/06/network-2022-07-06-Httptps对称与非对称加密协议/">
-                <h2 class="post-title">
-                    HTTPS对称与非对称加密协议
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-众所周知，WEB服务存在http和https两种通信方式，http默认采用80作为通讯端口，对于传输采用不加密的方式，https默认采用443，对于传输的数据进行加密传输。本文重点介绍https涉及到的对称加密和非对称加密协议原理。
-
-首先我们先不谈https，先从一个简单的通讯原理图讲起：
-​    
-http通信原理客户端发送一句client hello给服务器端，服务器端返回一句se......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#https" title="https">https</a>
-                    
-                      <a href="/tags/#加密算法" title="加密算法">加密算法</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/06/network-2022-07-06-HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥/">
-                <h2 class="post-title">
-                    HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-本文内容主要来自简书博主olaH的文章，作者对概念之间的联系解释的非常清楚，熟悉这些概念可以对理解SSH协议、Https协议以及证书颁发等打下基础
-原文链接:olaH
-
-对称加密对称加密是指双方持有相同的密钥进行通信，加密速度快，但是有一个安全问题，双方怎样获得相同的密钥？你总不能总是拿着U盘把密钥拷贝给对方吧。
-常见的对称加密算法有DES、3DES、AES等
-非对称加密非对称加密，又称为......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#https" title="https">https</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/10/05/源码-jdk-2022-07-05-HashMap源码解析/">
-                <h2 class="post-title">
-                    HashMap源码解析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-HashMap是特别常用的数据结构，源码很长,但底层原理并不复杂，本篇主要介绍hashmap的存储原理以及底层用到的数据结构，并对核心代码进行分析。
-
-整体结构
-结构图
-HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时， 链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表，整体的数据结构 如下：
-
-
-类注释信息
-
-允许 ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-10-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/08/03/leetcode-leetcode高频-2022-07-05-3-Longest-Substring-Without-Repeating-Characters/">
-                <h2 class="post-title">
-                    3. Longest Substring Without Repeating Characters
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/longest-substring-without-repeating-characters/ 
-题目描述Given a string s, find the length of the longest substring without repeating characters.
-Example 1:
-123In......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-08-03
-                </p>
-                <div class="tags">
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                       <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/21/企业高频算法面试题-2020-09-21-Problem-36-异或和为0的最多子数组个数/">
+                <h2 class="post-title">
+                    Problem 36 异或和为0的最多子数组个数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    数组中所有数都异或起来的结果，叫做异或和 给定一个数组arr，可以任意切分成若干个不相交的子数组其中一定存在一种最优方案，使得切出异或和为0的子数组最多 返回这个最多数量
+题目解析
+看到子数组先想DP ，打出前缀和，自己异或自己是0，利用这几点，题目就很简单了。
+
+代码12345678910111213141516//动态规划，利用异或的前缀和  public static i......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/20/企业高频算法面试题-2020-09-20-Problem-35-与数组中元素的最大异或值/">
+                <h2 class="post-title">
+                    Problem 35 与数组中元素的最大异或值
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    https://leetcode.com/problems/maximum-xor-with-an-element-from-array/
+题目解析
+这个题还是比较经典的，有两种思路，一种是来个简单的，直接把查询的mi 和 数组都按照从小到大排序，加入前缀树中，代码几乎和34题一样
+前缀树，节点可以存放一些附加信息，比如以当前路径为前缀的单词个数，当前节点是不是单词等等，这个地......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/16/企业高频算法面试题-2020-09-16-Problem-34-最大异或和的两个数/">
+                <h2 class="post-title">
+                    Problem 34 最大异或和的两个数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    数组中所有数都异或起来的结果，叫做异或和 给定一个数组arr，想知道arr中哪两个数的异或结果最大返回最大的异或结果https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/
+题目解析
+是33题的简化版。
+
+代码12345678910111213141516171819202122232425262......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-16
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/12/企业高频算法面试题-2020-09-12-Problem-33-最大异或和子数组/">
+                <h2 class="post-title">
+                    Problem 33 最大异或和子数组
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    数组中所有数都异或起来的结果，叫做异或和,给定一个数组arr，返回arr的最大子数组异或和    
+题目解析
+首先看到这种和啊，数组啊，应该想到”前缀和“ ，要有这种意识，总要有些经验上的积累。
+先做出前缀的异或和数组，这样对于数组preSum[i],和前置的哪个元素异或 得到最大值，最大值是多少？
+preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
+
+代码12345......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Bit Manipulate" title="Bit Manipulate">Bit Manipulate</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/09/企业高频算法面试题-2020-09-09-Problem-32-最少删除字符成为其子串/">
+                <h2 class="post-title">
+                    Problem 32 最少删除字符成为其子串
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定两个字符串s1和s2，问s2最少删除多少字符可以成为s1的子串？比如 s1 = “abcde”，s2 = “axbc”
+题目解析
+一种暴力思路，将s2进行挑选，挑选删除字符少的子序列 看是不是s1子串。
+编辑距离思路，挑选出s1的所有子串，挨个进行编辑距离的dp
+
+代码12345678910111213141516171819202122232425262728293031......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                       <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
                     
@@ -986,26 +1240,31 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2018/08/01/leetcode-leetcode高频-2022-07-05-2-Add-Two-Numbers/">
+            <a href="/2020/09/06/企业高频算法面试题-2020-09-06-Problem-31-编辑距离问题/">
                 <h2 class="post-title">
-                    2. Add Two Numbers
+                    Problem 31 编辑距离问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接https://leetcode.com/problems/add-two-numbers/
-题目描述You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nod......
+                    题目​    一个字符串 可以有插入（insert）、删除（delete）、替换（replace）操作，每种操作都有对应的代价。求一个字符串变成另一个最小的代价。
+题目解析
+经典的题目。动态规划中的行列模型。列举所有的可能性。
+
+代码123456789101112131415161718192021222324&#x2F;&#x2F;方法：编辑距离问题，考察代价最小的最优解 ，典型的行列模型......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-08-01
+                    2020-09-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Linked List" title="Linked List">Linked List</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
                     
                 </div>
             
@@ -1019,27 +1278,101 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2018/08/01/leetcode-leetcode高频-2022-07-04-1-Two-Sum/">
+            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-30-相等子树/">
                 <h2 class="post-title">
-                    1. Two Sum
+                    Problem 30 相等子树
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接 https://leetcode.com/problems/two-sum/
-题目描述Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-You may assume that each in......
+                    题目如果一个节点X，它左树结构和右树结构完全一样,那么我们说以X为头的树是相等树。给定一棵二叉树的头节点head ，返回head整棵树上有多少棵相等子树
+题目解析
+既然是比较树是不是一样的，那我们可以通过序列化的方式来描述一棵树。运用二叉树的递归套路，返回以head为头节点有多少个相等树，同时返回序列化结果。那么当拿到左右孩子的info信息时，便可以决定当前节点的相等子树个数。此外，比较序列......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-08-01
+                    2020-09-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Array" title="Array">Array</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-29-BST先序构造树/">
+                <h2 class="post-title">
+                    Problem 29 BST先序构造树
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​        已知一棵搜索二叉树上没有重复值的节点，现在有一个数组arr，是这棵搜索二叉树先序遍历的结果请根据arr生成整棵树并返回头节点
+题目解析
+就是递归在区间l-r中创建树,寻找左子树，右子树时候，因为是寻找第一个大于的,用二分正好，总体就是nlogn的
+
+代码12345678910111213141516171819202122232425262728293031323334......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/01/企业高频算法面试题-2020-09-01-Problem-28-大楼轮廓线问题/">
+                <h2 class="post-title">
+                    Problem 28 大楼轮廓线问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    大楼轮廓线问题​    https://leetcode.com/problems/the-skyline-problem/
+第4节
+题目解析代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                 </div>
             
@@ -1059,6 +1392,10 @@ You may assume that each in......
             <a href="/archives/20/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/archives/22/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -1116,15 +1453,15 @@ You may assume that each in......
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
         
             
             <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="23">mysql</a>
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
             
         
             
@@ -1143,6 +1480,12 @@ You may assume that each in......
         
             
         
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
             
         
             
@@ -1151,6 +1494,48 @@ You may assume that each in......
         
             
             <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1168,20 +1553,6 @@ You may assume that each in......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
             
         
@@ -1196,27 +1567,13 @@ You may assume that each in......
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
+            
+        
             
         
             
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="10">Tree</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1235,6 +1592,22 @@ You may assume that each in......
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
             
         
             
@@ -1309,23 +1682,23 @@ You may assume that each in......
     <ul>
       
         <li>
-          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
+          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
+          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
+          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
+          <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture%E8%AF%A6%E8%A7%A3/">CompletableFuture详解</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/09/27/JUC-2022-09-27-Future%E6%A8%A1%E5%BC%8F/">Future模式</a>
         </li>
       
     </ul>
@@ -1340,7 +1713,7 @@ You may assume that each in......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1351,25 +1724,23 @@ You may assume that each in......
     <div class="widget">
       <ul>
         
-          <a href="categories/#常见问题"><li>常见问题</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#git"><li>git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
@@ -1379,13 +1750,23 @@ You may assume that each in......
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
+          <a href="categories/#Hive"><li>Hive</li></a>
         
       </ul>
     </div>

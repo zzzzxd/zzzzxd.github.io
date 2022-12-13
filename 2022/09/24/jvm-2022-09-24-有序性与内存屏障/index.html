@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          有序性与内存屏障 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/09/24/jvm-2022-09-24-有序性与内存屏障/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                            
+                        </div>
+                        <h1>有序性与内存屏障</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-09-24
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.5k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="并发三大特性"><a href="#并发三大特性" class="headerlink" title="并发三大特性"></a>并发三大特性</h2><p>所有讲并发编程的书籍都会讲到并发编程的三大特性，这是并发编程中所有问题的根源，我们只有深刻理解了这三大特性，才不会编写出漏洞百出的并发程序，才不会遇到问题时无从下手，才不会对自己的程序没有信心。</p>
+<p>这三大特性是：</p>
+<ol>
+<li>原子性 : 所有操作要么全部成功，要么全部失败。</li>
+<li><p>可见性: 一个线程对变量进行了修改，另外一个线程能够立刻读取到此变量的最新值。</p>
+</li>
+<li><p>有序性: 代码在执行阶段，并不一定和你的编写顺序一致。</p>
+</li>
+</ol>
+<p>​    其中原子性比较简单，熟悉事务ACID的都清楚，事务最重要的就是原子性，可见性暂时跳过，我们日后在谈，这次我们重点来分析有序性问题，这个是相对较难的地方。</p>
+<h2 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h2><p>学习过计算机组成原理的同学都知道，cpu为了提高效率，指令的执行并不是一条指令执行完成之后再执行下一条，而是采用流水线的方式执行的。第一条执行在读取内存的过程中，这个等待的时间就可以进行第二条执行了，也就是说发生了乱序或者叫做指令的重排。这种优化，对于单线程是没问题的，因为优化的前提一定是不能影响结果的正确输出，但对于多线程而言就不太友好了。</p>
+<p><img src="1.jpg" alt=""></p>
+<p>往上有一个美团工程师给出的一个实验，可以观察出乱序问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Disorder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">0</span>; i &lt; Long.MAX_VALUE; i++) &#123;</span><br><span class="line">            x = <span class="number">0</span>;</span><br><span class="line">            y = <span class="number">0</span>;</span><br><span class="line">            a = <span class="number">0</span>;</span><br><span class="line">            b = <span class="number">0</span>;</span><br><span class="line">            CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(<span class="number">2</span>);</span><br><span class="line">            Thread one = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    a = <span class="number">1</span>;</span><br><span class="line">                    x = b;</span><br><span class="line">                    latch.countDown();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            Thread other = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    b = <span class="number">1</span>;</span><br><span class="line">                    y = a;</span><br><span class="line">                    latch.countDown();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            one.start();</span><br><span class="line">            other.start();</span><br><span class="line">            latch.await();</span><br><span class="line">            String result = <span class="string">"第"</span> + i + <span class="string">"次 ("</span> + x + <span class="string">","</span> + y + <span class="string">"）"</span>;</span><br><span class="line">            <span class="keyword">if</span> (x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>) &#123;</span><br><span class="line">                System.err.println(result);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个实验中，我们可以分析一下，理论上是不会出现x=0,y=0的情况，但只要多次运行，确实会发现有这个情况。也就证明了乱序。</p>
+<h2 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h2><p>我们前面观察到了乱序的问题，这种乱序在多线程的时候可能会出问题的，那么如何解决呢？首先我们要知道volatile是可以解决有序性的问题，其实它的原理也是内存屏障。</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>我们要解决乱序问题，说白了就是 我们想办法让你先后执行的两条执行就应该串行执行。而不应该打破原来的顺序。最简单的方法就是加锁。第一条指令执行的时候，直接锁定相关的区域，第二条指令想要执行只能等。但cpu为了提高执行顺序，通常会采用内存屏障。</p>
+<p><font color=red>内存屏障</font>就是说，加这么一道指令，屏障前的指令不能跑到屏障后，屏障后的指令也不能在屏障前执行。</p>
+<h3 id="cpu保障有序性"><a href="#cpu保障有序性" class="headerlink" title="cpu保障有序性"></a>cpu保障有序性</h3><p>不同的cpu有不同的实现，这里我们还是以intel的x86为例</p>
+<h4 id="X86-CPU内存屏障"><a href="#X86-CPU内存屏障" class="headerlink" title="X86 CPU内存屏障:"></a>X86 CPU内存屏障:</h4><p>sfence:在sfence指令前的写操作当必须在sfence指令后的写操作前完成。</p>
+<p>lfence：在lfence指令前的读操作当必须在lfence指令后的读操作前完成。 </p>
+<p>mfence：在mfence指令前的读写操作当必须在mfence指令后的读写操 作前完成。</p>
+<h4 id="intel-lock汇编指令"><a href="#intel-lock汇编指令" class="headerlink" title="intel lock汇编指令"></a>intel lock汇编指令</h4><p>​    原子指令，如x86上的”lock …” 指令是一个Full Barrier，执行时会锁住内存子系统来确保执行顺 序，甚至跨多个CPU。Software Locks通常使用 了内存屏障或原子指令来实现变量可见性和保持 程序顺序</p>
+<h3 id="JVM内存屏障"><a href="#JVM内存屏障" class="headerlink" title="JVM内存屏障"></a>JVM内存屏障</h3><p>在JVM层面,我们看到的也仅仅是JVM规范中提的，不同的JVM有不同的实现。</p>
+<p>JSR内存屏障:</p>
+<ul>
+<li><p>LoadLoad屏障： 对于这样的语句Load1; LoadLoad; Load2，在Load2及后续读取操作要读取的数据被访问前，保证Load1要读取的数据被读取完毕。</p>
+</li>
+<li><p>StoreStore屏障：对于这样的语句Store1; StoreStore; Store2，在Store2及后续写入操作执行前，保证Store1的写入操作对其它处理器可见。</p>
+</li>
+<li>LoadStore屏障：对于这样的语句Load1; LoadStore; Store2，在Store2及后续写入操作被刷出前，保证Load1要读取的数据被读取完毕。</li>
+<li>StoreLoad屏障：对于这样的语句Store1; StoreLoad; Load2，在Load2及后续所有读取操作执行前，保证Store1的写入对所有处理器可见。</li>
+</ul>
+<h3 id="Volatile的实现"><a href="#Volatile的实现" class="headerlink" title="Volatile的实现"></a>Volatile的实现</h3><h4 id="编译器层面"><a href="#编译器层面" class="headerlink" title="编译器层面"></a>编译器层面</h4><p><img src="2.jpg" alt="image-20220925000504998"></p>
+<p>可以看到volatile关键字编译完之后，在字节码的体现是在修饰符上。</p>
+<h4 id="JVM层面"><a href="#JVM层面" class="headerlink" title="JVM层面"></a>JVM层面</h4><p>在JVM层面是通过内存屏障:</p>
+<p>写操作:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StoreStoreBarrier</span><br><span class="line">volatile 写操作</span><br><span class="line">StoreLoadBarrier</span><br></pre></td></tr></table></figure>
+<p>读操作:</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LoadLoadBarrier</span><br><span class="line">volatile 读操作</span><br><span class="line">LoadStoreBarrier</span><br></pre></td></tr></table></figure>
+<h4 id="操作系统硬件层面"><a href="#操作系统硬件层面" class="headerlink" title="操作系统硬件层面"></a>操作系统硬件层面</h4><p>想要观察在硬件层面是如何做的，就需要查看字节码对应的汇编指令，看看是使用什么cpu指令来保证有序的。操作过程比较复杂，可以参考博客：<a href="https://www.cnblogs.com/xrq730/p/7048693.html" target="_blank" rel="noopener">https://www.cnblogs.com/xrq730/p/7048693.html</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x0000000002931351</span>: lock add dword ptr [rsp],<span class="number">0</span>h  ;*putstatic instance</span><br><span class="line">                                               ; - org.xrq.test.design.singleton.LazySingleton::getInstance@<span class="number">13</span> (line <span class="number">14</span>)</span><br></pre></td></tr></table></figure>
+<p>最终结论是: 依靠Lock 指令。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    对于有序性的解决，对cpu而言，可能会使用cpu的内存屏障或者lock指令，在JVM层面，也有相应的内存屏障。不同的的cpu有不同的实现，不同的JVM由于不同的实现，所以比较复杂 不能一概而论。但是 我们一定要注意一点，就是区分层次来看。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/09/25/jvm-2022-09-25-volatile与可见性/" data-toggle="tooltip" data-placement="top" title="volatile与可见性">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/09/24/jvm-2022-09-24-JMM与缓存一致性/" data-toggle="tooltip" data-placement="top" title="JMM与缓存一致性">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#并发三大特性"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">并发三大特性</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#有序性"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">有序性</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#内存屏障"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">内存屏障</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概念"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cpu保障有序性"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">cpu保障有序性</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#X86-CPU内存屏障"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">X86 CPU内存屏障:</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#intel-lock汇编指令"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">intel lock汇编指令</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JVM内存屏障"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">JVM内存屏障</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Volatile的实现"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Volatile的实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#编译器层面"><span class="toc-nav-number">3.4.1.</span> <span class="toc-nav-text">编译器层面</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#JVM层面"><span class="toc-nav-number">3.4.2.</span> <span class="toc-nav-text">JVM层面</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#操作系统硬件层面"><span class="toc-nav-number">3.4.3.</span> <span class="toc-nav-text">操作系统硬件层面</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

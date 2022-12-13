@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          异步IO - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/10/09/Flink-2022-10-09-异步IO/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                            
+                        </div>
+                        <h1>异步IO</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-10-09
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2k</span> and
+                                Reading Time <span class="post-count">9</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>通常情况我们在进行维表关联时，是进行同步的查询，为了提高吞吐率，提高处理的数据量，可以利用异步的查询，但是有一个问题，异步访问的后的结果 如何反回到主流中？这就需要Flink给我们提供支持了。我们看一下官网的介绍。</p>
+<p><img src="1.jpg" alt="image-20221009112349107"></p>
+<h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><p>引用官网的一段话:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">As illustrated in the section above, implementing proper asynchronous I/<span class="function">O to a <span class="title">database</span> <span class="params">(or key/value store)</span> <span class="keyword">requires</span> a client to that database that supports asynchronous requests. Many popular databases offer such a client.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">In the absence of such a client, one can <span class="keyword">try</span> and turn a synchronous client into a limited concurrent client by creating multiple clients and handling the synchronous calls with a thread pool. However, <span class="keyword">this</span> approach is usually less efficient than a proper asynchronous client.</span></span><br></pre></td></tr></table></figure>
+<p>也就是说。其实Flink提供的只是如何让数据反回到主流。异步需要你自己实现。实现的方式有两种</p>
+<ol>
+<li>第一种比较简单，是指异步的客户端。也就说有些组建的客户端本身提供了异步查询的功能。那就省下了很多事情。</li>
+<li>如果客户端没有异步功能，那就只能自己用多线程来实现，简单的方法就是用CompletableFuture异步编排这个类来实现异步功能。</li>
+</ol>
+<p>看一下 官网提供的demo:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AsyncDatabaseRequest</span> <span class="keyword">extends</span> <span class="title">RichAsyncFunction</span>&lt;<span class="title">String</span>, <span class="title">Tuple2</span>&lt;<span class="title">String</span>, <span class="title">String</span>&gt;&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** The database specific client that can issue concurrent requests with callbacks */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> DatabaseClient client;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(Configuration parameters)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        client = <span class="keyword">new</span> DatabaseClient(host, post, credentials);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        client.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">asyncInvoke</span><span class="params">(String key, <span class="keyword">final</span> ResultFuture&lt;Tuple2&lt;String, String&gt;&gt; resultFuture)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// issue the asynchronous request, receive a future for result</span></span><br><span class="line">        <span class="keyword">final</span> Future&lt;String&gt; result = client.query(key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// set the callback to be executed once the request by the client is complete</span></span><br><span class="line">        <span class="comment">// the callback simply forwards the result to the result future</span></span><br><span class="line">        CompletableFuture.supplyAsync(<span class="keyword">new</span> Supplier&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> result.get();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">                    <span class="comment">// Normally handled explicitly.</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).thenAccept( (String dbResult) -&gt; &#123;</span><br><span class="line">            resultFuture.complete(Collections.singleton(<span class="keyword">new</span> Tuple2&lt;&gt;(key, dbResult)));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// create the original stream</span></span><br><span class="line">DataStream&lt;String&gt; stream = ...;</span><br><span class="line"></span><br><span class="line"><span class="comment">// apply the async I/O transformation</span></span><br><span class="line">DataStream&lt;Tuple2&lt;String, String&gt;&gt; resultStream =</span><br><span class="line">    AsyncDataStream.unorderedWait(stream, <span class="keyword">new</span> AsyncDatabaseRequest(), <span class="number">1000</span>, TimeUnit.MILLISECONDS, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Important note</strong>: The <code>ResultFuture</code> is completed with the first call of <code>ResultFuture.complete</code>. All subsequent <code>complete</code> calls will be ignored.</p>
+<p>The following two parameters control the asynchronous operations:</p>
+<ul>
+<li><strong>Timeout</strong>: The timeout defines how long an asynchronous request may take before it is considered failed. This parameter guards against dead/failed requests.</li>
+<li><strong>Capacity</strong>: This parameter defines how many asynchronous requests may be in progress at the same time. Even though the async I/O approach leads typically to much better throughput, the operator can still be the bottleneck in the streaming application. Limiting the number of concurrent requests ensures that the operator will not accumulate an ever-growing backlog of pending requests, but that it will trigger backpressure once the capacity is exhausted.</li>
+</ul>
+</blockquote>
+<h2 id="超时处理"><a href="#超时处理" class="headerlink" title="超时处理"></a>超时处理</h2><p>​    当异步I/O请求超时时，默认情况下会抛出异常并重新启动作业。如果要处理超时，可以重写AsyncFunction#timeout。确保调用ResultFuture。complete() 或 ResultFuture.completeExceptionally（），以便向Flink指示此输入记录的处理已完成。如果不想在发生超时时发出任何记录，可以调用ResultFuture.complete（Collections.emptyList()）。</p>
+<h2 id="返回顺序"><a href="#返回顺序" class="headerlink" title="返回顺序"></a>返回顺序</h2><p>​    AsyncFunction发出的并发请求通常以未定义的顺序完成，这取决于哪个请求先完成。为了控制结果记录的发出顺序，Flink提供了两种模式：</p>
+<ul>
+<li>Unordered：一旦异步请求完成，就会发出结果记录。流中记录的顺序在异步I/O操作符之后与之前不同。当使用处理时间作为基本时间特征时，此模式具有最低的延迟和最低的开销。对此模式使用AsyncDataStream.unorderedWait（…）。</li>
+<li>Ordered：在这种情况下，将保留流顺序。结果记录的发出顺序与触发异步请求的顺序相同（操作员输入记录的顺序）。为了实现这一点，操作员缓冲一个结果记录，直到它前面的所有记录都被发出（或超时）。这通常会在检查点中引入一些额外的延迟和开销，因为与无序模式相比，记录或结果在检查点状态下维护的时间更长。对此模式使用AsyncDataStream.orderedWait（…）。</li>
+</ul>
+<p>简单来讲，就是保证发送到下游的数据是不是请求发起的顺序，如果是，那么需要额外维护这个顺序，增加一定的开销。</p>
+<h2 id="案例演示"><a href="#案例演示" class="headerlink" title="案例演示"></a>案例演示</h2><h3 id="同步方式"><a href="#同步方式" class="headerlink" title="同步方式"></a>同步方式</h3><p>生成6条数据，从0开始递增的6个数字。模拟异步查询之后，加上时间戳输出。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AsyncIODemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        env.setParallelism(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> maxCount = <span class="number">6</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> taskNum = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">long</span> timeout = <span class="number">40000</span>;</span><br><span class="line"></span><br><span class="line">        DataStream&lt;Integer&gt; inputStream = env.addSource(<span class="keyword">new</span> SimpleSource(maxCount));</span><br><span class="line">        AsyncFunction&lt;Integer, String&gt; function = <span class="keyword">new</span> SampleAsyncFunction();</span><br><span class="line"></span><br><span class="line">        DataStream&lt;String&gt; result = AsyncDataStream.unorderedWait(</span><br><span class="line">                    inputStream,</span><br><span class="line">                    function,</span><br><span class="line">                    timeout,</span><br><span class="line">                    TimeUnit.MILLISECONDS,</span><br><span class="line">                    <span class="number">10</span>).setParallelism(taskNum);</span><br><span class="line"></span><br><span class="line">        result.map(<span class="keyword">new</span> MapFunction&lt;String, String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">map</span><span class="params">(String value)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> value + <span class="string">","</span> + System.currentTimeMillis();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).print();</span><br><span class="line"></span><br><span class="line">        env.execute(<span class="string">"Async IO Demo"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleSource</span> <span class="keyword">implements</span> <span class="title">SourceFunction</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> isRunning = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">SimpleSource</span><span class="params">(<span class="keyword">int</span> maxNum)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.counter = maxNum;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(SourceContext&lt;Integer&gt; ctx)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> ((start &lt; counter || counter == -<span class="number">1</span>) &amp;&amp; isRunning) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (ctx.getCheckpointLock()) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"send data:"</span> + start);</span><br><span class="line">                    ctx.collect(start);</span><br><span class="line">                    ++start;</span><br><span class="line">                &#125;</span><br><span class="line">                Thread.sleep(<span class="number">10L</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            isRunning = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="异步方法"><a href="#异步方法" class="headerlink" title="异步方法"></a>异步方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SampleAsyncFunction</span> <span class="keyword">extends</span> <span class="title">RichAsyncFunction</span>&lt;<span class="title">Integer</span>, <span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span>[] sleep = &#123;<span class="number">100L</span>, <span class="number">1000L</span>, <span class="number">5000L</span>, <span class="number">2000L</span>, <span class="number">6000L</span>, <span class="number">100L</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(Configuration parameters)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.open(parameters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">asyncInvoke</span><span class="params">(<span class="keyword">final</span> Integer input, <span class="keyword">final</span> ResultFuture&lt;String&gt; resultFuture)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.currentTimeMillis() + <span class="string">"-input:"</span> + input + <span class="string">" will sleep "</span> + sleep[input] + <span class="string">" ms"</span>);</span><br><span class="line"></span><br><span class="line">        query(input, resultFuture);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">final</span> Integer input, <span class="keyword">final</span> ResultFuture&lt;String&gt; resultFuture)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(sleep[input]);</span><br><span class="line">            resultFuture.complete(Collections.singletonList(String.valueOf(input)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            resultFuture.complete(<span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">asyncQuery</span><span class="params">(<span class="keyword">final</span> Integer input, <span class="keyword">final</span> ResultFuture&lt;String&gt; resultFuture)</span> </span>&#123;</span><br><span class="line">        CompletableFuture.supplyAsync(<span class="keyword">new</span> Supplier&lt;Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(sleep[input]);</span><br><span class="line">                    <span class="keyword">return</span> input;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).thenAccept((Integer dbResult) -&gt; &#123;</span><br><span class="line">            resultFuture.complete(Collections.singleton(String.valueOf(dbResult)));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中有两个方法query()和asyncQuery()，其中Thread.sleep(sleep[input]);用来模拟查询需要等待的时间，每条数据等待的时间分别为100L, 1000L, 5000L, 2000L, 6000L, 100L毫秒。</p>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>运行query()的结果为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">send data:<span class="number">0</span></span><br><span class="line">send data:<span class="number">1</span></span><br><span class="line">send data:<span class="number">2</span></span><br><span class="line">send data:<span class="number">3</span></span><br><span class="line">send data:<span class="number">4</span></span><br><span class="line">send data:<span class="number">5</span></span><br><span class="line"><span class="number">1577801193230</span>-input:<span class="number">0</span> will sleep <span class="number">100</span> ms</span><br><span class="line"><span class="number">1577801193331</span>-input:<span class="number">1</span> will sleep <span class="number">1000</span> ms</span><br><span class="line"><span class="number">0</span>,<span class="number">1577801194336</span></span><br><span class="line"><span class="number">1</span>,<span class="number">1577801194336</span></span><br><span class="line"><span class="number">1577801194336</span>-input:<span class="number">2</span> will sleep <span class="number">5000</span> ms</span><br><span class="line"><span class="number">1577801199339</span>-input:<span class="number">3</span> will sleep <span class="number">2000</span> ms</span><br><span class="line"><span class="number">2</span>,<span class="number">1577801201341</span></span><br><span class="line"><span class="number">1577801201342</span>-input:<span class="number">4</span> will sleep <span class="number">6000</span> ms</span><br><span class="line"><span class="number">3</span>,<span class="number">1577801207345</span></span><br><span class="line"><span class="number">4</span>,<span class="number">1577801207345</span></span><br><span class="line"><span class="number">1577801207346</span>-input:<span class="number">5</span> will sleep <span class="number">100</span> ms</span><br><span class="line"><span class="number">5</span>,<span class="number">1577801207451</span></span><br></pre></td></tr></table></figure>
+<p>可以看到第一条数据进入到map算子的时间与最后一条相差了13115毫秒，执行的顺序与source中数据的顺序一致，并且是串行的。</p>
+<p>运行asyncQuery()的结果为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">send data:<span class="number">0</span></span><br><span class="line">send data:<span class="number">1</span></span><br><span class="line">send data:<span class="number">2</span></span><br><span class="line">send data:<span class="number">3</span></span><br><span class="line"><span class="number">1577802161755</span>-input:<span class="number">0</span> will sleep <span class="number">100</span> ms</span><br><span class="line"><span class="number">1577802161756</span>-input:<span class="number">1</span> will sleep <span class="number">1000</span> ms</span><br><span class="line"><span class="number">1577802161757</span>-input:<span class="number">2</span> will sleep <span class="number">5000</span> ms</span><br><span class="line">send data:<span class="number">4</span></span><br><span class="line">send data:<span class="number">5</span></span><br><span class="line"><span class="number">1577802161783</span>-input:<span class="number">3</span> will sleep <span class="number">2000</span> ms</span><br><span class="line"><span class="number">1577802161784</span>-input:<span class="number">4</span> will sleep <span class="number">6000</span> ms</span><br><span class="line"><span class="number">1577802161785</span>-input:<span class="number">5</span> will sleep <span class="number">100</span> ms</span><br><span class="line"><span class="number">0</span>,<span class="number">1577802161859</span></span><br><span class="line"><span class="number">1</span>,<span class="number">1577802162759</span></span><br><span class="line"><span class="number">3</span>,<span class="number">1577802163862</span></span><br><span class="line"><span class="number">5</span>,<span class="number">1577802163962</span></span><br><span class="line"><span class="number">2</span>,<span class="number">1577802166760</span></span><br><span class="line"><span class="number">4</span>,<span class="number">1577802168762</span></span><br></pre></td></tr></table></figure>
+<p>同样第一条数据进入map算子的时间与最后一条仅相差了6903毫秒，而且输出结果的顺序并不是source中的顺序，而是按照查询时间递增的顺序输出，并且查询请求几乎是同一时间发出的。</p>
+<p>通过上面的例子可以看出，flink所谓的异步IO，并不是只要实现了asyncInvoke方法就是异步了，这个方法并不是异步的，而是要依靠这个方法里面所写的查询是异步的才可以。否则像是上面query()方法那样，同样会阻塞查询相当于同步IO。在实现flink异步IO的时候一定要注意。官方文档也给出了相关的说明。</p>
+<blockquote>
+<p>For example, the following patterns result in a blocking asyncInvoke(…) functions and thus void the asynchronous behavior:Using a database client whose lookup/query method call blocks until the result has been received back.</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    要注意Flink的异步IO，需要自己在算子中实现，具体的超时参数、有序无序的要求要根据场景来设置。</p>
+<p>​    更详细的原理在flink官网推荐的博客中有比较详细的解释，喜欢研究的可以参考下。</p>
+<blockquote>
+<p>参考:<a href="https://cloud.tencent.com/developer/article/1780022" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1780022</a></p>
+<p>​        <a href="https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/dev/datastream/operators/asyncio/" target="_blank" rel="noopener">https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/dev/datastream/operators/asyncio/</a></p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/10/09/Flink-2022-10-09-checkpoint的生产配置/" data-toggle="tooltip" data-placement="top" title="checkpoint的生产配置">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture详解/" data-toggle="tooltip" data-placement="top" title="CompletableFuture详解">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前置准备"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">前置准备</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#超时处理"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">超时处理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#返回顺序"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">返回顺序</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#案例演示"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">案例演示</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#同步方式"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">同步方式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#异步方法"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">异步方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#结果分析"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">结果分析</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2022 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

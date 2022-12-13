@@ -671,6 +671,334 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -679,27 +1007,32 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-49-Group-Anagrams/">
+            <a href="/2020/11/11/企业高频算法面试题-2020-11-11-Problem-67-打砖块/">
                 <h2 class="post-title">
-                    49. Group Anagrams
+                    Problem 67 打砖块
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/group-anagrams/
-题目描述​    Given an array of strings strs, group the anagrams together. You can return the answer in any order.
-An Anagram is a word or phrase f......
+                    题目Leetcode原题：
+https://leetcode.com/problems/bricks-falling-when-hit/
+题目解析
+首先一定要熟悉并查集。此题是并查集的逆运用，思考并查集核心思想在于集合的合并。而击落砖块问的是掉落之后的个数，相当于初始情况是一个大集合，不断的击落砖块时，集合分散之后，那些无连接的集合大小。所以可以，倒过来想，从击落最后一块砖块开始，此时是分散......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-11-11
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hash Table" title="Hash Table">Hash Table</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -713,25 +1046,35 @@ An Anagram is a word or phrase f......
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-48-Rotate-Image/">
+            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-66-扰乱字符串/">
                 <h2 class="post-title">
-                    48. Rotate Image
+                    Problem 66. 扰乱字符串
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/rotate-image/submissions/
-题目描述​    You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
-You have to rotate the ......
+                    题目​    Leetcode原题：
+https://leetcode.com/problems/scramble-string/
+题目解析
+思路比较直接，更加考察编程能力，包括这些位置的推断。以及递归的设计
+普通递归，不去优化会卡在最后连个case上，加上缓存就可以顺利通过。主要是能快速写出来程序，所以没有进一步优化，也可以进一步写成数组严格递归的形式，甚至用斜率优化
+
+代码1234567......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-11-08
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -745,26 +1088,66 @@ You have to rotate the ......
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-46-Permutations/">
+            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-65-超级洗衣机/">
                 <h2 class="post-title">
-                    46. Permutations
+                    Problem 65 超级洗衣机
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/permutations/
-题目描述​    Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
-Example 1:
-12In......
+                    题目  Leetcode原题：  https://leetcode.com/problems/super-washing-machines/
+题目解析
+考察单点瓶颈问题。诸如此类的还有接雨水问题等 都是考察 ”最短处“，整个问题的解决在于“痛点”。洗衣机每个都可以一次扔一件衣服，因为可以并发进行。那么只要找到需要扔到最多的，问题就解决了。
+
+代码12345678910111213141516......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-11-08
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/05/企业高频算法面试题-2020-11-05-Problem-64-谷歌抽牌问题/">
+                <h2 class="post-title">
+                    Problem 64 谷歌抽牌问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    谷歌面试题扩展版面值为1~N的牌组成一组，每次你从组里等概率的抽出1~N中的一张下次抽会换一个新的组，有无限组当累加和=a且=b时，你将失败返回获胜的概率，给定的参数为N，a，b
+题目解析
+可能一上来不知道如何下手，这种就想先定义递归含义。依据定义的含义在去写递归体，最后想递归边界，以及优化点。
+这个题想到大概思路之后，还要注意优化，关键在于(a,b)之间的距离
+
+代码1234......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
@@ -780,26 +1163,30 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-44-Wildcard-Matching/">
+            <a href="/2020/11/04/企业高频算法面试题-2020-11-04-Problem-63/">
                 <h2 class="post-title">
-                    44. Wildcard Matching
+                    Problem 63
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/wildcard-matching/
-题目描述​    Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for &#39;?&#39; and &#39;*&#39; wher......
+                    题目Leetcode原题：
+https://leetcode.com/problems/regular-expression-matching/
+题目解析
+好题。考察递归，重点思考后面元素是*或者.，需要对这种特殊清楚进行分析可能性。
+
+代码1234567891011121314151617181920212223242526272829303132333435363738394041424......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-11-04
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
@@ -815,26 +1202,30 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-42-Trapping-Rain-Water/">
+            <a href="/2020/11/01/企业高频算法面试题-2020-11-01-Problem-62-最长连续序列/">
                 <h2 class="post-title">
-                    42. Trapping Rain Water
+                    Problem 62 最长连续序列
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/trapping-rain-water/
-题目描述​    Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap......
+                    题目Leetcode原题：
+https://leetcode.com/problems/longest-consecutive-sequence/
+题目解析
+和之前的播放流题目类似，用头表，尾表的思想实现，只不过这个题是用map，不是基于链表的
+
+代码123456789101112131415161718192021222324252627282930313233class Solution......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-11-01
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Two Pointer" title="Two Pointer">Two Pointer</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                 </div>
             
@@ -848,29 +1239,27 @@ Example 1:
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-41-First-Missing-Positive/">
+            <a href="/2020/10/31/企业高频算法面试题-2020-10-31-Problem-61-两个有序数整体K小/">
                 <h2 class="post-title">
-                    41. First Missing Positive
+                    Problem 61 两个有序数整体K小
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/first-missing-positive/
-题目描述​    Given an unsorted integer array nums, return the smallest missing positive integer.
-You must implement an algorithm that runs......
+                    题目Leetcode原题：https://leetcode.com/problems/median-of-two-sorted-arrays/进阶问题：在两个都有序的数组中找整体第K小的数可以做到O(log(Min(M,N)))
+12节
+题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-10-31
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Array" title="Array">Array</a>
-                    
-                      <a href="/tags/#Two Pointer" title="Two Pointer">Two Pointer</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                 </div>
             
@@ -884,29 +1273,30 @@ You must implement an algorithm that runs......
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-38-Count-and-Say/">
+            <a href="/2020/10/28/企业高频算法面试题-2020-10-28-Problem-60-查找种类及个数相同的子串/">
                 <h2 class="post-title">
-                    38. Count and Say
+                    Problem 60 查找种类及个数相同的子串
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/count-and-say/
-题目描述​    The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
+                    题目给定长度为m的字符串aim，以及一个长度为n的字符串str问能否在str中找到一个长度为m的连续子串，使得这个子串刚好由aim的m个字符组成，顺序无所谓，返回任意满足条件的一个子串的起始位置，未找到返回-1
+Leetcode:567
+题目解析
+题目比较简单 使用滑动窗口+字符表映射就可以解决
 
-countAndSay(1) = &quot;1&quot;
-countAndSa......
+代码123456789101112131415161718192021222324252627......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-10-28
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#recursion" title="recursion">recursion</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                 </div>
             
@@ -920,28 +1310,33 @@ countAndSa......
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-36-Valid-Sudoku/">
+            <a href="/2020/10/27/企业高频算法面试题-2020-10-27-Problem-59-切分回文串的最少刀数/">
                 <h2 class="post-title">
-                    36. Valid Sudoku
+                    Problem 59 切分回文串的最少刀数
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接https://leetcode.com/problems/valid-sudoku/
-题目描述Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
-
-Each row must contain t......
+                    题目​    问题一：一个字符串至少要切几刀能让切出来的子串都是回文串
+问题二：返回问题一的其中一种划分结果
+问题三：返回问题一的所有划分结果
+11jie
+题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-10-27
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Array" title="Array">Array</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -955,58 +1350,35 @@ Each row must contain t......
 
         <div class="post-preview">
 
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-Find-First-and-Last-Position-of-Element-in-Sorted-Array/">
+            <a href="/2020/10/24/企业高频算法面试题-2020-10-24-Problem-58-整体回文串的所有添加结果/">
                 <h2 class="post-title">
-                     Find First and Last Position of Element in Sorted Array
+                    Problem 58 整体回文串的所有添加结果
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
-题目描述Given an array of integers nums sorted in non-decreasing order, find the starting and ending position ......
+                    题目问题一：一个字符串至少需要添加多少个字符能整体变成回文串
+https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+问题二：返回问题一的其中一种添加结果
+问题三：返回问题一的所有添加结果
+11节
+题目解析
+题目原型比较简单，普通的dp 行列模型。主要是通过此题目 总结一下通过dp矩......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-10
+                    2020-10-24
                 </p>
                 <div class="tags">
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/10/leetcode-leetcode高频-2022-07-10-33-Search-in-Rotated-Sorted-Array/">
-                <h2 class="post-title">
-                    33. Search in Rotated Sorted Array
-                </h2>
-                <h3 class="post-subtitle">
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/search-in-rotated-sorted-array/
-题目描述​    There is an integer array nums sorted in ascending order (with distinct values).
-Prior to being passed to your functi......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-10
-                </p>
-                <div class="tags">
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
-                      <a href="/tags/#Binary Search" title="Binary Search">Binary Search</a>
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1087,15 +1459,15 @@ Prior to being passed to your functi......
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
         
             
             <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
             
         
             
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="23">mysql</a>
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
             
         
             
@@ -1114,6 +1486,12 @@ Prior to being passed to your functi......
         
             
         
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
             
         
             
@@ -1122,6 +1500,48 @@ Prior to being passed to your functi......
         
             
             <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1139,20 +1559,6 @@ Prior to being passed to your functi......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="12">Dynamic Programming</a>
-            
-        
-            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
             
         
@@ -1167,27 +1573,13 @@ Prior to being passed to your functi......
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="11">Recursion</a>
+        
+            
+        
             
         
             
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="10">Tree</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1206,6 +1598,22 @@ Prior to being passed to your functi......
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
             
         
             
@@ -1280,23 +1688,23 @@ Prior to being passed to your functi......
     <ul>
       
         <li>
-          <a href="/2022/07/24/log4j%E6%97%A5%E5%BF%97%E4%B8%8D%E8%BE%93%E5%87%BA/">log4j日志不输出</a>
+          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/git-2022-07-24-git%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">git常见报错</a>
+          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
         </li>
       
         <li>
-          <a href="/2022/07/24/PrepareStatement%E6%9C%AA%E5%85%B3%E9%97%AD%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">PrepareStatement未关闭导致内存泄漏</a>
+          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/network-2022-07-23-TCP%E6%8B%86%E5%8C%85%E4%B8%8E%E7%B2%98%E5%8C%85/">TCP拆包与粘包</a>
+          <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture%E8%AF%A6%E8%A7%A3/">CompletableFuture详解</a>
         </li>
       
         <li>
-          <a href="/2022/07/23/ssm-2022-07-23-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+          <a href="/2022/09/27/JUC-2022-09-27-Future%E6%A8%A1%E5%BC%8F/">Future模式</a>
         </li>
       
     </ul>
@@ -1311,7 +1719,7 @@ Prior to being passed to your functi......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">206</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1322,25 +1730,23 @@ Prior to being passed to your functi......
     <div class="widget">
       <ul>
         
-          <a href="categories/#常见问题"><li>常见问题</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#git"><li>git</li></a>
+          <a href="categories/#Hbase"><li>Hbase</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#linux"><li>linux</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#mysql"><li>mysql</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
@@ -1350,13 +1756,23 @@ Prior to being passed to your functi......
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
+          <a href="categories/#Hive"><li>Hive</li></a>
         
       </ul>
     </div>

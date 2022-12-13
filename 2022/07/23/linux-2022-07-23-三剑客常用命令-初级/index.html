@@ -125,8 +125,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">715</span> and
-                                Reading Time <span class="post-count">2</span> Minutes
+                                Words <span class="post-count">990</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -277,31 +277,40 @@
 <li><p>查询hello.txt中以字母a开头的内容，这样写也是可以的</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep ^a hello.txt</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>查看test.log中包含http的所有行(-i忽略大小写）</p>
+</li>
 </ol>
-<p>​         </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i "http" ./test.log</span><br></pre></td></tr></table></figure>
 <ol>
 <li>查询出来对应字符串所在的行号</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i ABC -n hello.txt</span><br></pre></td></tr></table></figure>
-<p>3.查找进程，去掉错觉</p>
-<pre><code> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java | grep -v grep</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="sed-编辑"><a href="#sed-编辑" class="headerlink" title="sed-编辑"></a><strong>sed-编辑</strong></h3><p>都是一个模式类似的，{作用范围}命令[\或者/]操作数</p>
-<p>1 .sed命令向文件中添加一行内容</p>
-<pre><code>           <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed '2a\haha' hello.txt （append）</span><br><span class="line">sed '1i\haha' hello.txt     (insert)</span><br><span class="line">sed '$a\haha' hello.txt （append）  $代表最后一行</span><br><span class="line">sed '$i\haha' hello.txt     (insert)</span><br></pre></td></tr></table></figure>
-</code></pre><ol>
-<li><p>删除最后一行</p>
-<pre><code>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed '$d' hello.txt</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>替换操作</p>
-</li>
+<ol>
+<li>查找进程，去掉错觉</li>
 </ol>
-<p>替换操作：sed后面的参数格式为[address]s/pattern/replacement/ﬂags</p>
-<p>和vim的substitute命令一样，再复习一下</p>
-<p>这里的address 表示指定要操作的具体行，是一个可选项</p>
-<p>s 表示替换操作;</p>
-<p>pattern 指的是需要替换的内容;</p>
-<p>replacement 指的是要替换的新内;</p>
-<p>ﬂags有多种用法，我们挑两种说一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java | grep -v grep</span><br></pre></td></tr></table></figure>
+<ol>
+<li>查看test.log中包含http的所有行，并显示前后行</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat -n test.log | grep -C 5 "http" 		(匹配到的前后5行)</span><br><span class="line"></span><br><span class="line">cat -n test.log | grep -B 5 "http"	  (前5行)</span><br><span class="line"></span><br><span class="line">cat -n test.log | grep -A 5 "http" 		(后5行)</span><br></pre></td></tr></table></figure>
+<h3 id="sed-编辑"><a href="#sed-编辑" class="headerlink" title="sed-编辑"></a><strong>sed-编辑</strong></h3><p>都是一个模式类似的，{作用范围}命令[\或者/]操作数</p>
+<ol>
+<li>sed命令向文件中添加一行内容</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed '2a\haha' hello.txt （append）</span><br><span class="line">sed '1i\haha' hello.txt  (insert)</span><br><span class="line">sed '$a\haha' hello.txt （append）  $代表最后一行</span><br><span class="line">sed '$i\haha' hello.txt  (insert)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>删除最后一行</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed '$d' hello.txt</span><br></pre></td></tr></table></figure>
+<ol>
+<li>替换操作：sed后面的参数格式为[address]s/pattern/replacement/ﬂags</li>
+</ol>
+<p>​    和vim的substitute命令一样，再复习一下</p>
+<p>​        这里的address 表示指定要操作的具体行，是一个可选项</p>
+<p>​        s 表示替换操作;</p>
+<p>​        pattern 指的是需要替换的内容;</p>
+<p>​        replacement 指的是要替换的新内;</p>
+<p>​        ﬂags有多种用法，我们挑两种说一下</p>
 <ul>
 <li><p>第一种就是ﬂags可以表示为1~512之间的任意一个数字，表示指定要替换的字符串在这一行中出现第几 次时才进行替换</p>
 </li>
@@ -309,11 +318,14 @@
 </li>
 </ul>
 <p>​    如果ﬂags位置的值为空，则只会在第一次匹配成功时做替换操作</p>
+<p>​    替换源文件修改        </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;2s&#x2F;l&#x2F;a&#x2F;g&#39; hello.txt</span><br></pre></td></tr></table></figure>
 <ol>
-<li><p>替换源文件修改</p>
-<pre><code>        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i '2s/l/a/g' hello.txt</span><br></pre></td></tr></table></figure>
-</code></pre></li>
+<li>SED 查看某时间段日志</li>
 </ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n '/2022-06-02 13:10:30/,/2022-06-02 13:10:40/p' test.log</span><br></pre></td></tr></table></figure>
+<p>补充: 命令选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-n ：使用安静(silent)模式。在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到终端上。但如果加上 -n 参数后，则只有经过sed 特殊处理的那一行(或者动作)才会被列出来。</span><br><span class="line">-e ：直接在命令列模式上进行 sed 的动作编辑；</span><br><span class="line">-f ：直接将 sed 的动作写在一个文件内， -f filename 则可以运行 filename 内的 sed 动作；</span><br><span class="line">-r ：sed 的动作支持的是延伸型正规表示法的语法。(默认是基础正规表示法语法)</span><br><span class="line">-i ：直接修改读取的文件内容，而不是输出到终端。</span><br></pre></td></tr></table></figure>
 <h3 id="awk-分析"><a href="#awk-分析" class="headerlink" title="awk-分析"></a><strong>awk-分析</strong></h3><p>简单来说awk就是把文件逐行的读入，以空白字符为默认分隔符将每行内容切片，切开的 部分再进行各种分析处理。</p>
 <p>awk的基本格式：awk [option] programe ﬁle</p>
 <p>这里的option是一个可选项，一般在这里来指定文件中数据的字段分隔符</p>
@@ -331,7 +343,7 @@
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk '&#123;print $1&#125;' hello.txt  打印第一列</span><br><span class="line">awk '&#123;print $2&#125;' hello.txt  打印第二列</span><br><span class="line">awk '&#123;print $0&#125;' hello.txt  打印全文</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在option里面指定字段分隔符，通过-F 参数</p>
-<pre><code>    <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F: ‘&#123;print $1&#125;’ /etc/passwd</span><br></pre></td></tr></table></figure>
+<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F: ‘&#123;print $1&#125;’ /etc/passwd</span><br></pre></td></tr></table></figure>
 </code></pre></li>
 </ol>
 
