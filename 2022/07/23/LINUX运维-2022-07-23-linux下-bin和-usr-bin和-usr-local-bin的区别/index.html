@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          screen命令 - Dante&#39;s blog
+           linux下 bin和 usr bin和 usr local bin的区别 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/23/linux-2022-07-23-screen命令/">
+    <link rel="canonical" href="https://dusign.net/2022/07/23/LINUX运维-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,7 +115,7 @@
                               <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
                             
                         </div>
-                        <h1>screen命令</h1>
+                        <h1> linux下 bin和 usr bin和 usr local bin的区别</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">314</span> and
+                                Words <span class="post-count">112</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -194,6 +194,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -270,25 +270,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="Screen简介"><a href="#Screen简介" class="headerlink" title="Screen简介"></a>Screen简介</h3><p>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。</p>
-<p><strong>简而言之：</strong></p>
-<p>远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。</p>
-<p>而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。</p>
-<h3 id="常用screen命令"><a href="#常用screen命令" class="headerlink" title="常用screen命令"></a>常用screen命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname           # 新建一个叫yourname的session</span><br><span class="line">screen -ls                   # 列出当前所有的session</span><br><span class="line">screen -r yourname           # 回到yourname这个session</span><br><span class="line">screen -d yourname           # 远程detach某个session    # detach快捷键 ctrl a + d</span><br><span class="line">screen -d -r yourname        # 结束当前session并回到yourname这个session</span><br><span class="line">screen -S yourname -X quit   # 删除叫yourname的session</span><br></pre></td></tr></table></figure>
-<h4 id="恢复会话"><a href="#恢复会话" class="headerlink" title="恢复会话"></a>恢复会话</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -r session_name</span><br></pre></td></tr></table></figure>
-<p><strong>如果不能恢复：</strong></p>
-<p>对于已经Attached Session则不能直接screen -r，需要先screen -d，然后才能screen -r</p>
-<p>用screen -ls可以查看所有的session的状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">先 screen -d session_name</span><br><span class="line">再 screen -r session_name</span><br></pre></td></tr></table></figure>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -S session_name -X quit</span><br></pre></td></tr></table></figure>
-<p><strong>重命名怎么删，如下图：</strong></p>
-<p>​    <img src="1.png" alt=""></p>
-<ol>
-<li><p>没有重命名的直接可以screen -S session_name -X quit</p>
-</li>
-<li><p>重命名的，需要带上id删，screen -S id.session_name -X quit                              </p>
-</li>
-</ol>
+                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。</span><br><span class="line">/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。</span><br><span class="line">/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。</span><br></pre></td></tr></table></figure>
 
                 
                 <hr>
@@ -296,12 +278,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/" data-toggle="tooltip" data-placement="top" title="字库表、编码字符集、字符编码">&larr; Previous Post</a>
+                        <a href="/2022/07/23/LINUX运维-2022-07-23-screen命令/" data-toggle="tooltip" data-placement="top" title="screen命令">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/23/linux-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/" data-toggle="tooltip" data-placement="top" title=" linux下 bin和 usr bin和 usr local bin的区别">Next Post &rarr;</a>
+                        <a href="/2022/07/23/LINUX运维-2022-07-23-linux不同版本的服务管理/" data-toggle="tooltip" data-placement="top" title="linux不同版本的服务管理">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -408,17 +390,6 @@
             <!-- Table of Contents -->
 
     
-      
-        <aside id="sidebar">
-          <div id="toc" class="toc-article">
-          <strong class="toc-title">Contents</strong>
-          
-            
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Screen简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Screen简介</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常用screen命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">常用screen命令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#恢复会话"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">恢复会话</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#删除"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">删除</span></a></li></ol></li></ol>
-            
-          
-          </div>
-        </aside>
       
     
 

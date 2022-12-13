@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          yum换源的详细操作 - Dante&#39;s blog
+          查看磁盘和目录空间df和du - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/22/linux-2022-07-22-yum换源的详细操作/">
+    <link rel="canonical" href="https://dusign.net/2022/07/22/LINUX运维-2022-07-22-查看磁盘和目录空间df和du/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,7 +115,7 @@
                               <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
                             
                         </div>
-                        <h1>yum换源的详细操作</h1>
+                        <h1>查看磁盘和目录空间df和du</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">168</span> and
+                                Words <span class="post-count">301</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -194,6 +194,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -270,21 +270,19 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
-<p><strong>备份原来的源</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk</span><br></pre></td></tr></table></figure>
-<p><strong>下载阿里源</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
-<p> <strong>更改阿里yum源为默认源</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv Centos-7.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-<p><strong>更新本地yum缓存</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum clean all # 全部清除</span><br><span class="line">sudo yum list # 更新列表 </span><br><span class="line">sudo yum makecache# 缓存yum包信息到本机，提高搜索速度</span><br></pre></td></tr></table></figure>
-<p><strong>国内yum源</strong></p>
-<p>阿里yum源:<a href="http://mirrors.aliyun.com/repo/" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/</a></p>
-<p>163(网易)yum源: <a href="http://mirrors.163.com/.help/" target="_blank" rel="noopener">http://mirrors.163.com/.help/</a></p>
-<p>中科大的Linux安装镜像源：<a href="http://centos.ustc.edu.cn/" target="_blank" rel="noopener">http://centos.ustc.edu.cn/</a></p>
-<p>搜狐的Linux安装镜像源：<a href="http://mirrors.sohu.com/" target="_blank" rel="noopener">http://mirrors.sohu.com/</a></p>
-<p>北京首都在线科技：<a href="http://mirrors.yun-idc.com/" target="_blank" rel="noopener">http://mirrors.yun-idc.com/</a></p>
+                <h3 id="du和df的区别："><a href="#du和df的区别：" class="headerlink" title="du和df的区别："></a><strong>du和df的区别：</strong></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间(最常见的就是文件已经删除，但是程序并没有释放空间)。</span><br><span class="line">du命令是面向文件的，只会计算文件或目录占用的</span><br></pre></td></tr></table></figure>
+<h3 id="查看磁盘整体情况"><a href="#查看磁盘整体情况" class="headerlink" title="查看磁盘整体情况"></a><strong>查看磁盘整体情况</strong></h3><h4 id="查看整体挂载情况"><a href="#查看整体挂载情况" class="headerlink" title="查看整体挂载情况"></a>查看整体挂载情况</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<p><img src="1.png" alt="WeChat069a76a447ca86aad5fec1408ef2fbde"></p>
+<h4 id="查看指定目录"><a href="#查看指定目录" class="headerlink" title="查看指定目录"></a>查看指定目录</h4>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h /opt/data/</span><br></pre></td></tr></table></figure>
+<p><img src="2.png" alt="WeChatfddb958643be29daa7380f9e2a7f2ab3"></p>
+<h3 id="查看文件夹的占用情况"><a href="#查看文件夹的占用情况" class="headerlink" title="查看文件夹的占用情况"></a><strong>查看文件夹的占用情况</strong></h3><h4 id="查看当前目录每个文件夹的情况。"><a href="#查看当前目录每个文件夹的情况。" class="headerlink" title="查看当前目录每个文件夹的情况。"></a>查看当前目录每个文件夹的情况。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h</span><br></pre></td></tr></table></figure>
+<p><img src="3.png" alt="WeChatfddb958643be29daa7380f9e2a7f2ab3"></p>
+<h4 id="指定目录"><a href="#指定目录" class="headerlink" title="指定目录"></a>指定目录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h  /opt/data/</span><br></pre></td></tr></table></figure>
+<p><img src="4.png" alt="WeChat0e80cc2a684da5f972f3d507563465d2"></p>
+<h4 id="计算文件夹大小"><a href="#计算文件夹大小" class="headerlink" title="计算文件夹大小"></a>计算文件夹大小</h4><p>(<strong>为了快算显示，同时也只是想查看目录整体占用大小。可以直接使用du -sh 命令，如果想查看指定目录，直接在命令后根目录即可</strong>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh /usr/</span><br></pre></td></tr></table></figure>
+<p><img src="5.png" alt="WeChat0dadf840b9fa7087478e4c7700ef1761"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>其中df -h和du -sh使用的比较多，一个统计整体磁盘情况，一个看单独目录点用情况，而命令du —max-depth=1 -h查看了目录下文件夹占用情况，使用比较少，可以用du -sh代替，而且命令较长，当然并不是说它没用。</p>
 
                 
                 <hr>
@@ -292,12 +290,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/22/linux-2022-07-22-查看磁盘和目录空间df和du/" data-toggle="tooltip" data-placement="top" title="查看磁盘和目录空间df和du">&larr; Previous Post</a>
+                        <a href="/2022/07/23/LINUX运维-2022-07-23-三剑客常用命令-初级/" data-toggle="tooltip" data-placement="top" title="三剑客常用命令-初级">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/22/linux-2022-07-22-yum源解释/" data-toggle="tooltip" data-placement="top" title="yum源解释">Next Post &rarr;</a>
+                        <a href="/2022/07/22/LINUX运维-2022-07-22-yum换源的详细操作/" data-toggle="tooltip" data-placement="top" title="yum换源的详细操作">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -404,6 +402,17 @@
             <!-- Table of Contents -->
 
     
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#du和df的区别："><span class="toc-nav-number">1.</span> <span class="toc-nav-text">du和df的区别：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看磁盘整体情况"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">查看磁盘整体情况</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查看整体挂载情况"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">查看整体挂载情况</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查看指定目录"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">查看指定目录</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查看文件夹的占用情况"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">查看文件夹的占用情况</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查看当前目录每个文件夹的情况。"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">查看当前目录每个文件夹的情况。</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#指定目录"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">指定目录</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#计算文件夹大小"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">计算文件夹大小</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#小结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">小结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
       
     
 

@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          top命令的Load average 含义及性能参考基值 - Dante&#39;s blog
+          yum源解释 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/22/linux-2022-07-22-top命令的Load-average-含义及性能参考基值/">
+    <link rel="canonical" href="https://dusign.net/2022/07/22/LINUX运维-2022-07-22-yum源解释/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,7 +115,7 @@
                               <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
                             
                         </div>
-                        <h1>top命令的Load average 含义及性能参考基值</h1>
+                        <h1>yum源解释</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
@@ -125,8 +125,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">1.4k</span> and
-                                Reading Time <span class="post-count">5</span> Minutes
+                                Words <span class="post-count">914</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -194,6 +194,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -270,37 +270,26 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">uptime</span></span><br><span class="line">11:12:26 up3:44,4users,load average:0.38,0.31,0.19</span><br></pre></td></tr></table></figure>
-<p>系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：</p>
-<ul>
-<li>它没有在等待I/O操作的结果</li>
-<li>它没有主动进入等待状态(也就是没有调用’wait’)</li>
-<li>没有被停止(例如：等待终止)</li>
-</ul>
-<p>上面的输出，load average后面分别是1分钟、5分钟、15分钟的负载情况。数据是每隔5秒钟检查一次活跃的进程数，然后根据这个数值算出来的。如果这个数除以CPU 的数目，结果高于5的时候就表明系统在超负荷运转了。</p>
-<p>Linux系统Load average负载详细解释 　我们知道判断一个系统的负载可以使用top，uptime等命令去查看，它分别记录了一分钟、五分钟、以及十五分钟的系统平均负载</p>
-<p>　　例如我的某台服务器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> uptime  　09:50:21 up 200 days, 15:07, 1 user, load average: 0.27, 0.33, 0.37</span></span><br></pre></td></tr></table></figure>
-<p>　　大部分的人都认为这个数字越小越好，其实有很多关联的提示信息，今天看到这个好文，应该可以给大家说清楚很多问题，转一下：</p>
-<p>　　原文链接： <a href="http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages" target="_blank" rel="noopener">http://blog.scoutapp.com/articles/2009/07/31/understanding-load-averages</a></p>
-<p>　　你可能对于 Linux 的负载均值（load averages）已有了充分的了解。负载均值在 uptime 或者 top 命令中可以看到，它们可能会显示成这个样子：</p>
-<pre><code>         <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load average: 0.09, 0.05, 0.01</span><br></pre></td></tr></table></figure>
-</code></pre><p>　　很多人会这样理解负载均值：三个数分别代表不同时间段的系统平均负载（一分钟、五 分钟、以及十五分钟），它们的数字当然是越小越好。数字越高，说明服务器的负载越 大，这也可能是服务器出现某种问题的信号。</p>
-<p>　　而事实不完全如此，是什么因素构成了负载均值的大小，以及如何区分它们目前的状况是 “好”还是“糟糕”？什么时候应该注意哪些不正常的数值？</p>
-<p>　　回答这些问题之前，首先需要了解下这些数值背后的些知识。我们先用最简单的例子说明， 一台只配备一块单核处理器的服务器。</p>
-<p>　　行车过桥</p>
-<p>　　一只单核的处理器可以形象得比喻成一条单车道。设想下，你现在需要收取这条道路的过桥 费 — 忙于处理那些将要过桥的车辆。你首先当然需要了解些信息，例如车辆的载重、以及 还有多少车辆正在等待过桥。如果前面没有车辆在等待，那么你可以告诉后面的司机通过。 如果车辆众多，那么需要告知他们可能需要稍等一会。</p>
-<p>　　因此，需要些特定的代号表示目前的车流情况，例如：</p>
-<p>　　0.00 表示目前桥面上没有任何的车流。 实际上这种情况与 0.00 和 1.00 之间是相同的，总而言之很通畅，过往的车辆可以丝毫不用等待的通过。</p>
-<p>　　1.00 表示刚好是在这座桥的承受范围内。 这种情况不算糟糕，只是车流会有些堵，不过这种情况可能会造成交通越来越慢。</p>
-<p>　　超过 1.00，那么说明这座桥已经超出负荷，交通严重的拥堵。 那么情况有多糟糕？ 例如 2.00 的情况说明车流已经超出了桥所能承受的一倍，那么将有多余过桥一倍的车辆正在焦急的等待。3.00 的话情况就更不妙了，说明这座桥基本上已经快承受不了，还有超出桥负载两倍多的车辆正在等待。</p>
-<p>　　上面的情况和处理器的负载情况非常相似。一辆汽车的过桥时间就好比是处理器处理某线程 的实际时间。Unix 系统定义的进程运行时长为所有处理器内核的处理时间加上线程 在队列中等待的时间。</p>
-<p>　　和收过桥费的管理员一样，你当然希望你的汽车（操作）不会被焦急的等待。所以，理想状态 下，都希望负载平均值小于 1.00 。当然不排除部分峰值会超过 1.00，但长此以往保持这 个状态，就说明会有问题，这时候你应该会很焦急。</p>
-<p>　　“所以你说的理想负荷为 1.00 ？”</p>
-<p>　　嗯，这种情况其实并不完全正确。负荷 1.00 说明系统已经没有剩余的资源了。在实际情况中 ，有经验的系统管理员都会将这条线划在<font color = red> 0.70</font>：</p>
-<p>　　<font color = green>“需要进行调查法则”</font>： 如果长期你的系统负载在 0.70 上下，那么你需要在事情变得更糟糕之前，花些时间了解其原因。</p>
-<p>　　<font color = green>“现在就要修复法则”</font>：1.00 。 如果你的服务器系统负载长期徘徊于 1.00，那么就应该马上解决这个问题。否则，你将半夜接到你上司的电话，这可不是件令人愉快的事情。</p>
-<p>　　<font color = green>“凌晨三点半锻炼身体法则”</font>：5.00。 如果你的服务器负载超过了 5.00 这个数字，那么你将失去你的睡眠，还得在会议中说明这情况发生的原因，总之千万不要让它发生。</p>
+                <blockquote>
+<p>转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。</p>
+</blockquote>
+<h3 id="yum是什么，yum源又是什么"><a href="#yum是什么，yum源又是什么" class="headerlink" title="yum是什么，yum源又是什么"></a>yum是什么，yum源又是什么</h3><p>   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不同的发行linux有不同工具，例如红帽（read hat）linux就使用的rpm全称就是read hat package manager 红帽软件包管理工具。</p>
+<p>   yum源是什么呢？我们安装软件的时候需要下载软件，将很多软件放在一起就是源。软件安装包的来源。所以yum源就是软件安装包来源。如果我们是在线的，他会在网上给你下载安装包，如果是离线的没有网络。那么就只能配置本地的yum源了。</p>
+<h3 id="本地yum源是什么呢？"><a href="#本地yum源是什么呢？" class="headerlink" title="本地yum源是什么呢？"></a>本地yum源是什么呢？</h3><p>   上面说过yum源就是软件安装包的来源，但是这些安装包哪里有呢？其实在linux的安装镜像中就有的，linux已经将常见的安装包放到了linux镜像中。如果你使用压缩文件打开linux的iso镜像文件，你会发现在根目录下有个文件夹：packages</p>
+<p><img src="1.png" alt="WeChat40190bf3ee24416d2daacfa56f1f172d"></p>
+<p>   上图就是使用压缩软件打开的系统盘内部情况，比如我们常用的工具vim，就是在这里面的。所以说： 系统的安装镜像就可以当作yum源。</p>
+<h3 id="与yum源相关的配置文件"><a href="#与yum源相关的配置文件" class="headerlink" title="与yum源相关的配置文件"></a>与yum源相关的配置文件</h3><p> <img src="2.png" alt="WeChat5b86da0c7a3647cb6d31f02d5c5e2cbe"></p>
+<p>   上图就是yun源相关的配置，在路径/etc/yum.repos.d/目录下，一共4个文件，说下两个常用的。</p>
+<p>   CentOS-Base.repo：有网的环境下默认使用这个，这个是第一优先级。因为没网，所以修改文件名，设置成备份文件。这样系统就会使用第二优先级的文件。</p>
+<p>   CentOS-Media.repo：没网的环境下使用这个，在上图中会发现他默认配置了4个路径，第4个yumsource是我自己加的。意思是说，如果系统检测yum使用了离线安装，那么会从上到下从这4个路径中查找安装软件。所以我们只要把光盘挂载在这四个目录下的任意一个目录即可。同时，该配置文件默认是不启用的，如果想使用需要 修改倒数第二行的enabled为1，否则该文件无效。</p>
+<h3 id="media目录与mnt目录"><a href="#media目录与mnt目录" class="headerlink" title="media目录与mnt目录"></a>media目录与mnt目录</h3><p>   挂载光盘或者u盘等使用的mount命令，但是你百度所有会说有挂在media目录下，也有挂载在mnt目录下的。这两个目录区别是什么呢？</p>
+<p>   media：挂载一些移动设备，例如光盘，U盘等。</p>
+<p>   mnt：挂载一些硬盘等设备。所以我们的光盘应该挂载在media目录下，从yum给的默认配置文件也能看出。</p>
+<h3 id="挂载光盘到系统上"><a href="#挂载光盘到系统上" class="headerlink" title="挂载光盘到系统上"></a>挂载光盘到系统上</h3><p>  <img src="3.png" alt="WeChatbc41627d35f3138e31bd97db231c8a8d"></p>
+<p>   如上图，首先执行df -h命令发现当前系统没有光盘信息，然后挂载目录之后，在查看就发现我们把光盘挂载到了系统上，光盘大小4.2G。</p>
+<p>-o loop ：指定挂载文件类型，说简单点就是我要挂载的是光盘这种设备。</p>
+<h3 id="卸载光盘"><a href="#卸载光盘" class="headerlink" title="卸载光盘"></a>卸载光盘</h3><p><img src="4.png" alt="WeChat418e1c2e32e31f4f22bcc4d12f0e5b33"></p>
+<p>   执行df -h发现光盘是挂载的，然后执行umount命令之后，在查看发现设备被卸载了</p>
 
                 
                 <hr>
@@ -308,12 +297,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/22/linux-2022-07-22-yum源解释/" data-toggle="tooltip" data-placement="top" title="yum源解释">&larr; Previous Post</a>
+                        <a href="/2022/07/22/LINUX运维-2022-07-22-yum换源的详细操作/" data-toggle="tooltip" data-placement="top" title="yum换源的详细操作">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/22/docker-2022-07-22-利用docker部署hadoop集群的记录/" data-toggle="tooltip" data-placement="top" title="利用docker部署hadoop集群的记录">Next Post &rarr;</a>
+                        <a href="/2022/07/22/LINUX运维-2022-07-22-top命令的Load-average-含义及性能参考基值/" data-toggle="tooltip" data-placement="top" title="top命令的Load average 含义及性能参考基值">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -420,6 +409,17 @@
             <!-- Table of Contents -->
 
     
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#yum是什么，yum源又是什么"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">yum是什么，yum源又是什么</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#本地yum源是什么呢？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">本地yum源是什么呢？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#与yum源相关的配置文件"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">与yum源相关的配置文件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#media目录与mnt目录"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">media目录与mnt目录</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#挂载光盘到系统上"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">挂载光盘到系统上</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#卸载光盘"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">卸载光盘</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
       
     
 

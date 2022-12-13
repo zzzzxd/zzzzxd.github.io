@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          三剑客常用命令-初级 - Dante&#39;s blog
+          Linux用户管理 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/23/linux-2022-07-23-三剑客常用命令-初级/">
+    <link rel="canonical" href="https://dusign.net/2022/12/13/Linux用户管理/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,18 +115,18 @@
                               <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
                             
                         </div>
-                        <h1>三剑客常用命令-初级</h1>
+                        <h1>Linux用户管理</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-23
+                            2022-12-13
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">990</span> and
-                                Reading Time <span class="post-count">3</span> Minutes
+                                Words <span class="post-count">1.2k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -194,6 +194,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -270,82 +270,185 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>grep、sed、awk号称三剑客，这三条命令对文本处理特别有用，今天来小结一下常用的基础操作，日后再来总结比较难的操作</p>
-</blockquote>
-<h3 id="grep-查找"><a href="#grep-查找" class="headerlink" title="grep-查找"></a><strong>grep-查找</strong></h3><ol>
-<li><p>查询hello.txt中以字母a开头的内容，这样写也是可以的</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep ^a hello.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看test.log中包含http的所有行(-i忽略大小写）</p>
-</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i "http" ./test.log</span><br></pre></td></tr></table></figure>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    用户管理体系是linux系统中一样很重要的内容，不同的用户分配不同等级的权限可以保障系统的安全，问题发生以后也方便追溯问题的原因。接下来总结一下与用户管理相关的一些比较重要的内容。</p>
+<h2 id="用户分类"><a href="#用户分类" class="headerlink" title="用户分类"></a>用户分类</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>用户分类</th>
+<th style="text-align:center">含义</th>
+<th>uid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root用户</td>
+<td style="text-align:center">最高权限用户。</td>
+<td>0</td>
+</tr>
+<tr>
+<td>虚拟用户（傀儡用 户）</td>
+<td style="text-align:center">这种用户存在是用于让一些服务正常运行。一些服务运行需要指定 的用户。</td>
+<td>uid是1-999 （非唯一判断标准）</td>
+</tr>
+<tr>
+<td>普通用户</td>
+<td style="text-align:center">只对自己家目录拥有权限的用户。</td>
+<td>1000开始 （CentOS 7. 8. ) C5 c6 (从500开始）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="补充：最小化原则"><a href="#补充：最小化原则" class="headerlink" title="补充：最小化原则"></a>补充：最小化原则</h3><p> Linux中，像文件、进程 天生就要有主人，一定要有归属的用户，文件要有属主，进程要有启动用户，目的就是为了安全，不要让别人看一些不该看的东西，也不要让一些进程做你不应该做的。</p>
 <ol>
-<li>查询出来对应字符串所在的行号</li>
+<li>安装软件最小化</li>
+<li>登录安全最小化（普通用户）</li>
+<li>进程启动权限最小化。</li>
+<li>权限最小化</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i ABC -n hello.txt</span><br></pre></td></tr></table></figure>
-<ol>
-<li>查找进程，去掉错觉</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java | grep -v grep</span><br></pre></td></tr></table></figure>
-<ol>
-<li>查看test.log中包含http的所有行，并显示前后行</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat -n test.log | grep -C 5 "http" 		(匹配到的前后5行)</span><br><span class="line"></span><br><span class="line">cat -n test.log | grep -B 5 "http"	  (前5行)</span><br><span class="line"></span><br><span class="line">cat -n test.log | grep -A 5 "http" 		(后5行)</span><br></pre></td></tr></table></figure>
-<h3 id="sed-编辑"><a href="#sed-编辑" class="headerlink" title="sed-编辑"></a><strong>sed-编辑</strong></h3><p>都是一个模式类似的，{作用范围}命令[\或者/]操作数</p>
-<ol>
-<li>sed命令向文件中添加一行内容</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed '2a\haha' hello.txt （append）</span><br><span class="line">sed '1i\haha' hello.txt  (insert)</span><br><span class="line">sed '$a\haha' hello.txt （append）  $代表最后一行</span><br><span class="line">sed '$i\haha' hello.txt  (insert)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>删除最后一行</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed '$d' hello.txt</span><br></pre></td></tr></table></figure>
-<ol>
-<li>替换操作：sed后面的参数格式为[address]s/pattern/replacement/ﬂags</li>
-</ol>
-<p>​    和vim的substitute命令一样，再复习一下</p>
-<p>​        这里的address 表示指定要操作的具体行，是一个可选项</p>
-<p>​        s 表示替换操作;</p>
-<p>​        pattern 指的是需要替换的内容;</p>
-<p>​        replacement 指的是要替换的新内;</p>
-<p>​        ﬂags有多种用法，我们挑两种说一下</p>
-<ul>
-<li><p>第一种就是ﬂags可以表示为1~512之间的任意一个数字，表示指定要替换的字符串在这一行中出现第几 次时才进行替换</p>
-</li>
-<li><p>第二种就是ﬂags可以直接表示为g，这样的意思就是对每一行数据中所有匹配到的内容全部进行替换</p>
-</li>
+<p>​    linux中使用命令的时候应该时刻想到最小化原则,比如一个进程需要启动，那么就只给这个用户启动这个进程的权限就好，不要扩大权限。再比如使用find命令 查找文件继而进行删除的时候，find查找的范围要尽可能的精确多使用参数来控制比如文件类型、修改时间、文件大小等等，避免误删这也是最小化原则。</p>
+<h2 id="用户相关的配置文件"><a href="#用户相关的配置文件" class="headerlink" title="用户相关的配置文件"></a>用户相关的配置文件</h2><h3 id="直接相关文件"><a href="#直接相关文件" class="headerlink" title="直接相关文件"></a>直接相关文件</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/passwd</td>
+<td>用户主配置文件，用户的各种属性（UID,GID,家目录，登录SHELL）</td>
+</tr>
+<tr>
+<td>/etc/shadow</td>
+<td>用户密码文件，存放密码及密码的属性（失效时间，修改密码时间等）。</td>
+</tr>
+<tr>
+<td>/etc/group</td>
+<td>组文件，存放用户组及属性。</td>
+</tr>
+<tr>
+<td>/etc/gshadow</td>
+<td>用户组的密码文件（废弃）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="创建用户相关的文件"><a href="#创建用户相关的文件" class="headerlink" title="创建用户相关的文件"></a>创建用户相关的文件</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/default/useradd</td>
+<td>创建用户命令useradd的配置文件</td>
+</tr>
+<tr>
+<td>/etc/skel</td>
+<td>创建用户环境变量原始文件存放地。</td>
+</tr>
+<tr>
+<td>/etc/login.defs</td>
+<td>创建用户系统配置对应文件。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="环境变量丢失问题"><a href="#环境变量丢失问题" class="headerlink" title="环境变量丢失问题"></a>环境变量丢失问题</h3><p>对于创建用户的三个文件，我们来看一个常见的问题来深入理解一下。</p>
+<p>问题: 使用test用户登录到Linux系统后，发现提示符为如下所示异常情况，    请问如何恢复到正常的Linux命令行提示符情况？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-bash-4.1$ </span><br><span class="line">-bash-4.1$</span><br></pre></td></tr></table></figure>
+<p>解答:</p>
+<p>我们来复现一下 </p>
+<p><img src="image-20221213170640466.png" alt="image-20221213170640466"></p>
+<p>我们看到一句重要的提示 “不再向其中复制任何文件”，可以看到家目录内也是空的。</p>
+<p><img src="image-20221213171128265.png" alt="image-20221213171128265"></p>
+<p>我们先来解决这个问题再来解释</p>
+<p><img src="image-20221213171832654.png" alt="image-20221213171832654"></p>
+<p>我们从/etc/skel/目录下 将bash的几个文件拷贝拷贝到家目录就好了，这几个文件是控制用户环境变量的，如果没有这几个文件 ，家目录是有问题的 就会出现-bash-4.2$的问题。那至于为什么要从/etc/skel中拷贝也是 linux事先在配置文件中规定好的,查看useradd文件</p>
+<p><img src="image-20221213172329965.png" alt="image-20221213172329965"></p>
+<h2 id="用户管理命令"><a href="#用户管理命令" class="headerlink" title="用户管理命令"></a>用户管理命令</h2><p>这些命令都比较简单，就不再进行演示了，感兴趣的可以自己操作一下。</p>
+<h2 id="增加用户"><a href="#增加用户" class="headerlink" title="增加用户"></a>增加用户</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>useradd 选项</th>
+<th>含义</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本用法: useradd 用户名</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-s</td>
+<td>添加用户的时候指定用户的命令解释器，如果不指定默认是/bin/bash.</td>
+<td></td>
+</tr>
+<tr>
+<td>-M</td>
+<td>添加的用户的时候不创建家目录。（一般与-sM搭配使用)</td>
+<td></td>
+</tr>
+<tr>
+<td>-u</td>
+<td>添加用户的时候指定uid。</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-g</td>
+<td>主要组（原生组） 替换默认创建的组。</td>
+<td></td>
+</tr>
+<tr>
+<td>-G</td>
+<td>附加组（额外组）添加用户的时候，让用户属于多个组</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>userdel 删除用户 宣传</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r</td>
+<td>删除用户及用户相关数据（家目录，邮箱） 极其危险。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>⚠️工作中一般不会使用这种操作，最简单的做法就是在passwd文件中注释此用户即可。</p>
+<h3 id="修改用户"><a href="#修改用户" class="headerlink" title="修改用户"></a>修改用户</h3><ul>
+<li>usermod 修改已存在的用户的信息，useradd添加用户时候设置的信息，usermod都可以改。</li>
+<li>uesrmod的选项与useradd 类似。</li>
 </ul>
-<p>​    如果ﬂags位置的值为空，则只会在第一次匹配成功时做替换操作</p>
-<p>​    替换源文件修改        </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;2s&#x2F;l&#x2F;a&#x2F;g&#39; hello.txt</span><br></pre></td></tr></table></figure>
-<ol>
-<li>SED 查看某时间段日志</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n '/2022-06-02 13:10:30/,/2022-06-02 13:10:40/p' test.log</span><br></pre></td></tr></table></figure>
-<p>补充: 命令选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-n ：使用安静(silent)模式。在一般 sed 的用法中，所有来自 STDIN 的数据一般都会被列出到终端上。但如果加上 -n 参数后，则只有经过sed 特殊处理的那一行(或者动作)才会被列出来。</span><br><span class="line">-e ：直接在命令列模式上进行 sed 的动作编辑；</span><br><span class="line">-f ：直接将 sed 的动作写在一个文件内， -f filename 则可以运行 filename 内的 sed 动作；</span><br><span class="line">-r ：sed 的动作支持的是延伸型正规表示法的语法。(默认是基础正规表示法语法)</span><br><span class="line">-i ：直接修改读取的文件内容，而不是输出到终端。</span><br></pre></td></tr></table></figure>
-<h3 id="awk-分析"><a href="#awk-分析" class="headerlink" title="awk-分析"></a><strong>awk-分析</strong></h3><p>简单来说awk就是把文件逐行的读入，以空白字符为默认分隔符将每行内容切片，切开的 部分再进行各种分析处理。</p>
-<p>awk的基本格式：awk [option] programe ﬁle</p>
-<p>这里的option是一个可选项，一般在这里来指定文件中数据的字段分隔符</p>
-<p>programe 是具体的处理逻辑;</p>
-<p>ﬁle表示我们要操作的文件;</p>
-<p>在具体使用awk之前我们还需要掌握awk的一个特性，就是awk在处理文本数据的时候，它会自动给每行变量从1开始，</p>
-<p>​    $1表示是文本中的第1个数据字段</p>
-<p>​    $2表示是文本中的第2个数据字段</p>
-<p>以此类推。</p>
-<p>还有一个特殊的 $0 它代表整个文本行的内容</p>
-<p>那下面我们来操作一下hello.txt这个文件</p>
-<p>这个文件的字段中间默认是空格</p>
-<ol>
-<li><p>简单打印</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk '&#123;print $1&#125;' hello.txt  打印第一列</span><br><span class="line">awk '&#123;print $2&#125;' hello.txt  打印第二列</span><br><span class="line">awk '&#123;print $0&#125;' hello.txt  打印全文</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在option里面指定字段分隔符，通过-F 参数</p>
-<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F: ‘&#123;print $1&#125;’ /etc/passwd</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-</ol>
+<h2 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h2><h4 id="查看用户基本信息"><a href="#查看用户基本信息" class="headerlink" title="查看用户基本信息"></a>查看用户基本信息</h4><ul>
+<li>whoami 显示当前用户的名字。</li>
+<li>id 查看当前或指定用户的信息（uid,gid,用户组信息）</li>
+</ul>
+<h4 id="查看用户登录情况"><a href="#查看用户登录情况" class="headerlink" title="查看用户登录情况"></a>查看用户登录情况</h4><ul>
+<li>w </li>
+<li>last 查看用户的登录情况。</li>
+<li>lastlog 查看所有用户最近1次的登录情况。</li>
+</ul>
 
                 
                 <hr>
@@ -353,12 +456,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/23/linux-2022-07-23-vim的查找替换总结/" data-toggle="tooltip" data-placement="top" title="vim的查找替换总结">&larr; Previous Post</a>
+                        <a href="/2022/12/13/Linux的12位权限体系/" data-toggle="tooltip" data-placement="top" title="Linux的12位权限体系">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/22/linux-2022-07-22-查看磁盘和目录空间df和du/" data-toggle="tooltip" data-placement="top" title="查看磁盘和目录空间df和du">Next Post &rarr;</a>
+                        <a href="/2022/10/09/hive-2022-10-09-hive中四种有效的SQL优化/" data-toggle="tooltip" data-placement="top" title="hive中四种有效的SQL优化">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -471,7 +574,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#grep-查找"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">grep-查找</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#sed-编辑"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">sed-编辑</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#awk-分析"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">awk-分析</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用户分类"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">用户分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#补充：最小化原则"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">补充：最小化原则</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用户相关的配置文件"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">用户相关的配置文件</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#直接相关文件"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">直接相关文件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建用户相关的文件"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">创建用户相关的文件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#环境变量丢失问题"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">环境变量丢失问题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用户管理命令"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">用户管理命令</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#增加用户"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">增加用户</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#删除用户"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">删除用户</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改用户"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">修改用户</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看用户信息"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">查看用户信息</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查看用户基本信息"><span class="toc-nav-number">7.0.1.</span> <span class="toc-nav-text">查看用户基本信息</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查看用户登录情况"><span class="toc-nav-number">7.0.2.</span> <span class="toc-nav-text">查看用户登录情况</span></a></li></ol></li></ol></li></ol>
             
           
           </div>

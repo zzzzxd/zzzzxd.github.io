@@ -171,6 +171,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -179,13 +186,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -999,9 +999,91 @@
 
     
 
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/30/企业高频算法面试题-2020-11-30-Problem-79-不能累加的最小正数/">
+                <h2 class="post-title">
+                    Problem 79 不能累加的最小正数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个正数数组arr，返回arr的子集不能累加出的最小正数1）正常怎么做？2）如果arr中肯定有1这个值，怎么做？
+题目解析
+这道题和前面的题目比较像， 都是要求数字连续这个特性。第二问中，如果有1，那么可以做到O(n)的复杂度。假设已经可以达到range了，下一个数字如果是range+1那是没问题的，提升range到range+1,下一个数字如果是大于range+1那么range+1......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-30
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/30/企业高频算法面试题-2020-11-30-Problem-80-挑选子集问题/">
+                <h2 class="post-title">
+                    Problem 80 挑选子集问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个有正、有负、有0的数组arr，给定一个整数k，返回arr的子集是否能累加出k1）正常怎么做？2）如果arr中的数值很大，但是arr的长度不大，怎么做？
+题目解析
+1) 正常做法 还是递归，背包思想去凑 k就可以，但是因为有负数，所有dp数组index会出现负数，这时候就得涉及到进行偏移，保证数组index不会出现负数
+
+代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-30
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1303,82 +1385,6 @@ https://leetcode.com/problems/recover-binary-search-tree/
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-69-回文对/">
-                <h2 class="post-title">
-                    Problem 69 回文对
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    https://leetcode.com/problems/palindrome-pairs/
-题目解析
-这个题简单思路是暴力 能做的。
-提供第二种思路。我们针对每个字符串，要是能直接找出来与之配对能成为回文的，就不需要无脑的匹配再判断是不是回文了。那如果找是关键，是突破口！判断是回文的前缀，将后面逆序放前面则是回文！同理，判断是回文的后缀逆序......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-68-修复BST/">
-                <h2 class="post-title">
-                    Problem 68 修复BST
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    https://leetcode.com/problems/recover-binary-search-tree/
-题目解析
-题目比较简答，因为BST中序遍历是升序，任意调换两个节点，正常的影响就是把中序中这两个元素进行调换会出现两段降序。case1 还提示了 也会有情况出现一段降序。所以说最多两段降序。我们给交换回来即可。
-用chi[]数组，......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1442,9 +1448,19 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
+            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            
         
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1454,7 +1470,19 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1466,7 +1494,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
-        
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
             
         
             
@@ -1490,12 +1518,6 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
-            
-        
-            
-        
-            
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
             
         
@@ -1510,13 +1532,13 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
             
         
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
             
         
             
@@ -1525,6 +1547,8 @@ https://leetcode.com/problems/recover-binary-search-tree/
         
             
             <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
             
         
             
@@ -1550,17 +1574,15 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1589,22 +1611,6 @@ https://leetcode.com/problems/recover-binary-search-tree/
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
             
         
             
@@ -1679,6 +1685,14 @@ https://leetcode.com/problems/recover-binary-search-tree/
     <ul>
       
         <li>
+          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+        </li>
+      
+        <li>
+          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+        </li>
+      
+        <li>
           <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
         </li>
       
@@ -1688,14 +1702,6 @@ https://leetcode.com/problems/recover-binary-search-tree/
       
         <li>
           <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
-        </li>
-      
-        <li>
-          <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture%E8%AF%A6%E8%A7%A3/">CompletableFuture详解</a>
-        </li>
-      
-        <li>
-          <a href="/2022/09/27/JUC-2022-09-27-Future%E6%A8%A1%E5%BC%8F/">Future模式</a>
         </li>
       
     </ul>
@@ -1710,7 +1716,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1721,49 +1727,49 @@ https://leetcode.com/problems/recover-binary-search-tree/
     <div class="widget">
       <ul>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#linux"><li>linux</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
-        
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
-        
-          <a href="categories/#常见问题"><li>常见问题</li></a>
-        
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
-        
-          <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
-        
-          <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#network"><li>network</li></a>
+        
+          <a href="categories/#Python"><li>Python</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
+        
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
+        
+          <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
       </ul>
     </div>

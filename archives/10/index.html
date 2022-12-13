@@ -171,6 +171,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -179,13 +186,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -999,9 +999,97 @@
 
     
 
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/15/git-2022-07-14-自建项目上传github常用操作/">
+                <h2 class="post-title">
+                    自建项目上传github常用操作
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    在idea 初始化本地项目后
+
+在github创建仓库
+
+添加git远程仓库绑定:git remote add origin https://github.com/zzzzxd/xxxx 当前没有追踪远程分支,拉取时候绑定远程分支:git pull origin master 
+
+
+常见的其他操作
+
+
+删除项目当前分支对远程分支的关联
+
+1git remote rm origin
+
+
+项目以......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#git" title="git">git</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/15/hbase-2022-07-15-Hbase-数据倾斜原因及解决方案/">
+                <h2 class="post-title">
+                    Hbase 数据倾斜原因及解决方案
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+最近公司在做ip维度表，数据量比较大，上亿条数据了，拿hbase存储，进行实时关联。发现ip存到region上倾斜的比较严重，考虑到基数比较大，后期增量相对比较少，可以做一个预分区，使数据分布均衡，借此机会，从网上搜集了一下资料，总结一下常见的解决方案。
+
+热点与数据倾斜热点：
+​    热点发生在大量的client直接访问集群的一个或极少数个节点（访问可能是读，写或者其他操作。
+​   ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#hbase" title="hbase">hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1273,72 +1361,6 @@ eg:
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/mysql-2022-07-14-Mysql-dump-命令/">
-                <h2 class="post-title">
-                    Mysql dump 命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    命令及解释123456789mysqldump -ubackup -p123456 -h 192.168.1.2 backup_test &gt; D:\bak\bakcup.sql 	在这段命令中：mysqldump 是myqldump的程序名了；  -u 是数据库的用户名，后面紧跟着用户名backup；  -p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；  -h......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/14/mysql-2022-07-14-linux-停止启动mysql常用命令/">
-                <h2 class="post-title">
-                    linux 停止启动mysql常用命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    查看mysql版本方法一：status;
-方法二：select version();
-Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启动方式1、使用 service 启动：    [root@localhost &#x2F;]# service mysqld start (5.0版本是mysqld)    [root@szxdb etc]......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1402,9 +1424,19 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
             
         
             
+            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            
         
             
         
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1414,7 +1446,19 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
             
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="9">LINUX</a>
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1426,7 +1470,7 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
             
         
             
-        
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
             
         
             
@@ -1450,12 +1494,6 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
-            
-        
-            
-        
-            
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
             
         
@@ -1470,13 +1508,13 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
             
         
             
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
             
         
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
             
         
             
@@ -1485,6 +1523,8 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
         
             
             <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
             
         
             
@@ -1510,17 +1550,15 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1549,22 +1587,6 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
             
         
             
@@ -1639,6 +1661,14 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
     <ul>
       
         <li>
+          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+        </li>
+      
+        <li>
+          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+        </li>
+      
+        <li>
           <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
         </li>
       
@@ -1648,14 +1678,6 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
       
         <li>
           <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
-        </li>
-      
-        <li>
-          <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture%E8%AF%A6%E8%A7%A3/">CompletableFuture详解</a>
-        </li>
-      
-        <li>
-          <a href="/2022/09/27/JUC-2022-09-27-Future%E6%A8%A1%E5%BC%8F/">Future模式</a>
         </li>
       
     </ul>
@@ -1670,7 +1692,7 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1681,49 +1703,49 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
     <div class="widget">
       <ul>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
-        
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#Git"><li>Git</li></a>
+          <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#docker"><li>docker</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#linux"><li>linux</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
-        
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
-        
-          <a href="categories/#常见问题"><li>常见问题</li></a>
-        
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
-        
-          <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
-        
-          <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#Git"><li>Git</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#network"><li>network</li></a>
+        
+          <a href="categories/#Python"><li>Python</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
+        
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
+        
+          <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
       </ul>
     </div>

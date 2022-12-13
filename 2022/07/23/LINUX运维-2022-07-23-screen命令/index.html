@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          yum源解释 - Dante&#39;s blog
+          screen命令 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/22/linux-2022-07-22-yum源解释/">
+    <link rel="canonical" href="https://dusign.net/2022/07/23/LINUX运维-2022-07-23-screen命令/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,18 +115,18 @@
                               <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
                             
                         </div>
-                        <h1>yum源解释</h1>
+                        <h1>screen命令</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-22
+                            2022-07-23
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">914</span> and
-                                Reading Time <span class="post-count">3</span> Minutes
+                                Words <span class="post-count">314</span> and
+                                Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -194,6 +194,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -270,26 +270,25 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。</p>
-</blockquote>
-<h3 id="yum是什么，yum源又是什么"><a href="#yum是什么，yum源又是什么" class="headerlink" title="yum是什么，yum源又是什么"></a>yum是什么，yum源又是什么</h3><p>   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不同的发行linux有不同工具，例如红帽（read hat）linux就使用的rpm全称就是read hat package manager 红帽软件包管理工具。</p>
-<p>   yum源是什么呢？我们安装软件的时候需要下载软件，将很多软件放在一起就是源。软件安装包的来源。所以yum源就是软件安装包来源。如果我们是在线的，他会在网上给你下载安装包，如果是离线的没有网络。那么就只能配置本地的yum源了。</p>
-<h3 id="本地yum源是什么呢？"><a href="#本地yum源是什么呢？" class="headerlink" title="本地yum源是什么呢？"></a>本地yum源是什么呢？</h3><p>   上面说过yum源就是软件安装包的来源，但是这些安装包哪里有呢？其实在linux的安装镜像中就有的，linux已经将常见的安装包放到了linux镜像中。如果你使用压缩文件打开linux的iso镜像文件，你会发现在根目录下有个文件夹：packages</p>
-<p><img src="1.png" alt="WeChat40190bf3ee24416d2daacfa56f1f172d"></p>
-<p>   上图就是使用压缩软件打开的系统盘内部情况，比如我们常用的工具vim，就是在这里面的。所以说： 系统的安装镜像就可以当作yum源。</p>
-<h3 id="与yum源相关的配置文件"><a href="#与yum源相关的配置文件" class="headerlink" title="与yum源相关的配置文件"></a>与yum源相关的配置文件</h3><p> <img src="2.png" alt="WeChat5b86da0c7a3647cb6d31f02d5c5e2cbe"></p>
-<p>   上图就是yun源相关的配置，在路径/etc/yum.repos.d/目录下，一共4个文件，说下两个常用的。</p>
-<p>   CentOS-Base.repo：有网的环境下默认使用这个，这个是第一优先级。因为没网，所以修改文件名，设置成备份文件。这样系统就会使用第二优先级的文件。</p>
-<p>   CentOS-Media.repo：没网的环境下使用这个，在上图中会发现他默认配置了4个路径，第4个yumsource是我自己加的。意思是说，如果系统检测yum使用了离线安装，那么会从上到下从这4个路径中查找安装软件。所以我们只要把光盘挂载在这四个目录下的任意一个目录即可。同时，该配置文件默认是不启用的，如果想使用需要 修改倒数第二行的enabled为1，否则该文件无效。</p>
-<h3 id="media目录与mnt目录"><a href="#media目录与mnt目录" class="headerlink" title="media目录与mnt目录"></a>media目录与mnt目录</h3><p>   挂载光盘或者u盘等使用的mount命令，但是你百度所有会说有挂在media目录下，也有挂载在mnt目录下的。这两个目录区别是什么呢？</p>
-<p>   media：挂载一些移动设备，例如光盘，U盘等。</p>
-<p>   mnt：挂载一些硬盘等设备。所以我们的光盘应该挂载在media目录下，从yum给的默认配置文件也能看出。</p>
-<h3 id="挂载光盘到系统上"><a href="#挂载光盘到系统上" class="headerlink" title="挂载光盘到系统上"></a>挂载光盘到系统上</h3><p>  <img src="3.png" alt="WeChatbc41627d35f3138e31bd97db231c8a8d"></p>
-<p>   如上图，首先执行df -h命令发现当前系统没有光盘信息，然后挂载目录之后，在查看就发现我们把光盘挂载到了系统上，光盘大小4.2G。</p>
-<p>-o loop ：指定挂载文件类型，说简单点就是我要挂载的是光盘这种设备。</p>
-<h3 id="卸载光盘"><a href="#卸载光盘" class="headerlink" title="卸载光盘"></a>卸载光盘</h3><p><img src="4.png" alt="WeChat418e1c2e32e31f4f22bcc4d12f0e5b33"></p>
-<p>   执行df -h发现光盘是挂载的，然后执行umount命令之后，在查看发现设备被卸载了</p>
+                <h3 id="Screen简介"><a href="#Screen简介" class="headerlink" title="Screen简介"></a>Screen简介</h3><p>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。</p>
+<p><strong>简而言之：</strong></p>
+<p>远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。</p>
+<p>而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。</p>
+<h3 id="常用screen命令"><a href="#常用screen命令" class="headerlink" title="常用screen命令"></a>常用screen命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname           # 新建一个叫yourname的session</span><br><span class="line">screen -ls                   # 列出当前所有的session</span><br><span class="line">screen -r yourname           # 回到yourname这个session</span><br><span class="line">screen -d yourname           # 远程detach某个session    # detach快捷键 ctrl a + d</span><br><span class="line">screen -d -r yourname        # 结束当前session并回到yourname这个session</span><br><span class="line">screen -S yourname -X quit   # 删除叫yourname的session</span><br></pre></td></tr></table></figure>
+<h4 id="恢复会话"><a href="#恢复会话" class="headerlink" title="恢复会话"></a>恢复会话</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -r session_name</span><br></pre></td></tr></table></figure>
+<p><strong>如果不能恢复：</strong></p>
+<p>对于已经Attached Session则不能直接screen -r，需要先screen -d，然后才能screen -r</p>
+<p>用screen -ls可以查看所有的session的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">先 screen -d session_name</span><br><span class="line">再 screen -r session_name</span><br></pre></td></tr></table></figure>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -S session_name -X quit</span><br></pre></td></tr></table></figure>
+<p><strong>重命名怎么删，如下图：</strong></p>
+<p>​    <img src="1.png" alt=""></p>
+<ol>
+<li><p>没有重命名的直接可以screen -S session_name -X quit</p>
+</li>
+<li><p>重命名的，需要带上id删，screen -S id.session_name -X quit                              </p>
+</li>
+</ol>
 
                 
                 <hr>
@@ -297,12 +296,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/22/linux-2022-07-22-yum换源的详细操作/" data-toggle="tooltip" data-placement="top" title="yum换源的详细操作">&larr; Previous Post</a>
+                        <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/" data-toggle="tooltip" data-placement="top" title="字库表、编码字符集、字符编码">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/22/linux-2022-07-22-top命令的Load-average-含义及性能参考基值/" data-toggle="tooltip" data-placement="top" title="top命令的Load average 含义及性能参考基值">Next Post &rarr;</a>
+                        <a href="/2022/07/23/LINUX运维-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/" data-toggle="tooltip" data-placement="top" title=" linux下 bin和 usr bin和 usr local bin的区别">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -415,7 +414,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#yum是什么，yum源又是什么"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">yum是什么，yum源又是什么</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#本地yum源是什么呢？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">本地yum源是什么呢？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#与yum源相关的配置文件"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">与yum源相关的配置文件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#media目录与mnt目录"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">media目录与mnt目录</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#挂载光盘到系统上"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">挂载光盘到系统上</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#卸载光盘"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">卸载光盘</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Screen简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Screen简介</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常用screen命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">常用screen命令</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#恢复会话"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">恢复会话</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#删除"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">删除</span></a></li></ol></li></ol>
             
           
           </div>

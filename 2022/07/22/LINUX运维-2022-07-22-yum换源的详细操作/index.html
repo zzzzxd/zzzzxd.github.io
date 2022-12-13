@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          linux不同版本的服务管理 - Dante&#39;s blog
+          yum换源的详细操作 - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2022/07/23/linux-2022-07-23-linux不同版本的服务管理/">
+    <link rel="canonical" href="https://dusign.net/2022/07/22/LINUX运维-2022-07-22-yum换源的详细操作/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -115,17 +115,17 @@
                               <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
                             
                         </div>
-                        <h1>linux不同版本的服务管理</h1>
+                        <h1>yum换源的详细操作</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2022-07-23
+                            2022-07-22
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">320</span> and
+                                Words <span class="post-count">168</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -194,6 +194,13 @@
 
                         
                         <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -202,13 +209,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -270,84 +270,21 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。</p>
-<p>Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>动作</th>
-<th>Rhel6 旧指令</th>
-<th>Rhel7新指令</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>启动某服务</td>
-<td>service httpd start</td>
-<td>systemctl start httpd</td>
-</tr>
-<tr>
-<td>停止某服务</td>
-<td>service httpd stop</td>
-<td>systemctl stop httpd</td>
-</tr>
-<tr>
-<td>重启某服务</td>
-<td>service httpd restart</td>
-<td>systemctl restart httpd</td>
-</tr>
-<tr>
-<td>检查服务状态</td>
-<td>service httpd status</td>
-<td>systemctl status httpd</td>
-</tr>
-<tr>
-<td>删除某服务</td>
-<td>chkconfig —del httpd</td>
-<td>停掉应用，删除其配置文件</td>
-</tr>
-<tr>
-<td>使服务开机自启动</td>
-<td>chkconfig —level 5 httpd on</td>
-<td>systemctl enable httpd</td>
-</tr>
-<tr>
-<td>使服务开机不自启动</td>
-<td>chkconfig —level 5 httpd off</td>
-<td>systemctl disable httpd</td>
-</tr>
-<tr>
-<td>显示所有已启动的服务</td>
-<td>chkconfig —list</td>
-<td>systemctl list-unit-files \</td>
-<td>grep enabled</td>
-</tr>
-<tr>
-<td>加入自定义服务</td>
-<td>chkconfig —add test</td>
-<td>systemctl load test</td>
-</tr>
-<tr>
-<td>查询服务是否开机自启</td>
-<td>chkconfig —list \</td>
-<td>grep httpd</td>
-<td>systemctl is-enabled httpd</td>
-</tr>
-<tr>
-<td>查看启动失败的服务</td>
-<td></td>
-<td>systemctl —failed</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>systemd的一些常用命令：</p>
-<p>列出所有可用单元 ： systemctl list-unit-files</p>
-<p>列出所有运行的单元： systemctl list-unit-files | grep enabled </p>
-<p>列出所有可用服务： systemctl list-unit-files —type=service</p>
-<p>列出所有运行的服务： systemctl list-unit-files —type=service | grep enabled </p>
-<p>屏蔽httpd服务：systemctl mask httpd</p>
+                <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+<p><strong>备份原来的源</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk</span><br></pre></td></tr></table></figure>
+<p><strong>下载阿里源</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+<p> <strong>更改阿里yum源为默认源</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv Centos-7.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+<p><strong>更新本地yum缓存</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum clean all # 全部清除</span><br><span class="line">sudo yum list # 更新列表 </span><br><span class="line">sudo yum makecache# 缓存yum包信息到本机，提高搜索速度</span><br></pre></td></tr></table></figure>
+<p><strong>国内yum源</strong></p>
+<p>阿里yum源:<a href="http://mirrors.aliyun.com/repo/" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/</a></p>
+<p>163(网易)yum源: <a href="http://mirrors.163.com/.help/" target="_blank" rel="noopener">http://mirrors.163.com/.help/</a></p>
+<p>中科大的Linux安装镜像源：<a href="http://centos.ustc.edu.cn/" target="_blank" rel="noopener">http://centos.ustc.edu.cn/</a></p>
+<p>搜狐的Linux安装镜像源：<a href="http://mirrors.sohu.com/" target="_blank" rel="noopener">http://mirrors.sohu.com/</a></p>
+<p>北京首都在线科技：<a href="http://mirrors.yun-idc.com/" target="_blank" rel="noopener">http://mirrors.yun-idc.com/</a></p>
 
                 
                 <hr>
@@ -355,12 +292,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/07/23/linux-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/" data-toggle="tooltip" data-placement="top" title=" linux下 bin和 usr bin和 usr local bin的区别">&larr; Previous Post</a>
+                        <a href="/2022/07/22/LINUX运维-2022-07-22-查看磁盘和目录空间df和du/" data-toggle="tooltip" data-placement="top" title="查看磁盘和目录空间df和du">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2022/07/23/linux-2022-07-23-vim的查找替换总结/" data-toggle="tooltip" data-placement="top" title="vim的查找替换总结">Next Post &rarr;</a>
+                        <a href="/2022/07/22/LINUX运维-2022-07-22-yum源解释/" data-toggle="tooltip" data-placement="top" title="yum源解释">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
