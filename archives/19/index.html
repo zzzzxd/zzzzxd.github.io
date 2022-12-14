@@ -171,7 +171,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -185,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1003,9 +1003,328 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/11/企业高频算法面试题-2020-11-11-Problem-67-打砖块/">
+                <h2 class="post-title">
+                    Problem 67 打砖块
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：
+https://leetcode.com/problems/bricks-falling-when-hit/
+题目解析
+首先一定要熟悉并查集。此题是并查集的逆运用，思考并查集核心思想在于集合的合并。而击落砖块问的是掉落之后的个数，相当于初始情况是一个大集合，不断的击落砖块时，集合分散之后，那些无连接的集合大小。所以可以，倒过来想，从击落最后一块砖块开始，此时是分散......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-11
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-66-扰乱字符串/">
+                <h2 class="post-title">
+                    Problem 66. 扰乱字符串
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode原题：
+https://leetcode.com/problems/scramble-string/
+题目解析
+思路比较直接，更加考察编程能力，包括这些位置的推断。以及递归的设计
+普通递归，不去优化会卡在最后连个case上，加上缓存就可以顺利通过。主要是能快速写出来程序，所以没有进一步优化，也可以进一步写成数组严格递归的形式，甚至用斜率优化
+
+代码1234567......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-65-超级洗衣机/">
+                <h2 class="post-title">
+                    Problem 65 超级洗衣机
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目  Leetcode原题：  https://leetcode.com/problems/super-washing-machines/
+题目解析
+考察单点瓶颈问题。诸如此类的还有接雨水问题等 都是考察 ”最短处“，整个问题的解决在于“痛点”。洗衣机每个都可以一次扔一件衣服，因为可以并发进行。那么只要找到需要扔到最多的，问题就解决了。
+
+代码12345678910111213141516......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/05/企业高频算法面试题-2020-11-05-Problem-64-谷歌抽牌问题/">
+                <h2 class="post-title">
+                    Problem 64 谷歌抽牌问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    谷歌面试题扩展版面值为1~N的牌组成一组，每次你从组里等概率的抽出1~N中的一张下次抽会换一个新的组，有无限组当累加和=a且=b时，你将失败返回获胜的概率，给定的参数为N，a，b
+题目解析
+可能一上来不知道如何下手，这种就想先定义递归含义。依据定义的含义在去写递归体，最后想递归边界，以及优化点。
+这个题想到大概思路之后，还要注意优化，关键在于(a,b)之间的距离
+
+代码1234......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/04/企业高频算法面试题-2020-11-04-Problem-63/">
+                <h2 class="post-title">
+                    Problem 63
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：
+https://leetcode.com/problems/regular-expression-matching/
+题目解析
+好题。考察递归，重点思考后面元素是*或者.，需要对这种特殊清楚进行分析可能性。
+
+代码1234567891011121314151617181920212223242526272829303132333435363738394041424......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-04
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/01/企业高频算法面试题-2020-11-01-Problem-62-最长连续序列/">
+                <h2 class="post-title">
+                    Problem 62 最长连续序列
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：
+https://leetcode.com/problems/longest-consecutive-sequence/
+题目解析
+和之前的播放流题目类似，用头表，尾表的思想实现，只不过这个题是用map，不是基于链表的
+
+代码123456789101112131415161718192021222324252627282930313233class Solution......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/31/企业高频算法面试题-2020-10-31-Problem-61-两个有序数整体K小/">
+                <h2 class="post-title">
+                    Problem 61 两个有序数整体K小
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：https://leetcode.com/problems/median-of-two-sorted-arrays/进阶问题：在两个都有序的数组中找整体第K小的数可以做到O(log(Min(M,N)))
+12节
+题目解析代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-31
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/28/企业高频算法面试题-2020-10-28-Problem-60-查找种类及个数相同的子串/">
+                <h2 class="post-title">
+                    Problem 60 查找种类及个数相同的子串
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定长度为m的字符串aim，以及一个长度为n的字符串str问能否在str中找到一个长度为m的连续子串，使得这个子串刚好由aim的m个字符组成，顺序无所谓，返回任意满足条件的一个子串的起始位置，未找到返回-1
+Leetcode:567
+题目解析
+题目比较简单 使用滑动窗口+字符表映射就可以解决
+
+代码123456789101112131415161718192021222324252627......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-28
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1089,316 +1408,6 @@ https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrom
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/23/企业高频算法面试题-2020-10-23-Problem-57-布尔运算/">
-                <h2 class="post-title">
-                    Problem 57 布尔运算
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode-cn.com/problems/boolean-evaluation-lcci/
-题目解析
-这个题也是很类似的思想，比如讲，求最大子数组和？不管哪个子数组和最大，子数组一定是以某个元素结尾，所以我们找以当前元素为结尾的最大子数组，最终找到答案。此题求的是加括号的方法数，首先每个运算符号一定都会生效。通过加括号使得答案最终为1，那么......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-55-K个逆序对数组/">
-                <h2 class="post-title">
-                    Problem 55 K个逆序对数组
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode.com/problems/k-inverse-pairs-array/
-题目解析
-这道题目是一道很不错的dp题目，这道题目如果去写几个例子，很容易发现特点，做好空间优化。
-结果要取模运算的时候，任何一处加法减法都要加模再去取模，一个时防止溢出，一个是防止计算出现负数。
-
-代码123456789101112131415161718c......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-56-BST转有序双向列表/">
-                <h2 class="post-title">
-                    Problem 56 BST转有序双向列表
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    给定一棵搜索二叉树头节点，转化成首尾相接的有序双向链表
-https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
-题目解析
-题目不难，就是麻烦点，用树的递归遍历就可以搞定。
-
-代码​    略
-...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Tree" title="Tree">Tree</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/20/企业高频算法面试题-2020-10-20-Problem-54/">
-                <h2 class="post-title">
-                    Problem 54
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Lintcode原题：
-https://www.lintcode.com/problem/top-k-frequent-words-ii/
-第10节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/19/企业高频算法面试题-2020-10-19-Problem-53-跳跃游戏/">
-                <h2 class="post-title">
-                    Problem 53 跳跃游戏
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：https://leetcode.com/problems/jump-game-ii/
-补:
-https://leetcode.com/problems/jump-game/
-题目解析
-这两道题目都非常有特点，考察这种先遍历后更新的技巧，两道题目要一块看。
-
-重点理解一下跳跃游戏II的三个变量
-
-Step : 当前走的步数
-cur：当前步数以内能到达的位置
-next......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/17/企业高频算法面试题-2020-10-17-Problem-52-step-sum问题/">
-                <h2 class="post-title">
-                    Problem 52 step sum问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    定义何为step sum？比如680，680 + 68 + 6 = 754，680的step sum叫754给定一个正数num，判断它是不是某个数的step sum
-题目解析
-这个题目考查的二分。拿到题目务必好好观察特点。明显这个数组拆分累加之后是变大的。所以说 给一个数x，它是某个数字的step sum 取值一定在1到x之间。所以可以用二分来枚举。
-
-代码1234567891......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-17
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/14/企业高频算法面试题-2020-10-14-Problem-51-俄罗斯套娃问题/">
-                <h2 class="post-title">
-                    Problem 51 俄罗斯套娃问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    俄罗斯套娃问题
-​    Leetcode 原题：
-​    https://leetcode.com/problems/russian-doll-envelopes/
-题目解析
-经典题目，是LIS问题的应用。有长和高两个维度，我们将信封按照长升序，并且长相等时按照宽降序。这样做的目的就是，当我们把宽单独拿出来，此时的最长递增子序列的长度就是嵌套层次。而如果宽也是升序排序，此时......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/13/企业高频算法面试题-2020-10-13-Problem-50-最长递增子序列/">
-                <h2 class="post-title">
-                    Problem 50 最长递增子序列
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    经典算法之最长递增子序列
-​    Leetcode 原题：
-​    https://leetcode.com/problems/longest-increasing-subsequence
-题目解析
-LIS 经典问题。普通的dp树N^2^的，不容易过，采用end数组的方式实现N*logN的
-End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end数组含义，开始......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1460,9 +1469,7 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
     <div class="tags">
         
             
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
             
         
             
@@ -1474,7 +1481,7 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
             
         
             
@@ -1484,15 +1491,7 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1501,6 +1500,16 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
         
             
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1522,11 +1531,7 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
             
         
             
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
             
         
             
@@ -1536,13 +1541,15 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
         
             
             <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
             
         
             
@@ -1553,6 +1560,8 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
             
         
             
@@ -1578,21 +1587,21 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1622,9 +1631,9 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
             
         
             
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1699,23 +1708,23 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
     <ul>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
         </li>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
+          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
+          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
         </li>
       
     </ul>
@@ -1730,7 +1739,7 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1741,35 +1750,35 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
     <div class="widget">
       <ul>
         
-          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Flink"><li>Flink</li></a>
-        
           <a href="categories/#多线程"><li>多线程</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1947,7 +1956,7 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1957,21 +1966,6 @@ End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end�
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

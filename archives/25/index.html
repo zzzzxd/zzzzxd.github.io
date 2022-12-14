@@ -171,7 +171,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -185,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1003,9 +1003,320 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/20/企业高频算法面试题-2020-07-20-Problem-7-最好收入问题/">
+                <h2 class="post-title">
+                    Problem 7 最好收入问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定数组hard和money，长度都为N hard[i]表示i号的难度， money[i]表示i号工作的收入 ，给定数组ability，长度都为M，ability[j]表示j号人的能力 ，每一号工作，都可以提供无数的岗位，难度和收入都一样但是人的能力必须&gt;=这份工作的难度，才能上班。返回一个长度为M的数组ans，ans[j]表示j号人能获得的最好收入
+题目解析
+先想一下 最简单的暴......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/17/企业高频算法面试题-2020-07-17-Problem-6-正负符号累加数字的方法数/">
+                <h2 class="post-title">
+                    Problem 6 正负符号累加数字的方法数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个数组arr，你可以在每个数字之前决定+或者-  但是必须所有数字都参与 ,再给定一个数target，请问最后算出target的方法数是多少？
+题目解析
+乍一看 ，典型的从左到右背包模型,可以给出dp的最优解。但实际上 想想看，这个target 可能是负的 ，dp[index][target]代表index到len-1的位置能组成target的方法数，这个target的变......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-17
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/14/企业高频算法面试题-2020-07-14-Problem-5-释放AOE/">
+                <h2 class="post-title">
+                    Problem 5 释放AOE
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定两个非负数组x和hp，长度都是N，再给定一个正数range  ,x有序，x[i]表示i号怪兽在x轴上的位置；hp[i]表示i号怪兽的血量  再给定一个正数range，表示如果法师释放技能的范围长度 被打到的每只怪兽损失1点血量。返回要把所有怪兽血量清空，至少需要释放多少次AOE技能？
+题目解析
+首先这个题目注意是双向释放技能，那不管怎么说，也得遍历一头一头的来杀死怪兽，那怎么杀死？要......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/13/企业高频算法面试题-2020-07-13-Problem-4-最少交换次数/">
+                <h2 class="post-title">
+                    Problem 4 最少交换次数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    一个数组中只有两种字符’G’和’B’，可以让所有的G都放在左侧，所有的B都放在右侧 或者可以让所有的G都放在右侧，所有的B都放在左侧但是只能在相邻字符之间进行交换操作，返回至少需要交换几次
+题目解析
+这个题其实很简单，就是怕被说辞给吓住了，G在左侧，因为是最少的交换，所以一定从左侧开始让G移动。这样求的G在左侧的最少移动次数。同理，求的B在左侧的最少移动次数，也就是G在右侧，比......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
+                    
+                      <a href="/tags/#Two Pointers" title="Two Pointers">Two Pointers</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/12/企业高频算法面试题-2020-07-12-Problem-3-2的某次幂/">
+                <h2 class="post-title">
+                    Problem 3 2的某次幂
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个非负整数num，如何不用循环语句，返回&gt;=num，并且离num最近的，2的某次方。
+题目解析
+考察位运算，不太好想。比如求00001010，求比它大的2的某次方,应该是0010000,实际上就是00001111加1，也就是说我们把原数最左侧的1的位置，右面全部变成1得到的就是答案。利用位运算，比如00100000,
+
+右移1次与原数或可得00110000
+再右移2......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/08/企业高频算法面试题-2020-07-08-Problem-2-统计文件数量/">
+                <h2 class="post-title">
+                    Problem 2 统计文件数量
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个文件目录的路径，写一个函数统计这个目录下所有的文件数量并返回，隐藏文件也算，但是文件夹不算。
+题目解析
+题目说的很清楚了，考的就是一个简单的递归，使用一下文件相关的api即可。 
+
+代码12345678910111213141516171819202122232425// 注意这个函数也会统计隐藏文件	public static int getFileNumber(St......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/05/企业高频算法面试题-2020-07-05-Problem-1-绳子压点问题/">
+                <h2 class="post-title">
+                    Problem 1 绳子压点问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个有序数组arr，代表坐落在X轴上的点，给定一个正数K，代表绳子的长度返回绳子最多压中几个点？注意：即使绳子边缘处盖住点也算盖住。
+题目解析
+有一个比较容易想到的思路就是把绳子看成长度固定的滑动窗口就可以了，依次遍历每个点作为绳子左端点的情况下 能压住几个点即可。
+
+代码12345678910111213public static int maxPoint(int[] arr, i......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/11/11/leetcode-leetcodetest-2018-11-11-412-Fizz-Buzz/">
+                <h2 class="post-title">
+                    412. Fizz Buzz 
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/fizz-buzz/    
+题目描述​    Given an integer n, return a string array answer (1-indexed) where:
+
+answer[i] == &quot;FizzBuzz&quot; if i is divisible by 3 and 5.
+a......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-11-11
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1064,289 +1375,6 @@
                     2018-11-11
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/11/leetcode-leetcodetest-2018-11-11-384-Shuffle-an-Array/">
-                <h2 class="post-title">
-                    384. Shuffle an Array
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/shuffle-an-array/    
-题目描述​    Given an integer array nums, design an algorithm to randomly shuffle the array. All permutations of the array should be equally......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-11
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Array" title="Array">Array</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/11/leetcode-leetcodetest-2018-11-11-380-Insert-Delete-GetRandom-O-1/">
-                <h2 class="post-title">
-                    380. Insert Delete GetRandom O(1)
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/insert-delete-getrandom-o1/
-题目描述​    Implement the RandomizedSet class:
-
-RandomizedSet() Initializes the RandomizedSet object.
-bool insert(int val) Inserts an......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-11
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/11/leetcode-leetcodetest-2018-11-11-454-4Sum-II/">
-                <h2 class="post-title">
-                    454. 4Sum II
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/4sum-ii/
-题目描述​    Given four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:
-
-0 &lt;= i, j,......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-11
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Array" title="Array">Array</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/10/leetcode-leetcodetest-2018-11-10-378-Kth-Smallest-Element-in-a-Sorted-Matrix/">
-                <h2 class="post-title">
-                    378. Kth Smallest Element in a Sorted Matrix
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
-题目描述​    Given an n x n matrix where each of the rows and columns is sorted in ascending order, return the kth smalle......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-10
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/10/leetcode-leetcodetest-2018-11-10-371-Sum-of-Two-Integers/">
-                <h2 class="post-title">
-                    371. Sum of Two Integers
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/sum-of-two-integers/
-题目描述​    Given two integers a and b, return the sum of the two integers without using the operators + and -.
-Example 1:
-12Input: a &#x3D;......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-10
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Bit Manipulation" title="Bit Manipulation">Bit Manipulation</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/10/leetcode-leetcodetest-2018-11-10-350-Intersection-of-Two-Arrays-II/">
-                <h2 class="post-title">
-                    350. Intersection of Two Arrays II
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/intersection-of-two-arrays-ii/
-题目描述​    Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appea......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-10
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/09/leetcode-leetcodetest-2018-11-09-347-Top-K-Frequent-Elements/">
-                <h2 class="post-title">
-                    347. Top K Frequent Elements
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/top-k-frequent-elements/
-题目描述​    Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
-E......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-09
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Heap" title="Heap">Heap</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/09/leetcode-leetcodetest-2018-11-09-344-Reverse-String/">
-                <h2 class="post-title">
-                    344. Reverse String
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/reverse-string/
-题目描述​    Write a function that reverses a string. The input string is given as an array of characters s.
-You must do this by modifying the inp......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-09
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Array" title="Array">Array</a>
                     
                       <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
                     
@@ -1419,9 +1447,7 @@ You must do this by modifying the inp......
     <div class="tags">
         
             
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
             
         
             
@@ -1433,7 +1459,7 @@ You must do this by modifying the inp......
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
             
         
             
@@ -1443,15 +1469,7 @@ You must do this by modifying the inp......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1460,6 +1478,16 @@ You must do this by modifying the inp......
         
             
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1481,11 +1509,7 @@ You must do this by modifying the inp......
             
         
             
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
             
         
             
@@ -1495,13 +1519,15 @@ You must do this by modifying the inp......
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
         
             
             <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
             
         
             
@@ -1512,6 +1538,8 @@ You must do this by modifying the inp......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
             
         
             
@@ -1537,21 +1565,21 @@ You must do this by modifying the inp......
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1581,9 +1609,9 @@ You must do this by modifying the inp......
             
         
             
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1658,23 +1686,23 @@ You must do this by modifying the inp......
     <ul>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
         </li>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
+          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
+          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
         </li>
       
     </ul>
@@ -1689,7 +1717,7 @@ You must do this by modifying the inp......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1700,35 +1728,35 @@ You must do this by modifying the inp......
     <div class="widget">
       <ul>
         
-          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Flink"><li>Flink</li></a>
-        
           <a href="categories/#多线程"><li>多线程</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1906,7 +1934,7 @@ You must do this by modifying the inp......
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1916,21 +1944,6 @@ You must do this by modifying the inp......
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

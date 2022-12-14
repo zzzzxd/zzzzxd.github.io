@@ -171,7 +171,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -185,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1003,9 +1003,305 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/network-2022-07-23-TCP拆包与粘包/">
+                <h2 class="post-title">
+                    TCP拆包与粘包
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    粘包产生的原因如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。
+传输层的UDP协议是否会发生粘包或者拆包问题？​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
+传输层的TCP协议是否会......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#TCP" title="TCP">TCP</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/ssm-2022-07-23-自定义注解/">
+                <h2 class="post-title">
+                    自定义注解
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    概念​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/jvm-2022-07-23-常量池/">
+                <h2 class="post-title">
+                    常量池
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+提到常量池一直容易混，今天一次性彻底搞定。
+
+class文件常量池（class constant pool）我们都知道，class文件中除了包含类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池(constant pool table)，用于存放编译器生成的各种字面量(Literal)和符号引用(Symbolic References)。字面量就是我们所说的常量概念，如文本字符......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/IO-2022-07-23-IO实验的一些常用命令总结/">
+                <h2 class="post-title">
+                    IO实验的一些常用命令总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    必须熟练使用的指令以及注意事项
+stat：可以查看文件的详细信息 1stat msb.txt
+ln：建立符号连接、硬连接1ln   [s]    已有的    不存在的
+dd：用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换
+https://www.cnblogs.com/fantasyxo/p/10519662.html
+
+12345678if=文件名：输入文件名，缺省为标准输入。......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-mysql的8个变量/">
+                <h2 class="post-title">
+                    mysql的8个变量
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+　本篇会简单介绍在 MySQL 中关于 8个 character_set 变量的基本作用。
+
+　使用下列SQL语句可以查看 MySQL中8个 character_set 变量
+1SHOW VARIABLES LIKE&#39;%char%&#39;;
+8个 character_set 变量：
+　　一、character_set_client
+　　二、character_set_connec......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-mysql编码错进错出解释/">
+                <h2 class="post-title">
+                    mysql编码错进错出解释
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    相关变量123SET character_set_client &#x3D; charset_name;SET character_set_results &#x3D; charset_name;SET character_set_connection &#x3D; charset_name;
+过程复现及原理解释123先假设客户端bash都是utf8SET character_set_cli......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-理解和解决MySQL乱码问题/">
+                <h2 class="post-title">
+                    理解和解决MySQL乱码问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+转载网络好文:http://cenalulu.github.io/mysql/mysql-mojibake/
+本文将详细介绍MySQL乱码的成因和具体的解决方案
+在阅读本文之前，强烈建议对字符集编码概念还比较模糊的同学 阅读下博主之前对相关概念的一篇科普：十分钟搞清字符集和字符编码
+
+MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理解：从客户端发起请求，到MySQL存储数据，再......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
+                <h2 class="post-title">
+                    字库表、编码字符集、字符编码
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1076,318 +1372,6 @@
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/LINUX运维-2022-07-23-linux不同版本的服务管理/">
-                <h2 class="post-title">
-                    linux不同版本的服务管理
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。
-Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。
-
-
-
-
-动作
-Rhel6 旧指令
-Rhel7新指令
-
-
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/LINUX运维-2022-07-23-vim的查找替换总结/">
-                <h2 class="post-title">
-                    vim的查找替换总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-vim的查找替换操作如果能运用熟练是非常提高效率的，我们来重新梳理一下查找与替换的一些操作，方便更好的记忆 。
-
-查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
-
-Vim查找支持正则表达式 /vim$匹配行尾的”vim”。
-需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。
-
-大小写敏......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/LINUX运维-2022-07-23-三剑客常用命令-初级/">
-                <h2 class="post-title">
-                    三剑客常用命令-初级
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-grep、sed、awk号称三剑客，这三条命令对文本处理特别有用，今天来小结一下常用的基础操作，日后再来总结比较难的操作
-
-grep-查找
-查询hello.txt中以字母a开头的内容，这样写也是可以的
-1grep ^a hello.txt
-
-查看test.log中包含http的所有行(-i忽略大小写）
-
-
-1grep -i "http" ./test.log
-
-查询出来对应字符串所在的行号......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/LINUX运维-2022-07-22-查看磁盘和目录空间df和du/">
-                <h2 class="post-title">
-                    查看磁盘和目录空间df和du
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    du和df的区别：12df命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间(最常见的就是文件已经删除，但是程序并没有释放空间)。du命令是面向文件的，只会计算文件或目录占用的
-查看磁盘整体情况查看整体挂载情况1df -h
-
-查看指定目录  1df -h /opt/data/
-
-查看文件夹的占用情况查看当前目录每个文件夹的情况。1du --max-depth=1......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/LINUX运维-2022-07-22-yum换源的详细操作/">
-                <h2 class="post-title">
-                    yum换源的详细操作
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    1yum install wget
-备份原来的源
-1sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk
-下载阿里源
-1cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo
- 更改阿里yu......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/LINUX运维-2022-07-22-yum源解释/">
-                <h2 class="post-title">
-                    yum源解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。
-
-yum是什么，yum源又是什么   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/LINUX运维-2022-07-22-top命令的Load-average-含义及性能参考基值/">
-                <h2 class="post-title">
-                    top命令的Load average 含义及性能参考基值
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                     12$uptime11:12:26 up3:44,4users,load average:0.38,0.31,0.19
-系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：
-
-它没有在等待I/O操作的结果
-它没有主动进入等待状态(也就是没有调用’wait’)
-没有被停止(例如：等待终止)
-
-上面的输出，load average后面分别......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/22/docker-2022-07-22-利用docker部署hadoop集群的记录/">
-                <h2 class="post-title">
-                    利用docker部署hadoop集群的记录
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。
-理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。
-启动容器：
-
-启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了
- 1docker exec -i......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1449,9 +1433,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
     <div class="tags">
         
             
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
             
         
             
@@ -1463,7 +1445,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
             
         
             
@@ -1473,15 +1455,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1490,6 +1464,16 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
         
             
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1511,11 +1495,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
             
         
             
@@ -1525,13 +1505,15 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
         
             
             <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
             
         
             
@@ -1542,6 +1524,8 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
             
         
             
@@ -1567,21 +1551,21 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1611,9 +1595,9 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1688,23 +1672,23 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
     <ul>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
         </li>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
+          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
+          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
         </li>
       
     </ul>
@@ -1719,7 +1703,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1730,35 +1714,35 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
     <div class="widget">
       <ul>
         
-          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Flink"><li>Flink</li></a>
-        
           <a href="categories/#多线程"><li>多线程</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1936,7 +1920,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1946,21 +1930,6 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

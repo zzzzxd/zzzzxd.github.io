@@ -171,7 +171,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -185,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1003,9 +1003,305 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/jvm-2022-09-25-Synchronized锁升级过程/">
+                <h2 class="post-title">
+                    Synchronized锁升级过程
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言Synchronized的经过优化之后，性能提高很多，接下来我们就看一下它的优化原理。
+java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻量级锁和重量级锁。
+在Java HotSpot VM中，每个对象前面都有一个class指针和一个Mark Word。 Mark Word存储了哈希值以及分代年龄和标记位等，通过这些值的变化，JVM可以实现对java对象的不同程度的锁定。
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/jvm-2022-09-25-Synchronized关键字原理/">
+                <h2 class="post-title">
+                    Synchronized关键字原理
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    java聊到并发，synchronized关键字想必肯定是再熟悉不过了，它的使用非常简单，接下来我们就重点看一下使用时候的注意点和原理。
+使用总结
+选用一个锁对象，可以是任意对象；
+锁对象锁的是同步代码块，并不是自己；
+不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象；
+需要同步的代码放到大括号中。需要同步的意思就是需要保证原子性、可......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/jvm-2022-09-25-volatile与可见性/">
+                <h2 class="post-title">
+                    volatile与可见性
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    可见性​    可见性指的是，某个线程对共享变量进行了修改，其它线程能够立刻看到修改后的最新值。乍一听这个定义，你可能会觉得这不是废话吗？变量被修改了，线程当然能够立刻读取到！否则即使单线程的程序也会出问题啊！没错，变量被修改后，在本线程中确实能够立刻被看到，但并不保证别的线程会立刻看到。原因就是编程领域经典的两大难题之一——缓存一致性。
+观察可见性123456789101112131415......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/24/jvm-2022-09-24-有序性与内存屏障/">
+                <h2 class="post-title">
+                    有序性与内存屏障
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    并发三大特性所有讲并发编程的书籍都会讲到并发编程的三大特性，这是并发编程中所有问题的根源，我们只有深刻理解了这三大特性，才不会编写出漏洞百出的并发程序，才不会遇到问题时无从下手，才不会对自己的程序没有信心。
+这三大特性是：
+
+原子性 : 所有操作要么全部成功，要么全部失败。
+可见性: 一个线程对变量进行了修改，另外一个线程能够立刻读取到此变量的最新值。
+
+有序性: 代码在执行阶段，并不一定和......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/24/jvm-2022-09-24-JMM与缓存一致性/">
+                <h2 class="post-title">
+                    JMM与缓存一致性
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    随着CPU的不断发展，CPU的性能越来越强大，但受迫于频率提升的困难，现代CPU架构开始向多核发展。而作为软件开发人员为了充分使用CPU的性能，越来越多的开发者会选择多线程程序开发。CPU在计算时会做一些优化，这些优化对于单线程程序来说是没有问题的，但对多线程程序则不是那么的友好。接下来我们就从硬件底层来看一下硬件对多线程并发的影响。
+硬件层的并发优化首先，我们来看一下硬件上的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/24/jvm-2022-09-24-Class加载过程/">
+                <h2 class="post-title">
+                    Class加载过程
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言    
+在java中当我们使用某个类的时候，首先做的就是把.class文件从硬盘中加载到内存中，这一步称为加载的过程，但实际上，要做的工作不止这一些，接下来我们看一下，在一个类被使用前要做哪些准备工作呢。
+Loading类加载器特点
+全盘负责：当一个类加载器加载一个类时，该类所依赖的其他类也会被这个类加载器加载到内存中。
+缓存机制：所有的Class对象都会被缓存，当程序需要使用某个Cl......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/23/JUC-2022-09-23-JUC包下的新型锁/">
+                <h2 class="post-title">
+                    JUC包下的新型锁
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ReentrantLock概念​    可重入锁，就是拿到锁之后，还可以对此锁再拿一次，一层一层的加，synchronized本身就是可重入锁的一种
+需要注意的地方
+可以代替synchronied关键字，只需要在使用synchronized关键字的地方使用lock.lock()方法
+synchronized关键字是自动解锁的，但是reen必须手动解锁
+特别注意对于异常的处理，sync遇到异常......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/23/JUC-2022-09-23-Atomic类与CAS分析/">
+                <h2 class="post-title">
+                    Atomic类与CAS分析
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Atomic 简介Atomic 相关类在 java.util.concurrent.atomic 包中。针对不同的原生类型及引用类型，有 AtomicInteger、AtomicLong、AtomicBoolean、AtomicReference 等。另外还有数组对应类型 AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray。由于 A......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1082,315 +1378,6 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/22/微服务-2022-09-22-缓存使用总结/">
-                <h2 class="post-title">
-                    缓存使用总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    缓存缓存使用为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。而 db 承担数据落 盘工作。 哪些数据适合放入缓存？ 
-
-即时性、数据一致性要求不高的 
-
-访问量大且更新频率不高的数据（读多，写少）
- 举例：电商类应用，商品分类，商品列表等适合缓存并加一个失效时间(根据数据更新频率 来定)，后台如果发布一个商品，买家需要 5 分钟才能看到新的商品一般还是可以接受的。
-
-
-
-12......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#缓存" title="缓存">缓存</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/22/Redis-2022-09-22-Redis无主模式集群/">
-                <h2 class="post-title">
-                    Redis无主模式集群
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-前面的文章我们讲了Redis的主从复制模式，它是来解决单点故障问题，从节点是主节点的备份，只读。这样一来就难解决容量问题，从AKF的原则讲，我们可以从y轴、Z轴来考虑搭建不同的集群来解决这个问题。接下来我们仔细的探讨下这个问题。
-
-功能划分在AKF Y轴方向，我们可以从业务的角度出发，用户功能一个redis实例，订单功能一个redis实例,在业务端进行实例的区分。
-
-数据分区不同的功能......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/21/微服务-2022-09-21-rabbitMq-实现定时任务/">
-                <h2 class="post-title">
-                    rabbitMq 实现定时任务
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-利用RabbitMq的死信特点，可以对过期消息进行单独处理，从而实现一个定时处理的任务。
-
-定时任务场景：
-​    比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 
-常用解决方案：  spring的 schedule 定时任务轮询数据库 
-缺点：消耗系统内存、增加了数据库的压力、存在较大的时间误差
-解决：rabbitmq的消息TTL和死信Exchange结合
-Rab......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#RabbitMQ" title="RabbitMQ">RabbitMQ</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/21/Redis-2022-09-21-Redission-信号量/">
-                <h2 class="post-title">
-                    Redission 信号量
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-信号量大家应该够不陌生，比如操作系统中的pv信号量，依据功能还可以分成同步信号量、互斥信号量。由于redis是单进程，天生具有锁的这个特性，而redisson更是对redis做了一层包装，使得api接口更适用。今天我们就看一下redisson基于redis做的信号量。
-
-Redisson信号量​    Redisson的分布式信号量（Semaphore）Java对象 RSemaphor......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/21/Redis-2022-09-21-Redis主从复制集群/">
-                <h2 class="post-title">
-                    Redis主从复制集群
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-主从复制，主要解决的是单点问题，从节点是主节点的备份，只读不能写，主节点可以读写。实际就是AKF原则中X轴的实现。但主从节点需要数据同步，就牵涉到数据一致性的问题，我们来看一下，集群主从集群需要注意的问题，以及redis是如何做的。
-
-数据一致性问题既然有从节点需要同步主节点数据，就涉及到一致性问题。
-
-强一致性（线性一致性）：即复制是同步的
-弱一致性：即复制是异步的
-
-强一致性所谓强......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/20/Redis-2022-09-20-集群原理/">
-                <h2 class="post-title">
-                    集群原理-AKF原则
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-我们在实际的工作中用到的组建通常会以集群的形式出现，目的就是解决单实例无法处理的情况，今天我们从AKF原则入手，总结一下 集群搭建的原理及要解决的问题。
-
-AKF原则初识AKFAKF原则是微服务拆分原则四条原则中的第一条，个人认为集群的搭建基本都是围绕AKF展开的。我们先思考单实例遇到的问题
-
-单点故障。一个实例挂掉，服务直接不可用了。
-容量问题。以redis为例，一个实例可能10g的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/20/jvm-2022-09-20-Jstack-应用/">
-                <h2 class="post-title">
-                    Jstack 应用
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    jstack 参数1234567891011121314151617/opt/java8/bin/jstackUsage:    jstack [-l] &lt;pid&gt;        (to connect to running process) 连接活动线程    jstack -F [-m] [-l] &lt;pid&gt;        (to connect to a hun......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/20/Redis-2022-09-20-Redis应用-分布式锁实现/">
-                <h2 class="post-title">
-                    Redis应用 分布式锁实现
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言
-Redis 除了做缓存、内存数据库之外，由于有线程的特性，经常可以拿来做分布式锁 、信号量等，应用起来也十分方便，我们来看一下一个分布式锁的简单实现。
-
-Redis实现
-用redis实现分布式锁，其实我们要重点考虑3个方面问题：加锁、解锁、锁续期
-
-加锁加锁要考虑的问题是，如果当前线程加锁之后挂掉了，相当于抱锁睡了，所以此时加锁时候 应该设置过期时间，保证能自动解锁。同时要注意应该是一......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1452,9 +1439,7 @@ Redis实现
     <div class="tags">
         
             
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
             
         
             
@@ -1466,7 +1451,7 @@ Redis实现
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
             
         
             
@@ -1476,15 +1461,7 @@ Redis实现
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1493,6 +1470,16 @@ Redis实现
         
             
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1514,11 +1501,7 @@ Redis实现
             
         
             
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
             
         
             
@@ -1528,13 +1511,15 @@ Redis实现
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
         
             
             <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
             
         
             
@@ -1545,6 +1530,8 @@ Redis实现
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
             
         
             
@@ -1570,21 +1557,21 @@ Redis实现
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1614,9 +1601,9 @@ Redis实现
             
         
             
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1691,23 +1678,23 @@ Redis实现
     <ul>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
         </li>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
+          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
+          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
         </li>
       
     </ul>
@@ -1722,7 +1709,7 @@ Redis实现
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1733,35 +1720,35 @@ Redis实现
     <div class="widget">
       <ul>
         
-          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Flink"><li>Flink</li></a>
-        
           <a href="categories/#多线程"><li>多线程</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1939,7 +1926,7 @@ Redis实现
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1949,21 +1936,6 @@ Redis实现
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

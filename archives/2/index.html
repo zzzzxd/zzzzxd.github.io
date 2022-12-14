@@ -171,7 +171,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -185,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1003,9 +1003,319 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/10/09/hive-2022-10-09-hive中四种有效的SQL优化/">
+                <h2 class="post-title">
+                    hive中四种有效的SQL优化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    数据准备首先虚拟一张表user，字段为：
+（1）user_id（用户的id）；
+（2）age（用户的年龄）；
+（3）sex（用户的性别）；
+（4）order_id（用户的订单编号，一个用户可能有多个订单编号）。
+另设一张表，叫order，里面包含order_id, order_date两个字段。
+multi-table-insert优化union all原SQL（目标是往一个新表user_n......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-10-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hive" title="Hive">Hive</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/10/09/Flink-2022-10-09-checkpoint的生产配置/">
+                <h2 class="post-title">
+                    checkpoint的生产配置
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Checkpoint相关配置
+
+
+
+配置项
+含义
+
+
+
+
+state.backend
+状态存储后端，可配置值有’jobmanager’, ‘filesystem’, ‘rocksdb’等，在checkpoint数据存储在hdfs上时，配置该值为filesystem
+
+
+state.checkpoints.dir
+checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-10-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/10/09/Flink-2022-10-09-异步IO/">
+                <h2 class="post-title">
+                    异步IO
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言通常情况我们在进行维表关联时，是进行同步的查询，为了提高吞吐率，提高处理的数据量，可以利用异步的查询，但是有一个问题，异步访问的后的结果 如何反回到主流中？这就需要Flink给我们提供支持了。我们看一下官网的介绍。
+
+前置准备引用官网的一段话:
+123As illustrated in the section above, implementing proper asynchronous......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-10-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture详解/">
+                <h2 class="post-title">
+                    CompletableFuture详解
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    CompletableFuture介绍Future 是 Java 5 添加的类，用来描述一个异步计算的结果。你可以使用isDone方法检查计算是否完成，或者使用get阻塞住调用线程，直到计算完成返回结果，你也可以使用cancel 方法停止任务的执行。
+虽然Future以及相关使用方法提供了异步执行任务的能力，但是对于结果的获取却是很不 方便，只能通过阻塞或者轮询的方式得到任务的结果。阻塞的方......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-27
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/27/JUC-2022-09-27-Future模式/">
+                <h2 class="post-title">
+                    Future模式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Future模式​    我们了解的Thread 和 runnable，实现多线程的方式是新起线程运行 run 方法，但是 run 方法有个缺陷是没有返回值，并且主线程也并不知道新的线程何时运行完毕。Future 持有要运行的任 务，以及任务的结果。主线程只要声明了 Future 对象，并且启动新的线程运行他。那么随时能通过 Future 对象获 取另外线程运行的结果。
+使用​    我们通......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-27
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/26/IO-2022-09-26-从Reactor模式到Netty架构演进/">
+                <h2 class="post-title">
+                    从Reactor模式到Netty架构演进
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    单线程ReactorReactor模型的朴素原型之前的文章探讨过IO模型，其中最优化的是基于多路复用器的NIO。Java的NIO模式的Selector网络通讯，其实就是一个简单的Reactor模型。可以说是Reactor模型的朴素原型。
+我们再来回顾一下代码
+1234567891011121314151617181920212223242526272829303132333435363738......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-26
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/IO-2022-09-25-网络IO模型/">
+                <h2 class="post-title">
+                    网络IO-BIO、NIO
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言都是需求推动发展，网络IO模型也是一样，IO的发展都是围绕C10问题。总的来说就是如何建立高并发的连接。接下来我就看一下IO模型从最初的阻塞BIO到NIO再到多路复用器，一步一步如何发展过来。
+BIO概念
+看上图，所谓的BIO就是 阻塞式IO，需要一个线程监听端口，这个线程只能阻塞式的监听，再也不能干别的，当有连接上来时，linux建立对应的连接（注意这一步时内核干的，其实应用层的线程没......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/IO-2022-09-25-DMA与零拷贝技术/">
+                <h2 class="post-title">
+                    DMA与零拷贝技术
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+注意事项：除了 Direct I/O，与磁盘相关的文件读写操作都有使用到 page cache 技术。
+
+数据的四次拷贝与四次上下文切换很多应用程序在面临客户端请求时，可以等价为进行如下的系统调用：
+
+File.read(file, buf, len);
+Socket.send(socket, buf, len);
+
+例如消息中间件 Kafka 就是这个应用场景，从磁盘中读取一批消息后原封......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1087,286 +1397,6 @@ class initializing- 静态变量赋初始值
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/25/jvm-2022-09-25-Synchronized锁升级过程/">
-                <h2 class="post-title">
-                    Synchronized锁升级过程
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言Synchronized的经过优化之后，性能提高很多，接下来我们就看一下它的优化原理。
-java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻量级锁和重量级锁。
-在Java HotSpot VM中，每个对象前面都有一个class指针和一个Mark Word。 Mark Word存储了哈希值以及分代年龄和标记位等，通过这些值的变化，JVM可以实现对java对象的不同程度的锁定。
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/25/jvm-2022-09-25-Synchronized关键字原理/">
-                <h2 class="post-title">
-                    Synchronized关键字原理
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言​    java聊到并发，synchronized关键字想必肯定是再熟悉不过了，它的使用非常简单，接下来我们就重点看一下使用时候的注意点和原理。
-使用总结
-选用一个锁对象，可以是任意对象；
-锁对象锁的是同步代码块，并不是自己；
-不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象；
-需要同步的代码放到大括号中。需要同步的意思就是需要保证原子性、可......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/25/jvm-2022-09-25-volatile与可见性/">
-                <h2 class="post-title">
-                    volatile与可见性
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    可见性​    可见性指的是，某个线程对共享变量进行了修改，其它线程能够立刻看到修改后的最新值。乍一听这个定义，你可能会觉得这不是废话吗？变量被修改了，线程当然能够立刻读取到！否则即使单线程的程序也会出问题啊！没错，变量被修改后，在本线程中确实能够立刻被看到，但并不保证别的线程会立刻看到。原因就是编程领域经典的两大难题之一——缓存一致性。
-观察可见性123456789101112131415......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/24/jvm-2022-09-24-有序性与内存屏障/">
-                <h2 class="post-title">
-                    有序性与内存屏障
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    并发三大特性所有讲并发编程的书籍都会讲到并发编程的三大特性，这是并发编程中所有问题的根源，我们只有深刻理解了这三大特性，才不会编写出漏洞百出的并发程序，才不会遇到问题时无从下手，才不会对自己的程序没有信心。
-这三大特性是：
-
-原子性 : 所有操作要么全部成功，要么全部失败。
-可见性: 一个线程对变量进行了修改，另外一个线程能够立刻读取到此变量的最新值。
-
-有序性: 代码在执行阶段，并不一定和......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/24/jvm-2022-09-24-JMM与缓存一致性/">
-                <h2 class="post-title">
-                    JMM与缓存一致性
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言​    随着CPU的不断发展，CPU的性能越来越强大，但受迫于频率提升的困难，现代CPU架构开始向多核发展。而作为软件开发人员为了充分使用CPU的性能，越来越多的开发者会选择多线程程序开发。CPU在计算时会做一些优化，这些优化对于单线程程序来说是没有问题的，但对多线程程序则不是那么的友好。接下来我们就从硬件底层来看一下硬件对多线程并发的影响。
-硬件层的并发优化首先，我们来看一下硬件上的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/24/jvm-2022-09-24-Class加载过程/">
-                <h2 class="post-title">
-                    Class加载过程
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言    
-在java中当我们使用某个类的时候，首先做的就是把.class文件从硬盘中加载到内存中，这一步称为加载的过程，但实际上，要做的工作不止这一些，接下来我们看一下，在一个类被使用前要做哪些准备工作呢。
-Loading类加载器特点
-全盘负责：当一个类加载器加载一个类时，该类所依赖的其他类也会被这个类加载器加载到内存中。
-缓存机制：所有的Class对象都会被缓存，当程序需要使用某个Cl......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/23/JUC-2022-09-23-JUC包下的新型锁/">
-                <h2 class="post-title">
-                    JUC包下的新型锁
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ReentrantLock概念​    可重入锁，就是拿到锁之后，还可以对此锁再拿一次，一层一层的加，synchronized本身就是可重入锁的一种
-需要注意的地方
-可以代替synchronied关键字，只需要在使用synchronized关键字的地方使用lock.lock()方法
-synchronized关键字是自动解锁的，但是reen必须手动解锁
-特别注意对于异常的处理，sync遇到异常......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/23/JUC-2022-09-23-Atomic类与CAS分析/">
-                <h2 class="post-title">
-                    Atomic类与CAS分析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Atomic 简介Atomic 相关类在 java.util.concurrent.atomic 包中。针对不同的原生类型及引用类型，有 AtomicInteger、AtomicLong、AtomicBoolean、AtomicReference 等。另外还有数组对应类型 AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray。由于 A......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1428,9 +1458,7 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
     <div class="tags">
         
             
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
             
         
             
@@ -1442,7 +1470,7 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
             
         
             
@@ -1452,15 +1480,7 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1469,6 +1489,16 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
         
             
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1490,11 +1520,7 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
             
         
             
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
             
         
             
@@ -1504,13 +1530,15 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
         
             
             <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
             
         
             
@@ -1521,6 +1549,8 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
             
         
             
@@ -1546,21 +1576,21 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1590,9 +1620,9 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
             
         
             
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1667,23 +1697,23 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
     <ul>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
         </li>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
+          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
+          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
         </li>
       
     </ul>
@@ -1698,7 +1728,7 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1709,35 +1739,35 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
     <div class="widget">
       <ul>
         
-          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Flink"><li>Flink</li></a>
-        
           <a href="categories/#多线程"><li>多线程</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1915,7 +1945,7 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1925,21 +1955,6 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

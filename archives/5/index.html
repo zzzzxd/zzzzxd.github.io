@@ -171,7 +171,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -185,7 +185,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1003,9 +1003,319 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/16/jvm-2022-09-16-minorGC前后的几种特殊情况/">
+                <h2 class="post-title">
+                    minorGC前后的几种特殊情况
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    大对象直接进入老年代 相关参数 -XX:PretenureSizeThreshold
+动态年龄判断 minor gc 后，一批对象总大小超过了 survivor 区的 50%，那么就让大于等于这批对象年龄的对象直接进入老年代 具体规则是，从年龄1的对象开始，把 年龄1 + 年龄2 + 年龄n 多个年龄的对象的总和超过survivor区的50%，就此时就会把年龄 n 以上的对象放入老年代
+老年......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-16
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/16/jvm-2022-09-16-FullGC的发生时机/">
+                <h2 class="post-title">
+                    FullGC的发生时机
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Major GC / Full GC基于分代收集理论，目前的JVM堆内存大多分为了==新生代、老年代、方法区==。
+JVM在进行GC时，并非每次都对上面三个内存区域（新生代、老年代；方法区）一起回收的，大部分时候回收的都是指新生代。
+针对Hotspot VM的实现，它里面的GC按照回收区域又分为两大种类型：一种是部分收集（Partial GC），一种是整堆收集（Full GC）。
+部分收集：......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-16
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/15/jvm-2022-09-15-JVM参数分类/">
+                <h2 class="post-title">
+                    JVM参数分类
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    JVM参数分类
+
+
+
+类别
+说明
+
+
+
+
+标准参数（-）
+所有的JVM实现都必须实现这些参数的功能，而且向后兼容；
+
+
+非标准参数（-X）
+这些参数不是虚拟机规范规定的。因此，不是所有VM的实现(如:HotSpot,JRockit,J9等)都支持这些配置参数。
+
+
+非稳定参数（-XX）
+这些参数是虚拟机规范中规定的。这些参数指定虚拟机实例在运行时的各种行为，从而对虚拟机的运行时性能有很大影响......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/08/17/JSON字符串的嵌套机制/">
+                <h2 class="post-title">
+                    JSON字符串的嵌套机制
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    转义机制的嵌套：转义机制被任意嵌套、组合，只要识别方的处理逻辑是正确的，就不会发生命令识别错误或数据识别错误。转义机制是一个安全性完备的机制。
+每增加一层转义机制，就需要增加一层还原机制。
+JSON字符串的多层嵌套12345678910111213141516171819202122232425&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-08-17
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JSON" title="JSON">JSON</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/08/02/Mac必备工具之brew/">
+                <h2 class="post-title">
+                    Mac必备工具之brew
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具
+
+安装可以使用如下命令进行安装:
+1/usr/bin/ruby -e "$(curl -fsSL https://raw......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-08-02
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/24/数据结构与算法-2022-07-24-组合数计算的方法总结/">
+                <h2 class="post-title">
+                    组合数计算的方法总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-24
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/24/数据结构与算法-2022-07-24-算法题目中常见的计算技巧总结/">
+                <h2 class="post-title">
+                    算法题目中常见的计算技巧总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+今天我们对算法题目中与数学运算相关的一些常用的知识进行简单总结，需要刻意记忆，如果对相关知识点不熟悉需要翻越更详细的资料。
+
+最大公约数与最小公倍数最大公约数正整数a,b的最大公约数是指a与b的所有公约数中最大的那个公约数。求解最大公约数常用的是欧几里得算法(即辗转相除法),假设 a,b 均为正整数，则gcd=(a,b) = gcd(b,a%b)
+代码如下:
+123int gcd(int ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#MATH" title="MATH">MATH</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/24/问题-2022-07-24-log4j日志不输出/">
+                <h2 class="post-title">
+                    log4j日志不输出
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    问题log4j日志不输出，或者没有按照预定的级别输出
+常见原因原因一：配置文件没配置对，这种低级错误就不说了
+原因二：依赖冲突
+​    多半是因为，引入的底层实现类出现了冲突，这样就得排查maven的冲突，那怎么知道哪些冲突了呢？如果
+真是一点一点查，那就麻烦了，注意，一定要看提示
+12345SLF4J: Class path contains multiple SLF4J binding......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1065,286 +1375,6 @@
                 <div class="tags">
                     
                       <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/network-2022-07-23-TCP拆包与粘包/">
-                <h2 class="post-title">
-                    TCP拆包与粘包
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    粘包产生的原因如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。
-传输层的UDP协议是否会发生粘包或者拆包问题？​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
-传输层的TCP协议是否会......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#TCP" title="TCP">TCP</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/ssm-2022-07-23-自定义注解/">
-                <h2 class="post-title">
-                    自定义注解
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    概念​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/jvm-2022-07-23-常量池/">
-                <h2 class="post-title">
-                    常量池
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-提到常量池一直容易混，今天一次性彻底搞定。
-
-class文件常量池（class constant pool）我们都知道，class文件中除了包含类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池(constant pool table)，用于存放编译器生成的各种字面量(Literal)和符号引用(Symbolic References)。字面量就是我们所说的常量概念，如文本字符......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/IO-2022-07-23-IO实验的一些常用命令总结/">
-                <h2 class="post-title">
-                    IO实验的一些常用命令总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    必须熟练使用的指令以及注意事项
-stat：可以查看文件的详细信息 1stat msb.txt
-ln：建立符号连接、硬连接1ln   [s]    已有的    不存在的
-dd：用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换
-https://www.cnblogs.com/fantasyxo/p/10519662.html
-
-12345678if=文件名：输入文件名，缺省为标准输入。......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#IO" title="IO">IO</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-mysql的8个变量/">
-                <h2 class="post-title">
-                    mysql的8个变量
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-　本篇会简单介绍在 MySQL 中关于 8个 character_set 变量的基本作用。
-
-　使用下列SQL语句可以查看 MySQL中8个 character_set 变量
-1SHOW VARIABLES LIKE&#39;%char%&#39;;
-8个 character_set 变量：
-　　一、character_set_client
-　　二、character_set_connec......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-mysql编码错进错出解释/">
-                <h2 class="post-title">
-                    mysql编码错进错出解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    相关变量123SET character_set_client &#x3D; charset_name;SET character_set_results &#x3D; charset_name;SET character_set_connection &#x3D; charset_name;
-过程复现及原理解释123先假设客户端bash都是utf8SET character_set_cli......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-理解和解决MySQL乱码问题/">
-                <h2 class="post-title">
-                    理解和解决MySQL乱码问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-转载网络好文:http://cenalulu.github.io/mysql/mysql-mojibake/
-本文将详细介绍MySQL乱码的成因和具体的解决方案
-在阅读本文之前，强烈建议对字符集编码概念还比较模糊的同学 阅读下博主之前对相关概念的一篇科普：十分钟搞清字符集和字符编码
-
-MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理解：从客户端发起请求，到MySQL存储数据，再......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
-                <h2 class="post-title">
-                    字库表、编码字符集、字符编码
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1415,9 +1445,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <div class="tags">
         
             
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="11">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
             
         
             
@@ -1429,7 +1457,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
             
         
             
@@ -1439,15 +1467,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1456,6 +1476,16 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1477,11 +1507,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
             
         
             
@@ -1491,13 +1517,15 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
         
             
             <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
             
         
             
@@ -1508,6 +1536,8 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
             
         
             
@@ -1533,21 +1563,21 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -1577,9 +1607,9 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1654,23 +1684,23 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <ul>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%9A%8412%E4%BD%8D%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB/">Linux的12位权限体系</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
         </li>
       
         <li>
-          <a href="/2022/12/13/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">Linux用户管理</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/hive-2022-10-09-hive%E4%B8%AD%E5%9B%9B%E7%A7%8D%E6%9C%89%E6%95%88%E7%9A%84SQL%E4%BC%98%E5%8C%96/">hive中四种有效的SQL优化</a>
+          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-checkpoint%E7%9A%84%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE/">checkpoint的生产配置</a>
+          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
         </li>
       
         <li>
-          <a href="/2022/10/09/Flink-2022-10-09-%E5%BC%82%E6%AD%A5IO/">异步IO</a>
+          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
         </li>
       
     </ul>
@@ -1685,7 +1715,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1696,35 +1726,35 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <div class="widget">
       <ul>
         
-          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#工作技巧"><li>工作技巧</li></a>
+        
+          <a href="categories/#Flink"><li>Flink</li></a>
         
           <a href="categories/#IO"><li>IO</li></a>
         
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#Flink"><li>Flink</li></a>
-        
           <a href="categories/#多线程"><li>多线程</li></a>
-        
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Hbase"><li>Hbase</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
+          <a href="categories/#Hbase"><li>Hbase</li></a>
+        
+          <a href="categories/#jvm"><li>jvm</li></a>
+        
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
           <a href="categories/#Hive"><li>Hive</li></a>
+        
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1902,7 +1932,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1912,21 +1942,6 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
