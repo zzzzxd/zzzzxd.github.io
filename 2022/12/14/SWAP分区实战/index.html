@@ -112,6 +112,8 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
+                            
                         </div>
                         <h1>SWAP分区实战</h1>
                         <h2 class="subheading"></h2>
@@ -123,8 +125,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">0</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">631</span> and
+                                Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -185,7 +187,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -199,7 +201,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -268,7 +270,16 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>swap 交换分区.内存不足的时候临时充当内存.</p>
+<h2 id="创建swap分区"><a href="#创建swap分区" class="headerlink" title="创建swap分区"></a>创建swap分区</h2><h3 id="通过文件创建swap分区"><a href="#通过文件创建swap分区" class="headerlink" title="通过文件创建swap分区"></a>通过文件创建swap分区</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@linx01 ~]# dd if=/dev/zero of=/tmp/t count=100 bs=10M</span><br><span class="line">记录了100+0 的读入</span><br><span class="line">记录了100+0 的写出</span><br><span class="line">1048576000字节(1.0 GB)已复制，1.28384 秒，817 MB/秒</span><br><span class="line">[root@linx01 ~]# swapon</span><br><span class="line">NAME      TYPE       SIZE  USED PRIO</span><br><span class="line">/dev/sda3 partition 1020M 43.5M   -2</span><br><span class="line">[root@linx01 ~]# mkswap /tmp/t</span><br><span class="line">正在设置交换空间版本 1，大小 = 1023996 KiB</span><br><span class="line">无标签，UUID=ca9c6c30-32b3-4236-89bc-ee396dff8bec</span><br><span class="line">[root@linx01 ~]# swapon</span><br><span class="line">NAME      TYPE       SIZE  USED PRIO</span><br><span class="line">/dev/sda3 partition 1020M 43.5M   -2</span><br><span class="line">[root@linx01 ~]# swapon /tmp/t</span><br><span class="line">swapon: /tmp/t：不安全的权限 0644，建议使用 0600。</span><br><span class="line">[root@linx01 ~]# swapon</span><br><span class="line">NAME      TYPE       SIZE  USED PRIO</span><br><span class="line">/dev/sda3 partition 1020M 43.5M   -2</span><br><span class="line">/tmp/t    file      1000M    0B   -3</span><br></pre></td></tr></table></figure>
+<h3 id="通过磁盘分区创建swap"><a href="#通过磁盘分区创建swap" class="headerlink" title="通过磁盘分区创建swap"></a>通过磁盘分区创建swap</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">创建 1G分区</span></span><br><span class="line">[root@linx01 ~]# fdisk /dev/sdb</span><br><span class="line">欢迎使用 fdisk (util-linux 2.23.2)。</span><br><span class="line"></span><br><span class="line">更改将停留在内存中，直到您决定将更改写入磁盘。</span><br><span class="line">使用写入命令前请三思。</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p):      </span><br><span class="line">Using default response p</span><br><span class="line">分区号 (1-4，默认 1)：</span><br><span class="line">起始 扇区 (2048-10485759，默认为 2048)：</span><br><span class="line">将使用默认值 2048</span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (2048-10485759，默认为 10485759)：+1G</span><br><span class="line">分区 1 已设置为 Linux 类型，大小设为 1 GiB</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：w</span><br><span class="line">The partition table has been altered!</span><br><span class="line"></span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line"></span><br><span class="line">WARNING: Re-reading the partition table failed with error 16: 设备或资源忙.</span><br><span class="line">The kernel still uses the old table. The new table will be used at</span><br><span class="line">the next reboot or after you run partprobe(8) or kpartx(8)</span><br><span class="line">正在同步磁盘。</span><br><span class="line"><span class="meta">#</span><span class="bash">格式化 swap分区</span></span><br><span class="line">[root@linx01 ~]# mkswap /dev/sdb1</span><br><span class="line">mkswap: /dev/sdb1: warning: wiping old xfs signature.</span><br><span class="line">正在设置交换空间版本 1，大小 = 5241852 KiB</span><br><span class="line">无标签，UUID=60ad3453-f89f-4c83-867f-68a93e95eccf</span><br><span class="line">[root@linx01 ~]# swapon</span><br><span class="line">NAME      TYPE       SIZE USED PRIO</span><br><span class="line">/dev/sda3 partition 1020M  54M   -2</span><br><span class="line">/tmp/t    file      1000M   0B   -3</span><br><span class="line"><span class="meta">#</span><span class="bash">激活交换分区</span></span><br><span class="line">[root@linx01 ~]# swapon /dev/sdb1</span><br><span class="line">[root@linx01 ~]# swapon</span><br><span class="line">NAME      TYPE       SIZE USED PRIO</span><br><span class="line">/dev/sda3 partition 1020M  54M   -2</span><br><span class="line">/tmp/t    file      1000M   0B   -3</span><br><span class="line">/dev/sdb1 partition    5G   0B   -4</span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li><p>创建swap分区的流程主要就三步： 创建分区（文件或磁盘分区）、格式化swap文件系统、激活swap分区对应的命令是 fdisk(dd)、mkswap、swapon</p>
+</li>
+<li><p>swap分区是内存不够用了 没办法的事情，通常情况，我们不会用，尤其云服务器默认就不带swap分区的，因为云服务器扩资源比较容易。不仅如此，如果有发现 swap分区占用，内存还很充足 就要降低swap的使用度在/etc/sysctl.conf 文件里添加如下参数：vm.swappiness=10</p>
+</li>
+</ul>
+
                 
                 <hr>
                 <!-- Pager -->
@@ -388,6 +399,17 @@
 
     
       
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">概述</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建swap分区"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">创建swap分区</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通过文件创建swap分区"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">通过文件创建swap分区</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通过磁盘分区创建swap"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">通过磁盘分区创建swap</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#小结"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">小结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
     
 
                 
@@ -404,6 +426,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
+                        
                     </div>
                 </section>
                 
@@ -606,7 +630,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -616,6 +640,21 @@
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

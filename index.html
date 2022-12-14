@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -178,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -1076,7 +1076,9 @@
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言 工作中可能会遇到no space left on device 这个问题  也就是磁盘满了，原因有很多种，下面进行分析并对问题进行复现，最后对排查问题的方法以及使用到的命令进行总结。
+原因大文件造成block不足这种算是真实的磁盘用满了
+复现1234567891011121314151617181920[root@linx01 ~]# df -h文件系统        容量  已用  ......
                 </div>
             </a>
             
@@ -1143,7 +1145,8 @@
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    概述swap 交换分区.内存不足的时候临时充当内存.
+创建swap分区通过文件创建swap分区12345678910111213141516171819[root@linx01 ~]# dd if=/dev/zero of=/tmp/t count=100 bs=10M记录了100+0 的读入记录了100+0 的写出1048576000字节(1.0 GB)已复制，1.28384 秒，817 ......
                 </div>
             </a>
             
@@ -1152,6 +1155,8 @@
                     2022-12-14
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1488,7 +1493,7 @@ uid是1-999......
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="15">LINUX</a>
+            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
             
         
             
@@ -1497,6 +1502,12 @@ uid是1-999......
         
             
         
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1510,7 +1521,15 @@ uid是1-999......
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1534,25 +1553,15 @@ uid是1-999......
             
         
             
-        
-            
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
             
         
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
             
         
             
@@ -1572,15 +1581,11 @@ uid是1-999......
             
         
             
-        
-            
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
             
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1606,27 +1611,25 @@ uid是1-999......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
-            <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+        
             
         
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
             
         
             
@@ -1650,9 +1653,11 @@ uid是1-999......
             
         
             
-            <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+        
             
         
+            
+            <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
             
         
             
@@ -1779,9 +1784,11 @@ uid是1-999......
         
           <a href="categories/#IO"><li>IO</li></a>
         
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#多线程"><li>多线程</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
@@ -1789,15 +1796,13 @@ uid是1-999......
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#Hive"><li>Hive</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
@@ -1975,7 +1980,7 @@ uid是1-999......
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -1985,6 +1990,21 @@ uid是1-999......
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

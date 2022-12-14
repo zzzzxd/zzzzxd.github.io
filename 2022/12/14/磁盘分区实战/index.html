@@ -187,7 +187,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -201,7 +201,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -288,13 +288,38 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">[root@linx01 dev]# fdisk /dev/sdb</span><br><span class="line">欢迎使用 fdisk (util-linux 2.23.2)。</span><br><span class="line"></span><br><span class="line">更改将停留在内存中，直到您决定将更改写入磁盘。</span><br><span class="line">使用写入命令前请三思。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：p</span><br><span class="line"></span><br><span class="line">磁盘 /dev/sdb：5368 MB, 5368709120 字节，10485760 个扇区</span><br><span class="line">Units = 扇区 of 1 * 512 = 512 bytes</span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 512 字节</span><br><span class="line">I/O 大小(最小/最佳)：512 字节 / 512 字节</span><br><span class="line">磁盘标签类型：dos</span><br><span class="line">磁盘标识符：0xf6a444cb</span><br><span class="line"></span><br><span class="line">   设备 Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1            2048      206847      102400   83  Linux</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：d</span><br><span class="line">已选择分区 1</span><br><span class="line">分区 1 已删除</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): p</span><br><span class="line">分区号 (1-4，默认 1)：</span><br><span class="line">起始 扇区 (2048-10485759，默认为 2048)：</span><br><span class="line">将使用默认值 2048</span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (2048-10485759，默认为 10485759)：+500M  </span><br><span class="line">分区 1 已设置为 Linux 类型，大小设为 500 MiB</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (1 primary, 0 extended, 3 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): e</span><br><span class="line">分区号 (2-4，默认 2)：</span><br><span class="line">起始 扇区 (1026048-10485759，默认为 1026048)：</span><br><span class="line">将使用默认值 1026048</span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (1026048-10485759，默认为 10485759)：+2G</span><br><span class="line">分区 2 已设置为 Extended 类型，大小设为 2 GiB</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (1 primary, 1 extended, 2 free)</span><br><span class="line">   l   logical (numbered from 5)</span><br><span class="line">Select (default p): l</span><br><span class="line">添加逻辑分区 5</span><br><span class="line">起始 扇区 (1028096-5220351，默认为 1028096)：</span><br><span class="line">将使用默认值 1028096</span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (1028096-5220351，默认为 5220351)：+1G</span><br><span class="line">分区 5 已设置为 Linux 类型，大小设为 1 GiB</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (1 primary, 1 extended, 2 free)</span><br><span class="line">   l   logical (numbered from 5)</span><br><span class="line">Select (default p): l</span><br><span class="line">添加逻辑分区 6</span><br><span class="line">起始 扇区 (3127296-5220351，默认为 3127296)：</span><br><span class="line">将使用默认值 3127296</span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (3127296-5220351，默认为 5220351)：+1G</span><br><span class="line">值超出范围。</span><br><span class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (3127296-5220351，默认为 5220351)：+500M  </span><br><span class="line">分区 6 已设置为 Linux 类型，大小设为 500 MiB</span><br><span class="line">命令(输入 m 获取帮助)：p</span><br><span class="line"></span><br><span class="line">磁盘 /dev/sdb：5368 MB, 5368709120 字节，10485760 个扇区</span><br><span class="line">Units = 扇区 of 1 * 512 = 512 bytes</span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 512 字节</span><br><span class="line">I/O 大小(最小/最佳)：512 字节 / 512 字节</span><br><span class="line">磁盘标签类型：dos</span><br><span class="line">磁盘标识符：0xf6a444cb</span><br><span class="line"></span><br><span class="line">   设备 Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1            2048     1026047      512000   83  Linux</span><br><span class="line">/dev/sdb2         1026048     5220351     2097152    5  Extended</span><br><span class="line">/dev/sdb5         1028096     3125247     1048576   83  Linux</span><br><span class="line">/dev/sdb6         3127296     4151295      512000   83  Linux</span><br><span class="line"></span><br><span class="line">命令(输入 m 获取帮助)：w</span><br><span class="line">The partition table has been altered!</span><br><span class="line"></span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line"></span><br><span class="line">WARNING: Re-reading the partition table failed with error 16: 设备或资源忙.</span><br><span class="line">The kernel still uses the old table. The new table will be used at</span><br><span class="line">the next reboot or after you run partprobe(8) or kpartx(8)</span><br><span class="line">正在同步磁盘。</span><br></pre></td></tr></table></figure>
 <p>可以看到。在创建扩展分区之后，在进行创建时候就看到逻辑分区了。这就是因为逻辑分区是依赖扩展分区的。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
-<li><p>我们看到整个分区的过程还是比较简单的，分区就类似给房子打隔断，打完隔断就变成一个一个的房间，但这时候还是不能用的，还需要格式化 类似于装修，最后挂载相当于装门，就可以用了。完整的流程我们后面还会总结。</p>
-</li>
-<li><p>fdisk 分区是mbr各式的，除了fdisk指令还有其它指令我们总结如下:</p>
-<p>| 指令   | 分区格式        | 限制            |<br>| ——— | ———————- | ———————- |<br>| fdisk  | mbr             | 磁盘不能大于2tb |<br>| parted | mbr(msdos)、gpt | 支持2tb以上     |<br>| gdisk  | gpt             | 2tb以上         |</p>
-<p> 大于2tb的磁盘需要用gpt的分区格式，所以通常用 parted或者gdisk指令 。其实只要熟练掌握一种指令 其它都是类似的。</p>
-</li>
+<li>我们看到整个分区的过程还是比较简单的，分区就类似给房子打隔断，打完隔断就变成一个一个的房间，但这时候还是不能用的，还需要格式化 类似于装修，最后挂载相当于装门，就可以用了。完整的流程我们后面还会总结。</li>
+<li>fdisk 分区是mbr各式的，除了fdisk指令还有其它指令我们总结如下:</li>
 </ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>分区格式</th>
+<th>限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fdisk</td>
+<td>mbr</td>
+<td>磁盘不能大于2tb</td>
+</tr>
+<tr>
+<td>parted</td>
+<td>mbr(msdos)、gpt</td>
+<td>支持2tb以上</td>
+</tr>
+<tr>
+<td>gdisk</td>
+<td>gpt</td>
+<td>2tb以上</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 大于2tb的磁盘需要用gpt的分区格式，所以通常用 parted或者gdisk指令 。其实只要熟练掌握一种指令 其它都是类似的。</p>
 
                 
                 <hr>
@@ -646,7 +671,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -656,6 +681,21 @@
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
