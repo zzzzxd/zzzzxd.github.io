@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,32 +1069,35 @@
 
         <div class="post-preview">
 
-            <a href="/2020/09/21/企业高频算法面试题-2020-09-21-Problem-37-Nim博/">
+            <a href="/2020/10/24/企业高频算法面试题-2020-10-24-Problem-58-整体回文串的所有添加结果/">
                 <h2 class="post-title">
-                    Problem 37 Nim博弈
+                    Problem 58 整体回文串的所有添加结果
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Nim博弈. 给定一个正数数组arr 先手和后手每次可以选择在一个位置拿走若干值，值要大于0，但是要小于该处的剩余 谁最先拿空arr，谁赢。根据arr，返回谁赢
+                    题目问题一：一个字符串至少需要添加多少个字符能整体变成回文串
+https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
+问题二：返回问题一的其中一种添加结果
+问题三：返回问题一的所有添加结果
+11节
 题目解析
-题目理解之后。需要转换思路。如果先手能保证每次拿一个数之后，异或值是0 ，不断的拿之后，最后后手面对异或和为0的情况 一定全是0，所以先手只能能保证当前异或值不是0，那就每次拿成0，这样 先手一定赢。
-有一点在于，能不......
+题目原型比较简单，普通的dp 行列模型。主要是通过此题目 总结一下通过dp矩......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-09-21
+                    2020-10-24
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
-                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1066,293 +1111,24 @@
 
         <div class="post-preview">
 
-            <a href="/2020/09/21/企业高频算法面试题-2020-09-21-Problem-36-异或和为0的最多子数组个数/">
+            <a href="/2020/10/23/企业高频算法面试题-2020-10-23-Problem-57-布尔运算/">
                 <h2 class="post-title">
-                    Problem 36 异或和为0的最多子数组个数
+                    Problem 57 布尔运算
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    数组中所有数都异或起来的结果，叫做异或和 给定一个数组arr，可以任意切分成若干个不相交的子数组其中一定存在一种最优方案，使得切出异或和为0的子数组最多 返回这个最多数量
+                    题目Leetcode原题：
+https://leetcode-cn.com/problems/boolean-evaluation-lcci/
 题目解析
-看到子数组先想DP ，打出前缀和，自己异或自己是0，利用这几点，题目就很简单了。
-
-代码12345678910111213141516//动态规划，利用异或的前缀和  public static i......
+这个题也是很类似的思想，比如讲，求最大子数组和？不管哪个子数组和最大，子数组一定是以某个元素结尾，所以我们找以当前元素为结尾的最大子数组，最终找到答案。此题求的是加括号的方法数，首先每个运算符号一定都会生效。通过加括号使得答案最终为1，那么......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-09-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/20/企业高频算法面试题-2020-09-20-Problem-35-与数组中元素的最大异或值/">
-                <h2 class="post-title">
-                    Problem 35 与数组中元素的最大异或值
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    https://leetcode.com/problems/maximum-xor-with-an-element-from-array/
-题目解析
-这个题还是比较经典的，有两种思路，一种是来个简单的，直接把查询的mi 和 数组都按照从小到大排序，加入前缀树中，代码几乎和34题一样
-前缀树，节点可以存放一些附加信息，比如以当前路径为前缀的单词个数，当前节点是不是单词等等，这个地......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/16/企业高频算法面试题-2020-09-16-Problem-34-最大异或和的两个数/">
-                <h2 class="post-title">
-                    Problem 34 最大异或和的两个数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    数组中所有数都异或起来的结果，叫做异或和 给定一个数组arr，想知道arr中哪两个数的异或结果最大返回最大的异或结果https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/
-题目解析
-是33题的简化版。
-
-代码12345678910111213141516171819202122232425262......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/12/企业高频算法面试题-2020-09-12-Problem-33-最大异或和子数组/">
-                <h2 class="post-title">
-                    Problem 33 最大异或和子数组
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    数组中所有数都异或起来的结果，叫做异或和,给定一个数组arr，返回arr的最大子数组异或和    
-题目解析
-首先看到这种和啊，数组啊，应该想到”前缀和“ ，要有这种意识，总要有些经验上的积累。
-先做出前缀的异或和数组，这样对于数组preSum[i],和前置的哪个元素异或 得到最大值，最大值是多少？
-preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
-
-代码12345......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Bit Manipulate" title="Bit Manipulate">Bit Manipulate</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/09/企业高频算法面试题-2020-09-09-Problem-32-最少删除字符成为其子串/">
-                <h2 class="post-title">
-                    Problem 32 最少删除字符成为其子串
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    给定两个字符串s1和s2，问s2最少删除多少字符可以成为s1的子串？比如 s1 = “abcde”，s2 = “axbc”
-题目解析
-一种暴力思路，将s2进行挑选，挑选删除字符少的子序列 看是不是s1子串。
-编辑距离思路，挑选出s1的所有子串，挨个进行编辑距离的dp
-
-代码12345678910111213141516171819202122232425262728293031......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-09
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/06/企业高频算法面试题-2020-09-06-Problem-31-编辑距离问题/">
-                <h2 class="post-title">
-                    Problem 31 编辑距离问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    一个字符串 可以有插入（insert）、删除（delete）、替换（replace）操作，每种操作都有对应的代价。求一个字符串变成另一个最小的代价。
-题目解析
-经典的题目。动态规划中的行列模型。列举所有的可能性。
-
-代码123456789101112131415161718192021222324&#x2F;&#x2F;方法：编辑距离问题，考察代价最小的最优解 ，典型的行列模型......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-30-相等子树/">
-                <h2 class="post-title">
-                    Problem 30 相等子树
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目如果一个节点X，它左树结构和右树结构完全一样,那么我们说以X为头的树是相等树。给定一棵二叉树的头节点head ，返回head整棵树上有多少棵相等子树
-题目解析
-既然是比较树是不是一样的，那我们可以通过序列化的方式来描述一棵树。运用二叉树的递归套路，返回以head为头节点有多少个相等树，同时返回序列化结果。那么当拿到左右孩子的info信息时，便可以决定当前节点的相等子树个数。此外，比较序列......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-29-BST先序构造树/">
-                <h2 class="post-title">
-                    Problem 29 BST先序构造树
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​        已知一棵搜索二叉树上没有重复值的节点，现在有一个数组arr，是这棵搜索二叉树先序遍历的结果请根据arr生成整棵树并返回头节点
-题目解析
-就是递归在区间l-r中创建树,寻找左子树，右子树时候，因为是寻找第一个大于的,用二分正好，总体就是nlogn的
-
-代码12345678910111213141516171819202122232425262728293031323334......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-05
+                    2020-10-23
                 </p>
                 <div class="tags">
                     
@@ -1372,23 +1148,297 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
 
         <div class="post-preview">
 
-            <a href="/2020/09/01/企业高频算法面试题-2020-09-01-Problem-28-大楼轮廓线问题/">
+            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-55-K个逆序对数组/">
                 <h2 class="post-title">
-                    Problem 28 大楼轮廓线问题
+                    Problem 55 K个逆序对数组
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    大楼轮廓线问题​    https://leetcode.com/problems/the-skyline-problem/
-第4节
+                    题目Leetcode原题：
+https://leetcode.com/problems/k-inverse-pairs-array/
+题目解析
+这道题目是一道很不错的dp题目，这道题目如果去写几个例子，很容易发现特点，做好空间优化。
+结果要取模运算的时候，任何一处加法减法都要加模再去取模，一个时防止溢出，一个是防止计算出现负数。
+
+代码123456789101112131415161718c......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-56-BST转有序双向列表/">
+                <h2 class="post-title">
+                    Problem 56 BST转有序双向列表
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode原题：
+​    给定一棵搜索二叉树头节点，转化成首尾相接的有序双向链表
+https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
+题目解析
+题目不难，就是麻烦点，用树的递归遍历就可以搞定。
+
+代码​    略
+...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Tree" title="Tree">Tree</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/20/企业高频算法面试题-2020-10-20-Problem-54/">
+                <h2 class="post-title">
+                    Problem 54
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Lintcode原题：
+https://www.lintcode.com/problem/top-k-frequent-words-ii/
+第10节
 题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-09-01
+                    2020-10-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/19/企业高频算法面试题-2020-10-19-Problem-53-跳跃游戏/">
+                <h2 class="post-title">
+                    Problem 53 跳跃游戏
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：https://leetcode.com/problems/jump-game-ii/
+补:
+https://leetcode.com/problems/jump-game/
+题目解析
+这两道题目都非常有特点，考察这种先遍历后更新的技巧，两道题目要一块看。
+
+重点理解一下跳跃游戏II的三个变量
+
+Step : 当前走的步数
+cur：当前步数以内能到达的位置
+next......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/17/企业高频算法面试题-2020-10-17-Problem-52-step-sum问题/">
+                <h2 class="post-title">
+                    Problem 52 step sum问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    定义何为step sum？比如680，680 + 68 + 6 = 754，680的step sum叫754给定一个正数num，判断它是不是某个数的step sum
+题目解析
+这个题目考查的二分。拿到题目务必好好观察特点。明显这个数组拆分累加之后是变大的。所以说 给一个数x，它是某个数字的step sum 取值一定在1到x之间。所以可以用二分来枚举。
+
+代码1234567891......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-17
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/14/企业高频算法面试题-2020-10-14-Problem-51-俄罗斯套娃问题/">
+                <h2 class="post-title">
+                    Problem 51 俄罗斯套娃问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    俄罗斯套娃问题
+​    Leetcode 原题：
+​    https://leetcode.com/problems/russian-doll-envelopes/
+题目解析
+经典题目，是LIS问题的应用。有长和高两个维度，我们将信封按照长升序，并且长相等时按照宽降序。这样做的目的就是，当我们把宽单独拿出来，此时的最长递增子序列的长度就是嵌套层次。而如果宽也是升序排序，此时......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/13/企业高频算法面试题-2020-10-13-Problem-50-最长递增子序列/">
+                <h2 class="post-title">
+                    Problem 50 最长递增子序列
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    经典算法之最长递增子序列
+​    Leetcode 原题：
+​    https://leetcode.com/problems/longest-increasing-subsequence
+题目解析
+LIS 经典问题。普通的dp树N^2^的，不容易过，采用end数组的方式实现N*logN的
+End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end数组含义，开始......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/13/企业高频算法面试题-2020-10-13-Problem-49-移除无效括号/">
+                <h2 class="post-title">
+                    Problem 49 移除无效括号
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode 原题：
+​    https://leetcode.com/problems/remove-invalid-parentheses/
+第9节
+题目解析代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-13
                 </p>
                 <div class="tags">
                     
@@ -1463,8 +1513,6 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1474,6 +1522,8 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1485,29 +1535,35 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1531,17 +1587,11 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1556,8 +1606,6 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1581,7 +1629,9 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1600,6 +1650,12 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1628,8 +1684,6 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1702,23 +1756,23 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1733,7 +1787,7 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1743,8 +1797,6 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1758,29 +1810,31 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1824,7 +1878,7 @@ preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

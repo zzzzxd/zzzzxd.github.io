@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,29 +1069,26 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
                 <h2 class="post-title">
-                    mysql的操作规范
+                     linux下 bin和 usr bin和 usr local bin的区别
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言今天来看一下，比较通用的规范操作。
-命名规范1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；
-1.2、库、表、字段全部采用小写；
-MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。
-1.3、避免用 MySQL 的保留字， MySQL 保留字请参考官方手册：9.3 Keyword......
+                    123/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。
+...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1063,27 +1102,36 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-应用层的优化点总结/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-linux不同版本的服务管理/">
                 <h2 class="post-title">
-                    应用层的优化点总结
+                    linux不同版本的服务管理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    对于数据库的使用，我们不仅仅要考虑 MySQL 本身的优化，还需要考虑应用层的优化。因为有些线上问题，就是由于应用层设置不合理导致的。下面看一下常见的优化点。
-使用连接池MySQL 如果频繁创建和断开连接，那 MySQL 的开销会比较大，可能会占用过多的服务器内存资源，甚至导致响应时间变慢。此时就可以考虑使用连接池来改进性能。
-连接池可以理解为：创建一些持久连接的“池”，新的请......
+                    Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。
+Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。
+
+
+
+
+动作
+Rhel6 旧指令
+Rhel7新指令
+
+
+......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1097,28 +1145,33 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-删除大量数据的经验/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-vim的查找替换总结/">
                 <h2 class="post-title">
-                    删除大量数据的经验
+                    vim的查找替换总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言为了防止单张表过大，很多情况下，我们需要对历史数据做归档或者删除操作。那么如何高效删除大量无用数据呢？今天就来总结一下。
-在聊数据删除前，我们先来看看 MySQL 的共享表空间和独立表空间。
-共享表空间和独立表空间InnoDB 数据是按照表空间进行存放的，其表空间分为共享表空间和独立表空间。
-共享表空间共享表空间：表的数据放在系统共享表空间，也就是跟数据字典放一起。文件名为 ibdata......
+                    
+vim的查找替换操作如果能运用熟练是非常提高效率的，我们来重新梳理一下查找与替换的一些操作，方便更好的记忆 。
+
+查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
+
+Vim查找支持正则表达式 /vim$匹配行尾的”vim”。
+需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。
+
+大小写敏......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1132,27 +1185,37 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-三剑客常用命令-初级/">
                 <h2 class="post-title">
-                    mysql的分库分表
+                    三剑客常用命令-初级
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    使用数据库时，我们经常会聊到分库分表，那么分库分表有哪些方式？什么情况应该考虑分库分表呢？这次我们来看下这些问题。
-MySQL 分库分表是指：把 MySQL 数据库物理地拆分到多个实例或者机器上去。从而降低单台 MySQL 实例的负载。那么这里讲的拆分究竟以什么方式实现的呢？这里就先来看看 MySQL 分库分表的拆分方法：
-MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆......
+                    
+grep、sed、awk号称三剑客，这三条命令对文本处理特别有用，今天来小结一下常用的基础操作，日后再来总结比较难的操作
+
+grep-查找
+查询hello.txt中以字母a开头的内容，这样写也是可以的
+1grep ^a hello.txt
+
+查看test.log中包含http的所有行(-i忽略大小写）
+
+
+1grep -i "http" ./test.log
+
+查询出来对应字符串所在的行号......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1166,28 +1229,30 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/">
+            <a href="/2022/07/22/LINUX运维-2022-07-22-查看磁盘和目录空间df和du/">
                 <h2 class="post-title">
-                    读写分离注意问题
+                    查看磁盘和目录空间df和du
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
-通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
-但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
-你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
+                    du和df的区别：12df命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间(最常见的就是文件已经删除，但是程序并没有释放空间)。du命令是面向文件的，只会计算文件或目录占用的
+查看磁盘整体情况查看整体挂载情况1df -h
+
+查看指定目录  1df -h /opt/data/
+
+查看文件夹的占用情况查看当前目录每个文件夹的情况。1du --max-depth=1......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1201,30 +1266,30 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的QC/">
+            <a href="/2022/07/22/LINUX运维-2022-07-22-yum换源的详细操作/">
                 <h2 class="post-title">
-                    mysql的QC
+                    yum换源的详细操作
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。
-
-关于 QC 的详细定义，可以查询 MySQL 5.7 官方手册
-
-那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。
-认识 QCQC 需要缓存最新数据结果，因......
+                    1yum install wget
+备份原来的源
+1sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk
+下载阿里源
+1cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo
+ 更改阿里yu......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1238,27 +1303,28 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/">
+            <a href="/2022/07/22/LINUX运维-2022-07-22-yum源解释/">
                 <h2 class="post-title">
-                    设置自增主键的好处
+                    yum源解释
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
-关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
-1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
+                    
+转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。
+
+yum是什么，yum源又是什么   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1272,28 +1338,32 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-sql注入攻击和预防/">
+            <a href="/2022/07/22/LINUX运维-2022-07-22-top命令的Load-average-含义及性能参考基值/">
                 <h2 class="post-title">
-                    sql注入攻击和预防
+                    top命令的Load average 含义及性能参考基值
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言很多时候，我们关心的是程序是否能实现我们的预期功能，而忽视了 SQL 安全，这就存在 SQL 注入的风险，本节就一起来聊聊 SQL 注入及防御。
-认识 SQL 注入SQL 注入是利用某些数据库的外部接口将用户数据插入到实际的数据库操作语句中，从而达到入侵数据库乃至操作系统的目的。
-SQL 注入产生的主要原因是：程序对用户输入的数据没有进行严格的过滤，导致非法数据库查询语句的执行。
-SQL......
+                     12$uptime11:12:26 up3:44,4users,load average:0.38,0.31,0.19
+系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：
+
+它没有在等待I/O操作的结果
+它没有主动进入等待状态(也就是没有调用’wait’)
+没有被停止(例如：等待终止)
+
+上面的输出，load average后面分别......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1307,27 +1377,30 @@ SQL......
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分布式事务/">
+            <a href="/2022/07/22/docker-2022-07-22-利用docker部署hadoop集群的记录/">
                 <h2 class="post-title">
-                    mysql的分布式事务
+                    利用docker部署hadoop集群的记录
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言今天我们看一下mysql提供的分布式事务，有关分布式事务的更多详细解释以及更多的解决方案，可以看博客的其它文章。
-认识分布式事务分布式事务是指一个大的事务由很多小操作组成，小操作分布在不同的服务器上或者不同的应用程序上。分布式事务需要保证这些小操作要么全部成功，要么全部失败。MySQL 从 5.0.3 开始支持分布式事务。
-分布式事务使用两阶段提交协议：
+                    计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。
+理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。
+启动容器：
 
-第一阶段：所有分支事务都开始准......
+启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了
+ 1docker exec -i......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-22
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
                     
                 </div>
             
@@ -1341,27 +1414,27 @@ SQL......
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-有关事务的使用习惯/">
+            <a href="/2022/07/22/docker-2022-07-22-Docker容器互访三种方式/">
                 <h2 class="post-title">
-                    有关事务的使用习惯
+                    Docker容器互访三种方式
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言有时好的事务习惯也影响着业务访问速度。接下来我们看一下事务的使用习惯。
-我们先来看看一些不好的事务习惯：
-不好的事务习惯在循环中提交在大多数情况下，MySQL 都是开启自动提交的，如果遇到循环执行 SQL，则相当于每个循环中都会进行一次提交，实际这算一个不好的事务习惯了。下面我创建一张测试表，并定义两个循环写入数据的存储过程：一个是自动提交，另一个是在循环前开启一个事务，在循环后一次性提......
+                    我们都知道docker容器之间是互相隔离的，不能互相访问，但如果有些依赖关系的服务要怎么办呢。下面介绍三种方法解决容器互访问题。
+方式一、虚拟ip访问安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。
+1234567891011[root@33fcf82ab4dd &#x2F;]# [root@CentO......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
                     
                 </div>
             
@@ -1432,8 +1505,6 @@ SQL......
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1443,6 +1514,8 @@ SQL......
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1454,29 +1527,35 @@ SQL......
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1500,17 +1579,11 @@ SQL......
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1525,8 +1598,6 @@ SQL......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1550,7 +1621,9 @@ SQL......
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1569,6 +1642,12 @@ SQL......
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1597,8 +1676,6 @@ SQL......
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1671,23 +1748,23 @@ SQL......
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1702,7 +1779,7 @@ SQL......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1712,8 +1789,6 @@ SQL......
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1727,29 +1802,31 @@ SQL......
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1793,7 +1870,7 @@ SQL......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

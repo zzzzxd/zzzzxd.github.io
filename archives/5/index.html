@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,23 +1069,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/09/16/jvm-2022-09-16-minorGC前后的几种特殊情况/">
+            <a href="/2022/09/25/jvm-2022-09-25-对象布局相关问题/">
                 <h2 class="post-title">
-                    minorGC前后的几种特殊情况
+                    对象布局相关问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    大对象直接进入老年代 相关参数 -XX:PretenureSizeThreshold
-动态年龄判断 minor gc 后，一批对象总大小超过了 survivor 区的 50%，那么就让大于等于这批对象年龄的对象直接进入老年代 具体规则是，从年龄1的对象开始，把 年龄1 + 年龄2 + 年龄n 多个年龄的对象的总和超过survivor区的50%，就此时就会把年龄 n 以上的对象放入老年代
-老年......
+                    前言有关对象的创建、对象在内存中的布局，今天我们通过几道面试题来梳理一下。
+请解释一下对象的创建过程？
+class loading
+class linking (verification, preparation, resolution) - 静态变量赋默认值
+class initializing- 静态变量赋初始值
+申请对象内存
+成员变量赋默认值
+调用构造方法
+成员变量顺序赋初始值
+执行构......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-16
+                    2022-09-25
                 </p>
                 <div class="tags">
                     
@@ -1061,24 +1110,24 @@
 
         <div class="post-preview">
 
-            <a href="/2022/09/16/jvm-2022-09-16-FullGC的发生时机/">
+            <a href="/2022/09/25/jvm-2022-09-25-Synchronized锁升级过程/">
                 <h2 class="post-title">
-                    FullGC的发生时机
+                    Synchronized锁升级过程
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Major GC / Full GC基于分代收集理论，目前的JVM堆内存大多分为了==新生代、老年代、方法区==。
-JVM在进行GC时，并非每次都对上面三个内存区域（新生代、老年代；方法区）一起回收的，大部分时候回收的都是指新生代。
-针对Hotspot VM的实现，它里面的GC按照回收区域又分为两大种类型：一种是部分收集（Partial GC），一种是整堆收集（Full GC）。
-部分收集：......
+                    前言Synchronized的经过优化之后，性能提高很多，接下来我们就看一下它的优化原理。
+java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻量级锁和重量级锁。
+在Java HotSpot VM中，每个对象前面都有一个class指针和一个Mark Word。 Mark Word存储了哈希值以及分代年龄和标记位等，通过这些值的变化，JVM可以实现对java对象的不同程度的锁定。
+......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-16
+                    2022-09-25
                 </p>
                 <div class="tags">
                     
@@ -1096,40 +1145,26 @@ JVM在进行GC时，并非每次都对上面三个内存区域（新生代、老
 
         <div class="post-preview">
 
-            <a href="/2022/09/15/jvm-2022-09-15-JVM参数分类/">
+            <a href="/2022/09/25/jvm-2022-09-25-Synchronized关键字原理/">
                 <h2 class="post-title">
-                    JVM参数分类
+                    Synchronized关键字原理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    JVM参数分类
-
-
-
-类别
-说明
-
-
-
-
-标准参数（-）
-所有的JVM实现都必须实现这些参数的功能，而且向后兼容；
-
-
-非标准参数（-X）
-这些参数不是虚拟机规范规定的。因此，不是所有VM的实现(如:HotSpot,JRockit,J9等)都支持这些配置参数。
-
-
-非稳定参数（-XX）
-这些参数是虚拟机规范中规定的。这些参数指定虚拟机实例在运行时的各种行为，从而对虚拟机的运行时性能有很大影响......
+                    前言​    java聊到并发，synchronized关键字想必肯定是再熟悉不过了，它的使用非常简单，接下来我们就重点看一下使用时候的注意点和原理。
+使用总结
+选用一个锁对象，可以是任意对象；
+锁对象锁的是同步代码块，并不是自己；
+不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象；
+需要同步的代码放到大括号中。需要同步的意思就是需要保证原子性、可......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-15
+                    2022-09-25
                 </p>
                 <div class="tags">
                     
@@ -1147,27 +1182,26 @@ JVM在进行GC时，并非每次都对上面三个内存区域（新生代、老
 
         <div class="post-preview">
 
-            <a href="/2022/08/17/JSON字符串的嵌套机制/">
+            <a href="/2022/09/25/jvm-2022-09-25-volatile与可见性/">
                 <h2 class="post-title">
-                    JSON字符串的嵌套机制
+                    volatile与可见性
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    转义机制的嵌套：转义机制被任意嵌套、组合，只要识别方的处理逻辑是正确的，就不会发生命令识别错误或数据识别错误。转义机制是一个安全性完备的机制。
-每增加一层转义机制，就需要增加一层还原机制。
-JSON字符串的多层嵌套12345678910111213141516171819202122232425&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&......
+                    可见性​    可见性指的是，某个线程对共享变量进行了修改，其它线程能够立刻看到修改后的最新值。乍一听这个定义，你可能会觉得这不是废话吗？变量被修改了，线程当然能够立刻读取到！否则即使单线程的程序也会出问题啊！没错，变量被修改后，在本线程中确实能够立刻被看到，但并不保证别的线程会立刻看到。原因就是编程领域经典的两大难题之一——缓存一致性。
+观察可见性123456789101112131415......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-08-17
+                    2022-09-25
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JSON" title="JSON">JSON</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1181,27 +1215,31 @@ JSON字符串的多层嵌套12345678910111213141516171819202122232425&lt;depende
 
         <div class="post-preview">
 
-            <a href="/2022/08/02/Mac必备工具之brew/">
+            <a href="/2022/09/24/jvm-2022-09-24-有序性与内存屏障/">
                 <h2 class="post-title">
-                    Mac必备工具之brew
+                    有序性与内存屏障
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具
+                    并发三大特性所有讲并发编程的书籍都会讲到并发编程的三大特性，这是并发编程中所有问题的根源，我们只有深刻理解了这三大特性，才不会编写出漏洞百出的并发程序，才不会遇到问题时无从下手，才不会对自己的程序没有信心。
+这三大特性是：
 
-安装可以使用如下命令进行安装:
-1/usr/bin/ruby -e "$(curl -fsSL https://raw......
+原子性 : 所有操作要么全部成功，要么全部失败。
+可见性: 一个线程对变量进行了修改，另外一个线程能够立刻读取到此变量的最新值。
+
+有序性: 代码在执行阶段，并不一定和......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-08-02
+                    2022-09-24
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1215,23 +1253,26 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 
         <div class="post-preview">
 
-            <a href="/2022/07/24/数据结构与算法-2022-07-24-组合数计算的方法总结/">
+            <a href="/2022/09/24/jvm-2022-09-24-JMM与缓存一致性/">
                 <h2 class="post-title">
-                    组合数计算的方法总结
+                    JMM与缓存一致性
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言​    随着CPU的不断发展，CPU的性能越来越强大，但受迫于频率提升的困难，现代CPU架构开始向多核发展。而作为软件开发人员为了充分使用CPU的性能，越来越多的开发者会选择多线程程序开发。CPU在计算时会做一些优化，这些优化对于单线程程序来说是没有问题的，但对多线程程序则不是那么的友好。接下来我们就从硬件底层来看一下硬件对多线程并发的影响。
+硬件层的并发优化首先，我们来看一下硬件上的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-24
+                    2022-09-24
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1245,32 +1286,29 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 
         <div class="post-preview">
 
-            <a href="/2022/07/24/数据结构与算法-2022-07-24-算法题目中常见的计算技巧总结/">
+            <a href="/2022/09/24/jvm-2022-09-24-Class加载过程/">
                 <h2 class="post-title">
-                    算法题目中常见的计算技巧总结
+                    Class加载过程
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-今天我们对算法题目中与数学运算相关的一些常用的知识进行简单总结，需要刻意记忆，如果对相关知识点不熟悉需要翻越更详细的资料。
-
-最大公约数与最小公倍数最大公约数正整数a,b的最大公约数是指a与b的所有公约数中最大的那个公约数。求解最大公约数常用的是欧几里得算法(即辗转相除法),假设 a,b 均为正整数，则gcd=(a,b) = gcd(b,a%b)
-代码如下:
-123int gcd(int ......
+                    前言    
+在java中当我们使用某个类的时候，首先做的就是把.class文件从硬盘中加载到内存中，这一步称为加载的过程，但实际上，要做的工作不止这一些，接下来我们看一下，在一个类被使用前要做哪些准备工作呢。
+Loading类加载器特点
+全盘负责：当一个类加载器加载一个类时，该类所依赖的其他类也会被这个类加载器加载到内存中。
+缓存机制：所有的Class对象都会被缓存，当程序需要使用某个Cl......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-24
+                    2022-09-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#MATH" title="MATH">MATH</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1284,30 +1322,29 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 
         <div class="post-preview">
 
-            <a href="/2022/07/24/问题-2022-07-24-log4j日志不输出/">
+            <a href="/2022/09/23/JUC-2022-09-23-JUC包下的新型锁/">
                 <h2 class="post-title">
-                    log4j日志不输出
+                    JUC包下的新型锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    问题log4j日志不输出，或者没有按照预定的级别输出
-常见原因原因一：配置文件没配置对，这种低级错误就不说了
-原因二：依赖冲突
-​    多半是因为，引入的底层实现类出现了冲突，这样就得排查maven的冲突，那怎么知道哪些冲突了呢？如果
-真是一点一点查，那就麻烦了，注意，一定要看提示
-12345SLF4J: Class path contains multiple SLF4J binding......
+                    ReentrantLock概念​    可重入锁，就是拿到锁之后，还可以对此锁再拿一次，一层一层的加，synchronized本身就是可重入锁的一种
+需要注意的地方
+可以代替synchronied关键字，只需要在使用synchronized关键字的地方使用lock.lock()方法
+synchronized关键字是自动解锁的，但是reen必须手动解锁
+特别注意对于异常的处理，sync遇到异常......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-24
+                    2022-09-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
                     
                 </div>
             
@@ -1321,27 +1358,25 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 
         <div class="post-preview">
 
-            <a href="/2022/07/24/git-2022-07-24-git常见报错/">
+            <a href="/2022/09/23/JUC-2022-09-23-Atomic类与CAS分析/">
                 <h2 class="post-title">
-                    git常见报错
+                    Atomic类与CAS分析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    错误一：Failed to connect to github.com port 443: Operation timed out
-​    这个多半是由于网络问题，正常情况不会拉取，推送失败，多半是网络原因
-12345678考虑更换ip（自己没遇到过这个问题）：1、查询可以用的IP	在https://www.ipaddress.com/上分别搜索	github.com、github.glo......
+                    Atomic 简介Atomic 相关类在 java.util.concurrent.atomic 包中。针对不同的原生类型及引用类型，有 AtomicInteger、AtomicLong、AtomicBoolean、AtomicReference 等。另外还有数组对应类型 AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray。由于 A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-24
+                    2022-09-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#git" title="git">git</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
                     
                 </div>
             
@@ -1355,26 +1390,31 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 
         <div class="post-preview">
 
-            <a href="/2022/07/24/问题-2022-07-24-PrepareStatement未关闭导致内存泄漏/">
+            <a href="/2022/09/23/JUC-2022-09-23-多线程基础/">
                 <h2 class="post-title">
-                    PrepareStatement未关闭导致内存泄漏
+                    多线程基础
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    现象堆内存飙升，GC次数明显提升
-原因:第三方的数据库连接池，使用的时候，获取到Connection之后，使用完成，调用的关闭方法（close()） ，并没有将Connection关闭，只是放回到连接池中，如果调用的这个方法，而没有手动关闭PreparedStatement等，则这个PreparedStatement并没有关闭，这样会使得开发的程序内存急速增长，java的内存回收机制可能跟不......
+                    线程状态线程的状态，是重点中的重点，在生产中遇到问题的时候，就需要观察线程状态来排查问题，比如用jstack查看堆栈信息时候，就需要重点关注block状态的线程。
+状态流转
+状态的解释
+new: 线程刚刚创建，还没有启动
+Runnable：可运行状态，可由线程调度器安排执行，具体分为：Ready等待调度，Running 正在执行
+Waiting：等待被唤醒
+Timed Waiting：隔一段......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-24
+                    2022-09-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
                     
                 </div>
             
@@ -1445,8 +1485,6 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1456,6 +1494,8 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1467,29 +1507,35 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1513,17 +1559,11 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1538,8 +1578,6 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1563,7 +1601,9 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1582,6 +1622,12 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1610,8 +1656,6 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1684,23 +1728,23 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1715,7 +1759,7 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1725,8 +1769,6 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1740,29 +1782,31 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1806,7 +1850,7 @@ brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以�
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

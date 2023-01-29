@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,27 +1069,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/network-2022-07-23-TCP拆包与粘包/">
+            <a href="/2022/09/22/微服务-2022-09-22-SpringCache-使用总结/">
                 <h2 class="post-title">
-                    TCP拆包与粘包
+                    SpringCache 使用总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    粘包产生的原因如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。
-传输层的UDP协议是否会发生粘包或者拆包问题？​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
-传输层的TCP协议是否会......
+                    Spring Cache简介
+Spring 从 3.1 开始定义了 org.springframework.cache.Cache 和 org.springframework.cache.CacheManager 接口来统一不同的缓存技术； 并支持使用 JCache（JSR-107）注解简化我们开发；
+
+Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合； Cache 接 口 下 ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#TCP" title="TCP">TCP</a>
+                      <a href="/tags/#缓存" title="缓存">缓存</a>
+                    
+                      <a href="/tags/#Spring Cache" title="Spring Cache">Spring Cache</a>
                     
                 </div>
             
@@ -1061,25 +1106,36 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/ssm-2022-07-23-自定义注解/">
+            <a href="/2022/09/22/微服务-2022-09-22-缓存使用总结/">
                 <h2 class="post-title">
-                    自定义注解
+                    缓存使用总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概念​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过......
+                    缓存缓存使用为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。而 db 承担数据落 盘工作。 哪些数据适合放入缓存？ 
+
+即时性、数据一致性要求不高的 
+
+访问量大且更新频率不高的数据（读多，写少）
+ 举例：电商类应用，商品分类，商品列表等适合缓存并加一个失效时间(根据数据更新频率 来定)，后台如果发布一个商品，买家需要 5 分钟才能看到新的商品一般还是可以接受的。
+
+
+
+12......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-22
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#缓存" title="缓存">缓存</a>
                     
                 </div>
             
@@ -1093,24 +1149,217 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/jvm-2022-07-23-常量池/">
+            <a href="/2022/09/22/Redis-2022-09-22-Redis无主模式集群/">
                 <h2 class="post-title">
-                    常量池
+                    Redis无主模式集群
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-提到常量池一直容易混，今天一次性彻底搞定。
+                    前言
+前面的文章我们讲了Redis的主从复制模式，它是来解决单点故障问题，从节点是主节点的备份，只读。这样一来就难解决容量问题，从AKF的原则讲，我们可以从y轴、Z轴来考虑搭建不同的集群来解决这个问题。接下来我们仔细的探讨下这个问题。
 
-class文件常量池（class constant pool）我们都知道，class文件中除了包含类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池(constant pool table)，用于存放编译器生成的各种字面量(Literal)和符号引用(Symbolic References)。字面量就是我们所说的常量概念，如文本字符......
+功能划分在AKF Y轴方向，我们可以从业务的角度出发，用户功能一个redis实例，订单功能一个redis实例,在业务端进行实例的区分。
+
+数据分区不同的功能......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/21/微服务-2022-09-21-rabbitMq-实现定时任务/">
+                <h2 class="post-title">
+                    rabbitMq 实现定时任务
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+利用RabbitMq的死信特点，可以对过期消息进行单独处理，从而实现一个定时处理的任务。
+
+定时任务场景：
+​    比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 
+常用解决方案：  spring的 schedule 定时任务轮询数据库 
+缺点：消耗系统内存、增加了数据库的压力、存在较大的时间误差
+解决：rabbitmq的消息TTL和死信Exchange结合
+Rab......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#RabbitMQ" title="RabbitMQ">RabbitMQ</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/21/Redis-2022-09-21-Redission-信号量/">
+                <h2 class="post-title">
+                    Redission 信号量
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+信号量大家应该够不陌生，比如操作系统中的pv信号量，依据功能还可以分成同步信号量、互斥信号量。由于redis是单进程，天生具有锁的这个特性，而redisson更是对redis做了一层包装，使得api接口更适用。今天我们就看一下redisson基于redis做的信号量。
+
+Redisson信号量​    Redisson的分布式信号量（Semaphore）Java对象 RSemaphor......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/21/Redis-2022-09-21-Redis主从复制集群/">
+                <h2 class="post-title">
+                    Redis主从复制集群
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+主从复制，主要解决的是单点问题，从节点是主节点的备份，只读不能写，主节点可以读写。实际就是AKF原则中X轴的实现。但主从节点需要数据同步，就牵涉到数据一致性的问题，我们来看一下，集群主从集群需要注意的问题，以及redis是如何做的。
+
+数据一致性问题既然有从节点需要同步主节点数据，就涉及到一致性问题。
+
+强一致性（线性一致性）：即复制是同步的
+弱一致性：即复制是异步的
+
+强一致性所谓强......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/20/Redis-2022-09-20-集群原理/">
+                <h2 class="post-title">
+                    集群原理-AKF原则
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+我们在实际的工作中用到的组建通常会以集群的形式出现，目的就是解决单实例无法处理的情况，今天我们从AKF原则入手，总结一下 集群搭建的原理及要解决的问题。
+
+AKF原则初识AKFAKF原则是微服务拆分原则四条原则中的第一条，个人认为集群的搭建基本都是围绕AKF展开的。我们先思考单实例遇到的问题
+
+单点故障。一个实例挂掉，服务直接不可用了。
+容量问题。以redis为例，一个实例可能10g的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/20/jvm-2022-09-20-Jstack-应用/">
+                <h2 class="post-title">
+                    Jstack 应用
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    jstack 参数1234567891011121314151617/opt/java8/bin/jstackUsage:    jstack [-l] &lt;pid&gt;        (to connect to running process) 连接活动线程    jstack -F [-m] [-l] &lt;pid&gt;        (to connect to a hun......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-20
                 </p>
                 <div class="tags">
                     
@@ -1128,31 +1377,31 @@ class文件常量池（class constant pool）我们都知道，class文件中除
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/IO-2022-07-23-IO实验的一些常用命令总结/">
+            <a href="/2022/09/20/Redis-2022-09-20-Redis应用-分布式锁实现/">
                 <h2 class="post-title">
-                    IO实验的一些常用命令总结
+                    Redis应用 分布式锁实现
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    必须熟练使用的指令以及注意事项
-stat：可以查看文件的详细信息 1stat msb.txt
-ln：建立符号连接、硬连接1ln   [s]    已有的    不存在的
-dd：用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换
-https://www.cnblogs.com/fantasyxo/p/10519662.html
+                    前言
+Redis 除了做缓存、内存数据库之外，由于有线程的特性，经常可以拿来做分布式锁 、信号量等，应用起来也十分方便，我们来看一下一个分布式锁的简单实现。
 
-12345678if=文件名：输入文件名，缺省为标准输入。......
+Redis实现
+用redis实现分布式锁，其实我们要重点考虑3个方面问题：加锁、解锁、锁续期
+
+加锁加锁要考虑的问题是，如果当前线程加锁之后挂掉了，相当于抱锁睡了，所以此时加锁时候 应该设置过期时间，保证能自动解锁。同时要注意应该是一......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
                     
                 </div>
             
@@ -1166,203 +1415,27 @@ https://www.cnblogs.com/fantasyxo/p/10519662.html
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/mysql-2022-07-23-mysql的8个变量/">
+            <a href="/2022/09/19/Redis-2022-09-19-Redis-RDB与AOF实现原理/">
                 <h2 class="post-title">
-                    mysql的8个变量
+                    Redis RDB实现原理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-　本篇会简单介绍在 MySQL 中关于 8个 character_set 变量的基本作用。
-
-　使用下列SQL语句可以查看 MySQL中8个 character_set 变量
-1SHOW VARIABLES LIKE&#39;%char%&#39;;
-8个 character_set 变量：
-　　一、character_set_client
-　　二、character_set_connec......
+                    前言
+Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快照文件。但有一个问题，时点的问题，比如redis 8点开始触发异步的持久化，假设需要十分钟的时间，那么这10分钟，主进程如果修改了内存数据，那么子进程进行持久化是写的修改后的数据吗？如果是，那此时持久化的数据就产生了脏数据,出现了数据一致性问题，如果不是，那此时内存数据被修改,又是如何做到呢？
+那么通过回......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-mysql编码错进错出解释/">
-                <h2 class="post-title">
-                    mysql编码错进错出解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    相关变量123SET character_set_client &#x3D; charset_name;SET character_set_results &#x3D; charset_name;SET character_set_connection &#x3D; charset_name;
-过程复现及原理解释123先假设客户端bash都是utf8SET character_set_cli......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-理解和解决MySQL乱码问题/">
-                <h2 class="post-title">
-                    理解和解决MySQL乱码问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-转载网络好文:http://cenalulu.github.io/mysql/mysql-mojibake/
-本文将详细介绍MySQL乱码的成因和具体的解决方案
-在阅读本文之前，强烈建议对字符集编码概念还比较模糊的同学 阅读下博主之前对相关概念的一篇科普：十分钟搞清字符集和字符编码
-
-MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理解：从客户端发起请求，到MySQL存储数据，再......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
-                <h2 class="post-title">
-                    字库表、编码字符集、字符编码
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/LINUX运维-2022-07-23-screen命令/">
-                <h2 class="post-title">
-                    screen命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Screen简介在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。
-简而言之：
-远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。
-而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。
-常用screen命令123456s......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/LINUX运维-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
-                <h2 class="post-title">
-                     linux下 bin和 usr bin和 usr local bin的区别
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    123/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。
-...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
                     
                 </div>
             
@@ -1433,8 +1506,6 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1444,6 +1515,8 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1455,29 +1528,35 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1501,17 +1580,11 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1526,8 +1599,6 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1551,7 +1622,9 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1570,6 +1643,12 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1598,8 +1677,6 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1672,23 +1749,23 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1703,7 +1780,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1713,8 +1790,6 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1728,29 +1803,31 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1794,7 +1871,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

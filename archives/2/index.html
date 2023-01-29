@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,31 +1069,27 @@
 
         <div class="post-preview">
 
-            <a href="/2022/10/09/hive-2022-10-09-hive中四种有效的SQL优化/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
                 <h2 class="post-title">
-                    hive中四种有效的SQL优化
+                    数据湖技术的发展
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据准备首先虚拟一张表user，字段为：
-（1）user_id（用户的id）；
-（2）age（用户的年龄）；
-（3）sex（用户的性别）；
-（4）order_id（用户的订单编号，一个用户可能有多个订单编号）。
-另设一张表，叫order，里面包含order_id, order_date两个字段。
-multi-table-insert优化union all原SQL（目标是往一个新表user_n......
+                    数据湖的定义Wikipedia是这样定义的:
+
+数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-10-09
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hive" title="Hive">Hive</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1065,40 +1103,28 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
 
         <div class="post-preview">
 
-            <a href="/2022/10/09/Flink-2022-10-09-checkpoint的生产配置/">
+            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
                 <h2 class="post-title">
-                    checkpoint的生产配置
+                    各大公司实时数仓实践
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Checkpoint相关配置
+                    网易实时数仓实践
+​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
 
-
-
-配置项
-含义
-
-
-
-
-state.backend
-状态存储后端，可配置值有’jobmanager’, ‘filesystem’, ‘rocksdb’等，在checkpoint数据存储在hdfs上时，配置该值为filesystem
-
-
-state.checkpoints.dir
-checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
+突然数据量增多，基于......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-10-09
+                    2023-01-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1112,28 +1138,29 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/10/09/Flink-2022-10-09-异步IO/">
+            <a href="/2023/01/10/数据仓库-2023-01-10-实时数仓的发展趋势-流批一体/">
                 <h2 class="post-title">
-                    异步IO
+                    实时数仓的发展趋势-流批一体
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言通常情况我们在进行维表关联时，是进行同步的查询，为了提高吞吐率，提高处理的数据量，可以利用异步的查询，但是有一个问题，异步访问的后的结果 如何反回到主流中？这就需要Flink给我们提供支持了。我们看一下官网的介绍。
+                    实时数仓现状当前基于Hive的离线数据仓库已经非常成熟，随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根据数仓架构演变过程，在Lambda架构中含有离线处理与实时处理两条链路，其架构图如下：
 
-前置准备引用官网的一段话:
-123As illustrated in the section above, implementing proper asynchronous......
+​    正是由于两条链路处理数据导致数据不一致等一些列问题所以才有了Kappa架构，Kappa架构如下：
+
+​        Kapp......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-10-09
+                    2023-01-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1147,26 +1174,63 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture详解/">
+            <a href="/2023/01/09/数据仓库-2023-01-09-实时数仓建设思考/">
                 <h2 class="post-title">
-                    CompletableFuture详解
+                    实时数仓建设思考
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    CompletableFuture介绍Future 是 Java 5 添加的类，用来描述一个异步计算的结果。你可以使用isDone方法检查计算是否完成，或者使用get阻塞住调用线程，直到计算完成返回结果，你也可以使用cancel 方法停止任务的执行。
-虽然Future以及相关使用方法提供了异步执行任务的能力，但是对于结果的获取却是很不 方便，只能通过阻塞或者轮询的方式得到任务的结果。阻塞的方......
+                    离线数仓与实时数仓区别
+
+
+
+对比方面
+离线数仓
+实时数仓
+
+
+
+
+架构选择
+传统大数据架构
+Kappa架构
+
+
+建设方法
+传统数仓主题建模理论
+传统数仓主题建模理论
+
+
+准确性
+准确度高
+准确度随着技术发展，准确度高
+
+
+实时性
+T+1
+分钟级别、秒级别
+
+
+稳定性
+稳定性好，方便重算
+对数据敏感稳定性差，需要考虑数据重新计算
+
+
+数据存储
+HDFS/Hive
+Kafka/HBase/Re......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-27
+                    2023-01-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1180,26 +1244,26 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/27/JUC-2022-09-27-Future模式/">
+            <a href="/2023/01/09/数据仓库-2023-01-09-数据仓库的架构演变/">
                 <h2 class="post-title">
-                    Future模式
+                    数据仓库的架构演变
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Future模式​    我们了解的Thread 和 runnable，实现多线程的方式是新起线程运行 run 方法，但是 run 方法有个缺陷是没有返回值，并且主线程也并不知道新的线程何时运行完毕。Future 持有要运行的任 务，以及任务的结果。主线程只要声明了 Future 对象，并且启动新的线程运行他。那么随时能通过 Future 对象获 取另外线程运行的结果。
-使用​    我们通......
+                    数据仓库演变​        20世纪70年代，MIT(麻省理工)的研究员致力于研究一种优化的技术架构，该架构试图将业务处理系统和分析系统分开，即将业务处理和分析处理分为不同层次，针对各自的特点采取不同的架构设计原则，MIT的研究员认为这两种信息处理的方式具有显著差别，以至于必须采取完全不同的架构和设计方法。但受限于当时的信息处理能力，这个研究仅仅停留在理论层面。
+​        1991......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-27
+                    2023-01-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1213,27 +1277,28 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/26/IO-2022-09-26-从Reactor模式到Netty架构演进/">
+            <a href="/2022/12/21/LINUX运维-2022-12-21-CI、CD系列四之质量检测SonarQube/">
                 <h2 class="post-title">
-                    从Reactor模式到Netty架构演进
+                    CI、CD系列四之质量检测SonarQube
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    单线程ReactorReactor模型的朴素原型之前的文章探讨过IO模型，其中最优化的是基于多路复用器的NIO。Java的NIO模式的Selector网络通讯，其实就是一个简单的Reactor模型。可以说是Reactor模型的朴素原型。
-我们再来回顾一下代码
-1234567891011121314151617181920212223242526272829303132333435363738......
+                    前言SonarQube是代码质量检测的利器，可以说自动化运维工具必备，下面我们就使用它对开源项目进行检测，观察一下。
+环境准备123[root@linx01 sonarqube-7.7]# pwd/opt/apps/sonarqube-7.7[root@linx01 conf]# vim sonar.properties
+
+123[sonar@localhost linux-x86-64]$......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-26
+                    2022-12-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1247,27 +1312,39 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/IO-2022-09-25-网络IO模型/">
+            <a href="/2022/12/20/LINUX运维-2022-12-20-CI、CD系列三之全流程部署开源项目zrlog/">
                 <h2 class="post-title">
-                    网络IO-BIO、NIO
+                    CI、CD系列三之全流程部署开源项目zrlog
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言都是需求推动发展，网络IO模型也是一样，IO的发展都是围绕C10问题。总的来说就是如何建立高并发的连接。接下来我就看一下IO模型从最初的阻塞BIO到NIO再到多路复用器，一步一步如何发展过来。
-BIO概念
-看上图，所谓的BIO就是 阻塞式IO，需要一个线程监听端口，这个线程只能阻塞式的监听，再也不能干别的，当有连接上来时，linux建立对应的连接（注意这一步时内核干的，其实应用层的线程没......
+                    概述​    我们以java开源项目zrlog为例，进行一次完整的部署，实现一套完整的CICD流程。
+​    整个过程如下：
+
+开发提交代码至gitlab
+
+jenkins拉取获取代码
+
+代码的质量检测;
+
+代码的编译;
+
+发布。
+
+
+环境准备源码准备123[root@localhost code]# git clone https://gitee.com/94fzb/zrlog.git[......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1281,33 +1358,26 @@ BIO概念
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/IO-2022-09-25-DMA与零拷贝技术/">
+            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列二之实现CD/">
                 <h2 class="post-title">
-                    DMA与零拷贝技术
+                    CI、CD系列二之实现CD
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-注意事项：除了 Direct I/O，与磁盘相关的文件读写操作都有使用到 page cache 技术。
-
-数据的四次拷贝与四次上下文切换很多应用程序在面临客户端请求时，可以等价为进行如下的系统调用：
-
-File.read(file, buf, len);
-Socket.send(socket, buf, len);
-
-例如消息中间件 Kafka 就是这个应用场景，从磁盘中读取一批消息后原封......
+                    概述​    上篇文章我们对CI、CD的概念进行了大致的解释，这次我们就用Jenkins 利用脚本的方式进行自动化部署。在这之前我们再来解释一下。所谓CI就是持续集成，说白了就是你的代码存放在哪，现在企业中gitlab用的较多。我们将一个静态网页项目放在gitlab中。CD就是持续交付，持续部署。这次我们演示持续部署，即如何自动化的将代码从gitlab中拉取然后部署到服务器上。
+环境准备​ ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1321,32 +1391,25 @@ Socket.send(socket, buf, len);
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/IO-2022-09-25-文件IO与PageCache/">
+            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列一之实现方式/">
                 <h2 class="post-title">
-                    文件IO与PageCache
+                    CI、CD系列一之实现方式
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Linux文件系统
-如上图，首先我们从图中得知两点:
-
-PageCache 是属于内核级别的，受到内核的管理
-在用户态，用户可以使用mmap映射，直接访问PageCache，而不必进行内核态的切换。
-
-PageCache概念首先我们要了解一点，现在的内存管理方案中多数是分页管理，也就是内存会划分为4k一页作为一个基本单位。而pagecache呢通常也是4KB，用来缓存文件。提高IO的速度。
-......
+                    CI、CD概述​    CI、CD是现在互联网公司中很普遍的技术了。它指的是持续集成，持续交付，持续部署。所谓的持续，说白了就是让开发，测试，上线部署整个过程能像流水一样持续的进行下去。假如没有CI、CD ，那项目的开发，开发完成后的测试，那这个过程涉及到的源码就需要我们手动拷贝，等测试完成后，代码上线部署，依然需要我们打包，编译最终传到服务器部署，将是一个完全靠人力的过程，费时费力。而CI......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1360,34 +1423,29 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/jvm-2022-09-25-对象布局相关问题/">
+            <a href="/2022/12/19/LINUX运维-2022-12-19-TCP连接状态图解/">
                 <h2 class="post-title">
-                    对象布局相关问题
+                    TCP连接状态图解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言有关对象的创建、对象在内存中的布局，今天我们通过几道面试题来梳理一下。
-请解释一下对象的创建过程？
-class loading
-class linking (verification, preparation, resolution) - 静态变量赋默认值
-class initializing- 静态变量赋初始值
-申请对象内存
-成员变量赋默认值
-调用构造方法
-成员变量顺序赋初始值
-执行构......
+                    概述​    TCP的连接过程与状态管理只要了解过网络的伙伴应该都听说过，tcp的连接与断开过程主要就是三次握手与四次分手，整个过程可以通过抓包 观察，网上的资料也比较多，今天重点来梳理一下，整个过程中相关的进程状态的变化，主要是方便以后工作中对网络故障的排查。
+连接建立与结束三次握手示例
+用户：向服务器发出建立连接的请求（SYN请求） ，随机序列号seq=100
+
+服务端： 我收到你的请求......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1458,8 +1516,6 @@ class initializing- 静态变量赋初始值
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1469,6 +1525,8 @@ class initializing- 静态变量赋初始值
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1480,29 +1538,35 @@ class initializing- 静态变量赋初始值
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1526,17 +1590,11 @@ class initializing- 静态变量赋初始值
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1551,8 +1609,6 @@ class initializing- 静态变量赋初始值
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1576,7 +1632,9 @@ class initializing- 静态变量赋初始值
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1595,6 +1653,12 @@ class initializing- 静态变量赋初始值
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1623,8 +1687,6 @@ class initializing- 静态变量赋初始值
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1697,23 +1759,23 @@ class initializing- 静态变量赋初始值
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1728,7 +1790,7 @@ class initializing- 静态变量赋初始值
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1738,8 +1800,6 @@ class initializing- 静态变量赋初始值
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1753,29 +1813,31 @@ class initializing- 静态变量赋初始值
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1819,7 +1881,7 @@ class initializing- 静态变量赋初始值
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

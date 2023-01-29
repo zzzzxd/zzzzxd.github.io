@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,63 +1069,28 @@
 
         <div class="post-preview">
 
-            <a href="/2020/09/01/企业高频算法面试题-2020-09-01-Problem-27-字符串交错组成/">
+            <a href="/2020/10/12/企业高频算法面试题-2020-10-12-Problem-48-点灯问题/">
                 <h2 class="post-title">
-                    Problem 27 字符串交错组成
+                    Problem 48 点灯问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    字符串交错组成​    https://leetcode.com/problems/interleaving-string/
-题目解析
-典型的dp行列模型，定义dp[i][j]表示s1的前i个和s2的前j个字符是否能组成s3的前i+j个字符
-
-代码1234567891011121314151617181920212223242526public static boolean i......
+                    题目给定一个数组arr，长度为N，arr中的值不是0就是1。arr[i]表示第i栈灯的状态，0代表灭灯，1代表亮灯每一栈灯都有开关，但是按下i号灯的开关，会同时改变i-1、i、i+1栈灯的状态问题一：如果N栈灯排成一条直线,请问最少按下多少次开关？i为中间位置时，i号灯的开关能影响i-1、i和i+10号灯的开关只能影响0和1位置的灯N-1号灯的开关只能影响N-2和N-1位置的灯
+问题二：如果......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-09-01
+                    2020-10-12
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/30/企业高频算法面试题-2020-08-30-Problem-26-达标数组问题/">
-                <h2 class="post-title">
-                    Problem 26 达标数组问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    生成长度为size的达标数组，什么叫达标？
-达标：对于任意的 i&lt;k&lt;j，满足 [i] + [j] != [k] * 2
-给定一个正数size，返回长度为size的达标数组
-第4节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-30
-                </p>
-                <div class="tags">
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
                     
                 </div>
             
@@ -1097,31 +1104,33 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/26/企业高频算法面试题-2020-08-26-Problem-25-分糖果问题/">
+            <a href="/2020/10/12/企业高频算法面试题-2020-10-12-Problem-47-蛇前进游戏/">
                 <h2 class="post-title">
-                    Problem 25 分糖果问题
+                    Problem 47 蛇前进游戏
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    原问题：https://leetcode.com/problems/candy/
-​    进阶问题：在原问题的基础上，增加一个原则：​        相邻的孩子间如果分数一样，分的糖果数必须一样​    返回至少需要分多少糖
+                    题目​    给定一个矩阵matrix，值有正、负、0蛇可以空降到最左列的任何一个位置，初始增长值是0蛇每一步可以选择右上、右、右下三个方向的任何一个前进沿途的数字累加起来，作为增长值；但是蛇一旦增长值为负数，就会死去蛇有一种能力，可以使用一次：把某个格子里的数变成相反数蛇可以走到任何格子的时候停止返回蛇能获得的最大增长值
+第8节
 题目解析
-和原题基本一样通过两次遍历，先满足比左邻居的大，再遍历一次 满足比右边邻居的大。
-
-代码123456789101112131415161718......
+考察的是递归，无非是增加了一些条件。我们就按照最普......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-26
+                    2020-10-12
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
                 </div>
             
 
@@ -1134,25 +1143,169 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/25/企业高频算法面试题-2020-08-25-Problem-24-不相邻的最大子序列和/">
+            <a href="/2020/10/10/企业高频算法面试题-2020-10-10-Problem-46-寻找word/">
                 <h2 class="post-title">
-                    Problem 24 不相邻的最大子序列和
+                    Problem 46 寻找word
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    返回一个数组中，选择的数字不能相邻的情况下，最大子序列累加和
-题目解析
-这种子序列，首选DP，不相邻只是一个限制条件。
-
-代码1234567891011121314public static int getNotNearMaxSub(int[] arr)&#123;        final int N = arr.length;        if(arr == null |......
+                    题目给定一个char[][] matrix，也就是char类型的二维数组，再给定一个字符串word，可以从任何一个某个位置出发，可以走上下左右，能不能找到word？ char[][] m = {  { ‘a’, ‘b’, ‘z’ },                       { ‘c’, ‘d’, ‘o’ },                       { ‘f’, ‘e’, ‘o’ ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-25
+                    2020-10-10
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/07/企业高频算法面试题-2020-10-07-Problem-45-最多盛水问题/">
+                <h2 class="post-title">
+                    Problem 45 最多盛水问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：https://leetcode.com/problems/container-with-most-water/    
+题目解析
+最多盛水问题，双指针，想不明白的话就是比较绕，关键点就是不断的把答案进行推高,最终逼近答案.
+
+代码12345678910111213141516class Solution &#123;    public static int ma......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-07
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Two Pointers" title="Two Pointers">Two Pointers</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/03/企业高频算法面试题-2020-10-03-Problem-44-计算多括号表达式/">
+                <h2 class="post-title">
+                    Problem 44 计算多括号表达式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个字符串str，str表示一个公式，公式里可能有整数、加减乘除符号和左右括号 返回公式的计算结果，难点在于括号可能嵌套很多层,如：
+str=”48((70-65)-43)+81”，返回-1816。str=”3+14”，返回7。str=”3+(14)”，返回7。【说明】1.可以认为给定的字符串一定是正确的公式，即不需要对str做公式有效性检查2.如果是负数，就需要用括号括起......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-03
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/29/企业高频算法面试题-2020-09-29-Problem-43/">
+                <h2 class="post-title">
+                    Problem 43
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目题目解析
+代码
+
+...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-29
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic programming" title="Dynamic programming">Dynamic programming</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/27/企业高频算法面试题-2020-09-27-Problem-42-单词表拼接字符串种数/">
+                <h2 class="post-title">
+                    Problem 42 单词表拼接字符串种数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    假设所有字符都是小写字母  大字符串是str,arr是去重的单词表, 每个单词都不是空字符串且可以使用任意次.使用arr中的单词有多少种拼接str的方式. 返回方法数.
+题目解析
+就是说长的字符串用单词来拼起来，看看有几种方式。首先不难想的是，对字符串进行判断，在index位置，判断单词表中哪个单词可以作为开头，切割之后进行递归。此处，需要单词表，枚举每个单词之后，需要判断是不......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-27
                 </p>
                 <div class="tags">
                     
@@ -1160,6 +1313,8 @@
                     
                       <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
                     
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                    
                 </div>
             
 
@@ -1172,29 +1327,33 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/22/企业高频算法面试题-2020-08-22-Problem-23-最大子矩阵和/">
+            <a href="/2020/09/25/企业高频算法面试题-2020-09-25-Problem-41-平方后数种类/">
                 <h2 class="post-title">
-                    Problem 23 最大子矩阵和
+                    Problem 41 平方后数种类
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    返回一个二维数组中，子矩阵最大累加和
+                    题目​    1.给定一个有序数组arr，其中值可能为正、负、0​    返回arr中每个数都平方之后不同的结果有多少种？
+​    2.给定一个数组arr，先递减然后递增，​    返回arr中有多少个不同的数字？
 题目解析
-子矩阵的最大累加和，子矩阵是任意的一个。做这种题目就是要想办法从某一个方向入手，能去枚举可能性。子矩阵可以分为以第一行为底的矩阵，第二行为底的子矩阵，第三行为底的子矩阵。同时我们想，在纵方向上进行累加起来，比如第一行和第二行的值累加成一个数组，此时这个数组的最大连续子数组实际就是以第二行为底，高为2的矩阵中，最大的子矩阵。通过枚举......
+两道题目实际是一道，想象成低谷，两个变量两边遍历一下即可
+
+代码​    略
+...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-22
+                    2020-09-25
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                      <a href="/tags/#Two Pointers" title="Two Pointers">Two Pointers</a>
                     
                 </div>
             
@@ -1208,170 +1367,68 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/22/企业高频算法面试题-2020-08-22-Problem-22-子数组最大累积和/">
+            <a href="/2020/09/25/企业高频算法面试题-2020-09-25-Problem-40-排序后的最大差值/">
                 <h2 class="post-title">
-                    Problem 22 子数组最大累积和
+                    Problem 40 排序后的最大差值
                 </h2>
                 <h3 class="post-subtitle">
-                    
+                    algorithm
                 </h3>
                 <div class="post-content-preview">
-                    题目​    返回一个数组中，子数组最大累加和
+                    题目​    给定一个数组arr，返回如果排序之后，相邻两数的最大差值 要求：时间复杂度O(N)
 题目解析
-这个题目就太常见了。
+这个题需要好好思考，其实没什么明显的知识点的提示，这时候就得想些 “特殊技巧”。这个题 N个数，可以分到N+1个桶中，把元素[min,max]，给把区间平均分配到桶中，间隔最大的两个元素 一定是夸桶！所以只需要在桶中维护最大，最小元素，最后挨个桶考察一下即可。
 
-代码1234567891011public static int max_subarr_sum(int[] arr)&#123;        final int N = arr.length;        int pre = arr[0];        int res = pre;        for ......
+代码123456789......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-22
+                    2020-09-25
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/25/企业高频算法面试题-2020-09-25-Problem-39-监控二叉树/">
+                <h2 class="post-title">
+                    Problem 39 监控二叉树
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    https://leetcode.com/problems/binary-tree-cameras/
+题目解析
+贪心的思路，因为目标是很明确的，就是照完整棵树，相机树最少，那就是能不放则不放，主要考察两个小变量，放了没有?照到了没有？
+结合二叉树的递归套路可解。
+
+代码1234567891011121314151617181920212223242526272829303132......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-25
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/19/企业高频算法面试题-2020-08-19-Problem-21-设计查询区间上目标数个数/">
-                <h2 class="post-title">
-                    Problem 21 设计查询区间上目标数个数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目数组为{3, 2, 2, 3, 1}，查询为(0, 3, 2)，意思是在数组里下标0~3这个范围上，有几个2？答案返回2。假设给你一个数组arr，对这个数组的查询非常频繁，都给出来。
-请返回 所有查询的结果
-题目解析
-数据结构的题目 通常都是考察某种思想，而且这种思想 在工作中，碰到的各种组建都会有应用到的地方，是可以落地使用的。
-此题可以用一种反向索引表，也就是key是待查的元素，v是......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/18/企业高频算法面试题-2020-08-18-Problem-20-距离K的树节点/">
-                <h2 class="post-title">
-                    Problem 20 距离K的树节点
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定三个参数：二叉树的头节点head，树上某个节点target，正数K从target开始，可以向上走或者向下走，返回与target的距离是K的所有节点    
-题目解析
-可以往上走，那就是3个方向，找距离为K的，那不就是图的bfs吗。所以说思路要打开。树是不带父亲的路径的，需要自己用有序表存一下。
-
-代码123456789101112131415161718192021222324252......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Tree" title="Tree">Tree</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/14/企业高频算法面试题-2020-08-14-Problem-19-自由之路/">
-                <h2 class="post-title">
-                    Problem 19
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode 自由之路
-​    https://leetcode.com/problems/freedom-trail/
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-14
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/12/企业高频算法面试题-2020-08-12-Problem-18-最接近sum的子序列累加和问题md/">
-                <h2 class="post-title">
-                    Problem 18 最接近sum的子序列累加和问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode 最接近sum的子序列累加和问题
-​    https://leetcode.com/problems/closest-subsequence-sum/
-​    3节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-12
-                </p>
-                <div class="tags">
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                 </div>
             
@@ -1442,8 +1499,6 @@
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1453,6 +1508,8 @@
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1464,29 +1521,35 @@
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1510,17 +1573,11 @@
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1535,8 +1592,6 @@
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1560,7 +1615,9 @@
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1579,6 +1636,12 @@
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1607,8 +1670,6 @@
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1681,23 +1742,23 @@
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1712,7 +1773,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1722,8 +1783,6 @@
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1737,29 +1796,31 @@
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1803,7 +1864,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

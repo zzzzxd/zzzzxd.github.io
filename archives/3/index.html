@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,28 +1069,225 @@
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/jvm-2022-09-25-Synchronized锁升级过程/">
+            <a href="/2022/12/15/LINUX运维-2022-12-15-系统负载高的原因及排查思路/">
                 <h2 class="post-title">
-                    Synchronized锁升级过程
+                    系统负载高的原因及排查思路
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言Synchronized的经过优化之后，性能提高很多，接下来我们就看一下它的优化原理。
-java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻量级锁和重量级锁。
-在Java HotSpot VM中，每个对象前面都有一个class指针和一个Mark Word。 Mark Word存储了哈希值以及分代年龄和标记位等，通过这些值的变化，JVM可以实现对java对象的不同程度的锁定。
+                    平均负载概述系统负载反映机器的压力情况，是日常工作中需要重点关注的指标，利用uptime命令可以进行查看如下 ：
+12[root@linx01 ~]# uptime 21:45:08 up  4:51,  2 users,  load average: 0.08, 0.04, 0.05
+从左到右含义依次是 当前时间、系统运行时间、正在登录用户数。过去 1 分钟、5 分钟、15 分钟的平均负载......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘使用的全流程/">
+                <h2 class="post-title">
+                    磁盘使用流程及企业分区方案
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    磁盘使用流程概述其实磁盘的使用，主要就是三个步骤，分区、格式化、挂载
+
+磁盘分区 :有了一块地,划分隔断. fdisk/parted
+
+格式化（创建文件系统） :对房间进行装修. mkfs
+
+挂载 :安装门窗,可以入住与使用. mount Linux下面设备必须要挂载才能访问与使用,没有挂载相当于房子没 有门窗. 挂载相当于给设备设置了一个入口.
+
+
+实战演示磁盘分区 对新添加的sdb磁盘划......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘空间不足案例分析/">
+                <h2 class="post-title">
+                    磁盘空间不足案例分析
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言 工作中可能会遇到no space left on device 这个问题  也就是磁盘满了，原因有很多种，下面进行分析并对问题进行复现，最后对排查问题的方法以及使用到的命令进行总结。
+原因大文件造成block不足这种算是真实的磁盘用满了
+复现1234567891011121314151617181920[root@linx01 ~]# df -h文件系统        容量  已用  ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-14
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘分区实战/">
+                <h2 class="post-title">
+                    fdisk磁盘分区实战
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    环境准备​    此次我们在虚拟机上添加磁盘进行操作。具体的添加操作，由于不同的虚拟机添加方法不一样就不在叙述了。
+添加完磁盘后，使用lsblk命令可以查看所以的块设备
+
+可以看到，当前虚拟机上共有三块设备，两块硬盘，一块光盘，只要能看到自己添加的硬盘即可。
+磁盘分区fdisk分区指令1fdisk [选项][参数]
+​    fdisk 指令是 Linux 下通用的磁盘分区工具，它可以操纵硬......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/14/LINUX运维-2022-12-14-SWAP分区实战/">
+                <h2 class="post-title">
+                    SWAP分区实战
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    概述swap 交换分区.内存不足的时候临时充当内存.
+创建swap分区通过文件创建swap分区12345678910111213141516171819[root@linx01 ~]# dd if=/dev/zero of=/tmp/t count=100 bs=10M记录了100+0 的读入记录了100+0 的写出1048576000字节(1.0 GB)已复制，1.28384 秒，817 ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux的磁盘管理体系/">
+                <h2 class="post-title">
+                    Linux的磁盘管理体系
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    　前言磁盘相关的知识是Linux系统中的重头戏，需要了解的点比较多。但现在随着云计算的兴起，在很多企业中很少碰到物理服务器了也就不会接触到屋里磁盘。所以更多的是停留在使用的层面。下面我们就系统的回顾一下linux的磁盘知识。
+磁盘管理基础磁盘分类与接口磁盘分类:
+
+机械硬盘HDD
+固态硬盘SSD
+
+磁盘接口分类:
+
+
+
+
+类型
+磁盘类型
+适应场景
+
+
+
+
+sata
+机械、固态
+家用更多
+
+
 ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1062,30 +1301,23 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/jvm-2022-09-25-Synchronized关键字原理/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-sed、awk的混合使用/">
                 <h2 class="post-title">
-                    Synchronized关键字原理
+                    sed、awk的混合使用
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    java聊到并发，synchronized关键字想必肯定是再熟悉不过了，它的使用非常简单，接下来我们就重点看一下使用时候的注意点和原理。
-使用总结
-选用一个锁对象，可以是任意对象；
-锁对象锁的是同步代码块，并不是自己；
-不同类型的多个 Thread 如果有代码要同步执行，锁对象要使用所有线程共同持有的同一个对象；
-需要同步的代码放到大括号中。需要同步的意思就是需要保证原子性、可......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-14
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1099,26 +1331,23 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/jvm-2022-09-25-volatile与可见性/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux中的正则表达式/">
                 <h2 class="post-title">
-                    volatile与可见性
+                    Linux中的正则表达式
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    可见性​    可见性指的是，某个线程对共享变量进行了修改，其它线程能够立刻看到修改后的最新值。乍一听这个定义，你可能会觉得这不是废话吗？变量被修改了，线程当然能够立刻读取到！否则即使单线程的程序也会出问题啊！没错，变量被修改后，在本线程中确实能够立刻被看到，但并不保证别的线程会立刻看到。原因就是编程领域经典的两大难题之一——缓存一致性。
-观察可见性123456789101112131415......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2022-12-14
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1132,31 +1361,45 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
 
         <div class="post-preview">
 
-            <a href="/2022/09/24/jvm-2022-09-24-有序性与内存屏障/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux的特殊符号总结/">
                 <h2 class="post-title">
-                    有序性与内存屏障
+                    Linux的特殊符号总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    并发三大特性所有讲并发编程的书籍都会讲到并发编程的三大特性，这是并发编程中所有问题的根源，我们只有深刻理解了这三大特性，才不会编写出漏洞百出的并发程序，才不会遇到问题时无从下手，才不会对自己的程序没有信心。
-这三大特性是：
+                    前言linux系统中充满着各种各式的符号，尤其是在书写shell脚本时候，更是明显，今天索性把所有常见的符号进行总结，方便记忆。
+引号
 
-原子性 : 所有操作要么全部成功，要么全部失败。
-可见性: 一个线程对变量进行了修改，另外一个线程能够立刻读取到此变量的最新值。
 
-有序性: 代码在执行阶段，并不一定和......
+
+符号
+含义
+
+
+
+
+反引号:`` 或 $()
+优先执行,先执行里面的命令. 一般创建/打包的时候给文件名加上个日期.
+
+
+单引号: ‘’
+所见即所得,单引号里面的内容会原封不动的输出.
+
+
+双引号: “”
+与单引号类似,但是对引号的里面特殊符号会进行解......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-24
+                    2022-12-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1170,205 +1413,45 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
 
         <div class="post-preview">
 
-            <a href="/2022/09/24/jvm-2022-09-24-JMM与缓存一致性/">
+            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux的12位权限体系/">
                 <h2 class="post-title">
-                    JMM与缓存一致性
+                    Linux的12位权限体系
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    随着CPU的不断发展，CPU的性能越来越强大，但受迫于频率提升的困难，现代CPU架构开始向多核发展。而作为软件开发人员为了充分使用CPU的性能，越来越多的开发者会选择多线程程序开发。CPU在计算时会做一些优化，这些优化对于单线程程序来说是没有问题的，但对多线程程序则不是那么的友好。接下来我们就从硬件底层来看一下硬件对多线程并发的影响。
-硬件层的并发优化首先，我们来看一下硬件上的......
+                    前言​    LINUX权限管理也是linux系统管理中很重要的一部分，通过权限管理最终保障系统网站的安全。接下来我们系统的总结一下linux权限相关的知识点，以及遇到权限问题的排查思路，可以应对工作中常见的权限问题。
+LINUX基础权限rwx权限与用户
+
+
+
+权限的字符
+含义与说明
+
+
+
+
+r
+read 读,是否可以读取内容
+
+
+w
+write 写, 是否可以修改内容
+
+
+x
+execut......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-24
+                    2022-12-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/24/jvm-2022-09-24-Class加载过程/">
-                <h2 class="post-title">
-                    Class加载过程
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言    
-在java中当我们使用某个类的时候，首先做的就是把.class文件从硬盘中加载到内存中，这一步称为加载的过程，但实际上，要做的工作不止这一些，接下来我们看一下，在一个类被使用前要做哪些准备工作呢。
-Loading类加载器特点
-全盘负责：当一个类加载器加载一个类时，该类所依赖的其他类也会被这个类加载器加载到内存中。
-缓存机制：所有的Class对象都会被缓存，当程序需要使用某个Cl......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/23/JUC-2022-09-23-JUC包下的新型锁/">
-                <h2 class="post-title">
-                    JUC包下的新型锁
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ReentrantLock概念​    可重入锁，就是拿到锁之后，还可以对此锁再拿一次，一层一层的加，synchronized本身就是可重入锁的一种
-需要注意的地方
-可以代替synchronied关键字，只需要在使用synchronized关键字的地方使用lock.lock()方法
-synchronized关键字是自动解锁的，但是reen必须手动解锁
-特别注意对于异常的处理，sync遇到异常......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/23/JUC-2022-09-23-Atomic类与CAS分析/">
-                <h2 class="post-title">
-                    Atomic类与CAS分析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Atomic 简介Atomic 相关类在 java.util.concurrent.atomic 包中。针对不同的原生类型及引用类型，有 AtomicInteger、AtomicLong、AtomicBoolean、AtomicReference 等。另外还有数组对应类型 AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray。由于 A......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/23/JUC-2022-09-23-多线程基础/">
-                <h2 class="post-title">
-                    多线程基础
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    线程状态线程的状态，是重点中的重点，在生产中遇到问题的时候，就需要观察线程状态来排查问题，比如用jstack查看堆栈信息时候，就需要重点关注block状态的线程。
-状态流转
-状态的解释
-new: 线程刚刚创建，还没有启动
-Runnable：可运行状态，可由线程调度器安排执行，具体分为：Ready等待调度，Running 正在执行
-Waiting：等待被唤醒
-Timed Waiting：隔一段......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/22/微服务-2022-09-22-SpringCache-使用总结/">
-                <h2 class="post-title">
-                    SpringCache 使用总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Spring Cache简介
-Spring 从 3.1 开始定义了 org.springframework.cache.Cache 和 org.springframework.cache.CacheManager 接口来统一不同的缓存技术； 并支持使用 JCache（JSR-107）注解简化我们开发；
-
-Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合； Cache 接 口 下 ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#缓存" title="缓存">缓存</a>
-                    
-                      <a href="/tags/#Spring Cache" title="Spring Cache">Spring Cache</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1439,8 +1522,6 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1450,6 +1531,8 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1461,29 +1544,35 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1507,17 +1596,11 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1532,8 +1615,6 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1557,7 +1638,9 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1576,6 +1659,12 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1604,8 +1693,6 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1678,23 +1765,23 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1709,7 +1796,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1719,8 +1806,6 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1734,29 +1819,31 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1800,7 +1887,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

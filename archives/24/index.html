@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,31 +1069,31 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/12/企业高频算法面试题-2020-08-12-Problem-17-最少坐船数md/">
+            <a href="/2020/09/22/企业高频算法面试题-2020-09-22-Problem-38-最大与运算/">
                 <h2 class="post-title">
-                    Problem 17 最少坐船数
+                    Problem 38 最大与运算
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    给定一个正数数组arr，代表若干人的体重. 再给定一个正数limit，表示所有船共同拥有的载重量 每艘船最多坐两人，且不能超过载重 ,想让所有的人同时过河，并且用最好的分配方法让船尽量少。返回最少的船数
-题目解析
-上道题目是同向的双指针，这就是对撞型的。尽可能少的，那就是让胖的尽可能捎带一个小的，稍不过来就单独成船。
-
-代码123456789101112131415161718......
+                    题目​    给定一个非负数组成的数组，长度一定大于1 想知道数组中哪两个数&amp;的结果最大返回这个最大结果.时间复杂度O(N)，额外空间复杂度O(1)
+第7节
+题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-12
+                    2020-09-22
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Two Pointers" title="Two Pointers">Two Pointers</a>
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
                     
                 </div>
             
@@ -1065,31 +1107,32 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/09/企业高频算法面试题-2020-08-09-Problem-16-最多比赛数/">
+            <a href="/2020/09/21/企业高频算法面试题-2020-09-21-Problem-37-Nim博/">
                 <h2 class="post-title">
-                    Problem 16 最多比赛数
+                    Problem 37 Nim博弈
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    给定一个数组arr，代表每个人的能力值。再给定一个非负数k 如果两个人能力差值正好为k，那么可以凑在一起比赛 一局比赛只有两个人返回最多可以同时有多少场比赛。
+                    题目Nim博弈. 给定一个正数数组arr 先手和后手每次可以选择在一个位置拿走若干值，值要大于0，但是要小于该处的剩余 谁最先拿空arr，谁赢。根据arr，返回谁赢
 题目解析
-双指针。注意双指针常用法有同向，也有对撞的。相差k，肯定是一个大，一个小呀，所以排序一下，用大的减小的为K，同时注意标记 。
-
-代码123456789101112131415161718192021222324......
+题目理解之后。需要转换思路。如果先手能保证每次拿一个数之后，异或值是0 ，不断的拿之后，最后后手面对异或和为0的情况 一定全是0，所以先手只能能保证当前异或值不是0，那就每次拿成0，这样 先手一定赢。
+有一点在于，能不......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-09
+                    2020-09-21
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Two Pointers" title="Two Pointers">Two Pointers</a>
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
                     
                 </div>
             
@@ -1103,25 +1146,102 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/07/企业高频算法面试题-2020-08-07-Problem-15-最大正方形/">
+            <a href="/2020/09/21/企业高频算法面试题-2020-09-21-Problem-36-异或和为0的最多子数组个数/">
                 <h2 class="post-title">
-                    Problem 15 最大正方形
+                    Problem 36 异或和为0的最多子数组个数
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    给定一个只有0和1组成的二维数组,返回边框全是1的最大正方形面积
-​    leetcode:https://leetcode.com/problems/largest-1-bordered-square/
+                    题目​    数组中所有数都异或起来的结果，叫做异或和 给定一个数组arr，可以任意切分成若干个不相交的子数组其中一定存在一种最优方案，使得切出异或和为0的子数组最多 返回这个最多数量
 题目解析
-先来分析一下。求的是边框是1，是空心的。没有任何知识点的提示，那就从从数据规模上看，N的3次方是能满足的。所以我们不妨用暴力来做。
-枚举长方形是 N的4次方，枚举......
+看到子数组先想DP ，打出前缀和，自己异或自己是0，利用这几点，题目就很简单了。
+
+代码12345678910111213141516//动态规划，利用异或的前缀和  public static i......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-07
+                    2020-09-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/20/企业高频算法面试题-2020-09-20-Problem-35-与数组中元素的最大异或值/">
+                <h2 class="post-title">
+                    Problem 35 与数组中元素的最大异或值
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    https://leetcode.com/problems/maximum-xor-with-an-element-from-array/
+题目解析
+这个题还是比较经典的，有两种思路，一种是来个简单的，直接把查询的mi 和 数组都按照从小到大排序，加入前缀树中，代码几乎和34题一样
+前缀树，节点可以存放一些附加信息，比如以当前路径为前缀的单词个数，当前节点是不是单词等等，这个地......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Bit Manipuldate" title="Bit Manipuldate">Bit Manipuldate</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/16/企业高频算法面试题-2020-09-16-Problem-34-最大异或和的两个数/">
+                <h2 class="post-title">
+                    Problem 34 最大异或和的两个数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    数组中所有数都异或起来的结果，叫做异或和 给定一个数组arr，想知道arr中哪两个数的异或结果最大返回最大的异或结果https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/
+题目解析
+是33题的简化版。
+
+代码12345678910111213141516171819202122232425262......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-16
                 </p>
                 <div class="tags">
                     
@@ -1141,25 +1261,27 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/04/企业高频算法面试题-2020-08-04-Problem-13-字符串种类/">
+            <a href="/2020/09/12/企业高频算法面试题-2020-09-12-Problem-33-最大异或和子数组/">
                 <h2 class="post-title">
-                    Problem 13 字符串种类
+                    Problem 33 最大异或和子数组
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    只由小写字母（a~z）组成的一批字符串 都放在字符类型的数组String[] arr中 如果其中某两个字符串所含有的字符种类完全一样 就将两个字符串算作一类 比如：baacbba和bac就算作一类 返回arr中有多少类？
+                    题目​    数组中所有数都异或起来的结果，叫做异或和,给定一个数组arr，返回arr的最大子数组异或和    
 题目解析
-很容易想到，一个字符串用一个map表来表示只与种类有关。但实际上26个字母，26位 利用一个整数就可以表示。所以有几个整数就是有几类。
+首先看到这种和啊，数组啊，应该想到”前缀和“ ，要有这种意识，总要有些经验上的积累。
+先做出前缀的异或和数组，这样对于数组preSum[i],和前置的哪个元素异或 得到最大值，最大值是多少？
+preSum元素放到前缀树上，利用数位 的贪心思想即可求解。
 
-代码123......
+代码12345......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-04
+                    2020-09-12
                 </p>
                 <div class="tags">
                     
@@ -1179,59 +1301,33 @@
 
         <div class="post-preview">
 
-            <a href="/2020/07/31/企业高频算法面试题-2020-07-31-Problem-14/">
+            <a href="/2020/09/09/企业高频算法面试题-2020-09-09-Problem-32-最少删除字符成为其子串/">
                 <h2 class="post-title">
-                    Problem 12
+                    Problem 32 最少删除字符成为其子串
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-07-31
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/07/29/企业高频算法面试题-2020-07-29-Problem-12-整体有序的最小子数组/">
-                <h2 class="post-title">
-                    Problem 12 整体有序的最小子数组
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    给定一个数组arr，只能对arr中的一个子数组排序，但是想让arr整体都有序 返回满足这一设定的子数组中，最短的是多长。
-leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
+                    题目​    给定两个字符串s1和s2，问s2最少删除多少字符可以成为s1的子串？比如 s1 = “abcde”，s2 = “axbc”
 题目解析
-经典题目，简单分析一下，假设第一个元素比最后一个元素大，降序，那只能整体排序。如果第一......
+一种暴力思路，将s2进行挑选，挑选删除字符少的子序列 看是不是s1子串。
+编辑距离思路，挑选出s1的所有子串，挨个进行编辑距离的dp
+
+代码12345678910111213141516171819202122232425262728293031......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-07-29
+                    2020-09-09
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
                 </div>
             
 
@@ -1244,31 +1340,32 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
 
         <div class="post-preview">
 
-            <a href="/2020/07/28/企业高频算法面试题-2020-07-28-Problem-11-设计setAll/">
+            <a href="/2020/09/06/企业高频算法面试题-2020-09-06-Problem-31-编辑距离问题/">
                 <h2 class="post-title">
-                    Problem 11 设计setAll
+                    Problem 31 编辑距离问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    设计有setAll功能的哈希表
-​    put、get、setAll方法，时间复杂度O(1)
+                    题目​    一个字符串 可以有插入（insert）、删除（delete）、替换（replace）操作，每种操作都有对应的代价。求一个字符串变成另一个最小的代价。
 题目解析
-考察思想 “版本”，利用时间戳做版本的思想。
+经典的题目。动态规划中的行列模型。列举所有的可能性。
 
-代码12345678910111213141516171819202122232425262728293031323334353637383940public static class MyValue&lt;V&gt; &#1......
+代码123456789101112131415161718192021222324&#x2F;&#x2F;方法：编辑距离问题，考察代价最小的最优解 ，典型的行列模型......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-07-28
+                    2020-09-06
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
                 </div>
             
 
@@ -1281,23 +1378,23 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
 
         <div class="post-preview">
 
-            <a href="/2020/07/26/企业高频算法面试题-2020-07-26-Problem-10-司机调度/">
+            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-30-相等子树/">
                 <h2 class="post-title">
-                    Problem 10 司机调度
+                    Problem 30 相等子树
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    现有司机N*2人，调度中心会将所有司机平分给A、B两个区域​            第 i 个司机去A可得收入为income[i][0]，​            第 i 个司机去B可得收入为income[i][1]，返回所有调度方案中能使所有司机总收入最高的方案，是多少钱
+                    题目如果一个节点X，它左树结构和右树结构完全一样,那么我们说以X为头的树是相等树。给定一棵二叉树的头节点head ，返回head整棵树上有多少棵相等子树
 题目解析
-最优解，一般考虑贪心 、dp。这个题实际贪心就可以。主要找出贪心策略，同一个人去A可能钱很多，......
+既然是比较树是不是一样的，那我们可以通过序列化的方式来描述一棵树。运用二叉树的递归套路，返回以head为头节点有多少个相等树，同时返回序列化结果。那么当拿到左右孩子的info信息时，便可以决定当前节点的相等子树个数。此外，比较序列......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-07-26
+                    2020-09-05
                 </p>
                 <div class="tags">
                     
@@ -1317,65 +1414,31 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
 
         <div class="post-preview">
 
-            <a href="/2020/07/23/企业高频算法面试题-2020-07-23-Problem-9-数据流问题/">
+            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-29-BST先序构造树/">
                 <h2 class="post-title">
-                    Problem 9 数据流问题
+                    Problem 29 BST先序构造树
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    已知一个消息流会不断地吐出整数 1~N，但不一定按照顺序依次吐出 如果上次打印的序号为i， 那么当i+1出现时 请打印 i+1 及其之后接收过的并且连续的所有数 直到1~N全部接收并打印完请设计这种接收并打印的结构。
+                    题目​        已知一棵搜索二叉树上没有重复值的节点，现在有一个数组arr，是这棵搜索二叉树先序遍历的结果请根据arr生成整棵树并返回头节点
 题目解析
-经典题目。大思路就是构建头链表，构建尾链表，来一个元素就要去头链中 拽出来前面的元素，同时检查这个元素是否在尾链中，同理也要尝试拽尾链中的元素。
+就是递归在区间l-r中创建树,寻找左子树，右子树时候，因为是寻找第一个大于的,用二分正好，总体就是nlogn的
 
-代码......
+代码12345678910111213141516171819202122232425262728293031323334......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-07-23
+                    2020-09-05
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/07/22/企业高频算法面试题-2020-07-22-Problem-8-可乐找零问题/">
-                <h2 class="post-title">
-                    Problem 8  可乐找零问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    贩卖机只支持硬币支付，且收退都只支持10 ，50，100三种面额一次购买只能出一瓶可乐，且投钱和找零都遵循优先使用大钱的原则需要购买的可乐数量是m，其中手头拥有的10、50、100的数量分别为a、b、c可乐的价格是x(x是10的倍数)请计算出需要投入硬币次数？
-2节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-07-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                 </div>
             
@@ -1446,8 +1509,6 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1457,6 +1518,8 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1468,29 +1531,35 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1514,17 +1583,11 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1539,8 +1602,6 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1564,7 +1625,9 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1583,6 +1646,12 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1611,8 +1680,6 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1685,23 +1752,23 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1716,7 +1783,7 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1726,8 +1793,6 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1741,29 +1806,31 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1807,7 +1874,7 @@ leetcode 链接:https://leetcode.com/problems/shortest-unsorted-continuous-subar
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

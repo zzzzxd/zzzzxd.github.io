@@ -164,7 +164,7 @@
 
                         
                         <li>
-                            <a href="/categories/">Categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -178,14 +178,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/categories/">Categories</a>
                         </li>
                         
                     
@@ -1019,6 +1019,48 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1027,34 +1069,29 @@
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/磁盘使用的全流程/">
+            <a href="/2023/01/29/数据仓库-2023-01-29-Hudi-增量查询/">
                 <h2 class="post-title">
-                    磁盘使用流程及企业分区方案
+                    Hudi-增量查询
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    磁盘使用流程概述其实磁盘的使用，主要就是三个步骤，分区、格式化、挂载
+                    前面的文章中提到过 快照查询，优化查询 其实都是对MOR类型表提的，还有一种增量查询，下面详细介绍一下。
+原理解释这个功能提供给用户“读取任意两个commit之间差分数据”的能力。这个功能也是基于TimeLine 的“多版本数据管理”实现的
+我们还是以之前的例子，假设我们想要读取v1 → v2之间的差分数据
 
-磁盘分区 :有了一块地,划分隔断. fdisk/parted
-
-格式化（创建文件系统） :对房间进行装修. mkfs
-
-挂载 :安装门窗,可以入住与使用. mount Linux下面设备必须要挂载才能访问与使用,没有挂载相当于房子没 有门窗. 挂载相当于给设备设置了一个入口.
-
-
-实战演示磁盘分区 对新添加的sdb磁盘划......
+Hudi会计算出v2到v1之间的差异是两个文件：fileId01_002和file......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-29
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1068,25 +1105,38 @@
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/磁盘空间不足案例分析/">
+            <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-事务原理详解/">
                 <h2 class="post-title">
-                    磁盘空间不足案例分析
+                    Hudi-事务原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言 工作中可能会遇到no space left on device 这个问题  也就是磁盘满了，原因有很多种，下面进行分析并对问题进行复现，最后对排查问题的方法以及使用到的命令进行总结。
-原因大文件造成block不足这种算是真实的磁盘用满了
-复现1234567891011121314151617181920[root@linx01 ~]# df -h文件系统        容量  已用  ......
+                    ​    之前的文章对Hudi的更新操作原理进行了较为详细的讲解，接下来是Hudi的另一大特色-事务功能。
+原理解释Hudi的事务功能被称为Timeline，因为Hudi把所有对一张表的操作都保存在一个时间线对象里面。Hudi官方文档中对于Timeline功能的介绍稍微有点复杂，不是很清晰。其实从用户角度来看的话，Hudi提供的事务相关能力主要是这些：
+
+
+
+
+特性
+功能
+
+
+
+
+原子性
+写......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-14
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1100,30 +1150,27 @@
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/磁盘分区实战/">
+            <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-MOR优化原理详解/">
                 <h2 class="post-title">
-                    fdisk磁盘分区实战
+                    Hudi-MOR优化原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    环境准备​    此次我们在虚拟机上添加磁盘进行操作。具体的添加操作，由于不同的虚拟机添加方法不一样就不在叙述了。
-添加完磁盘后，使用lsblk命令可以查看所以的块设备
-
-可以看到，当前虚拟机上共有三块设备，两块硬盘，一块光盘，只要能看到自己添加的硬盘即可。
-磁盘分区fdisk分区指令1fdisk [选项][参数]
-​    fdisk 指令是 Linux 下通用的磁盘分区工具，它可以操纵硬......
+                    背景Merge on Read（简称MOR表），是Hudi最初开源时尚处于“实验阶段”的新功能，在开源后的0.3.5版本开始才告完成。现在则是Hudi最常用的表类型。
+Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入性能。
+导致COW表写入慢的原因，是因为COW表每次在写入时，会把新写入的数据和老数据合并以后，再写成新的文件。单单是写入的过程（不包含前......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1137,26 +1184,25 @@
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/SWAP分区实战/">
+            <a href="/2023/01/13/数据仓库-2023-01-13-Hudi-Upsert操作原理详解/">
                 <h2 class="post-title">
-                    SWAP分区实战
+                    Hudi-Upsert操作原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述swap 交换分区.内存不足的时候临时充当内存.
-创建swap分区通过文件创建swap分区12345678910111213141516171819[root@linx01 ~]# dd if=/dev/zero of=/tmp/t count=100 bs=10M记录了100+0 的读入记录了100+0 的写出1048576000字节(1.0 GB)已复制，1.28384 秒，817 ......
+                    背景​    首先介绍下Hudi的背景，因为背景对理解一个项目很关键。​    Hudi，正式的全称是Hadoop Upsert Delete and Incremental。其实关于这个名字也不用太较真，因为都是后来附会上去的，从源代码里可以看到这个项目最初的名字是hoodie和现在的名字发音相同。但这个名字还是透露了一些信息的，那就是Hudi项目最初的设计目标:在hadoop上实现upd......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1170,64 +1216,9 @@
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/Linux的磁盘管理体系/">
+            <a href="/2023/01/12/Huid-表类型/">
                 <h2 class="post-title">
-                    Linux的磁盘管理体系
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    　前言磁盘相关的知识是Linux系统中的重头戏，需要了解的点比较多。但现在随着云计算的兴起，在很多企业中很少碰到物理服务器了也就不会接触到屋里磁盘。所以更多的是停留在使用的层面。下面我们就系统的回顾一下linux的磁盘知识。
-磁盘管理基础磁盘分类与接口磁盘分类:
-
-机械硬盘HDD
-固态硬盘SSD
-
-磁盘接口分类:
-
-
-
-
-类型
-磁盘类型
-适应场景
-
-
-
-
-sata
-机械、固态
-家用更多
-
-
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/sed、awk的混合使用/">
-                <h2 class="post-title">
-                    sed、awk的混合使用
+                    Huid-表类型
                 </h2>
                 <h3 class="post-subtitle">
                     
@@ -1239,7 +1230,7 @@ sata
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
@@ -1255,9 +1246,9 @@ sata
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/Linux中的正则表达式/">
+            <a href="/2023/01/12/Hudi-查询类型/">
                 <h2 class="post-title">
-                    Linux中的正则表达式
+                    Hudi-查询类型
                 </h2>
                 <h3 class="post-subtitle">
                     
@@ -1269,7 +1260,7 @@ sata
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
@@ -1285,45 +1276,23 @@ sata
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/Linux的特殊符号总结/">
+            <a href="/2023/01/12/Hudi-核心概念/">
                 <h2 class="post-title">
-                    Linux的特殊符号总结
+                    Hudi-核心概念
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言linux系统中充满着各种各式的符号，尤其是在书写shell脚本时候，更是明显，今天索性把所有常见的符号进行总结，方便记忆。
-引号
-
-
-
-符号
-含义
-
-
-
-
-反引号:`` 或 $()
-优先执行,先执行里面的命令. 一般创建/打包的时候给文件名加上个日期.
-
-
-单引号: ‘’
-所见即所得,单引号里面的内容会原封不动的输出.
-
-
-双引号: “”
-与单引号类似,但是对引号的里面特殊符号会进行解......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1337,45 +1306,23 @@ sata
 
         <div class="post-preview">
 
-            <a href="/2022/12/13/Linux的12位权限体系/">
+            <a href="/2023/01/12/Huid-数据管理/">
                 <h2 class="post-title">
-                    Linux的12位权限体系
+                    Huid-数据管理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    LINUX权限管理也是linux系统管理中很重要的一部分，通过权限管理最终保障系统网站的安全。接下来我们系统的总结一下linux权限相关的知识点，以及遇到权限问题的排查思路，可以应对工作中常见的权限问题。
-LINUX基础权限rwx权限与用户
-
-
-
-权限的字符
-含义与说明
-
-
-
-
-r
-read 读,是否可以读取内容
-
-
-w
-write 写, 是否可以修改内容
-
-
-x
-execut......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-13
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1389,44 +1336,66 @@ execut......
 
         <div class="post-preview">
 
-            <a href="/2022/12/13/Linux用户管理/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-Hudi介绍/">
                 <h2 class="post-title">
-                    Linux用户管理
+                    Hudi介绍
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    用户管理体系是linux系统中一样很重要的内容，不同的用户分配不同等级的权限可以保障系统的安全，问题发生以后也方便追溯问题的原因。接下来总结一下与用户管理相关的一些比较重要的内容。
-用户分类
+                    数据湖框架目前市面上流行的三大开源数据湖方案分别为：Delta Lake、Apache Iceberg和Apache Hudi。
+
+Delta Lake：DataBricks公司推出的一种数据湖方案，网址：https://delta.io/ 
 
 
-
-用户分类
-含义
-uid
+Apache Iceberg：以类似于SQL的形式高性能的处理大型的开放式表，网址：https://iceberg.apache.org/
 
 
-
-
-root用户
-最高权限用户。
-0
-
-
-虚拟用户（傀儡用 户）
-这种用户存在是用于让一些服务正常运行。一些服务运行需要指定 的用户。
-uid是1-999......
+A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-13
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/12/数据仓库-2023-01-12-大数据为什么需要数据湖/">
+                <h2 class="post-title">
+                    大数据为什么需要数据湖？
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ​    当前基于Hive的离线数据仓库已经非常成熟，在传统的离线数据仓库中对记录级别的数据进行更新是非常麻烦的，需要对待更新的数据所属的整个分区，甚至是整个表进行全面覆盖才行，由于离线数仓多级逐层加工的架构设计，数据更新时也需要从贴源层开始逐层反应到后续的派生表中去。
+​    随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1493,8 +1462,6 @@ uid是1-999......
     <div class="tags">
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="16">LINUX</a>
-            
         
             
         
@@ -1504,6 +1471,8 @@ uid是1-999......
         
             
         
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1515,29 +1484,35 @@ uid是1-999......
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1561,17 +1536,11 @@ uid是1-999......
             
         
             
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
             <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
             
         
             
@@ -1586,8 +1555,6 @@ uid是1-999......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1611,7 +1578,9 @@ uid是1-999......
             
         
             
-            <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
             
         
             
@@ -1630,6 +1599,12 @@ uid是1-999......
         
             
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Array" title="Array" rel="15">Array</a>
             
         
             
@@ -1658,8 +1633,6 @@ uid是1-999......
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
-            
-        
             
         
             
@@ -1732,23 +1705,23 @@ uid是1-999......
     <ul>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%A8%E6%B5%81%E7%A8%8B/">磁盘使用流程及企业分区方案</a>
+          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90/">磁盘空间不足案例分析</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/%E7%A3%81%E7%9B%98%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">fdisk磁盘分区实战</a>
+          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/SWAP%E5%88%86%E5%8C%BA%E5%AE%9E%E6%88%98/">SWAP分区实战</a>
+          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
         </li>
       
         <li>
-          <a href="/2022/12/14/Linux%E7%9A%84%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86%E4%BD%93%E7%B3%BB/">Linux的磁盘管理体系</a>
+          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
         </li>
       
     </ul>
@@ -1763,7 +1736,7 @@ uid是1-999......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
     </div>
 
         <hr>
@@ -1773,8 +1746,6 @@ uid是1-999......
     <h5>categories</h5>
     <div class="widget">
       <ul>
-        
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
           <a href="categories/#SSM"><li>SSM</li></a>
         
@@ -1788,29 +1759,31 @@ uid是1-999......
         
           <a href="categories/#docker"><li>docker</li></a>
         
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Git"><li>Git</li></a>
         
-          <a href="categories/#Hbase"><li>Hbase</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#Hive"><li>Hive</li></a>
-        
-          <a href="categories/#Python"><li>Python</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#Mysql"><li>Mysql</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#微服务"><li>微服务</li></a>
         
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
           <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#常见问题"><li>常见问题</li></a>
         
@@ -1854,7 +1827,7 @@ uid是1-999......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2022 
+                    Copyright &copy; Dante 2023 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

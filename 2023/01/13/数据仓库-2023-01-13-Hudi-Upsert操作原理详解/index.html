@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Hudi-Upsert操作原理详解 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/01/13/数据仓库-2023-01-13-Hudi-Upsert操作原理详解/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                            
+                        </div>
+                        <h1>Hudi-Upsert操作原理详解</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-01-13
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.3k</span> and
+                                Reading Time <span class="post-count">9</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​    首先介绍下Hudi的背景，因为背景对理解一个项目很关键。<br>​    Hudi，正式的全称是Hadoop Upsert Delete and Incremental。其实关于这个名字也不用太较真，因为都是后来附会上去的，从源代码里可以看到这个项目最初的名字是hoodie和现在的名字发音相同。但这个名字还是透露了一些信息的，那就是Hudi项目最初的设计目标:在hadoop上实现update和delete操作。<br>​    为什么会有update和delete的需求? uber在开源Hudi的文章中解释了:</p>
+<blockquote>
+<p>最初uber使用的是Lambda架构，但是有个问题是计算逻辑分为批量和实时两种，要保持两者的逻辑完全一致很困难(毕竟是两套代码)。<br>然后uber转向了Kappa架构，使得两套代码变为-套，但是存储依然有两套，分别支持实时写入和批量写入。</p>
+</blockquote>
+<p>为了把存储也统-起来，减少运维的压力，就需要让负责批量写入的存储系统也能支持实时写入，这就产生了update和delete的需求。为什么呢?有多种原因，例如实时计算常有的迟到数据，还有业务时效性要求以及一些合规需求(GDPR要 求平台允许用户删除自己的数据)。而众所众知的是，无论是HDFS还是云平台的对象存储(例如aws的s3，阿里云的oss等)，都不支持update而只 能overwrite,因此要实现update和delete功能，就必须在底层存储之上做文章。Hudi于 是应运而生。</p>
+<h2 id="Upsert原理解释"><a href="#Upsert原理解释" class="headerlink" title="Upsert原理解释"></a>Upsert原理解释</h2><p>Upsert可以说是Hudi的招牌，正如上⼀节所说，Hudi最初的设计⽬标就是在hadoop上实现数据的update。于是这⾥的核⼼问题就是：</p>
+<blockquote>
+<p>如何在⼀个只能overwrite的⽂件系统上实现update操作？</p>
+</blockquote>
+<p>Hudi解决了这个问题，使⽤了⼀种很简单的思想，那就是：</p>
+<blockquote>
+<p>把⼀个完整的⽂件拆分为多个“⼩⽂件”，当需要更新其中某条记录时，只要把包含这条记录的“⼩⽂件”给重写⼀遍即可。</p>
+</blockquote>
+<p>Hudi最大的特征就是表类型有两种 COW和MOR，我们以COW表来举例说明更新写入原理。之所以先讲COW表，是因为这种类型的表原理更加简单，也是MOR表的基础。⽽且Hudi最初的版本只⽀持COW表，可 见这是Hudi的⽴项之本。</p>
+<p>接下来⽤⼀个例⼦直观地展⽰下COW表的upsert是如何实现的。</p>
+<p>⾸先，假设我们向⼀张Hudi表中预先写⼊了5⾏数据，如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>txn_id</th>
+<th>user_id</th>
+<th>item_id</th>
+<th>amount</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>20220101</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>20220101</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>20220101</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+<td>20220102</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>20220102</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这时在我们的hdfs⾥⾯，会有下⾯2个⽬录，以及1个隐藏的.hoodie⽬录。</p>
+<p>warehouse</p>
+<p>├── .hoodie</p>
+<p>├── 20220101</p>
+<p>│ └── fileId1_001.parquet </p>
+<p>└── 20220102</p>
+<p>​     └── fileId2_001.parquet</p>
+<p>⽂件名分为两部分，fileId是Hudi中的⼀个概念，后⾯会做解释，001则是commitId。</p>
+<p>画成图就是</p>
+<p><img src="image-20230113161324925.png" alt="image-20230113161324925" style="zoom: 80%;" /></p>
+<p>​    可以看到，属于20220101分区的3条数据保存在⼀个parquet⽂件：fileId1_001.parquet，属于20220102分区的2条数据则保存在另 ⼀个parquet⽂件：fileId2_001.parquet。</p>
+<p>然后我们再写⼊3条新的数据。其中有2条数据是新增，1条数据是更新。写⼊的数据如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>txn_id</th>
+<th>user_id</th>
+<th>item_id</th>
+<th>amount</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>20220101</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>4</td>
+<td>1</td>
+<td>20220103</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>20220103</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>写⼊完成后，hdfs⾥⾯的⽂件结构会变成这样</p>
+<p>warehouse</p>
+<p>├── .hoodie</p>
+<p>├── 20220101</p>
+<p>│ ├── fileId1_001.parquet </p>
+<p>│ └── fileId1_002.parquet </p>
+<p>├── 20220102</p>
+<p>│ └── fileId2_001.parquet </p>
+<p>└── 20220103</p>
+<p> └── fileId3_001.parquet</p>
+<p>注意.hoodie这个⽬录，⾥⾯保存了hudi的元数据。</p>
+<p>画成图就是</p>
+<p><img src="image-20230113161715887.png" alt="image-20230113161715887"></p>
+<p>可以看到，更新的那⼀条记录，实际被写⼊到了同⼀个分区下的新⽂件：fileId1_002.parquet。这个新⽂件的fileId和上⼀个相同，只不过 commitId变成了002。同时还有⼀个新⽂件：fileId3_001.parquet。</p>
+<p>update到这⾥就算完成了，那么使⽤这张表的⽤户⼜是如何读到更新以后的数据呢？Hudi客户端在读取这张表时，会根据.hoodie⽬录下保 存的元数据信息，获知需要读取的⽂件是：fileId1_002.parquet，fileId2_001.parquet，fileId3_001.parquet。这些⽂件⾥保存的正是 最新的数据。</p>
+<p><img src="image-20230113161759476.png" alt="image-20230113161759476"></p>
+<p>读取的是最新的⽂件</p>
+<p>以上就是Hudi实现update的原理。在有了相对直观的理解之后，可以为我们后续学习Hudi打下扎实的基础</p>
+<h2 id="写入原理小结"><a href="#写入原理小结" class="headerlink" title="写入原理小结"></a>写入原理小结</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df.write.format(<span class="string">"hudi"</span>).</span><br><span class="line">option(RECORDKEY_FIELD_OPT_KEY, <span class="string">"txn_id"</span>)</span><br><span class="line">.option(PARTITIONPATH_FIELD_OPT_KEY, <span class="string">"date"</span>)</span><br><span class="line">.option(TABLE_NAME, tableName)</span><br><span class="line">.mode(Overwrite)</span><br><span class="line">.save()</span><br></pre></td></tr></table></figure>
+<p>注意到这⾥有两个必填的配置项：RECORDKEY_FIELD_OPT_KEY和PARTITIONPATH_FIELD_OPT_KEY，它们的含义是“作为 recordKey的字段名”，“作为partitionPath的字段名”。请记住这两个字段，在后⾯的写⼊过程中有⾮常重要的作⽤。</p>
+<p>Upsert的过程整体分为3步（这⾥省略了很多不太重要的步骤）：</p>
+<ol>
+<li><p>根据partitionPath进⾏重新分区。</p>
+</li>
+<li><p>根据recordKey确定哪些记录需要插⼊，哪些记录需要更新。对于需要更新的记录，还需要找到旧的记录所在的⽂件。（这个过程被 称为tagging）</p>
+</li>
+<li><p>把记录写⼊实际的⽂件。</p>
+<ol>
+<li><p>Step1. 重新分区 ⽆论DataFrame在写⼊前是如何分区的，Hudi都会对它们进⾏重新分区。重新分区的依据就是partitionPath。partitionPath相同的 record都会被分到同⼀个partition，并交给⼀个executor负责写⼊。上⾯例⼦中的配置项PARTITIONPATH_FIELD_OPT_KEY就是⽤来 指定record⾥⾯的哪个字段作为partitionPath。 </p>
+</li>
+<li><p>Step2. Tagging 在确定了每个record的partition之后，接下来做的就是tagging。tagging是写⼊过程中最重要的⼀步，核⼼逻辑是确定每条record是 insert还是update，以及如果是update，则定位到上次写⼊时的fileId。 Hudi如何确定⼀条record是insert还是update？是通过recordKey。⽤户在写⼊时需要指定每条record的recordKey，Hudi会⽤这个 recordKey和现有的数据进⾏⽐对，如果找到⼀条key相同的record，则认为这次新的写⼊是update，否则就是insert。 对于⼀条update的数据，也就是说之前曾经插⼊过相同key的record，那么Hudi会把旧的record的fileId取出来，作为这条新record的 fileId。之前⼀直没有解释fileId的含义，现在可以解释下了。fileId是Hudi为每条record赋予的id，⽤于标识这条record被保存在哪个⽂件 ⾥，或者更严格地说，是“哪⼀批⽂件”⾥。由于每次update都会⽣成⼀个新的⽂件，但是共享同⼀个fileId，所以最终会变成⼀批⽂件。 Hudi把具有相同fileId的⼀批⽂件称为file group。最后，fileId本⾝是⼀个uuid，是全局唯⼀的.</p>
+<p>warehouse</p>
+<p>├── .hoodie</p>
+<p>├── 20220101</p>
+<p>│ ├── fileId1_001.parquet </p>
+<p>│ └── fileId1_002.parquet </p>
+<p>├── 20220102</p>
+<p>│ └── fileId2_001.parquet </p>
+<p>└── 20220103</p>
+<p>​    └── fileId3_001.parquet</p>
+<p>⽂件名⾥包含fileId1的2个⽂件就是⼀个file group</p>
+<p>整个tagging过程还有⼀个显⽽易见的问题，那就是tagging需要在已有的数据⾥寻找key相同的record，如果表的数据量⽐较⼤时会⾮常 耗时。为了解决这个问题，Hudi引⼊了index机制，这个后续再谈。</p>
+</li>
+<li><p>Step3. 写⼊⽂件</p>
+<p>当tagging完成以后，就会开始真正地写⼊数据。Hudi会把需要写⼊的数据分为insert和update两部分，update的数据会⽤原来的fileId进 ⾏写⼊，insert的数据则会⽣成⼀个新的fileId⽤于写⼊。值得⼀提的是，insert的数据也不会全部写⼊到同⼀个⽂件，⽽是到达了⼀定阈值 （由hoodie.parquet.max.file.size配置项控制）以后，关闭当前⽂件，换⼀个新的⽂件继续写⼊（同时也会⽣成⼀个新的fileId）。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="实践验证"><a href="#实践验证" class="headerlink" title="实践验证"></a>实践验证</h2><p>写入代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zxd.prac.hudi</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hudi.DataSourceWriteOptions</span><br><span class="line"><span class="keyword">import</span> org.apache.hudi.DataSourceWriteOptions.&#123;PARTITIONPATH_FIELD, PRECOMBINE_FIELD, RECORDKEY_FIELD, TABLE_NAME&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.hudi.config.HoodieWriteConfig</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.sql.&#123;DataFrame, SaveMode, SparkSession&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Intellij IDEA.</span></span><br><span class="line"><span class="comment"> * User:  dante</span></span><br><span class="line"><span class="comment"> * Date:  2022/5/30</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">object InsertDataToHudi &#123;</span><br><span class="line">  <span class="function">def <span class="title">main</span><span class="params">(args: Array[String])</span>: Unit </span>= &#123;</span><br><span class="line">    System.getProperties.setProperty(<span class="string">"HADOOP_USER_NAME"</span>, <span class="string">"james"</span>)</span><br><span class="line">    val session: SparkSession = SparkSession.builder().master(<span class="string">"local"</span>).appName(<span class="string">"test"</span>)</span><br><span class="line">      .config(<span class="string">"spark.serializer"</span>, <span class="string">"org.apache.spark.serializer.KryoSerializer"</span>)</span><br><span class="line">      .getOrCreate()</span><br><span class="line">    session.sparkContext.setLogLevel(<span class="string">"Error"</span>)</span><br><span class="line"></span><br><span class="line">    val df: DataFrame = session.read.json(<span class="string">"file:///Users/james/IdeaProjects/Learn-Advance/Spark-Plus/src/main/resources/appendData4.json"</span>)</span><br><span class="line">    <span class="keyword">import</span> org.apache.spark.sql.functions._</span><br><span class="line">    val newdf: DataFrame = df.withColumn(</span><br><span class="line">      <span class="string">"partition_key"</span>,col(<span class="string">"date"</span>)</span><br><span class="line">    )</span><br><span class="line">    newdf.show()</span><br><span class="line"></span><br><span class="line">    newdf.write.format(<span class="string">"hudi"</span>)</span><br><span class="line">      .option(RECORDKEY_FIELD.key(),<span class="string">"txn_id"</span>)</span><br><span class="line">      .option(PRECOMBINE_FIELD.key(),<span class="string">"date"</span>)</span><br><span class="line">      .option(PARTITIONPATH_FIELD.key(),<span class="string">"partition_key"</span>)</span><br><span class="line">      .option(<span class="string">"hoodie.upsert.shuffle.parallelism"</span>,<span class="string">"2"</span>)</span><br><span class="line">      .option(<span class="string">"hoodie.insert.shuffle.parallelism"</span>,<span class="string">"2"</span>)</span><br><span class="line">      .option(<span class="string">"hoodie.parquet.small.file.limit"</span>,<span class="string">"0"</span>)</span><br><span class="line">      .option(<span class="string">"hoodie.table.name"</span>,<span class="string">"batch_tb"</span>)</span><br><span class="line">      .mode(SaveMode.Append)</span><br><span class="line">      .save(<span class="string">"hdfs://localhost:8020/hudi_data/batch_tb"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>插入第一批数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">1</span>,<span class="string">"user_id"</span>:<span class="string">"ww1"</span>,<span class="string">"amount"</span>:<span class="number">90</span>,<span class="string">"date"</span>:<span class="string">"20210708"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">2</span>,<span class="string">"user_id"</span>:<span class="string">"ww2"</span>,<span class="string">"amount"</span>:<span class="number">35</span>,<span class="string">"date"</span>:<span class="string">"20210708"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">3</span>,<span class="string">"user_id"</span>:<span class="string">"ww3"</span>,<span class="string">"amount"</span>:<span class="number">35</span>,<span class="string">"date"</span>:<span class="string">"20210708"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">4</span>,<span class="string">"user_id"</span>:<span class="string">"ww4"</span>,<span class="string">"amount"</span>:<span class="number">45</span>,<span class="string">"date"</span>:<span class="string">"20210709"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">5</span>,<span class="string">"user_id"</span>:<span class="string">"ww5"</span>,<span class="string">"amount"</span>:<span class="number">25</span>,<span class="string">"date"</span>:<span class="string">"20210709"</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​    执行完成后,看一下效果图</p>
+<p><img src="image-20230113222733751.png" alt="image-20230113222733751"></p>
+<p><img src="image-20230113222750700.png" alt="image-20230113222750700"></p>
+<p>2.插入第二批数据，其中txn_id为3的是更新操作，6 7为新增</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">3</span>,<span class="string">"user_id"</span>:<span class="string">"ww333"</span>,<span class="string">"amount"</span>:<span class="number">25</span>,<span class="string">"date"</span>:<span class="string">"20210708"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">6</span>,<span class="string">"user_id"</span>:<span class="string">"ww6"</span>,<span class="string">"amount"</span>:<span class="number">25</span>,<span class="string">"date"</span>:<span class="string">"20210710"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">7</span>,<span class="string">"user_id"</span>:<span class="string">"ww7"</span>,<span class="string">"amount"</span>:<span class="number">25</span>,<span class="string">"date"</span>:<span class="string">"20210710"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="image-20230113223205259.png" alt="    "></p>
+<p> 我们看到08分区，此时又生成了一个parquent文件，我们不妨来看一下，第一个,第二个文件的内容都是什么 </p>
+<p>第一个文件内容:</p>
+<p><img src="image-20230113223912600.png" alt="image-20230113223912600">    </p>
+<p>第二个文件内容:</p>
+<p><img src="image-20230113224110404.png" alt="image-20230113224110404"></p>
+<p> 我们可以清晰的看到，更新的数据发生了变更，而老数据也保留了下来，所以说此时，最新的commit_id代表最新的状态，而file_id代表这插入的第一批数据即 txn_id $ \subset $  {1,2,3,4,5}</p>
+<ol>
+<li>假如我们第三次插入,此时为新增操作，依然重点观察08分区</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">8</span>,<span class="string">"user_id"</span>:<span class="string">"ww8"</span>,<span class="string">"amount"</span>:<span class="number">25</span>,<span class="string">"date"</span>:<span class="string">"20210708"</span>&#125;</span><br><span class="line">&#123;<span class="string">"txn_id"</span>:<span class="number">9</span>,<span class="string">"user_id"</span>:<span class="string">"ww9"</span>,<span class="string">"amount"</span>:<span class="number">25</span>,<span class="string">"date"</span>:<span class="string">"20210708"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="image-20230113225214127.png" alt="image-20230113225214127"></p>
+<p>  我们看一下最新的文件内容</p>
+<p><img src="image-20230113225421927.png" alt="image-20230113225421927"></p>
+<p>可以看到只有最新这次插入的数据，相当于此次插入的数据是新的一批数据。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-MOR优化原理详解/" data-toggle="tooltip" data-placement="top" title="Hudi-MOR优化原理详解">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/01/12/Huid-表类型/" data-toggle="tooltip" data-placement="top" title="Huid-表类型">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#背景"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Upsert原理解释"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Upsert原理解释</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#写入原理小结"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">写入原理小结</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#实践验证"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">实践验证</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

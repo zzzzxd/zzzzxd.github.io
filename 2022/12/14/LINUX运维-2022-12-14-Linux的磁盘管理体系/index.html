@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Linux的磁盘管理体系 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/12/14/LINUX运维-2022-12-14-Linux的磁盘管理体系/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
+                            
+                        </div>
+                        <h1>Linux的磁盘管理体系</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-12-14
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.6k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="　前言"></a>　前言</h2><p>磁盘相关的知识是Linux系统中的重头戏，需要了解的点比较多。但现在随着云计算的兴起，在很多企业中很少碰到物理服务器了也就不会接触到屋里磁盘。所以更多的是停留在使用的层面。下面我们就系统的回顾一下linux的磁盘知识。</p>
+<h2 id="磁盘管理基础"><a href="#磁盘管理基础" class="headerlink" title="磁盘管理基础"></a>磁盘管理基础</h2><h3 id="磁盘分类与接口"><a href="#磁盘分类与接口" class="headerlink" title="磁盘分类与接口"></a>磁盘分类与接口</h3><p>磁盘分类:</p>
+<ul>
+<li>机械硬盘HDD</li>
+<li>固态硬盘SSD</li>
+</ul>
+<p>磁盘接口分类:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>磁盘类型</th>
+<th>适应场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sata</td>
+<td>机械、固态</td>
+<td>家用更多</td>
+</tr>
+<tr>
+<td>sas(由scsi改进而来)</td>
+<td>机械、固态</td>
+<td>企业更多</td>
+</tr>
+<tr>
+<td>pic-e</td>
+<td>固态</td>
+<td>企业、家用</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注:以上只列举了目前家庭企业比较常见的，实际上现在还有较新的M2接口，速度也更快，感兴趣的可以自己了解下。</p>
+<h3 id="企业磁盘选型"><a href="#企业磁盘选型" class="headerlink" title="企业磁盘选型"></a>企业磁盘选型</h3><p>在企业场景中，选择磁盘的时候 要考虑很多方面，包括性能、性价比等，要根据不同的场景选择合适的磁盘，也是为了节省成本。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>应用场景</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sata</td>
+<td>企业内部使用,存放备份. 线下业务(给自己内部人员使用)</td>
+<td>4tb 6tb 7.2k转 * 8</td>
+</tr>
+<tr>
+<td>SAS</td>
+<td>企业标配,线上业务(线上环境,生产环境)使用(提供给用户环境)</td>
+<td>300g 600g 900g 15k硬盘 *8</td>
+</tr>
+<tr>
+<td>固态硬盘(pci- e/sas/sata)</td>
+<td>访问量巨大(并发高). 数据量不是很大. (架构优化策略:把用户经常访问的数据存 放在固态)</td>
+<td>500g 1tb 2tb *4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="磁盘内部结构"><a href="#磁盘内部结构" class="headerlink" title="磁盘内部结构"></a>磁盘内部结构</h3><p>机械硬盘:</p>
+<p><img src="20191123182101621.png" alt="img"></p>
+<p>固态硬盘: 闪存颗粒 nand flash</p>
+<p>上述只是粗略的描述，固态硬盘的内部结构比较复杂。感兴趣的可以寻找其他资料。</p>
+<h3 id="固态VS机械"><a href="#固态VS机械" class="headerlink" title="固态VS机械"></a>固态VS机械</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>机械硬盘</th>
+<th>固态硬盘</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性价比</td>
+<td>容量大价格低</td>
+<td>容量小价格高</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>抗击打能力弱</td>
+<td>抗击打能力高</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>读写速度稍慢</td>
+<td><strong>读写速度很快</strong></td>
+</tr>
+<tr>
+<td>数据安全</td>
+<td>数据恢复易</td>
+<td>数据恢复难</td>
+</tr>
+<tr>
+<td>寿命</td>
+<td>无限</td>
+<td>1-2w次</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="RAID"><a href="#RAID" class="headerlink" title="RAID"></a>RAID</h2><p>​    我们都知道现在的互联网时代，尤其对于一家互联网公司而言，数据就是核心，数据存储在磁盘上，如果磁盘坏掉了 那公司不是要瘫痪掉吗。所以RAID技术就是来解决数据安全的。如果一块磁盘坏掉，我们是不是有其他方案能替换掉这块磁盘来作一个兜底。RAID相当于是一个节点上的磁盘的保障方案。同理，如果一个节点坏掉呢？那么就要使用其他节点 也就是分布式了。</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>磁盘冗余阵列 RAID 物理服务器的硬盘,通过raid管理,才能使用。</li>
+<li>常见的raid级别: raid 0 , raid 1 , raid 5,raid 10</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>至少几块硬盘</th>
+<th>容量</th>
+<th>冗余</th>
+<th>性能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>raid 0 (条 带)</td>
+<td>1</td>
+<td>所有硬盘容量总和.</td>
+<td>最低,没有冗余.</td>
+<td>最快的.</td>
+</tr>
+<tr>
+<td>raid 1 (镜 像)</td>
+<td>2块硬盘(制作的时候,1次只能给2块硬 盘做raid1)</td>
+<td>一半.</td>
+<td>冗余100%</td>
+<td>写入性能较慢,读取类似于单 块硬盘.</td>
+</tr>
+<tr>
+<td>raid 5</td>
+<td>至少3块硬盘</td>
+<td>损失n-1 (n硬盘总 数,n&gt;=3)</td>
+<td>损坏1块.</td>
+<td>读取性能还可以,写入较慢.</td>
+</tr>
+<tr>
+<td>raid 10</td>
+<td>至少需要4块硬盘</td>
+<td>减半</td>
+<td>损坏一半,但是不能在1 个组里.</td>
+<td>读写性能强悍</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们来看几张图，更容易理解 ：</p>
+<p><img src="1.jpg" alt="img" style="zoom:50%;" /></p>
+<p><img src="2.jpg" alt="img" style="zoom:50%;" /></p>
+<p><img src="3.jpg" alt="img"></p>
+<p><img src="4.jpg" alt="img"></p>
+<h3 id="RAID与LVM"><a href="#RAID与LVM" class="headerlink" title="RAID与LVM"></a>RAID与LVM</h3><p>​    RAID相当于在物理层面，将多块磁盘进行组合给上层使用。而LVM 逻辑卷 是在软件层面也就是 逻辑上的 去进行多个磁盘块的整合 以达到屏蔽效果，它的好处是 可以支持动态扩容磁盘。缺点就是 使用起来会慢。由关LVM的细节，此处就不多介绍了，以后会详细介绍。</p>
+<h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><h3 id="磁盘分区概述"><a href="#磁盘分区概述" class="headerlink" title="磁盘分区概述"></a>磁盘分区概述</h3><ul>
+<li>磁盘的第1个扇区: 0磁头(盘面)0磁道1扇区 1个扇区 512字节 <ul>
+<li>MBR 磁盘的引导程序(主引导记录) : 引导系统启动. </li>
+<li>分区表:存放分区开始结束信息</li>
+</ul>
+</li>
+</ul>
+<p><img src="5.jpg" alt="image-20221214155901109" style="zoom:50%;" /></p>
+<h3 id="主分区-扩展分区-逻辑分区·"><a href="#主分区-扩展分区-逻辑分区·" class="headerlink" title="主分区,扩展分区,逻辑分区·"></a>主分区,扩展分区,逻辑分区·</h3><ul>
+<li>主分区: 最多有4个,每个占用16字节分区表空间 </li>
+<li><p>扩展分区:主要用来解决主分区最多4个. 主分区无法直接存放数据与使用. 如果要使用需要在扩展分区中创建逻辑分区. 扩展分区在一个磁盘中只有1个.</p>
+</li>
+<li><p>逻辑分区:需要先创建扩展分区. 使用逻辑分区存放数据.</p>
+</li>
+</ul>
+<p><img src="image-20221214160133501.png" alt="image-20221214160133501"></p>
+<h3 id="分区命名规则"><a href="#分区命名规则" class="headerlink" title="分区命名规则"></a>分区命名规则</h3><p> 磁盘名字:/dev/sda(第一块磁盘不做分区) 、/dev/sda1、/dev/sda2 </p>
+<ul>
+<li><p>第1块硬盘 /dev/sda </p>
+</li>
+<li><p>第2块硬盘 /dev/sdb</p>
+</li>
+</ul>
+<p>分区命名规则:</p>
+<ul>
+<li>主分区或扩展分区 1-4  /dev/sda1-4</li>
+<li>逻辑分区从5开始 /dev/sda5</li>
+</ul>
+<p>例子:</p>
+<ul>
+<li>第3块sata硬盘的第1个主分区 /dev/sdc1 </li>
+<li>第4块sas硬盘的第2个逻辑分区 /dev/sdd6</li>
+</ul>
+<h3 id="MBR-vs-GPT"><a href="#MBR-vs-GPT" class="headerlink" title="MBR vs GPT"></a>MBR vs GPT</h3><p>MBR与GPT可以理解分两种磁盘分区的标准GPT可以解决MBR的问题。</p>
+<ul>
+<li>MBR主引导记录,磁盘分区格式 。磁盘大小不能大于2tb,如果大于2tb则无法使用.</li>
+<li>GPT分区表格式,解决问题. 解决系统支持大硬盘的问题。主分区随便用,不用区分主分区,扩展分区逻辑分区.</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>MBR VS GPT</th>
+<th>支持的主分区数量</th>
+<th>支持的硬盘大小</th>
+<th>磁盘分区命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MBR</td>
+<td>支持的主分区+扩展分区 最多 4个</td>
+<td>小于2tb硬盘</td>
+<td>fdsik 只支持mbr</td>
+</tr>
+<tr>
+<td>GPT</td>
+<td>可以理解无限</td>
+<td>可以各种容量的磁盘</td>
+<td>parted/gdisk 支持 gpt和mbr</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><p>格式化的目的就是创建一个文件系统，分区之后必须要格式化才能使用。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>系统类型</th>
+<th>文件系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux</td>
+<td>ext3(centOS5)、ext4 (C6 ) 、xfs(C7),btrfs</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>fat32, ntfs</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>格式化常用的命令就是mkfs。 日后我们会在实战中详细的进行 的演示。</p>
+<h2 id="Swap"><a href="#Swap" class="headerlink" title="Swap"></a>Swap</h2><p>Swap 是在 内存不足的时候临时充当内存 </p>
+<p><img src="image-20221214162643361.png" alt="image-20221214162643361"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>我们这次只是对磁盘体系进行一个概要的梳理，命令的使用是细节，更重要的是让知识成体系</p>
+<p><img src="6.jpg" alt="image-20221214163042509"></p>
+</li>
+<li><p>简单来讲，对于一块磁盘使用，只需要三步走</p>
+<ol>
+<li>分区 :fdisk/parted/gdisk,</li>
+<li>格式化 :mkfs.xfs</li>
+<li>挂载 ：  临时挂载:mount/umount 永久挂载： /etc/rc.local /etc/fstab</li>
+</ol>
+</li>
+</ul>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/12/14/LINUX运维-2022-12-14-SWAP分区实战/" data-toggle="tooltip" data-placement="top" title="SWAP分区实战">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/12/14/LINUX运维-2022-12-14-sed、awk的混合使用/" data-toggle="tooltip" data-placement="top" title="sed、awk的混合使用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">　前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#磁盘管理基础"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">磁盘管理基础</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#磁盘分类与接口"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">磁盘分类与接口</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#企业磁盘选型"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">企业磁盘选型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#磁盘内部结构"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">磁盘内部结构</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#固态VS机械"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">固态VS机械</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#RAID"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">RAID</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概念"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#RAID与LVM"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">RAID与LVM</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#磁盘分区"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">磁盘分区</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#磁盘分区概述"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">磁盘分区概述</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#主分区-扩展分区-逻辑分区·"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">主分区,扩展分区,逻辑分区·</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分区命名规则"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">分区命名规则</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MBR-vs-GPT"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">MBR vs GPT</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#格式化"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">格式化</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Swap"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Swap</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#LINUX" title="LINUX">LINUX</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
