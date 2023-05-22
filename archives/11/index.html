@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,25 +1123,101 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/mysql-2022-07-21-一文详解脏读、不可重复读、幻读/">
+            <a href="/2022/07/23/JVM-2022-07-23-常量池/">
                 <h2 class="post-title">
-                    一文详解脏读、不可重复读、幻读
+                    常量池
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-在MySQL的众多存储引擎中，只有InnoDB支持事务，所有这里说的事务隔离级别指的是InnoDB下的事务隔离级别。
+                    
+提到常量池一直容易混，今天一次性彻底搞定。
 
-MySQL 是支持多事务并发执行的。否则来一个事务处理一个请求，处理一个人请求的时候，其它事务都等着，那估计都没人敢用MySQL作为数据库,因为用户体验太差，估计都要砸键盘了。
-既然事务可以并发操作,这里就有一些问题：一个事务在写数据的时候，另一个事务要读这行数据，该......
+class文件常量池（class constant pool）我们都知道，class文件中除了包含类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池(constant pool table)，用于存放编译器生成的各种字面量(Literal)和符号引用(Symbolic References)。字面量就是我们所说的常量概念，如文本字符......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/IO-2022-07-23-IO实验的一些常用命令总结/">
+                <h2 class="post-title">
+                    IO实验的一些常用命令总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    必须熟练使用的指令以及注意事项
+stat：可以查看文件的详细信息 1stat msb.txt
+ln：建立符号连接、硬连接1ln   [s]    已有的    不存在的
+dd：用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换
+https://www.cnblogs.com/fantasyxo/p/10519662.html
+
+12345678if=文件名：输入文件名，缺省为标准输入。......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/07/23/mysql-2022-07-23-mysql的8个变量/">
+                <h2 class="post-title">
+                    mysql的8个变量
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+　本篇会简单介绍在 MySQL 中关于 8个 character_set 变量的基本作用。
+
+　使用下列SQL语句可以查看 MySQL中8个 character_set 变量
+1SHOW VARIABLES LIKE&#39;%char%&#39;;
+8个 character_set 变量：
+　　一、character_set_client
+　　二、character_set_connec......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
@@ -1105,25 +1235,22 @@ MySQL 是支持多事务并发执行的。否则来一个事务处理一个请�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的操作规范/">
+            <a href="/2022/07/23/mysql-2022-07-23-mysql编码错进错出解释/">
                 <h2 class="post-title">
-                    mysql的操作规范
+                    mysql编码错进错出解释
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言今天来看一下，比较通用的规范操作。
-命名规范1.1、表名建议使用有业务意义的英文词汇，必要时可加数字和下划线，并以英文字母开头；
-1.2、库、表、字段全部采用小写；
-MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大小写。因此，防止出现问题，建议都设置为小写。
-1.3、避免用 MySQL 的保留字， MySQL 保留字请参考官方手册：9.3 Keyword......
+                    相关变量123SET character_set_client &#x3D; charset_name;SET character_set_results &#x3D; charset_name;SET character_set_connection &#x3D; charset_name;
+过程复现及原理解释123先假设客户端bash都是utf8SET character_set_cli......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
@@ -1141,23 +1268,26 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-应用层的优化点总结/">
+            <a href="/2022/07/23/mysql-2022-07-23-理解和解决MySQL乱码问题/">
                 <h2 class="post-title">
-                    应用层的优化点总结
+                    理解和解决MySQL乱码问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    对于数据库的使用，我们不仅仅要考虑 MySQL 本身的优化，还需要考虑应用层的优化。因为有些线上问题，就是由于应用层设置不合理导致的。下面看一下常见的优化点。
-使用连接池MySQL 如果频繁创建和断开连接，那 MySQL 的开销会比较大，可能会占用过多的服务器内存资源，甚至导致响应时间变慢。此时就可以考虑使用连接池来改进性能。
-连接池可以理解为：创建一些持久连接的“池”，新的请......
+                    
+转载网络好文:http://cenalulu.github.io/mysql/mysql-mojibake/
+本文将详细介绍MySQL乱码的成因和具体的解决方案
+在阅读本文之前，强烈建议对字符集编码概念还比较模糊的同学 阅读下博主之前对相关概念的一篇科普：十分钟搞清字符集和字符编码
+
+MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理解：从客户端发起请求，到MySQL存储数据，再......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
@@ -1175,24 +1305,21 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-删除大量数据的经验/">
+            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
                 <h2 class="post-title">
-                    删除大量数据的经验
+                    字库表、编码字符集、字符编码
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言为了防止单张表过大，很多情况下，我们需要对历史数据做归档或者删除操作。那么如何高效删除大量无用数据呢？今天就来总结一下。
-在聊数据删除前，我们先来看看 MySQL 的共享表空间和独立表空间。
-共享表空间和独立表空间InnoDB 数据是按照表空间进行存放的，其表空间分为共享表空间和独立表空间。
-共享表空间共享表空间：表的数据放在系统共享表空间，也就是跟数据字典放一起。文件名为 ibdata......
+                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
@@ -1210,27 +1337,29 @@ MySQL 在 Linux 下默认是区分大小写的，而在 Windows 下不区分大�
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分库分表/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-screen命令/">
                 <h2 class="post-title">
-                    mysql的分库分表
+                    screen命令
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    使用数据库时，我们经常会聊到分库分表，那么分库分表有哪些方式？什么情况应该考虑分库分表呢？这次我们来看下这些问题。
-MySQL 分库分表是指：把 MySQL 数据库物理地拆分到多个实例或者机器上去。从而降低单台 MySQL 实例的负载。那么这里讲的拆分究竟以什么方式实现的呢？这里就先来看看 MySQL 分库分表的拆分方法：
-MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆......
+                    Screen简介在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。
+简而言之：
+远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。
+而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。
+常用screen命令123456s......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1244,28 +1373,26 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-读写分离注意问题/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
                 <h2 class="post-title">
-                    读写分离注意问题
+                     linux下 bin和 usr bin和 usr local bin的区别
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
-通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
-但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
-你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
+                    123/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。
+...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1279,30 +1406,36 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的QC/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-linux不同版本的服务管理/">
                 <h2 class="post-title">
-                    mysql的QC
+                    linux不同版本的服务管理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言从 MySQL 4.1 开始，增加了查询缓存（Query Cache，简称 QC）的功能，它会存储 select 语句的文本以及发送到客户端的结果。如果下一次收到一个相同的查询，就会从查询缓存中获得查询结果。
+                    Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。
+Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。
 
-关于 QC 的详细定义，可以查询 MySQL 5.7 官方手册
 
-那么是不是只要开启查询缓存就能提升查询速度呢？今天就一起探讨这一话题。
-认识 QCQC 需要缓存最新数据结果，因......
+
+
+动作
+Rhel6 旧指令
+Rhel7新指令
+
+
+......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1316,96 +1449,33 @@ MySQL 分库分表拆分方法MySQL 分库分表拆分方法分为：垂直拆..
 
         <div class="post-preview">
 
-            <a href="/2022/07/19/mysql-2022-07-19-设置自增主键的好处/">
+            <a href="/2022/07/23/LINUX运维-2022-07-23-vim的查找替换总结/">
                 <h2 class="post-title">
-                    设置自增主键的好处
+                    vim的查找替换总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
-关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
-1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
+                    
+vim的查找替换操作如果能运用熟练是非常提高效率的，我们来重新梳理一下查找与替换的一些操作，方便更好的记忆 。
+
+查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
+
+Vim查找支持正则表达式 /vim$匹配行尾的”vim”。
+需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。
+
+大小写敏......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-19
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-sql注入攻击和预防/">
-                <h2 class="post-title">
-                    sql注入攻击和预防
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言很多时候，我们关心的是程序是否能实现我们的预期功能，而忽视了 SQL 安全，这就存在 SQL 注入的风险，本节就一起来聊聊 SQL 注入及防御。
-认识 SQL 注入SQL 注入是利用某些数据库的外部接口将用户数据插入到实际的数据库操作语句中，从而达到入侵数据库乃至操作系统的目的。
-SQL 注入产生的主要原因是：程序对用户输入的数据没有进行严格的过滤，导致非法数据库查询语句的执行。
-SQL......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/19/mysql-2022-07-19-mysql的分布式事务/">
-                <h2 class="post-title">
-                    mysql的分布式事务
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言今天我们看一下mysql提供的分布式事务，有关分布式事务的更多详细解释以及更多的解决方案，可以看博客的其它文章。
-认识分布式事务分布式事务是指一个大的事务由很多小操作组成，小操作分布在不同的服务器上或者不同的应用程序上。分布式事务需要保证这些小操作要么全部成功，要么全部失败。MySQL 从 5.0.3 开始支持分布式事务。
-分布式事务使用两阶段提交协议：
-
-第一阶段：所有分支事务都开始准......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-19
-                </p>
-                <div class="tags">
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1482,6 +1552,8 @@ SQL......
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1539,6 +1611,8 @@ SQL......
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1654,6 +1728,18 @@ SQL......
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1719,23 +1805,23 @@ SQL......
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1750,7 +1836,7 @@ SQL......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1804,6 +1890,10 @@ SQL......
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

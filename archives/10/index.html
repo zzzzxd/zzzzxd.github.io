@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,29 +1123,44 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/docker-2022-07-22-docker启动后自动停止的原因及解决/">
+            <a href="/2022/09/15/JVM-2022-09-15-JVM参数分类/">
                 <h2 class="post-title">
-                    docker启动后自动停止的原因及解决
+                    JVM参数分类
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    问题描述：centos 启动一个容器添加了-d 参数，但是docker ps 或者docker ps -a查看却已经退出了
-12docker run -d centosa44b2b88559b68a2221c9574490a0e708bff49d88ca21f9e59d3eb245c7c0547docker ps
+                    JVM参数分类
 
-退出原因
-docker容器运行必须有一个前台进程， 如果没有前台进程执行，容......
+
+
+类别
+说明
+
+
+
+
+标准参数（-）
+所有的JVM实现都必须实现这些参数的功能，而且向后兼容；
+
+
+非标准参数（-X）
+这些参数不是虚拟机规范规定的。因此，不是所有VM的实现(如:HotSpot,JRockit,J9等)都支持这些配置参数。
+
+
+非稳定参数（-XX）
+这些参数是虚拟机规范中规定的。这些参数指定虚拟机实例在运行时的各种行为，从而对虚拟机的运行时性能有很大影响......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1105,29 +1174,27 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/docker-2022-07-22-docker-tag命令解释/">
+            <a href="/2022/08/17/JSON字符串的嵌套机制/">
                 <h2 class="post-title">
-                    docker tag命令解释
+                    JSON字符串的嵌套机制
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    命令1docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
-示例演示
-比如我现在有一个 centos 镜像：
-
-123[root@localhost ~]$ docker imagesREPOSITORY          TAG                 IMAGE ID            CREATED             SIZ......
+                    转义机制的嵌套：转义机制被任意嵌套、组合，只要识别方的处理逻辑是正确的，就不会发生命令识别错误或数据识别错误。转义机制是一个安全性完备的机制。
+每增加一层转义机制，就需要增加一层还原机制。
+JSON字符串的多层嵌套12345678910111213141516171819202122232425&lt;dependency&gt;    &lt;groupId&gt;com.alibaba&......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-08-17
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                      <a href="/tags/#JSON" title="JSON">JSON</a>
                     
                 </div>
             
@@ -1141,26 +1208,27 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/docker-2022-07-22-docker-常用命令记录/">
+            <a href="/2022/08/02/Mac必备工具之brew/">
                 <h2 class="post-title">
-                    docker 常用命令记录
+                    Mac必备工具之brew
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ### 查看镜像/容器
- 123456docker images 查看镜像信息列表 镜像是静态的docker ps -a 查看运行中的所有容器docker pull  [images]:[version]从dockerhub拉取指定镜像docker rm [containerID] 删除容器docker rmi [imageID] 删除镜像docker cp [YourHostFilePat......
+                    
+brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具
+
+安装可以使用如下命令进行安装:
+1/usr/bin/ruby -e "$(curl -fsSL https://raw......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-08-02
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
                     
                 </div>
             
@@ -1174,9 +1242,9 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/ssm-2022-07-22-Servlet过滤器与SpringMVC拦截器/">
+            <a href="/2022/07/24/数据结构与算法-2022-07-24-组合数计算的方法总结/">
                 <h2 class="post-title">
-                    Servlet过滤器与SpringMVC拦截器
+                    组合数计算的方法总结
                 </h2>
                 <h3 class="post-subtitle">
                     
@@ -1188,11 +1256,9 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-07-24
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
                     
                 </div>
             
@@ -1206,27 +1272,32 @@ docker容器运行必须有一个前台进程， 如果没有前台进程执行�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/ssm-2022-07-22-框架中的三种配置方式/">
+            <a href="/2022/07/24/数据结构与算法-2022-07-24-算法题目中常见的计算技巧总结/">
                 <h2 class="post-title">
-                    框架中的三种配置方式
+                    算法题目中常见的计算技巧总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言:
+                    
+今天我们对算法题目中与数学运算相关的一些常用的知识进行简单总结，需要刻意记忆，如果对相关知识点不熟悉需要翻越更详细的资料。
 
-java中对配置的方式有三种，配置文件（xml、properties、yml等）、注解式配置、代码配置类，配置文件配置不用修改源码，并且适合模块的划分管理，一般适合大型项目，不好处就是配置文件太多，尤其像ssm的xml整合配置等，冗杂繁琐，对程序员极其不友好，于是有了注解式配置，注解配置对开发人员友好，但是不好处就是改注解相当于改代码，改代码就得重新编译、部署，但对于程序员来说，可......
+最大公约数与最小公倍数最大公约数正整数a,b的最大公约数是指a与b的所有公约数中最大的那个公约数。求解最大公约数常用的是欧几里得算法(即辗转相除法),假设 a,b 均为正整数，则gcd=(a,b) = gcd(b,a%b)
+代码如下:
+123int gcd(int ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#MATH" title="MATH">MATH</a>
                     
                 </div>
             
@@ -1240,36 +1311,30 @@ java中对配置的方式有三种，配置文件（xml、properties、yml等）
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/ssm-2022-07-21-视图解析与模版引擎/">
+            <a href="/2022/07/24/问题-2022-07-24-log4j日志不输出/">
                 <h2 class="post-title">
-                    视图解析与模版引擎
+                    log4j日志不输出
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ModelAndView
-
-ModelAndView对象是指”模型(数据)与视图(界面)”对象
-
-通过ModelAndView可将包含数据对象与模板引擎进行绑定
-
-SpringMVC中默认的View是JSP,也可以配置其他模板引擎
-
-
-视图解析器作用
-一般地视图解析器配置如下：      
-假如Controller类中返回值为hello，那么根据视图解析器可得将要跳转的页面路径为：/WebC......
+                    问题log4j日志不输出，或者没有按照预定的级别输出
+常见原因原因一：配置文件没配置对，这种低级错误就不说了
+原因二：依赖冲突
+​    多半是因为，引入的底层实现类出现了冲突，这样就得排查maven的冲突，那怎么知道哪些冲突了呢？如果
+真是一点一点查，那就麻烦了，注意，一定要看提示
+12345SLF4J: Class path contains multiple SLF4J binding......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
                     
                 </div>
             
@@ -1283,27 +1348,27 @@ SpringMVC中默认的View是JSP,也可以配置其他模板引擎
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/ssm-2022-07-21-SpringMVC用Map接收请求参数分析/">
+            <a href="/2022/07/24/git-2022-07-24-git常见报错/">
                 <h2 class="post-title">
-                    SpringMVC用Map接收请求参数分析
+                    git常见报错
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    第一种情况，什么也不设置，无参数传递注解为 @Controller @RequestMapping
-
-可以看到传递的为SpringMVC的BindingAwareModelMap类型，SpringMVC中的隐含模型就是这个类型，其作用域等价于 request 域，当添加Model、ModelMap参数时，SpringMVC实际传入的就是这个隐含模型；向这个隐含模型种设置值后，在返回的页面中就......
+                    错误一：Failed to connect to github.com port 443: Operation timed out
+​    这个多半是由于网络问题，正常情况不会拉取，推送失败，多半是网络原因
+12345678考虑更换ip（自己没遇到过这个问题）：1、查询可以用的IP	在https://www.ipaddress.com/上分别搜索	github.com、github.glo......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#git" title="git">git</a>
                     
                 </div>
             
@@ -1317,29 +1382,26 @@ SpringMVC中默认的View是JSP,也可以配置其他模板引擎
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/ssm-2022-07-21-requestParam与-Param/">
+            <a href="/2022/07/24/问题-2022-07-24-PrepareStatement未关闭导致内存泄漏/">
                 <h2 class="post-title">
-                     @requestParam与@Param
+                    PrepareStatement未关闭导致内存泄漏
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    @RequestParam 用于controller层，是Spring的注解
-解决前台参数名称与后台接收参数变量名称不一致的问题，等价于request.getParam
-
-value：参数名字，即入参的请求参数名字，如username表示请求的参数区中的name为username的参数的值将传入；
-required：是否必须，默认是true，表示请求中一定要有相应的参数，否则将报404错误码......
+                    现象堆内存飙升，GC次数明显提升
+原因:第三方的数据库连接池，使用的时候，获取到Connection之后，使用完成，调用的关闭方法（close()） ，并没有将Connection关闭，只是放回到连接池中，如果调用的这个方法，而没有手动关闭PreparedStatement等，则这个PreparedStatement并没有关闭，这样会使得开发的程序内存急速增长，java的内存回收机制可能跟不......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-07-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
                     
                 </div>
             
@@ -1353,28 +1415,27 @@ required：是否必须，默认是true，表示请求中一定要有相应的�
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/ssm-2022-07-21-springmvc-Controller-页面跳转/">
+            <a href="/2022/07/23/network-2022-07-23-TCP拆包与粘包/">
                 <h2 class="post-title">
-                    springmvc Controller 页面跳转
+                    TCP拆包与粘包
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-如果返回值为ModelAndView，在处理方法中，返回null时，默认跳转的视图名称为请求名。跳转结果会根据视图解析器来跳转。
-
-12345@RequestMapping("/hello.do")    public ModelAndView hello()&#123;        System.out.println("hello================");        ......
+                    粘包产生的原因如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。
+传输层的UDP协议是否会发生粘包或者拆包问题？​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
+传输层的TCP协议是否会......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
+                      <a href="/tags/#TCP" title="TCP">TCP</a>
                     
                 </div>
             
@@ -1388,29 +1449,25 @@ required：是否必须，默认是true，表示请求中一定要有相应的�
 
         <div class="post-preview">
 
-            <a href="/2022/07/21/mysql-2022-07-21-mvcc原理解释/">
+            <a href="/2022/07/23/ssm-2022-07-23-自定义注解/">
                 <h2 class="post-title">
-                    mvcc原理解释
+                    自定义注解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章的时候,感觉到网上的资料在讲这块知识点上写的五花八门,好像大家的理解并没有一致。
-这里将自己所理解的做一个总结,个人会觉得这是一篇含金量挺高的一篇文章(哈哈),所以请你坚持认真的看下去,一定会对你有收获。
-如果文章中哪里没有理解,或者认为我讲的不对的地方，都欢迎留言一起交流哈。
-前言一些基本概念我这里不在做阐述了。好比什么是事务?......
+                    概念​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-21
+                    2022-07-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#SSM" title="SSM">SSM</a>
                     
                 </div>
             
@@ -1487,6 +1544,8 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1544,6 +1603,8 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1659,6 +1720,18 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1724,23 +1797,23 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1755,7 +1828,7 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1809,6 +1882,10 @@ MVCC实现原理也是一道非常高频的面试题,自己在整理这篇文章
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

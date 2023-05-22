@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,26 +1123,33 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/LINUX运维-2022-07-23-linux下-bin和-usr-bin和-usr-local-bin的区别/">
+            <a href="/2022/09/21/微服务-2022-09-21-rabbitMq-实现定时任务/">
                 <h2 class="post-title">
-                     linux下 bin和 usr bin和 usr local bin的区别
+                    rabbitMq 实现定时任务
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    123/bin 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。/usr/bin 是系统安装时自带的一些可执行程序。即系统程序，轻易不要去动里面的东西，容易入坑。/usr/local/bin 是用户自行编译安装时默认的可执行程序的安装位置，这个不小心误删点什么，不会影响大局。
-...
+                    前言
+利用RabbitMq的死信特点，可以对过期消息进行单独处理，从而实现一个定时处理的任务。
+
+定时任务场景：
+​    比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 
+常用解决方案：  spring的 schedule 定时任务轮询数据库 
+缺点：消耗系统内存、增加了数据库的压力、存在较大的时间误差
+解决：rabbitmq的消息TTL和死信Exchange结合
+Rab......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#RabbitMQ" title="RabbitMQ">RabbitMQ</a>
                     
                 </div>
             
@@ -1102,36 +1163,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/LINUX运维-2022-07-23-linux不同版本的服务管理/">
+            <a href="/2022/09/21/Redis-2022-09-21-Redission-信号量/">
                 <h2 class="post-title">
-                    linux不同版本的服务管理
+                    Redission 信号量
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Rhel6 用 service 和 chkconfig 来管理服务，它是 SystemV 架构下的一个工具。
-Rhel7 是用 systemctl 来管理服务，它融合了之前的 service 和 chkconfig 的功能于一体。可以使用它永久性或只在当前会话中启用/禁用服务。systemctl 是 systemd 架构下的一个工具。
+                    前言
+信号量大家应该够不陌生，比如操作系统中的pv信号量，依据功能还可以分成同步信号量、互斥信号量。由于redis是单进程，天生具有锁的这个特性，而redisson更是对redis做了一层包装，使得api接口更适用。今天我们就看一下redisson基于redis做的信号量。
 
-
-
-
-动作
-Rhel6 旧指令
-Rhel7新指令
-
-
-......
+Redisson信号量​    Redisson的分布式信号量（Semaphore）Java对象 RSemaphor......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
                     
                 </div>
             
@@ -1145,33 +1200,35 @@ Rhel7新指令
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/LINUX运维-2022-07-23-vim的查找替换总结/">
+            <a href="/2022/09/21/Redis-2022-09-21-Redis主从复制集群/">
                 <h2 class="post-title">
-                    vim的查找替换总结
+                    Redis主从复制集群
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-vim的查找替换操作如果能运用熟练是非常提高效率的，我们来重新梳理一下查找与替换的一些操作，方便更好的记忆 。
+                    前言
+主从复制，主要解决的是单点问题，从节点是主节点的备份，只读不能写，主节点可以读写。实际就是AKF原则中X轴的实现。但主从节点需要数据同步，就牵涉到数据一致性的问题，我们来看一下，集群主从集群需要注意的问题，以及redis是如何做的。
 
-查找在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
+数据一致性问题既然有从节点需要同步主节点数据，就涉及到一致性问题。
 
-Vim查找支持正则表达式 /vim$匹配行尾的”vim”。
-需要查找特殊字符需要转义，例如/vim\$匹配”vim$”。
+强一致性（线性一致性）：即复制是同步的
+弱一致性：即复制是异步的
 
-大小写敏......
+强一致性所谓强......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
                     
                 </div>
             
@@ -1185,37 +1242,33 @@ Vim查找支持正则表达式 /vim$匹配行尾的”vim”。
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/LINUX运维-2022-07-23-三剑客常用命令-初级/">
+            <a href="/2022/09/20/Redis-2022-09-20-集群原理/">
                 <h2 class="post-title">
-                    三剑客常用命令-初级
+                    集群原理-AKF原则
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-grep、sed、awk号称三剑客，这三条命令对文本处理特别有用，今天来小结一下常用的基础操作，日后再来总结比较难的操作
+                    前言
+我们在实际的工作中用到的组建通常会以集群的形式出现，目的就是解决单实例无法处理的情况，今天我们从AKF原则入手，总结一下 集群搭建的原理及要解决的问题。
 
-grep-查找
-查询hello.txt中以字母a开头的内容，这样写也是可以的
-1grep ^a hello.txt
+AKF原则初识AKFAKF原则是微服务拆分原则四条原则中的第一条，个人认为集群的搭建基本都是围绕AKF展开的。我们先思考单实例遇到的问题
 
-查看test.log中包含http的所有行(-i忽略大小写）
-
-
-1grep -i "http" ./test.log
-
-查询出来对应字符串所在的行号......
+单点故障。一个实例挂掉，服务直接不可用了。
+容量问题。以redis为例，一个实例可能10g的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
                     
                 </div>
             
@@ -1229,30 +1282,25 @@ grep-查找
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/LINUX运维-2022-07-22-查看磁盘和目录空间df和du/">
+            <a href="/2022/09/20/JVM-2022-09-20-Jstack-应用/">
                 <h2 class="post-title">
-                    查看磁盘和目录空间df和du
+                    Jstack 应用
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    du和df的区别：12df命令是从文件系统考虑的，不光要考虑文件占用的空间，还要统计被命令或程序占用的空间(最常见的就是文件已经删除，但是程序并没有释放空间)。du命令是面向文件的，只会计算文件或目录占用的
-查看磁盘整体情况查看整体挂载情况1df -h
-
-查看指定目录  1df -h /opt/data/
-
-查看文件夹的占用情况查看当前目录每个文件夹的情况。1du --max-depth=1......
+                    jstack 参数1234567891011121314151617/opt/java8/bin/jstackUsage:    jstack [-l] &lt;pid&gt;        (to connect to running process) 连接活动线程    jstack -F [-m] [-l] &lt;pid&gt;        (to connect to a hun......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1266,30 +1314,31 @@ grep-查找
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/LINUX运维-2022-07-22-yum换源的详细操作/">
+            <a href="/2022/09/20/Redis-2022-09-20-Redis应用-分布式锁实现/">
                 <h2 class="post-title">
-                    yum换源的详细操作
+                    Redis应用 分布式锁实现
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    1yum install wget
-备份原来的源
-1sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bk
-下载阿里源
-1cd /etc/yum.repos.dsudo wget -nc http://mirrors.aliyun.com/repo/Centos-7.repo
- 更改阿里yu......
+                    前言
+Redis 除了做缓存、内存数据库之外，由于有线程的特性，经常可以拿来做分布式锁 、信号量等，应用起来也十分方便，我们来看一下一个分布式锁的简单实现。
+
+Redis实现
+用redis实现分布式锁，其实我们要重点考虑3个方面问题：加锁、解锁、锁续期
+
+加锁加锁要考虑的问题是，如果当前线程加锁之后挂掉了，相当于抱锁睡了，所以此时加锁时候 应该设置过期时间，保证能自动解锁。同时要注意应该是一......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
                     
                 </div>
             
@@ -1303,28 +1352,27 @@ grep-查找
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/LINUX运维-2022-07-22-yum源解释/">
+            <a href="/2022/09/19/Redis-2022-09-19-Redis-RDB与AOF实现原理/">
                 <h2 class="post-title">
-                    yum源解释
+                    Redis RDB实现原理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-转载他人的文章主要说明下如何配置linux上的本地yum源，主要关于一些原理上的说明。
-
-yum是什么，yum源又是什么   在windows上安装一个软件，我们可以通过360管家。因为360管家提供了软件的安装，卸载，并且解决了软件之间的依赖等相关问题，使得我们能够一键安装。在linux上有一个提供了和360管家类似功能的工具，叫做yum。使用yum我们就可以做到一个命令安装软件，并且不......
+                    前言
+Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快照文件。但有一个问题，时点的问题，比如redis 8点开始触发异步的持久化，假设需要十分钟的时间，那么这10分钟，主进程如果修改了内存数据，那么子进程进行持久化是写的修改后的数据吗？如果是，那此时持久化的数据就产生了脏数据,出现了数据一致性问题，如果不是，那此时内存数据被修改,又是如何做到呢？
+那么通过回......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-19
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
                     
                 </div>
             
@@ -1338,32 +1386,29 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/LINUX运维-2022-07-22-top命令的Load-average-含义及性能参考基值/">
+            <a href="/2022/09/16/JVM-2022-09-16-FullGC频繁排查思路/">
                 <h2 class="post-title">
-                    top命令的Load average 含义及性能参考基值
+                    FullGC频繁排查思路
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                     12$uptime11:12:26 up3:44,4users,load average:0.38,0.31,0.19
-系统平均负载被定义为在特定时间间隔内运行队列中的平均进程树。如果一个进程满足以下条件则其就会位于运行队列中：
+                    
+转载：https://maimai.cn/article/detail?fid=1698450575&amp;efid=HoKY2iJmr6ceJpp0vT5P-Q
 
-它没有在等待I/O操作的结果
-它没有主动进入等待状态(也就是没有调用’wait’)
-没有被停止(例如：等待终止)
-
-上面的输出，load average后面分别......
+背景最近在整理JVM的知识体系，想到了大家平时都会讨论了一个话题，当然也是面试常问的一个话题，就是发生频繁fullGC的情况，我们应该如何应对，如何找到问题并且如何解决问题，这是让人头大的事情。
+发现问题我们先思考一下，我们......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1377,30 +1422,27 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/docker-2022-07-22-利用docker部署hadoop集群的记录/">
+            <a href="/2022/09/16/JVM-2022-09-16-minorGC前后的几种特殊情况/">
                 <h2 class="post-title">
-                    利用docker部署hadoop集群的记录
+                    minorGC前后的几种特殊情况
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    计划部署五个docker容器，node1 为主节点，部署hdfs的namenode，yarn的resourcemager，redis的master等节点，目的就是拿docker当虚拟机用。
-理想很丰满，现实很骨干，问题重重,现把遇到的问题记录下，做相应的知识补充，也防止下次再次掉坑。
-启动容器：
-
-启动就退出，需要让容器内启动一个进程，否则没有服务 就退掉了
- 1docker exec -i......
+                    大对象直接进入老年代 相关参数 -XX:PretenureSizeThreshold
+动态年龄判断 minor gc 后，一批对象总大小超过了 survivor 区的 50%，那么就让大于等于这批对象年龄的对象直接进入老年代 具体规则是，从年龄1的对象开始，把 年龄1 + 年龄2 + 年龄n 多个年龄的对象的总和超过survivor区的50%，就此时就会把年龄 n 以上的对象放入老年代
+老年......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1414,27 +1456,28 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
 
         <div class="post-preview">
 
-            <a href="/2022/07/22/docker-2022-07-22-Docker容器互访三种方式/">
+            <a href="/2022/09/16/JVM-2022-09-16-FullGC的发生时机/">
                 <h2 class="post-title">
-                    Docker容器互访三种方式
+                    FullGC的发生时机
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    我们都知道docker容器之间是互相隔离的，不能互相访问，但如果有些依赖关系的服务要怎么办呢。下面介绍三种方法解决容器互访问题。
-方式一、虚拟ip访问安装docker时，docker会默认创建一个内部的桥接网络docker0，每创建一个容器分配一个虚拟网卡，容器之间可以根据ip互相访问。
-1234567891011[root@33fcf82ab4dd &#x2F;]# [root@CentO......
+                    Major GC / Full GC基于分代收集理论，目前的JVM堆内存大多分为了==新生代、老年代、方法区==。
+JVM在进行GC时，并非每次都对上面三个内存区域（新生代、老年代；方法区）一起回收的，大部分时候回收的都是指新生代。
+针对Hotspot VM的实现，它里面的GC按照回收区域又分为两大种类型：一种是部分收集（Partial GC），一种是整堆收集（Full GC）。
+部分收集：......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-22
+                    2022-09-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#DOCKER" title="DOCKER">DOCKER</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1511,6 +1554,8 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1568,6 +1613,8 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1683,6 +1730,18 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1748,23 +1807,23 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1779,7 +1838,7 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1833,6 +1892,10 @@ yum是什么，yum源又是什么   在windows上安装一个软件，我们可�
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,44 +1123,25 @@
 
         <div class="post-preview">
 
-            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux用户管理/">
+            <a href="/2023/01/13/数据仓库-2023-01-13-Hudi-Upsert操作原理详解/">
                 <h2 class="post-title">
-                    Linux用户管理
+                    Hudi-Upsert操作原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    用户管理体系是linux系统中一样很重要的内容，不同的用户分配不同等级的权限可以保障系统的安全，问题发生以后也方便追溯问题的原因。接下来总结一下与用户管理相关的一些比较重要的内容。
-用户分类
-
-
-
-用户分类
-含义
-uid
-
-
-
-
-root用户
-最高权限用户。
-0
-
-
-虚拟用户（傀儡用 户）
-这种用户存在是用于让一些服务正常运行。一些服务运行需要指定 的用户。
-uid是1-999......
+                    背景​    首先介绍下Hudi的背景，因为背景对理解一个项目很关键。​    Hudi，正式的全称是Hadoop Upsert Delete and Incremental。其实关于这个名字也不用太较真，因为都是后来附会上去的，从源代码里可以看到这个项目最初的名字是hoodie和现在的名字发音相同。但这个名字还是透露了一些信息的，那就是Hudi项目最初的设计目标:在hadoop上实现upd......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-13
+                    2023-01-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1120,31 +1155,23 @@ uid是1-999......
 
         <div class="post-preview">
 
-            <a href="/2022/10/09/大数据-2022-10-09-hive中四种有效的SQL优化/">
+            <a href="/2023/01/12/Huid-表类型/">
                 <h2 class="post-title">
-                    hive中四种有效的SQL优化
+                    Huid-表类型
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据准备首先虚拟一张表user，字段为：
-（1）user_id（用户的id）；
-（2）age（用户的年龄）；
-（3）sex（用户的性别）；
-（4）order_id（用户的订单编号，一个用户可能有多个订单编号）。
-另设一张表，叫order，里面包含order_id, order_date两个字段。
-multi-table-insert优化union all原SQL（目标是往一个新表user_n......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-10-09
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Hive" title="Hive">Hive</a>
                     
                 </div>
             
@@ -1158,40 +1185,23 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
 
         <div class="post-preview">
 
-            <a href="/2022/10/09/Flink-2022-10-09-checkpoint的生产配置/">
+            <a href="/2023/01/12/Hudi-查询类型/">
                 <h2 class="post-title">
-                    checkpoint的生产配置
+                    Hudi-查询类型
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Checkpoint相关配置
-
-
-
-配置项
-含义
-
-
-
-
-state.backend
-状态存储后端，可配置值有’jobmanager’, ‘filesystem’, ‘rocksdb’等，在checkpoint数据存储在hdfs上时，配置该值为filesystem
-
-
-state.checkpoints.dir
-checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-10-09
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1205,28 +1215,23 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/10/09/Flink-2022-10-09-异步IO/">
+            <a href="/2023/01/12/Hudi-核心概念/">
                 <h2 class="post-title">
-                    异步IO
+                    Hudi-核心概念
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言通常情况我们在进行维表关联时，是进行同步的查询，为了提高吞吐率，提高处理的数据量，可以利用异步的查询，但是有一个问题，异步访问的后的结果 如何反回到主流中？这就需要Flink给我们提供支持了。我们看一下官网的介绍。
-
-前置准备引用官网的一段话:
-123As illustrated in the section above, implementing proper asynchronous......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-10-09
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1240,26 +1245,25 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/27/JUC-2022-09-27-CompletableFuture详解/">
+            <a href="/2023/01/12/设计模式-2023-01-12-Huid-数据管理/">
                 <h2 class="post-title">
-                    CompletableFuture详解
+                    Huid-数据管理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    CompletableFuture介绍Future 是 Java 5 添加的类，用来描述一个异步计算的结果。你可以使用isDone方法检查计算是否完成，或者使用get阻塞住调用线程，直到计算完成返回结果，你也可以使用cancel 方法停止任务的执行。
-虽然Future以及相关使用方法提供了异步执行任务的能力，但是对于结果的获取却是很不 方便，只能通过阻塞或者轮询的方式得到任务的结果。阻塞的方......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-27
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                      <a href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
                     
                 </div>
             
@@ -1273,26 +1277,33 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/27/JUC-2022-09-27-Future模式/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-Hudi介绍/">
                 <h2 class="post-title">
-                    Future模式
+                    Hudi介绍
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Future模式​    我们了解的Thread 和 runnable，实现多线程的方式是新起线程运行 run 方法，但是 run 方法有个缺陷是没有返回值，并且主线程也并不知道新的线程何时运行完毕。Future 持有要运行的任 务，以及任务的结果。主线程只要声明了 Future 对象，并且启动新的线程运行他。那么随时能通过 Future 对象获 取另外线程运行的结果。
-使用​    我们通......
+                    数据湖框架目前市面上流行的三大开源数据湖方案分别为：Delta Lake、Apache Iceberg和Apache Hudi。
+
+Delta Lake：DataBricks公司推出的一种数据湖方案，网址：https://delta.io/ 
+
+
+Apache Iceberg：以类似于SQL的形式高性能的处理大型的开放式表，网址：https://iceberg.apache.org/
+
+
+A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-27
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1306,27 +1317,26 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/26/IO-2022-09-26-从Reactor模式到Netty架构演进/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-大数据为什么需要数据湖/">
                 <h2 class="post-title">
-                    从Reactor模式到Netty架构演进
+                    大数据为什么需要数据湖？
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    单线程ReactorReactor模型的朴素原型之前的文章探讨过IO模型，其中最优化的是基于多路复用器的NIO。Java的NIO模式的Selector网络通讯，其实就是一个简单的Reactor模型。可以说是Reactor模型的朴素原型。
-我们再来回顾一下代码
-1234567891011121314151617181920212223242526272829303132333435363738......
+                    ​    当前基于Hive的离线数据仓库已经非常成熟，在传统的离线数据仓库中对记录级别的数据进行更新是非常麻烦的，需要对待更新的数据所属的整个分区，甚至是整个表进行全面覆盖才行，由于离线数仓多级逐层加工的架构设计，数据更新时也需要从贴源层开始逐层反应到后续的派生表中去。
+​    随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-26
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1340,27 +1350,27 @@ checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/IO-2022-09-25-网络IO模型/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
                 <h2 class="post-title">
-                    网络IO-BIO、NIO
+                    数据湖技术的发展
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言都是需求推动发展，网络IO模型也是一样，IO的发展都是围绕C10问题。总的来说就是如何建立高并发的连接。接下来我就看一下IO模型从最初的阻塞BIO到NIO再到多路复用器，一步一步如何发展过来。
-BIO概念
-看上图，所谓的BIO就是 阻塞式IO，需要一个线程监听端口，这个线程只能阻塞式的监听，再也不能干别的，当有连接上来时，linux建立对应的连接（注意这一步时内核干的，其实应用层的线程没......
+                    数据湖的定义Wikipedia是这样定义的:
+
+数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1374,33 +1384,28 @@ BIO概念
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/IO-2022-09-25-DMA与零拷贝技术/">
+            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
                 <h2 class="post-title">
-                    DMA与零拷贝技术
+                    各大公司实时数仓实践
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-注意事项：除了 Direct I/O，与磁盘相关的文件读写操作都有使用到 page cache 技术。
+                    网易实时数仓实践
+​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
 
-数据的四次拷贝与四次上下文切换很多应用程序在面临客户端请求时，可以等价为进行如下的系统调用：
-
-File.read(file, buf, len);
-Socket.send(socket, buf, len);
-
-例如消息中间件 Kafka 就是这个应用场景，从磁盘中读取一批消息后原封......
+突然数据量增多，基于......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2023-01-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1414,32 +1419,29 @@ Socket.send(socket, buf, len);
 
         <div class="post-preview">
 
-            <a href="/2022/09/25/IO-2022-09-25-文件IO与PageCache/">
+            <a href="/2023/01/10/数据仓库-2023-01-10-实时数仓的发展趋势-流批一体/">
                 <h2 class="post-title">
-                    文件IO与PageCache
+                    实时数仓的发展趋势-流批一体
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Linux文件系统
-如上图，首先我们从图中得知两点:
+                    实时数仓现状当前基于Hive的离线数据仓库已经非常成熟，随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根据数仓架构演变过程，在Lambda架构中含有离线处理与实时处理两条链路，其架构图如下：
 
-PageCache 是属于内核级别的，受到内核的管理
-在用户态，用户可以使用mmap映射，直接访问PageCache，而不必进行内核态的切换。
+​    正是由于两条链路处理数据导致数据不一致等一些列问题所以才有了Kappa架构，Kappa架构如下：
 
-PageCache概念首先我们要了解一点，现在的内存管理方案中多数是分页管理，也就是内存会划分为4k一页作为一个基本单位。而pagecache呢通常也是4KB，用来缓存文件。提高IO的速度。
-......
+​        Kapp......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-25
+                    2023-01-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1516,6 +1518,8 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1573,6 +1577,8 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1688,6 +1694,18 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1753,23 +1771,23 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1784,7 +1802,7 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1838,6 +1856,10 @@ PageCache概念首先我们要了解一点，现在的内存管理方案中多�
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

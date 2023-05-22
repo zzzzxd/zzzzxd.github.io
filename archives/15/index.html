@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,31 +1123,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/network-2022-07-06-HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql死锁的发生与解决/">
                 <h2 class="post-title">
-                    HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥
+                    mysql死锁的发生与解决
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-本文内容主要来自简书博主olaH的文章，作者对概念之间的联系解释的非常清楚，熟悉这些概念可以对理解SSH协议、Https协议以及证书颁发等打下基础
-原文链接:olaH
+                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
+认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+InnoDB 中解决死锁问题有两种方式：
 
-对称加密对称加密是指双方持有相同的密钥进行通信，加密速度快，但是有一个安全问题，双方怎样获得相同的密钥？你总不能总是拿着U盘把密钥拷贝给对方吧。
-常见的对称加密算法有DES、3DES、AES等
-非对称加密非对称加密，又称为......
+检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
+等查询的时间达到锁等待超时的设......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#https" title="https">https</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1107,29 +1160,38 @@
 
         <div class="post-preview">
 
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-128-整数翻转/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-间隙锁/">
                 <h2 class="post-title">
-                    Problem 128 整数翻转
+                    mysql锁机制-间隙锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给你一个32位的有符号整数x返回将x中的数字部分反转后的结果反转后整数超过 32 位的有符号整数的范围就返回0假设环境不允许存储 64 位整数（有符号或无符号）Leetcode题目：https://leetcode.com/problems/reverse-integer/
-题目解析
-注意，给的就是整数,可以进行翻转溢出的提前判断
+                    前言​    上节我们聊到了 RC 隔离级别的各种情况的锁，这节我们就来一起看看 RR 隔离级别各种情况下的锁，同时揭晓间隙锁的意义。
+RC下的幻读下面我们来做一个实验：
 
-代码12345678910111213141516cl......
+
+
+
+session1
+session2
+
+
+
+
+set session transaction_isolation=‘READ-COMMITTED’;/* 设置会话隔离级别为 RC*/
+set session tran......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-03-01
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1143,31 +1205,30 @@
 
         <div class="post-preview">
 
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-127-两数之和/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-行锁/">
                 <h2 class="post-title">
-                    Problem 127 两数之和
+                    mysql锁机制-行锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给定一个整数数组 nums 和一个整数目标值 target请你在该数组中找出 和为目标值 target  的那两个整数并返回它们的数组下标你可以假设每种输入只会对应一个答案但是数组中同一个元素在答案里不能重复出现你可以按任意顺序返回答案Leetcode题目：https://leetcode.com/problems/two-sum/
-题目解析
-两数之和，题目简单，写出好的代码也不好想,能......
+                    前言MySQL 5.5 之前的默认存储引擎是 MyISAM，5.5 之后改成了 InnoDB。InnoDB 后来居上最主要的原因就是：
+
+InnoDB 支持事务：适合在并发条件下要求数据一致的场景。
+InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
+
+本节就一起来探讨 InnoDB 的行锁。
+在讲解行锁之前，我们首先来看一下两阶段锁协议。
+两阶段锁传统的关系型数据库加锁的一个原则......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-03-01
+                    2022-07-18
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1181,31 +1242,34 @@
 
         <div class="post-preview">
 
-            <a href="/2021/02/26/企业高频算法面试题-2021-02-26-Problem-126-企鹅文化衫问题/">
+            <a href="/2022/07/18/mysql-2022-07-18-mysql锁机制-全局锁与表锁/">
                 <h2 class="post-title">
-                    Problem 126 企鹅文化衫问题
+                    mysql锁机制-全局锁与表锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目企鹅厂活动发文化衫，文化衫有很多种，企鹅们都穿文化衫采访中，企鹅会说还有多少企鹅跟他穿一种文化衫有些企鹅没被采访到将这些回答放在answers数组里，返回活动中企鹅的最少数量Leetcode题目：https://leetcode.com/problems/rabbits-in-forest/
-27
-题目解析代码...
+                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
+本章就来介绍一下不同场景下的锁机制。
+根据加锁的范围，MySQL 中的锁可分为三类：
+
+全局锁
+表级锁
+行锁
+
+本节来重点讲解一下全局锁和表锁。
+1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-26
+                    2022-07-18
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1219,25 +1283,29 @@
 
         <div class="post-preview">
 
-            <a href="/2021/02/24/企业高频算法面试题-2021-02-24-Problem-125-乐队演出问题/">
+            <a href="/2022/07/16/数据结构与算法-2022-07-16-详解红黑树性质与实现/">
                 <h2 class="post-title">
-                    Problem 125 乐队演出问题
+                    详解红黑树性质与实现
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目每一个项目都有三个数，[a,b,c]表示这个项目a和b乐队参演，花费为c每一个乐队可能在多个项目里都出现了，但是只能被挑一次nums是可以挑选的项目数量，所以一定会有nums2只乐队被挑选出来返回一共挑nums轮(也就意味着一定请到所有的乐队)，最少花费是多少如果怎么都无法在nums轮请到nums2只乐队且每只乐队只能被挑一次返回-1nums&lt;9，programs长度小于500每组......
+                    
+本文将从2-3树与红黑树的联系入手，详细解释红黑树的性质与代码实现，让各位清楚红黑树为何如此定义以及性质是如何推导出来的。本文需要前章2-3树的知识
+[红黑树等价树2-3树]: http://www.icanfly.tech/2022/07/14/%E7%BA%A2%E9%BB%91%E6%A0%91%E7%AD%89%E4%BB%B7%E6%A0%912-3%E6%A0%91/
+
+初见红......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-24
+                    2022-07-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#红黑树" title="红黑树">红黑树</a>
                     
                 </div>
             
@@ -1251,33 +1319,29 @@
 
         <div class="post-preview">
 
-            <a href="/2021/02/21/企业高频算法面试题-2021-02-21-Problem-124-表达式添加运算符/">
+            <a href="/2022/07/15/git-2022-07-14-git的回退操作/">
                 <h2 class="post-title">
-                    Problem 124 表达式添加运算符
+                    git的回退操作
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode 题目 : 
-https://leetcode.com/problems/expression-add-operators/
-自己可以试试普通递归，优化了计算表达式的过程
-26节
-题目解析代码...
+                    查看提交的log日志1git log
+回退提交点1git reset --hard commidId
+显示所有提交点1git reflog
+
+有时候回退回去，还想回退回来，这时候 git log 就已经删除了所有commit id了，只能用这个命令，这个日志 包括所有的 分之合并等提交点都会显示，但是注意，只是显示本地进行的操作，如果从git拉取下来后，不是在本地进行的提交，直接回退后，可能......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-21
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                      <a href="/tags/#git" title="git">git</a>
                     
                 </div>
             
@@ -1291,31 +1355,40 @@ https://leetcode.com/problems/expression-add-operators/
 
         <div class="post-preview">
 
-            <a href="/2021/02/20/企业高频算法面试题-2021-02-20-Problem-123-单词搜索II/">
+            <a href="/2022/07/15/git-2022-07-14-自建项目上传github常用操作/">
                 <h2 class="post-title">
-                    Problem 123 单词搜索II
+                    自建项目上传github常用操作
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode 题目 :https://leetcode.com/problems/word-search-ii/
-题目解析
-BFS + Prefix Tree
+                    在idea 初始化本地项目后
 
-代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859c......
+在github创建仓库
+
+添加git远程仓库绑定:git remote add origin https://github.com/zzzzxd/xxxx 当前没有追踪远程分支,拉取时候绑定远程分支:git pull origin master 
+
+
+常见的其他操作
+
+
+删除项目当前分支对远程分支的关联
+
+1git remote rm origin
+
+
+项目以......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-20
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                      <a href="/tags/#git" title="git">git</a>
                     
                 </div>
             
@@ -1329,27 +1402,30 @@ BFS + Prefix Tree
 
         <div class="post-preview">
 
-            <a href="/2021/02/20/企业高频算法面试题-2021-02-20-Problem-122-最窄区间变形题/">
+            <a href="/2022/07/15/大数据-2022-07-15-Hbase-数据倾斜原因及解决方案/">
                 <h2 class="post-title">
-                    Problem 122 最窄区间变形题
+                    Hbase 数据倾斜原因及解决方案
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode 题目 :https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/—最窄区间变形有三个有序数组，分别在三个数组中挑出3个数，x、y、z返回 |x-y| + |y-z| + |z-x|最小是多少？
-26
-题目解析代码...
+                    
+最近公司在做ip维度表，数据量比较大，上亿条数据了，拿hbase存储，进行实时关联。发现ip存到region上倾斜的比较严重，考虑到基数比较大，后期增量相对比较少，可以做一个预分区，使数据分布均衡，借此机会，从网上搜集了一下资料，总结一下常见的解决方案。
+
+热点与数据倾斜热点：
+​    热点发生在大量的client直接访问集群的一个或极少数个节点（访问可能是读，写或者其他操作。
+​   ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-20
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1363,31 +1439,29 @@ BFS + Prefix Tree
 
         <div class="post-preview">
 
-            <a href="/2021/02/19/企业高频算法面试题-2021-02-19-Problem-121-单词梯子II/">
+            <a href="/2022/07/15/微服务-2022-07-15-分布式AKF拆分原则/">
                 <h2 class="post-title">
-                    Problem 121 单词梯子II
+                    分布式AKF拆分原则
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode 题目 :https://leetcode.com/problems/gas-station/
-26
-题目解析
-同单词梯子一
+                    
+转载 :https://blog.csdn.net/tomcosin/article/details/119332084
 
-
-代码...
+前言​    当我们需要分布式系统提供更强的性能时，该怎样扩展系统呢？什么时候该加机器？什么时候该重构代码？扩容时，究竟该选择哈希算法还是最小连接数算法，才能有效提升性能？
+在面对 Scalability 可伸缩性问题时，我们必须有一个系统的方法论，才能应对日益复杂的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-19
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#微服务" title="微服务">微服务</a>
                     
                 </div>
             
@@ -1401,34 +1475,30 @@ BFS + Prefix Tree
 
         <div class="post-preview">
 
-            <a href="/2021/02/16/企业高频算法面试题-2021-02-16-Problem-120-单词梯子/">
+            <a href="/2022/07/15/分布式算法-2022-07-15-理解一致性哈希算法/">
                 <h2 class="post-title">
-                    Problem 120 单词梯子
+                    理解一致性哈希算法
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode 题目 : 
-https://leetcode.com/problems/word-ladder/
-题目解析
-只要能反应过来使用图的模型，就能做，只不过要麻烦些而已。
+                    
+转载:https://segmentfault.com/a/1190000021199728
 
-代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545......
+前言要了解一致性哈希，首先我们必须了解传统的哈希及其在大规模分布式系统中的局限性。简单地说，哈希就是一个键值对存储，在给定键的情况下，可以非常高效地找到所关联的值。假设我们要根据其邮政编码查找城市中的街道名称。一种最简单的实现方式是将此信息以哈希字典的形式进行存储 &lt;Zip Code，St......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-16
+                    2022-07-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#一 致性Hash" title="一 致性Hash">一 致性Hash</a>
                     
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                      <a href="/tags/#Graph" title="Graph">Graph</a>
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
                     
                 </div>
             
@@ -1505,6 +1575,8 @@ https://leetcode.com/problems/word-ladder/
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1562,6 +1634,8 @@ https://leetcode.com/problems/word-ladder/
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1677,6 +1751,18 @@ https://leetcode.com/problems/word-ladder/
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1742,23 +1828,23 @@ https://leetcode.com/problems/word-ladder/
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1773,7 +1859,7 @@ https://leetcode.com/problems/word-ladder/
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1827,6 +1913,10 @@ https://leetcode.com/problems/word-ladder/
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

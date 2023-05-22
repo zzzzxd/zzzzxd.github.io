@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,123 +1123,22 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/24/问题-2022-07-24-PrepareStatement未关闭导致内存泄漏/">
+            <a href="/2022/09/25/JVM-2022-09-25-volatile与可见性/">
                 <h2 class="post-title">
-                    PrepareStatement未关闭导致内存泄漏
+                    volatile与可见性
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    现象堆内存飙升，GC次数明显提升
-原因:第三方的数据库连接池，使用的时候，获取到Connection之后，使用完成，调用的关闭方法（close()） ，并没有将Connection关闭，只是放回到连接池中，如果调用的这个方法，而没有手动关闭PreparedStatement等，则这个PreparedStatement并没有关闭，这样会使得开发的程序内存急速增长，java的内存回收机制可能跟不......
+                    可见性​    可见性指的是，某个线程对共享变量进行了修改，其它线程能够立刻看到修改后的最新值。乍一听这个定义，你可能会觉得这不是废话吗？变量被修改了，线程当然能够立刻读取到！否则即使单线程的程序也会出问题啊！没错，变量被修改后，在本线程中确实能够立刻被看到，但并不保证别的线程会立刻看到。原因就是编程领域经典的两大难题之一——缓存一致性。
+观察可见性123456789101112131415......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Trouble Shooting" title="Trouble Shooting">Trouble Shooting</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/network-2022-07-23-TCP拆包与粘包/">
-                <h2 class="post-title">
-                    TCP拆包与粘包
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    粘包产生的原因如果客户端连续不断的向服务端发送数据包时，服务端接收的数据会出现两个数据包粘在一起的情况，这就是TCP协议中经常会遇到的粘包以及拆包的问题。
-传输层的UDP协议是否会发生粘包或者拆包问题？​    不会。UDP是基于报文发送的，在UDP首部采用了16bit来指示UDP数据报文的长度，因此在应用层能很好的将不同的数据报文区分开，从而避免粘包和拆包的问题。
-传输层的TCP协议是否会......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#TCP" title="TCP">TCP</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/ssm-2022-07-23-自定义注解/">
-                <h2 class="post-title">
-                    自定义注解
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    概念​    Java 注解是在 JDK5 时引入的新特性，注解（也被称为元数据）为我们在代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。注解类型定义指定了一种新的类型，一种特殊的接口类型。 在关键词 interface 前加 @ 符号也就是用 @interface 来区分注解的定义和普通的接口声明。目前大部分框架(如 Spring Boot 等)都通过......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#SSM" title="SSM">SSM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/23/jvm-2022-07-23-常量池/">
-                <h2 class="post-title">
-                    常量池
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-提到常量池一直容易混，今天一次性彻底搞定。
-
-class文件常量池（class constant pool）我们都知道，class文件中除了包含类的版本、字段、方法、接口等描述信息外，还有一项信息就是常量池(constant pool table)，用于存放编译器生成的各种字面量(Literal)和符号引用(Symbolic References)。字面量就是我们所说的常量概念，如文本字符......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-23
+                    2022-09-25
                 </p>
                 <div class="tags">
                     
@@ -1203,31 +1156,31 @@ class文件常量池（class constant pool）我们都知道，class文件中除
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/IO-2022-07-23-IO实验的一些常用命令总结/">
+            <a href="/2022/09/24/JVM-2022-09-24-有序性与内存屏障/">
                 <h2 class="post-title">
-                    IO实验的一些常用命令总结
+                    有序性与内存屏障
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    必须熟练使用的指令以及注意事项
-stat：可以查看文件的详细信息 1stat msb.txt
-ln：建立符号连接、硬连接1ln   [s]    已有的    不存在的
-dd：用指定大小的块拷贝一个文件，并在拷贝的同时进行指定的转换
-https://www.cnblogs.com/fantasyxo/p/10519662.html
+                    并发三大特性所有讲并发编程的书籍都会讲到并发编程的三大特性，这是并发编程中所有问题的根源，我们只有深刻理解了这三大特性，才不会编写出漏洞百出的并发程序，才不会遇到问题时无从下手，才不会对自己的程序没有信心。
+这三大特性是：
 
-12345678if=文件名：输入文件名，缺省为标准输入。......
+原子性 : 所有操作要么全部成功，要么全部失败。
+可见性: 一个线程对变量进行了修改，另外一个线程能够立刻读取到此变量的最新值。
+
+有序性: 代码在执行阶段，并不一定和......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#IO" title="IO">IO</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1241,32 +1194,26 @@ https://www.cnblogs.com/fantasyxo/p/10519662.html
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/mysql-2022-07-23-mysql的8个变量/">
+            <a href="/2022/09/24/JVM-2022-09-24-JMM与缓存一致性/">
                 <h2 class="post-title">
-                    mysql的8个变量
+                    JMM与缓存一致性
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-　本篇会简单介绍在 MySQL 中关于 8个 character_set 变量的基本作用。
-
-　使用下列SQL语句可以查看 MySQL中8个 character_set 变量
-1SHOW VARIABLES LIKE&#39;%char%&#39;;
-8个 character_set 变量：
-　　一、character_set_client
-　　二、character_set_connec......
+                    前言​    随着CPU的不断发展，CPU的性能越来越强大，但受迫于频率提升的困难，现代CPU架构开始向多核发展。而作为软件开发人员为了充分使用CPU的性能，越来越多的开发者会选择多线程程序开发。CPU在计算时会做一些优化，这些优化对于单线程程序来说是没有问题的，但对多线程程序则不是那么的友好。接下来我们就从硬件底层来看一下硬件对多线程并发的影响。
+硬件层的并发优化首先，我们来看一下硬件上的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1280,26 +1227,29 @@ https://www.cnblogs.com/fantasyxo/p/10519662.html
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/mysql-2022-07-23-mysql编码错进错出解释/">
+            <a href="/2022/09/24/JVM-2022-09-24-Class加载过程/">
                 <h2 class="post-title">
-                    mysql编码错进错出解释
+                    Class加载过程
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    相关变量123SET character_set_client &#x3D; charset_name;SET character_set_results &#x3D; charset_name;SET character_set_connection &#x3D; charset_name;
-过程复现及原理解释123先假设客户端bash都是utf8SET character_set_cli......
+                    前言    
+在java中当我们使用某个类的时候，首先做的就是把.class文件从硬盘中加载到内存中，这一步称为加载的过程，但实际上，要做的工作不止这一些，接下来我们看一下，在一个类被使用前要做哪些准备工作呢。
+Loading类加载器特点
+全盘负责：当一个类加载器加载一个类时，该类所依赖的其他类也会被这个类加载器加载到内存中。
+缓存机制：所有的Class对象都会被缓存，当程序需要使用某个Cl......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-24
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
                     
                 </div>
             
@@ -1313,30 +1263,29 @@ https://www.cnblogs.com/fantasyxo/p/10519662.html
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/mysql-2022-07-23-理解和解决MySQL乱码问题/">
+            <a href="/2022/09/23/多线程-2022-09-23-JUC包下的新型锁/">
                 <h2 class="post-title">
-                    理解和解决MySQL乱码问题
+                    JUC包下的新型锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-转载网络好文:http://cenalulu.github.io/mysql/mysql-mojibake/
-本文将详细介绍MySQL乱码的成因和具体的解决方案
-在阅读本文之前，强烈建议对字符集编码概念还比较模糊的同学 阅读下博主之前对相关概念的一篇科普：十分钟搞清字符集和字符编码
-
-MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理解：从客户端发起请求，到MySQL存储数据，再......
+                    ReentrantLock概念​    可重入锁，就是拿到锁之后，还可以对此锁再拿一次，一层一层的加，synchronized本身就是可重入锁的一种
+需要注意的地方
+可以代替synchronied关键字，只需要在使用synchronized关键字的地方使用lock.lock()方法
+synchronized关键字是自动解锁的，但是reen必须手动解锁
+特别注意对于异常的处理，sync遇到异常......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
                     
                 </div>
             
@@ -1350,25 +1299,25 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/mysql-2022-07-23-字库表、编码字符集、字符编码/">
+            <a href="/2022/09/23/多线程-2022-09-23-Atomic类与CAS分析/">
                 <h2 class="post-title">
-                    字库表、编码字符集、字符编码
+                    Atomic类与CAS分析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    字库表（character repertoire）：相当于一个 所有 可读或者可显示字符的数据库（可读的字符不一定能够直观的显示出来，如回车）。其决定了编码字符集能够展示的字符的范围。每一种编码字符集，应该都对应着一个字库表。例如 ASCII 字符集，对应的字库表就是由换行、回车等控制字符，和数字、大小写字母、英文标点符号等 128 个字符组成的。且这 128 个字符，是按照一定顺序来排列的......
+                    Atomic 简介Atomic 相关类在 java.util.concurrent.atomic 包中。针对不同的原生类型及引用类型，有 AtomicInteger、AtomicLong、AtomicBoolean、AtomicReference 等。另外还有数组对应类型 AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray。由于 A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
                     
                 </div>
             
@@ -1382,29 +1331,148 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
 
         <div class="post-preview">
 
-            <a href="/2022/07/23/LINUX运维-2022-07-23-screen命令/">
+            <a href="/2022/09/23/多线程-2022-09-23-多线程基础/">
                 <h2 class="post-title">
-                    screen命令
+                    多线程基础
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Screen简介在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。
-简而言之：
-远程服务器的时候，断网或者手误关掉了远程终端，会导致会话中断，程序终止。
-而Screen连接的终端，会话独立运行，程序会一直进行。而且会话可以恢复，还可以自行删除。
-常用screen命令123456s......
+                    线程状态线程的状态，是重点中的重点，在生产中遇到问题的时候，就需要观察线程状态来排查问题，比如用jstack查看堆栈信息时候，就需要重点关注block状态的线程。
+状态流转
+状态的解释
+new: 线程刚刚创建，还没有启动
+Runnable：可运行状态，可由线程调度器安排执行，具体分为：Ready等待调度，Running 正在执行
+Waiting：等待被唤醒
+Timed Waiting：隔一段......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-23
+                    2022-09-23
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/22/微服务-2022-09-22-SpringCache-使用总结/">
+                <h2 class="post-title">
+                    SpringCache 使用总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Spring Cache简介
+Spring 从 3.1 开始定义了 org.springframework.cache.Cache 和 org.springframework.cache.CacheManager 接口来统一不同的缓存技术； 并支持使用 JCache（JSR-107）注解简化我们开发；
+
+Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合； Cache 接 口 下 ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#缓存" title="缓存">缓存</a>
+                    
+                      <a href="/tags/#Spring Cache" title="Spring Cache">Spring Cache</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/22/微服务-2022-09-22-缓存使用总结/">
+                <h2 class="post-title">
+                    缓存使用总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    缓存缓存使用为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。而 db 承担数据落 盘工作。 哪些数据适合放入缓存？ 
+
+即时性、数据一致性要求不高的 
+
+访问量大且更新频率不高的数据（读多，写少）
+ 举例：电商类应用，商品分类，商品列表等适合缓存并加一个失效时间(根据数据更新频率 来定)，后台如果发布一个商品，买家需要 5 分钟才能看到新的商品一般还是可以接受的。
+
+
+
+12......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                    
+                      <a href="/tags/#缓存" title="缓存">缓存</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/22/Redis-2022-09-22-Redis无主模式集群/">
+                <h2 class="post-title">
+                    Redis无主模式集群
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+前面的文章我们讲了Redis的主从复制模式，它是来解决单点故障问题，从节点是主节点的备份，只读。这样一来就难解决容量问题，从AKF的原则讲，我们可以从y轴、Z轴来考虑搭建不同的集群来解决这个问题。接下来我们仔细的探讨下这个问题。
+
+功能划分在AKF Y轴方向，我们可以从业务的角度出发，用户功能一个redis实例，订单功能一个redis实例,在业务端进行实例的区分。
+
+数据分区不同的功能......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Redis" title="Redis">Redis</a>
                     
                 </div>
             
@@ -1481,6 +1549,8 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1538,6 +1608,8 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1653,6 +1725,18 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1718,23 +1802,23 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1749,7 +1833,7 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1803,6 +1887,10 @@ MySQL出现乱码的原因要了解为什么会出现乱码，我们就先要理
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,30 +1123,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/09/22/微服务-2022-09-22-SpringCache-使用总结/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘分区实战/">
                 <h2 class="post-title">
-                    SpringCache 使用总结
+                    fdisk磁盘分区实战
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Spring Cache简介
-Spring 从 3.1 开始定义了 org.springframework.cache.Cache 和 org.springframework.cache.CacheManager 接口来统一不同的缓存技术； 并支持使用 JCache（JSR-107）注解简化我们开发；
+                    环境准备​    此次我们在虚拟机上添加磁盘进行操作。具体的添加操作，由于不同的虚拟机添加方法不一样就不在叙述了。
+添加完磁盘后，使用lsblk命令可以查看所以的块设备
 
-Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合； Cache 接 口 下 ......
+可以看到，当前虚拟机上共有三块设备，两块硬盘，一块光盘，只要能看到自己添加的硬盘即可。
+磁盘分区fdisk分区指令1fdisk [选项][参数]
+​    fdisk 指令是 Linux 下通用的磁盘分区工具，它可以操纵硬......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-22
+                    2022-12-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#缓存" title="缓存">缓存</a>
-                    
-                      <a href="/tags/#Spring Cache" title="Spring Cache">Spring Cache</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1106,36 +1160,26 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
 
         <div class="post-preview">
 
-            <a href="/2022/09/22/微服务-2022-09-22-缓存使用总结/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-SWAP分区实战/">
                 <h2 class="post-title">
-                    缓存使用总结
+                    SWAP分区实战
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    缓存缓存使用为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。而 db 承担数据落 盘工作。 哪些数据适合放入缓存？ 
-
-即时性、数据一致性要求不高的 
-
-访问量大且更新频率不高的数据（读多，写少）
- 举例：电商类应用，商品分类，商品列表等适合缓存并加一个失效时间(根据数据更新频率 来定)，后台如果发布一个商品，买家需要 5 分钟才能看到新的商品一般还是可以接受的。
-
-
-
-12......
+                    概述swap 交换分区.内存不足的时候临时充当内存.
+创建swap分区通过文件创建swap分区12345678910111213141516171819[root@linx01 ~]# dd if=/dev/zero of=/tmp/t count=100 bs=10M记录了100+0 的读入记录了100+0 的写出1048576000字节(1.0 GB)已复制，1.28384 秒，817 ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-22
+                    2022-12-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#缓存" title="缓存">缓存</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1149,30 +1193,48 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
 
         <div class="post-preview">
 
-            <a href="/2022/09/22/Redis-2022-09-22-Redis无主模式集群/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux的磁盘管理体系/">
                 <h2 class="post-title">
-                    Redis无主模式集群
+                    Linux的磁盘管理体系
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-前面的文章我们讲了Redis的主从复制模式，它是来解决单点故障问题，从节点是主节点的备份，只读。这样一来就难解决容量问题，从AKF的原则讲，我们可以从y轴、Z轴来考虑搭建不同的集群来解决这个问题。接下来我们仔细的探讨下这个问题。
+                    　前言磁盘相关的知识是Linux系统中的重头戏，需要了解的点比较多。但现在随着云计算的兴起，在很多企业中很少碰到物理服务器了也就不会接触到屋里磁盘。所以更多的是停留在使用的层面。下面我们就系统的回顾一下linux的磁盘知识。
+磁盘管理基础磁盘分类与接口磁盘分类:
 
-功能划分在AKF Y轴方向，我们可以从业务的角度出发，用户功能一个redis实例，订单功能一个redis实例,在业务端进行实例的区分。
+机械硬盘HDD
+固态硬盘SSD
 
-数据分区不同的功能......
+磁盘接口分类:
+
+
+
+
+类型
+磁盘类型
+适应场景
+
+
+
+
+sata
+机械、固态
+家用更多
+
+
+......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-22
+                    2022-12-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1186,33 +1248,23 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
 
         <div class="post-preview">
 
-            <a href="/2022/09/21/微服务-2022-09-21-rabbitMq-实现定时任务/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-sed、awk的混合使用/">
                 <h2 class="post-title">
-                    rabbitMq 实现定时任务
+                    sed、awk的混合使用
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-利用RabbitMq的死信特点，可以对过期消息进行单独处理，从而实现一个定时处理的任务。
-
-定时任务场景：
-​    比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 
-常用解决方案：  spring的 schedule 定时任务轮询数据库 
-缺点：消耗系统内存、增加了数据库的压力、存在较大的时间误差
-解决：rabbitmq的消息TTL和死信Exchange结合
-Rab......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-21
+                    2022-12-14
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#RabbitMQ" title="RabbitMQ">RabbitMQ</a>
                     
                 </div>
             
@@ -1226,30 +1278,23 @@ Rab......
 
         <div class="post-preview">
 
-            <a href="/2022/09/21/Redis-2022-09-21-Redission-信号量/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux中的正则表达式/">
                 <h2 class="post-title">
-                    Redission 信号量
+                    Linux中的正则表达式
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-信号量大家应该够不陌生，比如操作系统中的pv信号量，依据功能还可以分成同步信号量、互斥信号量。由于redis是单进程，天生具有锁的这个特性，而redisson更是对redis做了一层包装，使得api接口更适用。今天我们就看一下redisson基于redis做的信号量。
-
-Redisson信号量​    Redisson的分布式信号量（Semaphore）Java对象 RSemaphor......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-21
+                    2022-12-14
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
                     
                 </div>
             
@@ -1263,35 +1308,45 @@ Redisson信号量​    Redisson的分布式信号量（Semaphore）Java对象 R
 
         <div class="post-preview">
 
-            <a href="/2022/09/21/Redis-2022-09-21-Redis主从复制集群/">
+            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux的特殊符号总结/">
                 <h2 class="post-title">
-                    Redis主从复制集群
+                    Linux的特殊符号总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-主从复制，主要解决的是单点问题，从节点是主节点的备份，只读不能写，主节点可以读写。实际就是AKF原则中X轴的实现。但主从节点需要数据同步，就牵涉到数据一致性的问题，我们来看一下，集群主从集群需要注意的问题，以及redis是如何做的。
+                    前言linux系统中充满着各种各式的符号，尤其是在书写shell脚本时候，更是明显，今天索性把所有常见的符号进行总结，方便记忆。
+引号
 
-数据一致性问题既然有从节点需要同步主节点数据，就涉及到一致性问题。
 
-强一致性（线性一致性）：即复制是同步的
-弱一致性：即复制是异步的
 
-强一致性所谓强......
+符号
+含义
+
+
+
+
+反引号:`` 或 $()
+优先执行,先执行里面的命令. 一般创建/打包的时候给文件名加上个日期.
+
+
+单引号: ‘’
+所见即所得,单引号里面的内容会原封不动的输出.
+
+
+双引号: “”
+与单引号类似,但是对引号的里面特殊符号会进行解......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-21
+                    2022-12-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1305,33 +1360,45 @@ Redisson信号量​    Redisson的分布式信号量（Semaphore）Java对象 R
 
         <div class="post-preview">
 
-            <a href="/2022/09/20/Redis-2022-09-20-集群原理/">
+            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux的12位权限体系/">
                 <h2 class="post-title">
-                    集群原理-AKF原则
+                    Linux的12位权限体系
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-我们在实际的工作中用到的组建通常会以集群的形式出现，目的就是解决单实例无法处理的情况，今天我们从AKF原则入手，总结一下 集群搭建的原理及要解决的问题。
+                    前言​    LINUX权限管理也是linux系统管理中很重要的一部分，通过权限管理最终保障系统网站的安全。接下来我们系统的总结一下linux权限相关的知识点，以及遇到权限问题的排查思路，可以应对工作中常见的权限问题。
+LINUX基础权限rwx权限与用户
 
-AKF原则初识AKFAKF原则是微服务拆分原则四条原则中的第一条，个人认为集群的搭建基本都是围绕AKF展开的。我们先思考单实例遇到的问题
 
-单点故障。一个实例挂掉，服务直接不可用了。
-容量问题。以redis为例，一个实例可能10g的......
+
+权限的字符
+含义与说明
+
+
+
+
+r
+read 读,是否可以读取内容
+
+
+w
+write 写, 是否可以修改内容
+
+
+x
+execut......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-20
+                    2022-12-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1345,25 +1412,44 @@ AKF原则初识AKFAKF原则是微服务拆分原则四条原则中的第一条�
 
         <div class="post-preview">
 
-            <a href="/2022/09/20/jvm-2022-09-20-Jstack-应用/">
+            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux用户管理/">
                 <h2 class="post-title">
-                    Jstack 应用
+                    Linux用户管理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    jstack 参数1234567891011121314151617/opt/java8/bin/jstackUsage:    jstack [-l] &lt;pid&gt;        (to connect to running process) 连接活动线程    jstack -F [-m] [-l] &lt;pid&gt;        (to connect to a hun......
+                    前言​    用户管理体系是linux系统中一样很重要的内容，不同的用户分配不同等级的权限可以保障系统的安全，问题发生以后也方便追溯问题的原因。接下来总结一下与用户管理相关的一些比较重要的内容。
+用户分类
+
+
+
+用户分类
+含义
+uid
+
+
+
+
+root用户
+最高权限用户。
+0
+
+
+虚拟用户（傀儡用 户）
+这种用户存在是用于让一些服务正常运行。一些服务运行需要指定 的用户。
+uid是1-999......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-20
+                    2022-12-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1377,31 +1463,31 @@ AKF原则初识AKFAKF原则是微服务拆分原则四条原则中的第一条�
 
         <div class="post-preview">
 
-            <a href="/2022/09/20/Redis-2022-09-20-Redis应用-分布式锁实现/">
+            <a href="/2022/10/09/大数据-2022-10-09-hive中四种有效的SQL优化/">
                 <h2 class="post-title">
-                    Redis应用 分布式锁实现
+                    hive中四种有效的SQL优化
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-Redis 除了做缓存、内存数据库之外，由于有线程的特性，经常可以拿来做分布式锁 、信号量等，应用起来也十分方便，我们来看一下一个分布式锁的简单实现。
-
-Redis实现
-用redis实现分布式锁，其实我们要重点考虑3个方面问题：加锁、解锁、锁续期
-
-加锁加锁要考虑的问题是，如果当前线程加锁之后挂掉了，相当于抱锁睡了，所以此时加锁时候 应该设置过期时间，保证能自动解锁。同时要注意应该是一......
+                    数据准备首先虚拟一张表user，字段为：
+（1）user_id（用户的id）；
+（2）age（用户的年龄）；
+（3）sex（用户的性别）；
+（4）order_id（用户的订单编号，一个用户可能有多个订单编号）。
+另设一张表，叫order，里面包含order_id, order_date两个字段。
+multi-table-insert优化union all原SQL（目标是往一个新表user_n......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-20
+                    2022-10-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                      <a href="/tags/#Hive" title="Hive">Hive</a>
                     
                 </div>
             
@@ -1415,27 +1501,40 @@ Redis实现
 
         <div class="post-preview">
 
-            <a href="/2022/09/19/Redis-2022-09-19-Redis-RDB与AOF实现原理/">
+            <a href="/2022/10/09/Flink-2022-10-09-checkpoint的生产配置/">
                 <h2 class="post-title">
-                    Redis RDB实现原理
+                    checkpoint的生产配置
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言
-Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快照文件。但有一个问题，时点的问题，比如redis 8点开始触发异步的持久化，假设需要十分钟的时间，那么这10分钟，主进程如果修改了内存数据，那么子进程进行持久化是写的修改后的数据吗？如果是，那此时持久化的数据就产生了脏数据,出现了数据一致性问题，如果不是，那此时内存数据被修改,又是如何做到呢？
-那么通过回......
+                    Checkpoint相关配置
+
+
+
+配置项
+含义
+
+
+
+
+state.backend
+状态存储后端，可配置值有’jobmanager’, ‘filesystem’, ‘rocksdb’等，在checkpoint数据存储在hdfs上时，配置该值为filesystem
+
+
+state.checkpoints.dir
+checkpoints写出的目录位置，比如：hdfs://ns/flink/fl......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-09-19
+                    2022-10-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1512,6 +1611,8 @@ Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快�
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1569,6 +1670,8 @@ Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快�
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1684,6 +1787,18 @@ Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快�
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1749,23 +1864,23 @@ Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快�
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1780,7 +1895,7 @@ Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1834,6 +1949,10 @@ Redis的rdb 相信接触redis的同学都不陌生，rdb是redis持久化的快�
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

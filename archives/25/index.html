@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,318 +1123,34 @@
 
         <div class="post-preview">
 
-            <a href="/2020/09/01/企业高频算法面试题-2020-09-01-Problem-28-大楼轮廓线问题/">
+            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-56-BST转有序双向列表/">
                 <h2 class="post-title">
-                    Problem 28 大楼轮廓线问题
+                    Problem 56 BST转有序双向列表
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    大楼轮廓线问题​    https://leetcode.com/problems/the-skyline-problem/
-第4节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-09-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/09/01/企业高频算法面试题-2020-09-01-Problem-27-字符串交错组成/">
-                <h2 class="post-title">
-                    Problem 27 字符串交错组成
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    字符串交错组成​    https://leetcode.com/problems/interleaving-string/
+                    题目​    Leetcode原题：
+​    给定一棵搜索二叉树头节点，转化成首尾相接的有序双向链表
+https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
 题目解析
-典型的dp行列模型，定义dp[i][j]表示s1的前i个和s2的前j个字符是否能组成s3的前i+j个字符
+题目不难，就是麻烦点，用树的递归遍历就可以搞定。
 
-代码1234567891011121314151617181920212223242526public static boolean i......
+代码​    略
+...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-09-01
+                    2020-10-22
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/30/企业高频算法面试题-2020-08-30-Problem-26-达标数组问题/">
-                <h2 class="post-title">
-                    Problem 26 达标数组问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    生成长度为size的达标数组，什么叫达标？
-达标：对于任意的 i&lt;k&lt;j，满足 [i] + [j] != [k] * 2
-给定一个正数size，返回长度为size的达标数组
-第4节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-30
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/26/企业高频算法面试题-2020-08-26-Problem-25-分糖果问题/">
-                <h2 class="post-title">
-                    Problem 25 分糖果问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    原问题：https://leetcode.com/problems/candy/
-​    进阶问题：在原问题的基础上，增加一个原则：​        相邻的孩子间如果分数一样，分的糖果数必须一样​    返回至少需要分多少糖
-题目解析
-和原题基本一样通过两次遍历，先满足比左邻居的大，再遍历一次 满足比右边邻居的大。
-
-代码123456789101112131415161718......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-26
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/25/企业高频算法面试题-2020-08-25-Problem-24-不相邻的最大子序列和/">
-                <h2 class="post-title">
-                    Problem 24 不相邻的最大子序列和
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    返回一个数组中，选择的数字不能相邻的情况下，最大子序列累加和
-题目解析
-这种子序列，首选DP，不相邻只是一个限制条件。
-
-代码1234567891011121314public static int getNotNearMaxSub(int[] arr)&#123;        final int N = arr.length;        if(arr == null |......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/22/企业高频算法面试题-2020-08-22-Problem-23-最大子矩阵和/">
-                <h2 class="post-title">
-                    Problem 23 最大子矩阵和
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    返回一个二维数组中，子矩阵最大累加和
-题目解析
-子矩阵的最大累加和，子矩阵是任意的一个。做这种题目就是要想办法从某一个方向入手，能去枚举可能性。子矩阵可以分为以第一行为底的矩阵，第二行为底的子矩阵，第三行为底的子矩阵。同时我们想，在纵方向上进行累加起来，比如第一行和第二行的值累加成一个数组，此时这个数组的最大连续子数组实际就是以第二行为底，高为2的矩阵中，最大的子矩阵。通过枚举......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/22/企业高频算法面试题-2020-08-22-Problem-22-子数组最大累积和/">
-                <h2 class="post-title">
-                    Problem 22 子数组最大累积和
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    返回一个数组中，子数组最大累加和
-题目解析
-这个题目就太常见了。
-
-代码1234567891011public static int max_subarr_sum(int[] arr)&#123;        final int N = arr.length;        int pre = arr[0];        int res = pre;        for ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/19/企业高频算法面试题-2020-08-19-Problem-21-设计查询区间上目标数个数/">
-                <h2 class="post-title">
-                    Problem 21 设计查询区间上目标数个数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目数组为{3, 2, 2, 3, 1}，查询为(0, 3, 2)，意思是在数组里下标0~3这个范围上，有几个2？答案返回2。假设给你一个数组arr，对这个数组的查询非常频繁，都给出来。
-请返回 所有查询的结果
-题目解析
-数据结构的题目 通常都是考察某种思想，而且这种思想 在工作中，碰到的各种组建都会有应用到的地方，是可以落地使用的。
-此题可以用一种反向索引表，也就是key是待查的元素，v是......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/18/企业高频算法面试题-2020-08-18-Problem-20-距离K的树节点/">
-                <h2 class="post-title">
-                    Problem 20 距离K的树节点
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定三个参数：二叉树的头节点head，树上某个节点target，正数K从target开始，可以向上走或者向下走，返回与target的距离是K的所有节点    
-题目解析
-可以往上走，那就是3个方向，找距离为K的，那不就是图的bfs吗。所以说思路要打开。树是不带父亲的路径的，需要自己用有序表存一下。
-
-代码123456789101112131415161718192021222324252......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                       <a href="/tags/#Tree" title="Tree">Tree</a>
                     
@@ -1396,25 +1166,328 @@
 
         <div class="post-preview">
 
-            <a href="/2020/08/14/企业高频算法面试题-2020-08-14-Problem-19-自由之路/">
+            <a href="/2020/10/20/企业高频算法面试题-2020-10-20-Problem-54/">
                 <h2 class="post-title">
-                    Problem 19
+                    Problem 54
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    Leetcode 自由之路
-​    https://leetcode.com/problems/freedom-trail/
+                    题目​    Lintcode原题：
+https://www.lintcode.com/problem/top-k-frequent-words-ii/
+第10节
 题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-08-14
+                    2020-10-20
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/19/企业高频算法面试题-2020-10-19-Problem-53-跳跃游戏/">
+                <h2 class="post-title">
+                    Problem 53 跳跃游戏
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：https://leetcode.com/problems/jump-game-ii/
+补:
+https://leetcode.com/problems/jump-game/
+题目解析
+这两道题目都非常有特点，考察这种先遍历后更新的技巧，两道题目要一块看。
+
+重点理解一下跳跃游戏II的三个变量
+
+Step : 当前走的步数
+cur：当前步数以内能到达的位置
+next......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/17/企业高频算法面试题-2020-10-17-Problem-52-step-sum问题/">
+                <h2 class="post-title">
+                    Problem 52 step sum问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    定义何为step sum？比如680，680 + 68 + 6 = 754，680的step sum叫754给定一个正数num，判断它是不是某个数的step sum
+题目解析
+这个题目考查的二分。拿到题目务必好好观察特点。明显这个数组拆分累加之后是变大的。所以说 给一个数x，它是某个数字的step sum 取值一定在1到x之间。所以可以用二分来枚举。
+
+代码1234567891......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-17
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/14/企业高频算法面试题-2020-10-14-Problem-51-俄罗斯套娃问题/">
+                <h2 class="post-title">
+                    Problem 51 俄罗斯套娃问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    俄罗斯套娃问题
+​    Leetcode 原题：
+​    https://leetcode.com/problems/russian-doll-envelopes/
+题目解析
+经典题目，是LIS问题的应用。有长和高两个维度，我们将信封按照长升序，并且长相等时按照宽降序。这样做的目的就是，当我们把宽单独拿出来，此时的最长递增子序列的长度就是嵌套层次。而如果宽也是升序排序，此时......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/13/企业高频算法面试题-2020-10-13-Problem-50-最长递增子序列/">
+                <h2 class="post-title">
+                    Problem 50 最长递增子序列
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    经典算法之最长递增子序列
+​    Leetcode 原题：
+​    https://leetcode.com/problems/longest-increasing-subsequence
+题目解析
+LIS 经典问题。普通的dp树N^2^的，不容易过，采用end数组的方式实现N*logN的
+End[i]代表所有长度为i +1的递增子序列中的最小结尾。明确end数组含义，开始......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/13/企业高频算法面试题-2020-10-13-Problem-49-移除无效括号/">
+                <h2 class="post-title">
+                    Problem 49 移除无效括号
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode 原题：
+​    https://leetcode.com/problems/remove-invalid-parentheses/
+第9节
+题目解析代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/12/企业高频算法面试题-2020-10-12-Problem-48-点灯问题/">
+                <h2 class="post-title">
+                    Problem 48 点灯问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个数组arr，长度为N，arr中的值不是0就是1。arr[i]表示第i栈灯的状态，0代表灭灯，1代表亮灯每一栈灯都有开关，但是按下i号灯的开关，会同时改变i-1、i、i+1栈灯的状态问题一：如果N栈灯排成一条直线,请问最少按下多少次开关？i为中间位置时，i号灯的开关能影响i-1、i和i+10号灯的开关只能影响0和1位置的灯N-1号灯的开关只能影响N-2和N-1位置的灯
+问题二：如果......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/12/企业高频算法面试题-2020-10-12-Problem-47-蛇前进游戏/">
+                <h2 class="post-title">
+                    Problem 47 蛇前进游戏
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个矩阵matrix，值有正、负、0蛇可以空降到最左列的任何一个位置，初始增长值是0蛇每一步可以选择右上、右、右下三个方向的任何一个前进沿途的数字累加起来，作为增长值；但是蛇一旦增长值为负数，就会死去蛇有一种能力，可以使用一次：把某个格子里的数变成相反数蛇可以走到任何格子的时候停止返回蛇能获得的最大增长值
+第8节
+题目解析
+考察的是递归，无非是增加了一些条件。我们就按照最普......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/10/10/企业高频算法面试题-2020-10-10-Problem-46-寻找word/">
+                <h2 class="post-title">
+                    Problem 46 寻找word
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个char[][] matrix，也就是char类型的二维数组，再给定一个字符串word，可以从任何一个某个位置出发，可以走上下左右，能不能找到word？ char[][] m = {  { ‘a’, ‘b’, ‘z’ },                       { ‘c’, ‘d’, ‘o’ },                       { ‘f’, ‘e’, ‘o’ ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-10-10
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1491,6 +1564,8 @@
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1548,6 +1623,8 @@
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1663,6 +1740,18 @@
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1728,23 +1817,23 @@
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1759,7 +1848,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1813,6 +1902,10 @@
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

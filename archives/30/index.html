@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,28 +1123,29 @@
 
         <div class="post-preview">
 
-            <a href="/2018/10/28/leetcode-leetcodetest-2018-10-28-289-Game-of-Life/">
+            <a href="/2020/07/14/企业高频算法面试题-2020-07-14-Problem-5-释放AOE/">
                 <h2 class="post-title">
-                    289. Game of Life
+                    Problem 5 释放AOE
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/game-of-life/
-题目描述​    According to Wikipedia’s article: “The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathemat......
+                    题目给定两个非负数组x和hp，长度都是N，再给定一个正数range  ,x有序，x[i]表示i号怪兽在x轴上的位置；hp[i]表示i号怪兽的血量  再给定一个正数range，表示如果法师释放技能的范围长度 被打到的每只怪兽损失1点血量。返回要把所有怪兽血量清空，至少需要释放多少次AOE技能？
+题目解析
+首先这个题目注意是双向释放技能，那不管怎么说，也得遍历一头一头的来杀死怪兽，那怎么杀死？要......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-28
+                    2020-07-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Bit Manipulation" title="Bit Manipulation">Bit Manipulation</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
                     
                 </div>
             
@@ -1104,64 +1159,181 @@
 
         <div class="post-preview">
 
-            <a href="/2018/10/28/leetcode-leetcodetest-2018-10-28-287-Find-the-Duplicate-Number/">
+            <a href="/2020/07/13/企业高频算法面试题-2020-07-13-Problem-4-最少交换次数/">
                 <h2 class="post-title">
-                    287. Find the Duplicate Number
+                    Problem 4 最少交换次数
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/find-the-duplicate-number/
-题目描述​    Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
-There is on......
+                    题目​    一个数组中只有两种字符’G’和’B’，可以让所有的G都放在左侧，所有的B都放在右侧 或者可以让所有的G都放在右侧，所有的B都放在左侧但是只能在相邻字符之间进行交换操作，返回至少需要交换几次
+题目解析
+这个题其实很简单，就是怕被说辞给吓住了，G在左侧，因为是最少的交换，所以一定从左侧开始让G移动。这样求的G在左侧的最少移动次数。同理，求的B在左侧的最少移动次数，也就是G在右侧，比......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-28
+                    2020-07-13
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Array" title="Array">Array</a>
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/10/28/leetcode-leetcodetest-2018-10-28-283-Move-Zeroes/">
-                <h2 class="post-title">
-                    283. Move Zeroes
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/move-zeroes/
-题目描述​    Given an integer array nums, move all 0‘s to the end of it while maintaining the relative order of the non-zero elements.
-Note that you ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-10-28
-                </p>
-                <div class="tags">
+                      <a href="/tags/#Greed" title="Greed">Greed</a>
                     
                       <a href="/tags/#Two Pointers" title="Two Pointers">Two Pointers</a>
                     
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/12/企业高频算法面试题-2020-07-12-Problem-3-2的某次幂/">
+                <h2 class="post-title">
+                    Problem 3 2的某次幂
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个非负整数num，如何不用循环语句，返回&gt;=num，并且离num最近的，2的某次方。
+题目解析
+考察位运算，不太好想。比如求00001010，求比它大的2的某次方,应该是0010000,实际上就是00001111加1，也就是说我们把原数最左侧的1的位置，右面全部变成1得到的就是答案。利用位运算，比如00100000,
+
+右移1次与原数或可得00110000
+再右移2......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/08/企业高频算法面试题-2020-07-08-Problem-2-统计文件数量/">
+                <h2 class="post-title">
+                    Problem 2 统计文件数量
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    给定一个文件目录的路径，写一个函数统计这个目录下所有的文件数量并返回，隐藏文件也算，但是文件夹不算。
+题目解析
+题目说的很清楚了，考的就是一个简单的递归，使用一下文件相关的api即可。 
+
+代码12345678910111213141516171819202122232425// 注意这个函数也会统计隐藏文件	public static int getFileNumber(St......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/05/企业高频算法面试题-2020-07-05-Problem-1-绳子压点问题/">
+                <h2 class="post-title">
+                    Problem 1 绳子压点问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个有序数组arr，代表坐落在X轴上的点，给定一个正数K，代表绳子的长度返回绳子最多压中几个点？注意：即使绳子边缘处盖住点也算盖住。
+题目解析
+有一个比较容易想到的思路就是把绳子看成长度固定的滑动窗口就可以了，依次遍历每个点作为绳子左端点的情况下 能压住几个点即可。
+
+代码12345678910111213public static int maxPoint(int[] arr, i......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-412-Fizz-Buzz/">
+                <h2 class="post-title">
+                    412. Fizz Buzz 
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/fizz-buzz/    
+题目描述​    Given an integer n, return a string array answer (1-indexed) where:
+
+answer[i] == &quot;FizzBuzz&quot; if i is divisible by 3 and 5.
+a......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-11-11
+                </p>
+                <div class="tags">
+                    
                       <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
                     
                 </div>
@@ -1176,23 +1348,28 @@ Note that you ......
 
         <div class="post-preview">
 
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-239-Sliding-Window-Maximum/">
+            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-395-Longest-Substring-with-At-Least-K-Repeating-Characters/">
                 <h2 class="post-title">
-                    239. Sliding Window Maximum
+                    395. Longest Substring with At Least K Repeating Characters
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    题目链接​    https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
+题目描述​    Given a string s and an integer k, return the length of the longest substring of s such that ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-27
+                    2018-11-11
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
                     
                 </div>
             
@@ -1206,22 +1383,55 @@ Note that you ......
 
         <div class="post-preview">
 
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-238-Product-of-Array-Except-Self/">
+            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-387-First-Unique-Character-in-a-String/">
                 <h2 class="post-title">
-                    238. Product of Array Except Self
+                    387. First Unique Character in a String
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/product-of-array-except-self/
-题目描述​    Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of ......
+                    题目链接​    https://leetcode.com/problems/first-unique-character-in-a-string/
+题目描述​    Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-27
+                    2018-11-11
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-384-Shuffle-an-Array/">
+                <h2 class="post-title">
+                    384. Shuffle an Array
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/shuffle-an-array/    
+题目描述​    Given an integer array nums, design an algorithm to randomly shuffle the array. All permutations of the array should be equally......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-11-11
                 </p>
                 <div class="tags">
                     
@@ -1241,167 +1451,25 @@ Note that you ......
 
         <div class="post-preview">
 
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-237-Delete-Node-in-a-Linked-List/">
+            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-380-Insert-Delete-GetRandom-O-1/">
                 <h2 class="post-title">
-                    237. Delete Node in a Linked List
+                    380. Insert Delete GetRandom O(1)
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/delete-node-in-a-linked-list/
-题目描述​    Write a function to delete a node in a singly-linked list. You will not be given access to the head of the list, instea......
+                    题目链接​    https://leetcode.com/problems/insert-delete-getrandom-o1/
+题目描述​    Implement the RandomizedSet class:
+
+RandomizedSet() Initializes the RandomizedSet object.
+bool insert(int val) Inserts an......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LinkedList" title="LinkedList">LinkedList</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-236-Lowest-Common-Ancestor-of-a-Binary-Tree/">
-                <h2 class="post-title">
-                    236. Lowest Common Ancestor of a Binary Tree
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
-题目描述​    Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
-According to the ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-10-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Tree" title="Tree">Tree</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-234-Palindrome-Linked-List/">
-                <h2 class="post-title">
-                    234. Palindrome Linked List
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/palindrome-linked-list/
-题目描述​    Given the head of a singly linked list, return true if it is a palindrome.
-Example 1:
-
-12Input: head &#x3D; [1,2,2,1]Output: ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-10-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LinkedList" title="LinkedList">LinkedList</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-279-Perfect-Squares/">
-                <h2 class="post-title">
-                    279. Perfect Squares
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/perfect-squares/
-题目描述​    Given an integer n, return the least number of perfect square numbers that sum to n.
-A perfect square is an integer that is the squa......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-10-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Math" title="Math">Math</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/10/27/leetcode-leetcodetest-2018-10-27-268-Missing-Number/">
-                <h2 class="post-title">
-                    268. Missing Number
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/missing-number/
-题目描述​    Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the a......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-10-27
+                    2018-11-11
                 </p>
                 <div class="tags">
                     
@@ -1482,6 +1550,8 @@ A perfect square is an integer that is the squa......
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1539,6 +1609,8 @@ A perfect square is an integer that is the squa......
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1654,6 +1726,18 @@ A perfect square is an integer that is the squa......
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1719,23 +1803,23 @@ A perfect square is an integer that is the squa......
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1750,7 +1834,7 @@ A perfect square is an integer that is the squa......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1804,6 +1888,10 @@ A perfect square is an integer that is the squa......
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

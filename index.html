@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,29 +1123,29 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/29/数据仓库-2023-01-29-Hudi-增量查询/">
+            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之3PC/">
                 <h2 class="post-title">
-                    Hudi-增量查询
+                    分布式事务解决方案之3PC
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前面的文章中提到过 快照查询，优化查询 其实都是对MOR类型表提的，还有一种增量查询，下面详细介绍一下。
-原理解释这个功能提供给用户“读取任意两个commit之间差分数据”的能力。这个功能也是基于TimeLine 的“多版本数据管理”实现的
-我们还是以之前的例子，假设我们想要读取v1 → v2之间的差分数据
-
-Hudi会计算出v2到v1之间的差异是两个文件：fileId01_002和file......
+                    什么是3PC 3PC，三阶段提交协议，是二阶段提交协议的改进版本，三阶段提交有两个改动点：
+（1）在协调者和参与者中都引入超时机制（2）在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。        所以3PC会分为3个阶段，CanCommit 准备阶段、PreCommit 预提交阶段、DoCommit 提交阶段，处理流程如下：
+3PC阶段详情阶段一......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-29
+                    2023-03-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                      <a href="/tags/#事务" title="事务">事务</a>
                     
                 </div>
             
@@ -1105,38 +1159,29 @@ Hudi会计算出v2到v1之间的差异是两个文件：fileId01_002和file.....
 
         <div class="post-preview">
 
-            <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-事务原理详解/">
+            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之2PC/">
                 <h2 class="post-title">
-                    Hudi-事务原理详解
+                    分布式事务解决方案之2PC
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ​    之前的文章对Hudi的更新操作原理进行了较为详细的讲解，接下来是Hudi的另一大特色-事务功能。
-原理解释Hudi的事务功能被称为Timeline，因为Hudi把所有对一张表的操作都保存在一个时间线对象里面。Hudi官方文档中对于Timeline功能的介绍稍微有点复杂，不是很清晰。其实从用户角度来看的话，Hudi提供的事务相关能力主要是这些：
-
-
-
-
-特性
-功能
-
-
-
-
-原子性
-写......
+                    什么是2PC2PC即两阶段提交协议，是将整个事务流程分为两个阶段，准备阶段（Prepare phase）、提交阶段（commit phase），2是指两个阶段，P是指准备阶段，C是指提交阶段。
+举例：张三和李四好久不见，老友约起聚餐，饭店老板要求先买单，才能出票。这时张三和李四分别抱怨近况不如意，囊中羞涩，都不愿意请客，这时只能AA。
+只有张三和李四都付款，老板才能出票安排就餐。但由于张三和......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-14
+                    2023-03-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                      <a href="/tags/#事务" title="事务">事务</a>
                     
                 </div>
             
@@ -1150,27 +1195,30 @@ Hudi会计算出v2到v1之间的差异是两个文件：fileId01_002和file.....
 
         <div class="post-preview">
 
-            <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-MOR优化原理详解/">
+            <a href="/2023/03/06/大数据-2023-03-06-clickhouse-join分析及优化/">
                 <h2 class="post-title">
-                    Hudi-MOR优化原理详解
+                    clickhouse join分析及优化
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    背景Merge on Read（简称MOR表），是Hudi最初开源时尚处于“实验阶段”的新功能，在开源后的0.3.5版本开始才告完成。现在则是Hudi最常用的表类型。
-Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入性能。
-导致COW表写入慢的原因，是因为COW表每次在写入时，会把新写入的数据和老数据合并以后，再写成新的文件。单单是写入的过程（不包含前......
+                    ClickHouse Joinclickhouse的join 分为单机join和分布式join 
+单机join​    SQL 里面只有本地表的 JOIN，只会在当前节点执行。本地JOIN方式分为Hash JOIN和Merge Join。优先使用 hash join 当内存达到一定阈值后再使用 merge join，优先满足性能要求。
+Hash Join
+右表全部数据加载到内存，再在内存构建......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-14
+                    2023-03-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                    
+                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
                     
                 </div>
             
@@ -1184,25 +1232,28 @@ Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入
 
         <div class="post-preview">
 
-            <a href="/2023/01/13/数据仓库-2023-01-13-Hudi-Upsert操作原理详解/">
+            <a href="/2023/03/06/大数据-2023-03-06-分布式Join原理/">
                 <h2 class="post-title">
-                    Hudi-Upsert操作原理详解
+                    分布式Join原理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    背景​    首先介绍下Hudi的背景，因为背景对理解一个项目很关键。​    Hudi，正式的全称是Hadoop Upsert Delete and Incremental。其实关于这个名字也不用太较真，因为都是后来附会上去的，从源代码里可以看到这个项目最初的名字是hoodie和现在的名字发音相同。但这个名字还是透露了一些信息的，那就是Hudi项目最初的设计目标:在hadoop上实现upd......
+                    前言Join操作可以说是最复杂、代价最大的操作，也是OLAP场景中使用相对较多的操作，尤其是在大数据领域中，Join操作的性能优劣直接会影响到整个查询，接下来我们就高屋建瓴的对整个JOIN操作进行解析，方便大家更深入的理解JOIN原理。
+单机Join算法一般的Join算法：Nested-Loop Join (NL Join)、Block Nested-Loop Join、Sort Merge......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-13
+                    2023-03-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                    
+                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
                     
                 </div>
             
@@ -1216,23 +1267,27 @@ Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Huid-表类型/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/">
                 <h2 class="post-title">
-                    Huid-表类型
+                    (十三)HBASE优化实操
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    HBASE优化实操高可用1在HBase中Hmaster负责监控RegionServer的生命周期，均衡RegionServer的负载，如果Hmaster挂掉了，那么整个HBase集群将陷入不健康的状态，并且此时的工作状态并不会维持太久。所以HBase支持对Hmaster的高可用配置。
+关闭HBase集群1[root@centos1 home]# stop-hbase.sh
+在conf目录下创......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-21
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1246,23 +1301,28 @@ Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Hudi-查询类型/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十二-HBASE企业级调优/">
                 <h2 class="post-title">
-                    Hudi-查询类型
+                    (十二)HBASE企业级调优
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    服务端
+hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10，生产环境建议使用100，也不是越大越好，特别是当请求内容很大的时候，比如scan/put几M的数据，会占用过多的内存，有可能导致频繁的GC，甚至出现内存溢出。
+
+hbase.master.distributed.log.splitting：默认值为true，建议设为false。关闭h......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-21
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1276,23 +1336,26 @@ Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Hudi-核心概念/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十一-HBASE的协处理器/">
                 <h2 class="post-title">
-                    Hudi-核心概念
+                    (十一)HBASE的协处理器
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    简介Hbase作为列族数据库最经常被人诟病的特性包括：无法轻易建立“二级索引”，难以执行求和、计数、排序等操作。
+1比如，在旧版本的(&lt;0.92)Hbase 中，统计数据表的总行数，需要使用 Counter 方法，执行一次 MapReduce Job 才能得到。虽然HBase在数据存储层中集成了MapReduce，能够有效用于数据表的分布式计算。然而在很多情况下，做一些简单的相加或者聚......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-21
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1306,23 +1369,28 @@ Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Huid-数据管理/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十-HBASE的二级索引/">
                 <h2 class="post-title">
-                    Huid-数据管理
+                    (十)HBASE的二级索引
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    说明当涉及到了HBase的多条件组合查询时，要把多条件组合查询的字段都拼接在RowKey中显然不太可能，这个时候，我们可以通过设计HBase的二级索引来解决这个问题.
+设计原理
+二级索引的本质就是建立各列值与行键之间的映射关系
+如图，当要对F:C1这列建立索引时，只需要建立F:C1各列值到其对应行键的映射关系，如C11-&gt;RK1等，这样就完成了对F:C1列值的二级索引的构建，当要查询符......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-21
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1336,33 +1404,26 @@ Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/数据仓库-2023-01-12-Hudi介绍/">
+            <a href="/2023/02/21/Hbase-2023-02-21-九-rowkey设计原则和案例/">
                 <h2 class="post-title">
-                    Hudi介绍
+                    (九)rowkey设计原则和案例
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据湖框架目前市面上流行的三大开源数据湖方案分别为：Delta Lake、Apache Iceberg和Apache Hudi。
-
-Delta Lake：DataBricks公司推出的一种数据湖方案，网址：https://delta.io/ 
-
-
-Apache Iceberg：以类似于SQL的形式高性能的处理大型的开放式表，网址：https://iceberg.apache.org/
-
-
-A......
+                    热点问题当大量客户端的访问定向到群集的一个节点或仅几个节点时，就会发生热点。此访问可能是读取、可能是写入。大量的访问使负责管理该region的单台计算机不堪重负，从而导致性能下降并可能导致region不可用。这也可能对由同一regionserver管理的其他region产生不利影响，因为该主机无法满足请求的负载。设计数据访问模式非常重要，这样才能充分，均匀地利用群集。
+rowkey的重要性H......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1376,26 +1437,40 @@ A......
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/数据仓库-2023-01-12-大数据为什么需要数据湖/">
+            <a href="/2023/02/21/多线程-2023-02-21-线程池使用详解/">
                 <h2 class="post-title">
-                    大数据为什么需要数据湖？
+                    线程池使用详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ​    当前基于Hive的离线数据仓库已经非常成熟，在传统的离线数据仓库中对记录级别的数据进行更新是非常麻烦的，需要对待更新的数据所属的整个分区，甚至是整个表进行全面覆盖才行，由于离线数仓多级逐层加工的架构设计，数据更新时也需要从贴源层开始逐层反应到后续的派生表中去。
-​    随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根......
+                    背景为什么使用线程池问题一：反复创建线程开销大
+问题二：过多的线程会占用太多内存
+解决以上两个问题的思路
+
+用少量的线程——避免内存占用过多
+
+让这部分线程都保持工作，且可以反复执行任务——避免生命周期 的损耗
+
+
+使用线程池的好处
+加快响应速度 
+合理利用CPU和内存 
+统一管理
+
+线程池的使用场景
+服务器接收到大量请求时，使用线程池技术是非常合适的，它可 以大大减少线程的创建和销毁次数，......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
                     
                 </div>
             
@@ -1468,6 +1543,8 @@ A......
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1525,6 +1602,8 @@ A......
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1640,6 +1719,18 @@ A......
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1705,23 +1796,23 @@ A......
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1736,7 +1827,7 @@ A......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1790,6 +1881,10 @@ A......
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>

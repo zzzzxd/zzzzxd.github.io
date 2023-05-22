@@ -1061,6 +1061,60 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1069,27 +1123,28 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
+            <a href="/2023/02/20/源码-jdk-2023-02-20-ThreadLocal-源码解析/">
                 <h2 class="post-title">
-                    数据湖技术的发展
+                    ThreadLocal 源码解析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据湖的定义Wikipedia是这样定义的:
-
-数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
+                    ThreadLocal 提供了一种方式，让在多线程环境下，每个线程都可以拥有自己独特的数据，并 且可以在整个线程执行过程中，从上而下的传递。
+用法演示1234567891011121314151617181920212223242526272829303132public class ThreadLocalTest &#123;    public static ThreadLocal&lt......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1103,28 +1158,36 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
+            <a href="/2023/02/20/源码-jdk-2023-02-20-ThreadPoolExecutor-源码解析/">
                 <h2 class="post-title">
-                    各大公司实时数仓实践
+                    ThreadPoolExecutor 源码解析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    网易实时数仓实践
-​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
+                    整体架构图
+类结构首先我们来看一下 ThreadPoolExecutor 的类结构，如下图：
 
-突然数据量增多，基于......
+接下来我们大概的看下这几个类的大概 含义：
+
+Executor：定义 execute 方法来执行任务，入参是 Runnable，无出参：
+
+
+ExecutorService：Executor 的功能太弱，ExecutorService 丰富了对任务的执行和管理 的功能，主要代码如下：
+123456......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-10
+                    2023-02-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1138,29 +1201,31 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/10/数据仓库-2023-01-10-实时数仓的发展趋势-流批一体/">
+            <a href="/2023/02/20/源码-jdk-2023-02-20-ReentrantLock-源码解析/">
                 <h2 class="post-title">
-                    实时数仓的发展趋势-流批一体
+                    ReentrantLock 源码解析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    实时数仓现状当前基于Hive的离线数据仓库已经非常成熟，随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根据数仓架构演变过程，在Lambda架构中含有离线处理与实时处理两条链路，其架构图如下：
+                    类注释ReentrantLock 中文我们习惯叫做可重入互斥锁，可重入的意思是同一个线程可以对同一个共 享资源重复的加锁或释放锁，互斥就是 AQS 中的排它锁的意思，只允许一个线程获得锁。
+我们来一起来看下类注释上都有哪些重要信息：
 
-​    正是由于两条链路处理数据导致数据不一致等一些列问题所以才有了Kappa架构，Kappa架构如下：
-
-​        Kapp......
+可重入互斥锁，和 synchronized 锁具有同样的功能语义，但更有扩展性；
+构造器接受 fairness 的参数，fairness 是 ture 时，保......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-10
+                    2023-02-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1174,63 +1239,25 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/09/数据仓库-2023-01-09-实时数仓建设思考/">
+            <a href="/2023/02/16/Hbase-2023-02-16-八-布隆过滤器应用/">
                 <h2 class="post-title">
-                    实时数仓建设思考
+                    (八)布隆过滤器应用
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    离线数仓与实时数仓区别
-
-
-
-对比方面
-离线数仓
-实时数仓
-
-
-
-
-架构选择
-传统大数据架构
-Kappa架构
-
-
-建设方法
-传统数仓主题建模理论
-传统数仓主题建模理论
-
-
-准确性
-准确度高
-准确度随着技术发展，准确度高
-
-
-实时性
-T+1
-分钟级别、秒级别
-
-
-稳定性
-稳定性好，方便重算
-对数据敏感稳定性差，需要考虑数据重新计算
-
-
-数据存储
-HDFS/Hive
-Kafka/HBase/Re......
+                    布隆过滤器由来​    Bloom filter 是由 Howard Bloom 在 1970 年提出的二进制向量数据结构，它具有很好的空间和时间效率，被用来检测一个元素是不是集合中的一个成员。如果检测结果为是，该元素不一定在集合中；但如果检测结果为否，该元素一定不在集合中。因此Bloom filter具有100%的召回率。这样每个检测请求返回有“在集合内（可能错误）”和“不在集合内（绝对不......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-09
+                    2023-02-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1244,26 +1271,27 @@ Kafka/HBase/Re......
 
         <div class="post-preview">
 
-            <a href="/2023/01/09/数据仓库-2023-01-09-数据仓库的架构演变/">
+            <a href="/2023/02/16/Hbase-2023-02-16-七-HBASE与其他框架整合/">
                 <h2 class="post-title">
-                    数据仓库的架构演变
+                    (七)HBASE与其他框架整合
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据仓库演变​        20世纪70年代，MIT(麻省理工)的研究员致力于研究一种优化的技术架构，该架构试图将业务处理系统和分析系统分开，即将业务处理和分析处理分为不同层次，针对各自的特点采取不同的架构设计原则，MIT的研究员认为这两种信息处理的方式具有显著差别，以至于必须采取完全不同的架构和设计方法。但受限于当时的信息处理能力，这个研究仅仅停留在理论层面。
-​        1991......
+                    整合的原因12341. HBase的最主要的目的是做数据存储2. Hive的最主要作用是做数据分析3. 整合的目的是为了方便的在项目中存储+分析4. hbase中的表数据在hive中能看到，hive中的表数据在hbase中也能看到
+Hive-To-Hbase1） 首先在hive中创建hbase能看到的表
+12345678910111213create table if not exists ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-09
+                    2023-02-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1277,28 +1305,28 @@ Kafka/HBase/Re......
 
         <div class="post-preview">
 
-            <a href="/2022/12/21/LINUX运维-2022-12-21-CI、CD系列四之质量检测SonarQube/">
+            <a href="/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/">
                 <h2 class="post-title">
-                    CI、CD系列四之质量检测SonarQube
+                    (六)HBASE的工作机制
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言SonarQube是代码质量检测的利器，可以说自动化运维工具必备，下面我们就使用它对开源项目进行检测，观察一下。
-环境准备123[root@linx01 sonarqube-7.7]# pwd/opt/apps/sonarqube-7.7[root@linx01 conf]# vim sonar.properties
+                    寻址机制我们应该知道读写操作都在 RegionServer 上发生，而每个 RegionSever 为一定数量的 Region 服务，那么 Client 要对某一行数据做读写访问时，是如何知道具体要去访问哪个 RegionServer 呢？那就是接下来我们要讨论的问题
+首先，我们要知道hbase:meta表的结构，有助于我们理解寻址过程。
+meta表结构参考
 
-123[sonar@localhost linux-x86-64]$......
+
+新的寻址方式123在0.96......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-21
+                    2023-02-16
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1312,39 +1340,25 @@ Kafka/HBase/Re......
 
         <div class="post-preview">
 
-            <a href="/2022/12/20/LINUX运维-2022-12-20-CI、CD系列三之全流程部署开源项目zrlog/">
+            <a href="/2023/02/16/Hbase-2023-02-16-五-HBASE-API/">
                 <h2 class="post-title">
-                    CI、CD系列三之全流程部署开源项目zrlog
+                    (五)HBASE  API
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述​    我们以java开源项目zrlog为例，进行一次完整的部署，实现一套完整的CICD流程。
-​    整个过程如下：
-
-开发提交代码至gitlab
-
-jenkins拉取获取代码
-
-代码的质量检测;
-
-代码的编译;
-
-发布。
-
-
-环境准备源码准备123[root@localhost code]# git clone https://gitee.com/94fzb/zrlog.git[......
+                    Namespace-DDLhbase的连接服务测试API12345678910111213141516171819public class ConnectionDemo &#123;    public static void main(String[] args) throws IOException &#123;        // 1、获取配置对象        Configurati......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-20
+                    2023-02-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1358,26 +1372,28 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列二之实现CD/">
+            <a href="/2023/02/16/Hbase-2023-02-16-四-HBASE-SHELL/">
                 <h2 class="post-title">
-                    CI、CD系列二之实现CD
+                    (四)HBASE SHELL
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述​    上篇文章我们对CI、CD的概念进行了大致的解释，这次我们就用Jenkins 利用脚本的方式进行自动化部署。在这之前我们再来解释一下。所谓CI就是持续集成，说白了就是你的代码存放在哪，现在企业中gitlab用的较多。我们将一个静态网页项目放在gitlab中。CD就是持续交付，持续部署。这次我们演示持续部署，即如何自动化的将代码从gitlab中拉取然后部署到服务器上。
-环境准备​ ......
+                    提示：可以查看命令组，或者是命令的帮助信息
+123hbase(main):000:0&gt; helphbase(main):000:0&gt; help 'command group'hbase(main):000:0&gt; help 'command'
+Namespace操作1） list_namespace:查询所有命名空间
+1hbase(main):020:0&gt; list_n......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-19
+                    2023-02-16
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1391,25 +1407,27 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列一之实现方式/">
+            <a href="/2023/02/15/Hbase-2023-02-15-三-HBASE的安装/">
                 <h2 class="post-title">
-                    CI、CD系列一之实现方式
+                    (三)HBASE的安装
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    CI、CD概述​    CI、CD是现在互联网公司中很普遍的技术了。它指的是持续集成，持续交付，持续部署。所谓的持续，说白了就是让开发，测试，上线部署整个过程能像流水一样持续的进行下去。假如没有CI、CD ，那项目的开发，开发完成后的测试，那这个过程涉及到的源码就需要我们手动拷贝，等测试完成后，代码上线部署，依然需要我们打包，编译最终传到服务器部署，将是一个完全靠人力的过程，费时费力。而CI......
+                    123456系统版本：centOS7.7HBASE版本：apache-hbase-1.2.1HADOOP版本：apache-hadoop-2.7.6JDK版本：jdk-1.8.0_45单机安装/伪分布式：1台服务器全分布式：3台服务器
+HBASE单机安装环境准备1）解压并更名
+123[root@node01 ~]# tar -zxvf hbase-1.2.1-bin.tar.gz -C /u......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-19
+                    2023-02-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1423,29 +1441,29 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/19/LINUX运维-2022-12-19-TCP连接状态图解/">
+            <a href="/2023/02/15/Hbase-2023-02-15-二-HBASEHBASE体系结构/">
                 <h2 class="post-title">
-                    TCP连接状态图解
+                    (二)HBASEHBASE体系结构
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述​    TCP的连接过程与状态管理只要了解过网络的伙伴应该都听说过，tcp的连接与断开过程主要就是三次握手与四次分手，整个过程可以通过抓包 观察，网上的资料也比较多，今天重点来梳理一下，整个过程中相关的进程状态的变化，主要是方便以后工作中对网络故障的排查。
-连接建立与结束三次握手示例
-用户：向服务器发出建立连接的请求（SYN请求） ，随机序列号seq=100
+                    RDBMS的表模型(扩展)我们先来了解以下传统型数据库的存储结构，也就是表模型（参考下图）：
+12- 关系型数据库采用表格的存储方式，数据按行和列进行存储，读取和查询十分方便。- 关系型数据库存储结构化的数据，存储前必须先定义好表结构，即各个列(字段)。
 
-服务端： 我收到你的请求......
+关系型数据库的特点：
+1234567891011121. 存储结构：以表格的形式存储结构化的数据，需要事先定义好表的结构(字段名称，字段......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-19
+                    2023-02-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1522,6 +1540,8 @@ jenkins拉取获取代码
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
         
             
         
@@ -1579,6 +1599,8 @@ jenkins拉取获取代码
         
             
         
+            
+            <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
@@ -1694,6 +1716,18 @@ jenkins拉取获取代码
             
         
             
+            <a href="/tags/#java" title="java" rel="9">java</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
+            
+        
+            
+        
+            
         
             
         
@@ -1759,23 +1793,23 @@ jenkins拉取获取代码
     <ul>
       
         <li>
-          <a href="/2023/01/29/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-29-Hudi-%E5%A2%9E%E9%87%8F%E6%9F%A5%E8%AF%A2/">Hudi-增量查询</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-%E4%BA%8B%E5%8A%A1%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-事务原理详解</a>
+          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
         </li>
       
         <li>
-          <a href="/2023/01/14/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-14-Hudi-MOR%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-MOR优化原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
         </li>
       
         <li>
-          <a href="/2023/01/13/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93-2023-01-13-Hudi-Upsert%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/">Hudi-Upsert操作原理详解</a>
+          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
         </li>
       
         <li>
-          <a href="/2023/01/12/Huid-%E8%A1%A8%E7%B1%BB%E5%9E%8B/">Huid-表类型</a>
+          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
         </li>
       
     </ul>
@@ -1790,7 +1824,7 @@ jenkins拉取获取代码
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">75</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">29</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1844,6 +1878,10 @@ jenkins拉取获取代码
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#HBase"><li>HBase</li></a>
         
       </ul>
     </div>
