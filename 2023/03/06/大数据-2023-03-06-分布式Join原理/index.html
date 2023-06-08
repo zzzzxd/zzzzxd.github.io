@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          分布式Join原理 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/03/06/大数据-2023-03-06-分布式Join原理/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                            
+                              <a class="tag" href="/tags/#OLAP" title="OLAP">OLAP</a>
+                            
+                        </div>
+                        <h1>分布式Join原理</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-03-06
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.4k</span> and
+                                Reading Time <span class="post-count">9</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Join操作可以说是最复杂、代价最大的操作，也是OLAP场景中使用相对较多的操作，尤其是在大数据领域中，Join操作的性能优劣直接会影响到整个查询，接下来我们就高屋建瓴的对整个JOIN操作进行解析，方便大家更深入的理解JOIN原理。</p>
+<h2 id="单机Join算法"><a href="#单机Join算法" class="headerlink" title="单机Join算法"></a>单机Join算法</h2><p>一般的Join算法：Nested-Loop Join (NL Join)、Block Nested-Loop Join、Sort Merge Join、Hash Join。</p>
+<p>接下来依次进行解析。</p>
+<h3 id="Nested-Loop-Join-NL-Join"><a href="#Nested-Loop-Join-NL-Join" class="headerlink" title="Nested-Loop Join (NL Join)"></a>Nested-Loop Join (NL Join)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Nested-Loop Join</span><br><span class="line">for outer_row in outer_table:</span><br><span class="line">   for inner_row in inner_table:</span><br><span class="line">      if join_condition is True:</span><br><span class="line">         output (outer_row, inner_row)</span><br></pre></td></tr></table></figure>
+<p>可以看出，NL join实际上就是简单的循环 来进行关联，时间复杂度是O(m*n)。假如参与Join的两张表一张量级为1万，一张量级为10w，那么进行比较的次数为1w*10w=10亿次。这在大表场景下几乎不可用，所以这种可以算是join算法发展过程中最原始的算法，实际上很少用到。</p>
+<h3 id="Index-Nested-Loop-Join"><a href="#Index-Nested-Loop-Join" class="headerlink" title="Index Nested-Loop Join"></a>Index Nested-Loop Join</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Index Nested-Loop Join</span><br><span class="line"><span class="keyword">for</span> outer_row in outer_table:</span><br><span class="line">   <span class="keyword">for</span> inner_row in inner_index.lookup(outer_join_key):</span><br><span class="line">      <span class="keyword">if</span> join_condition is True:</span><br><span class="line">         output (outer_row, inner_row)</span><br></pre></td></tr></table></figure>
+<p>假设其中一个表存在索引，那么对外层表进行循环，对内表就可以利用索引进行点查,复杂度瞬间降了下来。</p>
+<h3 id="Block-Nested-Loop-Join"><a href="#Block-Nested-Loop-Join" class="headerlink" title="Block Nested-Loop Join"></a><strong>Block Nested-Loop Join</strong></h3><p>如果没有索引，那就只能对 普通的NL Join 进行优化，主要是两个方面：</p>
+<ol>
+<li>小表驱动大表，即数据量较大的集作为于for循环的内部循环。目的是结合2，减少内表的扫描。</li>
+<li>一次处理一个数据块，而不是一条记录。也就是所谓的Block Nested Loop Join，通过对外表进行分块降低IO次数，提升缓存命中率。</li>
+</ol>
+<p>​    将外层循环的行/结果集存入join buffer, 内层循环的每一行与整个buffer中的记录做比较，从而减少内层循环的次数. 举例来说，外层循环的结果集是100行，使用NLJ 算法需要扫描内部表100次，如果使用BNL算法，先把对Outer Loop表(外部表)每次读取的10行记录放到join buffer,然后在InnerLoop表(内部表)扫瞄一次中直接匹配这10行数据，内存循环就可以一次与这10行进行比较, 这样只需要比较10次，对内部表的扫描减少了9/10。所以BNL算法就能够显著减少内层循环表扫描的次数. 前面描述的query, 如果使用join buffer。其实 这点很容易想到，对磁盘读取，当然是尽可能一次读取较多的内容，减少IO。</p>
+<h3 id="Sort-Merge-Join"><a href="#Sort-Merge-Join" class="headerlink" title="Sort Merge Join"></a><strong>Sort Merge Join</strong></h3><p>对NL join，如果集合中的元素是有序的，比较的次数会大幅度降低，避免很多无意义的比较运算。</p>
+<p>通过将JOIN操作拆分成Sort和Merge两个阶段实现Join操作的加速。对于Sort阶段，是可以提前准备好可以复用的。这样的思想对于MySQL这类关系型数据库是非常友好的，这也能解释阿里巴巴开发手册中要求关联的字段必须建立索引，因为索引保证了数据有序。该算法时间复杂度为排序开销O(m<em>log(m)+n</em>log(n))+合并开销O(m+n)。但是通常由于索引保证了数据有序，索引其时间复杂度为O(m+n)。</p>
+<h3 id="Hash-Join"><a href="#Hash-Join" class="headerlink" title="Hash Join"></a><strong>Hash Join</strong></h3><p>Hash Join在大数据中非常常用的算法，其是思路也很简单，无非是利用hash，选取其中一个表 A对join key做hash，建立hash表，对另一个表进行扫描，扫描时就可以对join key利用hash 直接定位到表A 相应的记录。下面借他人文章举一个例子，文章的引用末尾会给出。</p>
+<p>先来看看这样一条SQL语句：select * from order,item where item.id = order.i_id，很简单一个Join节点，参与join的两张表是item和order，join key分别是item.id以及order.i_id。现在假设这个Join采用的是hash join算法，整个过程会经历三步：</p>
+<ol>
+<li>确定Build Table以及Probe Table：这个概念比较重要，Build Table使用join key构建Hash Table，而Probe Table使用join key进行探测，探测成功就可以join在一起。通常情况下，小表会作为Build Table，大表作为Probe Table。此事例中item为Build Table，order为Probe Table。</li>
+<li>构建Hash Table：依次读取Build Table（item）的数据，对于每一行数据根据join key（item.id）进行hash，hash到对应的Bucket，生成hash table中的一条记录。数据缓存在内存中，如果内存放不下需要dump到外存。</li>
+<li>探测：再依次扫描Probe Table（order）的数据，使用相同的hash函数映射Hash Table中的记录，映射成功之后再检查join条件（item.id = order.i_id），如果匹配成功就可以将两者join在一起。<img src="2.jpg" alt="img"></li>
+</ol>
+<p>基本流程可以参考上图，这里有两个小问题需要关注：</p>
+<ol>
+<li><p>hash join性能如何？</p>
+<p>​    很显然，hash join基本都只扫描两表一次，可以认为o(a+b)，较之最极端的笛卡尔集运算a*b，不知甩了多少条街。</p>
+</li>
+</ol>
+<ol>
+<li><p>为什么Build Table选择小表？</p>
+<p>   道理很简单，因为构建的Hash Table最好能全部加载在内存，效率最高；这也决定了hash join算法只适合至少一个小表的join场景，对于两个大表的join场景并不适用。</p>
+</li>
+</ol>
+<h2 id="分布式Join算法"><a href="#分布式Join算法" class="headerlink" title="分布式Join算法"></a>分布式Join算法</h2><p>所谓的分布式，无非是为了充分利用并行计算的资源，利用的算法还是单机join的算法，所以分布式join算法 无非是 分布方式 + Join 算法 ，根据分布方式有三种：boradcast、shuffle、located ，利用这几种数据分布方式再选择上合适的Join算法，就构成了分布式JOIN，常见的分布式JOIN有如下几种:</p>
+<blockquote>
+<ul>
+<li>A <strong>shuffle join</strong> re-distributes rows from both tables among nodes based on join key values, such that all rows with the same join key value are moved to the same node. Depending on a particular algorithm used to compute joins, a shuffle join can be a shuffle hash join, shuffle sort-merge join, and so forth.</li>
+<li>A <strong>broadcast join</strong> moves data stored in only one table, such that all rows from the smallest table are available on every node. Depending on a particular algorithm used to compute joins, a broadcast join can be a broadcast hash join, broadcast nested-loop join, and so forth.</li>
+<li>A <strong>co-located join</strong> does not need to move data at all because data is already stored such that all rows with the same join key value reside on the same node. Data still needs to be joined using a nested-loop, sort-merge, or hash join algorithm.</li>
+<li>A <strong>pre-computed join</strong> does not need to move data or compute joins locally on each node because data is already stored in a joined form. This type of join skips data movement and join computation and goes directly to merging and returning results.</li>
+</ul>
+</blockquote>
+<p><img src="1.jpg" alt="img" style="zoom:50%;" /></p>
+<h2 id="Spark-Join-算法"><a href="#Spark-Join-算法" class="headerlink" title="Spark Join 算法"></a>Spark Join 算法</h2><pre><code>### broadcast hash join
+</code></pre><p>​    将其中一张小表广播分发到另一张大表所在的分区节点上，分别并发地与其上的分区记录进行hash join。broadcast适用于小表很小，可以直接广播的场景。</p>
+<h4 id="broadcast阶段："><a href="#broadcast阶段：" class="headerlink" title="broadcast阶段："></a><strong>broadcast阶段：</strong></h4><p>​    将小表广播分发到大表所在的所有主机。广播算法可以有很多，最简单的是先发给driver，driver再统一分发给所有executor；要不就是基于BitTorrent的TorrentBroadcast。</p>
+<h4 id="hash-join阶段："><a href="#hash-join阶段：" class="headerlink" title="hash join阶段："></a><strong>hash join阶段：</strong></h4><p>​    在每个executor上执行单机版hash join，小表映射，大表试探。</p>
+<p>​    <img src="3.jpg" alt="2" style="zoom:80%;" /></p>
+<p>SparkSQL规定broadcast hash join执行的基本条件为被广播小表必须小于参数spark.sql.autoBroadcastJoinThreshold，默认为10M</p>
+<h3 id="shuffle-hash-join"><a href="#shuffle-hash-join" class="headerlink" title="shuffle hash join"></a>shuffle hash join</h3><p>​    在大数据条件下如果一张表很小，执行join操作最优的选择无疑是broadcast hash join，效率最高。但是一旦小表数据量增大，广播所需内存、带宽等资源必然就会太大，broadcast hash join就不再是最优方案。此时可以按照join key进行分区，根据key相同必然分区相同的原理，就可以将大表join分而治之，划分为很多小表的join，充分利用集群资源并行化。如下图所示，shuffle hash join也可以分为两步：</p>
+<h4 id="shuffle阶段"><a href="#shuffle阶段" class="headerlink" title="shuffle阶段:"></a>shuffle阶段:</h4><p>​    分别将两个表按照join key进行分区，将相同join key的记录重分布到同一节点，两张表的数据会被重分布到集群中所有节点。这个过程称为shuffle。</p>
+<h4 id="hash-join阶段"><a href="#hash-join阶段" class="headerlink" title="hash join阶段:"></a>hash join阶段:</h4><p><img src="4.jpg" alt="6a53a913-eb7e-4985-9b37-4c990332b5e0"></p>
+<p>看到这里，可以初步总结出来如果两张小表join可以直接使用单机版hash join；如果一张大表join一张极小表，可以选择broadcast hash join算法；而如果是一张大表join一张小表，则可以选择shuffle hash join算法；那如果是两张大表进行join呢</p>
+<h3 id="sort-merge-join"><a href="#sort-merge-join" class="headerlink" title="sort merge join"></a><strong>sort merge join</strong></h3><p>SparkSQL对两张大表join采用了全新的算法－sort-merge join，如下图所示，整个过程分为三个步骤：</p>
+<h4 id="shuffle阶段："><a href="#shuffle阶段：" class="headerlink" title="shuffle阶段："></a><strong>shuffle阶段：</strong></h4><p>​    将两张大表根据join key进行重新分区，两张表数据会分布到整个集群，以便分布式并行处理。</p>
+<h4 id="sort阶段："><a href="#sort阶段：" class="headerlink" title="sort阶段："></a><strong>sort阶段：</strong></h4><p>​    对单个分区节点的两表数据，分别进行排序。</p>
+<h4 id="merge阶段："><a href="#merge阶段：" class="headerlink" title="merge阶段："></a><strong>merge阶段：</strong></h4><p>​    对排好序的两张分区表数据执行join操作。join操作很简单，分别遍历两个有序序列，碰到相同join key就merge输出，否则取更小一边。如下图所示：</p>
+<p>​    <img src="5.jpg" style="zoom:80%;" /></p>
+<p>经过上文的分析，很明显可以得出来这几种Join的代价关系：</p>
+<p>cost(broadcast hash join) &lt; cost(shuffle hash join) &lt; cost(sort merge join)，数据仓库设计时最好避免大表与大表的join查询，SparkSQL也可以根据内存资源、带宽资源适量将参数spark.sql.autoBroadcastJoinThreshold调大，让更多join实际执行为broadcast hash join。</p>
+<blockquote>
+<p>引用：<a href="https://ost.51cto.com/posts/12860" target="_blank" rel="noopener">https://ost.51cto.com/posts/12860</a></p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/03/06/大数据-2023-03-06-clickhouse-join分析及优化/" data-toggle="tooltip" data-placement="top" title="clickhouse join分析及优化">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/" data-toggle="tooltip" data-placement="top" title="(十三)HBASE优化实操">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#单机Join算法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">单机Join算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Nested-Loop-Join-NL-Join"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Nested-Loop Join (NL Join)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Index-Nested-Loop-Join"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Index Nested-Loop Join</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Block-Nested-Loop-Join"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Block Nested-Loop Join</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Sort-Merge-Join"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Sort Merge Join</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Hash-Join"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Hash Join</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#分布式Join算法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">分布式Join算法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Spark-Join-算法"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Spark Join 算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#broadcast阶段："><span class="toc-nav-number">4.0.1.</span> <span class="toc-nav-text">broadcast阶段：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#hash-join阶段："><span class="toc-nav-number">4.0.2.</span> <span class="toc-nav-text">hash join阶段：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#shuffle-hash-join"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">shuffle hash join</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shuffle阶段"><span class="toc-nav-number">4.1.1.</span> <span class="toc-nav-text">shuffle阶段:</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#hash-join阶段"><span class="toc-nav-number">4.1.2.</span> <span class="toc-nav-text">hash join阶段:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#sort-merge-join"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">sort merge join</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shuffle阶段："><span class="toc-nav-number">4.2.1.</span> <span class="toc-nav-text">shuffle阶段：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#sort阶段："><span class="toc-nav-number">4.2.2.</span> <span class="toc-nav-text">sort阶段：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#merge阶段："><span class="toc-nav-number">4.2.3.</span> <span class="toc-nav-text">merge阶段：</span></a></li></ol></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                        
+                          <a class="tag" href="/tags/#OLAP" title="OLAP">OLAP</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

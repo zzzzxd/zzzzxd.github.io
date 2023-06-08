@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          (五)HBASE  API - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/02/16/Hbase-2023-02-16-五-HBASE-API/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Hbase" title="Hbase">Hbase</a>
+                            
+                        </div>
+                        <h1>(五)HBASE  API</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-02-16
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.2k</span> and
+                                Reading Time <span class="post-count">16</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="Namespace-DDL"><a href="#Namespace-DDL" class="headerlink" title="Namespace-DDL"></a>Namespace-DDL</h2><h3 id="hbase的连接服务测试API"><a href="#hbase的连接服务测试API" class="headerlink" title="hbase的连接服务测试API"></a>hbase的连接服务测试API</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 1、获取配置对象</span></span><br><span class="line">        Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">        <span class="comment">// 2、配置zookeeper的参数</span></span><br><span class="line">        conf.set(<span class="string">"hbase.zookeeper.quorum"</span>, <span class="string">"qianfeng01:2181,qianfeng02:2181,qianfeng03:2181"</span>);</span><br><span class="line">        <span class="comment">// 3、获取连接对象</span></span><br><span class="line">        Connection connection = ConnectionFactory.createConnection(conf);</span><br><span class="line">        <span class="comment">// 4、获取一个DDL操作的hbase客户端Admin</span></span><br><span class="line">        Admin admin = connection.getAdmin();</span><br><span class="line">        <span class="comment">//5 、创建一个namespace的描述器</span></span><br><span class="line">        NamespaceDescriptor descriptor = NamespaceDescriptor.create(<span class="string">"ns3"</span>).build();</span><br><span class="line">        <span class="comment">//6. 客户端进行提交创建</span></span><br><span class="line">        admin.createNamespace(descriptor);</span><br><span class="line">        <span class="comment">//7. 关闭操作</span></span><br><span class="line">        connection.close();</span><br><span class="line">        admin.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="HbaseUtil的工具类的封装"><a href="#HbaseUtil的工具类的封装" class="headerlink" title="HbaseUtil的工具类的封装"></a>HbaseUtil的工具类的封装</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HbaseUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Connection conn;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1、获取配置对象</span></span><br><span class="line">            Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">            <span class="comment">// 2、配置zookeeper的参数</span></span><br><span class="line">            conf.set(<span class="string">"hbase.zookeeper.quorum"</span>, <span class="string">"master:2181,slave1:2181,slave2:2181"</span>);</span><br><span class="line">            <span class="comment">// 3、获取连接对象</span></span><br><span class="line">            conn = ConnectionFactory.createConnection(conf);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取DDL操作的客户端Admin */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Admin <span class="title">getAdmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Admin admin = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            admin = conn.getAdmin();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> admin;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 关闭客户端Admin */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeAdmin</span><span class="params">(Admin admin)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (admin != <span class="keyword">null</span>) &#123;</span><br><span class="line">                admin.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编写好Junit执行代码模板"><a href="#编写好Junit执行代码模板" class="headerlink" title="编写好Junit执行代码模板"></a>编写好Junit执行代码模板</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NamespaceHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Admin admin;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAdmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        admin = HbaseUtil.getAdmin();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HbaseUtil.closeAdmin(admin);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建namespace的API"><a href="#创建namespace的API" class="headerlink" title="创建namespace的API"></a>创建namespace的API</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createNamespace</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//获取namespace描述器对象</span></span><br><span class="line">        NamespaceDescriptor descriptor = NamespaceDescriptor.create(<span class="string">"ns2"</span>).build();</span><br><span class="line">        <span class="comment">//提交到hbase中，进行创建</span></span><br><span class="line">        admin.createNamespace(descriptor);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="列出所有的namespace"><a href="#列出所有的namespace" class="headerlink" title="列出所有的namespace"></a>列出所有的namespace</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listNamespace</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//通过客户端，获取namespace的描述器数组</span></span><br><span class="line">    NamespaceDescriptor[] nss = admin.listNamespaceDescriptors();</span><br><span class="line">    <span class="keyword">for</span> (NamespaceDescriptor descriptor : nss) &#123;</span><br><span class="line">        <span class="comment">//遍历描述器进行打印名称</span></span><br><span class="line">        System.out.println(descriptor.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="列出所有namespace中的表名"><a href="#列出所有namespace中的表名" class="headerlink" title="列出所有namespace中的表名"></a>列出所有namespace中的表名</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listNamespaceTable</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//通过客户端，获取namespace的描述器数组</span></span><br><span class="line">    NamespaceDescriptor[] nss = admin.listNamespaceDescriptors();</span><br><span class="line">    <span class="keyword">for</span> (NamespaceDescriptor descriptor : nss) &#123;</span><br><span class="line">        System.out.println(<span class="string">"-------名称空间："</span> + descriptor.getName() + <span class="string">"-----------"</span>);</span><br><span class="line">        <span class="comment">//通过客户端，并指定namespace，来获取相应表描述器的数组，进行遍历</span></span><br><span class="line">        HTableDescriptor[] tss = admin</span><br><span class="line">            .listTableDescriptorsByNamespace(descriptor.getName());</span><br><span class="line">        <span class="keyword">for</span> (HTableDescriptor t : tss) &#123;</span><br><span class="line">            System.out.println(t.getTableName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">listNamespaceTable1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 通过客户端，获取所有的TableName，进行遍历</span></span><br><span class="line">    TableName[] ts = admin.listTableNames();</span><br><span class="line">    <span class="keyword">for</span> (TableName t : ts) &#123;</span><br><span class="line">        System.out.println(t.getNameAsString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改namespace的属性信息"><a href="#修改namespace的属性信息" class="headerlink" title="修改namespace的属性信息"></a>修改namespace的属性信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">alterNamespace</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//获取指定namespace的描述器</span></span><br><span class="line">    NamespaceDescriptor ns2 = admin.getNamespaceDescriptor(<span class="string">"ns2"</span>);</span><br><span class="line">    <span class="comment">//设置属性</span></span><br><span class="line">    ns2.setConfiguration(<span class="string">"author"</span>, <span class="string">"michael"</span>);</span><br><span class="line">    <span class="comment">//进行提交修改</span></span><br><span class="line">    admin.modifyNamespace(ns2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除namespace"><a href="#删除namespace" class="headerlink" title="删除namespace"></a>删除namespace</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteNamespace</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//删除指定的namespace</span></span><br><span class="line">    admin.deleteNamespace(<span class="string">"ns2"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Table-DDL"><a href="#Table-DDL" class="headerlink" title="Table-DDL"></a>Table-DDL</h2><h3 id="编写Junit执行代码模板"><a href="#编写Junit执行代码模板" class="headerlink" title="编写Junit执行代码模板"></a>编写Junit执行代码模板</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tablehandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Admin admin;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAdmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        admin = HbaseUtil.getAdmin();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HbaseUtil.closeAdmin(admin);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个table"><a href="#创建一个table" class="headerlink" title="创建一个table"></a>创建一个table</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createTable</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//获取TableName对象，指定要创建的表名</span></span><br><span class="line">    TableName tableName = TableName.valueOf(<span class="string">"ns1:students"</span>);</span><br><span class="line">    <span class="comment">//新建一个表描述器</span></span><br><span class="line">    HTableDescriptor descriptor = <span class="keyword">new</span> HTableDescriptor(tableName);</span><br><span class="line">    <span class="comment">//新建一个列族描述器</span></span><br><span class="line">    HColumnDescriptor columnDescriptor = <span class="keyword">new</span> HColumnDescriptor(<span class="string">"f1"</span>);</span><br><span class="line">    <span class="comment">//设置列族的布隆过滤器为列类型</span></span><br><span class="line">    columnDescriptor.setBloomFilterType(BloomType.ROWCOL);</span><br><span class="line">    <span class="comment">//设置列族支持缓存</span></span><br><span class="line">    columnDescriptor.setInMemory(<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">//设置列族内的单元格支持3个版本</span></span><br><span class="line">    columnDescriptor.setVersions(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="comment">//设置列族的单元格过期时间为1天</span></span><br><span class="line">    columnDescriptor.setTimeToLive(<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>);</span><br><span class="line">    <span class="comment">//将列族描述器添加到表描述器中, 可以添加多个列族描述器</span></span><br><span class="line">    descriptor.addFamily(columnDescriptor);</span><br><span class="line">    <span class="comment">//提交到Hbase，进行创建</span></span><br><span class="line">    admin.createTable(descriptor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改table的列族属性信息"><a href="#修改table的列族属性信息" class="headerlink" title="修改table的列族属性信息"></a>修改table的列族属性信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">alterTable2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//指定表名</span></span><br><span class="line">    TableName tableName = TableName.valueOf(<span class="string">"ns1:students"</span>);</span><br><span class="line">    <span class="comment">//获取表描述器</span></span><br><span class="line">    HTableDescriptor tableDescriptor = admin.getTableDescriptor(tableName);</span><br><span class="line">    <span class="comment">//获取指定的列族的描述器</span></span><br><span class="line">    HColumnDescriptor columnDescriptor =tableDescriptor.getFamily(Bytes.toBytes(<span class="string">"f1"</span>));</span><br><span class="line">    <span class="comment">//修改属性</span></span><br><span class="line">    columnDescriptor.setBloomFilterType(BloomType.ROWCOL);</span><br><span class="line">    columnDescriptor.setVersions(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    columnDescriptor.setTimeToLive(<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>); </span><br><span class="line">    <span class="comment">//提交到Hbase</span></span><br><span class="line">    admin.modifyColumn(tableName, columnDescriptor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="向table中添加新的列族"><a href="#向table中添加新的列族" class="headerlink" title="向table中添加新的列族"></a>向table中添加新的列族</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">alterTable2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    TableName tableName = TableName.valueOf(<span class="string">"ns1:students"</span>);</span><br><span class="line">    HColumnDescriptor columnDescriptor = <span class="keyword">new</span> HColumnDescriptor(<span class="string">"f2"</span>);</span><br><span class="line">    columnDescriptor.setBloomFilterType(BloomType.ROWCOL);</span><br><span class="line">    columnDescriptor.setVersions(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    columnDescriptor.setTimeToLive(<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>); <span class="comment">// 秒为单位</span></span><br><span class="line">    admin.addColumn(tableName, columnDescriptor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取table的描述信息"><a href="#获取table的描述信息" class="headerlink" title="获取table的描述信息"></a>获取table的描述信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">describeTable</span><span class="params">()</span> <span class="keyword">throws</span> IOException, Exception </span>&#123;</span><br><span class="line">    TableName tableName = TableName.valueOf(<span class="string">"ns1:students"</span>);</span><br><span class="line">    HTableDescriptor descriptor =admin.getTableDescriptor(tableName);</span><br><span class="line">    HColumnDescriptor[] hcs = descriptor.getColumnFamilies();</span><br><span class="line">    <span class="keyword">for</span>(HColumnDescriptor hc:hcs) &#123;</span><br><span class="line">        System.out.print(<span class="string">"NAME=&gt;"</span>+hc.getNameAsString()+<span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="string">"BLOOMFILTER=&gt;"</span>+hc.getBloomFilterType()+<span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="string">"VERSIONS=&gt;"</span>+hc.getMaxVersions()+<span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="string">"TTL=&gt;"</span>+hc.getTimeToLive()+<span class="string">"\t"</span>);</span><br><span class="line">        System.out.println(<span class="string">"BLOCKSIZE=&gt;"</span>+hc.getBlocksize());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除table"><a href="#删除table" class="headerlink" title="删除table"></a>删除table</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dropTable</span><span class="params">()</span> <span class="keyword">throws</span> TableNotFoundException, IOException </span>&#123;</span><br><span class="line">    TableName tableName = TableName.valueOf(<span class="string">"ns1:students"</span>);</span><br><span class="line">    <span class="keyword">if</span> (admin.tableExists(tableName)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!admin.isTableDisabled(tableName)) &#123;</span><br><span class="line">            admin.disableTable(tableName);</span><br><span class="line">        &#125;</span><br><span class="line">        admin.deleteTable(tableName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Table-CRUD-DML-DQL"><a href="#Table-CRUD-DML-DQL" class="headerlink" title="Table-CRUD(DML+DQL)"></a>Table-CRUD(DML+DQL)</h2><h3 id="修改HbaseUtil工具类型"><a href="#修改HbaseUtil工具类型" class="headerlink" title="修改HbaseUtil工具类型"></a>修改HbaseUtil工具类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HbaseUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Connection conn;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">            conf.set(<span class="string">"hbase.zookeeper.quorum"</span>, <span class="string">"master:2181,slave1:2181,slave2:2181"</span>);</span><br><span class="line">            conn = ConnectionFactory.createConnection(conf);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Admin <span class="title">getAdmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//  略</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeAdmin</span><span class="params">(Admin admin)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//  略</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取Table对象的方法*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Table <span class="title">getTable</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        Table table = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 将表名转成TableName对象</span></span><br><span class="line">            TableName tableName = TableName.valueOf(name);</span><br><span class="line">            <span class="comment">// 通过连接对象，获取Table对象</span></span><br><span class="line">            table = conn.getTable(tableName);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> table;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**  关闭表对象 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeTable</span><span class="params">(Table table)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (table != <span class="keyword">null</span>) &#123;</span><br><span class="line">                table.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编写Junit执行代码模板-1"><a href="#编写Junit执行代码模板-1" class="headerlink" title="编写Junit执行代码模板"></a>编写Junit执行代码模板</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TableCRUDandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Table table;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAdmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        table = HbaseUtil.getTable(<span class="string">"ns1:students"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HbaseUtil.closeTable(table);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="向table中添加数据：put"><a href="#向table中添加数据：put" class="headerlink" title="向table中添加数据：put"></a>向table中添加数据：put</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putData</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//1. 获取Put对象,指定rowkey</span></span><br><span class="line">    Put put = <span class="keyword">new</span> Put(Bytes.toBytes(<span class="string">"rk00001"</span>));</span><br><span class="line">    <span class="comment">//2. 指定列族名，列名，列值</span></span><br><span class="line">    put.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>), Bytes.toBytes(<span class="string">"zhangfei"</span>));</span><br><span class="line">    put.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>), Bytes.toBytes(<span class="string">"15"</span>));</span><br><span class="line">    put.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"gender"</span>), Bytes.toBytes(<span class="string">"m"</span>));</span><br><span class="line">    <span class="comment">//3. 提交</span></span><br><span class="line">    table.put(put);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="批量增加数据："><a href="#批量增加数据：" class="headerlink" title="批量增加数据："></a>批量增加数据：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">putData2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    List&lt;Put&gt; list = <span class="keyword">new</span> ArrayList&lt;Put&gt;();</span><br><span class="line">    </span><br><span class="line">    Put put1 = <span class="keyword">new</span> Put(Bytes.toBytes(<span class="string">"rk00002"</span>));</span><br><span class="line">    put1.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>), Bytes.toBytes(<span class="string">"zhenji"</span>));</span><br><span class="line">    put1.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>), Bytes.toBytes(<span class="string">"23"</span>));</span><br><span class="line">    put1.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"gender"</span>), Bytes.toBytes(<span class="string">"f"</span>));</span><br><span class="line"></span><br><span class="line">    Put put2 = <span class="keyword">new</span> Put(Bytes.toBytes(<span class="string">"rk00003"</span>));</span><br><span class="line">    put2.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>), Bytes.toBytes(<span class="string">"zhaoyun"</span>));</span><br><span class="line">    put2.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>), Bytes.toBytes(<span class="string">"25"</span>));</span><br><span class="line">    put2.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"gender"</span>), Bytes.toBytes(<span class="string">"m"</span>));</span><br><span class="line"></span><br><span class="line">    Put put3 = <span class="keyword">new</span> Put(Bytes.toBytes(<span class="string">"rk00004"</span>));</span><br><span class="line">    put3.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>), Bytes.toBytes(<span class="string">"liubei"</span>));</span><br><span class="line">    put3.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>), Bytes.toBytes(<span class="string">"30"</span>));</span><br><span class="line">    put3.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"gender"</span>), Bytes.toBytes(<span class="string">"m"</span>));</span><br><span class="line"></span><br><span class="line">    list.add(put1);</span><br><span class="line">    list.add(put2);</span><br><span class="line">    list.add(put3);</span><br><span class="line">    table.put(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取指定rowkey的所有列族信息"><a href="#获取指定rowkey的所有列族信息" class="headerlink" title="获取指定rowkey的所有列族信息"></a>获取指定rowkey的所有列族信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getData</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//指定rowkey，获取get对象</span></span><br><span class="line">    Get get = <span class="keyword">new</span> Get(Bytes.toBytes(<span class="string">"rk00001"</span>));</span><br><span class="line">    <span class="comment">//调用get方法，获取结果集</span></span><br><span class="line">    Result result = table.get(get);</span><br><span class="line">    <span class="comment">//获取结果集的扫描器，即迭代器</span></span><br><span class="line">    CellScanner sc = result.cellScanner();</span><br><span class="line">    <span class="keyword">while</span> (sc.advance()) &#123;</span><br><span class="line">        <span class="comment">//取出当前单元格对象</span></span><br><span class="line">        Cell cell = sc.current();</span><br><span class="line">        <span class="comment">//使用克隆的方式，打印出来</span></span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneRow(cell))+<span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneFamily(cell), <span class="string">"utf8"</span>) + <span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneQualifier(cell), <span class="string">"utf8"</span>) + <span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneValue(cell), <span class="string">"utf8"</span>)+ <span class="string">"\t"</span>);</span><br><span class="line">        System.out.println(CellUtil.getCellKeyAsString(cell));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改HbaseUtil工具类：将打印单元格的内容进行封装"><a href="#修改HbaseUtil工具类：将打印单元格的内容进行封装" class="headerlink" title="修改HbaseUtil工具类：将打印单元格的内容进行封装"></a>修改HbaseUtil工具类：将打印单元格的内容进行封装</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResult</span><span class="params">(Result rs)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    CellScanner sc = rs.cellScanner();</span><br><span class="line">    <span class="keyword">while</span> (sc.advance()) &#123;</span><br><span class="line">        Cell cell = sc.current();</span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneRow(cell)) + <span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneFamily(cell), <span class="string">"utf8"</span>) + <span class="string">"\t"</span>);</span><br><span class="line">        System.out.print(<span class="keyword">new</span> String(CellUtil.cloneQualifier(cell), <span class="string">"utf8"</span>) + <span class="string">"\t"</span>);</span><br><span class="line">        System.out.println(<span class="keyword">new</span> String(CellUtil.cloneValue(cell), <span class="string">"utf8"</span>) + <span class="string">"\t"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取多行的所有列族信息"><a href="#获取多行的所有列族信息" class="headerlink" title="获取多行的所有列族信息"></a>获取多行的所有列族信息</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MultigetData</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    List&lt;Get&gt; gets = <span class="keyword">new</span> ArrayList&lt;Get&gt;();</span><br><span class="line">    Get get1 = <span class="keyword">new</span> Get(Bytes.toBytes(<span class="string">"rk00001"</span>));</span><br><span class="line">    Get get2 = <span class="keyword">new</span> Get(Bytes.toBytes(<span class="string">"rk00002"</span>));</span><br><span class="line">    Get get3 = <span class="keyword">new</span> Get(Bytes.toBytes(<span class="string">"rk00003"</span>));</span><br><span class="line">    Get get4 = <span class="keyword">new</span> Get(Bytes.toBytes(<span class="string">"rk00004"</span>));</span><br><span class="line">    gets.add(get1);</span><br><span class="line">    gets.add(get2);</span><br><span class="line">    gets.add(get3);</span><br><span class="line">    gets.add(get4);</span><br><span class="line">    <span class="comment">//获取多行的结果集</span></span><br><span class="line">    Result[] result = table.get(gets);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; result.length; i++) &#123;</span><br><span class="line">        HbaseUtil.printResult(result[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用scan对表进行扫描"><a href="#使用scan对表进行扫描" class="headerlink" title="使用scan对表进行扫描"></a>使用scan对表进行扫描</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">scanData</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//获取Scan对象，指定扫描范围：开始行号和结束行号。小技巧\000</span></span><br><span class="line">    Scan scan = <span class="keyword">new</span> Scan(Bytes.toBytes(<span class="string">"rk00001"</span>), Bytes.toBytes(<span class="string">"rk00003"</span> + <span class="string">"\001"</span>));</span><br><span class="line">    ResultScanner rScanner = table.getScanner(scan);</span><br><span class="line">    Iterator&lt;Result&gt; iterable = rScanner.iterator();</span><br><span class="line">    <span class="keyword">while</span> (iterable.hasNext()) &#123;</span><br><span class="line">        Result result = iterable.next();</span><br><span class="line">        HbaseUtil.printResult(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除指定行"><a href="#删除指定行" class="headerlink" title="删除指定行"></a>删除指定行</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteData</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Delete delete = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk00001"</span>));</span><br><span class="line">    table.delete(delete);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除指定单元格"><a href="#删除指定单元格" class="headerlink" title="删除指定单元格"></a>删除指定单元格</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteDataC</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Delete delete = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk000003"</span>));</span><br><span class="line">    delete.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>));</span><br><span class="line">    table.delete(delete);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-11-批量删除"><a href="#5-3-11-批量删除" class="headerlink" title="5.3.11 批量删除"></a>5.3.11 批量删除</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MultideleteData</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    List&lt;Delete&gt; list = <span class="keyword">new</span> ArrayList&lt;Delete&gt;();</span><br><span class="line">    Delete delete1 = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk00001"</span>));</span><br><span class="line">    Delete delete2 = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk000010"</span>));</span><br><span class="line">    Delete delete3 = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk000011"</span>));</span><br><span class="line">    Delete delete4 = <span class="keyword">new</span> Delete(Bytes.toBytes(<span class="string">"rk000012"</span>));</span><br><span class="line">    list.add(delete1);</span><br><span class="line">    list.add(delete2);</span><br><span class="line">    list.add(delete3);</span><br><span class="line">    list.add(delete4);</span><br><span class="line"></span><br><span class="line">    table.delete(list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="HBASE-过滤器（重要）"><a href="#HBASE-过滤器（重要）" class="headerlink" title="HBASE 过滤器（重要）"></a>HBASE 过滤器（重要）</h2><h3 id="结构过滤器：FilterList"><a href="#结构过滤器：FilterList" class="headerlink" title="结构过滤器：FilterList"></a>结构过滤器：FilterList</h3><p>1) 代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">TestFilter</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 定义一个结构过滤器，指定满足所有条件 MUST_PASS_ALL/ MUST_PASS_ONE</span></span><br><span class="line">    FilterList list = <span class="keyword">new</span> FilterList(FilterList.Operator.MUST_PASS_ALL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用单列过滤器进行设置条件, 比较关系：CompareOp.EQUAL ,CompareOp.GREATER_OR_EQUAL</span></span><br><span class="line">    SingleColumnValueFilter nameFilter = <span class="keyword">new</span> SingleColumnValueFilter(</span><br><span class="line">        Bytes.toBytes(<span class="string">"f1"</span>),</span><br><span class="line">        Bytes.toBytes(<span class="string">"name"</span>),CompareOp.EQUAL,Bytes.toBytes(<span class="string">"zhaoyun"</span>));</span><br><span class="line">    SingleColumnValueFilter ageFilter = <span class="keyword">new</span> SingleColumnValueFilter(</span><br><span class="line">        Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>),CompareOp.EQUAL, Bytes.toBytes(<span class="string">"25"</span>));</span><br><span class="line">    <span class="comment">/* 设置不满组条件的过滤掉，因为：如果某一行中，没有指定的字段，表示满足条件。</span></span><br><span class="line"><span class="comment">    可以设置缺失字段，进行过滤*/</span></span><br><span class="line">    nameFilter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    ageFilter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">// 将单列过滤器添加到结构过滤器上</span></span><br><span class="line">    list.addFilter(nameFilter);</span><br><span class="line">    list.addFilter(ageFilter);</span><br><span class="line">    <span class="comment">// 获取浏览对象，</span></span><br><span class="line">    Scan scan = <span class="keyword">new</span> Scan();</span><br><span class="line">    <span class="comment">// 添加过滤条件</span></span><br><span class="line">    scan.setFilter(list);</span><br><span class="line">    ResultScanner rScanner = table.getScanner(scan);</span><br><span class="line">    Iterator&lt;Result&gt; it = rScanner.iterator();</span><br><span class="line">    <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">        Result result = it.next();</span><br><span class="line">        HbaseUtil.printResult(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2) 说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 遍历到某一行键时，如果包含了两个列，age和name，就会对比值，不满足条件就将其过滤，满足条件就获取。</span><br><span class="line">- 如果包含其中一个列，name或者age，只要其中一个列满足条件就会，就会获取。</span><br><span class="line">- 如果name和age都没有，那么视为该行满足条件</span><br></pre></td></tr></table></figure>
+<p>3) 解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在某个单值过滤器总添加</span><br><span class="line">ageFilter.setFilterIfMissing(true);</span><br><span class="line">nameFilter.setFilterIfMissing(true);</span><br></pre></td></tr></table></figure>
+<h3 id="单列过滤器"><a href="#单列过滤器" class="headerlink" title="单列过滤器"></a>单列过滤器</h3><p>1) 先修改HbaseUtil工具类，将扫描结果集对象的打印行为，封装到HbaseUtil工具类中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printResultScanner</span><span class="params">(ResultScanner rScanner)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Iterator&lt;Result&gt; iterator = rScanner.iterator();</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">        Result rs = iterator.next();</span><br><span class="line">        HbaseUtil.printResult(rs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2) <strong>SingleColumnValueFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSingleColumnValueFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    SingleColumnValueFilter filter = <span class="keyword">new</span> </span><br><span class="line">        SingleColumnValueFilter(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>),</span><br><span class="line">                                CompareFilter.CompareOp.GREATER_OR_EQUAL, </span><br><span class="line">                                Bytes.toBytes(<span class="string">"16"</span>));</span><br><span class="line">    filter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    testScan(filter); <span class="comment">//调用扫描行为</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将扫描行为再次封装。</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">testScan</span><span class="params">(Filter filter)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Scan scan = <span class="keyword">new</span> Scan();</span><br><span class="line">    scan.setFilter(filter);</span><br><span class="line">    ResultScanner rScanner = table.getScanner(scan);</span><br><span class="line">    HbaseUtil.printResultScanner(rScanner);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="列值比较器"><a href="#列值比较器" class="headerlink" title="列值比较器"></a>列值比较器</h3><p>1) <strong>RegexStringComparator</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRegex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//正则表达式比较器</span></span><br><span class="line">    RegexStringComparator comp = <span class="keyword">new</span> RegexStringComparator(<span class="string">"^zhao"</span>);</span><br><span class="line">    SingleColumnValueFilter nameFilter = <span class="keyword">new</span></span><br><span class="line">        SingleColumnValueFilter(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>),</span><br><span class="line">                                CompareFilter.CompareOp.EQUAL, comp);</span><br><span class="line">    nameFilter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    testScan(nameFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2) <strong>SubstringComparator</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSubstringComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//子串比较器， 在构造器里给一个字符串，如果这个字符串是另外一个字符串的子串，就满足条件</span></span><br><span class="line">    SubstringComparator comp = <span class="keyword">new</span> SubstringComparator(<span class="string">"zh"</span>);</span><br><span class="line">    SingleColumnValueFilter nameFilter = <span class="keyword">new</span></span><br><span class="line">        SingleColumnValueFilter(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>),</span><br><span class="line">                                CompareFilter.CompareOp.EQUAL, comp);</span><br><span class="line">    nameFilter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    testScan(nameFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3) <strong>BinaryPrefixComparator</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testBinaryPrefixComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//二进制前缀比较器</span></span><br><span class="line">    BinaryPrefixComparator comp = <span class="keyword">new</span> BinaryPrefixComparator(Bytes.toBytes(<span class="string">"zh"</span>));</span><br><span class="line">    SingleColumnValueFilter nameFilter = <span class="keyword">new</span></span><br><span class="line">        SingleColumnValueFilter(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>),</span><br><span class="line">                                CompareFilter.CompareOp.EQUAL, comp);</span><br><span class="line">    nameFilter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    testScan(nameFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4) <strong>BinaryComparator</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testBinaryComparator</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">//二进制比较器，</span></span><br><span class="line">    BinaryComparator comp = <span class="keyword">new</span> BinaryComparator(Bytes.toBytes(<span class="string">"xiaoniu"</span>));</span><br><span class="line">    <span class="comment">//如果使用二进制比较器，匹配的是字段的整个值的二进制进行比较，不是模糊匹配。是全匹配</span></span><br><span class="line">    SingleColumnValueFilter nameFilter = <span class="keyword">new</span></span><br><span class="line">        SingleColumnValueFilter(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"name"</span>),</span><br><span class="line">                                CompareFilter.CompareOp.EQUAL, comp);</span><br><span class="line">    nameFilter.setFilterIfMissing(<span class="keyword">true</span>);</span><br><span class="line">    testScan(nameFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="KeyValue元数据过滤器"><a href="#KeyValue元数据过滤器" class="headerlink" title="KeyValue元数据过滤器"></a>KeyValue元数据过滤器</h3><p>1) <strong>FamilyFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 列族过滤器，查询指定列族下的所有单元格</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFamily</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//		RegexStringComparator comp = new RegexStringComparator("f1");</span></span><br><span class="line">    <span class="comment">//		SubstringComparator comp = new SubstringComparator("f1");</span></span><br><span class="line">    <span class="comment">//		BinaryPrefixComparator comp = new BinaryPrefixComparator(Bytes.toBytes("f1"));</span></span><br><span class="line">    BinaryComparator comp = <span class="keyword">new</span> BinaryComparator(Bytes.toBytes(<span class="string">"f2"</span>));</span><br><span class="line">    FamilyFilter filter = <span class="keyword">new</span> FamilyFilter(CompareFilter.CompareOp.EQUAL, comp);</span><br><span class="line">    testScan(filter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2)  <strong>QualifierFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * QualifierFilter过滤器是用来查询符合条件的单元格数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQualifierFilter1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    SubstringComparator substringComparator = <span class="keyword">new</span> SubstringComparator(<span class="string">"na"</span>);</span><br><span class="line">    QualifierFilter qualifierFilter = <span class="keyword">new</span> QualifierFilter(</span><br><span class="line">        CompareFilter.CompareOp.EQUAL, substringComparator);</span><br><span class="line">    testScan(qualifierFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3)  <strong>ColumnPrefixFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 列名前缀过滤器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testColumnPrefixFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 创建ColumnPrefixFilter</span></span><br><span class="line">    ColumnPrefixFilter columnPrefixFilter = <span class="keyword">new</span> ColumnPrefixFilter(Bytes.toBytes(<span class="string">"a"</span>));</span><br><span class="line">    <span class="comment">// 2. 打印</span></span><br><span class="line">    testScan(columnPrefixFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4)  <strong>MultipleColumnPrefixFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMultipleColumnPrefixFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 创建ColumnPrefixFilter</span></span><br><span class="line">    <span class="keyword">byte</span>[][] prefixes = <span class="keyword">new</span> <span class="keyword">byte</span>[][] &#123; Bytes.toBytes(<span class="string">"a"</span>), Bytes.toBytes(<span class="string">"n"</span>) &#125;;</span><br><span class="line">    MultipleColumnPrefixFilter multipleColumnPrefixFilter = <span class="keyword">new</span></span><br><span class="line">        MultipleColumnPrefixFilter(prefixes);</span><br><span class="line">    testScan(multipleColumnPrefixFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5)  <strong>ColumnRangeFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查找以"age"到"name"的列的信息</span></span><br><span class="line"><span class="comment">     *  minColumnInclusive:true为包含，false为不包含</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testColumnRangeFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 创建ColumnPrefixFilter</span></span><br><span class="line">    ColumnRangeFilter columnRangeFilter = <span class="keyword">new</span> ColumnRangeFilter(</span><br><span class="line">        Bytes.toBytes(<span class="string">"age"</span>), <span class="keyword">true</span>, Bytes.toBytes(<span class="string">"name"</span>),<span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">// 2. 打印</span></span><br><span class="line">    testScan(columnRangeFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="RowKey过滤器"><a href="#RowKey过滤器" class="headerlink" title="RowKey过滤器"></a>RowKey过滤器</h3><p>1）<strong>RowFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRowFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 创建RowFilter</span></span><br><span class="line">    BinaryComparator binaryComparator = <span class="keyword">new</span> BinaryComparator(Bytes.toBytes(<span class="string">"rk00002"</span>));</span><br><span class="line">    RowFilter rowFilter = <span class="keyword">new</span> RowFilter(CompareFilter.CompareOp.EQUAL, binaryComparator);</span><br><span class="line">    testScan(rowFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Utility过滤器"><a href="#Utility过滤器" class="headerlink" title="Utility过滤器"></a>Utility过滤器</h3><p>1)   <strong>FirstKeyOnlyFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * FirstKeyOnlyFilter</span></span><br><span class="line"><span class="comment">     * 功能：查询行内的所有单元格进行排序的第一个单元格的数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFirstKeyOnlyFilter</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    FirstKeyOnlyFilter firstKeyOnlyFilter = <span class="keyword">new</span> FirstKeyOnlyFilter();</span><br><span class="line">    <span class="comment">// 2. 打印</span></span><br><span class="line">    testScan(firstKeyOnlyFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分页过滤器"><a href="#分页过滤器" class="headerlink" title="分页过滤器"></a>分页过滤器</h3><p>1)  <strong>PageFilter</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 需求：每页显示3条记录</span></span><br><span class="line"><span class="comment">  * 将全部的数据分页显示出来</span></span><br><span class="line"><span class="comment">  * 思路：</span></span><br><span class="line"><span class="comment">  * 1. 第一页：</span></span><br><span class="line"><span class="comment">  * select * from user_info where rowkey &gt; \001 limit 3;</span></span><br><span class="line"><span class="comment">  * 2. 其他页</span></span><br><span class="line"><span class="comment">  * select * from user_info where rowkey &gt; 前一页的maxrowkey limit 3;</span></span><br><span class="line"><span class="comment">  * 3. 循环什么时候结束？</span></span><br><span class="line"><span class="comment">  * while(true) &#123;</span></span><br><span class="line"><span class="comment">  * select * from user_info where rowkey &gt; 前一页的maxrowkey limit 3;</span></span><br><span class="line"><span class="comment">  * print 3行数据</span></span><br><span class="line"><span class="comment">  * 结束条件：count&lt;3</span></span><br><span class="line"><span class="comment">  * &#125;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPageFilter</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    PageFilter filter = <span class="keyword">new</span> PageFilter(<span class="number">3</span>);</span><br><span class="line">    Scan scan = <span class="keyword">new</span> Scan();</span><br><span class="line">    scan.setFilter(filter);</span><br><span class="line">    String maxkey = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//每三页一查询</span></span><br><span class="line">        ResultScanner rScanner = table.getScanner(scan);</span><br><span class="line">        Iterator&lt;Result&gt; iterator = rScanner.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            Result result = iterator.next();</span><br><span class="line">            count++;<span class="comment">//统计打印次数</span></span><br><span class="line">            maxkey = Bytes.toString(result.getRow());</span><br><span class="line">            HbaseUtil.printResult(result);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"------------------------------"</span>);</span><br><span class="line">        <span class="keyword">if</span> (count &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;<span class="comment">//如果不足三页，结束循环</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//为下一页的查询做准备，下一页的开始rowkey要大于当前页的最后一行的rowkey</span></span><br><span class="line">        scan.setStartRow(Bytes.toBytes(maxkey + <span class="string">"\001"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/" data-toggle="tooltip" data-placement="top" title="(六)HBASE的工作机制">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/02/16/Hbase-2023-02-16-四-HBASE-SHELL/" data-toggle="tooltip" data-placement="top" title="(四)HBASE SHELL">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Namespace-DDL"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Namespace-DDL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hbase的连接服务测试API"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">hbase的连接服务测试API</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HbaseUtil的工具类的封装"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">HbaseUtil的工具类的封装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#编写好Junit执行代码模板"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">编写好Junit执行代码模板</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建namespace的API"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">创建namespace的API</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#列出所有的namespace"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">列出所有的namespace</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#列出所有namespace中的表名"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">列出所有namespace中的表名</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改namespace的属性信息"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">修改namespace的属性信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除namespace"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">删除namespace</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Table-DDL"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Table-DDL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#编写Junit执行代码模板"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">编写Junit执行代码模板</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建一个table"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">创建一个table</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改table的列族属性信息"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">修改table的列族属性信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#向table中添加新的列族"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">向table中添加新的列族</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#获取table的描述信息"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">获取table的描述信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除table"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">删除table</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Table-CRUD-DML-DQL"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Table-CRUD(DML+DQL)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改HbaseUtil工具类型"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">修改HbaseUtil工具类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#编写Junit执行代码模板-1"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">编写Junit执行代码模板</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#向table中添加数据：put"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">向table中添加数据：put</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#批量增加数据："><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">批量增加数据：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#获取指定rowkey的所有列族信息"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">获取指定rowkey的所有列族信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改HbaseUtil工具类：将打印单元格的内容进行封装"><span class="toc-nav-number">3.6.</span> <span class="toc-nav-text">修改HbaseUtil工具类：将打印单元格的内容进行封装</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#获取多行的所有列族信息"><span class="toc-nav-number">3.7.</span> <span class="toc-nav-text">获取多行的所有列族信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用scan对表进行扫描"><span class="toc-nav-number">3.8.</span> <span class="toc-nav-text">使用scan对表进行扫描</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除指定行"><span class="toc-nav-number">3.9.</span> <span class="toc-nav-text">删除指定行</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除指定单元格"><span class="toc-nav-number">3.10.</span> <span class="toc-nav-text">删除指定单元格</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-3-11-批量删除"><span class="toc-nav-number">3.11.</span> <span class="toc-nav-text">5.3.11 批量删除</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HBASE-过滤器（重要）"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">HBASE 过滤器（重要）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#结构过滤器：FilterList"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">结构过滤器：FilterList</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#单列过滤器"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">单列过滤器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#列值比较器"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">列值比较器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#KeyValue元数据过滤器"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">KeyValue元数据过滤器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#RowKey过滤器"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">RowKey过滤器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Utility过滤器"><span class="toc-nav-number">4.6.</span> <span class="toc-nav-text">Utility过滤器</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分页过滤器"><span class="toc-nav-number">4.7.</span> <span class="toc-nav-text">分页过滤器</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Hbase" title="Hbase">Hbase</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

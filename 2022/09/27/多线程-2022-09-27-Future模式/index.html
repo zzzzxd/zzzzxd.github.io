@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Future模式 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2022/09/27/多线程-2022-09-27-Future模式/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#多线程" title="多线程">多线程</a>
+                            
+                        </div>
+                        <h1>Future模式</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2022-09-27
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.4k</span> and
+                                Reading Time <span class="post-count">9</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="Future模式"><a href="#Future模式" class="headerlink" title="Future模式"></a>Future模式</h2><p>​    我们了解的Thread 和 runnable，实现多线程的方式是新起线程运行 run 方法，但是 run 方法有个缺陷是没有返回值，并且主线程也并不知道新的线程何时运行完毕。Future 持有要运行的任 务，以及任务的结果。主线程只要声明了 Future 对象，并且启动新的线程运行他。那么随时能通过 Future 对象获 取另外线程运行的结果。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>​    我们通过一个简单例子来介绍一下使用方法 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        FutureTask&lt;String&gt; cookTask = <span class="keyword">new</span> FutureTask&lt;&gt;(<span class="keyword">new</span> Callable&lt;String&gt;() &#123; </span><br><span class="line">        <span class="meta">@Override</span> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000</span>); <span class="keyword">return</span> <span class="string">"5斤的龙虾"</span>;</span><br><span class="line">         &#125;&#125;);</span><br><span class="line"></span><br><span class="line">        Long startTime = System.currentTimeMillis();</span><br><span class="line">        System.out.println(<span class="string">"我点了5斤的龙虾。"</span>); <span class="keyword">new</span> Thread(cookTask).start();</span><br><span class="line">        System.out.println(<span class="string">"我去买牙膏。"</span>); TimeUnit.SECONDS.sleep(<span class="number">2</span>); System.out.println(<span class="string">"我买到牙膏了！"</span>);</span><br><span class="line"></span><br><span class="line">        String lunch = cookTask.get(); </span><br><span class="line">        System.out.println(<span class="string">"我点的"</span>+lunch+<span class="string">"已经OK了！"</span>);</span><br><span class="line">        Long userTime = (System.currentTimeMillis() - startTime)/<span class="number">1000</span>; System.out.println(<span class="string">"我一共用了"</span>+userTime+<span class="string">"秒买午餐并且买牙膏。"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码中先了一个 FutureTask 对象，称之为 cookTask。顾名思义，这个 task 是用来做饭的。可以看到构造方法中 传入 Callable 的实现。实现的 call 方法中模拟做饭用了 3 秒钟。</p>
+<p>主线程运行后，先点了 5 斤的龙虾，然后一个新的线程就开始去执行 cookTask 了。等会儿，到这里你一定会 问，Thread 构造方法需要传入 Runnable 的实现啊？没错，FutureTask 实现了 Runnable 接口。FutureTask 的 run方法实际执行的是 Callable 的 call 方法。那么新的线程 start 后，实际做饭的逻辑会被执行：自线程 sleep3 秒后返 回 “5 斤的龙虾”。</p>
+<p>主线程在启动做饭的自线程后继续向下执行，去买牙膏。这里 sleep 两秒，模拟买牙膏的时间消耗。</p>
+<p>买到牙膏接下来的一行代码 String lobster = cookTask.get (); 重点说一下，此时分两种情况：</p>
+<ol>
+<li>cookTask 运行的线程已经结束了，那么可以直接取到运行的结果赋值给 lunch；</li>
+<li>cookTask 运行的线程还没有执行结束，此时主线程会阻塞，直到能取得运行结果。</li>
+</ol>
+<p>​    cookTask 就是你的购物小票，只要你没弄丢，随时能去取你的午饭。</p>
+<p>​    程序最后计算了整个过程的执行时间。由于采用了多线程并发，所以执行时间应该等于耗时最长的那个任务。这个 例子中做龙虾 3 秒 &gt; 买牙膏 2 秒，所以总共耗时 3 秒，输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">我点了<span class="number">5</span>斤的龙虾 </span><br><span class="line">我去买牙膏 我买到牙膏了！ </span><br><span class="line">我点的<span class="number">5</span>斤的龙虾已经OK了 </span><br><span class="line">我一共用了<span class="number">3</span>秒买午餐并且买牙膏</span><br></pre></td></tr></table></figure>
+<p>加入我调整买牙膏需要 10 秒，那么输出则如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我点了<span class="number">5</span>斤的龙虾 </span><br><span class="line">我去买牙膏 </span><br><span class="line">我买到牙膏了！ </span><br><span class="line">我点的<span class="number">5</span>斤的龙虾已经OK了 </span><br><span class="line">我一共用了<span class="number">10</span>秒买午餐并且买牙膏</span><br></pre></td></tr></table></figure>
+<p>总共耗时 10 秒。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>Future 是一个接口，而 FutrueTask 则是他的实现，我们看一下它们的继承关系：</p>
+<p><img src="1.jpg" alt="WeChatd192175825d8fb235fce099659172545" style="zoom:50%;" /></p>
+<p>FutureTask 不但实现了 Future 而且实现了 Runnable 接口。这也是为什么它能作为参数传入 Thread 构造方法。我们看一下 Future 接口有哪些方法：</p>
+<p><img src="4.jpg" alt="WeChate273a460f8bd667f2a5cf78f52db12c7"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cancel 用于尝试取消任务。</span><br><span class="line">get 用于等待并获取任务执行结果。带时间参数的 get 方法只会等待指定时间长度。</span><br><span class="line">isCancelled 返回任务在完成前是否已经被取消。</span><br><span class="line">isDone 返回任务是否完成。</span><br></pre></td></tr></table></figure>
+<h3 id="FutureTask-构造方法"><a href="#FutureTask-构造方法" class="headerlink" title="FutureTask 构造方法"></a>FutureTask 构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FutureTask</span><span class="params">(Callable&lt;V&gt; callable)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (callable == <span class="keyword">null</span>) </span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(); </span><br><span class="line">    <span class="keyword">this</span>.callable = callable; </span><br><span class="line">    <span class="keyword">this</span>.state = NEW; <span class="comment">// ensure visibility of callable</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要传入 Callable 的实现，Callable 是一个接口，定义了 call 方法，返回 V 类型。</p>
+<p>然后定义了 FutureTask 的状态为 NEW。FutrueTask 定义了如下状态：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NEW = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COMPLETING = <span class="number">1</span>; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NORMAL = <span class="number">2</span>; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EXCEPTIONAL = <span class="number">3</span>; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CANCELLED = <span class="number">4</span>; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INTERRUPTING = <span class="number">5</span>; </span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INTERRUPTED = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<p>通过字面我们很容易理解其含义。</p>
+<h3 id="Run方法"><a href="#Run方法" class="headerlink" title="Run方法"></a>Run方法</h3><p>FutrueTask 实现了 Runnbale 接口，所以 Thread 运行后实际上执行的是 FutrueTask 的 run 方法。我们要想了解 Future 的实现原理，那么就应该从它的 run 方法开始入手。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果此时状态不为NEW 直接结束 </span></span><br><span class="line"><span class="comment">//如果为NEW ，但是CAS操作把本线程写入为runner时，发现runner已经不为null，那么也直接结束</span></span><br><span class="line">    <span class="keyword">if</span> (state != NEW || !UNSAFE.compareAndSwapObject(<span class="keyword">this</span>, runnerOffset, <span class="keyword">null</span>, Thread.currentThread())) </span><br><span class="line">        <span class="keyword">return</span>; </span><br><span class="line">    <span class="keyword">try</span> &#123; </span><br><span class="line">        <span class="comment">//取得Callable对象 </span></span><br><span class="line">        Callable&lt;V&gt; c = callable; </span><br><span class="line">            <span class="keyword">if</span> (c != <span class="keyword">null</span> &amp;&amp; state == NEW) &#123;</span><br><span class="line">             V result; </span><br><span class="line">             <span class="keyword">boolean</span> ran; </span><br><span class="line">             <span class="keyword">try</span> &#123; </span><br><span class="line">             <span class="comment">//运行Callable对象的call方法，并且取得返回值。 </span></span><br><span class="line">             result = c.call(); </span><br><span class="line">             ran = <span class="keyword">true</span>; </span><br><span class="line">             &#125; <span class="keyword">catch</span> (Throwable ex) &#123; </span><br><span class="line">                 result = <span class="keyword">null</span>; </span><br><span class="line">                 ran = <span class="keyword">false</span>; </span><br><span class="line">                 setException(ex); </span><br><span class="line">             &#125; </span><br><span class="line">             <span class="comment">//如果call方法成功执行结束，那么把执行结果设置给成员变量outcome; </span></span><br><span class="line">             <span class="keyword">if</span> (ran) </span><br><span class="line">                set(result);</span><br><span class="line">            &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    <span class="keyword">finally</span> &#123; </span><br><span class="line">        <span class="comment">// runner must be non-null until state is settled to </span></span><br><span class="line">        <span class="comment">// prevent concurrent calls to run() </span></span><br><span class="line">        runner = <span class="keyword">null</span>; </span><br><span class="line">        <span class="comment">// state must be re-read after nulling runner to prevent </span></span><br><span class="line">        <span class="comment">// leaked interrupts </span></span><br><span class="line">        <span class="keyword">int</span> s = state; </span><br><span class="line">        <span class="keyword">if</span> (s &gt;= INTERRUPTING) </span><br><span class="line">        handlePossibleCancellationInterrupt(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">核心逻辑就是执行运行 Call</span><br></pre></td></tr></table></figure>
+<h3 id="Set-方法"><a href="#Set-方法" class="headerlink" title="Set 方法"></a>Set 方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(V v)</span> </span>&#123;</span><br><span class="line"><span class="comment">//状态还是NEW ，保存计算结果给outcome </span></span><br><span class="line"><span class="keyword">if</span> (UNSAFE.compareAndSwapInt(<span class="keyword">this</span>, stateOffset, NEW, COMPLETING)) &#123;</span><br><span class="line">    outcome = v; </span><br><span class="line">    <span class="comment">//更新状态为NORMAL</span></span><br><span class="line">    UNSAFE.putOrderedInt(<span class="keyword">this</span>, stateOffset, NORMAL); </span><br><span class="line">    <span class="comment">// final state </span></span><br><span class="line">    <span class="comment">//唤醒等待的线程</span></span><br><span class="line">    finishCompletion(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果没有被取消则会保存计算结果 v 到 outcome。然后更新最终状态为 NORMAL。最后调用 finishCompletion 方法 唤醒阻塞的线程。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">finishCompletion</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">// assert state &gt; COMPLETING; </span></span><br><span class="line"><span class="comment">//遍历等待线程，结束等待 </span></span><br><span class="line"><span class="keyword">for</span> (WaitNode q; (q = waiters) != <span class="keyword">null</span>;) &#123; </span><br><span class="line">    <span class="keyword">if</span> (UNSAFE.compareAndSwapObject(<span class="keyword">this</span>, waitersOffset, q, <span class="keyword">null</span>)) &#123; </span><br><span class="line">        <span class="keyword">for</span> (;;) &#123; </span><br><span class="line">            <span class="comment">//结束等待线程的挂起 </span></span><br><span class="line">            Thread t = q.thread; </span><br><span class="line">            <span class="keyword">if</span> (t != <span class="keyword">null</span>) &#123;</span><br><span class="line">                q.thread = <span class="keyword">null</span>; </span><br><span class="line">                LockSupport.unpark(t); </span><br><span class="line">             &#125; </span><br><span class="line">             <span class="comment">//如果没有下一个等待线程，那么结束循环 </span></span><br><span class="line">             WaitNode next = q.next; </span><br><span class="line">             <span class="keyword">if</span> (next == <span class="keyword">null</span>) </span><br><span class="line">                <span class="keyword">break</span>; </span><br><span class="line">             q.next = <span class="keyword">null</span>; <span class="comment">// unlink to help gc </span></span><br><span class="line">             q = next;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//全部完成后回调FutrueTask的done方法。done方法为空，可以由子类实现。</span></span><br><span class="line">    done(); </span><br><span class="line"><span class="comment">//清除callable</span></span><br><span class="line"> callable = <span class="keyword">null</span>;</span><br><span class="line"><span class="comment">// to reduce footprint</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><p>get 方法用于获取任务的返回值，如果还没有执行完成，则会阻塞，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, ExecutionException </span>&#123; </span><br><span class="line"><span class="comment">//获取当前Task的状态 </span></span><br><span class="line"><span class="keyword">int</span> s = state; </span><br><span class="line"><span class="comment">//如果还没有完成，则阻塞等待完成 </span></span><br><span class="line"><span class="keyword">if</span> (s &lt;= COMPLETING) </span><br><span class="line">    s = awaitDone(<span class="keyword">false</span>, <span class="number">0L</span>); </span><br><span class="line">    <span class="comment">//获取任务执行的返回结果 </span></span><br><span class="line">    <span class="keyword">return</span> report(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们先来看 awaitDone 的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">awaitDone</span><span class="params">(<span class="keyword">boolean</span> timed, <span class="keyword">long</span> nanos)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"><span class="comment">//计算等待截止时长 </span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">long</span> deadline = timed ? System.nanoTime() + nanos : <span class="number">0L</span>; </span><br><span class="line">WaitNode q = <span class="keyword">null</span>; </span><br><span class="line"><span class="keyword">boolean</span> queued = <span class="keyword">false</span>; </span><br><span class="line"><span class="keyword">for</span> (;;) &#123; </span><br><span class="line">    <span class="comment">//当前线程如果被打断，则不再等待。从等待链表中移除 </span></span><br><span class="line">        <span class="keyword">if</span> (Thread.interrupted()) &#123; </span><br><span class="line">            removeWaiter(q); </span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> InterruptedException(); </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">//取得目前的状态 </span></span><br><span class="line">        <span class="keyword">int</span> s = state; </span><br><span class="line">        <span class="comment">//如果已经执行完成，清空q节点保存的线程 </span></span><br><span class="line">        <span class="keyword">if</span> (s &gt; COMPLETING) &#123; </span><br><span class="line">            <span class="keyword">if</span> (q != <span class="keyword">null</span>) </span><br><span class="line">            q.thread = <span class="keyword">null</span>; </span><br><span class="line">            <span class="keyword">return</span> s; </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">//如果正在执行，让出CPU执行权 </span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (s == COMPLETING) <span class="comment">// cannot time out yet </span></span><br><span class="line">            Thread.yield(); </span><br><span class="line">        <span class="comment">//没有进入以上分支，运行到此分支，这说明此线程确实需要开始等待了， </span></span><br><span class="line">        <span class="comment">//那么如果还未为此线程建立关联的等待节点，则进行创建。 </span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (q == <span class="keyword">null</span>) </span><br><span class="line">            q = <span class="keyword">new</span> WaitNode(); </span><br><span class="line">        <span class="comment">//通过CAS把此线程的等待node加入到连表中。失败的话，下次循环若能运行到此分支，会继续添加。 </span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (!queued) </span><br><span class="line">        queued = UNSAFE.compareAndSwapObject(<span class="keyword">this</span>, waitersOffset, q.next = waiters, q); <span class="comment">//如果设置了超时，检查是否超时。超时的话结束等待。否则挂起超时时长 </span></span><br><span class="line">        <span class="comment">//如果没有设置超时时长，则永久挂起 </span></span><br><span class="line">        <span class="comment">//回到上面的finishCompletion方法，等到task执行完成后会执行LockSupport.unpark(t)，结束阻塞。 </span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (timed) &#123;   </span><br><span class="line">            nanos = deadline - System.nanoTime(); </span><br><span class="line">            <span class="keyword">if</span> (nanos &lt;= <span class="number">0L</span>) &#123;</span><br><span class="line">             removeWaiter(q); </span><br><span class="line">             <span class="keyword">return</span> state; </span><br><span class="line">            &#125; </span><br><span class="line">            LockSupport.parkNanos(<span class="keyword">this</span>, nanos);</span><br><span class="line"></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> LockSupport.park(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们看一下 report 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> V <span class="title">report</span><span class="params">(<span class="keyword">int</span> s)</span> <span class="keyword">throws</span> ExecutionException </span>&#123; </span><br><span class="line">    <span class="comment">//获取执行结果 </span></span><br><span class="line">    Object x = outcome; </span><br><span class="line">    <span class="comment">//NORMAL为正常结束，那么直接把X转型后返回 </span></span><br><span class="line">    <span class="keyword">if</span> (s == NORMAL) </span><br><span class="line">        <span class="keyword">return</span> (V)x; </span><br><span class="line">    <span class="comment">//如果任务被取消了，则抛出异常 </span></span><br><span class="line">    <span class="keyword">if</span> (s &gt;= CANCELLED) </span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CancellationException(); </span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> ExecutionException((Throwable)x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>outcome 保存的就是任务的执行结果。根据此时的状态，选择返回执行结果还是抛出取消的异常。</p>
+<p>最后我们总结下 FutureTask 的代码：</p>
+<ol>
+<li><p>FutureTask 实现 Runnable 和 Future 接口；</p>
+</li>
+<li><p>在线程上运行 FutureTask 后，run 方法被调用，run 方法会调用传入的 Callable 接口的 call 方法；</p>
+</li>
+<li>拿到返回值后，通过 set 方法保存结果到 outcome，并且唤醒所有等待的线程；</li>
+<li>调用 get 方法获取执行结果时，如果没有执行完毕，则进入等待，直到 set 方法调用后被唤醒。</li>
+</ol>
+<p>下图示意了两个线程运行 task 和 get 时的程序逻辑：</p>
+<p><img src="3.jpg" alt="WeChat2d6c1ed19feedb49de736d5f87f888da"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Future 模式在实际开发中有着大量的应用场景。比如说微服务架构中，需要调用不同服务接口获取数据，但是接口 调用间并无依赖关系，那么可以通过 FutureTask 并发调用，然后再执行后续逻辑。如果我们采用串行的方式，则 需要一个接口返回后，再调用下一个接口。FutreTask 需要结合 Callable 接口使用，示例代码中为了让大家显示的 看到 Callable 接口，所以采用匿名对象的方式。实际使用中我们可以使用 lambda 表达式来简化代码，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FutureTask&lt;String&gt; cookTask = <span class="keyword">new</span> FutureTask&lt;&gt;(() -&gt; &#123; Thread.sleep(<span class="number">3000</span>); <span class="keyword">return</span> <span class="string">"5斤的龙虾"</span>; &#125;)</span><br></pre></td></tr></table></figure>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/09/27/多线程-2022-09-27-CompletableFuture详解/" data-toggle="tooltip" data-placement="top" title="CompletableFuture详解">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/09/26/IO-2022-09-26-从Reactor模式到Netty架构演进/" data-toggle="tooltip" data-placement="top" title="从Reactor模式到Netty架构演进">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Future模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Future模式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#使用"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">使用</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#源码"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">源码</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#FutureTask-构造方法"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">FutureTask 构造方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Run方法"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Run方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Set-方法"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Set 方法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#get"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">get</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">总结</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#多线程" title="多线程">多线程</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

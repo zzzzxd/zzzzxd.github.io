@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          (七)HBASE与其他框架整合 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/02/16/Hbase-2023-02-16-七-HBASE与其他框架整合/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Hbase" title="Hbase">Hbase</a>
+                            
+                        </div>
+                        <h1>(七)HBASE与其他框架整合</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-02-16
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3k</span> and
+                                Reading Time <span class="post-count">15</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="整合的原因"><a href="#整合的原因" class="headerlink" title="整合的原因"></a>整合的原因</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. HBase的最主要的目的是做数据存储</span><br><span class="line">2. Hive的最主要作用是做数据分析</span><br><span class="line">3. 整合的目的是为了方便的在项目中存储+分析</span><br><span class="line">4. hbase中的表数据在hive中能看到，hive中的表数据在hbase中也能看到</span><br></pre></td></tr></table></figure>
+<h3 id="Hive-To-Hbase"><a href="#Hive-To-Hbase" class="headerlink" title="Hive-To-Hbase"></a>Hive-To-Hbase</h3><p><strong>1） 首先在hive中创建hbase能看到的表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> hive2hbase (</span><br><span class="line">uid <span class="built_in">int</span>,</span><br><span class="line">uname <span class="keyword">string</span>,</span><br><span class="line">age <span class="built_in">int</span>,</span><br><span class="line">sex <span class="keyword">string</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">stored</span> <span class="keyword">by</span> <span class="string">'org.apache.hadoop.hive.hbase.HBaseStorageHandler'</span></span><br><span class="line"><span class="keyword">with</span> serdeproperties(</span><br><span class="line"><span class="string">"hbase.columns.mapping"</span>=<span class="string">":key,base_info:name,base_info:age,base_info:sex"</span></span><br><span class="line">)</span><br><span class="line">tblproperties(</span><br><span class="line"><span class="string">"hbase.table.name"</span>=<span class="string">"hive2hbase1"</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>2） 如果hive是低版本的，如1.2.1，那么应该报以下错误</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. org.apache.hadoop.hbase.HTableDescriptor.addFamily(Lorg&#x2F;apache&#x2F;hadoop&#x2F;hbase&#x2F;HColumnDescriptor;)V</span><br><span class="line"></span><br><span class="line">原因是：依赖于hive-hbase-handler-1.2.1.jar，而找到的hbase中的版本匹配不一致造成的。</span><br><span class="line"></span><br><span class="line">hive-2.1.1不会出现以上错误</span><br></pre></td></tr></table></figure>
+<p><strong>3） 解决办法</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- 可以使用maven 下载此包</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hive-hbase-handler<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line">- 去本地仓库中找到源码包，解压</span><br><span class="line">- 使用IDE，随便创建一个空项目</span><br><span class="line">- 将源码包copy到src下，因为依赖hive和hbase的jar,因此有红叉</span><br><span class="line">- 将hive和hbase的lib下的所有jar 放入此项目下的lib中 	</span><br><span class="line">- 将源码重写打包生成hive-hbase-handler-1.2.1.jar,覆盖掉hive的lib下原有的jar包</span><br><span class="line">- 然后再重写建表，就好了</span><br></pre></td></tr></table></figure>
+<p><strong>4） 进行测试</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. 在hive中插入一条记录</span><br><span class="line"></span><br><span class="line">   insert into hive2hbase values(1, &#39;michael&#39;, 32, &#39;男&#39;);</span><br><span class="line"></span><br><span class="line">2. 在hbase中插入一条记录</span><br><span class="line"></span><br><span class="line">    put &#39;hive2hbase1&#39;, &#39;2&#39;, &#39;base_info:age&#39;,&#39;33&#39;</span><br><span class="line">put &#39;hive2hbase1&#39;, &#39;2&#39;, &#39;base_info:name&#39;,&#39;rock&#39;</span><br><span class="line">   	put &#39;hive2hbase1&#39;, &#39;2&#39;, &#39;base_info:sex&#39;,&#39;女&#39;</span><br><span class="line"></span><br><span class="line">3. 分别查看查询结果</span><br><span class="line"></span><br><span class="line">4. 导入数据</span><br><span class="line"></span><br><span class="line">   借助中间表向hive2hbase表中导入数据。</span><br></pre></td></tr></table></figure>
+<h3 id="Hbase-To-Hive"><a href="#Hbase-To-Hive" class="headerlink" title="Hbase-To-Hive"></a>Hbase-To-Hive</h3><p><strong>1） 确定hbase中的某一张表的表结构和表数据</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">hbase&gt;</span> <span class="string">create 'ns1:t1','f1'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00001','f1:name','zhaoyun'</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00001','f1:age',23</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00001','f1:gender','m'</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00002','f1:name','zhenji'</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00002','f1:age',24</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00002','f1:gender','f'</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00003','f1:name','貂蝉'</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00003','f1:age',24</span></span><br><span class="line"><span class="attr">put</span> <span class="string">'ns1:t1','rk00003','f1:gender','f'</span></span><br></pre></td></tr></table></figure>
+<p><strong>2） 根据hbase的表结构建立hive表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> hbase2hive;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">external</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> hbase2hive(</span><br><span class="line">uid <span class="keyword">string</span>,</span><br><span class="line">age <span class="built_in">int</span>,</span><br><span class="line"><span class="keyword">name</span> <span class="keyword">string</span>,</span><br><span class="line">sex <span class="keyword">string</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">stored</span> <span class="keyword">by</span> <span class="string">'org.apache.hadoop.hive.hbase.HBaseStorageHandler'</span></span><br><span class="line"><span class="keyword">with</span> serdeproperties(</span><br><span class="line"><span class="string">"hbase.columns.mapping"</span>=<span class="string">"f1:age,f1:name,f1:gender"</span></span><br><span class="line">)</span><br><span class="line">tblproperties(</span><br><span class="line"><span class="string">"hbase.table.name"</span>=<span class="string">"ns1:t1"</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>3） 在hive中查看结果</strong></p>
+<p><strong>4） 注意事项</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 映射hbase的列时，要么就写:key，要么不写，默认使用:key</span><br><span class="line">2. hbase中表存在的时候，在hive中创建表时应该使用external关键字。</span><br><span class="line">3. 如果删除了hbase中对应的表数据，那么hive中就不能查询出来数据。</span><br><span class="line">4. hbase中的列和hive中的列个数和数据类型应该尽量相同，hive表和hbase表的字段不是按照名字匹配，而是按照顺序来匹配的。</span><br><span class="line">5. hive、hbase和mysql等可以使用第三方工具来进行整合。</span><br></pre></td></tr></table></figure>
+<h3 id="hbase与mr整合"><a href="#hbase与mr整合" class="headerlink" title="hbase与mr整合"></a>hbase与mr整合</h3><h4 id="pom-xml依赖"><a href="#pom-xml依赖" class="headerlink" title="pom.xml依赖"></a>pom.xml依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-hdfs<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hbase<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hbase-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hbase<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hbase-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hbase<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hbase-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Hbase-to-mr"><a href="#Hbase-to-mr" class="headerlink" title="Hbase-to-mr"></a>Hbase-to-mr</h3><p><strong>1） Mapper类的定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zxd.hbase.hbase2mr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.Cell;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.CellScanner;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.CellUtil;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Result;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.io.ImmutableBytesWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.mapreduce.TableMapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.NullWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Author</span> dante</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Company</span> dante's blog</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Description</span> </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 需求：使用mr查询hbase的数据    ns1:students</span></span><br><span class="line"><span class="comment"> * 1. 读取每一行</span></span><br><span class="line"><span class="comment"> * rk00002                         column=f1:age, timestamp=1589306416170, value=23</span></span><br><span class="line"><span class="comment"> * rk00002                         column=f1:gender, timestamp=1589306416170, value=f</span></span><br><span class="line"><span class="comment"> * rk00002                         column=f1:name, timestamp=1589306416170, value=zhenji</span></span><br><span class="line"><span class="comment"> * rk00003                         column=f1:age, timestamp=1589306416170, value=25</span></span><br><span class="line"><span class="comment"> * rk00003                         column=f1:gender, timestamp=1589306416170, value=m</span></span><br><span class="line"><span class="comment"> * rk00003                         column=f1:name, timestamp=1589306416170, value=zhaoyun</span></span><br><span class="line"><span class="comment"> * ..........</span></span><br><span class="line"><span class="comment"> * 2. 将hbase中的一行转成以下格式，使用mr输出到hdfs上</span></span><br><span class="line"><span class="comment"> *     age:23   gender:f    name:zhenji</span></span><br><span class="line"><span class="comment"> *     age:25   gender:m    name:zhaoyun</span></span><br><span class="line"><span class="comment"> *  ...............</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  编写模板：</span></span><br><span class="line"><span class="comment"> *      Mapper类型：</span></span><br><span class="line"><span class="comment"> *      Driver类型：</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * org.apahce.hadoop.hbase.mapreduce.TableMapper&lt;KEYOUT，VALUEOUT&gt;</span></span><br><span class="line"><span class="comment"> * 说明：此类型是hbase和mr整合的一个Mapper端的类型，</span></span><br><span class="line"><span class="comment"> * 只有两个泛型需要提供，一个K2,一个V2，不需要提供k1和v1的泛型</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 在Map端的map函数中，我们只需要将hbase中的一行的所有的单元格拼接成想</span></span><br><span class="line"><span class="comment"> * 要的字符串，作为k2, NullWritable作为v2写到hdfs上即可。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hbase2HDFSMapper</span> <span class="keyword">extends</span> <span class="title">TableMapper</span>&lt;<span class="title">Text</span>, <span class="title">NullWritable</span>&gt; </span>&#123;</span><br><span class="line">    Text k2 = <span class="keyword">new</span> Text();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key  是hbase中的一个行标识，就是rowkey</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value value是一行的所有的单元格的一个封装，即Result类型对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(ImmutableBytesWritable key, Result value, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">//定义一个StringBuilder类型，来拼接字符串</span></span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="comment">//遍历value对象里的所有单元格</span></span><br><span class="line">        CellScanner cellScanner = value.cellScanner();</span><br><span class="line">        <span class="keyword">while</span>(cellScanner.advance())&#123;</span><br><span class="line">            Cell cell = cellScanner.current();</span><br><span class="line">            <span class="comment">//获取单元格的key和value</span></span><br><span class="line">            String _key = <span class="keyword">new</span> String(CellUtil.cloneQualifier(cell));</span><br><span class="line">            String _value = <span class="keyword">new</span> String(CellUtil.cloneValue(cell));</span><br><span class="line">            sb.append(_key+<span class="string">":"</span>+_value+<span class="string">"\t"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//循环结束后，age:23   gender:f    name:zhenji 单元格就拼接成功</span></span><br><span class="line">        k2.set(sb.toString());</span><br><span class="line">        context.write(k2,NullWritable.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2） Driver类的定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zxd.hbase.hbase2mr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Scan;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.NullWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.Tool;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.ToolRunner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Author</span> dante</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Company</span> dante's blog</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Description</span></span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * mapreduce程序的驱动类，换一种写法。学习两个新类型</span></span><br><span class="line"><span class="comment"> * Tool接口里 有三个方法：</span></span><br><span class="line"><span class="comment"> *          - int run(String[] args) -----&gt;是一个任务体</span></span><br><span class="line"><span class="comment"> *          - setConf(Configuration conf)----&gt;绑定配置对象</span></span><br><span class="line"><span class="comment"> *          - getConf();    ----&gt;获取配置对象</span></span><br><span class="line"><span class="comment"> * ToolRunner类型 提供一个方法：</span></span><br><span class="line"><span class="comment"> *          -static run(Configuration conf,Tool tool,String[] args)&#123;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *                 tool.run(args)</span></span><br><span class="line"><span class="comment"> *          &#125;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hbase2HdfsDriver</span> <span class="keyword">implements</span> <span class="title">Tool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Configuration conf;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">run</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//编写job对象和绑定各种信息</span></span><br><span class="line"></span><br><span class="line">        Job job = Job.getInstance(conf,<span class="string">"hbase2mr"</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * 调用initTableMapperJob初始化job作业的各种信息</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * 参数table:  指定要查询的hbase的表名</span></span><br><span class="line"><span class="comment">         * 参数scan：  hbase表的扫描器对象</span></span><br><span class="line"><span class="comment">         * 参数mapper: map端的用户自定义类型对象</span></span><br><span class="line"><span class="comment">         * 参数outputKeyClass： k2的类型</span></span><br><span class="line"><span class="comment">         * 参数outputValueClass：v2的类型</span></span><br><span class="line"><span class="comment">         * 参数job: job对象</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        TableMapReduceUtil.initTableMapperJob(<span class="string">"ns1:students"</span>,<span class="keyword">new</span> Scan(),Hbase2HDFSMapper<span class="class">.<span class="keyword">class</span>,</span></span><br><span class="line"><span class="class">                <span class="title">Text</span>.<span class="title">class</span>, <span class="title">NullWritable</span>.<span class="title">class</span>,<span class="title">job</span>)</span>;</span><br><span class="line">        <span class="comment">// 4. 设置输出路径</span></span><br><span class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(<span class="string">"/hbase2mr"</span>));</span><br><span class="line">        <span class="comment">// 5. 提交</span></span><br><span class="line">        <span class="keyword">boolean</span> b = job.waitForCompletion(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> b ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConf</span><span class="params">(Configuration conf)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//配置链接hbase的参数</span></span><br><span class="line">        conf.set(<span class="string">"hbase.zookeeper.quorum"</span>, <span class="string">"qianfeng01:2181,qianfeng02:2181,qianfeng03:2181"</span>);</span><br><span class="line">        <span class="comment">//配置连接hdfs的参数</span></span><br><span class="line">        conf.set(<span class="string">"fs.defaultFS"</span>,<span class="string">"hdfs://qianfeng01:8020"</span>);</span><br><span class="line">        <span class="comment">//设置mr的资源管理器</span></span><br><span class="line">        conf.set(<span class="string">"mapreduce.framework.name"</span>,<span class="string">"local"</span>);</span><br><span class="line">        <span class="keyword">this</span>.conf=conf;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Configuration <span class="title">getConf</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> conf;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//会执行Hbase2HdfsDriver的run方法</span></span><br><span class="line">        ToolRunner.run(HBaseConfiguration.create(),<span class="keyword">new</span> Hbase2HdfsDriver(),args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3）错误说明：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">当在集群上运行jar包程序的时候：</span><br><span class="line"></span><br><span class="line">hadoop jar mytestHbase2Hdfs.jar com.zxd.hbase.TestHbaseMr.Hdfs2Hbase  &#x2F;mytestHbase2Hdfs1&#x2F;</span><br><span class="line"></span><br><span class="line">会出现异常：</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org&#x2F;apache&#x2F;hadoop&#x2F;hbase&#x2F;HBaseConfiguration</span><br><span class="line"></span><br><span class="line">原因:hadoop程序使用的HADOOP_CLASSPATH路径中没有hbase的jar包</span><br></pre></td></tr></table></figure>
+<p><strong>4） 解决办法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 临时设置：</span><br><span class="line">	export HADOOP_CLASSPATH&#x3D;$HADOOP_CLASSPATH:&#x2F;usr&#x2F;local&#x2F;hbase&#x2F;lib&#x2F;*</span><br><span class="line"></span><br><span class="line">2. 配置hadoop-env.sh：永久生效</span><br><span class="line">   export HADOOP_CLASSPATH&#x3D;$HADOOP_CLASSPATH:&#x2F;usr&#x2F;local&#x2F;hbase&#x2F;lib&#x2F;*</span><br><span class="line"></span><br><span class="line">3. 最暴力的方式：把hbase的lib的jar包，拷贝到hadoop的classpath中</span><br></pre></td></tr></table></figure>
+<h3 id="MR-to-Hbase"><a href="#MR-to-Hbase" class="headerlink" title="MR-to-Hbase"></a>MR-to-Hbase</h3><p><strong>1） Mapper的定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zxd.hbase.mr2hbase;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Author</span> dante</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Company</span> dante's blog</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Description</span></span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 需求：统计每个年龄的人数</span></span><br><span class="line"><span class="comment"> * 数据如下：</span></span><br><span class="line"><span class="comment"> * age:15	gender:女	name:貂蝉</span></span><br><span class="line"><span class="comment"> * age:15	gender:女	name:王昭君</span></span><br><span class="line"><span class="comment"> * age:23	gender:f	name:zhenji</span></span><br><span class="line"><span class="comment"> * age:25	gender:m	name:zhaoyun</span></span><br><span class="line"><span class="comment"> * age:30	gender:m	name:liubei</span></span><br><span class="line"><span class="comment"> * age:30	gender:m	name:sunquan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 结果存储在hbase表： userAgeinfo</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *    rowkey</span></span><br><span class="line"><span class="comment"> *    age:15    column=f1:age       value = 15</span></span><br><span class="line"><span class="comment"> *    age:15    column=f1:count     value = 2</span></span><br><span class="line"><span class="comment"> *    age:23    column=f1:age       value = 23</span></span><br><span class="line"><span class="comment"> *    age:23    column=f1:count     value = 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hdfs2HbaseMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">LongWritable</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">LongWritable</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Text k = <span class="keyword">new</span> Text();</span><br><span class="line">    <span class="keyword">private</span> LongWritable v = <span class="keyword">new</span> LongWritable(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(LongWritable key, Text value, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 解析进来的每一行记录</span></span><br><span class="line">        String line = value.toString();</span><br><span class="line">        String[] columns = line.split(<span class="string">"\t"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String column : columns) &#123;</span><br><span class="line">            <span class="comment">//查找有age的键值对</span></span><br><span class="line">            <span class="keyword">if</span> (column.contains(<span class="string">"age"</span>)) &#123;</span><br><span class="line">                <span class="comment">//解析成k2,v2，并写出。</span></span><br><span class="line">                String[] kv = column.split(<span class="string">":"</span>);</span><br><span class="line">                <span class="comment">//使用年龄的具体值充当k2,  那么相同年龄的行记录机会汇聚到一个reduce函数中</span></span><br><span class="line">                k.set(kv[<span class="number">1</span>]);</span><br><span class="line">                context.write(k, v);</span><br><span class="line">                <span class="comment">//打断当前行的循环</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2） Reducer的定义</strong>    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zxd.hbase.mr2hbase;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Put;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.io.ImmutableBytesWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.mapreduce.TableReducer;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.util.Bytes;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> dante</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Company</span> dante's blog</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hdfs2HbaseReducer</span> <span class="keyword">extends</span> <span class="title">TableReducer</span>&lt;<span class="title">Text</span>, <span class="title">LongWritable</span>, <span class="title">ImmutableBytesWritable</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 相同的年龄汇聚到一起，输入到一个reduce函数中。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key   k2</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> values    list&lt;v2&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> context</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(Text key, Iterable&lt;LongWritable&gt; values, Context context)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 计数器</span></span><br><span class="line">        <span class="keyword">long</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 2. 迭代</span></span><br><span class="line">        Iterator&lt;LongWritable&gt; iterator = values.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            LongWritable n = iterator.next();</span><br><span class="line">            count += n.get();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//循环结束后：   15    2    .....</span></span><br><span class="line">        <span class="comment">// 3. 输出一定要是hbase的对象，如put.   指定rowkey   "age:15"</span></span><br><span class="line">        Put put = <span class="keyword">new</span> Put(Bytes.toBytes(<span class="string">"age:"</span>+key.toString()));</span><br><span class="line">        <span class="comment">// 4. 将结果集写入put对象</span></span><br><span class="line">        put.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"age"</span>),</span><br><span class="line">                      Bytes.toBytes(key.toString()));</span><br><span class="line">        put.addColumn(Bytes.toBytes(<span class="string">"f1"</span>), Bytes.toBytes(<span class="string">"count"</span>),</span><br><span class="line">                      Bytes.toBytes(count + <span class="string">""</span>));</span><br><span class="line">        <span class="comment">// 5. 写</span></span><br><span class="line">        context.write(<span class="keyword">new</span> ImmutableBytesWritable(Bytes.toBytes(<span class="string">"age:"</span>+key.toString())), put);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3） Driver的定义</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zxd.hbase.mr2hbase;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.zxd.hbase.util.HbaseUtil;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HBaseConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HColumnDescriptor;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.HTableDescriptor;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.TableName;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.client.Admin;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.hbase.regionserver.BloomType;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.Tool;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.util.ToolRunner;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> dante</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Company</span> dante's blog</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span></span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 从hdfs读取数据 然后写到hbase 统计每个年龄的人数，并将结果存储到hbase中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hdfs2HbaseDriver</span> <span class="keyword">implements</span> <span class="title">Tool</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 创建配置对象</span></span><br><span class="line">    <span class="keyword">private</span> Configuration configuration;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String HBASE_CONNECT_KEY = <span class="string">"hbase.zookeeper.quorum"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String HBASE_CONNECT_VALUE = <span class="string">"qianfeng01:2181,qianfeng02:2181,qianfeng03:2181"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String HDFS_CONNECT_KEY = <span class="string">"fs.defaultFS"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String HDFS_CONNECT_VALUE = <span class="string">"hdfs://qianfeng01:8020"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String MAPREDUCE_CONNECT_KEY = <span class="string">"mapreduce.framework.name"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String MAPREDUCE_CONNECT_VALUE = <span class="string">"local"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">run</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Job job = Job.getInstance(configuration,<span class="string">"hdfs2hbase"</span>);</span><br><span class="line">        job.setJarByClass(Hdfs2HbaseDriver<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        job.setMapperClass(Hdfs2HbaseMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        job.setReducerClass(Hdfs2HbaseReducer<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        job.setMapOutputKeyClass(Text<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        job.setMapOutputValueClass(LongWritable<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="comment">// 1.创建表</span></span><br><span class="line">        String tablename = <span class="string">"userAgeinfo"</span>;</span><br><span class="line">        createTable(tablename);</span><br><span class="line">        <span class="comment">// 2. 设置reduce向hbase输出</span></span><br><span class="line">        TableMapReduceUtil.initTableReducerJob(tablename, Hdfs2HbaseReducer<span class="class">.<span class="keyword">class</span>, <span class="title">job</span>)</span>;</span><br><span class="line">        <span class="comment">// 3. 设置输入路径</span></span><br><span class="line">        FileInputFormat.setInputPaths(job, <span class="keyword">new</span> Path(<span class="string">"/hbase2mr"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> job.waitForCompletion(<span class="keyword">true</span>) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 校验表是否存在，如果不存在就创建，存在就先删除再创建</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">createTable</span><span class="params">(String tablename)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Admin admin = HbaseUtil.getAdmin();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">boolean</span> isExist = admin.tableExists(TableName.valueOf(tablename));</span><br><span class="line">            <span class="keyword">if</span> (isExist) &#123;</span><br><span class="line">                admin.disableTable(TableName.valueOf(tablename));</span><br><span class="line">                admin.deleteTable(TableName.valueOf(tablename));</span><br><span class="line">            &#125;</span><br><span class="line">            HTableDescriptor tableDescriptor = <span class="keyword">new</span> HTableDescriptor(TableName.valueOf(tablename));</span><br><span class="line">            HColumnDescriptor columnDescriptor1 = <span class="keyword">new</span> HColumnDescriptor(<span class="string">"f1"</span>);</span><br><span class="line">            columnDescriptor1.setBloomFilterType(BloomType.ROW);</span><br><span class="line">            columnDescriptor1.setVersions(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">            tableDescriptor.addFamily(columnDescriptor1);</span><br><span class="line">            admin.createTable(tableDescriptor);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            HbaseUtil.closeAdmin(admin);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConf</span><span class="params">(Configuration conf)</span> </span>&#123;</span><br><span class="line">        conf.set(HBASE_CONNECT_KEY, HBASE_CONNECT_VALUE); <span class="comment">// 设置连接的hbase</span></span><br><span class="line">        conf.set(HDFS_CONNECT_KEY, HDFS_CONNECT_VALUE); <span class="comment">// 设置连接的hadoop</span></span><br><span class="line">        conf.set(MAPREDUCE_CONNECT_KEY, MAPREDUCE_CONNECT_VALUE); <span class="comment">// 设置使用的mr运行平台</span></span><br><span class="line">        <span class="keyword">this</span>.configuration = conf;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Configuration <span class="title">getConf</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> configuration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ToolRunner.run(HBaseConfiguration.create(), <span class="keyword">new</span> Hdfs2HbaseDriver(), args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/02/16/Hbase-2023-02-16-八-布隆过滤器应用/" data-toggle="tooltip" data-placement="top" title="(八)布隆过滤器应用">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/" data-toggle="tooltip" data-placement="top" title="(六)HBASE的工作机制">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整合的原因"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">整合的原因</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Hive-To-Hbase"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Hive-To-Hbase</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Hbase-To-Hive"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Hbase-To-Hive</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hbase与mr整合"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">hbase与mr整合</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#pom-xml依赖"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">pom.xml依赖</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Hbase-to-mr"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Hbase-to-mr</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#MR-to-Hbase"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">MR-to-Hbase</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#"><span class="toc-nav-number"></span> <span class="toc-nav-text"> </span></a>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Hbase" title="Hbase">Hbase</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

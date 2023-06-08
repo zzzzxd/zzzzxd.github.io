@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          (三)HBASE的安装 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/02/15/Hbase-2023-02-15-三-HBASE的安装/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Hbase" title="Hbase">Hbase</a>
+                            
+                        </div>
+                        <h1>(三)HBASE的安装</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-02-15
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.5k</span> and
+                                Reading Time <span class="post-count">11</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">系统版本：centOS7.7</span></span><br><span class="line"><span class="attr">HBASE版本：apache-hbase-1.2.1</span></span><br><span class="line"><span class="attr">HADOOP版本：apache-hadoop-2.7.6</span></span><br><span class="line"><span class="attr">JDK版本：jdk-1.8.0_45</span></span><br><span class="line"><span class="attr">单机安装/伪分布式：1台服务器</span></span><br><span class="line"><span class="attr">全分布式：3台服务器</span></span><br></pre></td></tr></table></figure>
+<h2 id="HBASE单机安装"><a href="#HBASE单机安装" class="headerlink" title="HBASE单机安装"></a>HBASE单机安装</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>1）解压并更名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 ~]# tar -zxvf hbase-1.2.1-bin.tar.gz -C /usr/local/</span><br><span class="line">[root@node01 ~]# cd /usr/local/</span><br><span class="line">[root@node01 local]# mv hbase-1.2.1 hbase</span><br></pre></td></tr></table></figure>
+<p>2）配置环境变量并重新引导</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@node01 local]# vi /etc/profile</span><br><span class="line">export HBASE_HOME=/usr/local/hbase</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HBASE_HOME/bin</span><br><span class="line"></span><br><span class="line">[hadoop@node01 local]# source /etc/profile</span><br></pre></td></tr></table></figure>
+<h3 id="修改-hbase-env-sh"><a href="#修改-hbase-env-sh" class="headerlink" title="修改 hbase-env.sh"></a>修改 hbase-env.sh</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@node01 local]$ vi $HBASE_HOME/conf/hbase-env.sh</span><br><span class="line"><span class="meta">#</span><span class="bash">找到下面内容，解开注释，添加具体路径</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The java implementation to use.  Java 1.7+ required.</span></span><br><span class="line">export JAVA_HOME=/usr/local/jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Tell HBase whether it should manage it<span class="string">'s own instance of Zookeeper or not.</span></span></span><br><span class="line">export HBASE_MANAGES_ZK=true	 #hbase内置zookeeper开启</span><br></pre></td></tr></table></figure>
+<h3 id="配置hbase-site-xml"><a href="#配置hbase-site-xml" class="headerlink" title="配置hbase-site.xml"></a>配置hbase-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 属性hbase.rootdir用于指定hbase产生的数据的存储位置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:///usr/local/hbase/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- hbase依赖于zookeeper,需要指定内置zookeeper的数据存储位置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>/usr/local/hbase/zkdata<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动HBase服务"><a href="#启动HBase服务" class="headerlink" title="启动HBase服务"></a>启动HBase服务</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 conf]# start-hbase.sh</span><br><span class="line"></span><br><span class="line">[root@node01 hbase]# jps</span><br><span class="line">4593 HMaster</span><br><span class="line">3272 ResourceManager</span><br><span class="line">4666 Jps</span><br><span class="line">2923 NameNode</span><br><span class="line">3116 SecondaryNameNode</span><br></pre></td></tr></table></figure>
+<h3 id="hbase的客户端连接"><a href="#hbase的客户端连接" class="headerlink" title="hbase的客户端连接"></a>hbase的客户端连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 logs]# hbase shell</span><br><span class="line">hbase(main):001:0&gt; status</span><br><span class="line">1 active master, 0 backup masters, 1 servers, 0 dead, 2.0000 average load</span><br><span class="line">----------------------------------------------------------------------------------------</span><br><span class="line">hbase(main):002:0&gt; version</span><br><span class="line">1.2.1, r8d8a7107dc4ccbf36a92f64675dc60392f85c015, Wed Mar 30 11:19:21 CDT 2016</span><br><span class="line">----------------------------------------------------------------------------------------</span><br><span class="line">hbase(main):003:0&gt; whoami</span><br><span class="line">root (auth:SIMPLE)</span><br><span class="line">    groups: root</span><br><span class="line">---------------------------------------------------------------------------------------- </span><br><span class="line">hbase(main):004:0&gt; help</span><br></pre></td></tr></table></figure>
+<h2 id="伪分布式安装"><a href="#伪分布式安装" class="headerlink" title="伪分布式安装"></a>伪分布式安装</h2><h3 id="情况说明"><a href="#情况说明" class="headerlink" title="情况说明"></a>情况说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- Hbase的伪分布式，指的是Hbase的相关守护进程运行在一台机器上，只不过每一个守护进程都作为独立的进程运行。</span><br><span class="line">- Hbase的伪分布式数据存储可以基于本地文件系统，也可以基于分布式文件系统。</span><br><span class="line">- 基于分布式文件系统时，hbase使用内置的zookeeper或者用户自己搭建的zookeeper.</span><br><span class="line"></span><br><span class="line">下面是使用分布式文件系统和用户自己搭建的zookeeper模式。</span><br></pre></td></tr></table></figure>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p><strong>1）</strong>配置Hbase的环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 ~]$ tar -zxvf hbase-1.2.1-bin.tar.gz -C /url/local/</span><br><span class="line">[root@node01 ~]$ cd /url/local/</span><br><span class="line">[root@node01 local]$ mv hbase-1.2.1 hbase</span><br><span class="line">[root@node01 local]$ vi /etc/profile</span><br><span class="line">.......省略.......</span><br><span class="line"><span class="meta">#</span><span class="bash">hbase environment</span></span><br><span class="line">export HBASE_HOME=/url/local/hbase</span><br><span class="line">export PATH=$HBASE_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line">[root@node01 local]$ source  /etc/profile</span><br><span class="line">[root@node01 local]$ hbase version</span><br></pre></td></tr></table></figure>
+<p><strong>2）</strong>修改hbase-env.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]$ vi $HBASE_HOME/conf/hbase-env.sh</span><br><span class="line">........省略...........</span><br><span class="line"><span class="meta">#</span><span class="bash">找到下面内容，解开注释，添加具体路径</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The java implementation to use.  Java 1.7+ required.</span></span><br><span class="line">export JAVA_HOME=/opt/local/jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Tell HBase whether it should manage it<span class="string">'s own instance of Zookeeper or not.</span></span></span><br><span class="line">export HBASE_MANAGES_ZK=false       #禁止内置zookeeper</span><br></pre></td></tr></table></figure>
+<p><strong>3）</strong>配置hbase-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]$ vi $HBASE_HOME/conf/hbase-site.xml</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 属性hbase.rootdir用于指定hbase产生的数据的存储位置 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://node01:8020/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 指定hbase使用的zookeeper集群 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:2181,node02:2181,node03:2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 开启用hbase集群模式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--将属性hbase.unsafe.stream.capability.enforce 改为true --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.unsafe.stream.capability.enforce<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>4）</strong>启动集群</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">1.</span> <span class="string">注意，如果使用的zookeeper为用户自己安装的，那么需要先启动zookeeper的服务</span></span><br><span class="line"><span class="meta">2.</span> <span class="string">再启动hbase</span></span><br><span class="line"><span class="meta">[root@node01</span> <span class="string">conf]# start-hbase.sh</span></span><br><span class="line"><span class="meta">[root@node01</span> <span class="string">conf]# jps</span></span><br></pre></td></tr></table></figure>
+<p>5）hdfs的目录查看</p>
+<p><img src="006.png" alt=""></p>
+<p><strong>6）</strong>(可选)：开启备份master(backup-master)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]$ local-master-backup.sh start 2 3 5</span><br><span class="line"></span><br><span class="line">说明：2，3，5是端口号16010和16000的端口偏移量，生成的端口号就是：16012/16002  16013/16003  16015/16005</span><br><span class="line"></span><br><span class="line">关闭备份master：backup-master:</span><br><span class="line">查看备份master的pid，通过kill命令 来结束进程</span><br><span class="line">方法：jps  或   cat /tmp/hbase-hyxy-num-master.pid | xargs kill -9</span><br></pre></td></tr></table></figure>
+<p><strong>7）</strong>(可选)：开启或停止其他RegionServer</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]$  local-regionservers.sh start 2 3 4 5</span><br><span class="line">[root@node01 local]$  local-regionservers.sh stop [num]</span><br></pre></td></tr></table></figure>
+<h2 id="全分布式安装"><a href="#全分布式安装" class="headerlink" title="全分布式安装"></a>全分布式安装</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">HBASE是一个分布式系统</span></span><br><span class="line"><span class="meta">其中有一个管理角色：</span>  <span class="string">HMaster(一般2台，一台active，一台backup)</span></span><br><span class="line"><span class="meta">其他的数据节点角色：</span>  <span class="string">HRegionServer(很多台，看数据容量)</span></span><br><span class="line"></span><br><span class="line"><span class="attr">实际上，您需要一个完全分布式的配置来全面测试HBase，并在实际场景中使用它。在分布式配置中，集群包含多个节点，每个节点运行一个或多个HBase守护进程。这些包括主实例和备份主实例、多个ZooKeeper节点和多个RegionServer节点。</span></span><br></pre></td></tr></table></figure>
+<h3 id="环境准备-1"><a href="#环境准备-1" class="headerlink" title="环境准备"></a>环境准备</h3><p>1）角色分配</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">node01</span>: <span class="string">hmaster 		regionserver </span></span><br><span class="line"><span class="attr">node02</span>: <span class="string">backup master 	regionserver  </span></span><br><span class="line"><span class="attr">node03</span>: 				<span class="string">regionserver</span></span><br></pre></td></tr></table></figure>
+<p>2） 配置hbase的环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 ~]# tar -zxvf hbase-1.2.1-bin.tar.gz -C /usr/local/</span><br><span class="line">[root@node01 ~]# cd /usr/local/</span><br><span class="line">[root@node01 local]# mv hbase-1.2.1 hbase</span><br><span class="line">[root@node01 local]# vi /etc/profile</span><br><span class="line">.......省略.......</span><br><span class="line"><span class="meta">#</span><span class="bash">hbase environment</span></span><br><span class="line">export HBASE_HOME=/usr/local/hbase</span><br><span class="line">export PATH=$HBASE_HOME/bin:$PATH</span><br><span class="line"></span><br><span class="line">[root@node01 local]# source  /etc/profile</span><br><span class="line">[root@node01 local]# hbase version</span><br></pre></td></tr></table></figure>
+<p>3）配置ssh无密码登陆(一般情况下，都在搭建HDFS时，完成)</p>
+<p>4）配置时间同步(<font color='red'><strong>非常重要</strong></font>，也应该在搭建HDFS时，完成,时间差不能超过30s)</p>
+<p>5）确认hbase-env.sh禁用内置的zookeeper</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]# vi $HBASE_HOME/conf/hbase-env.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">找到下面内容，解开注释，添加具体路径</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> The java implementation to use.  Java 1.7+ required.</span></span><br><span class="line">export JAVA_HOME=/usr/local/jdk</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Tell HBase whether it should manage it<span class="string">'s own instance of Zookeeper or not.</span></span></span><br><span class="line">export HBASE_MANAGES_ZK=false       #禁止内置zookeeper</span><br></pre></td></tr></table></figure>
+<h3 id="配置HBASE"><a href="#配置HBASE" class="headerlink" title="配置HBASE"></a>配置HBASE</h3><p>1) 修改hbase-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定hbase在HDFS上存储的路径 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://node01:8020/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定hbase是分布式的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指定zk的地址，多个用“,”分割 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>node01:2181,node02:2181,node03:2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--将属性hbase.unsafe.stream.capability.enforce 改为true --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.unsafe.stream.capability.enforce<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2）配置regionserver所在的节点信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 apps]#  vi $HBASE_HOME/conf/regionservers</span><br><span class="line"></span><br><span class="line">删除localhost</span><br><span class="line">添加:</span><br><span class="line">	node01</span><br><span class="line">    node02</span><br><span class="line">    node03</span><br></pre></td></tr></table></figure>
+<p>3）配置备份hmaster: 创建backup-masters文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]#  cd $HBASE_HOME/conf/</span><br><span class="line">[root@node01 conf]#  echo "node02"&gt;&gt; backup-masters</span><br></pre></td></tr></table></figure>
+<p>4）将hadoop的core-site.xml和hdfs-site.xml放入conf目录内</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]#  cd $HADOOP_HOME/etc/hadoop/</span><br><span class="line">[root@node01 hadoop]#  cp core-site.xml hdfs-site.xml $HBASE_HOME/conf/</span><br></pre></td></tr></table></figure>
+<p>5）将hbase分发到集群其他相关节点上</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 <span class="built_in">local</span>]<span class="comment"># scp -r /usr/local/hbase node02:/usr/local</span></span><br><span class="line">[root@node01 <span class="built_in">local</span>]<span class="comment"># scp -r /usr/local/hbase node03:/usr/local</span></span><br><span class="line">[root@node01 <span class="built_in">local</span>]<span class="comment"># scp /etc/profile node02:/etc/</span></span><br><span class="line">[root@node01 <span class="built_in">local</span>]<span class="comment"># scp /etc/profile node03:/etc/</span></span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line">     重新引导一下各个节点的环境变量配置情况</span><br></pre></td></tr></table></figure>
+<h3 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h3><p>1）启动集群</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 启动zookeeper集群</span><br><span class="line">2. 启动hdfs集群</span><br><span class="line">3. 启动hbase服务</span><br><span class="line">   </span><br><span class="line">说明： start-hbase.sh脚本开启进程的顺序</span><br><span class="line">    - 1. 主节点上的hmaster</span><br><span class="line">    - 2. regionserver</span><br><span class="line">    - 3. 备份hmaster</span><br></pre></td></tr></table></figure>
+<p>2）查看hbase</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]# jps</span><br><span class="line">1888 QuorumPeerMain</span><br><span class="line">2438 ResourceManager</span><br><span class="line">2822 HMaster</span><br><span class="line">2090 NameNode</span><br><span class="line">2284 SecondaryNameNode</span><br><span class="line">3373 Jps</span><br><span class="line">2943 HRegionServer</span><br><span class="line">[root@node01 local]# netstat -nltp | grep 2822</span><br><span class="line">tcp    0    0 ::ffff:192.168.49.250:16000 :::*          LISTEN      2822/java</span><br><span class="line">tcp    0    0 :::16010                    :::*          LISTEN      2822/java</span><br></pre></td></tr></table></figure>
+<p>3）<font color='red'>查看webui页面</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;ip:16010</span><br></pre></td></tr></table></figure>
+<p>4）<font color='red'>查看zookeeper</font></p>
+<p>5）查看hdfs</p>
+<p>6) hbase shell 启动</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 bin]# ./hbase shell</span><br></pre></td></tr></table></figure>
+<p>7) HBASE的测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">help '命令组'</span><br><span class="line">e.g. </span><br><span class="line">help 'create'</span><br></pre></td></tr></table></figure>
+<h2 id="regionserver动态上下线"><a href="#regionserver动态上下线" class="headerlink" title="regionserver动态上下线"></a>regionserver动态上下线</h2><h3 id="regionserver动态上线"><a href="#regionserver动态上线" class="headerlink" title="regionserver动态上线"></a>regionserver动态上线</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Master使用Zookeeper跟踪RegionServer状态。当某个RegionServer启动时，会首先在Zookeeper上的Server目录下建立代表自己的znode，并获得该znode的独占锁。由于Master订阅了Server目录上的变更信息，当Server目录下的znode出现新增或者删除操作时，Master可以得到来自Zookeeper的实时通知。因此一旦RegionServer上线，Master能马上得到消息。如果负载平衡器开启的话，master会为新的regionserver分配region。</span><br></pre></td></tr></table></figure>
+<p><strong>1）</strong>准备节点环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">方法1：选择集群中正常工作的一台机器node04</span><br><span class="line">方法2：新搭建一台机器node04，保证jdk,hadoop环境配置，hdfs节点动态上线等一系列注意事项</span><br></pre></td></tr></table></figure>
+<p><strong>2）</strong>搭建hbase环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 1. 配置hbase的环境变量</span><br><span class="line">- 2. 配置hbase的hbase-env.sh文件</span><br><span class="line">- 3. 配置hbase的hbase-site.xml文件 </span><br><span class="line"></span><br><span class="line">强调：要与hmaster节点的配置内容一致。当然可以选择copy</span><br></pre></td></tr></table></figure>
+<p><strong>3）</strong>在节点上启动regionserver</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@node04 conf]# hbase-daemon.sh start regionserver</span><br></pre></td></tr></table></figure>
+<p><strong>4）</strong>修改conf/regionservers配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 将新增节点主机名，添加到regionservers配置文件中,以便下次启动hbase时，带上node04</span></span><br><span class="line">[root@node01 conf]# vi regionservers</span><br><span class="line">node01</span><br><span class="line">node02</span><br><span class="line">node03</span><br><span class="line">node04</span><br><span class="line"></span><br><span class="line">注意：最好同步一下</span><br></pre></td></tr></table></figure>
+<h3 id="regionserver动态下线"><a href="#regionserver动态下线" class="headerlink" title="regionserver动态下线"></a>regionserver动态下线</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">当regionserver断开与zookeeper的会话时，相应的znode被删除。当master通过zookeeper发现该节点不存在后，就会在平衡器的作用下，重新分配region。</span><br><span class="line"></span><br><span class="line">当RegionServer动态下线或者宕机时，它和zookeeper的会话断开，zookeeper自动释放代表这台Server的znode的独占锁，并删除该znode。而Master不断轮询Server目录下znode的锁状态时，如果发现某个RegionServer丢失自己的的独占锁，或者连续几次和RegionServer通信都无法成功，Master就尝试去获取代表这个RegionServer的读写锁。一旦获取成功，就可以确定RegionServer和zookeeper之间的网络断开或RegionServer挂了。此时Master会删除这台RegionServer的对应的znode，开始重新分配region。</span><br><span class="line">	</span><br><span class="line">如果网络短暂出现问题导致RegionServer丢失它的锁，RegionServer重新连接到Zookeeper之后，只要代表它的znode还在，它就会不断尝试这个文件上的锁，一旦获取到，就可以继续提供服务。</span><br></pre></td></tr></table></figure>
+<p><strong>1）</strong>选择要下线的机器节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">比如，我选择了node01</span><br></pre></td></tr></table></figure>
+<p><strong>2）</strong>卸载该节点的region</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 conf]# graceful_stop.sh node01</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">该节点的region会逐渐迁徙到其他regionserver上</span></span><br></pre></td></tr></table></figure>
+<p><strong>3）</strong>修改conf/regionservers配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除下线的节点主机名，同步到其他节点上</span></span><br><span class="line">[root@node01 conf]# vi regionservers</span><br><span class="line"><span class="meta">#</span><span class="bash"> node01  删除或者注释</span></span><br><span class="line">node02</span><br><span class="line">node03</span><br><span class="line">node04</span><br><span class="line"></span><br><span class="line">注意：最好同步一下</span><br></pre></td></tr></table></figure>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/02/16/Hbase-2023-02-16-四-HBASE-SHELL/" data-toggle="tooltip" data-placement="top" title="(四)HBASE SHELL">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/02/15/Hbase-2023-02-15-二-HBASEHBASE体系结构/" data-toggle="tooltip" data-placement="top" title="(二)HBASEHBASE体系结构">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#HBASE单机安装"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">HBASE单机安装</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#环境准备"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">环境准备</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改-hbase-env-sh"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">修改 hbase-env.sh</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#配置hbase-site-xml"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">配置hbase-site.xml</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#启动HBase服务"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">启动HBase服务</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hbase的客户端连接"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">hbase的客户端连接</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#伪分布式安装"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">伪分布式安装</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#情况说明"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">情况说明</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#安装步骤"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">安装步骤</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全分布式安装"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">全分布式安装</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#简介"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">简介</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#环境准备-1"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">环境准备</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#配置HBASE"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">配置HBASE</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#启动集群"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">启动集群</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#regionserver动态上下线"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">regionserver动态上下线</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#regionserver动态上线"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">regionserver动态上线</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#regionserver动态下线"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">regionserver动态下线</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#"><span class="toc-nav-number"></span> <span class="toc-nav-text"> </span></a>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Hbase" title="Hbase">Hbase</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          (六)HBASE的工作机制 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>(六)HBASE的工作机制</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-02-16
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.7k</span> and
+                                Reading Time <span class="post-count">13</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="寻址机制"><a href="#寻址机制" class="headerlink" title="寻址机制"></a>寻址机制</h2><p>我们应该知道读写操作都在 RegionServer 上发生，而每个 RegionSever 为一定数量的 Region 服务，那么 Client 要对某一行数据做读写访问时，是如何知道具体要去访问哪个 RegionServer 呢？那就是接下来我们要讨论的问题</p>
+<p><strong>首先</strong>，我们要知道hbase:meta表的结构，有助于我们理解寻址过程。</p>
+<p>meta表结构参考</p>
+<p><img src="014-1588396368629.png" alt=""></p>
+<hr>
+<h3 id="新的寻址方式"><a href="#新的寻址方式" class="headerlink" title="新的寻址方式"></a>新的寻址方式</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">在0.96版本以后，hbase直接将meta表所在的regionsServer信息存储在zk中的/hbase/meta-region-server中，之后又引用了namespace的概念，因此，meta表改成了hbase</span>:<span class="string">meta。 </span></span><br><span class="line"></span><br><span class="line"><span class="attr">如下图所示：</span></span><br></pre></td></tr></table></figure>
+<p><img src="102.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 访问过程分3步：</span></span></span><br><span class="line"></span><br><span class="line">第1步：Client请求ZooKeeper获取hbase:meta表所在的RegionServer的地址。</span><br><span class="line"></span><br><span class="line">第2步：Client 请求hbase:meta表所在的RegionServer获取访问数据所在的RegionServer地址，Client会将hbase:meta表的相关信息cache下来，以便下一次快速访问。</span><br><span class="line"></span><br><span class="line">第3步：Client请求数据所在的 RegionServer，获取所需要的数据。</span><br></pre></td></tr></table></figure>
+<h3 id="老的寻址方式-参考"><a href="#老的寻址方式-参考" class="headerlink" title="老的寻址方式(参考)"></a>老的寻址方式(参考)</h3><p>在 0.96 版本以前，HBase 有两个特殊的表，分别是-ROOT-表和.META.表，其中-ROOT-的位置存储在ZooKeeper中，-ROOT-本身存储.META.表的 RegionInfo 信息，并且-ROOT不会分裂，只有一个 Region。而.META.表可以被切分成多个 Region。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">寻找流程：client -&gt;  -root-表  -&gt;  .meta.表  -&gt;  region</span><br><span class="line">也被称之为三层跳转。</span><br></pre></td></tr></table></figure>
+<p>root表结构参考：</p>
+<p><img src="013-1588396368629.png" alt=""></p>
+<p>具体的寻址流程如下图所示：</p>
+<p><img src="101.png" alt=""></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">第</span> <span class="string">1 步：Client 请求 ZooKeeper 获得-ROOT-所在的 RegionServer 地址</span></span><br><span class="line"></span><br><span class="line"><span class="meta">第</span> <span class="string">2 步：Client 请求-ROOT-所在的 RS 地址，获取.META.表的地址，Client 会将-ROOT-的相关 信息 cache 下来，以便下一次快速访问</span></span><br><span class="line"></span><br><span class="line"><span class="meta">第</span> <span class="string">3 步：Client 请求.META.表的 RegionServer 地址，获取访问数据所在 RegionServer 的地址， Client 会将.META.的相关信息 cache 下来，以便下一次快速访问</span></span><br><span class="line"></span><br><span class="line"><span class="meta">第</span> <span class="string">4 步：Client 请求访问数据所在 RegionServer 的地址，获取对应的数据</span></span><br></pre></td></tr></table></figure>
+<p>从上面的路径我们可以看出，用户需要 3 次请求才能到达用户 Table 真正的位置(具体的region)，这在一定程度上，性能明显下降。在 0.96 之前使用 3 层设计的主要原因是考虑到元数据可能需要很大。但是真正集群运行，元数据的大小其实很容易计算出来。在 BigTable 的论文中，每行 METADATA 数据存储大小为 1KB 左右，如果按照一个 Region 为 128M 的计算，3 层设计可以支持的 Region 个数为 2^34 个，采用 2 层设计可以支持 2^17（131072）。那么 2 层设计的情 况下一个集群可以存储 4P 的数据。这仅仅是一个 Region 只有 128M 的情况下。如果是 10G 呢? 因此，通过计算，其实 2 层设计就可以满足集群的需求。因此在 0.96 版本以后就去掉 了-ROOT-表了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">总结去掉-ROOT-的原因有如下</span> <span class="string">2 点：</span></span><br><span class="line"><span class="attr">其一：提高性能</span></span><br><span class="line"><span class="meta">其二：2</span> <span class="string">层结构已经足以满足集群的需求</span></span><br><span class="line"></span><br><span class="line"><span class="meta">这里还有一个问题需要说明，那就是</span> <span class="string">Client 会缓存.META.的数据，用来加快访问，既然有缓存，那它什么时候更新？如果.META.更新了，比如 Region1 不在 RerverServer2 上了，被转移 到了 RerverServer3 上。Client 的缓存没有更新会有什么情况？</span></span><br><span class="line"><span class="meta">其实，Client</span> <span class="string">的元数据缓存不更新，当.META.的数据发生更新。如上面的例子，由于 Region1 的位置发生了变化，Client 再次根据缓存去访问的时候，会出现错误，当出现异常达到重试 次数后就会去.META.所在的 RegionServer 获取最新的数据，如果.META.所在的 RegionServer 也变了，Client 就会去 ZooKeeper 上获取.META.所在的 RegionServer 的最新地址。</span></span><br></pre></td></tr></table></figure>
+<h2 id="存储机制"><a href="#存储机制" class="headerlink" title="存储机制"></a>存储机制</h2><h3 id="存储模型"><a href="#存储模型" class="headerlink" title="存储模型"></a>存储模型</h3><p><img src="010.png" alt=""></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">1.</span> <span class="string">数据的存储是每个Region所承担的工作了</span></span><br><span class="line">	<span class="meta">1)</span> <span class="string">我们知道一个Region代表的是一张 Hbase表中特定Rowkey范围内的数据，</span></span><br><span class="line">	<span class="meta">2)</span> <span class="string">而Hbase是面向列存储的数据库，所以在一个Region中，有多个文件来存储这些列。</span></span><br><span class="line">	<span class="meta">3)</span> <span class="string">Hbase中数据列是由列簇来组织的，所以每一个列簇都会有对应的一个数据结构，</span></span><br><span class="line">		<span class="meta">3.1)</span> <span class="string">Hbase将列簇的存储数据结构抽象为Store，一个Store代表一个列簇。</span></span><br><span class="line">	<span class="attr">总结：所以在这里也可以看出为什么在我们查询的时候要尽量减少不需要的列，而经常一起查询的列要组织到一个列簇里：因为要需要查询的列簇越多，意味着要扫描越多的Store文件，这就需要越多的时间</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">2.</span> <span class="string">Store中存储数据的方式:Hbase采用的是LSM树的结构，这种结构的关键是:</span></span><br><span class="line">	<span class="meta">1)</span> <span class="string">每一次的插入操作都会先进入MemStore（内存缓冲区），</span></span><br><span class="line">	<span class="meta">2)</span> <span class="string">当 MemStore达到上限的时候，Hbase会将内存中的数据输出为有序的StoreFile文件数据（根据Rowkey、版本、列名排序，这里已经和列簇无关了因为Store里都属于同一个列簇）。</span></span><br><span class="line">	<span class="meta">3)</span> <span class="string">这样会在Store中形成很多个小的StoreFile，当这些小的File数量达到一个阀值的时 候，Hbase会用一个线程来把这些小File合并成一个大的File。这样，Hbase就把效率低下的文件中的插入、移动操作转变成了单纯的文件输出、 合并操作。</span></span><br><span class="line"></span><br><span class="line"><span class="attr">由上可知，在Hbase底层的Store数据结构中，</span></span><br><span class="line">    <span class="meta">1）</span> <span class="string">每个StoreFile内的数据是有序的，</span></span><br><span class="line">    <span class="meta">2）</span> <span class="string">但是StoreFile之间不一定是有序的，</span></span><br><span class="line">    <span class="meta">3）</span> <span class="string">Store只需要管理StoreFile的索引就可以了。</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">这里也可以看出为什么指定版本和Rowkey可以加强查询的效率，因为指定版本和Rowkey的查询可以利用</span> <span class="string">StoreFile的索引跳过一些肯定不包含目标数据的数据。</span></span><br></pre></td></tr></table></figure>
+<p><img src="211.png" alt=""></p>
+<h3 id="两种文件类型"><a href="#两种文件类型" class="headerlink" title="两种文件类型"></a>两种文件类型</h3><p>HBase中的所有数据文件都存储在Hadoop HDFS文件系统上，主要包括两种文件类型:</p>
+<p><strong>1）HFile(storefile)</strong></p>
+<p>HFile是HBase的数据存储的实际载体，从体系结构中我们也能看出，Hbase不直接与磁盘进行交互，而是通过调用HDFS的client接口，由HDFS进行存储的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">网上资料上也有不少人管HFile叫storefile的，其实这么叫也是没有错的。HFile在Hadoop中是一种二进制格式文件，它模仿了BigTable中的SSTable格式(参考下图)。实际上StoreFile就是对HFile做了轻量级包装,进行数据的存储。Hbase是基于java编写得，那么所有物理上得东西，在java程序运行时，都有一个对象与之对应，在物理存储上我们管StoreFile刷写而成得文件叫HFile,StoreFile是HFile得抽象类而已。</span><br></pre></td></tr></table></figure>
+<p><img src="20150821140814648.jpg" alt=""></p>
+<p><strong>2）HLog File</strong></p>
+<p>HBase中采用WAL(Write Ahead Log)的存储格式，物理上是Hadoop的SequenceFile。在写数据时会先往Hlog写一份，然后往内存写，以避免内存丢失数据，可以从日志文件中恢复Hlog记录数据的所有变更，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每个HRegionServer维护一个HLog，而不是每个HRegion一个。这样不同region（来自不同table）的日志会混在一起，这样做的目的是不断追加单个文件相对于同时写多个文件而言，可以减少磁盘寻址次数，因此可以提高对table的写性能。带来的麻烦是，如果一台HRegionServer下线，为了恢复其上的region，需要将HRegionServer上的log进行拆分，然后分发到其它HRegionServer上进行恢复。</span><br></pre></td></tr></table></figure>
+<h3 id="Flush与Compact、Split"><a href="#Flush与Compact、Split" class="headerlink" title="Flush与Compact、Split"></a>Flush与Compact、Split</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 1. Flush</span><br><span class="line">	客户端的数据会写入内存，一直到MemStore满了或者达到其他flush条件时，会将MemStore中的数据Flush成</span><br><span class="line">	一个StoreFile</span><br><span class="line">- 2. Compact</span><br><span class="line">	当storefile的数量越来越多，增长到数量阈值时，会触发Compact合并操作多个StoreFile合并成一个</span><br><span class="line">	StoreFile，同时进行版本合并和数据删除 </span><br><span class="line">- 3. Split</span><br><span class="line">	由于合并操作，当单个StoreFile大小超过一定阈值后，这样会触发Region Split操作。实际上是新生成两个</span><br><span class="line">	Region来管理维护旧的Region中的数据，旧的Region会下线，新的两个Region会被HMaster重新分配到相应</span><br><span class="line">	的HRegionServer上，这样使得原先1个Region的压力得以分流到2个Region上。</span><br></pre></td></tr></table></figure>
+<h3 id="增删改查的真正面目"><a href="#增删改查的真正面目" class="headerlink" title="增删改查的真正面目"></a>增删改查的真正面目</h3><p>Hbase是一个可以随机读写的数据，而它是基于HDFS的，HDFS的特点是只能新增，要么整个删除，不能修改。那么HDFS是如何实现我们的增删改查的呢。实际上Hbase几乎总是在做新增操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 新增单元格数据时，在HDFS上新增一条记录</span><br><span class="line">- 修改一个单元格时，也是新增一条记录，只是版本号比之前大了。</span><br><span class="line">- 删除时，还是新增一条记录，只不过没有value值，类型为DELETE。</span><br><span class="line"></span><br><span class="line">为了提高性能，Hbase每间隔一段时间或者文件大小达到阀值后，都会进行一次合并，合并的对象就是HFile文件。当合并成一个HFile时，会忽略掉DELETE类型的记录，从而达到了删除的目的，并对剩下的数据做排序和版本合并。形成一个大的HFile，当Hfile的大小达到需要切分的阀值时，会等分为两个HFile...</span><br></pre></td></tr></table></figure>
+<h2 id="Region的管理"><a href="#Region的管理" class="headerlink" title="Region的管理"></a>Region的管理</h2><p>一张表的数据可能只有一个region，也可能有多个region。当一个region的数据越来越大时，regionserver会进行split策略，将一个region的数据，切分成两个region，这个旧的region会下线，两个新的region由hmaster来重新分配regionserver进行管理，尽可能的做到集群的负载均衡。</p>
+<p>在管理region时，我们也可以通过建表的预分区和手动操作来进行管理region</p>
+<h3 id="预分区"><a href="#预分区" class="headerlink" title="预分区"></a>预分区</h3><p>每一个region都维护着startRow与endRowKey，如果加入的数据符合某个region维护的rowKey范围，则该数据交给这个region维护。那么依照这个原则，我们可以将数据所要投放的分区提前大致的规划好，以提高HBase性能。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):050:0&gt; create 'mydb:emp13','base_info',SPLITS=&gt;['1000','2000','3000','4000']</span><br></pre></td></tr></table></figure>
+<p><img src="20191128195121.jpg" alt=""></p>
+<p>我们可以插入下面五条数据，就会进入不同的region里</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hbase(main):050:0&gt;put 'mydb:emp13','0001','base_info:name','zhangsan'</span><br><span class="line">hbase(main):051:0&gt;put 'mydb:emp13','1001','base_info:name','lisi'</span><br><span class="line">hbase(main):052:0&gt;put 'mydb:emp13','2001','base_info:name','wangwu'</span><br><span class="line">hbase(main):053:0&gt;put 'mydb:emp13','3001','base_info:name','zhaoliu'</span><br><span class="line">hbase(main):054:0&gt;put 'mydb:emp13','4001','base_info:name','xiaoqi'</span><br><span class="line">hbase(main):050:0&gt;flush  'mydb:emp13'#手动flush到hdfs中</span><br><span class="line"></span><br><span class="line"><span class="keyword">flush</span>语法：</span><br><span class="line">hbase&gt; <span class="keyword">flush</span> <span class="string">'TABLENAME'</span></span><br><span class="line">hbase&gt; <span class="keyword">flush</span> <span class="string">'REGIONNAME'</span></span><br><span class="line">hbase&gt; <span class="keyword">flush</span> <span class="string">'ENCODED_REGIONNAME'</span></span><br></pre></td></tr></table></figure>
+<h3 id="手动管理"><a href="#手动管理" class="headerlink" title="手动管理"></a>手动管理</h3><p>1)  切分region</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">split 'tableName'</span><br><span class="line">split 'namespace:tableName'</span><br><span class="line">split 'regionName' <span class="comment"># format: 'tableName,startKey,id'</span></span><br><span class="line">split 'tableName', 'splitKey'</span><br><span class="line">split 'regionName', 'splitKey'</span><br><span class="line"></span><br><span class="line">eg.</span><br><span class="line">hbase(main):064:0&gt; split 'mydb:emp13,4000,1574941694731.1952dc6f126caa2d82d6ebb09d27fd81.','5000'</span><br></pre></td></tr></table></figure>
+<p>2)  合并region</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hbase&gt; merge_region 'ENCODED_REGIONNAME', 'ENCODED_REGIONNAME'</span><br><span class="line">hbase&gt; merge_region 'ENCODED_REGIONNAME', 'ENCODED_REGIONNAME', true</span><br></pre></td></tr></table></figure>
+<h2 id="读写流程"><a href="#读写流程" class="headerlink" title="读写流程"></a>读写流程</h2><h3 id="写数据流程"><a href="#写数据流程" class="headerlink" title="写数据流程"></a>写数据流程</h3><p><img src="018.png" alt=""></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">1.</span> <span class="string">HBase使用memstore和storefile存储对表的更新。数据在更新时首先写入hlog和memstore，memstore中的数据是排序的，当memstore累计到一定的阀值时，就会创建一个新的memstore，并将老的memstore添加到flush队列，由单独的线程flush到磁盘上，成为一个storefile。与此同时，系统会在zookeeper中记录一个checkpoint，表示这个时刻之前的数据变更已经持久化了。当系统出现意外时，可能导致memstore中的数据丢失，此时使用hlog来恢复checkpoint之后的数据。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">2.</span> <span class="string">Storefile是只读的，一旦创建之后就不可修改。因此hbase的更新就是不断追加的操作。当一个store的storefile达到一定的阀值后，就会进行一次合并操作，将对同一个key的修改合并到一起，同时进行版本合并和数据删除，形成一个大的storefile。当storefile的大小达到一定的阀值后，又会对storefile进行切分操作，等分为两个storefile。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">3.</span> <span class="string">Hbase中只有增添数据，所有的更新和删除操作都是在后续的合并中进行的，使得用户的写操作只要进入内存就可以立刻返回，实现了hbase的高速存储。</span></span><br></pre></td></tr></table></figure>
+<p>具体写流程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1) Client通过Zookeeper的调度，向RegionServer发出写数据请求，在Region中写数据。</span><br><span class="line">(2) 数据被写入Region的MemStore，直到MemStore达到预设阈值。</span><br><span class="line">(3) MemStore中的数据被Flush成一个StoreFile。</span><br><span class="line">(4) 随着StoreFile文件的不断增多，当其数量增长到一定阈值后，触发Compact合并操作，将多个StoreFile合并成一个StoreFile，同时进行版本合并和数据删除。</span><br><span class="line">(5) StoreFiles通过不断的Compact合并操作，逐步形成越来越大的StoreFile。</span><br><span class="line">(6) 单个StoreFile大小超过一定阈值后，触发Split操作，把当前Region Split成2个新的Region。父Region会下线，新Split出的2个子Region会被HMaster分配到相应的RegionServer上，使得原先1个Region的压力得以分流到2个Region上。</span><br></pre></td></tr></table></figure>
+<h3 id="读数据流程-HBase1-0之前"><a href="#读数据流程-HBase1-0之前" class="headerlink" title="读数据流程(HBase1.0之前)"></a>读数据流程(HBase1.0之前)</h3><p><img src="019.png" alt=""></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Hbase的所有region元数据被存储在.META表中，随着region的增多，.META表中的数据也会增大，并分裂成多个新的region。为了定位.META表中各个region的位置，把.META表中的所有region的元数据保存在-ROOT-表中(1.0之后转移到zk的master目录)，最后由zookeeper记录-ROOT-表的位置信息。所有的客户端访问数据之前，需要首先访问zookeeper获取-ROOT-的位置，然后访问-ROOT-表获得.META表的位置，最后根据.META表中的信息确定用户数据存放的位置。</span></span><br><span class="line"></span><br><span class="line"><span class="attr">-ROOT-表永远不会被分割，它只有一个region，这样可以保证最多只需要三次跳转就可以定位任意一个region。为了加快访问速度，.META表的所有region全部保存在内存中。客户端会将查询过的位置信息缓存起来，且缓存不会主动失效。如果客户端根据缓存信息还访问不到数据，则询问相关.META表的region服务器，试图获取数据的位置，如果还是失败，则询问-ROOT-表相关的.META表在哪里。最后，如果前面的信息全部失效，则通过zookeeper重新定位region的信息。所以如果客户端上的缓存全部失效，则需要进行6次网络来定位，才能定位到正确的region。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">client--&gt;Zookeeper--&gt;-ROOT-表（master）--&gt;.META.表--&gt;RegionServer--&gt;Region--&gt;client</span> <span class="string"></span></span><br><span class="line"></span><br><span class="line">   <span class="meta">(1)</span> <span class="string">Client访问Zookeeper，查找-ROOT-表，获取.META.表信息。</span></span><br><span class="line">   <span class="meta">(2)</span> <span class="string">从.META.表查找，获取存放目标数据的Region信息，从而找到对应的RegionServer。</span></span><br><span class="line">   <span class="meta">(3)</span> <span class="string">通过RegionServer获取需要查找的数据。</span></span><br><span class="line">   <span class="meta">(4)</span> <span class="string">Regionserver的内存分为MemStore和BlockCache两部分，MemStore主要用于写数据，BlockCache主要用于读数据。读请求先到MemStore中查数据，然后在到BlockCache中查，最后再到StoreFile上读，并把读的结果放入BlockCache，</span></span><br></pre></td></tr></table></figure>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/02/16/Hbase-2023-02-16-七-HBASE与其他框架整合/" data-toggle="tooltip" data-placement="top" title="(七)HBASE与其他框架整合">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/02/16/Hbase-2023-02-16-五-HBASE-API/" data-toggle="tooltip" data-placement="top" title="(五)HBASE  API">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#寻址机制"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">寻址机制</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#新的寻址方式"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">新的寻址方式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#老的寻址方式-参考"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">老的寻址方式(参考)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">总结</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#存储机制"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">存储机制</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#存储模型"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">存储模型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#两种文件类型"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">两种文件类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Flush与Compact、Split"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Flush与Compact、Split</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#增删改查的真正面目"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">增删改查的真正面目</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Region的管理"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Region的管理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#预分区"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">预分区</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#手动管理"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">手动管理</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#读写流程"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">读写流程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#写数据流程"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">写数据流程</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#读数据流程-HBase1-0之前"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">读数据流程(HBase1.0之前)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#"><span class="toc-nav-number"></span> <span class="toc-nav-text"> </span></a>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2023 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
