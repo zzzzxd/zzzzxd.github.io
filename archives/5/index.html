@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1115,6 +1115,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1123,59 +1145,23 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/09/数据仓库-2023-01-09-实时数仓建设思考/">
+            <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-MOR优化原理详解/">
                 <h2 class="post-title">
-                    实时数仓建设思考
+                    Hudi-MOR优化原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    离线数仓与实时数仓区别
-
-
-
-对比方面
-离线数仓
-实时数仓
-
-
-
-
-架构选择
-传统大数据架构
-Kappa架构
-
-
-建设方法
-传统数仓主题建模理论
-传统数仓主题建模理论
-
-
-准确性
-准确度高
-准确度随着技术发展，准确度高
-
-
-实时性
-T+1
-分钟级别、秒级别
-
-
-稳定性
-稳定性好，方便重算
-对数据敏感稳定性差，需要考虑数据重新计算
-
-
-数据存储
-HDFS/Hive
-Kafka/HBase/Re......
+                    背景Merge on Read（简称MOR表），是Hudi最初开源时尚处于“实验阶段”的新功能，在开源后的0.3.5版本开始才告完成。现在则是Hudi最常用的表类型。
+Merge on Read是对Copy on Write的优化。优化了什么呢？主要是写入性能。
+导致COW表写入慢的原因，是因为COW表每次在写入时，会把新写入的数据和老数据合并以后，再写成新的文件。单单是写入的过程（不包含前......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-09
+                    2023-01-14
                 </p>
                 <div class="tags">
                     
@@ -1193,22 +1179,21 @@ Kafka/HBase/Re......
 
         <div class="post-preview">
 
-            <a href="/2023/01/09/数据仓库-2023-01-09-数据仓库的架构演变/">
+            <a href="/2023/01/13/数据仓库-2023-01-13-Hudi-Upsert操作原理详解/">
                 <h2 class="post-title">
-                    数据仓库的架构演变
+                    Hudi-Upsert操作原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据仓库演变​        20世纪70年代，MIT(麻省理工)的研究员致力于研究一种优化的技术架构，该架构试图将业务处理系统和分析系统分开，即将业务处理和分析处理分为不同层次，针对各自的特点采取不同的架构设计原则，MIT的研究员认为这两种信息处理的方式具有显著差别，以至于必须采取完全不同的架构和设计方法。但受限于当时的信息处理能力，这个研究仅仅停留在理论层面。
-​        1991......
+                    背景​    首先介绍下Hudi的背景，因为背景对理解一个项目很关键。​    Hudi，正式的全称是Hadoop Upsert Delete and Incremental。其实关于这个名字也不用太较真，因为都是后来附会上去的，从源代码里可以看到这个项目最初的名字是hoodie和现在的名字发音相同。但这个名字还是透露了一些信息的，那就是Hudi项目最初的设计目标:在hadoop上实现upd......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-09
+                    2023-01-13
                 </p>
                 <div class="tags">
                     
@@ -1226,28 +1211,23 @@ Kafka/HBase/Re......
 
         <div class="post-preview">
 
-            <a href="/2022/12/21/LINUX运维-2022-12-21-CI、CD系列四之质量检测SonarQube/">
+            <a href="/2023/01/12/Huid-表类型/">
                 <h2 class="post-title">
-                    CI、CD系列四之质量检测SonarQube
+                    Huid-表类型
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言SonarQube是代码质量检测的利器，可以说自动化运维工具必备，下面我们就使用它对开源项目进行检测，观察一下。
-环境准备123[root@linx01 sonarqube-7.7]# pwd/opt/apps/sonarqube-7.7[root@linx01 conf]# vim sonar.properties
-
-123[sonar@localhost linux-x86-64]$......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-21
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1261,39 +1241,23 @@ Kafka/HBase/Re......
 
         <div class="post-preview">
 
-            <a href="/2022/12/20/LINUX运维-2022-12-20-CI、CD系列三之全流程部署开源项目zrlog/">
+            <a href="/2023/01/12/Hudi-查询类型/">
                 <h2 class="post-title">
-                    CI、CD系列三之全流程部署开源项目zrlog
+                    Hudi-查询类型
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述​    我们以java开源项目zrlog为例，进行一次完整的部署，实现一套完整的CICD流程。
-​    整个过程如下：
-
-开发提交代码至gitlab
-
-jenkins拉取获取代码
-
-代码的质量检测;
-
-代码的编译;
-
-发布。
-
-
-环境准备源码准备123[root@localhost code]# git clone https://gitee.com/94fzb/zrlog.git[......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-20
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1307,26 +1271,23 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列二之实现CD/">
+            <a href="/2023/01/12/Hudi-核心概念/">
                 <h2 class="post-title">
-                    CI、CD系列二之实现CD
+                    Hudi-核心概念
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述​    上篇文章我们对CI、CD的概念进行了大致的解释，这次我们就用Jenkins 利用脚本的方式进行自动化部署。在这之前我们再来解释一下。所谓CI就是持续集成，说白了就是你的代码存放在哪，现在企业中gitlab用的较多。我们将一个静态网页项目放在gitlab中。CD就是持续交付，持续部署。这次我们演示持续部署，即如何自动化的将代码从gitlab中拉取然后部署到服务器上。
-环境准备​ ......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-19
+                    2023-01-12
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
                     
                 </div>
             
@@ -1340,25 +1301,25 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列一之实现方式/">
+            <a href="/2023/01/12/设计模式-2023-01-12-Huid-数据管理/">
                 <h2 class="post-title">
-                    CI、CD系列一之实现方式
+                    Huid-数据管理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    CI、CD概述​    CI、CD是现在互联网公司中很普遍的技术了。它指的是持续集成，持续交付，持续部署。所谓的持续，说白了就是让开发，测试，上线部署整个过程能像流水一样持续的进行下去。假如没有CI、CD ，那项目的开发，开发完成后的测试，那这个过程涉及到的源码就需要我们手动拷贝，等测试完成后，代码上线部署，依然需要我们打包，编译最终传到服务器部署，将是一个完全靠人力的过程，费时费力。而CI......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-19
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
                     
                 </div>
             
@@ -1372,29 +1333,33 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/19/LINUX运维-2022-12-19-TCP连接状态图解/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-Hudi介绍/">
                 <h2 class="post-title">
-                    TCP连接状态图解
+                    Hudi介绍
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概述​    TCP的连接过程与状态管理只要了解过网络的伙伴应该都听说过，tcp的连接与断开过程主要就是三次握手与四次分手，整个过程可以通过抓包 观察，网上的资料也比较多，今天重点来梳理一下，整个过程中相关的进程状态的变化，主要是方便以后工作中对网络故障的排查。
-连接建立与结束三次握手示例
-用户：向服务器发出建立连接的请求（SYN请求） ，随机序列号seq=100
+                    数据湖框架目前市面上流行的三大开源数据湖方案分别为：Delta Lake、Apache Iceberg和Apache Hudi。
 
-服务端： 我收到你的请求......
+Delta Lake：DataBricks公司推出的一种数据湖方案，网址：https://delta.io/ 
+
+
+Apache Iceberg：以类似于SQL的形式高性能的处理大型的开放式表，网址：https://iceberg.apache.org/
+
+
+A......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-19
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1408,27 +1373,26 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/15/LINUX运维-2022-12-15-系统负载高的原因及排查思路/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-大数据为什么需要数据湖/">
                 <h2 class="post-title">
-                    系统负载高的原因及排查思路
+                    大数据为什么需要数据湖？
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    平均负载概述系统负载反映机器的压力情况，是日常工作中需要重点关注的指标，利用uptime命令可以进行查看如下 ：
-12[root@linx01 ~]# uptime 21:45:08 up  4:51,  2 users,  load average: 0.08, 0.04, 0.05
-从左到右含义依次是 当前时间、系统运行时间、正在登录用户数。过去 1 分钟、5 分钟、15 分钟的平均负载......
+                    ​    当前基于Hive的离线数据仓库已经非常成熟，在传统的离线数据仓库中对记录级别的数据进行更新是非常麻烦的，需要对待更新的数据所属的整个分区，甚至是整个表进行全面覆盖才行，由于离线数仓多级逐层加工的架构设计，数据更新时也需要从贴源层开始逐层反应到后续的派生表中去。
+​    随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-15
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1442,34 +1406,27 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘使用的全流程/">
+            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
                 <h2 class="post-title">
-                    磁盘使用流程及企业分区方案
+                    数据湖技术的发展
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    磁盘使用流程概述其实磁盘的使用，主要就是三个步骤，分区、格式化、挂载
+                    数据湖的定义Wikipedia是这样定义的:
 
-磁盘分区 :有了一块地,划分隔断. fdisk/parted
-
-格式化（创建文件系统） :对房间进行装修. mkfs
-
-挂载 :安装门窗,可以入住与使用. mount Linux下面设备必须要挂载才能访问与使用,没有挂载相当于房子没 有门窗. 挂载相当于给设备设置了一个入口.
-
-
-实战演示磁盘分区 对新添加的sdb磁盘划......
+数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1483,25 +1440,28 @@ jenkins拉取获取代码
 
         <div class="post-preview">
 
-            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘空间不足案例分析/">
+            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
                 <h2 class="post-title">
-                    磁盘空间不足案例分析
+                    各大公司实时数仓实践
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言 工作中可能会遇到no space left on device 这个问题  也就是磁盘满了，原因有很多种，下面进行分析并对问题进行复现，最后对排查问题的方法以及使用到的命令进行总结。
-原因大文件造成block不足这种算是真实的磁盘用满了
-复现1234567891011121314151617181920[root@linx01 ~]# df -h文件系统        容量  已用  ......
+                    网易实时数仓实践
+​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
+
+突然数据量增多，基于......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-12-14
+                    2023-01-10
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
                     
                 </div>
             
@@ -1572,39 +1532,11 @@ jenkins拉取获取代码
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
-            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
-            
-        
-            
-        
+            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
             
         
             
@@ -1622,15 +1554,53 @@ jenkins拉取获取代码
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
             
         
             
@@ -1644,6 +1614,10 @@ jenkins拉取获取代码
             
         
             
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
@@ -1651,8 +1625,6 @@ jenkins拉取获取代码
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1674,31 +1646,23 @@ jenkins拉取获取代码
             
         
             
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
             <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1732,6 +1696,10 @@ jenkins拉取获取代码
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
@@ -1750,11 +1718,9 @@ jenkins拉取获取代码
             
         
             
-        
-            
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1831,23 +1797,23 @@ jenkins拉取获取代码
     <ul>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
         </li>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
+          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
+          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
         </li>
       
         <li>
-          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
+          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1862,7 +1828,7 @@ jenkins拉取获取代码
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1875,47 +1841,45 @@ jenkins拉取获取代码
         
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#HBase"><li>HBase</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
-          <a href="categories/#HBase"><li>HBase</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
-          <a href="categories/#Git"><li>Git</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1957,7 +1921,7 @@ jenkins拉取获取代码
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2023 
+                    Copyright &copy; Dante 2024 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Flink Sql Join类型 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/10/11/Flink-2023-10-11-Flink-Sql-Join类型/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                            
+                              <a class="tag" href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                            
+                        </div>
+                        <h1>Flink Sql Join类型</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-10-11
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.1k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="Regular-Joins-普通join"><a href="#Regular-Joins-普通join" class="headerlink" title="Regular Joins(普通join)"></a>Regular Joins(普通join)</h3><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>最普通的join 两条流任何一条流更新都会触发计算,为了支持结果的更新，下游目的表需要定义主键。</li>
+<li>运行时需要保留左表和右表的状态，且随着时间的推移，状态会无限增长，最终可能导致作业 OOM 崩溃或异常缓慢。因此我们强烈建议用户在 Flink 参数中设置 table.exec.state.ttl 选项，它可以指定 JOIN 状态的保留时间（定义键的状态在多长时间内没被更新过就会被删除），以便 Flink 及时清理过期的状态，默认值是0 ms，即保存所有状态。比如设置为1天，SET ‘table.exec.state.ttl’ = ‘86400 s’;</li>
+</ul>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>​    和普通的数据库join一样，支持INNER、LEFT、RIGHT 等多种 JOIN 类型，但是目前仅支持等值条件的连接（on x=y)</p>
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM Orders</span><br><span class="line">INNER JOIN Product</span><br><span class="line">ON Orders.product_id = Product.id</span><br></pre></td></tr></table></figure>
+<h3 id="Interval-Joins-区间join"><a href="#Interval-Joins-区间join" class="headerlink" title="Interval Joins(区间join)"></a>Interval Joins(区间join)</h3><h4 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>需要至少一个等值关联条件 和 时间限制条件，时间限制条件可以是等值、条件比较、或者Between，如下ltime 左表时间属性 rtime 右表时间属性<ul>
+<li>ltime = rtime</li>
+<li>ltime &gt;= rtime AND ltime &lt; rtime + INTERVAL ‘10’ MINUTE</li>
+<li>ltime BETWEEN rtime - INTERVAL ‘10’ SECOND AND rtime + INTERVAL ‘5’ SECOND</li>
+</ul>
+</li>
+<li>该类型join只支持Append 数据流，不支持含 Retract等 的动态表。由于给定了关联的区间，因此只需要保留很少的状态，内存压力较小。但是缺点是如果关联的数据晚到或者早到，导致落不到 JOIN 区间内，就可能导致结果不准确。此外，只有当区间过了以后，JOIN 结果才会输出，因此会有一定的延迟存在。</li>
+</ul>
+<h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h4><pre><code>1. 两个表中指定时间属性
+1. Join条件中 需要包含至少一个等值关联条件  外加一个时间区间的条件
+</code></pre><h4 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM Orders o, Shipments s</span><br><span class="line">WHERE o.id = s.order_id</span><br><span class="line">AND o.order_time BETWEEN s.ship_time - INTERVAL <span class="string">'4'</span> HOUR AND s.ship_time</span><br></pre></td></tr></table></figure>
+<h3 id="Temporal-Joins（时态表join）"><a href="#Temporal-Joins（时态表join）" class="headerlink" title="Temporal Joins（时态表join）"></a>Temporal Joins（时态表join）</h3><h4 id="Event-Time-Temporal-Join"><a href="#Event-Time-Temporal-Join" class="headerlink" title="Event Time Temporal Join"></a>Event Time Temporal Join</h4><h4 id="Processing-Time-Temporal-Join"><a href="#Processing-Time-Temporal-Join" class="headerlink" title="Processing Time Temporal Join"></a>Processing Time Temporal Join</h4><h3 id="Lookup-Join（查找join"><a href="#Lookup-Join（查找join" class="headerlink" title="Lookup Join（查找join)"></a>Lookup Join（查找join)</h3><h4 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li><p>Lookup Join常用于流与维表之间的join，维表来源于外部系统，比如mysql、redis等。而维表的作用就是对流式数据进行数据补全</p>
+</li>
+<li><p>的，这要在性能和正确性之间做权衡。所以Lookup Join也提供了缓存的机制，使用的是guava cache实现的。默认缓存机制是禁用的。</p>
+<ul>
+<li><p>lookup.cache.max-rows 和 lookup.cache.ttl。两个都配置了才能启用缓存。</p>
+<p>lookup.cache.max-rows：指定缓存的最大行数。如果超过该值，则最老的行记录将会过期，会被新的记录替换掉。</p>
+<p>lookup.cache.ttl：指定缓存中每行记录的最大存活时间。如果某行记录超过该时间，则该行记录将会过期。</p>
+<p>lookup.cache.caching-missing-key：是否缓存空查询结果的key，默认值是true，即缓存空查询结果的key（即key值没查到结果）</p>
+<p>lookup.max-retries：查询数据库的最大重试次数</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h4><p>​        Lookup Join要求流表具有处理时间属性（必须是processing time，当前不支持event time，也就是说这种方法不支持根据数据流的事件时间去查维度表里的对应时刻的数据），而维表可以直接使用连接器connector支持。Lookup Join使用Processing Time Temporal Join 的语法，且必须要有等值连接条件。</p>
+<p>​    关键写法：JOIN table2 FOR SYSTEM_TIME AS OF table1.proctime</p>
+<h4 id="使用示例-2"><a href="#使用示例-2" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CREATE TABLE <span class="title">orders</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    order_id    STRING,</span></span></span><br><span class="line"><span class="function"><span class="params">    price       DECIMAL(<span class="number">32</span>,<span class="number">2</span>)</span>,</span></span><br><span class="line"><span class="function">    customer_id    STRING,</span></span><br><span class="line"><span class="function">    order_time  <span class="title">TIMESTAMP</span><span class="params">(<span class="number">3</span>)</span>,</span></span><br><span class="line"><span class="function">    proc_time as <span class="title">PROCTIME</span><span class="params">()</span></span></span><br><span class="line"><span class="function">) <span class="title">with</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'connector'</span> = <span class="string">'kafka'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'topic'</span> = <span class="string">'mdxxx'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'properties.bootstrap.servers'</span> = <span class="string">'xxx-003:9092'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'properties.group.id'</span> = <span class="string">'xxx'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'scan.startup.mode'</span> = <span class="string">'latest-offset'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'format'</span> = <span class="string">'json'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'json.fail-on-missing-field'</span> = <span class="string">'false'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'json.ignore-parse-errors'</span> = <span class="string">'true'</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line"><span class="function">CREATE TABLE <span class="title">customers</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  id INT,</span></span></span><br><span class="line"><span class="function"><span class="params">  name STRING,</span></span></span><br><span class="line"><span class="function"><span class="params">  country STRING,</span></span></span><br><span class="line"><span class="function"><span class="params">  zip STRING</span></span></span><br><span class="line"><span class="function"><span class="params">)</span> <span class="title">with</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'connector'</span> = <span class="string">'jdbc'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'url'</span> = <span class="string">'jdbc:mysql://mysqlhost:3306/customerdb'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'table-name'</span> = <span class="string">'da.customers'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'username'</span> = <span class="string">'xxx'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'password'</span> = <span class="string">'xxx'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'lookup.cache.max-rows'</span> = <span class="string">'100000'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'lookup.cache.ttl'</span> = <span class="string">'86400000'</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line">SELECT o.order_id, o.price, c.country, c.zip</span><br><span class="line">FROM orders AS o</span><br><span class="line">  JOIN customers FOR SYSTEM_TIME AS OF o.proc_time AS c</span><br><span class="line">    ON o.customer_id = c.id;</span><br></pre></td></tr></table></figure>
+<h3 id="Table-Function-Join（表函数join）"><a href="#Table-Function-Join（表函数join）" class="headerlink" title="Table Function Join（表函数join）"></a>Table Function Join（表函数join）</h3><h4 id="注意事项-3"><a href="#注意事项-3" class="headerlink" title="注意事项"></a>注意事项</h4><p>​    将表与表函数的结果join起来。左边(外部)表的每一行都与表函数的相应调用所产生的所有行join。用户定义表函数必须在使用前注册</p>
+<h4 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h4><p>​    <code>JOIN LATERAL TABLE(table_func(filed))</code></p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_id, res</span><br><span class="line">FROM Orders,</span><br><span class="line"><span class="function">LATERAL <span class="title">TABLE</span><span class="params">(table_func(order_id)</span>) <span class="title">t</span><span class="params">(res)</span></span></span><br><span class="line"><span class="function">SELECT order_id, res</span></span><br><span class="line"><span class="function">FROM Orders</span></span><br><span class="line"><span class="function">LEFT OUTER JOIN LATERAL <span class="title">TABLE</span><span class="params">(table_func(order_id)</span>) <span class="title">t</span><span class="params">(res)</span></span></span><br><span class="line"><span class="function">ON TRUE</span></span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/11/05/Java-2023-11-05-开发中常见图的绘制/" data-toggle="tooltip" data-placement="top" title="开发中常见图的绘制">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/10/10/Java-2023-10-10-JavaParse操作Java代码/" data-toggle="tooltip" data-placement="top" title="JavaParse操作Java代码">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Regular-Joins-普通join"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Regular Joins(普通join)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#注意事项"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">注意事项</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#语法"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">语法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用示例"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">使用示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Interval-Joins-区间join"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Interval Joins(区间join)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#注意事项-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">注意事项</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#语法-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">语法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用示例-1"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">使用示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Temporal-Joins（时态表join）"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Temporal Joins（时态表join）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Event-Time-Temporal-Join"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Event Time Temporal Join</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Processing-Time-Temporal-Join"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Processing Time Temporal Join</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Lookup-Join（查找join"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Lookup Join（查找join)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#注意事项-2"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">注意事项</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#语法-2"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">语法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用示例-2"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">使用示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Table-Function-Join（表函数join）"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Table Function Join（表函数join）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#注意事项-3"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">注意事项</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#语法-3"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">语法</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#示例"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                        
+                          <a class="tag" href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2024 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

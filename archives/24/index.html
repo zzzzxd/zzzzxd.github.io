@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1115,6 +1115,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1123,25 +1145,27 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-65-超级洗衣机/">
+            <a href="/2020/11/23/企业高频算法面试题-2020-11-23-Problem-77-股票系列问题/">
                 <h2 class="post-title">
-                    Problem 65 超级洗衣机
+                    Problem 77 股票系列问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目  Leetcode原题：  https://leetcode.com/problems/super-washing-machines/
-题目解析
-考察单点瓶颈问题。诸如此类的还有接雨水问题等 都是考察 ”最短处“，整个问题的解决在于“痛点”。洗衣机每个都可以一次扔一件衣服，因为可以并发进行。那么只要找到需要扔到最多的，问题就解决了。
-
-代码12345678910111213141516......
+                    题目15节
+股票问题1：
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+股票问题2：
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+股票问题3:
+https://leetcode.com/problems/best-time-t......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-08
+                    2020-11-23
                 </p>
                 <div class="tags">
                     
@@ -1159,32 +1183,34 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/05/企业高频算法面试题-2020-11-05-Problem-64-谷歌抽牌问题/">
+            <a href="/2020/11/23/企业高频算法面试题-2020-11-23-Problem-76-第一个缺失的正数/">
                 <h2 class="post-title">
-                    Problem 64 谷歌抽牌问题
+                    Problem 76 第一个缺失的正数
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    谷歌面试题扩展版面值为1~N的牌组成一组，每次你从组里等概率的抽出1~N中的一张下次抽会换一个新的组，有无限组当累加和=a且=b时，你将失败返回获胜的概率，给定的参数为N，a，b
+                    题目​    Leetcode原题：
+​    https://leetcode.com/problems/first-missing-positive/
 题目解析
-可能一上来不知道如何下手，这种就想先定义递归含义。依据定义的含义在去写递归体，最后想递归边界，以及优化点。
-这个题想到大概思路之后，还要注意优化，关键在于(a,b)之间的距离
+这类题目使用的一种我管它称作 “占位”的思想
+对于直接判定垃圾值，会占用有效空间，所以减小连续的最大值
+暂时无法判定是否为垃圾值，进行归位。
 
-代码1234......
+
+需要用L保证扫描过的是连续空间，否则无法判断当前已经连续到哪个值了
+是从1开始的，......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-05
+                    2020-11-23
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                 </div>
             
@@ -1198,65 +1224,26 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/04/企业高频算法面试题-2020-11-04-Problem-63/">
+            <a href="/2020/11/21/企业高频算法面试题-2020-11-21-Problem-75-修复BST/">
                 <h2 class="post-title">
-                    Problem 63
+                    Problem 75 修复BST
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
                     题目Leetcode原题：
-https://leetcode.com/problems/regular-expression-matching/
+https://leetcode.com/problems/recover-binary-search-tree/
 题目解析
-好题。考察递归，重点思考后面元素是*或者.，需要对这种特殊清楚进行分析可能性。
+题目中只有两个节点会出错，那么实际中序遍历 要么出现降序一次，要么两次，要是一次只需要交换降序的两个节点，要是两次 需要把第一个降序的节点和最后一个节点交换
 
-代码1234567891011121314151617181920212223242526272829303132333435363738394041424......
+代码12345678910111213141516171819202122232......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-04
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/01/企业高频算法面试题-2020-11-01-Problem-62-最长连续序列/">
-                <h2 class="post-title">
-                    Problem 62 最长连续序列
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode.com/problems/longest-consecutive-sequence/
-题目解析
-和之前的播放流题目类似，用头表，尾表的思想实现，只不过这个题是用map，不是基于链表的
-
-代码123456789101112131415161718192021222324252627282930313233class Solution......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-01
+                    2020-11-21
                 </p>
                 <div class="tags">
                     
@@ -1274,96 +1261,23 @@ https://leetcode.com/problems/longest-consecutive-sequence/
 
         <div class="post-preview">
 
-            <a href="/2020/10/31/企业高频算法面试题-2020-10-31-Problem-61-两个有序数整体K小/">
+            <a href="/2020/11/21/企业高频算法面试题-2020-11-21-Problem-73/">
                 <h2 class="post-title">
-                    Problem 61 两个有序数整体K小
+                    Problem 73
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode原题：https://leetcode.com/problems/median-of-two-sorted-arrays/进阶问题：在两个都有序的数组中找整体第K小的数可以做到O(log(Min(M,N)))
-12节
+                    题目从二叉树的某个节点x开始，往下子节点都要的，叫子树；在二叉树上只要能连起来的任何结构，叫子拓扑结构；返回二叉树上满足搜索二叉树性质的、最大子拓扑结构的节点数
+14节
 题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-31
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/28/企业高频算法面试题-2020-10-28-Problem-60-查找种类及个数相同的子串/">
-                <h2 class="post-title">
-                    Problem 60 查找种类及个数相同的子串
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定长度为m的字符串aim，以及一个长度为n的字符串str问能否在str中找到一个长度为m的连续子串，使得这个子串刚好由aim的m个字符组成，顺序无所谓，返回任意满足条件的一个子串的起始位置，未找到返回-1
-Leetcode:567
-题目解析
-题目比较简单 使用滑动窗口+字符表映射就可以解决
-
-代码123456789101112131415161718192021222324252627......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-28
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/27/企业高频算法面试题-2020-10-27-Problem-59-切分回文串的最少刀数/">
-                <h2 class="post-title">
-                    Problem 59 切分回文串的最少刀数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    问题一：一个字符串至少要切几刀能让切出来的子串都是回文串
-问题二：返回问题一的其中一种划分结果
-问题三：返回问题一的所有划分结果
-11jie
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-27
+                    2020-11-21
                 </p>
                 <div class="tags">
                     
@@ -1385,27 +1299,25 @@ Leetcode:567
 
         <div class="post-preview">
 
-            <a href="/2020/10/24/企业高频算法面试题-2020-10-24-Problem-58-整体回文串的所有添加结果/">
+            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-72-小于K的最大子数组和/">
                 <h2 class="post-title">
-                    Problem 58 整体回文串的所有添加结果
+                    Problem 72 小于K的最大子数组和
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目问题一：一个字符串至少需要添加多少个字符能整体变成回文串
-https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
-问题二：返回问题一的其中一种添加结果
-问题三：返回问题一的所有添加结果
-11节
+                    题目​    请返回arr中，求子数组的累加和，是&lt;=K的并且是最大的返回这个最大的累加和
 题目解析
-题目原型比较简单，普通的dp 行列模型。主要是通过此题目 总结一下通过dp矩......
+考察的是前缀和的应用！前缀和已经多次提到了，就看你能不能灵活应用了
+
+代码1234567891011121314151617181920// 请返回arr中，求个子数组的累加和，是&lt;=K的，并且是最大的。	// 返回这个最大的累加和	public static int getMa......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-24
+                    2020-11-18
                 </p>
                 <div class="tags">
                     
@@ -1427,30 +1339,29 @@ https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrom
 
         <div class="post-preview">
 
-            <a href="/2020/10/23/企业高频算法面试题-2020-10-23-Problem-57-布尔运算/">
+            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-71-最长的有效括号的子串/">
                 <h2 class="post-title">
-                    Problem 57 布尔运算
+                    Problem 71 最长的有效括号的子串
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode-cn.com/problems/boolean-evaluation-lcci/
+                    题目给定一个只由左括号和右括号的字符串返回最长的有效括号子串的长度
 题目解析
-这个题也是很类似的思想，比如讲，求最大子数组和？不管哪个子数组和最大，子数组一定是以某个元素结尾，所以我们找以当前元素为结尾的最大子数组，最终找到答案。此题求的是加括号的方法数，首先每个运算符号一定都会生效。通过加括号使得答案最终为1，那么......
+分析题目，dp[i]代表以当前i位置结尾，最长的有效括号的子串长度。
+
+代码123456789101112131415161718192021222324// s只由(和)组成	// 求最长有效括号子串长度	public static int maxLength(String s) &#123;		if (s ==......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-23
+                    2020-11-18
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                 </div>
             
@@ -1464,33 +1375,145 @@ https://leetcode-cn.com/problems/boolean-evaluation-lcci/
 
         <div class="post-preview">
 
-            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-55-K个逆序对数组/">
+            <a href="/2020/11/15/企业高频算法面试题-2020-11-15-Problem-70-数组调整的逆序对问题/">
                 <h2 class="post-title">
-                    Problem 55 K个逆序对数组
+                    Problem 70 数组调整的逆序对问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定整数power，给定一个数组arr，给定一个数组reverse，含义如下：arr的长度一定是2的power次方reverse中的每个值一定都在0~power范围。例如power = 2, arr = {3, 1, 4, 2}，reverse = {0, 1, 0, 2}
+任何一个在前的数字可以和任何一个在后的数组，构成一对数可能是升序关系、相等关系或者降序关系比如arr开始时有如下的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-69-回文对/">
+                <h2 class="post-title">
+                    Problem 69 回文对
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode原题：
+​    https://leetcode.com/problems/palindrome-pairs/
+题目解析
+这个题简单思路是暴力 能做的。
+提供第二种思路。我们针对每个字符串，要是能直接找出来与之配对能成为回文的，就不需要无脑的匹配再判断是不是回文了。那如果找是关键，是突破口！判断是回文的前缀，将后面逆序放前面则是回文！同理，判断是回文的后缀逆序......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-68-修复BST/">
+                <h2 class="post-title">
+                    Problem 68 修复BST
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode原题：
+​    https://leetcode.com/problems/recover-binary-search-tree/
+题目解析
+题目比较简答，因为BST中序遍历是升序，任意调换两个节点，正常的影响就是把中序中这两个元素进行调换会出现两段降序。case1 还提示了 也会有情况出现一段降序。所以说最多两段降序。我们给交换回来即可。
+用chi[]数组，......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/11/企业高频算法面试题-2020-11-11-Problem-67-打砖块/">
+                <h2 class="post-title">
+                    Problem 67 打砖块
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
                     题目Leetcode原题：
-https://leetcode.com/problems/k-inverse-pairs-array/
+https://leetcode.com/problems/bricks-falling-when-hit/
 题目解析
-这道题目是一道很不错的dp题目，这道题目如果去写几个例子，很容易发现特点，做好空间优化。
-结果要取模运算的时候，任何一处加法减法都要加模再去取模，一个时防止溢出，一个是防止计算出现负数。
-
-代码123456789101112131415161718c......
+首先一定要熟悉并查集。此题是并查集的逆运用，思考并查集核心思想在于集合的合并。而击落砖块问的是掉落之后的个数，相当于初始情况是一个大集合，不断的击落砖块时，集合分散之后，那些无连接的集合大小。所以可以，倒过来想，从击落最后一块砖块开始，此时是分散......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-22
+                    2020-11-11
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1561,39 +1584,11 @@ https://leetcode.com/problems/k-inverse-pairs-array/
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
-            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
-            
-        
-            
-        
+            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
             
         
             
@@ -1611,15 +1606,53 @@ https://leetcode.com/problems/k-inverse-pairs-array/
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
             
         
             
@@ -1633,6 +1666,10 @@ https://leetcode.com/problems/k-inverse-pairs-array/
             
         
             
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
@@ -1640,8 +1677,6 @@ https://leetcode.com/problems/k-inverse-pairs-array/
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1663,31 +1698,23 @@ https://leetcode.com/problems/k-inverse-pairs-array/
             
         
             
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
             <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1721,6 +1748,10 @@ https://leetcode.com/problems/k-inverse-pairs-array/
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
@@ -1739,11 +1770,9 @@ https://leetcode.com/problems/k-inverse-pairs-array/
             
         
             
-        
-            
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1820,23 +1849,23 @@ https://leetcode.com/problems/k-inverse-pairs-array/
     <ul>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
         </li>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
+          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
+          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
         </li>
       
         <li>
-          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
+          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1851,7 +1880,7 @@ https://leetcode.com/problems/k-inverse-pairs-array/
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1864,47 +1893,45 @@ https://leetcode.com/problems/k-inverse-pairs-array/
         
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#HBase"><li>HBase</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
-          <a href="categories/#HBase"><li>HBase</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
-          <a href="categories/#Git"><li>Git</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1946,7 +1973,7 @@ https://leetcode.com/problems/k-inverse-pairs-array/
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2023 
+                    Copyright &copy; Dante 2024 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

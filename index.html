@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1115,6 +1115,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1123,29 +1145,32 @@
 
         <div class="post-preview">
 
-            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之3PC/">
+            <a href="/2024/01/06/Flink-2024-01-06-Flink-timer定时器踩坑/">
                 <h2 class="post-title">
-                    分布式事务解决方案之3PC
+                    Flink timer定时器踩坑
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    什么是3PC 3PC，三阶段提交协议，是二阶段提交协议的改进版本，三阶段提交有两个改动点：
-（1）在协调者和参与者中都引入超时机制（2）在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。        所以3PC会分为3个阶段，CanCommit 准备阶段、PreCommit 预提交阶段、DoCommit 提交阶段，处理流程如下：
-3PC阶段详情阶段一......
+                    问题公司同事在开发时，发现任务跑一段时间后 定时器会延迟执行，查看日志如下:
+
+延迟了一个小时,基本上高峰就会出现。
+查看火焰图
+
+​    火焰图中明显看到定时器的处理方法占用大量cpu时间，所以定时器这块多少是有点问题的，但问题到底出在哪，只能进一步结合代码来看。
+
+可以看到代码中是每条数据都会注册定时器，也就是说 同时来100条数据，就会同时注册100个定时器，并且注册的定时器时间都一......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-03-09
+                    2024-01-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
-                    
-                      <a href="/tags/#事务" title="事务">事务</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1159,29 +1184,30 @@
 
         <div class="post-preview">
 
-            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之2PC/">
+            <a href="/2024/01/06/Flink-2024-01-06-watermark的传递/">
                 <h2 class="post-title">
-                    分布式事务解决方案之2PC
+                    watermark的传递
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    什么是2PC2PC即两阶段提交协议，是将整个事务流程分为两个阶段，准备阶段（Prepare phase）、提交阶段（commit phase），2是指两个阶段，P是指准备阶段，C是指提交阶段。
-举例：张三和李四好久不见，老友约起聚餐，饭店老板要求先买单，才能出票。这时张三和李四分别抱怨近况不如意，囊中羞涩，都不愿意请客，这时只能AA。
-只有张三和李四都付款，老板才能出票安排就餐。但由于张三和......
+                    水位线的传递
+​        在流处理中，上游任务处理完⽔位线、时钟改变之后，要把当前的⽔位线再次发出，⼴ 播给所有的下游⼦任务。⽽当⼀个任务接收到多个上游并⾏任务传递来的⽔位线时，应该以 最⼩的那个作为当前任务的事件时钟。
+​        ⽔位线在上下游任务之间的传递， ⾮常巧妙地避免了分布式系统中没有统⼀时钟的问 题，每个任务都以“处理完之前所有数据”为标准来确定⾃⼰的时钟。
+水位线......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-03-09
+                    2024-01-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
-                      <a href="/tags/#事务" title="事务">事务</a>
+                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
                     
                 </div>
             
@@ -1195,30 +1221,30 @@
 
         <div class="post-preview">
 
-            <a href="/2023/03/06/大数据-2023-03-06-clickhouse-join分析及优化/">
+            <a href="/2024/01/06/Flink-2024-01-06-interval-join执行流程解析/">
                 <h2 class="post-title">
-                    clickhouse join分析及优化
+                    interval join执行流程解析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ClickHouse Joinclickhouse的join 分为单机join和分布式join 
-单机join​    SQL 里面只有本地表的 JOIN，只会在当前节点执行。本地JOIN方式分为Hash JOIN和Merge Join。优先使用 hash join 当内存达到一定阈值后再使用 merge join，优先满足性能要求。
-Hash Join
-右表全部数据加载到内存，再在内存构建......
+                    重要概念想要熟悉interval join的原理或者读懂TimeIntervalJoin.java源码 必须先熟悉几个源码中提到的概念。假设A表 left join B表 ,A表来了一条数据a。那么会有这么几个概念。
+
+rightQualifiedLowerBound (右侧合格下界):
+它表示右侧流中的事件的最小匹配时间。对于每个左侧流事件，只有右侧流中的事件的时间大于等于rightQua......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-03-06
+                    2024-01-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
-                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
+                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
                     
                 </div>
             
@@ -1232,28 +1258,23 @@ Hash Join
 
         <div class="post-preview">
 
-            <a href="/2023/03/06/大数据-2023-03-06-分布式Join原理/">
+            <a href="/2023/11/20/大数据-2023-11-20-distribute-by、sort-by、order-by应用/">
                 <h2 class="post-title">
-                    分布式Join原理
+                    distribute by、sort by、order by应用
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言Join操作可以说是最复杂、代价最大的操作，也是OLAP场景中使用相对较多的操作，尤其是在大数据领域中，Join操作的性能优劣直接会影响到整个查询，接下来我们就高屋建瓴的对整个JOIN操作进行解析，方便大家更深入的理解JOIN原理。
-单机Join算法一般的Join算法：Nested-Loop Join (NL Join)、Block Nested-Loop Join、Sort Merge......
+                    使用场景order by：order by关键字用于对查询结果进行全局排序。它会将所有数据收集到一个节点上进行排序，然后输出有序的结果。使用order by时，Hive会将整个数据集加载到内存中进行排序，因此适用于数据量较小的情况。然而，由于需要加载全部数据到内存，对于大规模数据集来说，可能导致内存不足的问题。使用场景：当需要对查询结果进行全局排序，并且数据量较小的情况下，可以使用order......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-03-06
+                    2023-11-20
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
-                    
-                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
                     
                 </div>
             
@@ -1267,27 +1288,29 @@ Hash Join
 
         <div class="post-preview">
 
-            <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/">
+            <a href="/2023/11/20/Java-2023-11-20-理解UTC、格林威治时间、夏令时等概念/">
                 <h2 class="post-title">
-                    (十三)HBASE优化实操
+                    理解UTC、格林威治时间、夏令时等概念
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    HBASE优化实操高可用1在HBase中Hmaster负责监控RegionServer的生命周期，均衡RegionServer的负载，如果Hmaster挂掉了，那么整个HBase集群将陷入不健康的状态，并且此时的工作状态并不会维持太久。所以HBase支持对Hmaster的高可用配置。
-关闭HBase集群1[root@centos1 home]# stop-hbase.sh
-在conf目录下创......
+                    概念解释GMTGMT（Greenwich Mean Time）， 格林威治平时（也称格林威治时间）。
+它规定太阳每天经过位于英国伦敦郊区的皇家格林威治天文台的时间为中午12点。
+
+格林威治皇家天文台为了海上霸权的扩张计划，在十七世纪就开始进行天体观测。为了天文观测，选择了穿过英国伦敦格林威治天文台子午仪中心的一条经线作为零度参考线，这条线，简称格林威治子午线。
+1884年10月在美国华盛顿召......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-21
+                    2023-11-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#Java" title="Java">Java</a>
                     
                 </div>
             
@@ -1301,28 +1324,31 @@ Hash Join
 
         <div class="post-preview">
 
-            <a href="/2023/02/21/Hbase-2023-02-21-十二-HBASE企业级调优/">
+            <a href="/2023/11/14/Flink-2023-11-14-Flink-Sql-Group类型/">
                 <h2 class="post-title">
-                    (十二)HBASE企业级调优
+                    Flink Sql Group类型
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    服务端
-hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10，生产环境建议使用100，也不是越大越好，特别是当请求内容很大的时候，比如scan/put几M的数据，会占用过多的内存，有可能导致频繁的GC，甚至出现内存溢出。
+                    Group Aggregation注意事项
+对于流式查询，计算查询结果所需的状态可能会无限增长。状态大小取决于组的数量以及聚合函数的数量和类型。例如，MIN/MAX在状态大小上很重，而COUNT则很便宜。您可以为查询配置提供适当的生存时间（TTL），以防止状态大小过大。请注意，这可能会影响查询结果的正确性
 
-hbase.master.distributed.log.splitting：默认值为true，建议设为false。关闭h......
+语法​    同mysql 语法
+用法举例123SELECT COUNT(*)FRO......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-21
+                    2023-11-14
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
                     
                 </div>
             
@@ -1336,26 +1362,29 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
 
         <div class="post-preview">
 
-            <a href="/2023/02/21/Hbase-2023-02-21-十一-HBASE的协处理器/">
+            <a href="/2023/11/05/Java-2023-11-05-开发中常见图的绘制/">
                 <h2 class="post-title">
-                    (十一)HBASE的协处理器
+                    开发中常见图的绘制
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    简介Hbase作为列族数据库最经常被人诟病的特性包括：无法轻易建立“二级索引”，难以执行求和、计数、排序等操作。
-1比如，在旧版本的(&lt;0.92)Hbase 中，统计数据表的总行数，需要使用 Counter 方法，执行一次 MapReduce Job 才能得到。虽然HBase在数据存储层中集成了MapReduce，能够有效用于数据表的分布式计算。然而在很多情况下，做一些简单的相加或者聚......
+                    
+参考:https://juejin.cn/post/6844903496542584845
+​        https://blog.csdn.net/qq_41854911/article/details/127063022
+
+背景​    大家应该在从事软件开发领域工作时间有一段时间之后，就开始有画图的意识，不管是懵懂的学别人还是想更好的让其它人理解自己的一个观点。所谓“一图胜千言”......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-21
+                    2023-11-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#Java" title="Java">Java</a>
                     
                 </div>
             
@@ -1369,28 +1398,29 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
 
         <div class="post-preview">
 
-            <a href="/2023/02/21/Hbase-2023-02-21-十-HBASE的二级索引/">
+            <a href="/2023/10/11/Flink-2023-10-11-Flink-Sql-Join类型/">
                 <h2 class="post-title">
-                    (十)HBASE的二级索引
+                    Flink Sql Join类型
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    说明当涉及到了HBase的多条件组合查询时，要把多条件组合查询的字段都拼接在RowKey中显然不太可能，这个时候，我们可以通过设计HBase的二级索引来解决这个问题.
-设计原理
-二级索引的本质就是建立各列值与行键之间的映射关系
-如图，当要对F:C1这列建立索引时，只需要建立F:C1各列值到其对应行键的映射关系，如C11-&gt;RK1等，这样就完成了对F:C1列值的二级索引的构建，当要查询符......
+                    Regular Joins(普通join)注意事项
+最普通的join 两条流任何一条流更新都会触发计算,为了支持结果的更新，下游目的表需要定义主键。
+运行时需要保留左表和右表的状态，且随着时间的推移，状态会无限增长，最终可能导致作业 OOM 崩溃或异常缓慢。因此我们强烈建议用户在 Flink 参数中设置 table.exec.state.ttl 选项，它可以指定 JOIN 状态的保留时间（定......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-21
+                    2023-10-11
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
                     
                 </div>
             
@@ -1404,26 +1434,29 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
 
         <div class="post-preview">
 
-            <a href="/2023/02/21/Hbase-2023-02-21-九-rowkey设计原则和案例/">
+            <a href="/2023/10/10/Java-2023-10-10-JavaParse操作Java代码/">
                 <h2 class="post-title">
-                    (九)rowkey设计原则和案例
+                    JavaParse操作Java代码
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    热点问题当大量客户端的访问定向到群集的一个节点或仅几个节点时，就会发生热点。此访问可能是读取、可能是写入。大量的访问使负责管理该region的单台计算机不堪重负，从而导致性能下降并可能导致region不可用。这也可能对由同一regionserver管理的其他region产生不利影响，因为该主机无法满足请求的负载。设计数据访问模式非常重要，这样才能充分，均匀地利用群集。
-rowkey的重要性H......
+                    
+转载 https://www.python100.com/html/83113.html
+
+​    JavaParse是一个Java库，它可以轻松解析和操作Java代码。使用JavaParse，您可以轻松处理Java源代码，而无需手动解析和处理文本文件。本文将从不同方面详细介绍JavaParse的功能和使用方法。
+ParseJavaParse的核心类是com.github.javapar......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-21
+                    2023-10-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#Java" title="Java">Java</a>
                     
                 </div>
             
@@ -1437,40 +1470,25 @@ rowkey的重要性H......
 
         <div class="post-preview">
 
-            <a href="/2023/02/21/多线程-2023-02-21-线程池使用详解/">
+            <a href="/2023/10/10/Flink-2023-10-10-flink回撤流问题与剖析/">
                 <h2 class="post-title">
-                    线程池使用详解
+                    flink回撤流问题与剖析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    背景为什么使用线程池问题一：反复创建线程开销大
-问题二：过多的线程会占用太多内存
-解决以上两个问题的思路
-
-用少量的线程——避免内存占用过多
-
-让这部分线程都保持工作，且可以反复执行任务——避免生命周期 的损耗
-
-
-使用线程池的好处
-加快响应速度 
-合理利用CPU和内存 
-统一管理
-
-线程池的使用场景
-服务器接收到大量请求时，使用线程池技术是非常合适的，它可 以大大减少线程的创建和销毁次数，......
+                    问题引入1234567891011121314151617181920212223242526272829303132333435363738394041424344--用户中心CREATE TEMPORARY TABLE tb_urs_user_kafka (    origin_database STRING METADATA FROM 'value.database' VIRTUAL,......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-21
+                    2023-10-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1537,39 +1555,11 @@ rowkey的重要性H......
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
-            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
-            
-        
-            
-        
+            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
             
         
             
@@ -1587,15 +1577,53 @@ rowkey的重要性H......
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
             
         
             
@@ -1609,6 +1637,10 @@ rowkey的重要性H......
             
         
             
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
@@ -1616,8 +1648,6 @@ rowkey的重要性H......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1639,31 +1669,23 @@ rowkey的重要性H......
             
         
             
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
             <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1697,6 +1719,10 @@ rowkey的重要性H......
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
@@ -1715,11 +1741,9 @@ rowkey的重要性H......
             
         
             
-        
-            
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1796,23 +1820,23 @@ rowkey的重要性H......
     <ul>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
         </li>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
+          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
+          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
         </li>
       
         <li>
-          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
+          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1827,7 +1851,7 @@ rowkey的重要性H......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1840,47 +1864,45 @@ rowkey的重要性H......
         
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#HBase"><li>HBase</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
-          <a href="categories/#HBase"><li>HBase</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
-          <a href="categories/#Git"><li>Git</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1922,7 +1944,7 @@ rowkey的重要性H......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2023 
+                    Copyright &copy; Dante 2024 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1115,6 +1115,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1123,23 +1145,165 @@
 
         <div class="post-preview">
 
-            <a href="/2018/10/01/leetcode-leetcode高频面试题-2018-10-01-141-Linked-List-Cycle/">
+            <a href="/2018/10/05/源码-jdk-2022-07-05-HashMap源码解析/">
                 <h2 class="post-title">
-                    141. Linked List Cycle
+                    HashMap源码解析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/linked-list-cycle/
-题目描述​    Given head, the head of a linked list, determine if the linked list has a cycle in it.
-There is a cycle in a linked list if there ......
+                    
+HashMap是特别常用的数据结构，源码很长,但底层原理并不复杂，本篇主要介绍hashmap的存储原理以及底层用到的数据结构，并对核心代码进行分析。
+
+整体结构
+结构图
+HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时， 链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表，整体的数据结构 如下：
+
+
+类注释信息
+
+允许 ......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-01
+                    2018-10-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#源码" title="源码">源码</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/10/05/leetcode-leetcode高频面试题-2018-10-05-169-Majority-Element/">
+                <h2 class="post-title">
+                    169. Majority Element
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/majority-element/
+题目描述​    Given an array nums of size n, return the majority element.
+The majority element is the element that appears more than ⌊n / 2⌋ time......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-10-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Array" title="Array">Array</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/10/05/leetcode-leetcode高频面试题-2018-10-05-166-Fraction-to-Recurring-Decimal/">
+                <h2 class="post-title">
+                    166. Fraction to Recurring Decimal
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/fraction-to-recurring-decimal/submissions/
+题目描述​    Given two integers representing the numerator and denominator of a fraction, return the fraction in string......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-10-05
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/10/05/leetcode-leetcode高频面试题-2018-10-05-162-Find-Peak-Element/">
+                <h2 class="post-title">
+                    162. Find Peak Element
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/find-peak-element/
+题目描述​    A peak element is an element that is strictly greater than its neighbors.
+Given a 0-indexed integer array nums, find a peak elemen......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-10-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Binary Search" title="Binary Search">Binary Search</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/10/05/leetcode-leetcode高频面试题-2018-10-05-160-Intersection-of-Two-Linked-Lists/">
+                <h2 class="post-title">
+                    160. Intersection of Two Linked Lists
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/intersection-of-two-linked-lists/
+题目描述​    Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If th......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-10-05
                 </p>
                 <div class="tags">
                     
@@ -1157,28 +1321,64 @@ There is a cycle in a linked list if there ......
 
         <div class="post-preview">
 
-            <a href="/2018/10/01/leetcode-leetcode高频面试题-2018-10-01-140-Word-Break-II/">
+            <a href="/2018/10/05/leetcode-leetcode高频面试题-2018-10-05-155-Min-Stack/">
                 <h2 class="post-title">
-                    140. Word Break II
+                    155. Min Stack
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/word-break-ii/
-题目描述​    Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word is a valid dictionary w......
+                    题目链接​    https://leetcode.com/problems/min-stack/
+题目描述​    Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+Implement the MinStack class:
+
+MinStack(......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-01
+                    2018-10-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Stack" title="Stack">Stack</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2018/10/05/leetcode-leetcode高频面试题-2018-10-05-152-Maximum-Product-Subarray/">
+                <h2 class="post-title">
+                    152. Maximum Product Subarray
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目链接​    https://leetcode.com/problems/maximum-product-subarray/
+题目描述​    Given an integer array nums, find a contiguous non-empty subarray within the array that has the largest product, and return......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2018-10-05
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
                     
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                      <a href="/tags/#Array" title="Array">Array</a>
                     
                 </div>
             
@@ -1192,28 +1392,27 @@ There is a cycle in a linked list if there ......
 
         <div class="post-preview">
 
-            <a href="/2018/10/01/leetcode-leetcode高频面试题-2018-10-01-139-Word-Break/">
+            <a href="/2018/10/03/leetcode-leetcode高频面试题-2018-10-03-150-Evaluate-Reverse-Polish-Notation/">
                 <h2 class="post-title">
-                    139. Word Break
+                    150. Evaluate Reverse Polish Notation
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/word-break/submissions/
-题目描述​    Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of o......
+                    题目链接​    https://leetcode.com/problems/evaluate-reverse-polish-notation/
+题目描述​    Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+Valid operators are +, -, *, and /. Each......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-10-01
+                    2018-10-03
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                      <a href="/tags/#Stack" title="Stack">Stack</a>
                     
                 </div>
             
@@ -1227,26 +1426,26 @@ There is a cycle in a linked list if there ......
 
         <div class="post-preview">
 
-            <a href="/2018/09/29/leetcode-leetcode高频面试题-2018-09-29-138-Copy-List-with-Random-Pointer/">
+            <a href="/2018/10/03/leetcode-leetcode高频面试题-2018-10-03-149-Max-Points-on-a-Line/">
                 <h2 class="post-title">
-                    138. Copy List with Random Pointer
+                    149. Max Points on a Line
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/copy-list-with-random-pointer/
-题目描述​    A linked list of length n is given such that each node contains an additional random pointer, which could point to any......
+                    题目链接​    https://leetcode.com/problems/max-points-on-a-line/
+题目描述​    Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane, return the maximum number of points th......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-09-29
+                    2018-10-03
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Linkedlist" title="Linkedlist">Linkedlist</a>
+                      <a href="/tags/#Math" title="Math">Math</a>
                     
                 </div>
             
@@ -1260,194 +1459,29 @@ There is a cycle in a linked list if there ......
 
         <div class="post-preview">
 
-            <a href="/2018/09/28/leetcode-leetcode高频面试题-2018-09-28-136-Single-Number/">
+            <a href="/2018/10/02/leetcode-leetcode高频面试题-2018-10-02-148-Sort-List/">
                 <h2 class="post-title">
-                    136. Single Number
+                    148. Sort List
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/single-number/
-题目描述​    Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
-You must implement a solut......
+                    题目链接​    https://leetcode.com/problems/sort-list/
+题目描述​    Given the head of a linked list, return the list after sorting it in ascending order.
+Example 1:
+
+12Input: head &#x3D; [4,2,1,3]Output: [1......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2018-09-28
+                    2018-10-02
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Bit Manipulation" title="Bit Manipulation">Bit Manipulation</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/09/28/leetcode-leetcode高频面试题-2018-09-28-134-Gas-Station/">
-                <h2 class="post-title">
-                    134. Gas Station
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/gas-station/
-题目描述​    There are n gas stations along a circular route, where the amount of gas at the ith station is gas[i].
-You have a car with an unlimited ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-09-28
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/09/27/leetcode-leetcode高频面试题-2018-09-27-131-Palindrome-Partitioning/">
-                <h2 class="post-title">
-                    131. Palindrome Partitioning
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/palindrome-partitioning/
-题目描述​    Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome par......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-09-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/09/27/leetcode-leetcode高频面试题-2018-09-27-130-Surrounded-Regions/">
-                <h2 class="post-title">
-                    130. Surrounded Regions
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/surrounded-regions/
-题目描述​    Given an m x n matrix board containing &#39;X&#39; and &#39;O&#39;, capture all regions that are 4-directionally surrounded by &#......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-09-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#BFS" title="BFS">BFS</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/09/27/leetcode-leetcode高频面试题-2018-09-27-128-Longest-Consecutive-Sequence/">
-                <h2 class="post-title">
-                    128. Longest Consecutive Sequence
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/longest-consecutive-sequence/
-题目描述​    Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
-You must writ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-09-27
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/09/27/leetcode-leetcode高频面试题-2018-09-27-127-Word-Ladder/">
-                <h2 class="post-title">
-                    127. Word Ladder
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/word-ladder/
-题目描述​    A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -&gt; s1 -&gt......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-09-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Graph" title="Graph">Graph</a>
+                      <a href="/tags/#LinkedList" title="LinkedList">LinkedList</a>
                     
                 </div>
             
@@ -1518,39 +1552,11 @@ You must writ......
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
-            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
-            
-        
-            
-        
+            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
             
         
             
@@ -1568,15 +1574,53 @@ You must writ......
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
             
         
             
@@ -1590,6 +1634,10 @@ You must writ......
             
         
             
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
@@ -1597,8 +1645,6 @@ You must writ......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1620,31 +1666,23 @@ You must writ......
             
         
             
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
             <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1678,6 +1716,10 @@ You must writ......
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
@@ -1696,11 +1738,9 @@ You must writ......
             
         
             
-        
-            
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1777,23 +1817,23 @@ You must writ......
     <ul>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
         </li>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
+          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
+          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
         </li>
       
         <li>
-          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
+          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1808,7 +1848,7 @@ You must writ......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1821,47 +1861,45 @@ You must writ......
         
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#HBase"><li>HBase</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
-          <a href="categories/#HBase"><li>HBase</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
-          <a href="categories/#Git"><li>Git</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1903,7 +1941,7 @@ You must writ......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2023 
+                    Copyright &copy; Dante 2024 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

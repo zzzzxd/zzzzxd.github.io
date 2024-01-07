@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          flink回撤流问题与剖析 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/10/10/Flink-2023-10-10-flink回撤流问题与剖析/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                            
+                        </div>
+                        <h1>flink回撤流问题与剖析</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-10-10
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.8k</span> and
+                                Reading Time <span class="post-count">12</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">--用户中心</span><br><span class="line"><span class="function">CREATE TEMPORARY TABLE <span class="title">tb_urs_user_kafka</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    origin_database STRING METADATA FROM <span class="string">'value.database'</span> VIRTUAL,</span></span></span><br><span class="line"><span class="function"><span class="params">    origin_table STRING METADATA FROM <span class="string">'value.table'</span> VIRTUAL,</span></span></span><br><span class="line"><span class="function"><span class="params">    origin_ts string METADATA FROM <span class="string">'value.ingestion-timestamp'</span> VIRTUAL,</span></span></span><br><span class="line"><span class="function"><span class="params">    id BIGINT COMMENT <span class="string">'主键'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        user_id STRING COMMENT <span class="string">'用户id'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        create_time TIMESTAMP(<span class="number">0</span>)</span> COMMENT '创建时间',</span></span><br><span class="line"><span class="function">        update_time <span class="title">TIMESTAMP</span><span class="params">(<span class="number">0</span>)</span> COMMENT '修改时间'</span></span><br><span class="line"><span class="function">) <span class="title">WITH</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'connector'</span> = <span class="string">'kafka'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'topic'</span> = <span class="string">'yb_canal_binlog_basic_ucenter_prod'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'properties.bootstrap.servers'</span> = <span class="string">'$&#123;secret_values.kafka_ip_prod&#125;'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'properties.group.id'</span> = <span class="string">'flink_basic_ybfqsync_zxd_02_prod_sql'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'scan.startup.mode'</span> = <span class="string">'timestamp'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'value.format'</span> = <span class="string">'canal-json'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'scan.startup.timestamp-millis'</span> = <span class="string">'1693324500000'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'value.canal-json.ignore-parse-errors'</span>=<span class="string">'true'</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line"><span class="comment">//hbase sink 表 </span></span><br><span class="line">CREATE temporary TABLE dim_ybfq_user_id</span><br><span class="line">(</span><br><span class="line">   rk          varchar</span><br><span class="line">  ,pt varchar</span><br><span class="line">  ,<span class="function">PRIMARY <span class="title">KEY</span> <span class="params">(rk)</span> NOT ENFORCED</span></span><br><span class="line"><span class="function">)</span></span><br><span class="line"><span class="function"><span class="title">WITH</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="string">'connector'</span> = <span class="string">'lindorm'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'seedserver'</span> = <span class="string">'$&#123;secret_values.lindorm_url&#125;'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'namespace'</span> = <span class="string">'ut'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'username'</span> = <span class="string">'$&#123;secret_values.lindorm_user&#125;'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'password'</span> = <span class="string">'$&#123;secret_values.lindorm_password&#125;'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'tableName'</span> = <span class="string">'dim_ybfq_user_id'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'columnFamily'</span> = <span class="string">'info'</span></span></span></span><br><span class="line"><span class="function"><span class="params">  ,<span class="string">'ignoreDelete'</span>=<span class="string">'true'</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line">--写hbase</span><br><span class="line">INSERT INTO  dim_ybfq_user_id</span><br><span class="line">SELECT </span><br><span class="line">user_id,</span><br><span class="line">cast(TO_DATE(create_time) as string) as pt</span><br><span class="line">FROM tb_urs_user_kafka</span><br><span class="line">where</span><br><span class="line">REGEXP(origin_table, <span class="string">'^(tb_urs_user_)\d+$'</span>);</span><br></pre></td></tr></table></figure>
+<p>一个简单的同步,在使用flink sql同步 kafka数据写入hbase时，发现莫名其妙的会删除数据，初始化数据有1000万，同步增量之后慢慢只有不到800万,从hbase后台发现会出现一批DELETE请求，那DELETE请求怎么来的，就得与联系Flink的回撤流了</p>
+<h3 id="回撤流"><a href="#回撤流" class="headerlink" title="回撤流"></a>回撤流</h3><p>​    Flink中，Kafka Source是非回撤流，Group By是回撤流。所谓回撤流，就是可以更新历史数据的流，更新历史数据并不是将发往下游的历史数据进行更改，要知道，已经发往下游的消息是追不回来的。更新历史数据的含义是，在得知某个Key（接在Key BY / Group By后的字段）对应数据已经存在的情况下，如果该Key对应的数据再次到来，会生成一条delete消息和一条新的insert消息发往下游。目的就是为了做更新 。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RetractDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// set up execution environment</span></span><br><span class="line">        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line">        env.setParallelism(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// use blink planner in streaming mode</span></span><br><span class="line">        EnvironmentSettings settings = EnvironmentSettings.newInstance()</span><br><span class="line">                .inStreamingMode()</span><br><span class="line">                .build();</span><br><span class="line">        StreamTableEnvironment tEnv = StreamTableEnvironment.create(env, settings);</span><br><span class="line">        <span class="comment">// 用fromElements模拟非回撤消息</span></span><br><span class="line">        DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; dataStream = env.fromElements(<span class="keyword">new</span> Tuple2&lt;&gt;(<span class="string">"hello"</span>, <span class="number">1</span>), <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="string">"hello"</span>, <span class="number">1</span>), <span class="keyword">new</span> Tuple2&lt;&gt;(<span class="string">"hello"</span>, <span class="number">1</span>));</span><br><span class="line">        tEnv.registerDataStream(<span class="string">"tmpTable"</span>, dataStream, <span class="string">"word, num"</span>);</span><br><span class="line">        Table table = tEnv.sqlQuery(<span class="string">"select cnt, count(word) as freq from (select word, count(num) as cnt from tmpTable group by word) group by cnt"</span>);</span><br><span class="line">        <span class="comment">// 启用回撤流机制</span></span><br><span class="line">        tEnv.toRetractStream(table, TypeInformation.of(<span class="keyword">new</span> TypeHint&lt;Tuple2&lt;Long, Long&gt;&gt;() &#123;</span><br><span class="line">        &#125;)).print();</span><br><span class="line">        env.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">true</span>,(<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">(<span class="keyword">false</span>,(<span class="number">1</span>,<span class="number">1</span>))</span><br><span class="line">(<span class="keyword">true</span>,(<span class="number">2</span>,<span class="number">1</span>))</span><br><span class="line">(<span class="keyword">false</span>,(<span class="number">2</span>,<span class="number">1</span>))</span><br><span class="line">(<span class="keyword">true</span>,(<span class="number">3</span>,<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="1.png" alt="在这里插入图片描述"></p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><h4 id="聚合算子回撤"><a href="#聚合算子回撤" class="headerlink" title="聚合算子回撤"></a>聚合算子回撤</h4><p>有如下sql：</p>
+<p>​    第一层count，接收kafka source的非回撤流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT region, count(id) AS order_cnt FROM order_tab GROUP BY region</span><br></pre></td></tr></table></figure>
+<p><img src="3.png" alt="在这里插入图片描述"></p>
+<p>第二层count，接收第一层count的回撤流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_cnt, count(region) as region_cnt FROM order_count_view GROUP BY order_cnt</span><br></pre></td></tr></table></figure>
+<p><img src="4.png" alt="在这里插入图片描述"></p>
+<p>下面来分析一下其源码：</p>
+<ol>
+<li><p>代码生成</p>
+<p>Flink在为SQL语句生成物理执行计划是，会在<code>AggregateUtil.createGroupAggregateFunction</code>方法中生成聚合方法<code>GeneratedAggregations#retract()</code>,并最终利用Janino动态编译框架编译运行。生成<code>GeneratedAggregations</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">object AggregateUtil &#123;</span><br><span class="line">	<span class="keyword">private</span>[flink] def createDataStreamGroupAggregateFunction[K](...generateRetraction: Boolean...)&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 动态生成聚合方法</span></span><br><span class="line">    <span class="keyword">new</span> GroupTableAggProcessFunction[K](</span><br><span class="line">    genAggregations.asInstanceOf[GeneratedTableAggregationsFunction],</span><br><span class="line">    aggregationStateType,</span><br><span class="line">    <span class="comment">// 生成聚合函数是否支持retraction，该方法通过判断上游流是否支持回撤来进行返回，true表示支持，false表示不支持</span></span><br><span class="line">    <span class="comment">// 例如kafka source算子不支持回撤流，count聚合算子支持回撤流</span></span><br><span class="line">    generateRetraction,</span><br><span class="line">    groupings.length,</span><br><span class="line">    queryConfig)</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class GroupAggProcessFunction[K](...private val generateRetraction: Boolean...)&#123;</span><br><span class="line">  <span class="comment">// 代理模式，真正生成的function被GroupTableAggProcessFunction所代理</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">var</span> function: GeneratedTableAggregations = _</span><br><span class="line">  </span><br><span class="line">	<span class="function">override def <span class="title">open</span><span class="params">(config: Configuration)</span> </span>&#123;</span><br><span class="line">  	LOG.debug(s<span class="string">"Compiling TableAggregateHelper: $&#123;genTableAggregations.name&#125; \n\n "</span> +</span><br><span class="line">      s<span class="string">"Code:\n$&#123;genTableAggregations.code&#125;"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 利用janino动态编译框架，动态编译并动态加载聚合函数</span></span><br><span class="line">    val clazz = compile(</span><br><span class="line">      <span class="comment">// 获取类加载器</span></span><br><span class="line">      getRuntimeContext.getUserCodeClassLoader,</span><br><span class="line">      genAggregations.name,</span><br><span class="line">      genAggregations.code)</span><br><span class="line">    LOG.debug(<span class="string">"Instantiating TableAggregateHelper."</span>)</span><br><span class="line">    function = clazz.newInstance()</span><br><span class="line">    function.open(getRuntimeContext)</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// janino的使用</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">import</span> org.codehaus.janino.SimpleCompiler</span><br><span class="line">trait Compiler[T] &#123;</span><br><span class="line">  <span class="meta">@throws</span>(classOf[CompileException])</span><br><span class="line">  <span class="function">def <span class="title">compile</span><span class="params">(cl: ClassLoader, name: String, code: String)</span>: Class[T] </span>= &#123;</span><br><span class="line">    require(cl != <span class="keyword">null</span>, <span class="string">"Classloader must not be null."</span>)</span><br><span class="line">    val compiler = <span class="keyword">new</span> SimpleCompiler()</span><br><span class="line">    compiler.setParentClassLoader(cl)</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      compiler.cook(code)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">      <span class="keyword">case</span> t: Throwable =&gt;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InvalidProgramException(<span class="string">"Table program cannot be compiled. "</span> +</span><br><span class="line">          <span class="string">"This is a bug. Please file an issue."</span>, t)</span><br><span class="line">    &#125;</span><br><span class="line">    compiler.getClassLoader.loadClass(name).asInstanceOf[Class[T]</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回撤</p>
+<p>聚合算子中包含两种状态，state 存储中间结果状态（如count(id)值）、cntState存储key对应的消息数量（聚合消息+1，回撤消息-1）。state用于不断更新中间聚合状态，cntState用于判断向下游发送当前新的聚合消息，还是上一次聚合消息对应的回撤消息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">state class GroupAggProcessFunction[K](...)</span><br><span class="line">    extends ProcessFunctionWithCleanupState[K, CRow, CRow](queryConfig)&#123;</span><br><span class="line">      <span class="comment">// 每一条消息都会经过该方法处理</span></span><br><span class="line">      <span class="function">override def <span class="title">processElement</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      // 消息的格式是CRow，包含一个change字段，标识是否是聚合消息；<span class="keyword">true</span>标识聚合消息，<span class="keyword">false</span>标识回撤消息</span></span></span><br><span class="line"><span class="function"><span class="params">      inputC: CRow,</span></span></span><br><span class="line"><span class="function"><span class="params">      ctx: KeyedProcessFunction[K, CRow, CRow]#Context,</span></span></span><br><span class="line"><span class="function"><span class="params">      out: Collector[CRow])</span>: Unit </span>= &#123;</span><br><span class="line">      ...</span><br><span class="line">        </span><br><span class="line">          <span class="comment">// 中间状态，即上一次的聚合结果</span></span><br><span class="line">    			<span class="keyword">var</span> accumulators = state.value()</span><br><span class="line">          <span class="comment">// key对应的消息数量，对于不支持回撤流的消息，取值可以&gt;1；对于支持回撤流的消息，取值为0或1</span></span><br><span class="line">    			<span class="keyword">var</span> inputCnt = cntState.value()</span><br><span class="line">          <span class="comment">// 如果是聚合消息</span></span><br><span class="line">          <span class="keyword">if</span> (inputC.change) &#123;</span><br><span class="line">      			inputCnt += <span class="number">1</span></span><br><span class="line">      			<span class="comment">// accumulate()是聚合方法，例如count()</span></span><br><span class="line">      			function.accumulate(accumulators, input)</span><br><span class="line">      			function.setAggregationResults(accumulators, newRow.row)</span><br><span class="line">    			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 对于支持回撤流的消息，inputCnt取值为0或1，因为某条消息如果要发生变更，只有先撤回，再新增新消息，如图片中的（+ SH 1）,（- SH 1），（+ SH 2）</span></span><br><span class="line">      			inputCnt -= <span class="number">1</span></span><br><span class="line">            <span class="comment">// function对象的retract（）方法，只有在判断上游算子支持回撤流时才会生成；在当前场景下为与count()相反的逻辑，即对input中key的count聚合进行减一操作</span></span><br><span class="line">      			function.retract(accumulators, input)</span><br><span class="line">      			function.setAggregationResults(accumulators, newRow.row)</span><br><span class="line">    			&#125;</span><br><span class="line">        	...</span><br><span class="line">        </span><br><span class="line">          <span class="comment">// 如果该key对应的中间状态还存在，即如果该key还存在，发送最新的聚合消息</span></span><br><span class="line">          <span class="keyword">if</span> (inputCnt != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// update the state</span></span><br><span class="line">      			state.update(accumulators)</span><br><span class="line">      			cntState.update(inputCnt)</span><br><span class="line">            ...</span><br><span class="line">            <span class="comment">// newRow/prevRow分别代表新消息和对上一次消息的回撤消息，具体请参考源码</span></span><br><span class="line">          	out.collect(newRow)</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 如果该key的聚合消息和回撤消息数量相等，则认为该key即将消失，发送回撤消息</span></span><br><span class="line">            out.collect(prevRow)</span><br><span class="line">      			<span class="comment">// 清除状态</span></span><br><span class="line">      			state.clear()</span><br><span class="line">      			cntState.clear()</span><br><span class="line">          &#125;</span><br><span class="line">    	...</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Sink算子回撤"><a href="#Sink算子回撤" class="headerlink" title="Sink算子回撤"></a>Sink算子回撤</h4><p>回顾一下 flink sql的处理流程</p>
+<p><img src="5.png" alt="image-20231010104618924"></p>
+<p>流式表查询的处理过程：</p>
+<ol>
+<li><p>流被转换为动态表</p>
+</li>
+<li><p>对动态表计算连续查询，生成新的动态表</p>
+</li>
+<li><p>生成的动态表被转换回流</p>
+</li>
+</ol>
+<p>官方对于sink的插入模式有以下三种描述：</p>
+<ul>
+<li>Append 模式 - 该模式用户在定义Sink的DDL时候不定义PK，在Apache Flink内部生成的所有只有INSERT语句；</li>
+<li>Upsert 模式 - 该模式用户在定义Sink的DDL时候可以定义PK，在Apache Flink内部会根据事件打标(retract机制)生成Upsert和DELETE 语句,其中如果定义了PK， UPDATE语句按PK进行更新，如果没有定义PK UPDATE会按整行更新；</li>
+<li>Retract 模式 - 该模式下会产生INSERT和DELETE两种信息，Sink Connector 根据这两种信息构造对应的数据操作指令；</li>
+</ul>
+<p>但其实sink算子是否支持回撤流，要根据sink数据源的特性而定。例如kafka sink只支持append模式，jdbc sink在Flink1.11中只支持upsert（不配置primary key会报错）。这都跟sink数据源的特性密切相关</p>
+<ol>
+<li><p>kafka sink</p>
+<p>如kafka是利用log中顺序追加消息的方式存储消息，因此只支持append模式，网上有修改kafka sink connector以支持upsert的方法：将聚合算子中的回撤消息（false）过滤掉，只留下聚合消息（true），并写入kafka，带来的现象就是一个聚合结果会多次出现在kafka中，算是一种阉割版的upsert模式，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">KafkaTableSinkBase</span> <span class="keyword">implements</span> <span class="title">AppendStreamTableSink</span>&lt;<span class="title">Row</span>&gt; </span>&#123;</span><br><span class="line">  <span class="comment">// 将 kafka 改成 upsert</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> DataStreamSink&lt;?&gt; consumeDataStream(DataStream&lt;Tuple2&lt;Boolean, Row&gt;&gt; dataStream) &#123;</span><br><span class="line">    <span class="keyword">final</span> SinkFunction&lt;Row&gt; kafkaProducer = createKafkaProducer(</span><br><span class="line">            topic,</span><br><span class="line">            properties,</span><br><span class="line">            serializationSchema,</span><br><span class="line">            partitioner);</span><br><span class="line">    <span class="comment">// 过滤掉回撤消息</span></span><br><span class="line">    <span class="keyword">return</span> dataStream.filter(t -&gt; t.f0).map(t -&gt; t.f1)</span><br><span class="line">            .addSink(kafkaProducer)</span><br><span class="line">            .setParallelism(dataStream.getParallelism())</span><br><span class="line">            .name(TableConnectorUtils.generateRuntimeName(<span class="keyword">this</span>.getClass(), getFieldNames()));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>JDBC Sink</p>
+<p>jdbc sink我们以mysql为例，理论上mysql支持append、upsert、retract中的所有模式，但是Flink1.11中只提供了upsert模式。这很好理解，CDC作为Flink1.11的重大特性，append和retract对于CDC都没有意义，只有upsert符合CDC的初衷。</p>
+<blockquote>
+<p>注意：Flink 1.11中ddl中不配置primary key会报错，尽管Flink并不会校验primary key的正确性，而只是upsert模式的一种表征</p>
+</blockquote>
+<p>其原理是利用了mysql的upsert原子语句（必须有主键）来实现，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `TABLE_SINK_SYNC`(`eno`, `ename`, `esex`, `ebirthday`, `eteam`, `eincome`)</span><br><span class="line">VALUES (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line">ON DUPLICATE KEY UPDATE `eno`=VALUES(`eno`),</span><br><span class="line">                        `ename`=VALUES(`ename`),</span><br><span class="line">                        `esex`=VALUES(`esex`),</span><br><span class="line">                        `ebirthday`=VALUES(`ebirthday`),</span><br><span class="line">                        `eteam`=VALUES(`eteam`),</span><br><span class="line">                        `eincome`=VALUES(`eincome`)</span><br></pre></td></tr></table></figure>
+<p>如果upsert操作不是原子的，很可能会发生并发问题，带来预料不到的后果。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="聚合算子回撤-VS-Sink算子回撤"><a href="#聚合算子回撤-VS-Sink算子回撤" class="headerlink" title="聚合算子回撤 VS Sink算子回撤"></a>聚合算子回撤 VS Sink算子回撤</h4><ol>
+<li>原理不同</li>
+</ol>
+<ul>
+<li><p>聚合算子通过在state和cntState这两个状态分别维护中间聚合状态和某key所对应的消息数量（聚合消息+1，回撤消息-1），如果cntState.value() = 1，则下发最新的聚合消息；如果cntState.value() = 0，则将state中维护的上一次的聚合状态作为回撤消息进行下发。</p>
+</li>
+<li><p>Sink算子则是解析canal或debezium中的op字段，如果op=create，则取after字段中的有效数据进行下发；如果op=update，则分别取before和after中的有效数据进行下发；如果op=delete，则取before中的有效数据进行下发。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">DebeziumJsonDeserializationSchema</span> <span class="keyword">implements</span> <span class="title">DeserializationSchema</span>&lt;<span class="title">RowData</span>&gt; </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deserialize</span><span class="params">(<span class="keyword">byte</span>[] message, Collector&lt;RowData&gt; out)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    	GenericRowData row = (GenericRowData) jsonDeserializer.deserialize(message);</span><br><span class="line">			GenericRowData payload;</span><br><span class="line">			<span class="keyword">if</span> (schemaInclude) &#123;</span><br><span class="line">				payload = (GenericRowData) row.getField(<span class="number">0</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				payload = row;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			GenericRowData before = (GenericRowData) payload.getField(<span class="number">0</span>);</span><br><span class="line">			GenericRowData after = (GenericRowData) payload.getField(<span class="number">1</span>);</span><br><span class="line">			String op = payload.getField(<span class="number">2</span>).toString();</span><br><span class="line">      <span class="comment">// 关键逻辑</span></span><br><span class="line">			<span class="keyword">if</span> (OP_CREATE.equals(op) || OP_READ.equals(op)) &#123;</span><br><span class="line">				after.setRowKind(RowKind.INSERT);</span><br><span class="line">				out.collect(after);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (OP_UPDATE.equals(op)) &#123;</span><br><span class="line">				before.setRowKind(RowKind.UPDATE_BEFORE);</span><br><span class="line">				after.setRowKind(RowKind.UPDATE_AFTER);</span><br><span class="line">				out.collect(before);</span><br><span class="line">				out.collect(after);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (OP_DELETE.equals(op)) &#123;</span><br><span class="line">				before.setRowKind(RowKind.DELETE);</span><br><span class="line">				out.collect(before);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> (!ignoreParseErrors) &#123;</span><br><span class="line">					<span class="keyword">throw</span> <span class="keyword">new</span> IOException(format(</span><br><span class="line">						<span class="string">"Unknown \"op\" value \"%s\". The Debezium JSON message is '%s'"</span>, op, <span class="keyword">new</span> String(message)));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，利用JDBC原子语句<code>ON DUPLICATE KEY UPDATE</code>实现upsert语义。</p>
+</li>
+</ul>
+<ol>
+<li><p>数据结构不同</p>
+<p>聚合算子中的数据格式为<code>CRow</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class CRow(var row: Row, var change: Boolean) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>Sink算子中的数据结构为Row</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericRowData</span> <span class="keyword">implements</span> <span class="title">RowData</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Object[] fields;</span><br><span class="line">  <span class="comment">// Flink1.11新增的属性</span></span><br><span class="line">	<span class="keyword">private</span> RowKind kind;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> RowKind &#123;</span><br><span class="line">	INSERT(<span class="string">"+I"</span>, (<span class="keyword">byte</span>) <span class="number">0</span>),</span><br><span class="line">	UPDATE_BEFORE(<span class="string">"-U"</span>, (<span class="keyword">byte</span>) <span class="number">1</span>),</span><br><span class="line">	UPDATE_AFTER(<span class="string">"+U"</span>, (<span class="keyword">byte</span>) <span class="number">2</span>),</span><br><span class="line">	DELETE(<span class="string">"-D"</span>, (<span class="keyword">byte</span>) <span class="number">3</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>聚合算子和Sink算子关于回撤的概念相似，但原理不同且使用场景也不同，聚合算子的回撤用于聚合状态的更新，Sink算子的回撤则更多的是应用于CDC场景。</p>
+<p>聚合算子的撤回机制，保证了FlinkSQL持续查询/增量查询的正确语义；而Sink算子的回撤机制，保证了CDC场景下的正确语义。</p>
+<p>在回到头看我们引入的问题，实际上就是flink sql写入hbase时 转成了 回撤流 所以一个写入请求 被拆成了 DELETE和PUT请求，并且由于两个时间戳一致，hbase正是通过时间戳来判断写入顺序的，就导致先PUT之后又删除的情况,而实际上 HBase本身是由rowkey保证幂等的无需回撤，所以只要过滤掉DELETE请求即可，可通过参数 <code>ignoreDelete&#39;=&#39;true</code>搞定。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/daijiguo/article/details/109976105" target="_blank" rel="noopener">https://blog.csdn.net/daijiguo/article/details/109976105</a></p>
+</blockquote>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/10/10/Java-2023-10-10-JavaParse操作Java代码/" data-toggle="tooltip" data-placement="top" title="JavaParse操作Java代码">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/10/09/Flink-2023-10-09-flink泛型擦除/" data-toggle="tooltip" data-placement="top" title="flink泛型擦除">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#问题引入"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">问题引入</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#回撤流"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">回撤流</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#示例"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">示例</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#源码分析"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">源码分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#聚合算子回撤"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">聚合算子回撤</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Sink算子回撤"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Sink算子回撤</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#聚合算子回撤-VS-Sink算子回撤"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">聚合算子回撤 VS Sink算子回撤</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#结论"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">结论</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2024 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

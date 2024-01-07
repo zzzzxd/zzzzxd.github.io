@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1115,6 +1115,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1123,25 +1145,29 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/13/数据仓库-2023-01-13-Hudi-Upsert操作原理详解/">
+            <a href="/2023/02/15/Hbase-2023-02-15-二-HBASEHBASE体系结构/">
                 <h2 class="post-title">
-                    Hudi-Upsert操作原理详解
+                    (二)HBASEHBASE体系结构
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    背景​    首先介绍下Hudi的背景，因为背景对理解一个项目很关键。​    Hudi，正式的全称是Hadoop Upsert Delete and Incremental。其实关于这个名字也不用太较真，因为都是后来附会上去的，从源代码里可以看到这个项目最初的名字是hoodie和现在的名字发音相同。但这个名字还是透露了一些信息的，那就是Hudi项目最初的设计目标:在hadoop上实现upd......
+                    RDBMS的表模型(扩展)我们先来了解以下传统型数据库的存储结构，也就是表模型（参考下图）：
+12- 关系型数据库采用表格的存储方式，数据按行和列进行存储，读取和查询十分方便。- 关系型数据库存储结构化的数据，存储前必须先定义好表结构，即各个列(字段)。
+
+关系型数据库的特点：
+1234567891011121. 存储结构：以表格的形式存储结构化的数据，需要事先定义好表的结构(字段名称，字段......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-13
+                    2023-02-15
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1155,23 +1181,25 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Huid-表类型/">
+            <a href="/2023/02/15/Hbase-2023-02-15-一-HBASE概述/">
                 <h2 class="post-title">
-                    Huid-表类型
+                    (一)HBASE概述
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    HBASE来源1231. hbase是一个开源的、分布式的、多版本的、可扩展的、非关系型的数据库。2. hbase是big table的开源的java版本，建立在hdfs基础之上，提供高可靠性、高性能的、列式存储、可伸缩、近实时读写的nosql的数据库系统3. 数据量越来越大，传统的关系型数据库不能满足存储和查询的需求。而hive虽然能够满足存储的要求，但是hive的本质也是利用底层的mr程......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-15
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
                     
                 </div>
             
@@ -1185,23 +1213,30 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Hudi-查询类型/">
+            <a href="/2023/02/15/源码-jdk-2023-02-15-AbstractQueuedSynchronizer源码解析（下）/">
                 <h2 class="post-title">
-                    Hudi-查询类型
+                    AbstractQueuedSynchronizer源码解析（下）
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    释放锁释放锁的触发时机就是我们常用的 Lock.unLock () 方法，目的就是让线程释放对资源的访问权 （流程见整体架构图紫色路线）。
+释放锁也是分为两类，一类是排它锁的释放，一类是共享锁的释放，我们分别来看下。
+释放排它锁 release排它锁的释放就比较简单了，从队头开始，找它的下一个节点，如果下一个节点是空的，就会从 尾开始，一直找到状态不是取消的节点，然后释放该节点，源码如下：
+......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-15
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1215,23 +1250,34 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/Hudi-核心概念/">
+            <a href="/2023/02/15/源码-jdk-2023-02-15-AbstractQueuedSynchronizer源码解析（上）/">
                 <h2 class="post-title">
-                    Hudi-核心概念
+                    AbstractQueuedSynchronizer源码解析（上）
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    
+AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的方法 ，juc包中的很多锁都是利用AQS实现，如下图。如果我们掌握了AQS原理 也能实现一个锁。AQS方法较多 ，对于源码学习而言，一定要先熟悉原理，从原理入手，串通整个流程，放眼观全局，一定不要掉入到某个细节之中。
+
+
+整体结构
+这个图总结了 AQS 整体架构的组成，和部分场景的动态流向，图中两个点说明一下，方便大家 观看。
+
+......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-15
                 </p>
                 <div class="tags">
+                    
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1245,21 +1291,105 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/设计模式-2023-01-12-Huid-数据管理/">
+            <a href="/2023/02/13/多线程-2023-02-13-多线程框架Executor家族总结/">
                 <h2 class="post-title">
-                    Huid-数据管理
+                    多线程框架Executor家族总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    Executor框架的结构主要包括3个部分
+任务：包括被执行任务需要实现的接口：Runnable接口或Callable接口
+执行(线程池)：
+Executor
+以及继承自Executor的EexcutorService接口
+ExecutorService接口的实现类（ThreadPoolExecutor和ScheduledThreadPoolExecutor）
+
+
+结果：包括接口Future......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/13/多线程-2023-02-13-线程状态Blocked和Waiting/">
+                <h2 class="post-title">
+                    线程状态Blocked和Waiting
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+入口区:    等待获取锁的线程状态为Blocked，获取锁失败，然后线程就排队等待
+等待区:    等待被唤醒的线程状态为Waiting(Time_Waiting)，线程在获取锁后调用自身的wait()方法，然后释放锁，进入等待区等待
+Java线程状态中,有blocked和wating状态，都是阻塞态 但阻塞的原因有所不同，对于等待取，线程A已经获得锁，其它线程 在尝试拿锁时，就会阻塞，......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/08/设计模式-2023-02-08-UML中的几种关系/">
+                <h2 class="post-title">
+                    UML中的几种关系
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+​    开发过程中，画类图 梳理关系，尤其应用设计模式时，经常要使用UML中的这些箭头，这些箭头多种多样并且表示的含义也不一样，今天就梳理一下，方便记忆。
+1 泛化
+概念：泛化表示一个更泛化的元素和一个更具体的元素之间的关系。泛化是用于对继承进行建模的UML元素。在Java中，用extends关键字表示。
+
+表示方式：用实线空心箭头表示。
+
+注意：箭头方向是子类指向父类。
+2 实现
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-08
                 </p>
                 <div class="tags">
                     
@@ -1277,29 +1407,83 @@
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/数据仓库-2023-01-12-Hudi介绍/">
+            <a href="/2023/02/02/数据仓库-2023-02-02-数仓中的全量表-快照表-流水表-拉链表/">
                 <h2 class="post-title">
-                    Hudi介绍
+                    数仓中的全量表&快照表&流水表&拉链表
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    数据湖框架目前市面上流行的三大开源数据湖方案分别为：Delta Lake、Apache Iceberg和Apache Hudi。
+                    ​    数仓设计中经常会听到各种类型表，今天我们对这其中几种表做一下解释，通过一个例子看一下它能解决什么问题。
+​    假设数据库中有一张user_balance表，用来记录用户的存款余额。
 
-Delta Lake：DataBricks公司推出的一种数据湖方案，网址：https://delta.io/ 
-
-
-Apache Iceberg：以类似于SQL的形式高性能的处理大型的开放式表，网址：https://iceberg.apache.org/
+2019-01-01，13点时，插入了两条数据。
 
 
-A......
+
+
+
+id
+name
+money
+time
+
+
+
+
+001
+张三
+100
+2019-01-01
+
+
+002
+李四
+100
+2019-01-01......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
+                    2023-02-02
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#离线数仓" title="离线数仓">离线数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/29/数据仓库-2023-01-29-Hudi-增量查询/">
+                <h2 class="post-title">
+                    Hudi-增量查询
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前面的文章中提到过 快照查询，优化查询 其实都是对MOR类型表提的，还有一种增量查询，下面详细介绍一下。
+原理解释这个功能提供给用户“读取任意两个commit之间差分数据”的能力。这个功能也是基于TimeLine 的“多版本数据管理”实现的
+我们还是以之前的例子，假设我们想要读取v1 → v2之间的差分数据
+
+Hudi会计算出v2到v1之间的差异是两个文件：fileId01_002和file......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-29
                 </p>
                 <div class="tags">
                     
@@ -1317,127 +1501,34 @@ A......
 
         <div class="post-preview">
 
-            <a href="/2023/01/12/数据仓库-2023-01-12-大数据为什么需要数据湖/">
+            <a href="/2023/01/14/数据仓库-2023-01-14-Hudi-事务原理详解/">
                 <h2 class="post-title">
-                    大数据为什么需要数据湖？
+                    Hudi-事务原理详解
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ​    当前基于Hive的离线数据仓库已经非常成熟，在传统的离线数据仓库中对记录级别的数据进行更新是非常麻烦的，需要对待更新的数据所属的整个分区，甚至是整个表进行全面覆盖才行，由于离线数仓多级逐层加工的架构设计，数据更新时也需要从贴源层开始逐层反应到后续的派生表中去。
-​    随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根......
+                    ​    之前的文章对Hudi的更新操作原理进行了较为详细的讲解，接下来是Hudi的另一大特色-事务功能。
+原理解释Hudi的事务功能被称为Timeline，因为Hudi把所有对一张表的操作都保存在一个时间线对象里面。Hudi官方文档中对于Timeline功能的介绍稍微有点复杂，不是很清晰。其实从用户角度来看的话，Hudi提供的事务相关能力主要是这些：
+
+
+
+
+特性
+功能
+
+
+
+
+原子性
+写......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-01-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
-                <h2 class="post-title">
-                    数据湖技术的发展
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    数据湖的定义Wikipedia是这样定义的:
-
-数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-01-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
-                <h2 class="post-title">
-                    各大公司实时数仓实践
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    网易实时数仓实践
-​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
-
-突然数据量增多，基于......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-01-10
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/01/10/数据仓库-2023-01-10-实时数仓的发展趋势-流批一体/">
-                <h2 class="post-title">
-                    实时数仓的发展趋势-流批一体
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    实时数仓现状当前基于Hive的离线数据仓库已经非常成熟，随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根据数仓架构演变过程，在Lambda架构中含有离线处理与实时处理两条链路，其架构图如下：
-
-​    正是由于两条链路处理数据导致数据不一致等一些列问题所以才有了Kappa架构，Kappa架构如下：
-
-​        Kapp......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-01-10
+                    2023-01-14
                 </p>
                 <div class="tags">
                     
@@ -1512,39 +1603,11 @@ A......
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
-            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
-            
-        
-            
-        
+            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
             
         
             
@@ -1562,15 +1625,53 @@ A......
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
             
         
             
@@ -1584,6 +1685,10 @@ A......
             
         
             
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
@@ -1591,8 +1696,6 @@ A......
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1614,31 +1717,23 @@ A......
             
         
             
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
             <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1672,6 +1767,10 @@ A......
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
@@ -1690,11 +1789,9 @@ A......
             
         
             
-        
-            
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1771,23 +1868,23 @@ A......
     <ul>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
         </li>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
+          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
+          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
         </li>
       
         <li>
-          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
+          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1802,7 +1899,7 @@ A......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1815,47 +1912,45 @@ A......
         
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#HBase"><li>HBase</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
-          <a href="categories/#HBase"><li>HBase</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
-          <a href="categories/#Git"><li>Git</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1897,7 +1992,7 @@ A......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2023 
+                    Copyright &copy; Dante 2024 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

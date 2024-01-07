@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1115,6 +1115,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1123,28 +1145,28 @@
 
         <div class="post-preview">
 
-            <a href="/2023/02/20/源码-jdk-2023-02-20-ThreadLocal-源码解析/">
+            <a href="/2023/10/09/Flink-2023-10-09-flink泛型擦除/">
                 <h2 class="post-title">
-                    ThreadLocal 源码解析
+                    flink泛型擦除
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ThreadLocal 提供了一种方式，让在多线程环境下，每个线程都可以拥有自己独特的数据，并 且可以在整个线程执行过程中，从上而下的传递。
-用法演示1234567891011121314151617181920212223242526272829303132public class ThreadLocalTest &#123;    public static ThreadLocal&lt......
+                    
+Java 8的Lambda表达式允许以一种直接的方式实现和传递函数，而不需要声明额外的(匿名的)类。Flink对Java API的所有操作符都支持使用lambda表达式，但是当lambda表达式使用了Java泛型时，开发者需要显式声明类型信息。如果开发者没有显式声明类型信息，那么使用lambda表达式会导致程序出错，这是Java编译器的泛型擦除问题所导致的。
+
+泛型擦除Java编译器在编译......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-20
+                    2023-10-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1158,36 +1180,29 @@
 
         <div class="post-preview">
 
-            <a href="/2023/02/20/源码-jdk-2023-02-20-ThreadPoolExecutor-源码解析/">
+            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之3PC/">
                 <h2 class="post-title">
-                    ThreadPoolExecutor 源码解析
+                    分布式事务解决方案之3PC
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    整体架构图
-类结构首先我们来看一下 ThreadPoolExecutor 的类结构，如下图：
-
-接下来我们大概的看下这几个类的大概 含义：
-
-Executor：定义 execute 方法来执行任务，入参是 Runnable，无出参：
-
-
-ExecutorService：Executor 的功能太弱，ExecutorService 丰富了对任务的执行和管理 的功能，主要代码如下：
-123456......
+                    什么是3PC 3PC，三阶段提交协议，是二阶段提交协议的改进版本，三阶段提交有两个改动点：
+（1）在协调者和参与者中都引入超时机制（2）在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。        所以3PC会分为3个阶段，CanCommit 准备阶段、PreCommit 预提交阶段、DoCommit 提交阶段，处理流程如下：
+3PC阶段详情阶段一......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-20
+                    2023-03-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
                     
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                      <a href="/tags/#事务" title="事务">事务</a>
                     
                 </div>
             
@@ -1201,31 +1216,29 @@ ExecutorService：Executor 的功能太弱，ExecutorService 丰富了对任务�
 
         <div class="post-preview">
 
-            <a href="/2023/02/20/源码-jdk-2023-02-20-ReentrantLock-源码解析/">
+            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之2PC/">
                 <h2 class="post-title">
-                    ReentrantLock 源码解析
+                    分布式事务解决方案之2PC
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    类注释ReentrantLock 中文我们习惯叫做可重入互斥锁，可重入的意思是同一个线程可以对同一个共 享资源重复的加锁或释放锁，互斥就是 AQS 中的排它锁的意思，只允许一个线程获得锁。
-我们来一起来看下类注释上都有哪些重要信息：
-
-可重入互斥锁，和 synchronized 锁具有同样的功能语义，但更有扩展性；
-构造器接受 fairness 的参数，fairness 是 ture 时，保......
+                    什么是2PC2PC即两阶段提交协议，是将整个事务流程分为两个阶段，准备阶段（Prepare phase）、提交阶段（commit phase），2是指两个阶段，P是指准备阶段，C是指提交阶段。
+举例：张三和李四好久不见，老友约起聚餐，饭店老板要求先买单，才能出票。这时张三和李四分别抱怨近况不如意，囊中羞涩，都不愿意请客，这时只能AA。
+只有张三和李四都付款，老板才能出票安排就餐。但由于张三和......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-20
+                    2023-03-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
                     
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                      <a href="/tags/#事务" title="事务">事务</a>
                     
                 </div>
             
@@ -1239,25 +1252,30 @@ ExecutorService：Executor 的功能太弱，ExecutorService 丰富了对任务�
 
         <div class="post-preview">
 
-            <a href="/2023/02/16/Hbase-2023-02-16-八-布隆过滤器应用/">
+            <a href="/2023/03/06/大数据-2023-03-06-clickhouse-join分析及优化/">
                 <h2 class="post-title">
-                    (八)布隆过滤器应用
+                    clickhouse join分析及优化
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    布隆过滤器由来​    Bloom filter 是由 Howard Bloom 在 1970 年提出的二进制向量数据结构，它具有很好的空间和时间效率，被用来检测一个元素是不是集合中的一个成员。如果检测结果为是，该元素不一定在集合中；但如果检测结果为否，该元素一定不在集合中。因此Bloom filter具有100%的召回率。这样每个检测请求返回有“在集合内（可能错误）”和“不在集合内（绝对不......
+                    ClickHouse Joinclickhouse的join 分为单机join和分布式join 
+单机join​    SQL 里面只有本地表的 JOIN，只会在当前节点执行。本地JOIN方式分为Hash JOIN和Merge Join。优先使用 hash join 当内存达到一定阈值后再使用 merge join，优先满足性能要求。
+Hash Join
+右表全部数据加载到内存，再在内存构建......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-16
+                    2023-03-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                    
+                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
                     
                 </div>
             
@@ -1271,27 +1289,28 @@ ExecutorService：Executor 的功能太弱，ExecutorService 丰富了对任务�
 
         <div class="post-preview">
 
-            <a href="/2023/02/16/Hbase-2023-02-16-七-HBASE与其他框架整合/">
+            <a href="/2023/03/06/大数据-2023-03-06-分布式Join原理/">
                 <h2 class="post-title">
-                    (七)HBASE与其他框架整合
+                    分布式Join原理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    整合的原因12341. HBase的最主要的目的是做数据存储2. Hive的最主要作用是做数据分析3. 整合的目的是为了方便的在项目中存储+分析4. hbase中的表数据在hive中能看到，hive中的表数据在hbase中也能看到
-Hive-To-Hbase1） 首先在hive中创建hbase能看到的表
-12345678910111213create table if not exists ......
+                    前言Join操作可以说是最复杂、代价最大的操作，也是OLAP场景中使用相对较多的操作，尤其是在大数据领域中，Join操作的性能优劣直接会影响到整个查询，接下来我们就高屋建瓴的对整个JOIN操作进行解析，方便大家更深入的理解JOIN原理。
+单机Join算法一般的Join算法：Nested-Loop Join (NL Join)、Block Nested-Loop Join、Sort Merge......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-16
+                    2023-03-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                    
+                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
                     
                 </div>
             
@@ -1305,56 +1324,23 @@ Hive-To-Hbase1） 首先在hive中创建hbase能看到的表
 
         <div class="post-preview">
 
-            <a href="/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/">
                 <h2 class="post-title">
-                    (六)HBASE的工作机制
+                    (十三)HBASE优化实操
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    寻址机制我们应该知道读写操作都在 RegionServer 上发生，而每个 RegionSever 为一定数量的 Region 服务，那么 Client 要对某一行数据做读写访问时，是如何知道具体要去访问哪个 RegionServer 呢？那就是接下来我们要讨论的问题
-首先，我们要知道hbase:meta表的结构，有助于我们理解寻址过程。
-meta表结构参考
-
-
-新的寻址方式123在0.96......
+                    HBASE优化实操高可用1在HBase中Hmaster负责监控RegionServer的生命周期，均衡RegionServer的负载，如果Hmaster挂掉了，那么整个HBase集群将陷入不健康的状态，并且此时的工作状态并不会维持太久。所以HBase支持对Hmaster的高可用配置。
+关闭HBase集群1[root@centos1 home]# stop-hbase.sh
+在conf目录下创......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-五-HBASE-API/">
-                <h2 class="post-title">
-                    (五)HBASE  API
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Namespace-DDLhbase的连接服务测试API12345678910111213141516171819public class ConnectionDemo &#123;    public static void main(String[] args) throws IOException &#123;        // 1、获取配置对象        Configurati......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
@@ -1372,24 +1358,24 @@ meta表结构参考
 
         <div class="post-preview">
 
-            <a href="/2023/02/16/Hbase-2023-02-16-四-HBASE-SHELL/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十二-HBASE企业级调优/">
                 <h2 class="post-title">
-                    (四)HBASE SHELL
+                    (十二)HBASE企业级调优
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    提示：可以查看命令组，或者是命令的帮助信息
-123hbase(main):000:0&gt; helphbase(main):000:0&gt; help 'command group'hbase(main):000:0&gt; help 'command'
-Namespace操作1） list_namespace:查询所有命名空间
-1hbase(main):020:0&gt; list_n......
+                    服务端
+hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10，生产环境建议使用100，也不是越大越好，特别是当请求内容很大的时候，比如scan/put几M的数据，会占用过多的内存，有可能导致频繁的GC，甚至出现内存溢出。
+
+hbase.master.distributed.log.splitting：默认值为true，建议设为false。关闭h......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-16
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
@@ -1407,23 +1393,22 @@ Namespace操作1） list_namespace:查询所有命名空间
 
         <div class="post-preview">
 
-            <a href="/2023/02/15/Hbase-2023-02-15-三-HBASE的安装/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十一-HBASE的协处理器/">
                 <h2 class="post-title">
-                    (三)HBASE的安装
+                    (十一)HBASE的协处理器
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    123456系统版本：centOS7.7HBASE版本：apache-hbase-1.2.1HADOOP版本：apache-hadoop-2.7.6JDK版本：jdk-1.8.0_45单机安装/伪分布式：1台服务器全分布式：3台服务器
-HBASE单机安装环境准备1）解压并更名
-123[root@node01 ~]# tar -zxvf hbase-1.2.1-bin.tar.gz -C /u......
+                    简介Hbase作为列族数据库最经常被人诟病的特性包括：无法轻易建立“二级索引”，难以执行求和、计数、排序等操作。
+1比如，在旧版本的(&lt;0.92)Hbase 中，统计数据表的总行数，需要使用 Counter 方法，执行一次 MapReduce Job 才能得到。虽然HBase在数据存储层中集成了MapReduce，能够有效用于数据表的分布式计算。然而在很多情况下，做一些简单的相加或者聚......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-15
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
@@ -1441,25 +1426,57 @@ HBASE单机安装环境准备1）解压并更名
 
         <div class="post-preview">
 
-            <a href="/2023/02/15/Hbase-2023-02-15-二-HBASEHBASE体系结构/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十-HBASE的二级索引/">
                 <h2 class="post-title">
-                    (二)HBASEHBASE体系结构
+                    (十)HBASE的二级索引
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    RDBMS的表模型(扩展)我们先来了解以下传统型数据库的存储结构，也就是表模型（参考下图）：
-12- 关系型数据库采用表格的存储方式，数据按行和列进行存储，读取和查询十分方便。- 关系型数据库存储结构化的数据，存储前必须先定义好表结构，即各个列(字段)。
-
-关系型数据库的特点：
-1234567891011121. 存储结构：以表格的形式存储结构化的数据，需要事先定义好表的结构(字段名称，字段......
+                    说明当涉及到了HBase的多条件组合查询时，要把多条件组合查询的字段都拼接在RowKey中显然不太可能，这个时候，我们可以通过设计HBase的二级索引来解决这个问题.
+设计原理
+二级索引的本质就是建立各列值与行键之间的映射关系
+如图，当要对F:C1这列建立索引时，只需要建立F:C1各列值到其对应行键的映射关系，如C11-&gt;RK1等，这样就完成了对F:C1列值的二级索引的构建，当要查询符......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-15
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-九-rowkey设计原则和案例/">
+                <h2 class="post-title">
+                    (九)rowkey设计原则和案例
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    热点问题当大量客户端的访问定向到群集的一个节点或仅几个节点时，就会发生热点。此访问可能是读取、可能是写入。大量的访问使负责管理该region的单台计算机不堪重负，从而导致性能下降并可能导致region不可用。这也可能对由同一regionserver管理的其他region产生不利影响，因为该主机无法满足请求的负载。设计数据访问模式非常重要，这样才能充分，均匀地利用群集。
+rowkey的重要性H......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
@@ -1534,39 +1551,11 @@ HBASE单机安装环境准备1）解压并更名
     <div class="tags">
         
             
-        
-            
-        
-            
             <a href="/tags/#Hbase" title="Hbase" rel="13">Hbase</a>
             
         
             
-            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
-            
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
-            
-        
-            
-        
+            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
             
         
             
@@ -1584,15 +1573,53 @@ HBASE单机安装环境准备1）解压并更名
             
         
             
+            <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="27">mysql</a>
+            
+        
+            
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
             
         
             
@@ -1606,6 +1633,10 @@ HBASE单机安装环境准备1）解压并更名
             
         
             
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
         
             
             <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
@@ -1613,8 +1644,6 @@ HBASE单机安装环境准备1）解压并更名
         
             
             <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
             
         
             
@@ -1636,31 +1665,23 @@ HBASE单机安装环境准备1）解压并更名
             
         
             
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
             <a href="/tags/#实时数仓" title="实时数仓" rel="11">实时数仓</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1694,6 +1715,10 @@ HBASE单机安装环境准备1）解压并更名
             
         
             
+        
+            
+        
+            
             <a href="/tags/#Math" title="Math" rel="8">Math</a>
             
         
@@ -1712,11 +1737,9 @@ HBASE单机安装环境准备1）解压并更名
             
         
             
-        
-            
-        
-            
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1793,23 +1816,23 @@ HBASE单机安装环境准备1）解压并更名
     <ul>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B3PC/">分布式事务解决方案之3PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
         </li>
       
         <li>
-          <a href="/2023/03/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1-2023-03-09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%B9%8B2PC/">分布式事务解决方案之2PC</a>
+          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-clickhouse-join%E5%88%86%E6%9E%90%E5%8F%8A%E4%BC%98%E5%8C%96/">clickhouse join分析及优化</a>
+          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
         </li>
       
         <li>
-          <a href="/2023/03/06/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-03-06-%E5%88%86%E5%B8%83%E5%BC%8FJoin%E5%8E%9F%E7%90%86/">分布式Join原理</a>
+          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
         </li>
       
         <li>
-          <a href="/2023/02/21/Hbase-2023-02-21-%E5%8D%81%E4%B8%89-HBASE%E4%BC%98%E5%8C%96%E5%AE%9E%E6%93%8D/">(十三)HBASE优化实操</a>
+          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1824,7 +1847,7 @@ HBASE单机安装环境准备1）解压并更名
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1837,47 +1860,45 @@ HBASE单机安装环境准备1）解压并更名
         
           <a href="categories/#工作技巧"><li>工作技巧</li></a>
         
-          <a href="categories/#SSM"><li>SSM</li></a>
+          <a href="categories/#HBase"><li>HBase</li></a>
         
           <a href="categories/#Flink"><li>Flink</li></a>
         
-          <a href="categories/#HBase"><li>HBase</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#jvm"><li>jvm</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
-          <a href="categories/#Git"><li>Git</li></a>
-        
-          <a href="categories/#Mysql"><li>Mysql</li></a>
-        
-          <a href="categories/#network"><li>network</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#Mysql"><li>Mysql</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+        
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
-        
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
-          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
+        
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1919,7 +1940,7 @@ HBASE单机安装环境准备1）解压并更名
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2023 
+                    Copyright &copy; Dante 2024 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">

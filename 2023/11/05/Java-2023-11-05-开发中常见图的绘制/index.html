@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          开发中常见图的绘制 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2023/11/05/Java-2023-11-05-开发中常见图的绘制/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                            
+                        </div>
+                        <h1>开发中常见图的绘制</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2023-11-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.5k</span> and
+                                Reading Time <span class="post-count">8</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>参考:<a href="https://juejin.cn/post/6844903496542584845" target="_blank" rel="noopener">https://juejin.cn/post/6844903496542584845</a></p>
+<p>​        <a href="https://blog.csdn.net/qq_41854911/article/details/127063022" target="_blank" rel="noopener">https://blog.csdn.net/qq_41854911/article/details/127063022</a></p>
+</blockquote>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​    大家应该在从事软件开发领域工作时间有一段时间之后，就开始有画图的意识，不管是懵懂的学别人还是想更好的让其它人理解自己的一个观点。所谓“一图胜千言”，我们身处于软件开发这个<strong>水很深且要求精确\</strong>的复杂*<em>领域*</em>里，要想把事情做好，最基本的是要把事情想明白，其次还要让相关的人能够明白你要说的东西，进行协作。</p>
+<p>　　特别对于一位架构师来说，能否画得一手好图尤其重要，因为相关的干系人数较多，要让不同领域的人能够达成一个统一的认识，是一件不太容易但也是必须要做好的事情。</p>
+<h2 id="不同场景下的图"><a href="#不同场景下的图" class="headerlink" title="不同场景下的图"></a>不同场景下的图</h2><h3 id="用例图"><a href="#用例图" class="headerlink" title="用例图"></a>用例图</h3><p><img src="1.png" alt="img"  />    </p>
+<p>用例图（User Case）是外部用户（被称为参与者，一般为软件的面向用户）所能观察到的系统功能的模型图。</p>
+<p>​        适用场景: 用来说明的是谁要使用系统，以及他们使用该系统可以做些什么</p>
+<p>​        缺点: 仅仅描述的是提供什么功能，不能表达非功能需求，如可靠性、性能等非功能需求</p>
+<h3 id="鲁棒图（Robustness-Diagram）"><a href="#鲁棒图（Robustness-Diagram）" class="headerlink" title="鲁棒图（Robustness Diagram）"></a>鲁棒图（Robustness Diagram）</h3><p><img src="2.png" alt="img"></p>
+<p>可能英文名Robustness Diagram更为常见一些，用于衔接用例图之后的设计，识别出系统在用例图中的各种职责，对后续的细节设计提供基础。算是对用例图的一种延伸。</p>
+<p>​        适用场景: 在确立用户场景之后，如果需要将关键功能设计出来，那么就需要它了。作图过程中最关键的2个点，发现职责，和梳理各个职责之间的关系。</p>
+<p>​        缺点: 和用例图是一样缺点，唯一的变化是，其有了粗粒度的实现层面的内容。</p>
+<p>（目前不常用）</p>
+<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="3.png" alt="img"></p>
+<p>思维导图是一个很厉害的发明，他将我们的思考过程具象化了，完美展示了由点到面不断发散的过程。但是它最大的价值，反而不是最终呈现出来的这个图，而是促进了思考的过程。并且需要注意的是，一定要把一条分支走到尽头，再回过头来走其它的分支，把思想榨干。 </p>
+<p>​        适用场景: 在一个事情刚开始的萌芽期，不知如何下手；或者陷入一个困境的时候。利用思维导图来活跃大脑，进行发散思维。这时候如果结合头脑风暴，效果更佳。</p>
+<p>​        缺点: 它是一种树状的信息分层可视化展视，结构比较固定，不适合分支间互相交互比较复杂的信息展示。</p>
+<h3 id="DFD（Data-Flow-Diagram）图"><a href="#DFD（Data-Flow-Diagram）图" class="headerlink" title="DFD（Data Flow Diagram）图"></a>DFD（Data Flow Diagram）图</h3><p><img src="4.png" alt="img"></p>
+<p>DFD图是从数据传递和加工角度，以图形方式来表达系统的逻辑功能、数据在系统内部的逻辑流向和逻辑变换过程，是结构化系统分析方法的主要表达工具及用于表示软件模型的一种图示方法。</p>
+<p>​        适用场景: 在将思维导图得出的东西进行整合、梳理形成一个粗粒度的流程。</p>
+<p>​        缺点: 反映系统“做什么”，不反映“如何做”，粒度算是中等，需要其它更细粒度的图来对细节做支撑。</p>
+<h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p><img src="5.png" alt="img"></p>
+<p><img src="6.png" alt="img"></p>
+<p>上面贴了2张图都是流程图，流程图有时也称作输入-输出图。该图直观地描述一个工作过程的具体步骤，各种操作一目了然，不会产生“歧义性”，便于理解，算法出错时容易发现。流程图对准确了解事情是如何进行的，以及决定应如何改进过程极有帮助。大到系统级别、小到某个操作背后的运转逻辑都可以使用流程图来画，我个人认为这应该是被最多人认识的图，没有之一。</p>
+<p>​        适用场景：正如上面所说这个适用场景比较广，日常工作中小到算法逻辑，大到战略层面的执行落地都需要它。主要用它来将背后的流程可视化，辅助做决策去（如改进等）。</p>
+<p>​        缺点：所占篇幅较大，由于允许使用流程线，过于灵活，不受约束，使用者可使流程任意转向，从而造成程序阅读和修改上的困难，不利于结构化程序的设计。</p>
+<h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="7.png" alt="img"></p>
+<p>UML类图是UML交互图中的一种，也是我们较常见的一种。类图是描述系统中的类，以及各个类之间的关系的静态视图。它不但是设计人员关心的核心，更是实现人员关注的核心。</p>
+<p>​        适用场景：一般作为编码前做的最后一步，将设计转为相应的模型。也可以使用Code First的方式直接在项目中建模，现在的VS也支持直接从代码中生成UML类图。</p>
+<p>　　缺点：缺点就是画起来太费时间了，但反过来其表达的粒度更细致，是代码实现级别的内容。由于现在有比较多的工具可以从代码生成UML类图，甚至在大部分提倡使用Code First的场景下，我们画UML类图的机会是越来越少了。</p>
+<h3 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h3><p><img src="8.png" alt="img"></p>
+<p>状态图是对类图的补充。描述类的对象所有可能的状态，以及事件发生时状态的转移条件。可以捕获对象、子系统和系统的生命周期。他们可以告知一个对象可以拥有的状态，并且事件(如消息的接收、时间的流逝、错误、条件变为真等)会怎么随着时间的推移来影响这些状态。一个状态图应该连接到所有具有清晰的可标识状态和复杂行为的类；该图可以确定类的行为，以及该行为如何根据当前的状态变化，也可以展示哪些事件将会改变类的对象的状态。</p>
+<p>　　适用场景：当有一个对象拥有多个状态的时候，想要表达清楚状态之间的演变关系（也就是这个对象的生命周期）。比如通过什么条件触发状态变动的，到达某个状态之后会做什么动作等。这也是基于事件驱动设计的良好可视化图。</p>
+<p>　　缺点：仅能表达行为/事件与状态之间的演变关系，不适用于其它领域。</p>
+<h3 id="E-R图"><a href="#E-R图" class="headerlink" title="E-R图"></a>E-R图</h3><p><img src="10.png" alt="img"></p>
+<p>E-R图提供了表示实体型(Entity)、属性(Attribute)和联系(Relationship)的方法。其中最核心的还属联系(Relationship)的表示。</p>
+<p>　　适用场景：虽然在UML类图中，也可以体现出聚合、依赖等关系。但是如果相关联的模型数量巨大的话，你会发现看起来特别费劲，要缩的很小才能看清全貌。这时候你需要E-R图出场了。</p>
+<p>　　缺点：相对类图来说，E-R图无法定义类/实体的行为。它更面向数据库而不是代码。</p>
+<h3 id="UML时序图"><a href="#UML时序图" class="headerlink" title="UML时序图"></a>UML时序图</h3><p><img src="9.png" alt="img"></p>
+<p>时序图也是UML交互图中的一种，是描述对象是如何交互的，并且将重点放在消息序列上。也就是说，描述消息是如何在对象间发送和接收的。时序图有两个坐标轴：纵坐标轴显示时间，横坐标轴显示对象。</p>
+<p>　　适用场景：一般当我们想反映一个包含顺序的交互流程，比如http请求的生命周期、页面上某个按钮背后流转细节等情况时，就需要它了。</p>
+<p>　　缺点：一个时序图仅能面向一个Case，同时画起来比较费时间</p>
+<h3 id="泳道图"><a href="#泳道图" class="headerlink" title="泳道图"></a>泳道图</h3><p><img src="11.png" alt="图片"></p>
+<p>​        泳道图，又被称为流程图或过程图，是一种常用的业务分析工具，广泛用于描绘业务过程，提供可视化的步骤和流程。</p>
+<p>​        泳道图提供了一种视觉化的呈现方式，使得初次接触业务的新手能够更好地理解业务的运行过程，从而对现有流程进行分析和优化。</p>
+<pre><code>      适用场景: 明确流程环节所属的阶段、流程环节负责人、组织机构或部门的一类图形。
+</code></pre><h2 id="实际的运用"><a href="#实际的运用" class="headerlink" title="实际的运用"></a>实际的运用</h2><p>其实上一节中图的顺序就是按照由层次从高到底，粒度从粗到细规划的。我们可以用用例图来确定用户核心需求，再用Robustness Diagram定义好关键功能，随后在关键功能的实现上通过思维导图进行发散，然后用DFD图把粗粒度的内容串起来，至此大体的设计工作算是完成了。</p>
+<p>　　然后再通过流程图、UML类图、状态图、E-R图、时序图在不同的场景确定细节实现。最终就是Coding的事情了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>其实最好的图是手稿，不但画起来快，还能让你的思维专注到构思上，用什么颜色之类的问题不会对你产生干扰。另外我们不要为了画图而画图，结合实际的情况把握好尺度，一般情况下，时间上不太会允许我们把图画的面面俱到，能覆盖到核心甚至80%就很好了</li>
+<li>个人常用一般是从用例图构思模块、思维导图梳理细节功能、数据流图进行功能交互、泳道图梳理规范流程</li>
+<li>还缺少一个很重要的 架构图，上面只是描述的构思思路，而在编写文档时候 首先亮相的就应该是架构图，让其他人知道最顶层的设计。</li>
+</ol>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2023/11/14/Flink-2023-11-14-Flink-Sql-Group类型/" data-toggle="tooltip" data-placement="top" title="Flink Sql Group类型">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/10/11/Flink-2023-10-11-Flink-Sql-Join类型/" data-toggle="tooltip" data-placement="top" title="Flink Sql Join类型">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#背景"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#不同场景下的图"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">不同场景下的图</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#用例图"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">用例图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#鲁棒图（Robustness-Diagram）"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">鲁棒图（Robustness Diagram）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#思维导图"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">思维导图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#DFD（Data-Flow-Diagram）图"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">DFD（Data Flow Diagram）图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#流程图"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">流程图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#UML类图"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">UML类图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#状态图"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">状态图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#E-R图"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">E-R图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#UML时序图"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">UML时序图</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#泳道图"><span class="toc-nav-number">2.10.</span> <span class="toc-nav-text">泳道图</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#实际的运用"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实际的运用</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Java" title="Java">Java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2024 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
