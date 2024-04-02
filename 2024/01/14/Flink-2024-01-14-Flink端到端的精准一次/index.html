@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Flink端到端的精准一次 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2024/01/14/Flink-2024-01-14-Flink端到端的精准一次/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                            
+                        </div>
+                        <h1>Flink端到端的精准一次</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2024-01-14
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">5.1k</span> and
+                                Reading Time <span class="post-count">17</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="端到端精确一次"><a href="#端到端精确一次" class="headerlink" title="端到端精确一次"></a>端到端精确一次</h2><p>​    实际应用中，最难做到、也最希望做到的一致性语义，无疑就是端到端（end-to-end）的“精确一次”（exactly-once）。对于Flink内部来说，检查点机制可以保证故障恢复后数据不丢（在能够重放的前提下），并且只处理一次，所以已经可以做到exactly-once的一致性语义了。</p>
+<p>  需要注意的是，检查点能够保证故障恢复后数据只处理一次，并不是说之前统计过某个数据，现在就不能再次统计了；而是要看状态的改变和输出的结果，是否只包含了一次这个数据的处理。由于检查点保存的是之前所有任务处理完某个数据后的状态快照，所以重放的数据引起的状态改变一定不会包含在里面，最终结果中只处理了一次。<br>  所以，<code>端到端一致性的关键点，就在于输入的数据源端和输出的外部存储端</code>。</p>
+<h2 id="输入端保证"><a href="#输入端保证" class="headerlink" title="输入端保证"></a>输入端保证</h2><p>入端主要指的就是Flink读取的外部数据源。对于一些数据源来说，并不提供数据的缓冲或是持久化保存，数据被消费之后就彻底不存在了。例如socket文本流就是这样，socket服务器是不负责存储数据的，发送一条数据之后，只能消费一次，是“一锤子买卖”。对于这样的数据源，故障后即使通过检查点恢复之前的状态，可保存检查点之后到发生故障期间的数据已经不能重发了，这就会导致数据丢失。所以就只能保证at-most-once的一致性语义，相当于没有保证。<br>  想要在故障恢复后不丢数据，外部数据源就必须拥有重放数据的能力。常见的做法就是对数据进行持久化保存，并且可以重设数据的读取位置。一个最经典的应用就是Kafka。在Flink的Source任务中将数据读取的偏移量保存为状态，这样就可以在故障恢复时从检查点中读取出来，对数据源重置偏移量，重新获取数据。<br>  <strong>数据源可重放数据，或者说可重置读取数据偏移量，加上Flink的Source算子将偏移量作为状态保存进检查点，就可以保证数据不丢。这是达到at-least-once一致性语义的基本要求，当然也是实现端到端exactly-once的基本要求。</strong></p>
+<h2 id="输出端保证"><a href="#输出端保证" class="headerlink" title="输出端保证"></a>输出端保证</h2><p>有了Flink的检查点机制，以及可重放数据的外部数据源，我们已经能做到at-least-once了。但是想要实现exactly-once却有更大的困难：数据有可能重复写入外部系统。</p>
+<p>  因为检查点保存之后，继续到来的数据也会一一处理，任务的状态也会更新，最终通过Sink任务将计算结果输出到外部系统；只是状态改变还没有存到下一个检查点中。这时如果出现故障，这些数据都会重新来一遍，就计算了两次。对Flink内部状态来说，重复计算的动作是没有影响的，因为状态已经回滚，最终改变只会发生一次；但对于外部系统来说，已经写入的结果就是泼出去的水，已经无法收回了，再次执行写入就会把同一个数据写入两次。</p>
+<p>  所以这时，只保证了端到端的at-least-once语义。</p>
+<p>  为了实现端到端exactly-once，我们还需要对外部存储系统、以及Sink连接器有额外的要求。能够保证exactly-once一致性的写入方式有两种：</p>
+<ul>
+<li><code>幂等写入</code></li>
+<li><code>事务写入</code></li>
+</ul>
+<p>需要外部存储系统对这两种写入方式的支持，而Flink也为提供了一些Sink连接器接口。</p>
+<h3 id="幂等（idempotent）写入"><a href="#幂等（idempotent）写入" class="headerlink" title="幂等（idempotent）写入"></a>幂等（idempotent）写入</h3><p>​    <strong>所谓“幂等”操作，就是说一个操作可以重复执行很多次，但只导致一次结果更改。也就是说，后面再重复执行就不会对结果起作用了。</strong></p>
+<p>  数学中一个典型的例子是，ex的求导下操作，无论做多少次，得到的都是自身。</p>
+<p>  而在数据处理领域，最典型的就是对HashMap的插入操作：如果是相同的键值对，后面的重复插入就都没什么作用了。</p>
+<p>  这相当于说，其实并没有真正解决数据重复计算、写入的问题；而是说，重复写入也没关系，结果不会改变。所以这种方式主要的限制在于外部存储系统必须支持这样的幂等写入：比如Redis中键值存储，或者关系型数据库（如MySQL）中满足查询条件的更新操作。</p>
+<p>  需要注意，对于幂等写入，遇到故障进行恢复时，有可能会出现短暂的不一致。因为保存点完成之后到发生故障之间的数据，其实已经写入了一遍，回滚的时候并不能消除它们。如果有一个外部应用读取写入的数据，可能会看到奇怪的现象：短时间内，结果会突然“跳回”到之前的某个值，然后“重播”一段之前的数据。不过当数据的重放逐渐超过发生故障的点的时候，最终的结果还是一致的。</p>
+<h3 id="事务（transactional）写入"><a href="#事务（transactional）写入" class="headerlink" title="事务（transactional）写入"></a>事务（transactional）写入</h3><p>如果说幂等写入对应用场景限制太多，那么事务写入可以说是更一般化的保证一致性的方式。</p>
+<p>  之前提到，输出端最大的问题就是“覆水难收”，写入到外部系统的数据难以撤回。自然想到，那怎样可以收回一条已写入的数据呢？利用事务就可以做到。</p>
+<p>  事务（transaction）是应用程序中一系列严密的操作，所有操作必须成功完成，否则在每个操作中所做的所有更改都会被撤消。事务有四个基本特性：**<code>原子性(Atomicity)</code>、<code>一致性(Correspondence)</code>、<code>隔离性(Isolation)</code>和<code>持久性(Durability)</code>，这就是著名的ACID。</p>
+<p>  在Flink流处理的结果写入外部系统时，如果能够构建一个事务，让写入操作可以随着检查点来提交和回滚，那么自然就可以解决重复写入的问题了。所以事务写入的基本思想就是：<strong><em>用一个事务来进行数据向外部系统的写入，这个事务是与检查点绑定在一起的。当Sink任务遇到barrier时，开始保存状态的同时就开启一个事务，接下来所有数据的写入都在这个事务中；待到当前检查点保存完毕时，将事务提交，所有写入的数据就真正可用了。如果中间过程出现故障，状态会回退到上一个检查点，而当前事务没有正常关闭（因为当前检查点没有保存完），所以也会回滚，写入到外部的数据就被撤销了</em></strong>。</p>
+<p>具体来说，又有两种实现方式：<code>预写日志（WAL）</code>和<code>两阶段提交（2PC）</code></p>
+<h4 id="预写日志（write-ahead-log，WAL）"><a href="#预写日志（write-ahead-log，WAL）" class="headerlink" title="预写日志（write-ahead-log，WAL）"></a>预写日志（write-ahead-log，WAL）</h4><p>事务提交是需要外部存储系统支持事务的，否则没有办法真正实现写入的回撤。那对于一般不支持事务的存储系统，能够实现事务写入呢？</p>
+<p>  预写日志（WAL）就是一种非常简单的方式。具体步骤是：</p>
+<p>   ① <strong>先把结果数据作为日志（log）状态保存起来</strong><br>   ② <strong>进行检查点保存时，也会将这些结果数据一并做持久化存储</strong><br>   ③ <strong>在收到检查点完成的通知时，将所有结果一次性写入外部系统。</strong></p>
+<p>​        这种方式类似于检查点完成时做一个批处理，一次性的写入会带来一些性能上的问题；而优点就是比较简单，由于数据提前在状态后端中做了缓存，所以无论什么外部存储系统，理论上都能用这种方式一批搞定。在Flink中DataStreamAPI提供了一个模板类GenericWriteAheadSink，用来实现这种事务型的写入方式。</p>
+<p>  需要注意的是，预写日志这种一批写入的方式，有可能会写入失败；所以在执行写入动作之后，必须等待发送成功的返回确认消息。在成功写入所有数据后，在内部再次确认相应的检查点，这才代表着检查点的真正完成。这里需要将确认信息也进行持久化保存，在故障恢复时，只有存在对应的确认信息，才能保证这批数据已经写入，可以恢复到对应的检查点位置。</p>
+<p>  但这种“再次确认”的方式，也会有一些缺陷。如果检查点已经成功保存、数据也成功地一批写入到了外部系统，但是最终保存确认信息时出现了故障，Flink最终还是会认为没有成功写入。于是发生故障时，不会使用这个检查点，而是需要回退到上一个；这样就会导致这批数据的重复写入。</p>
+<h4 id="两阶段提交（two-phase-commit，2PC）"><a href="#两阶段提交（two-phase-commit，2PC）" class="headerlink" title="两阶段提交（two-phase-commit，2PC）"></a>两阶段提交（two-phase-commit，2PC）</h4><p>​    前面提到的各种实现exactly-once的方式，多少都有点缺陷，有没有更好的方法呢？自然是有的，这就是传说中的两阶段提交（2PC）。<br>顾名思义，它的想法是分成两个阶段：先做“预提交”，等检查点完成之后再正式提交。这种提交方式是真正基于事务的，它需要外部系统提供事务支持。<br>具体的实现步骤为：</p>
+<p>   ① <strong>当第一条数据到来时，或者收到检查点的分界线时，Sink任务都会启动一个事务。</strong><br>   ② <strong>接下来接收到的所有数据，都通过这个事务写入外部系统；这时由于事务没有提交，所以数据尽管写入了外部系统，但是不可用，是“预提交”的状态。</strong><br>   ③ <strong>当Sink任务收到JobManager发来检查点完成的通知时，正式提交事务，写入的结果就真正可用了。</strong></p>
+<p>  当中间发生故障时，当前未提交的事务就会回滚，于是所有写入外部系统的数据也就实现了撤回。这种两阶段提交（2PC）的方式充分利用了Flink现有的检查点机制：分界线的到来，就标志着开始一个新事务；而收到来自JobManager的checkpoint成功的消息，就是提交事务的指令。每个结果数据的写入，依然是流式的，不再有预写日志时批处理的性能问题；最终提交时，也只需要额外发送一个确认信息。所以2PC协议不仅真正意义上实现了exactly-once，而且通过搭载Flink的检查点机制来实现事务，只给系统增加了很少的开销。</p>
+<p>  Flink提供了TwoPhaseCommitSinkFunction接口，方便我们自定义实现两阶段提交的SinkFunction的实现，提供了真正端到端的exactly-once保证。</p>
+<p>  不过两阶段提交虽然精巧，却对外部系统有很高的要求。这里将2PC对外部系统的要求列举如下：</p>
+<ul>
+<li><strong>外部系统必须提供事务支持</strong>，或者 Sink 任务必须能够模拟外部系统上的事务。</li>
+<li>在检查点的间隔期间里，必须能够开启一个事务并接受数据写入。</li>
+<li>在收到检查点完成的通知之前，事务必须是“等待提交”的状态。在故障恢复的情况 下，这可能需要一些时间。如果这个时候外部系统关闭事务（例如超时了），那么未提交的数据就会丢失。</li>
+<li>Sink 任务必须能够在进程失败后恢复事务。</li>
+<li>提交事务必须是幂等操作。也就是说，事务的重复提交应该是无效的。</li>
+</ul>
+<p>可见，2PC在实际应用同样会受到比较大的限制。具体在项目中的选型，最终还应该是一致性级别和处理性能的权衡考量。</p>
+<h2 id="Flink和Kafka连接时的精确一次保证"><a href="#Flink和Kafka连接时的精确一次保证" class="headerlink" title="Flink和Kafka连接时的精确一次保证"></a>Flink和Kafka连接时的精确一次保证</h2><p>​    在流处理的应用中，最佳的数据源当然就是可重置偏移量的消息队列了；它不仅可以提供数据重放的功能，而且天生就是以流的方式存储和处理数据的。所以作为大数据工具中消息队列的代表，Kafka可以说与Flink是天作之合，实际项目中也经常会看到以Kafka作为数据源和写入的外部系统的应用。在本小节，具体讨论一下Flink和Kafka连接时，怎样保证端到端的exactly-once状态一致性。</p>
+<h3 id="整体介绍"><a href="#整体介绍" class="headerlink" title="整体介绍"></a>整体介绍</h3><p>  既然是端到端的exactly-once，可以从三个组件的角度来进行分析：</p>
+<ol>
+<li><p><strong>Flink内部</strong></p>
+<pre><code>Flink 内部可以通过检查点机制保证状态和处理结果的exactly-once语义。
+</code></pre></li>
+<li><p><strong>输入端</strong><br>  输入数据源端的Kafka可以对数据进行持久化保存，并可以重置偏移量（offset）。所以可以在Source任务（FlinkKafkaConsumer）中将当前读取的偏移量保存为算子状态，写入到检查点中；当发生故障时，从检查点中读取恢复状态，并由连接器FlinkKafkaConsumer向Kafka重新提交偏移量，就可以重新消费数据、保证结果的一致性了。</p>
+</li>
+<li><p><strong>输出端</strong><br>  输出端保证exactly-once的最佳实现，当然就是两阶段提交（2PC）。作为与Flink天生一对的Kafka，自然需要用最强有力的一致性保证来证明自己。</p>
+</li>
+</ol>
+<p>Flink官方实现的Kafka连接器中，提供了写入到Kafka的FlinkKafkaProducer，它就实现了TwoPhaseCommitSinkFunction接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlinkKafkaProducer</span>&lt;<span class="title">IN</span>&gt; <span class="keyword">extends</span> <span class="title">TwoPhaseCommitSinkFunction</span>&lt;<span class="title">IN</span>,</span></span><br><span class="line"><span class="class"><span class="title">FlinkKafkaProducer</span>.<span class="title">KafkaTransactionState</span>,</span></span><br><span class="line"><span class="class"><span class="title">FlinkKafkaProducer</span>.<span class="title">KafkaTransactionContext</span>&gt; </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    也就是说，写入Kafka的过程实际上是一个两段式的提交：处理完毕得到结果，写入Kafka时是基于事务的“预提交”；等到检查点保存完毕，才会提交事务进行“正式提交”。如果中间出现故障，事务进行回滚，预提交就会被放弃；恢复状态之后，也只能恢复所有已经确认提交的操作。</p>
+<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p>为了方便说明，来考虑一个具体的流处理系统，由Flink从Kafka读取数据、并将处理结果写入Kafka，如下图所示。</p>
+<p><img src="1.png" alt="image"></p>
+<p>这是一个Flink与Kafka构建的完整数据管道，Source任务从Kafka读取数据，经过一系列处理（比如窗口计算），然后由Sink任务将结果再写入Kafka。</p>
+<p>Flink与Kafka连接的两阶段提交，离不开检查点的配合，这个过程需要JobManager协调各个TaskManager进行状态快照，而检查点具体存储位置则是由状态后端（StateBackend）来配置管理的。一般情况，会将检查点存储到分布式文件系统上。</p>
+<p>实现端到端exactly-once的具体过程可以分解如下：</p>
+<ol>
+<li><h4 id="启动检查点保存"><a href="#启动检查点保存" class="headerlink" title="启动检查点保存"></a>启动检查点保存</h4><p>检查点保存的启动，标志着进入了两阶段提交协议的“预提交”阶段。当然，现在还没有具体提交的数据。        </p>
+</li>
+</ol>
+<p><img src="2.png" alt="image"></p>
+<p>​    如图上图所示，JobManager通知各个TaskManager启动检查点保存，Source任务会将检查点分界线（barrier）注入数据流。这个barrier可以将数据流中的数据，分为进入当前检查点的集合和进入下一个检查点的集合。</p>
+<ol>
+<li><h4 id="算子任务对状态做快照"><a href="#算子任务对状态做快照" class="headerlink" title="算子任务对状态做快照"></a>算子任务对状态做快照</h4><p>分界线（barrier）会在算子间传递下去。每个算子收到barrier时，会将当前的状态做个快照，保存到状态后端。</p>
+<p><img src="3.png" alt="image"></p>
+<p>如上图所示，Source任务将barrier插入数据流后，也会将当前读取数据的偏移量作为状态写入检查点，存入状态后端；然后把barrier向下游传递，自己就可以继续读取数据了。<br>接下来barrier传递到了内部的Window算子，它同样会对自己的状态进行快照保存，写入远程的持久化存储。</p>
+</li>
+<li><h4 id="Sink-任务开启事务，进行预提交"><a href="#Sink-任务开启事务，进行预提交" class="headerlink" title="Sink 任务开启事务，进行预提交"></a>Sink 任务开启事务，进行预提交</h4><p><img src="4.png" alt="image"></p>
+<p>如上图所示，分界线（barrier）终于传到了Sink任务，这时Sink任务会开启一个事务。接下来到来的所有数据，Sink任务都会通过这个事务来写入Kafka。这里barrier是检查点的分界线，也是事务的分界线。由于之前的检查点可能尚未完成，因此上一个事务也可能尚未提交；此时barrier的到来开启了新的事务，上一个事务尽管可能没有被提交，但也不再接收新的数据了。</p>
+<p>对于Kafka而言，提交的数据会被标记为“未确认”（uncommitted）。这个过程就是所谓的“预提交”（pre-commit）。</p>
+</li>
+<li><h4 id="检查点保存完成，提交事务"><a href="#检查点保存完成，提交事务" class="headerlink" title="检查点保存完成，提交事务"></a>检查点保存完成，提交事务</h4><p>当所有算子的快照都完成，也就是这次的检查点保存最终完成时，JobManager会向所有任务发确认通知，告诉大家当前检查点已成功保存，如下图所示</p>
+<p><img src="5.png" alt="image"></p>
+<p>当Sink任务收到确认通知后，就会正式提交之前的事务，把之前“未确认”的数据标为“已确认”，接下来就可以正常消费了。</p>
+<p>在任务运行中的任何阶段失败，都会从上一次的状态恢复，所有没有正式提交的数据也会回滚。这样，Flink和Kafka连接构成的流处理系统，就实现了端到端的exactly-once状态一致性。</p>
+</li>
+</ol>
+<h3 id="需要的配置"><a href="#需要的配置" class="headerlink" title="需要的配置"></a>需要的配置</h3><p> 在具体应用中，实现真正的端到端exactly-once，还需要有一些额外的配置：</p>
+<ol>
+<li><strong>必须启用检查点；</strong></li>
+<li><p><strong>在FlinkKafkaProducer的构造函数中传入参数Semantic.EXACTLY_ONCE；</strong></p>
+</li>
+<li><p><strong>配置Kafka读取数据的消费者的隔离级别</strong></p>
+<p>这里所说的Kafka，是写入的外部系统。预提交阶段数据已经写入，只是被标记为“未提交”（uncommitted），而Kafka中默认的隔离级别isolation.level是read_uncommitted，也就是可以读取未提交的数据。这样一来，外部应用就可以直接消费未提交的数据，对于事务性的保证就失效了。所以应该将隔离级别配置为read_committed，表示消费者遇到未提交的消息时，会停止从分区中消费数据，直到消息被标记为已提交才会再次恢复消费。当然，这样做的话，外部应用消费数据就会有显著的延迟。</p>
+</li>
+<li><p><strong>事务超时配置</strong><br>  Flink的Kafka连接器中配置的事务超时时间transaction.timeout.ms默认是1小时，而Kafka集群配置的事务最大超时时间transaction.max.timeout.ms默认是15分钟。所以在检查点保存时间很长时，有可能出现Kafka已经认为事务超时了，丢弃了预提交的数据；而Sink任务认为还可以继续等待。如果接下来检查点保存成功，发生故障后回滚到这个检查点的状态，这部分数据就被真正丢掉了。所以这两个超时时间，前者应该小于等于后者。</p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>   Flink作为一个大数据分布式流处理框架，必须要考虑系统的容错性，主要就是发生故障之后的恢复。Flink容错机制的核心就是检查点，它通过巧妙的分布式快照算法保证了故障恢复后的一致性，并且尽可能地降低对处理性能的影响。</p>
+<p>  本章详细介绍了Flink检查点的原理、算法和配置，并且结合一致性理论与Flink-Kafka的实际互连系统，阐述了如何用Flink实现流处理应用的端到端exactly-once状态一致性。这既是Flink底层原理的深入，也与之前的状态管理、水位线机制有联系和相通之处；相信通过本章，会对Flink乃至分布式系统的容错机制有更加深刻的理解。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/03/19/源码-Flink-2024-03-19-Flink源码前置知识-Akka/" data-toggle="tooltip" data-placement="top" title="Flink源码前置知识-Akka">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2024/01/06/Flink-2024-01-06-Flink-timer定时器踩坑/" data-toggle="tooltip" data-placement="top" title="Flink timer定时器踩坑">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#端到端精确一次"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">端到端精确一次</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#输入端保证"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">输入端保证</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#输出端保证"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">输出端保证</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#幂等（idempotent）写入"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">幂等（idempotent）写入</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#事务（transactional）写入"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">事务（transactional）写入</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#预写日志（write-ahead-log，WAL）"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">预写日志（write-ahead-log，WAL）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#两阶段提交（two-phase-commit，2PC）"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">两阶段提交（two-phase-commit，2PC）</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Flink和Kafka连接时的精确一次保证"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Flink和Kafka连接时的精确一次保证</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整体介绍"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">整体介绍</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实现过程"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">实现过程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#启动检查点保存"><span class="toc-nav-number">4.2.1.</span> <span class="toc-nav-text">启动检查点保存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#算子任务对状态做快照"><span class="toc-nav-number">4.2.2.</span> <span class="toc-nav-text">算子任务对状态做快照</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Sink-任务开启事务，进行预提交"><span class="toc-nav-number">4.2.3.</span> <span class="toc-nav-text">Sink 任务开启事务，进行预提交</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#检查点保存完成，提交事务"><span class="toc-nav-number">4.2.4.</span> <span class="toc-nav-text">检查点保存完成，提交事务</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#需要的配置"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">需要的配置</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number"></span> <span class="toc-nav-text">总结</span></a>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2024 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

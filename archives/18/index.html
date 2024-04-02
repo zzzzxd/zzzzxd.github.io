@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1137,6 +1137,16 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1145,25 +1155,30 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/14/python-2022-07-14-conda、pip、virtualenv的几点区别/">
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-行锁/">
                 <h2 class="post-title">
-                    conda、pip、virtualenv的几点区别
+                    mysql锁机制-行锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    conda首先，conda是一个通用的包管理器，意思是什么语言的包都可以用其进行管理，自然也就包括Python了。在安装Anaconda或者Miniconda时，会对conda进行一同安装。其中Anaconda作为Python的发行版，相当于在Python的基础上自带了常用第三方库，而Miniconda则相当于是一个conda环境的安装程序，只包含了conda及其依赖项，这样就可以减少一些不......
+                    前言MySQL 5.5 之前的默认存储引擎是 MyISAM，5.5 之后改成了 InnoDB。InnoDB 后来居上最主要的原因就是：
+
+InnoDB 支持事务：适合在并发条件下要求数据一致的场景。
+InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
+
+本节就一起来探讨 InnoDB 的行锁。
+在讲解行锁之前，我们首先来看一下两阶段锁协议。
+两阶段锁传统的关系型数据库加锁的一个原则......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-14
+                    2022-03-29
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#python" title="python">python</a>
                     
                 </div>
             
@@ -1177,33 +1192,34 @@
 
         <div class="post-preview">
 
-            <a href="/2022/07/07/network-2022-07-07-SSH协议原理及最佳实践/">
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-全局锁与表锁/">
                 <h2 class="post-title">
-                    SSH协议原理及最佳实践
+                    mysql锁机制-全局锁与表锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    初识SSH​    维基百科是这样描述ssh协议的 ：
+                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
+本章就来介绍一下不同场景下的锁机制。
+根据加锁的范围，MySQL 中的锁可分为三类：
 
-Secure Shell（安全外壳协议，简称SSH）是一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境[1]。SSH通过在网络中创建安全隧道（英语：secure channel）来实现SSH客户端与服务器之间的连接[2]。SSH最常见的用途是远程登录系统，人们通常利用SSH来传输命令行界面和远程执行命令。
+全局锁
+表级锁
+行锁
 
-通常......
+本节来重点讲解一下全局锁和表锁。
+1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-07
+                    2022-03-29
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#https" title="https">https</a>
-                    
-                      <a href="/tags/#ssh" title="ssh">ssh</a>
-                    
-                      <a href="/tags/#network" title="network">network</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1217,35 +1233,30 @@ Secure Shell（安全外壳协议，简称SSH）是一种加密的网络传输�
 
         <div class="post-preview">
 
-            <a href="/2022/07/07/network-2022-07-07-HTTPS与中间人攻击/">
+            <a href="/2022/03/28/mysql-2022-03-28-mysql死锁的发生与解决/">
                 <h2 class="post-title">
-                    HTTPS与"中间人攻击"
+                    mysql死锁的发生与解决
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    引导问题
-为什么使用Https是安全的？
+                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
+认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+InnoDB 中解决死锁问题有两种方式：
 
-Https的底层原理如何实现？
-
-使用Https是绝对安全的吗？
-
-
-Https实现原理Https协议在内容传输上使用的加密是“对称加密”，而“非对称加密”只作用于证书验证阶段。Https的整体实现过程分为“证书验证”和“数据传输”两个阶段，过程如下所示：
-
-Https协议在内容传输上使用的加密是“对称加密”，而“非对称加密”只作用于证书验证阶段。......
+检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
+等查询的时间达到锁等待超时的设......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-07
+                    2022-03-28
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Https" title="Https">Https</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1259,9 +1270,79 @@ Https协议在内容传输上使用的加密是“对称加密”，而“非对
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/源码-jdk-2022-07-06-HashSet与TreeSet源码解析/">
+            <a href="/2022/03/19/mysql-2022-03-19-mvcc实现/">
                 <h2 class="post-title">
-                    HashSet与TreeSet源码解析
+                    mvcc实现
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    本节跟大家一起聊聊 MVCC。
+什么是 MVCC？在说 MVCC 之前，大家先看看下面这个例子。
+首先创建表并写入测试数据：
+1234567891011use muke;drop table if exists t20;CREATE TABLE `t20` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/18/mysql-2022-03-18-事务与事务持久化/">
+                <h2 class="post-title">
+                    事务与事务持久化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言 思考两个问题，数据库突然断电会丢失数据吗？数据库中的事务是如何记录的？带着两个疑问，我们继续往下看。
+什么是事务？根据《高性能 MySQL》第 3 版 1.3 事务一节中定义：
+
+事务就是一组原子性的 SQL 查询，或者说一个独立的工作单元。如果数据库引擎能够成功地对数据库应用该组查询的全部语句，那么就执行该组查询。如果其中有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-18
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/12/mysql-2022-03-12-Mysql-DateTime与Timestamp区别/">
+                <h2 class="post-title">
+                    Mysql DateTime与Timestamp区别
                 </h2>
                 <h3 class="post-subtitle">
                     
@@ -1273,7 +1354,7 @@ Https协议在内容传输上使用的加密是“对称加密”，而“非对
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2022-03-12
                 </p>
                 <div class="tags">
                     
@@ -1289,28 +1370,25 @@ Https协议在内容传输上使用的加密是“对称加密”，而“非对
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/源码-jdk-2022-07-06-TreeMap源码解析/">
+            <a href="/2022/03/12/mysql-2022-03-12-Mysql-dump-命令/">
                 <h2 class="post-title">
-                    TreeMap源码解析
+                    Mysql dump 命令
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-TreeMap是一种常用的key有序的数据结构,底层原理主要是用到动态平衡树，之前研究过了HashMap，解决冲突时链表会转化红黑树，同样这里平衡树依然是红黑树,可见这个数据结构的重要性了。如果红黑树原理不熟悉，那么涉及到具体的操作源码 可先跳过，有关红黑树只需要记住一点，红黑树和AVL都是动态平衡树的一种，都是在BST的基础上改进而来，基础的查询操作和BST一模一样，插入元素与删除元素，......
+                    命令及解释123456789mysqldump -ubackup -p123456 -h 192.168.1.2 backup_test &gt; D:\bak\bakcup.sql 	在这段命令中：mysqldump 是myqldump的程序名了；  -u 是数据库的用户名，后面紧跟着用户名backup；  -p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；  -h......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2022-03-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1324,30 +1402,28 @@ TreeMap是一种常用的key有序的数据结构,底层原理主要是用到动
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/源码-jdk-2022-07-06-LinkList源码解析/">
+            <a href="/2022/03/09/mysql-2022-03-09-Mysql-创建用户相关操作常用命令/">
                 <h2 class="post-title">
-                    LinkedList源码解析
+                    Mysql 创建用户相关操作常用命令
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    整体结构
-整体结构
-LinkedList也是常用的一种数据结构,它和ArrayList在逻辑上都是线性结构，而在物理存储上ArrayList是连续存储，LinkedList是非连续存储。LinkedList实现是一个双向链表。Node节点源码如下:
-1234567891011private static class Node&lt;E&gt; &#123;     E item;     N......
+                    创建用户
+1CREATE USER &#39;username&#39;@&#39;%&#39; IDENTIFIED BY &#39;password&#39;;
+eg:
+1234CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#3......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2022-03-09
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1361,40 +1437,27 @@ LinkedList也是常用的一种数据结构,它和ArrayList在逻辑上都是线
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/源码-jdk-2022-07-06-ArrayList源码解析/">
+            <a href="/2022/03/06/mysql-2022-03-06-linux-停止启动mysql常用命令/">
                 <h2 class="post-title">
-                    ArrayList源码解析
+                    linux 停止启动mysql常用命令
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-ArrayList几乎是最常用的一种数据结构,本篇就研究一下ArrayList的常用操作的底层实现。通过学习底层实现的细节，帮助自己写出更优秀的代码 。
-
-整体结构
-结构图
-
-​    ArrayList实际上就是封装了一个数组 ,代码体现如下:
-12//封装的数组transient  Object[] elementData;
-
-
-类注释信息        
-
-
-允许 put null ......
+                    查看mysql版本方法一：status;
+方法二：select version();
+Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启动方式1、使用 service 启动：    [root@localhost &#x2F;]# service mysqld start (5.0版本是mysqld)    [root@szxdb etc]......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2022-03-06
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1408,106 +1471,25 @@ ArrayList几乎是最常用的一种数据结构,本篇就研究一下ArrayList�
 
         <div class="post-preview">
 
-            <a href="/2022/07/06/network-2022-07-06-Httptps对称与非对称加密协议/">
+            <a href="/2022/03/05/mysql-2022-03-05-优化Mysql数据导入的几种方法/">
                 <h2 class="post-title">
-                    HTTPS对称与非对称加密协议
+                    优化Mysql数据导入的几种方法
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-众所周知，WEB服务存在http和https两种通信方式，http默认采用80作为通讯端口，对于传输采用不加密的方式，https默认采用443，对于传输的数据进行加密传输。本文重点介绍https涉及到的对称加密和非对称加密协议原理。
-
-首先我们先不谈https，先从一个简单的通讯原理图讲起：
-​    
-http通信原理客户端发送一句client hello给服务器端，服务器端返回一句se......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-07-06
+                    2022-03-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#https" title="https">https</a>
-                    
-                      <a href="/tags/#加密算法" title="加密算法">加密算法</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/07/06/network-2022-07-06-HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥/">
-                <h2 class="post-title">
-                    HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-本文内容主要来自简书博主olaH的文章，作者对概念之间的联系解释的非常清楚，熟悉这些概念可以对理解SSH协议、Https协议以及证书颁发等打下基础
-原文链接:olaH
-
-对称加密对称加密是指双方持有相同的密钥进行通信，加密速度快，但是有一个安全问题，双方怎样获得相同的密钥？你总不能总是拿着U盘把密钥拷贝给对方吧。
-常见的对称加密算法有DES、3DES、AES等
-非对称加密非对称加密，又称为......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-07-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#https" title="https">https</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-128-整数翻转/">
-                <h2 class="post-title">
-                    Problem 128 整数翻转
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给你一个32位的有符号整数x返回将x中的数字部分反转后的结果反转后整数超过 32 位的有符号整数的范围就返回0假设环境不允许存储 64 位整数（有符号或无符号）Leetcode题目：https://leetcode.com/problems/reverse-integer/
-题目解析
-注意，给的就是整数,可以进行翻转溢出的提前判断
-
-代码12345678910111213141516cl......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-03-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1578,7 +1560,7 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
             
         
             
@@ -1588,19 +1570,7 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
-            
-        
-            
-        
             
         
             
@@ -1608,11 +1578,13 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
         
             
         
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
             
         
             
@@ -1636,57 +1608,7 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
             
         
             
-            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1720,7 +1642,69 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            
+        
             
         
             
@@ -1781,6 +1765,8 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
             <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
             
         
+            
+            <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
     </div>
@@ -1843,23 +1829,23 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
     <ul>
       
         <li>
+          <a href="/2024/03/21/%E6%BA%90%E7%A0%81-Flink-2024-03-21-DataStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">DataStream源码解析</a>
+        </li>
+      
+        <li>
+          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink-Rpc%E6%A1%86%E6%9E%B6/">Flink Rpc框架</a>
+        </li>
+      
+        <li>
+          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink%E6%BA%90%E7%A0%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-Akka/">Flink源码前置知识-Akka</a>
+        </li>
+      
+        <li>
+          <a href="/2024/01/14/Flink-2024-01-14-Flink%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E7%B2%BE%E5%87%86%E4%B8%80%E6%AC%A1/">Flink端到端的精准一次</a>
+        </li>
+      
+        <li>
           <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
-        </li>
-      
-        <li>
-          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
-        </li>
-      
-        <li>
-          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
-        </li>
-      
-        <li>
-          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
-        </li>
-      
-        <li>
-          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1874,7 +1860,7 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1891,45 +1877,47 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
         
           <a href="categories/#HBase"><li>HBase</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
-        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#多线程"><li>多线程</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
       </ul>
     </div>
@@ -2093,7 +2081,7 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2103,6 +2091,21 @@ http通信原理客户端发送一句client hello给服务器端，服务器端�
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

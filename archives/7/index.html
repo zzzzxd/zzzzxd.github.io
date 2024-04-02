@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1137,9 +1137,130 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/19/LINUX运维-2022-12-19-TCP连接状态图解/">
+                <h2 class="post-title">
+                    TCP连接状态图解
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    概述​    TCP的连接过程与状态管理只要了解过网络的伙伴应该都听说过，tcp的连接与断开过程主要就是三次握手与四次分手，整个过程可以通过抓包 观察，网上的资料也比较多，今天重点来梳理一下，整个过程中相关的进程状态的变化，主要是方便以后工作中对网络故障的排查。
+连接建立与结束三次握手示例
+用户：向服务器发出建立连接的请求（SYN请求） ，随机序列号seq=100
+
+服务端： 我收到你的请求......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/15/LINUX运维-2022-12-15-系统负载高的原因及排查思路/">
+                <h2 class="post-title">
+                    系统负载高的原因及排查思路
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    平均负载概述系统负载反映机器的压力情况，是日常工作中需要重点关注的指标，利用uptime命令可以进行查看如下 ：
+12[root@linx01 ~]# uptime 21:45:08 up  4:51,  2 users,  load average: 0.08, 0.04, 0.05
+从左到右含义依次是 当前时间、系统运行时间、正在登录用户数。过去 1 分钟、5 分钟、15 分钟的平均负载......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘使用的全流程/">
+                <h2 class="post-title">
+                    磁盘使用流程及企业分区方案
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    磁盘使用流程概述其实磁盘的使用，主要就是三个步骤，分区、格式化、挂载
+
+磁盘分区 :有了一块地,划分隔断. fdisk/parted
+
+格式化（创建文件系统） :对房间进行装修. mkfs
+
+挂载 :安装门窗,可以入住与使用. mount Linux下面设备必须要挂载才能访问与使用,没有挂载相当于房子没 有门窗. 挂载相当于给设备设置了一个入口.
+
+
+实战演示磁盘分区 对新添加的sdb磁盘划......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1410,147 +1531,6 @@ sata
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux的12位权限体系/">
-                <h2 class="post-title">
-                    Linux的12位权限体系
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言​    LINUX权限管理也是linux系统管理中很重要的一部分，通过权限管理最终保障系统网站的安全。接下来我们系统的总结一下linux权限相关的知识点，以及遇到权限问题的排查思路，可以应对工作中常见的权限问题。
-LINUX基础权限rwx权限与用户
-
-
-
-权限的字符
-含义与说明
-
-
-
-
-r
-read 读,是否可以读取内容
-
-
-w
-write 写, 是否可以修改内容
-
-
-x
-execut......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux用户管理/">
-                <h2 class="post-title">
-                    Linux用户管理
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言​    用户管理体系是linux系统中一样很重要的内容，不同的用户分配不同等级的权限可以保障系统的安全，问题发生以后也方便追溯问题的原因。接下来总结一下与用户管理相关的一些比较重要的内容。
-用户分类
-
-
-
-用户分类
-含义
-uid
-
-
-
-
-root用户
-最高权限用户。
-0
-
-
-虚拟用户（傀儡用 户）
-这种用户存在是用于让一些服务正常运行。一些服务运行需要指定 的用户。
-uid是1-999......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/10/09/大数据-2022-10-09-hive中四种有效的SQL优化/">
-                <h2 class="post-title">
-                    hive中四种有效的SQL优化
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    数据准备首先虚拟一张表user，字段为：
-（1）user_id（用户的id）；
-（2）age（用户的年龄）；
-（3）sex（用户的性别）；
-（4）order_id（用户的订单编号，一个用户可能有多个订单编号）。
-另设一张表，叫order，里面包含order_id, order_date两个字段。
-multi-table-insert优化union all原SQL（目标是往一个新表user_n......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-10-09
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hive" title="Hive">Hive</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1612,7 +1592,7 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
             
         
             
@@ -1622,19 +1602,7 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
-            
-        
-            
-        
             
         
             
@@ -1642,11 +1610,13 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
         
             
         
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
             
         
             
@@ -1670,57 +1640,7 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
             
         
             
-            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1754,7 +1674,69 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            
+        
             
         
             
@@ -1815,6 +1797,8 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
             <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
             
         
+            
+            <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
     </div>
@@ -1877,23 +1861,23 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
     <ul>
       
         <li>
+          <a href="/2024/03/21/%E6%BA%90%E7%A0%81-Flink-2024-03-21-DataStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">DataStream源码解析</a>
+        </li>
+      
+        <li>
+          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink-Rpc%E6%A1%86%E6%9E%B6/">Flink Rpc框架</a>
+        </li>
+      
+        <li>
+          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink%E6%BA%90%E7%A0%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-Akka/">Flink源码前置知识-Akka</a>
+        </li>
+      
+        <li>
+          <a href="/2024/01/14/Flink-2024-01-14-Flink%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E7%B2%BE%E5%87%86%E4%B8%80%E6%AC%A1/">Flink端到端的精准一次</a>
+        </li>
+      
+        <li>
           <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
-        </li>
-      
-        <li>
-          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
-        </li>
-      
-        <li>
-          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
-        </li>
-      
-        <li>
-          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
-        </li>
-      
-        <li>
-          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1908,7 +1892,7 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1925,45 +1909,47 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
         
           <a href="categories/#HBase"><li>HBase</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
-        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#多线程"><li>多线程</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
       </ul>
     </div>
@@ -2127,7 +2113,7 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2137,6 +2123,21 @@ multi-table-insert优化union all原SQL（目标是往一个新表user_n......
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

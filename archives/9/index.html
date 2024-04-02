@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/categories/">Categories</a>
                         </li>
                         
@@ -185,7 +178,7 @@
 
                         
                         <li>
-                            <a href="/photography/">Photography</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -193,6 +186,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
                         </li>
                         
                     
@@ -1137,9 +1137,134 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/IO-2022-09-25-文件IO与PageCache/">
+                <h2 class="post-title">
+                    文件IO与PageCache
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Linux文件系统
+如上图，首先我们从图中得知两点:
+
+PageCache 是属于内核级别的，受到内核的管理
+在用户态，用户可以使用mmap映射，直接访问PageCache，而不必进行内核态的切换。
+
+PageCache概念首先我们要了解一点，现在的内存管理方案中多数是分页管理，也就是内存会划分为4k一页作为一个基本单位。而pagecache呢通常也是4KB，用来缓存文件。提高IO的速度。
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#IO" title="IO">IO</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/JVM-2022-09-25-对象布局相关问题/">
+                <h2 class="post-title">
+                    对象布局相关问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言有关对象的创建、对象在内存中的布局，今天我们通过几道面试题来梳理一下。
+请解释一下对象的创建过程？
+class loading
+class linking (verification, preparation, resolution) - 静态变量赋默认值
+class initializing- 静态变量赋初始值
+申请对象内存
+成员变量赋默认值
+调用构造方法
+成员变量顺序赋初始值
+执行构......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/09/25/JVM-2022-09-25-Synchronized锁升级过程/">
+                <h2 class="post-title">
+                    Synchronized锁升级过程
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言Synchronized的经过优化之后，性能提高很多，接下来我们就看一下它的优化原理。
+java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻量级锁和重量级锁。
+在Java HotSpot VM中，每个对象前面都有一个class指针和一个Mark Word。 Mark Word存储了哈希值以及分代年龄和标记位等，通过这些值的变化，JVM可以实现对java对象的不同程度的锁定。
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-09-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#JVM" title="JVM">JVM</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1386,124 +1511,6 @@ synchronized关键字是自动解锁的，但是reen必须手动解锁
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/23/多线程-2022-09-23-多线程基础/">
-                <h2 class="post-title">
-                    多线程基础
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    线程状态线程的状态，是重点中的重点，在生产中遇到问题的时候，就需要观察线程状态来排查问题，比如用jstack查看堆栈信息时候，就需要重点关注block状态的线程。
-状态流转
-状态的解释
-new: 线程刚刚创建，还没有启动
-Runnable：可运行状态，可由线程调度器安排执行，具体分为：Ready等待调度，Running 正在执行
-Waiting：等待被唤醒
-Timed Waiting：隔一段......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#多线程" title="多线程">多线程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/22/微服务-2022-09-22-SpringCache-使用总结/">
-                <h2 class="post-title">
-                    SpringCache 使用总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Spring Cache简介
-Spring 从 3.1 开始定义了 org.springframework.cache.Cache 和 org.springframework.cache.CacheManager 接口来统一不同的缓存技术； 并支持使用 JCache（JSR-107）注解简化我们开发；
-
-Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合； Cache 接 口 下 ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#缓存" title="缓存">缓存</a>
-                    
-                      <a href="/tags/#Spring Cache" title="Spring Cache">Spring Cache</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/22/微服务-2022-09-22-缓存使用总结/">
-                <h2 class="post-title">
-                    缓存使用总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    缓存缓存使用为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。而 db 承担数据落 盘工作。 哪些数据适合放入缓存？ 
-
-即时性、数据一致性要求不高的 
-
-访问量大且更新频率不高的数据（读多，写少）
- 举例：电商类应用，商品分类，商品列表等适合缓存并加一个失效时间(根据数据更新频率 来定)，后台如果发布一个商品，买家需要 5 分钟才能看到新的商品一般还是可以接受的。
-
-
-
-12......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Redis" title="Redis">Redis</a>
-                    
-                      <a href="/tags/#缓存" title="缓存">缓存</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1565,7 +1572,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="9">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
             
         
             
@@ -1575,19 +1582,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
-            
-        
-            
-        
             
         
             
@@ -1595,11 +1590,13 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
-            
         
             
         
+            
+        
+            
+            <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
             
         
             
@@ -1623,57 +1620,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
-            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
             
         
             
@@ -1707,7 +1654,69 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             
         
             
+            <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Array" title="Array" rel="15">Array</a>
+            
+        
             
         
             
@@ -1768,6 +1777,8 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
             <a href="/tags/#jdk源码" title="jdk源码" rel="6">jdk源码</a>
             
         
+            
+            <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
     </div>
@@ -1830,23 +1841,23 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
     <ul>
       
         <li>
+          <a href="/2024/03/21/%E6%BA%90%E7%A0%81-Flink-2024-03-21-DataStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">DataStream源码解析</a>
+        </li>
+      
+        <li>
+          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink-Rpc%E6%A1%86%E6%9E%B6/">Flink Rpc框架</a>
+        </li>
+      
+        <li>
+          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink%E6%BA%90%E7%A0%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-Akka/">Flink源码前置知识-Akka</a>
+        </li>
+      
+        <li>
+          <a href="/2024/01/14/Flink-2024-01-14-Flink%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E7%B2%BE%E5%87%86%E4%B8%80%E6%AC%A1/">Flink端到端的精准一次</a>
+        </li>
+      
+        <li>
           <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
-        </li>
-      
-        <li>
-          <a href="/2024/01/06/Flink-2024-01-06-watermark%E7%9A%84%E4%BC%A0%E9%80%92/">watermark的传递</a>
-        </li>
-      
-        <li>
-          <a href="/2024/01/06/Flink-2024-01-06-interval-join%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%A7%A3%E6%9E%90/">interval join执行流程解析</a>
-        </li>
-      
-        <li>
-          <a href="/2023/11/20/%E5%A4%A7%E6%95%B0%E6%8D%AE-2023-11-20-distribute-by%E3%80%81sort-by%E3%80%81order-by%E5%BA%94%E7%94%A8/">distribute by、sort by、order by应用</a>
-        </li>
-      
-        <li>
-          <a href="/2023/11/20/Java-2023-11-20-%E7%90%86%E8%A7%A3UTC%E3%80%81%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%97%B6%E9%97%B4%E3%80%81%E5%A4%8F%E4%BB%A4%E6%97%B6%E7%AD%89%E6%A6%82%E5%BF%B5/">理解UTC、格林威治时间、夏令时等概念</a>
         </li>
       
     </ul>
@@ -1861,7 +1872,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">50</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1878,45 +1889,47 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
           <a href="categories/#HBase"><li>HBase</li></a>
         
-          <a href="categories/#IO"><li>IO</li></a>
-        
           <a href="categories/#jvm"><li>jvm</li></a>
-        
-          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
           <a href="categories/#docker"><li>docker</li></a>
+        
+          <a href="categories/#Java"><li>Java</li></a>
         
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
-          <a href="categories/#Python"><li>Python</li></a>
-        
           <a href="categories/#network"><li>network</li></a>
         
-          <a href="categories/#分布式算法"><li>分布式算法</li></a>
+          <a href="categories/#IO"><li>IO</li></a>
         
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+          <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#多线程"><li>多线程</li></a>
+          <a href="categories/#Redis"><li>Redis</li></a>
         
           <a href="categories/#大数据"><li>大数据</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
           <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
+          <a href="categories/#多线程"><li>多线程</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
-          <a href="categories/#设计模式"><li>设计模式</li></a>
-        
           <a href="categories/#常见问题"><li>常见问题</li></a>
+        
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
+        
+          <a href="categories/#设计模式"><li>设计模式</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
+        
+          <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
       </ul>
     </div>
@@ -2080,7 +2093,7 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2090,6 +2103,21 @@ Cache 接口为缓存的组件规范定义，包含缓存的各种操作集合�
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
