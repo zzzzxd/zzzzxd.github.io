@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          交叉熵损失函数的含义解释 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/06/12/LLM-交叉熵损失函数/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                            
+                        </div>
+                        <h1>交叉熵损失函数的含义解释</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-06-12
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">991</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="✅-什么是交叉熵？为什么它能作为损失函数？"><a href="#✅-什么是交叉熵？为什么它能作为损失函数？" class="headerlink" title="✅ 什么是交叉熵？为什么它能作为损失函数？"></a><strong>✅ 什么是交叉熵？为什么它能作为损失函数？</strong></h1><h2 id="🌟-一句话总结"><a href="#🌟-一句话总结" class="headerlink" title="🌟 一句话总结"></a><strong>🌟 一句话总结</strong></h2><p><strong>交叉熵（Cross-Entropy）</strong> 是一个衡量“<strong>模型预测的概率分布</strong>”与“<strong>真实标签分布</strong>”之间差距的指标。差距越大，损失越大。</p>
+<p> 模型训练的目标就是：<strong>让交叉熵损失尽可能小</strong>。</p>
+<h2 id="🎯-一、从一个分类任务说起"><a href="#🎯-一、从一个分类任务说起" class="headerlink" title="🎯 一、从一个分类任务说起"></a><strong>🎯 一、从一个分类任务说起</strong></h2><p>假设你在做一个图像分类任务：判断一张图是 <strong>猫、狗、还是鸟</strong>。</p>
+<ul>
+<li><p><strong>真实标签</strong></p>
+<p>这是一只猫 用独热编码表示为：</p>
+<p><strong>[1, 0, 0]</strong></p>
+</li>
+<li><p><strong>模型预测</strong>：模型输出一个概率分布</p>
+<p> 比如：猫 70%，狗 20%，鸟 10% → <strong>[0.7, 0.2, 0.1]</strong></p>
+</li>
+</ul>
+<p>我们希望模型对“正确答案”的预测概率越高越好。<strong>交叉熵就是用来量化“它离正确答案还有多远”的工具。</strong></p>
+<h2 id="📐-二、交叉熵的数学公式（别怕，我们一步步看）"><a href="#📐-二、交叉熵的数学公式（别怕，我们一步步看）" class="headerlink" title="📐 二、交叉熵的数学公式（别怕，我们一步步看）"></a><strong>📐 二、交叉熵的数学公式（别怕，我们一步步看）</strong></h2><p>对于一个样本，交叉熵损失的公式是：其中：</p>
+<ul>
+<li>$ C $：类别总数（这里是 3：猫、狗、鸟）</li>
+<li>$ y_i $：真实标签，0 或 1（独热编码）</li>
+<li>$ \hat{y}_i $：模型预测的第 $ i $ 类的概率</li>
+<li>$ \log $：自然对数（以 $ e $ 为底）</li>
+</ul>
+<h3 id="✅-举个例子计算"><a href="#✅-举个例子计算" class="headerlink" title="✅ 举个例子计算"></a><strong>✅ 举个例子计算</strong></h3><ul>
+<li>真实标签：$ y = [1, 0, 0] $（是猫）</li>
+<li>预测概率：$ \hat{y} = [0.7, 0.2, 0.1] $</li>
+</ul>
+<p>代入公式：✅ <strong>只有真实类别那一项参与计算！</strong></p>
+<p> 因为 $ y_i = 0 $ 的项，乘出来都是 0。</p>
+<h2 id="🔍-三、交叉熵到底在“惩罚”什么？"><a href="#🔍-三、交叉熵到底在“惩罚”什么？" class="headerlink" title="🔍 三、交叉熵到底在“惩罚”什么？"></a><strong>🔍 三、交叉熵到底在“惩罚”什么？</strong></h2><p>核心思想：</p>
+<blockquote>
+<p><strong>如果模型对“正确答案”的预测概率很低，就狠狠惩罚它！</strong></p>
+</blockquote>
+<p>我们来看几个对比：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>真实类别</th>
+<th>预测为“猫”的概率</th>
+<th>交叉熵损失</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>猫</td>
+<td>0.9</td>
+<td>$ -\log(0.9) \approx 0.105 $</td>
+<td>预测很准，损失小 ✅</td>
+</tr>
+<tr>
+<td>猫</td>
+<td>0.5</td>
+<td>$ -\log(0.5) \approx 0.693 $</td>
+<td>模型犹豫，损失变大 ⚠️</td>
+</tr>
+<tr>
+<td>猫</td>
+<td>0.1</td>
+<td>$ -\log(0.1) = 2.303 $</td>
+<td>预测错得很离谱，损失巨大 ❌</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>👉 损失越大，说明模型越“不确定”或“错误”。</p>
+<p> 优化器（如 SGD、Adam）会据此调整参数，让模型下次预测更准。</p>
+<h2 id="🧠-四、为什么用交叉熵，而不是其他损失函数？"><a href="#🧠-四、为什么用交叉熵，而不是其他损失函数？" class="headerlink" title="🧠 四、为什么用交叉熵，而不是其他损失函数？"></a><strong>🧠 四、为什么用交叉熵，而不是其他损失函数？</strong></h2><h3 id="❌-为什么不直接用“预测值和真实值的差”（比如-MSE）？"><a href="#❌-为什么不直接用“预测值和真实值的差”（比如-MSE）？" class="headerlink" title="❌ 为什么不直接用“预测值和真实值的差”（比如 MSE）？"></a><strong>❌ 为什么不直接用“预测值和真实值的差”（比如 MSE）？</strong></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>均方误差（MSE）</td>
+<td>把类别当成有“距离”的数字（比如猫=0，狗=1），但类别是<strong>独立的</strong>，没有大小关系</td>
+</tr>
+<tr>
+<td>准确率</td>
+<td>不能求导，无法用于反向传播</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="✅-为什么交叉熵更合适？"><a href="#✅-为什么交叉熵更合适？" class="headerlink" title="✅ 为什么交叉熵更合适？"></a><strong>✅ 为什么交叉熵更合适？</strong></h3><ul>
+<li>✅ <strong>可微分</strong>：能求导 → 支持反向传播</li>
+<li>✅ <strong>适合概率输出</strong>：天然配合 Softmax</li>
+<li>✅ <strong>强惩罚机制</strong>：对“低概率预测正确答案”进行严厉惩罚，训练更高效</li>
+<li>✅ <strong>信息论基础</strong>：来自香农的信息熵理论，衡量“不确定性”</li>
+</ul>
+<h2 id="🔄-五、交叉熵-Softmax：黄金搭档"><a href="#🔄-五、交叉熵-Softmax：黄金搭档" class="headerlink" title="🔄 五、交叉熵 + Softmax：黄金搭档"></a><strong>🔄 五、交叉熵 + Softmax：黄金搭档</strong></h2><p>在神经网络中，通常这样设计：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">神经网络输出（logits） </span><br><span class="line">        ↓</span><br><span class="line">     Softmax </span><br><span class="line">        ↓</span><br><span class="line">  概率分布 [0.7, 0.2, 0.1] </span><br><span class="line">        ↓</span><br><span class="line">   交叉熵损失</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Softmax</strong>：把原始输出（如 <strong>[-2, 3, 1]</strong>）变成概率分布（和为 1）</li>
+<li><strong>交叉熵</strong>：衡量这个概率与真实标签的差距</li>
+</ul>
+<blockquote>
+<p>🔧 很多框架（如 PyTorch、TensorFlow）提供 <strong>CrossEntropyLoss</strong>，它<strong>自动包含 Softmax</strong>，你只需要输入原始 logits（未归一化的分数）。</p>
+</blockquote>
+<hr>
+<h2 id="✅-六、总结：交叉熵的用途"><a href="#✅-六、总结：交叉熵的用途" class="headerlink" title="✅ 六、总结：交叉熵的用途"></a><strong>✅ 六、总结：交叉熵的用途</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类任务的标准损失函数</td>
+<td>图像分类、文本分类、语音识别等</td>
+</tr>
+<tr>
+<td>驱动模型学习</td>
+<td>损失越小，预测越准</td>
+</tr>
+<tr>
+<td>配合概率输出</td>
+<td>和 Softmax 天然搭配</td>
+</tr>
+<tr>
+<td>可微分</td>
+<td>支持反向传播，优化参数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>交叉熵损失函数中 pytorch实现，目标值并非采用了独热编码， 而是采用类别索引。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型输出：原始 logits（未经过 softmax）</span></span><br><span class="line"><span class="comment"># 形状: (batch_size, num_classes)</span></span><br><span class="line">logits = torch.tensor([[<span class="number">2.0</span>, <span class="number">1.0</span>, <span class="number">0.1</span>],    <span class="comment"># 样本1的 logits</span></span><br><span class="line">                       [<span class="number">0.5</span>, <span class="number">2.3</span>, <span class="number">0.8</span>]])   <span class="comment"># 样本2的 logits</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 真实标签：直接使用类别索引（class indices），不是 one-hot！</span></span><br><span class="line"><span class="comment"># 形状: (batch_size,)</span></span><br><span class="line">target = torch.tensor([<span class="number">0</span>, <span class="number">1</span>])  <span class="comment"># 0=猫, 1=狗</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用交叉熵损失（自动包含 Softmax）</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">loss = criterion(logits, target)</span><br><span class="line"></span><br><span class="line">print(loss)  <span class="comment"># 输出标量损失值</span></span><br></pre></td></tr></table></figure>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/06/20/LLM-理解神经网络/" data-toggle="tooltip" data-placement="top" title="神经网络的理解小结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/06/09/LLM-SGD与全量GD对比/" data-toggle="tooltip" data-placement="top" title="BGD与SGD">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#✅-什么是交叉熵？为什么它能作为损失函数？"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">✅ 什么是交叉熵？为什么它能作为损失函数？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🌟-一句话总结"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">🌟 一句话总结</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🎯-一、从一个分类任务说起"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">🎯 一、从一个分类任务说起</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#📐-二、交叉熵的数学公式（别怕，我们一步步看）"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">📐 二、交叉熵的数学公式（别怕，我们一步步看）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-举个例子计算"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">✅ 举个例子计算</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🔍-三、交叉熵到底在“惩罚”什么？"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">🔍 三、交叉熵到底在“惩罚”什么？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🧠-四、为什么用交叉熵，而不是其他损失函数？"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">🧠 四、为什么用交叉熵，而不是其他损失函数？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#❌-为什么不直接用“预测值和真实值的差”（比如-MSE）？"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">❌ 为什么不直接用“预测值和真实值的差”（比如 MSE）？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-为什么交叉熵更合适？"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">✅ 为什么交叉熵更合适？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🔄-五、交叉熵-Softmax：黄金搭档"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">🔄 五、交叉熵 + Softmax：黄金搭档</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-六、总结：交叉熵的用途"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">✅ 六、总结：交叉熵的用途</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#补充"><span class="toc-nav-number">1.7.1.</span> <span class="toc-nav-text">补充</span></a></li></ol></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

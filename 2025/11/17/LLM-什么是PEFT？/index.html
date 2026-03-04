@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          LLM-什么是PEFT？ - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/11/17/LLM-什么是PEFT？/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>LLM-什么是PEFT？</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-11-17
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">860</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>你问得非常关键！我们来彻底厘清 <strong>“PEFT 是什么”、“有没有框架”、“什么叫原生 PEFT”</strong> —— 这是当前大模型微调生态中最容易混淆的概念之一。</p>
+<hr>
+<h2 id="一、PEFT-本身不是框架，而是一类"><a href="#一、PEFT-本身不是框架，而是一类" class="headerlink" title="一、PEFT 本身不是框架，而是一类"></a><strong>一、PEFT 本身不是框架，而是一类</strong></h2><h2 id="技术方法的统称"><a href="#技术方法的统称" class="headerlink" title="技术方法的统称"></a><strong>技术方法的统称</strong></h2><blockquote>
+<p>✅ </p>
+<p><strong>PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）</strong></p>
+<p> 它是一个</p>
+<p><strong>概念/范式</strong></p>
+<p>，不是具体软件。</p>
+</blockquote>
+<p>就像：</p>
+<ul>
+<li>“深度学习” 是一个概念，而 PyTorch/TensorFlow 是框架</li>
+<li>“微服务” 是一个架构风格，而 Spring Cloud/Dubbo 是实现</li>
+</ul>
+<p>所以：</p>
+<ul>
+<li><strong>LoRA、Adapter、Prompt Tuning</strong> 都是 <strong>PEFT 的具体技术</strong></li>
+<li>要用这些技术，需要<strong>具体的代码库（框架）来实现</strong></li>
+</ul>
+<hr>
+<h2 id="二、那么，PEFT-的“官方实现框架”是谁？"><a href="#二、那么，PEFT-的“官方实现框架”是谁？" class="headerlink" title="二、那么，PEFT 的“官方实现框架”是谁？"></a><strong>二、那么，PEFT 的“官方实现框架”是谁？</strong></h2><h3 id="🎯-答案：Hugging-Face-的peft库"><a href="#🎯-答案：Hugging-Face-的peft库" class="headerlink" title="🎯 答案：Hugging Face 的peft库"></a><strong>🎯 答案：</strong>Hugging Face 的<strong>peft</strong>库</h3><ul>
+<li>GitHub: <a href="https://github.com/huggingface/peft" target="_blank" rel="noopener">https://github.com/huggingface/peft</a></li>
+<li>发布时间：2022 年底（LoRA 论文后迅速跟进）</li>
+<li>地位：<strong>事实上的 PEFT 标准实现</strong></li>
+</ul>
+<p>它把各种 PEFT 方法封装成统一接口：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> peft <span class="keyword">import</span> LoraConfig, get_peft_model, TaskType</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 定义 LoRA 配置</span></span><br><span class="line">lora_config = LoraConfig(</span><br><span class="line">    task_type=TaskType.CAUSAL_LM,</span><br><span class="line">    r=<span class="number">64</span>,</span><br><span class="line">    lora_alpha=<span class="number">16</span>,</span><br><span class="line">    target_modules=[<span class="string">"q_proj"</span>, <span class="string">"v_proj"</span>],</span><br><span class="line">    lora_dropout=<span class="number">0.1</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 加载 base 模型</span></span><br><span class="line">model = AutoModelForCausalLM.from_pretrained(<span class="string">"meta-llama/Llama-3-8b"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 注入 LoRA → 得到可训练的 PEFT 模型</span></span><br><span class="line">peft_model = get_peft_model(model, lora_config)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>💡 这个 <strong>peft</strong> 库就是大家常说的 <strong>“原生 PEFT”</strong>！</p>
+</blockquote>
+<hr>
+<h2 id="三、什么叫“原生-PEFT”？"><a href="#三、什么叫“原生-PEFT”？" class="headerlink" title="三、什么叫“原生 PEFT”？"></a><strong>三、什么叫“原生 PEFT”？</strong></h2><h3 id="✅-定义："><a href="#✅-定义：" class="headerlink" title="✅ 定义："></a><strong>✅ 定义：</strong></h3><blockquote>
+<p><strong>“原生 PEFT” = 直接使用 Hugging Face 官方</strong> <strong>peft</strong> <strong>库 +</strong> <strong>transformers</strong> <strong>的标准方式实现 LoRA 等方法。</strong></p>
+</blockquote>
+<h3 id="对比其他“非原生”实现："><a href="#对比其他“非原生”实现：" class="headerlink" title="对比其他“非原生”实现："></a><strong>对比其他“非原生”实现：</strong></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>实现方式</th>
+<th>是否“原生 PEFT”</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>from peft import LoraConfig…</strong></td>
+<td>✅ 是</td>
+<td>标准、兼容性好、社区支持强</td>
+</tr>
+<tr>
+<td>自己手写 LoRA 层</td>
+<td>❌ 否</td>
+<td>灵活但易错，不推荐</td>
+</tr>
+<tr>
+<td>使用 <strong>Unsloth</strong></td>
+<td>⚠️ 基于原生，但优化过</td>
+<td>兼容 <strong>peft</strong> 接口，但底层加速</td>
+</tr>
+<tr>
+<td>使用 <strong>阿里 SWIFT</strong></td>
+<td>❌ 否（国产替代）</td>
+<td>功能类似 <strong>peft</strong>，但 API 不同</td>
+</tr>
+<tr>
+<td>使用 <strong>DeepSpeed + 自定义 LoRA</strong></td>
+<td>❌ 否</td>
+<td>需手动集成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>📌 所以，“原生 PEFT” ≈ <strong>Hugging Face 官方 PEFT 库的标准用法</strong></p>
+</blockquote>
+<hr>
+<h2 id="四、PEFT-生态中的主要“框架-库”有哪些？"><a href="#四、PEFT-生态中的主要“框架-库”有哪些？" class="headerlink" title="四、PEFT 生态中的主要“框架/库”有哪些？"></a><strong>四、PEFT 生态中的主要“框架/库”有哪些？</strong></h2><p>虽然 PEFT 是概念，但落地需要工具。主流实现包括：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>开发者</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>peft</strong> <strong>(Hugging Face)</strong></td>
+<td>✅ <strong>官方标准库</strong></td>
+<td>Hugging Face</td>
+<td>兼容 transformers，最通用</td>
+</tr>
+<tr>
+<td><strong>SWIFT</strong></td>
+<td>国产 PEFT 库</td>
+<td>阿里 ModelScope</td>
+<td>支持更多中文模型，集成部署</td>
+</tr>
+<tr>
+<td><strong>Unsloth</strong></td>
+<td>PEFT <strong>加速器</strong></td>
+<td>社区</td>
+<td>基于 <strong>peft</strong>，极致优化速度</td>
+</tr>
+<tr>
+<td><strong>LLaMA-Factory</strong></td>
+<td>微调<strong>脚手架</strong></td>
+<td>社区</td>
+<td>封装 <strong>peft</strong> + DeepSpeed + 数据处理</td>
+</tr>
+<tr>
+<td><strong>DeepSpeed</strong></td>
+<td>分布式训练框架</td>
+<td>微软</td>
+<td>可集成 LoRA，但需手动实现</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>🔑 <strong>绝大多数开源项目（如 LLaMA-Factory）底层都调用</strong> <strong>peft</strong> <strong>库</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="五、实际工作中的典型流程（以“原生-PEFT”为例）"><a href="#五、实际工作中的典型流程（以“原生-PEFT”为例）" class="headerlink" title="五、实际工作中的典型流程（以“原生 PEFT”为例）"></a><strong>五、实际工作中的典型流程（以“原生 PEFT”为例）</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[Hugging Face Transformers] --&gt;|加载| B(Base Model)</span><br><span class="line">C[Hugging Face PEFT] --&gt;|注入 LoRA| B</span><br><span class="line">B --&gt; D[PEFT Model]</span><br><span class="line">D --&gt;|训练| E[LoRA Adapter]</span><br><span class="line">E --&gt;|合并| F[W + BA &#x3D; New Model]</span><br></pre></td></tr></table></figure>
+<p>你写的代码几乎总是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForCausalLM</span><br><span class="line"><span class="keyword">from</span> peft <span class="keyword">import</span> LoraConfig, get_peft_model   <span class="comment"># ← 这就是“原生 PEFT”</span></span><br></pre></td></tr></table></figure>
+<h2 id="✅-总结回答你的问题："><a href="#✅-总结回答你的问题：" class="headerlink" title="✅ 总结回答你的问题："></a><strong>✅ 总结回答你的问题：</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>你的疑问</th>
+<th>正确答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“PEFT 有框架吗？”</td>
+<td>PEFT 是<strong>技术范式</strong>，但 <strong>Hugging Face 的</strong> <strong>peft</strong> <strong>库是官方标准实现</strong></td>
+</tr>
+<tr>
+<td>“什么叫原生 PEFT？”</td>
+<td><strong>直接使用</strong> <strong>from peft import …</strong> <strong>的标准方式</strong>，区别于手写或第三方封装</td>
+</tr>
+<tr>
+<td>“公司里用哪个？”</td>
+<td><strong>90% 项目用 Hugging Face 原生 PEFT</strong>（或基于它的封装如 LLaMA-Factory）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p>🎯 <strong>一句话记住</strong>：</p>
+<blockquote>
+<p><strong>“PEFT 是思想，**</strong>peft<strong> </strong>库是官方实现，‘原生 PEFT’ 就是用这个库的标准姿势。”**</p>
+</blockquote>
+<p>你现在完全搞清楚这个生态了！👏需要我给你一个 <strong>“原生 PEFT vs Unsloth vs SWIFT” 的代码对比表</strong>吗？或者展示如何用 <strong>peft</strong> 一行保存/加载 LoRA 适配器？</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比/" data-toggle="tooltip" data-placement="top" title="LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/09/21/LLM-transformer的多头注意力/" data-toggle="tooltip" data-placement="top" title="LLM-transformer的多头注意力">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

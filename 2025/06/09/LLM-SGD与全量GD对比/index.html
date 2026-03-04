@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          Hudi-核心概念 - Dante&#39;s blog
+          BGD与SGD - Dante&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2023/01/12/Hudi-核心概念/">
+    <link rel="canonical" href="https://dusign.net/2025/06/09/LLM-SGD与全量GD对比/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,19 +112,21 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                            
                         </div>
-                        <h1>Hudi-核心概念</h1>
+                        <h1>BGD与SGD</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Dante on
-                            2023-01-12
+                            2025-06-09
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">0</span> and
-                                Reading Time <span class="post-count">1</span> Minutes
+                                Words <span class="post-count">1k</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -192,13 +194,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -207,6 +202,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -268,19 +270,162 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h1 id="✅-SGD-vs-全量梯度下降：为什么深度学习都用“小批量”？"><a href="#✅-SGD-vs-全量梯度下降：为什么深度学习都用“小批量”？" class="headerlink" title="✅ SGD vs 全量梯度下降：为什么深度学习都用“小批量”？"></a><strong>✅ SGD vs 全量梯度下降：为什么深度学习都用“小批量”？</strong></h1><h2 id="🎯-核心结论（先看答案）"><a href="#🎯-核心结论（先看答案）" class="headerlink" title="🎯 核心结论（先看答案）"></a><strong>🎯 核心结论（先看答案）</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>全量梯度下降（Batch GD）</th>
+<th>随机梯度下降（SGD / Mini-batch SGD）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使用数据</td>
+<td>整个训练集</td>
+<td>一个样本 或 一个小批量（如 32、64）</td>
+</tr>
+<tr>
+<td>梯度计算</td>
+<td>精确，方向稳定</td>
+<td>有噪声，方向波动</td>
+</tr>
+<tr>
+<td>更新频率</td>
+<td>每遍历完整个数据集才更新一次</td>
+<td>每个 batch 更新一次</td>
+</tr>
+<tr>
+<td>训练速度</td>
+<td>极慢（内存、计算压力大）</td>
+<td>快得多</td>
+</tr>
+<tr>
+<td>收敛行为</td>
+<td>平滑，但易陷局部最优</td>
+<td>有噪声，可能跳出坏的局部最优</td>
+</tr>
+<tr>
+<td>实际使用</td>
+<td>❌ 几乎不用</td>
+<td>✅ 深度学习标准做法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>✅ <strong>现代深度学习几乎都用 SGD 或其变体（如 Adam），根本原因：效率 + 泛化 + 可扩展性</strong></p>
+</blockquote>
+<hr>
+<h2 id="🔍-一、全量梯度下降（Batch-Gradient-Descent）"><a href="#🔍-一、全量梯度下降（Batch-Gradient-Descent）" class="headerlink" title="🔍 一、全量梯度下降（Batch Gradient Descent）"></a><strong>🔍 一、全量梯度下降（Batch Gradient Descent）</strong></h2><h3 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a><strong>是什么？</strong></h3><ul>
+<li><p>每次更新参数前，计算<strong>整个训练集</strong>的平均梯度。</p>
+</li>
+<li><p>公式： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">梯度 &#x3D; (1&#x2F;N) × Σ(每个样本的梯度)</span><br><span class="line">参数 &#x3D; 参数 - 学习率 × 梯度</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a><strong>优点</strong></h3><ul>
+<li>梯度方向非常准确</li>
+<li>更新路径平滑，收敛稳定</li>
+</ul>
+<h3 id="缺点（致命！）"><a href="#缺点（致命！）" class="headerlink" title="缺点（致命！）"></a><strong>缺点（致命！）</strong></h3><ol>
+<li><strong>太慢</strong>：每更新一步都要遍历全部数据（如 100 万张图）</li>
+<li><strong>内存爆炸</strong>：无法将全部数据加载到 GPU</li>
+<li><strong>容易陷入局部最优</strong>：没有噪声帮助跳出</li>
+<li><strong>无法在线学习</strong>：必须等所有数据齐备</li>
+</ol>
+<p>📌 适合：数据量极小（几百条）、凸优化问题（如线性回归）</p>
+<h2 id="🔍-二、随机梯度下降（SGD）与小批量-SGD（Mini-batch-SGD）"><a href="#🔍-二、随机梯度下降（SGD）与小批量-SGD（Mini-batch-SGD）" class="headerlink" title="🔍 二、随机梯度下降（SGD）与小批量 SGD（Mini-batch SGD）"></a><strong>🔍 二、随机梯度下降（SGD）与小批量 SGD（Mini-batch SGD）</strong></h2><h3 id="是什么？-1"><a href="#是什么？-1" class="headerlink" title="是什么？"></a><strong>是什么？</strong></h3><ul>
+<li><strong>SGD</strong>：每次只用<strong>一个样本</strong>计算梯度并更新</li>
+<li><strong>Mini-batch SGD</strong>：每次用<strong>一小批样本</strong>（如 32、64、128）计算平均梯度</li>
+</ul>
+<p>这是现代深度学习的<strong>标准做法</strong>。</p>
+<h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a><strong>优点</strong></h3><ol>
+<li>✅ <strong>速度快</strong>：每 batch 更新一次，1 个 epoch 就能更新很多次</li>
+<li>✅ <strong>内存友好</strong>：只需加载小 batch 到 GPU</li>
+<li>✅ <strong>利用硬件并行</strong>：GPU 擅长并行计算小矩阵</li>
+<li>✅ <strong>噪声有助于泛化</strong>：梯度有波动，可能跳出尖锐的局部最优，找到更平坦的极小值（泛化更好）</li>
+<li>✅ <strong>支持在线学习</strong>：数据可以持续流入</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a><strong>缺点</strong></h3><ul>
+<li>梯度有噪声，更新路径震荡</li>
+<li>学习率需要 careful 调整</li>
+</ul>
+<h2 id="🧠-三、为什么“噪声”反而是好事？"><a href="#🧠-三、为什么“噪声”反而是好事？" class="headerlink" title="🧠 三、为什么“噪声”反而是好事？"></a><strong>🧠 三、为什么“噪声”反而是好事？</strong></h2><p>听起来反直觉：<strong>不准确的梯度怎么反而更好？</strong>关键在于：</p>
+<blockquote>
+<p>深度学习的损失函数极其复杂，有很多“尖锐的局部最优”和“平坦的全局最优”。</p>
+</blockquote>
+<ul>
+<li><strong>全量 GD</strong>：像一个“盲人拄拐”，走得很稳，但一旦掉进一个尖锐的小坑，就出不来了。</li>
+<li><strong>SGD</strong>：像一个“带震动的球”，虽然走不直，但震动（噪声）可能把它从坏的小坑里“抖”出来，最终滚到更平坦、泛化更好的区域。</li>
+</ul>
+<p>📌 这就是 <strong>SGD 的隐式正则化效应</strong>：噪声 → 更好泛化。</p>
+<h2 id="🔄-四、实际训练流程（以-Mini-batch-SGD-为例）"><a href="#🔄-四、实际训练流程（以-Mini-batch-SGD-为例）" class="headerlink" title="🔄 四、实际训练流程（以 Mini-batch SGD 为例）"></a><strong>🔄 四、实际训练流程（以 Mini-batch SGD 为例）</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    <span class="keyword">for</span> batch_x, batch_y <span class="keyword">in</span> dataloader:  <span class="comment"># 每次取一个小 batch</span></span><br><span class="line">        logits = model(batch_x)          <span class="comment"># 前向传播</span></span><br><span class="line">        loss = criterion(logits, batch_y) <span class="comment"># 计算损失</span></span><br><span class="line">        loss.backward()                  <span class="comment"># 反向传播，计算梯度</span></span><br><span class="line">        optimizer.step()                 <span class="comment"># 更新参数（如 SGD、Adam）</span></span><br><span class="line">        optimizer.zero_grad()            <span class="comment"># 清空梯度</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>一个 epoch：遍历完整个数据集</li>
+<li>但参数更新了 <strong>N / batch_size</strong> 次！</li>
+</ul>
+<h2 id="🆚-五、SGD-vs-全量-GD：直观对比"><a href="#🆚-五、SGD-vs-全量-GD：直观对比" class="headerlink" title="🆚 五、SGD vs 全量 GD：直观对比"></a><strong>🆚 五、SGD vs 全量 GD：直观对比</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>全量 GD</th>
+<th>Mini-batch SGD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据量 100 万</td>
+<td>更新一次要几小时</td>
+<td>每秒可更新几十次</td>
+</tr>
+<tr>
+<td>GPU 显存</td>
+<td>必须存下全部数据 → 不可能</td>
+<td>只存一个 batch → 轻松</td>
+</tr>
+<tr>
+<td>收敛曲线</td>
+<td>平滑下降</td>
+<td>上下震荡，但总体下降</td>
+</tr>
+<tr>
+<td>泛化性能</td>
+<td>可能过拟合</td>
+<td>通常更好</td>
+</tr>
+<tr>
+<td>实际使用</td>
+<td>❌ 基本不用</td>
+<td>✅ 标准做法</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="✅-六、总结：为什么深度学习都用-SGD？"><a href="#✅-六、总结：为什么深度学习都用-SGD？" class="headerlink" title="✅ 六、总结：为什么深度学习都用 SGD？"></a><strong>✅ 六、总结：为什么深度学习都用 SGD？</strong></h2><ol>
+<li><strong>效率</strong>：小批量更新快，适合大规模数据</li>
+<li><strong>可扩展</strong>：能用 GPU 并行，支持大数据</li>
+<li><strong>泛化好</strong>：梯度噪声有正则化作用</li>
+<li><strong>工程友好</strong>：内存可控，支持流式数据</li>
+<li><strong>基础框架</strong>：Adam、RMSProp 等都是 SGD 的改进版</li>
+</ol>
+<blockquote>
+<p>✅ 所以：<strong>不是“为什么用 SGD”，而是“为什么不用全量 GD”</strong>。</p>
+</blockquote>
+
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2023/01/12/Hudi-查询类型/" data-toggle="tooltip" data-placement="top" title="Hudi-查询类型">&larr; Previous Post</a>
+                        <a href="/2025/06/12/LLM-交叉熵损失函数/" data-toggle="tooltip" data-placement="top" title="交叉熵损失函数的含义解释">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2023/01/12/设计模式-2023-01-12-Huid-数据管理/" data-toggle="tooltip" data-placement="top" title="Huid-数据管理">Next Post &rarr;</a>
+                        <a href="/2025/06/06/LLM-Adam/" data-toggle="tooltip" data-placement="top" title="Adam优化器思想">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -388,6 +533,17 @@
 
     
       
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#✅-SGD-vs-全量梯度下降：为什么深度学习都用“小批量”？"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">✅ SGD vs 全量梯度下降：为什么深度学习都用“小批量”？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🎯-核心结论（先看答案）"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">🎯 核心结论（先看答案）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🔍-一、全量梯度下降（Batch-Gradient-Descent）"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">🔍 一、全量梯度下降（Batch Gradient Descent）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#是什么？"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">是什么？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#优点"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">优点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#缺点（致命！）"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">缺点（致命！）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🔍-二、随机梯度下降（SGD）与小批量-SGD（Mini-batch-SGD）"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">🔍 二、随机梯度下降（SGD）与小批量 SGD（Mini-batch SGD）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#是什么？-1"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">是什么？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#优点-1"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">优点</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#缺点"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">缺点</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🧠-三、为什么“噪声”反而是好事？"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">🧠 三、为什么“噪声”反而是好事？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🔄-四、实际训练流程（以-Mini-batch-SGD-为例）"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">🔄 四、实际训练流程（以 Mini-batch SGD 为例）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🆚-五、SGD-vs-全量-GD：直观对比"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">🆚 五、SGD vs 全量 GD：直观对比</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-六、总结：为什么深度学习都用-SGD？"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">✅ 六、总结：为什么深度学习都用 SGD？</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
     
 
                 
@@ -404,6 +560,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                        
                     </div>
                 </section>
                 
@@ -480,7 +638,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2024 
+                    Copyright &copy; Dante 2026 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
@@ -606,7 +764,7 @@
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -616,21 +774,6 @@
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

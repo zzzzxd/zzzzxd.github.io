@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          特征工程-数值+类别特征处理 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/07/07/LLM-特征工程类别与数值型特征处理/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#特征工程" title="特征工程">特征工程</a>
+                            
+                        </div>
+                        <h1>特征工程-数值+类别特征处理</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-07-07
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">839</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="特征工程-数值-类别特征处理"><a href="#特征工程-数值-类别特征处理" class="headerlink" title="特征工程 数值 + 类别特征处理"></a><strong>特征工程 数值 + 类别特征处理</strong></h1><p>这是 <strong>机器学习项目中最常见的预处理模式</strong>，尤其适用于：</p>
+<ul>
+<li>结构化数据（如 CSV、数据库表）</li>
+<li>混合了数值和文本/类别特征</li>
+<li>使用线性模型、SVM、神经网络等</li>
+</ul>
+<h2 id="🎯-为什么这么做？核心原因"><a href="#🎯-为什么这么做？核心原因" class="headerlink" title="🎯 为什么这么做？核心原因"></a><strong>🎯 为什么这么做？核心原因</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值特征和类别特征处理方式不同</td>
+<td>不能用同一套规则</td>
+</tr>
+<tr>
+<td>缺失值处理策略不同</td>
+<td>数值用均值/中位数，类别用“缺失”标签</td>
+</tr>
+<tr>
+<td>缩放需求不同</td>
+<td>数值需要标准化，类别不需要</td>
+</tr>
+<tr>
+<td>编码方式不同</td>
+<td>类别需要转为数值（如 One-Hot）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>✅ 所以：<strong>必须分类型处理，再组合</strong></p>
+<hr>
+<h2 id="🔧-标准五步流程（你的代码结构完美匹配）"><a href="#🔧-标准五步流程（你的代码结构完美匹配）" class="headerlink" title="🔧 标准五步流程（你的代码结构完美匹配）"></a><strong>🔧 标准五步流程（你的代码结构完美匹配）</strong></h2><h3 id="✅-第一步：自动识别特征类型"><a href="#✅-第一步：自动识别特征类型" class="headerlink" title="✅ 第一步：自动识别特征类型"></a><strong>✅ 第一步：自动识别特征类型</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">numerical_features = X.select_dtypes(exclude=[<span class="string">'object'</span>]).columns</span><br><span class="line">categorical_features = X.select_dtypes(include=[<span class="string">'object'</span>]).columns</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>exclude=[‘object’]</strong>：所有非文本列（int, float）→ 数值型</li>
+<li><strong>include=[‘object’]</strong>：所有文本列 → 类别型</li>
+</ul>
+<p>📌 也可用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X.select_dtypes(include=[<span class="string">'number'</span>])  <span class="comment"># 更明确</span></span><br><span class="line">X.select_dtypes(include=[<span class="string">'category'</span>])  <span class="comment"># 类别类型</span></span><br></pre></td></tr></table></figure>
+<h3 id="✅-第二步：为数值特征定义处理流水线"><a href="#✅-第二步：为数值特征定义处理流水线" class="headerlink" title="✅ 第二步：为数值特征定义处理流水线"></a><strong>✅ 第二步：为数值特征定义处理流水线</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">numerical_transformer = Pipeline(steps=[</span><br><span class="line">    (<span class="string">'fillNA'</span>, SimpleImputer(strategy=<span class="string">'mean'</span>)),     <span class="comment"># 填补缺失值</span></span><br><span class="line">    (<span class="string">'scaler'</span>, StandardScaler())                   <span class="comment"># 标准化</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h4 id="常见策略："><a href="#常见策略：" class="headerlink" title="常见策略："></a><strong>常见策略：</strong></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>可选参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>填补缺失</td>
+<td><strong>‘mean’</strong>, <strong>‘median’</strong>, <strong>‘most_frequent’</strong></td>
+</tr>
+<tr>
+<td>标准化</td>
+<td><strong>StandardScaler</strong>（Z-score）</td>
+</tr>
+<tr>
+<td>归一化</td>
+<td><strong>MinMaxScaler</strong>（0~1）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>📌 树模型（如 Random Forest、XGBoost）<strong>不需要标准化</strong>，可省略。</p>
+<h3 id="✅-第三步：为类别特征定义处理流水线"><a href="#✅-第三步：为类别特征定义处理流水线" class="headerlink" title="✅ 第三步：为类别特征定义处理流水线"></a><strong>✅ 第三步：为类别特征定义处理流水线</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">categorical_transformer = Pipeline(steps=[</span><br><span class="line">    (<span class="string">'fillNA'</span>, SimpleImputer(strategy=<span class="string">'constant'</span>, fill_value=<span class="string">'NaN'</span>)),</span><br><span class="line">    (<span class="string">'onehot'</span>, OneHotEncoder(handle_unknown=<span class="string">'ignore'</span>))</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h4 id="常见策略：-1"><a href="#常见策略：-1" class="headerlink" title="常见策略："></a><strong>常见策略：</strong></h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>填补缺失</td>
+<td>用 <strong>‘constant’</strong> 策略，填 <strong>‘Missing’</strong> 或 <strong>‘NaN’</strong></td>
+</tr>
+<tr>
+<td>编码方式</td>
+<td><strong>OneHotEncoder</strong>, <strong>OrdinalEncoder</strong></td>
+</tr>
+<tr>
+<td><strong>handle_unknown=’ignore’</strong></td>
+<td>测试集出现新类别时不报错</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>📌 高基数类别（如 用户ID）不适合 One-Hot，应改用 Target Encoding 或 Embedding。</p>
+<h3 id="✅-第四步：组合所有处理规则"><a href="#✅-第四步：组合所有处理规则" class="headerlink" title="✅ 第四步：组合所有处理规则"></a><strong>✅ 第四步：组合所有处理规则</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">preprocessor = ColumnTransformer(</span><br><span class="line">    transformers=[</span><br><span class="line">        (<span class="string">'num'</span>, numerical_transformer, numerical_features),</span><br><span class="line">        (<span class="string">'cat'</span>, categorical_transformer, categorical_features)</span><br><span class="line">    ],</span><br><span class="line">    remainder=<span class="string">'drop'</span>  <span class="comment"># 可选：丢弃未指定列</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>ColumnTransformer</strong> 是关键：<strong>按列分组处理，自动拼接结果</strong></li>
+<li>支持稀疏矩阵，高效处理 One-Hot 膨胀</li>
+</ul>
+<hr>
+<h3 id="✅-第五步：应用预处理器，并转为-DataFrame（可选）"><a href="#✅-第五步：应用预处理器，并转为-DataFrame（可选）" class="headerlink" title="✅ 第五步：应用预处理器，并转为 DataFrame（可选）"></a><strong>✅ 第五步：应用预处理器，并转为 DataFrame（可选）</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x_train = pd.DataFrame(</span><br><span class="line">    preprocessor.fit_transform(x_train).toarray(),</span><br><span class="line">    columns=preprocessor.get_feature_names_out()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">x_test = pd.DataFrame(</span><br><span class="line">    preprocessor.transform(x_test).toarray(),</span><br><span class="line">    columns=preprocessor.get_feature_names_out()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a><strong>说明：</strong></h4><ul>
+<li><strong>.fit_transform(train)</strong>：在训练集上学习并转换</li>
+<li><strong>.transform(test)</strong>：用训练集的规则转换测试集（避免数据泄露）</li>
+<li><strong>.toarray()</strong>：稀疏矩阵 → 稠密矩阵（⚠️ 仅当内存允许）</li>
+<li><strong>get_feature_names_out()</strong>：获取新特征名，如 <strong>num__age</strong>, <strong>cat__color_red</strong></li>
+</ul>
+<p>📌 <strong>注意</strong>：如果特征太多，<strong>.toarray()</strong> 可能导致内存爆炸！</p>
+<hr>
+<h2 id="📦-完整代码模板（推荐收藏）"><a href="#📦-完整代码模板（推荐收藏）" class="headerlink" title="📦 完整代码模板（推荐收藏）"></a><strong>📦 完整代码模板（推荐收藏）</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.compose <span class="keyword">import</span> ColumnTransformer</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.impute <span class="keyword">import</span> SimpleImputer</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler, OneHotEncoder</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 分离特征类型</span></span><br><span class="line">numerical_features = X.select_dtypes(include=[<span class="string">'number'</span>]).columns</span><br><span class="line">categorical_features = X.select_dtypes(include=[<span class="string">'object'</span>]).columns</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 数值特征处理</span></span><br><span class="line">numerical_transformer = Pipeline(steps=[</span><br><span class="line">    (<span class="string">'imputer'</span>, SimpleImputer(strategy=<span class="string">'median'</span>)),  <span class="comment"># 用中位数更鲁棒</span></span><br><span class="line">    (<span class="string">'scaler'</span>, StandardScaler())</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 类别特征处理</span></span><br><span class="line">categorical_transformer = Pipeline(steps=[</span><br><span class="line">    (<span class="string">'imputer'</span>, SimpleImputer(strategy=<span class="string">'constant'</span>, fill_value=<span class="string">'Missing'</span>)),</span><br><span class="line">    (<span class="string">'onehot'</span>, OneHotEncoder(drop=<span class="string">'first'</span>, handle_unknown=<span class="string">'ignore'</span>))  <span class="comment"># drop='first' 防多重共线性</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 组合处理器</span></span><br><span class="line">preprocessor = ColumnTransformer(transformers=[</span><br><span class="line">    (<span class="string">'num'</span>, numerical_transformer, numerical_features),</span><br><span class="line">    (<span class="string">'cat'</span>, categorical_transformer, categorical_features)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 应用处理</span></span><br><span class="line">X_train_processed = preprocessor.fit_transform(X_train)</span><br><span class="line">X_test_processed = preprocessor.transform(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. （可选）转为 DataFrame</span></span><br><span class="line">feature_names = preprocessor.get_feature_names_out()</span><br><span class="line">X_train_df = pd.DataFrame(X_train_processed.toarray(), columns=feature_names)</span><br></pre></td></tr></table></figure>
+<h2 id="✅-最佳实践建议"><a href="#✅-最佳实践建议" class="headerlink" title="✅ 最佳实践建议"></a><strong>✅ 最佳实践建议</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>建议</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 使用 <strong>Pipeline</strong> + <strong>ColumnTransformer</strong></td>
+<td>避免数据泄露，代码整洁</td>
+</tr>
+<tr>
+<td>✅ 训练集 <strong>fit_transform</strong>，测试集 <strong>transform</strong></td>
+<td>保证一致性</td>
+</tr>
+<tr>
+<td>✅ 用 <strong>get_feature_names_out()</strong> 获取特征名</td>
+<td>方便调试和解释</td>
+</tr>
+<tr>
+<td>⚠️ 谨慎使用 <strong>.toarray()</strong></td>
+<td>高基数类别会导致内存爆炸</td>
+</tr>
+<tr>
+<td>✅ 树模型可省略标准化</td>
+<td>但保留也无害</td>
+</tr>
+<tr>
+<td>✅ 高基数类别不用 One-Hot</td>
+<td>改用 Target Encoding、Embedding、Hashing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/08/05/LLM-什么是“微调”（Fine-tuning）？—-广义-vs-狭义/" data-toggle="tooltip" data-placement="top" title="什么是“微调”（Fine-tuning）？">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/06/27/LLM-梯度累积实现/" data-toggle="tooltip" data-placement="top" title="梯度累积实现">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#特征工程-数值-类别特征处理"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">特征工程 数值 + 类别特征处理</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🎯-为什么这么做？核心原因"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">🎯 为什么这么做？核心原因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🔧-标准五步流程（你的代码结构完美匹配）"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">🔧 标准五步流程（你的代码结构完美匹配）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-第一步：自动识别特征类型"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">✅ 第一步：自动识别特征类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-第二步：为数值特征定义处理流水线"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">✅ 第二步：为数值特征定义处理流水线</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#常见策略："><span class="toc-nav-number">1.2.2.1.</span> <span class="toc-nav-text">常见策略：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-第三步：为类别特征定义处理流水线"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">✅ 第三步：为类别特征定义处理流水线</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#常见策略：-1"><span class="toc-nav-number">1.2.3.1.</span> <span class="toc-nav-text">常见策略：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-第四步：组合所有处理规则"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">✅ 第四步：组合所有处理规则</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅-第五步：应用预处理器，并转为-DataFrame（可选）"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">✅ 第五步：应用预处理器，并转为 DataFrame（可选）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#说明："><span class="toc-nav-number">1.2.5.1.</span> <span class="toc-nav-text">说明：</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#📦-完整代码模板（推荐收藏）"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">📦 完整代码模板（推荐收藏）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-最佳实践建议"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">✅ 最佳实践建议</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#特征工程" title="特征工程">特征工程</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

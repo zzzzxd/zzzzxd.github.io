@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Adam优化器思想 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/06/06/LLM-Adam/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                            
+                        </div>
+                        <h1>Adam优化器思想</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-06-06
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.2k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>🎯 核心思想：Adam 是对普通梯度下降的“加权 + 自适应 + 修正”升级<br>普通梯度下降：<br>$ \theta<em>{t} = \theta</em>{t-1} - \alpha \cdot g<em>t $<br>Adam 的更新：<br> $ \theta</em>{t} = \theta_{t-1} - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t $<br>✅ 本质：还是“参数 = 参数 - 学习率 × 梯度”</p>
+<h2 id="但-Adam-对“学习率”和“梯度”都做了智能调整！"><a href="#但-Adam-对“学习率”和“梯度”都做了智能调整！" class="headerlink" title=" 但 Adam 对“学习率”和“梯度”都做了智能调整！"></a> 但 Adam 对“学习率”和“梯度”都做了智能调整！</h2><p>🔍 Adam 公式四步拆解<br>我们用时间步 $ t $ 来追踪整个过程。<br>✅ 第一步：计算梯度 $ g_t $  </p>
+<p> $ g<em>t = \nabla</em>\theta L(\theta_{t-1}) $<br>•  这和 SGD 一样：用当前 batch 计算损失的梯度</p>
+<h2 id="•-是“当下”的信息"><a href="#•-是“当下”的信息" class="headerlink" title="•  是“当下”的信息"></a>•  是“当下”的信息</h2><p>✅ 第二步：更新一阶矩（动量）$ m<em>t $ —— 实现“记忆梯度”<br> $ \boxed{m_t = \beta_1 m</em>{t-1} + (1 - \beta<em>1) g_t} $<br>🔍 拆解：<br>•  $ m_t $：当前的“速度”或“动量”<br>•  $ \beta_1 m</em>{t-1} $：过去动量的衰减（比如 90% 的上一次速度）<br>•  $ 1 - \beta<em>1 g_t $：当前梯度的贡献（比如 10% 的新梯度）<br>🌰 举例：<br>•  $ \beta_1 = 0.9 $<br>•  $ m</em>{t-1} = [-0.1, 0.2] $<br>•  $ g_t = [-0.15, 0.25] $<br>•  $ m_t = 0.9 \times [-0.1, 0.2] + 0.1 \times [-0.15, 0.25] = [-0.105, 0.205] $<br>✅ 它不是简单平均，而是“指数加权移动平均”：越近的梯度权重越大。<br>🎯 作用：<br>•  平滑梯度：减少随机噪声<br>•  加速收敛：如果连续几次梯度都往左，$ m_t $ 会越来越大，更新更快</p>
+<h2 id="•-减少震荡：在峡谷地形中，横向梯度来回变号，-m-t-会抵消掉；纵向梯度同向，-m-t-累积-→-自动“顺着峡谷走”"><a href="#•-减少震荡：在峡谷地形中，横向梯度来回变号，-m-t-会抵消掉；纵向梯度同向，-m-t-累积-→-自动“顺着峡谷走”" class="headerlink" title="•  减少震荡：在峡谷地形中，横向梯度来回变号，$ m_t $ 会抵消掉；纵向梯度同向，$ m_t $ 累积 → 自动“顺着峡谷走”"></a>•  减少震荡：在峡谷地形中，横向梯度来回变号，$ m_t $ 会抵消掉；纵向梯度同向，$ m_t $ 累积 → 自动“顺着峡谷走”</h2><p>✅ 第三步：更新二阶矩（自适应学习率）$ v<em>t $ —— 实现“调整步伐”<br> $ \boxed{v_t = \beta_2 v</em>{t-1} + (1 - \beta<em>2) g_t^2} $<br>🔍 拆解：<br>•  $ v_t $：当前梯度的“方差”或“能量”<br>•  $ g_t^2 $：逐元素平方（保证非负）<br>•  同样是指数加权移动平均<br>🌰 举例：<br>•  $ \beta_2 = 0.999 $<br>•  $ v</em>{t-1} = [0.01, 0.04] $<br>•  $ g_t = [-0.1, 0.2] \Rightarrow g_t^2 = [0.01, 0.04] $<br>•  $ v_t = 0.999 \times [0.01, 0.04] + 0.001 \times [0.01, 0.04] ≈ [0.01, 0.04] $<br>✅ 它记录了每个参数方向上梯度的历史大小。<br>🎯 作用：<br>•  如果某个方向梯度一直很大（陡坡）→ $ v_t $ 大 → $ \sqrt{v_t} $ 大 → 学习率自动变小<br>•  如果某个方向梯度一直很小（平缓）→ $ v_t $ 小 → $ \sqrt{v_t} $ 小 → 学习率自动变大</p>
+<h2 id="✅-实现了“因地（梯度）制宜”的自适应学习率！"><a href="#✅-实现了“因地（梯度）制宜”的自适应学习率！" class="headerlink" title="✅ 实现了“因地（梯度）制宜”的自适应学习率！"></a>✅ 实现了“因地（梯度）制宜”的自适应学习率！</h2><p>✅ 第四步：偏差修正 —— 解决“起步偏见”<br>因为 $ m_0 = 0 $, $ v_0 = 0 $，所以：<br>•  $ m_1 = 1-\beta_1 g_1 $ → 比真实值小<br>•  $ v_1 = 1-\beta_2 g_1^2 $ → 也比真实值小<br>Adam 用偏差修正来补偿：<br> $ \hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$<br>🌰 举例（t=1）：<br>•  $ \beta_1 = 0.9 \Rightarrow 1 - \beta_1^1 = 0.1 $<br>•  $ m_1 = 0.1 \times g_1 $<br>•  $ \hat{m}_1 = \frac{0.1 \times g_1}{0.1} = g_1 $ ✅ 修正回真实值！</p>
+<h2 id="✅-让前几步的更新更准确，避免“起步太弱”。"><a href="#✅-让前几步的更新更准确，避免“起步太弱”。" class="headerlink" title="✅ 让前几步的更新更准确，避免“起步太弱”。"></a>✅ 让前几步的更新更准确，避免“起步太弱”。</h2><p>✅ 第五步：最终更新 —— 综合所有智慧<br>$ \boxed{\theta<em>t = \theta</em>{t-1} - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t} $<br>🔍 拆解：<br>•  $ \hat{m}_t $：经过动量加速的方向<br>•  $ \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} $：自适应的学习率矩阵（逐元素）<br>•  $ \cdot $：逐元素相乘（Hadamard 积）</p>
+<h2 id="✅-每个参数都有自己独立的“步伐大小”和“方向强度”"><a href="#✅-每个参数都有自己独立的“步伐大小”和“方向强度”" class="headerlink" title="✅ 每个参数都有自己独立的“步伐大小”和“方向强度”"></a>✅ 每个参数都有自己独立的“步伐大小”和“方向强度”</h2><p>🆚 公式对比：SGD vs Adam</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>优化器</th>
+<th>更新公式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SGD</td>
+<td>$ \theta = \theta - \alpha g $</td>
+<td>所有参数用同一个学习率，无记忆</td>
+</tr>
+<tr>
+<td>SGD + Momentum</td>
+<td>$ \theta = \theta - \alpha m $<br/>$ m = \beta m + (1-\beta)g$</td>
+<td>有动量，但学习率仍固定</td>
+</tr>
+<tr>
+<td>RMSProp</td>
+<td>$ \theta = \theta - \frac{\alpha}{\sqrt{v} + \epsilon} g $<br/>$ v = \beta v + (1-\beta)g^2 $</td>
+<td>自适应学习率，但无动量</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Adam-theta-theta-frac-alpha-sqrt-hat-v-t-epsilon-hat-m-t-✅-动量-自适应-偏差修正"><a href="#Adam-theta-theta-frac-alpha-sqrt-hat-v-t-epsilon-hat-m-t-✅-动量-自适应-偏差修正" class="headerlink" title="| Adam | $ \theta = \theta - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t $ | ✅ 动量 + 自适应 + 偏差修正 |"></a>| Adam | $ \theta = \theta - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t $ | ✅ 动量 + 自适应 + 偏差修正 |</h2><p>🎯 本质：Adam 是对梯度下降的“智能加权”<br>我们可以把 Adam 看作：<br> $ \text{有效学习率} = \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon}, \quad \text{有效梯度} = \hat{m}_t $<br>所以：<br> $ \Delta \theta = (\text{有效学习率}) \times (\text{有效梯度})  $</p>
+<h2 id="✅-它没有改变梯度下降的基本框架，而是通过“加权”让每一步更聪明！"><a href="#✅-它没有改变梯度下降的基本框架，而是通过“加权”让每一步更聪明！" class="headerlink" title="✅ 它没有改变梯度下降的基本框架，而是通过“加权”让每一步更聪明！"></a>✅ 它没有改变梯度下降的基本框架，而是通过“加权”让每一步更聪明！</h2><p>📊 一个直观例子：峡谷地形<br>假设损失函数像一个“U型峡谷”：<br>•  横向（x1）：梯度来回震荡（正负交替）<br>•  纵向（x2）：梯度一直向下（负值）</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>SGD 表现</th>
+<th>Adam 表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>梯度 [-0.1, -0.01] → 更新 [-0.1, -0.01]</td>
+<td>$ m ≈ [-0.1, -0.01] $, $ v ≈ [0.01, 0.0001] $ → 更新 $[-0.1, -0.1]$（纵向放大）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>梯度 [+0.1, -0.01] → 更新 [+0.1, -0.01]</td>
+<td>$ m_x ≈ 0 $（抵消）, $ m_y ≈ -0.015 $（累积）→ 更新 $[0, -0.15]$</td>
+</tr>
+<tr>
+<td>…</td>
+<td>左右摇摆，前进慢</td>
+<td>横向抵消，纵向加速 → 顺着峡谷直下</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="✅-Adam-自动实现了“横向抑制，纵向加速”，而-SGD-只能被动震荡。"><a href="#✅-Adam-自动实现了“横向抑制，纵向加速”，而-SGD-只能被动震荡。" class="headerlink" title="✅ Adam 自动实现了“横向抑制，纵向加速”，而 SGD 只能被动震荡。"></a>✅ Adam 自动实现了“横向抑制，纵向加速”，而 SGD 只能被动震荡。</h2><p>✅ 总结：从公式看 Adam 的智慧</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>实现的智慧</th>
+<th>数学本质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$ m<em>t = \beta_1 m</em>{t-1} + 1-\beta_1g_t $</td>
+<td>记忆梯度，加速收敛</td>
+<td>指数加权移动平均（一阶矩）</td>
+</tr>
+<tr>
+<td>$ v<em>t = \beta_2 v</em>{t-1} + 1-\beta_2g_t^2 $</td>
+<td>自适应学习率，调整步伐</td>
+<td>指数加权移动平均（二阶矩）</td>
+</tr>
+<tr>
+<td>$ \hat{m}_t = m_t / 1-\beta_1^t $</td>
+<td>起步更稳</td>
+<td>偏差修正</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="theta-theta-frac-alpha-sqrt-hat-v-t-epsilon-hat-m-t-智能更新-逐元素自适应-动量"><a href="#theta-theta-frac-alpha-sqrt-hat-v-t-epsilon-hat-m-t-智能更新-逐元素自适应-动量" class="headerlink" title="| $ \theta = \theta - \frac{\alpha}{\sqrt{\hat{v}_t}+\epsilon} \hat{m}_t $ | 智能更新 | 逐元素自适应 + 动量 |"></a>| $ \theta = \theta - \frac{\alpha}{\sqrt{\hat{v}_t}+\epsilon} \hat{m}_t $ | 智能更新 | 逐元素自适应 + 动量 |</h2>
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/06/09/LLM-SGD与全量GD对比/" data-toggle="tooltip" data-placement="top" title="BGD与SGD">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/06/01/LLM-2025-06-12-预测任务与函数优化/" data-toggle="tooltip" data-placement="top" title="预测任务与函数优化">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#但-Adam-对“学习率”和“梯度”都做了智能调整！"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 但 Adam 对“学习率”和“梯度”都做了智能调整！</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#•-是“当下”的信息"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">•  是“当下”的信息</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#•-减少震荡：在峡谷地形中，横向梯度来回变号，-m-t-会抵消掉；纵向梯度同向，-m-t-累积-→-自动“顺着峡谷走”"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">•  减少震荡：在峡谷地形中，横向梯度来回变号，$ m_t $ 会抵消掉；纵向梯度同向，$ m_t $ 累积 → 自动“顺着峡谷走”</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-实现了“因地（梯度）制宜”的自适应学习率！"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">✅ 实现了“因地（梯度）制宜”的自适应学习率！</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-让前几步的更新更准确，避免“起步太弱”。"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">✅ 让前几步的更新更准确，避免“起步太弱”。</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-每个参数都有自己独立的“步伐大小”和“方向强度”"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">✅ 每个参数都有自己独立的“步伐大小”和“方向强度”</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Adam-theta-theta-frac-alpha-sqrt-hat-v-t-epsilon-hat-m-t-✅-动量-自适应-偏差修正"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">| Adam | $ \theta &#x3D; \theta - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t $ | ✅ 动量 + 自适应 + 偏差修正 |</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-它没有改变梯度下降的基本框架，而是通过“加权”让每一步更聪明！"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">✅ 它没有改变梯度下降的基本框架，而是通过“加权”让每一步更聪明！</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-Adam-自动实现了“横向抑制，纵向加速”，而-SGD-只能被动震荡。"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">✅ Adam 自动实现了“横向抑制，纵向加速”，而 SGD 只能被动震荡。</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#theta-theta-frac-alpha-sqrt-hat-v-t-epsilon-hat-m-t-智能更新-逐元素自适应-动量"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">| $ \theta &#x3D; \theta - \frac{\alpha}{\sqrt{\hat{v}_t}+\epsilon} \hat{m}_t $ | 智能更新 | 逐元素自适应 + 动量 |</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

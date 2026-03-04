@@ -171,13 +171,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -186,6 +179,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -1147,6 +1147,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1155,96 +1177,25 @@
 
         <div class="post-preview">
 
-            <a href="/2020/10/31/企业高频算法面试题-2020-10-31-Problem-61-两个有序数整体K小/">
+            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-72-小于K的最大子数组和/">
                 <h2 class="post-title">
-                    Problem 61 两个有序数整体K小
+                    Problem 72 小于K的最大子数组和
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode原题：https://leetcode.com/problems/median-of-two-sorted-arrays/进阶问题：在两个都有序的数组中找整体第K小的数可以做到O(log(Min(M,N)))
-12节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-31
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/28/企业高频算法面试题-2020-10-28-Problem-60-查找种类及个数相同的子串/">
-                <h2 class="post-title">
-                    Problem 60 查找种类及个数相同的子串
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定长度为m的字符串aim，以及一个长度为n的字符串str问能否在str中找到一个长度为m的连续子串，使得这个子串刚好由aim的m个字符组成，顺序无所谓，返回任意满足条件的一个子串的起始位置，未找到返回-1
-Leetcode:567
+                    题目​    请返回arr中，求子数组的累加和，是&lt;=K的并且是最大的返回这个最大的累加和
 题目解析
-题目比较简单 使用滑动窗口+字符表映射就可以解决
+考察的是前缀和的应用！前缀和已经多次提到了，就看你能不能灵活应用了
 
-代码123456789101112131415161718192021222324252627......
+代码1234567891011121314151617181920// 请返回arr中，求个子数组的累加和，是&lt;=K的，并且是最大的。	// 返回这个最大的累加和	public static int getMa......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-28
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/27/企业高频算法面试题-2020-10-27-Problem-59-切分回文串的最少刀数/">
-                <h2 class="post-title">
-                    Problem 59 切分回文串的最少刀数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    问题一：一个字符串至少要切几刀能让切出来的子串都是回文串
-问题二：返回问题一的其中一种划分结果
-问题三：返回问题一的所有划分结果
-11jie
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-27
+                    2020-11-18
                 </p>
                 <div class="tags">
                     
@@ -1266,27 +1217,58 @@ Leetcode:567
 
         <div class="post-preview">
 
-            <a href="/2020/10/24/企业高频算法面试题-2020-10-24-Problem-58-整体回文串的所有添加结果/">
+            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-71-最长的有效括号的子串/">
                 <h2 class="post-title">
-                    Problem 58 整体回文串的所有添加结果
+                    Problem 71 最长的有效括号的子串
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目问题一：一个字符串至少需要添加多少个字符能整体变成回文串
-https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
-问题二：返回问题一的其中一种添加结果
-问题三：返回问题一的所有添加结果
-11节
+                    题目给定一个只由左括号和右括号的字符串返回最长的有效括号子串的长度
 题目解析
-题目原型比较简单，普通的dp 行列模型。主要是通过此题目 总结一下通过dp矩......
+分析题目，dp[i]代表以当前i位置结尾，最长的有效括号的子串长度。
+
+代码123456789101112131415161718192021222324// s只由(和)组成	// 求最长有效括号子串长度	public static int maxLength(String s) &#123;		if (s ==......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-24
+                    2020-11-18
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/15/企业高频算法面试题-2020-11-15-Problem-70-数组调整的逆序对问题/">
+                <h2 class="post-title">
+                    Problem 70 数组调整的逆序对问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定整数power，给定一个数组arr，给定一个数组reverse，含义如下：arr的长度一定是2的power次方reverse中的每个值一定都在0~power范围。例如power = 2, arr = {3, 1, 4, 2}，reverse = {0, 1, 0, 2}
+任何一个在前的数字可以和任何一个在后的数组，构成一对数可能是升序关系、相等关系或者降序关系比如arr开始时有如下的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-15
                 </p>
                 <div class="tags">
                     
@@ -1308,144 +1290,25 @@ https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrom
 
         <div class="post-preview">
 
-            <a href="/2020/10/23/企业高频算法面试题-2020-10-23-Problem-57-布尔运算/">
+            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-69-回文对/">
                 <h2 class="post-title">
-                    Problem 57 布尔运算
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode-cn.com/problems/boolean-evaluation-lcci/
-题目解析
-这个题也是很类似的思想，比如讲，求最大子数组和？不管哪个子数组和最大，子数组一定是以某个元素结尾，所以我们找以当前元素为结尾的最大子数组，最终找到答案。此题求的是加括号的方法数，首先每个运算符号一定都会生效。通过加括号使得答案最终为1，那么......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-55-K个逆序对数组/">
-                <h2 class="post-title">
-                    Problem 55 K个逆序对数组
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode.com/problems/k-inverse-pairs-array/
-题目解析
-这道题目是一道很不错的dp题目，这道题目如果去写几个例子，很容易发现特点，做好空间优化。
-结果要取模运算的时候，任何一处加法减法都要加模再去取模，一个时防止溢出，一个是防止计算出现负数。
-
-代码123456789101112131415161718c......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/22/企业高频算法面试题-2020-10-22-Problem-56-BST转有序双向列表/">
-                <h2 class="post-title">
-                    Problem 56 BST转有序双向列表
+                    Problem 69 回文对
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
                     题目​    Leetcode原题：
-​    给定一棵搜索二叉树头节点，转化成首尾相接的有序双向链表
-https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
+​    https://leetcode.com/problems/palindrome-pairs/
 题目解析
-题目不难，就是麻烦点，用树的递归遍历就可以搞定。
-
-代码​    略
-...
+这个题简单思路是暴力 能做的。
+提供第二种思路。我们针对每个字符串，要是能直接找出来与之配对能成为回文的，就不需要无脑的匹配再判断是不是回文了。那如果找是关键，是突破口！判断是回文的前缀，将后面逆序放前面则是回文！同理，判断是回文的后缀逆序......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-22
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Tree" title="Tree">Tree</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/20/企业高频算法面试题-2020-10-20-Problem-54/">
-                <h2 class="post-title">
-                    Problem 54
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Lintcode原题：
-https://www.lintcode.com/problem/top-k-frequent-words-ii/
-第10节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-20
+                    2020-11-12
                 </p>
                 <div class="tags">
                     
@@ -1463,67 +1326,25 @@ https://www.lintcode.com/problem/top-k-frequent-words-ii/
 
         <div class="post-preview">
 
-            <a href="/2020/10/19/企业高频算法面试题-2020-10-19-Problem-53-跳跃游戏/">
+            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-68-修复BST/">
                 <h2 class="post-title">
-                    Problem 53 跳跃游戏
+                    Problem 68 修复BST
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode原题：https://leetcode.com/problems/jump-game-ii/
-补:
-https://leetcode.com/problems/jump-game/
+                    题目​    Leetcode原题：
+​    https://leetcode.com/problems/recover-binary-search-tree/
 题目解析
-这两道题目都非常有特点，考察这种先遍历后更新的技巧，两道题目要一块看。
-
-重点理解一下跳跃游戏II的三个变量
-
-Step : 当前走的步数
-cur：当前步数以内能到达的位置
-next......
+题目比较简答，因为BST中序遍历是升序，任意调换两个节点，正常的影响就是把中序中这两个元素进行调换会出现两段降序。case1 还提示了 也会有情况出现一段降序。所以说最多两段降序。我们给交换回来即可。
+用chi[]数组，......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-10-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/17/企业高频算法面试题-2020-10-17-Problem-52-step-sum问题/">
-                <h2 class="post-title">
-                    Problem 52 step sum问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    定义何为step sum？比如680，680 + 68 + 6 = 754，680的step sum叫754给定一个正数num，判断它是不是某个数的step sum
-题目解析
-这个题目考查的二分。拿到题目务必好好观察特点。明显这个数组拆分累加之后是变大的。所以说 给一个数x，它是某个数字的step sum 取值一定在1到x之间。所以可以用二分来枚举。
-
-代码1234567891......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-17
+                    2020-11-12
                 </p>
                 <div class="tags">
                     
@@ -1532,6 +1353,201 @@ next......
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                       <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/11/企业高频算法面试题-2020-11-11-Problem-67-打砖块/">
+                <h2 class="post-title">
+                    Problem 67 打砖块
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：
+https://leetcode.com/problems/bricks-falling-when-hit/
+题目解析
+首先一定要熟悉并查集。此题是并查集的逆运用，思考并查集核心思想在于集合的合并。而击落砖块问的是掉落之后的个数，相当于初始情况是一个大集合，不断的击落砖块时，集合分散之后，那些无连接的集合大小。所以可以，倒过来想，从击落最后一块砖块开始，此时是分散......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-11
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-66-扰乱字符串/">
+                <h2 class="post-title">
+                    Problem 66. 扰乱字符串
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode原题：
+https://leetcode.com/problems/scramble-string/
+题目解析
+思路比较直接，更加考察编程能力，包括这些位置的推断。以及递归的设计
+普通递归，不去优化会卡在最后连个case上，加上缓存就可以顺利通过。主要是能快速写出来程序，所以没有进一步优化，也可以进一步写成数组严格递归的形式，甚至用斜率优化
+
+代码1234567......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-65-超级洗衣机/">
+                <h2 class="post-title">
+                    Problem 65 超级洗衣机
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目  Leetcode原题：  https://leetcode.com/problems/super-washing-machines/
+题目解析
+考察单点瓶颈问题。诸如此类的还有接雨水问题等 都是考察 ”最短处“，整个问题的解决在于“痛点”。洗衣机每个都可以一次扔一件衣服，因为可以并发进行。那么只要找到需要扔到最多的，问题就解决了。
+
+代码12345678910111213141516......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/05/企业高频算法面试题-2020-11-05-Problem-64-谷歌抽牌问题/">
+                <h2 class="post-title">
+                    Problem 64 谷歌抽牌问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    谷歌面试题扩展版面值为1~N的牌组成一组，每次你从组里等概率的抽出1~N中的一张下次抽会换一个新的组，有无限组当累加和=a且=b时，你将失败返回获胜的概率，给定的参数为N，a，b
+题目解析
+可能一上来不知道如何下手，这种就想先定义递归含义。依据定义的含义在去写递归体，最后想递归边界，以及优化点。
+这个题想到大概思路之后，还要注意优化，关键在于(a,b)之间的距离
+
+代码1234......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/04/企业高频算法面试题-2020-11-04-Problem-63/">
+                <h2 class="post-title">
+                    Problem 63
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：
+https://leetcode.com/problems/regular-expression-matching/
+题目解析
+好题。考察递归，重点思考后面元素是*或者.，需要对这种特殊清楚进行分析可能性。
+
+代码1234567891011121314151617181920212223242526272829303132333435363738394041424......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-04
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                 </div>
             
@@ -1612,13 +1628,13 @@ next......
             
         
             
+        
+            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
+            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
             
         
             
@@ -1627,6 +1643,22 @@ next......
         
             
             <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1650,7 +1682,47 @@ next......
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1672,18 +1744,6 @@ next......
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
             
         
@@ -1691,40 +1751,6 @@ next......
         
             
         
-            
-            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
             
         
             
@@ -1760,11 +1786,7 @@ next......
             
         
             
-        
-            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
-            
-        
             
         
             
@@ -1793,6 +1815,8 @@ next......
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1871,23 +1895,23 @@ next......
     <ul>
       
         <li>
-          <a href="/2024/03/21/%E6%BA%90%E7%A0%81-Flink-2024-03-21-DataStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">DataStream源码解析</a>
+          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
         </li>
       
         <li>
-          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink-Rpc%E6%A1%86%E6%9E%B6/">Flink Rpc框架</a>
+          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
         </li>
       
         <li>
-          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink%E6%BA%90%E7%A0%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-Akka/">Flink源码前置知识-Akka</a>
+          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
         </li>
       
         <li>
-          <a href="/2024/01/14/Flink-2024-01-14-Flink%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E7%B2%BE%E5%87%86%E4%B8%80%E6%AC%A1/">Flink端到端的精准一次</a>
+          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
         </li>
       
         <li>
-          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
+          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
         </li>
       
     </ul>
@@ -1902,7 +1926,7 @@ next......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1919,41 +1943,45 @@ next......
         
           <a href="categories/#HBase"><li>HBase</li></a>
         
+          <a href="categories/#IO"><li>IO</li></a>
+        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#大模型学习"><li>大模型学习</li></a>
         
-          <a href="categories/#docker"><li>docker</li></a>
+          <a href="categories/#大模型"><li>大模型</li></a>
         
           <a href="categories/#Java"><li>Java</li></a>
         
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
-          <a href="categories/#network"><li>network</li></a>
-        
-          <a href="categories/#IO"><li>IO</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#大数据"><li>大数据</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#数据仓库"><li>数据仓库</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
-          <a href="categories/#常见问题"><li>常见问题</li></a>
-        
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
-        
           <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1997,7 +2025,7 @@ next......
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2024 
+                    Copyright &copy; Dante 2026 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
@@ -2123,7 +2151,7 @@ next......
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -2133,21 +2161,6 @@ next......
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

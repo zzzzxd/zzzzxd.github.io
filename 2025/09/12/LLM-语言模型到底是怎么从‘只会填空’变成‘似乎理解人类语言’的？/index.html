@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/09/12/LLM-语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的？/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                            
+                        </div>
+                        <h1>语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-09-12
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.3k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p><strong>“语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的？”</strong></p>
+</blockquote>
+<p>我们来<strong>按时间线 + 技术本质</strong>，一步步拆解这个“智能涌现”的过程。</p>
+<hr>
+<h2 id="一、起点：Transformer（2017）——-只是一个“高级序列建模工具”"><a href="#一、起点：Transformer（2017）——-只是一个“高级序列建模工具”" class="headerlink" title="一、起点：Transformer（2017）—— 只是一个“高级序列建模工具”"></a><strong>一、起点：Transformer（2017）—— 只是一个“高级序列建模工具”</strong></h2><ul>
+<li><p><strong>原始 Transformer</strong></p>
+<p>（《Attention is All You Need》）： </p>
+<ul>
+<li>包含 <strong>Encoder（编码器） + Decoder（解码器）</strong></li>
+<li><strong>目标</strong>：机器翻译（输入一句英文 → 输出一句中文）</li>
+<li><strong>没有“理解”能力</strong>，只是一个端到端的映射函数</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>✅ 此时的模型：<strong>不会对话、不会推理、不会生成连贯长文本</strong></p>
+</blockquote>
+<hr>
+<h2 id="二、BERT（2018）——-“理解”任务的里程碑（但仍是判别式）"><a href="#二、BERT（2018）——-“理解”任务的里程碑（但仍是判别式）" class="headerlink" title="二、BERT（2018）—— “理解”任务的里程碑（但仍是判别式）"></a><strong>二、BERT（2018）—— “理解”任务的里程碑（但仍是判别式）</strong></h2><ul>
+<li><strong>架构</strong>：纯 Encoder（只用 Transformer 的左边）</li>
+<li><strong>训练方式</strong>：<strong>掩码语言建模（MLM）</strong><ul>
+<li>输入：<strong>“今天 [MASK] 晴天”</strong></li>
+<li>目标：预测 <strong>[MASK]</strong> 是 “是”</li>
+</ul>
+</li>
+<li><strong>用途</strong>：<strong>分类、问答、NER 等下游任务</strong><ul>
+<li>把句子喂进去，输出一个向量，接个分类头</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>🔍 BERT 的“理解”是<strong>静态的</strong>：</p>
+<p> 它能判断“这句话是否合理”，但<strong>不能主动生成语言</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="三、GPT-1（2018）——-第一个“生成式理解”的雏形"><a href="#三、GPT-1（2018）——-第一个“生成式理解”的雏形" class="headerlink" title="三、GPT-1（2018）—— 第一个“生成式理解”的雏形"></a><strong>三、GPT-1（2018）—— 第一个“生成式理解”的雏形</strong></h2><ul>
+<li><strong>架构</strong>：纯 Decoder（只用 Transformer 的右边）</li>
+<li><strong>训练方式</strong>：<strong>自回归语言建模（Autoregressive LM）</strong><ul>
+<li>输入：<strong>“今天是”</strong></li>
+<li>目标：预测下一个词 “晴天”</li>
+</ul>
+</li>
+<li><strong>关键突破</strong>： <ul>
+<li>在 BookCorpus 上预训练</li>
+<li>然后<strong>微调</strong>到下游任务（如分类、推理）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>✅ GPT-1 能</p>
+<p><strong>生成连贯文本</strong></p>
+<p>，但能力有限（只有 1.17 亿参数）</p>
+<p> ❌ 它还不能“零样本”理解指令（必须微调）</p>
+</blockquote>
+<h2 id="四、GPT-2（2019）——-“无监督多任务学习”的觉醒"><a href="#四、GPT-2（2019）——-“无监督多任务学习”的觉醒" class="headerlink" title="四、GPT-2（2019）—— “无监督多任务学习”的觉醒"></a><strong>四、GPT-2（2019）—— “无监督多任务学习”的觉醒</strong></h2><ul>
+<li><p><strong>核心思想</strong></p>
+<p>：<strong>所有任务都是语言建模！</strong></p>
+<ul>
+<li>分类？→ 生成 “答案是：正面”</li>
+<li>翻译？→ 生成 “英文：Hello”</li>
+</ul>
+</li>
+<li><p><strong>训练数据</strong>：WebText（40GB 网页文本）</p>
+</li>
+<li><p><strong>参数量</strong>：15 亿（比 GPT-1 大 10 倍）</p>
+</li>
+</ul>
+<h3 id="🌟-关键发现："><a href="#🌟-关键发现：" class="headerlink" title="🌟 关键发现："></a><strong>🌟 关键发现：</strong></h3><blockquote>
+<p><strong>当模型足够大 + 数据足够多，它可以在不微调的情况下，根据 prompt 完成新任务！</strong></p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：  </span><br><span class="line">“法国的首都是巴黎。德国的首都是___”</span><br><span class="line"></span><br><span class="line">GPT-2 输出：柏林 ✅</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>💡 这就是 <strong>“上下文学习”（In-Context Learning）</strong> 的开端！</p>
+</blockquote>
+<p>但 GPT-2 仍不稳定：有时胡说八道，无法可靠对齐人类意图。</p>
+<h2 id="五、GPT-3（2020）——-“规模带来质变”的临界点"><a href="#五、GPT-3（2020）——-“规模带来质变”的临界点" class="headerlink" title="五、GPT-3（2020）—— “规模带来质变”的临界点"></a><strong>五、GPT-3（2020）—— “规模带来质变”的临界点</strong></h2><ul>
+<li><strong>参数量</strong>：1750 亿（比 GPT-2 大 100 倍！）</li>
+<li><strong>训练数据</strong>：570GB 高质量文本</li>
+<li><strong>不再微调</strong>！完全靠 <strong>Prompt Engineering + In-Context Learning</strong></li>
+</ul>
+<h3 id="🚀-惊人能力："><a href="#🚀-惊人能力：" class="headerlink" title="🚀 惊人能力："></a><strong>🚀 惊人能力：</strong></h3><ul>
+<li>给几个例子，就能做翻译、写代码、答题</li>
+<li>表现出<strong>类人的泛化能力</strong></li>
+</ul>
+<blockquote>
+<p>🔥 <strong>这是“大模型智能涌现”的公认起点！</strong></p>
+</blockquote>
+<p>但问题依然存在：</p>
+<ul>
+<li><strong>不可控</strong>：可能生成有毒、虚假内容</li>
+<li><strong>不遵循指令</strong>：你让它“用小学生能懂的话解释”，它可能不理你</li>
+</ul>
+<hr>
+<h2 id="六、真正的转折点："><a href="#六、真正的转折点：" class="headerlink" title="六、真正的转折点："></a><strong>六、真正的转折点：</strong></h2><h2 id="对齐（Alignment）技术的出现"><a href="#对齐（Alignment）技术的出现" class="headerlink" title="对齐（Alignment）技术的出现"></a><strong>对齐（Alignment）技术的出现</strong></h2><p>GPT-3 虽强，但<strong>不听话</strong>。于是有了：</p>
+<h3 id="1-Instruction-Tuning（2021）"><a href="#1-Instruction-Tuning（2021）" class="headerlink" title="1. Instruction Tuning（2021）"></a><strong>1.</strong> <strong>Instruction Tuning（2021）</strong></h3><ul>
+<li><p>用人工写的“指令-回答”对微调模型</p>
+</li>
+<li><p>例子：</p>
+<p><strong>指令：“总结这段话” → 回答：“本文讲述了…”</strong></p>
+</li>
+<li><p>结果：模型学会<strong>遵循人类指令</strong></p>
+</li>
+</ul>
+<h3 id="2-RLHF（Reinforcement-Learning-from-Human-Feedback，2022）"><a href="#2-RLHF（Reinforcement-Learning-from-Human-Feedback，2022）" class="headerlink" title="2. RLHF（Reinforcement Learning from Human Feedback，2022）"></a><strong>2.</strong> RLHF（Reinforcement Learning from Human Feedback，2022）</h3><ul>
+<li>步骤： <ol>
+<li>让人类给多个回答打分（哪个更好？）</li>
+<li>训练一个 <strong>Reward Model（RM）</strong> 来预测人类偏好</li>
+<li>用 <strong>PPO 强化学习</strong> 微调语言模型，使其输出高奖励的回答</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>✅ <strong>GPT-3.5 / ChatGPT 的核心！</strong></p>
+</blockquote>
+<h3 id="3-DPO-GRPO（2023-2024）"><a href="#3-DPO-GRPO（2023-2024）" class="headerlink" title="3. DPO / GRPO（2023~2024）"></a><strong>3.</strong> <strong>DPO / GRPO（2023~2024）</strong></h3><ul>
+<li>发现 PPO 太复杂，于是提出<strong>直接优化偏好对</strong>的方法</li>
+<li>DPO：把 RL 问题转化为简单的分类损失</li>
+<li>GRPO：进一步提升训练稳定性</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>这些不是让模型“更聪明”，而是让它“更听话、更安全、更符合人类价值观”</strong></p>
+</blockquote>
+<h2 id="七、所以，“理解自然语言”的本质是什么？"><a href="#七、所以，“理解自然语言”的本质是什么？" class="headerlink" title="七、所以，“理解自然语言”的本质是什么？"></a><strong>七、所以，“理解自然语言”的本质是什么？</strong></h2><blockquote>
+<p><strong>不是真的“理解”，而是“在海量数据中学会了人类语言的统计规律和模式”</strong>。</p>
+</blockquote>
+<ul>
+<li>模型看到过无数类似“巴黎是法国首都”的句子</li>
+<li>它学会：<strong>“国家 → 首都” 是一种常见映射</strong></li>
+<li>当你问“德国首都是？”，它按概率生成最可能的答案</li>
+</ul>
+<h3 id="🌱-智能是如何“涌现”的？"><a href="#🌱-智能是如何“涌现”的？" class="headerlink" title="🌱 智能是如何“涌现”的？"></a><strong>🌱 智能是如何“涌现”的？</strong></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>规模</th>
+<th>能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小模型（&lt;1B）</td>
+<td>只会局部填空</td>
+</tr>
+<tr>
+<td>中模型（10B）</td>
+<td>能做简单推理（如“A 的父亲是 B，B 的儿子是？”）</td>
+</tr>
+<tr>
+<td><strong>大模型（&gt;100B）</strong></td>
+<td><strong>表现出“常识”、“类比”、“多步推理”等近似理解的能力</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>🔬 这就像蚂蚁个体简单，蚁群却能建复杂巢穴——<strong>复杂行为源于简单规则 + 大规模交互</strong></p>
+</blockquote>
+<h2 id="✅-总结：关键里程碑"><a href="#✅-总结：关键里程碑" class="headerlink" title="✅ 总结：关键里程碑"></a><strong>✅ 总结：关键里程碑</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>模型</th>
+<th>贡献</th>
+<th>是否“理解”？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td>Transformer</td>
+<td>提供基础架构</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>BERT</td>
+<td>强大的判别式理解</td>
+<td>⚠️（静态理解）</td>
+</tr>
+<tr>
+<td>2018</td>
+<td>GPT-1</td>
+<td>生成式语言建模</td>
+<td>❌（需微调）</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>GPT-2</td>
+<td>上下文学习雏形</td>
+<td>⚠️（不稳定）</td>
+</tr>
+<tr>
+<td><strong>2020</strong></td>
+<td><strong>GPT-3</strong></td>
+<td><strong>规模带来质变，零样本泛化</strong></td>
+<td>✅（初步涌现）</td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>ChatGPT（GPT-3.5 + RLHF）</strong></td>
+<td><strong>对齐人类意图</strong></td>
+<td>✅✅（可用的“理解”）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p>🎯 <strong>回答你的终极问题</strong>：</p>
+<blockquote>
+<p><strong>“突然能很好理解自然语言”的开端，就是 GPT-3（2020）</strong></p>
+<p> ——</p>
+<p><strong>当模型规模跨过某个阈值，配合海量数据，语言的“结构”和“语义”就从统计中浮现出来了。</strong></p>
+</blockquote>
+<p>而后续的 RLHF、DPO 等，只是让这种能力<strong>可控、安全、有用</strong>。</p>
+<hr>
+<p>需要我用一个<strong>具体例子</strong>（比如“解释光合作用”）展示 GPT-1 vs GPT-3 vs ChatGPT 的回答差异吗？这样你能直观感受“理解”的演进。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/09/21/LLM-transformer的多头注意力/" data-toggle="tooltip" data-placement="top" title="LLM-transformer的多头注意力">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/08/05/LLM-什么是“微调”（Fine-tuning）？—-广义-vs-狭义/" data-toggle="tooltip" data-placement="top" title="什么是“微调”（Fine-tuning）？">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、起点：Transformer（2017）——-只是一个“高级序列建模工具”"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">一、起点：Transformer（2017）—— 只是一个“高级序列建模工具”</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、BERT（2018）——-“理解”任务的里程碑（但仍是判别式）"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">二、BERT（2018）—— “理解”任务的里程碑（但仍是判别式）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三、GPT-1（2018）——-第一个“生成式理解”的雏形"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">三、GPT-1（2018）—— 第一个“生成式理解”的雏形</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四、GPT-2（2019）——-“无监督多任务学习”的觉醒"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">四、GPT-2（2019）—— “无监督多任务学习”的觉醒</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🌟-关键发现："><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">🌟 关键发现：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五、GPT-3（2020）——-“规模带来质变”的临界点"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">五、GPT-3（2020）—— “规模带来质变”的临界点</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🚀-惊人能力："><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">🚀 惊人能力：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#六、真正的转折点："><span class="toc-nav-number">6.</span> <span class="toc-nav-text">六、真正的转折点：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#对齐（Alignment）技术的出现"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">对齐（Alignment）技术的出现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Instruction-Tuning（2021）"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">1. Instruction Tuning（2021）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-RLHF（Reinforcement-Learning-from-Human-Feedback，2022）"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">2. RLHF（Reinforcement Learning from Human Feedback，2022）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-DPO-GRPO（2023-2024）"><span class="toc-nav-number">7.3.</span> <span class="toc-nav-text">3. DPO &#x2F; GRPO（2023~2024）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#七、所以，“理解自然语言”的本质是什么？"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">七、所以，“理解自然语言”的本质是什么？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🌱-智能是如何“涌现”的？"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">🌱 智能是如何“涌现”的？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-总结：关键里程碑"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">✅ 总结：关键里程碑</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#nlp" title="nlp">nlp</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

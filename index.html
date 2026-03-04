@@ -171,13 +171,6 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -186,6 +179,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -1147,6 +1147,28 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1155,27 +1177,28 @@
 
         <div class="post-preview">
 
-            <a href="/2024/03/21/源码-Flink-2024-03-21-DataStream源码解析/">
+            <a href="/2025/11/20/LLM-什么是SFT？/">
                 <h2 class="post-title">
-                    DataStream源码解析
+                    LLM-什么是SFT？
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    源码流程分析WordCount1234567891011121314151617181920public class WordCount &#123;    	public static void main(String[] args) throws Exception &#123;      StreamExecutionEnvironment env = StreamExecutionE......
+                    你问到了一个非常核心且容易混淆的问题！我们来彻底厘清 SFT、PEFT、微调（Fine-tuning）之间的关系，并解释为什么 SFT 不用于 BERT 分类任务。
+
+一、先说结论（一句话概括）
+
+PEFT（Parameter-Efficient Fine-Tuning） 是一类 “只更新少量参数” 的微调技术总称（如 LoRA、Adapter、Prefix-Tuning）。
+SFT（Sup......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-03-21
+                    2025-11-20
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
                     
                 </div>
             
@@ -1189,27 +1212,44 @@
 
         <div class="post-preview">
 
-            <a href="/2024/03/19/源码-Flink-2024-03-19-Flink-Rpc框架/">
+            <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比/">
                 <h2 class="post-title">
-                    Flink Rpc框架
+                    LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    前言​    RPC 通信是分布式计算框架的基础，各个组件之间的交互，信息的传递都通过RPC进行，Flink的RPC框架设计比较复杂，本篇重点梳理框架中的各个角色及作用，但需要注意的是IO重点是通信，是工具，不影响业务设计，RPC的合理设计目的就是为了在编写业务代码时，能像调用本地方法一样调用远程方法，例如jobmaster 调用exector的某个方法，代码里看到的是本地方法，对Flink......
+                    非常好！我们来横向对比三大主流 PEFT 实现在 LoRA 和 QLoRA 场景下的使用差异，包括代码结构、性能特点和适用场景。你会清晰看到：
+
+哪个最简单？
+哪个最快？
+哪个适合中文/国产模型？
+
+
+🧩 对比概览表
+
+
+
+特性
+Hugging Face PEFT（原生）
+Unsloth
+SWIFT（ModelScope）
+
+
+
+
+开发方
+Hugging Face
+社区（Daniel Ha......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-03-19
+                    2025-11-17
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
                     
                 </div>
             
@@ -1223,30 +1263,34 @@
 
         <div class="post-preview">
 
-            <a href="/2024/03/19/源码-Flink-2024-03-19-Flink源码前置知识-Akka/">
+            <a href="/2025/11/17/LLM-什么是PEFT？/">
                 <h2 class="post-title">
-                    Flink源码前置知识-Akka
+                    LLM-什么是PEFT？
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ​    阅读Flink之前，需要准备一些前置知识，比如IO框架、SPI机制、动态代理等，设计模式和IO知识其它文章都有过记录，也做过深入的研究，本篇重点梳理Akka
-AKKA简介Akka是一个开源工具包，用于构建高并发、分布式和容错系统。它基于Actor模型，其中所有的并发单元是称为”Actor”的轻量级实体。
-Actor模型
-Actor 核心概念ActorSystemActorSyste......
+                    你问得非常关键！我们来彻底厘清 “PEFT 是什么”、“有没有框架”、“什么叫原生 PEFT” —— 这是当前大模型微调生态中最容易混淆的概念之一。
+
+一、PEFT 本身不是框架，而是一类技术方法的统称
+✅ 
+PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
+ 它是一个
+概念/范式
+，不是具体软件。
+
+就像：
+
+“深度学习” 是一个概念，而 PyT......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-03-19
+                    2025-11-17
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
                     
                 </div>
             
@@ -1260,26 +1304,28 @@ Actor 核心概念ActorSystemActorSyste......
 
         <div class="post-preview">
 
-            <a href="/2024/01/14/Flink-2024-01-14-Flink端到端的精准一次/">
+            <a href="/2025/09/21/LLM-transformer的多头注意力/">
                 <h2 class="post-title">
-                    Flink端到端的精准一次
+                    LLM-transformer的多头注意力
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    端到端精确一次​    实际应用中，最难做到、也最希望做到的一致性语义，无疑就是端到端（end-to-end）的“精确一次”（exactly-once）。对于Flink内部来说，检查点机制可以保证故障恢复后数据不丢（在能够重放的前提下），并且只处理一次，所以已经可以做到exactly-once的一致性语义了。
-  需要注意的是，检查点能够保证故障恢复后数据只处理一次，并不是说之前统计过某个数......
+                    🔍 问题一：Transformer 中的多头注意力，是怎么保证一组 QKV 就能关注到某一组逻辑的？是基于假设吗？
+✅ 简短回答：
+不是“保证”，而是“学习”出来的。多头注意力机制 并不预先保证 每个头会关注某种特定逻辑（如主谓宾、长距离依赖等），而是通过训练，让模型自己学会 不同的注意力模式。它的“能力”来自结构设计，它的“行为”来自数据驱动的学习。
+
+
+🧠 详细解释1. 多头注意力的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-01-14
+                    2025-09-21
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
                     
                 </div>
             
@@ -1293,32 +1339,35 @@ Actor 核心概念ActorSystemActorSyste......
 
         <div class="post-preview">
 
-            <a href="/2024/01/06/Flink-2024-01-06-Flink-timer定时器踩坑/">
+            <a href="/2025/09/12/LLM-语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的？/">
                 <h2 class="post-title">
-                    Flink timer定时器踩坑
+                    语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    问题公司同事在开发时，发现任务跑一段时间后 定时器会延迟执行，查看日志如下:
+                    
+“语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的？”
 
-延迟了一个小时,基本上高峰就会出现。
-查看火焰图
+我们来按时间线 + 技术本质，一步步拆解这个“智能涌现”的过程。
 
-​    火焰图中明显看到定时器的处理方法占用大量cpu时间，所以定时器这块多少是有点问题的，但问题到底出在哪，只能进一步结合代码来看。
+一、起点：Transformer（2017）—— 只是一个“高级序列建模工具”
+原始 Transformer
+（《Attention is All You Need》）： 
 
-可以看到代码中是每条数据都会注册定时器，也就是说 同时来100条数据，就会同时注册100个定时器，并且注册的定时器时间都一......
+包含 Encoder（编码器） + Decoder（解码器）
+目标：机器翻译（输......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-01-06
+                    2025-09-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                      <a href="/tags/#nlp" title="nlp">nlp</a>
                     
                 </div>
             
@@ -1332,30 +1381,41 @@ Actor 核心概念ActorSystemActorSyste......
 
         <div class="post-preview">
 
-            <a href="/2024/01/06/Flink-2024-01-06-watermark的传递/">
+            <a href="/2025/08/05/LLM-什么是“微调”（Fine-tuning）？—-广义-vs-狭义/">
                 <h2 class="post-title">
-                    watermark的传递
+                    什么是“微调”（Fine-tuning）？
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    水位线的传递
-​        在流处理中，上游任务处理完⽔位线、时钟改变之后，要把当前的⽔位线再次发出，⼴ 播给所有的下游⼦任务。⽽当⼀个任务接收到多个上游并⾏任务传递来的⽔位线时，应该以 最⼩的那个作为当前任务的事件时钟。
-​        ⽔位线在上下游任务之间的传递， ⾮常巧妙地避免了分布式系统中没有统⼀时钟的问 题，每个任务都以“处理完之前所有数据”为标准来确定⾃⼰的时钟。
-水位线......
+                    一、什么是“微调”（Fine-tuning）？—— 广义 vs 狭义✅广义微调（传统定义）
+在预训练模型基础上，用下游任务数据继续训练部分或全部参数。
+
+
+核心思想：迁移学习（Transfer Learning）
+
+典型操作
+： 
+
+冻结/不冻结 backbone
+加任务头（分类层、生成头等）
+用小学习率继续训练
+
+
+
+✅ 你用 BERT 做对联的例子，就是经典的广义微调！
+12# 你的做法......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-01-06
+                    2025-08-05
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                      <a href="/tags/#LLM" title="LLM">LLM</a>
                     
                 </div>
             
@@ -1369,30 +1429,50 @@ Actor 核心概念ActorSystemActorSyste......
 
         <div class="post-preview">
 
-            <a href="/2024/01/06/Flink-2024-01-06-interval-join执行流程解析/">
+            <a href="/2025/07/07/LLM-特征工程类别与数值型特征处理/">
                 <h2 class="post-title">
-                    interval join执行流程解析
+                    特征工程-数值+类别特征处理
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    重要概念想要熟悉interval join的原理或者读懂TimeIntervalJoin.java源码 必须先熟悉几个源码中提到的概念。假设A表 left join B表 ,A表来了一条数据a。那么会有这么几个概念。
+                    特征工程 数值 + 类别特征处理这是 机器学习项目中最常见的预处理模式，尤其适用于：
 
-rightQualifiedLowerBound (右侧合格下界):
-它表示右侧流中的事件的最小匹配时间。对于每个左侧流事件，只有右侧流中的事件的时间大于等于rightQua......
+结构化数据（如 CSV、数据库表）
+混合了数值和文本/类别特征
+使用线性模型、SVM、神经网络等
+
+🎯 为什么这么做？核心原因
+
+
+
+问题
+解决方案
+
+
+
+
+数值特征和类别特征处理方式不同
+不能用同一套规则
+
+
+缺失值处理策略不同
+数值用均值/中位数，类别用“缺失”标签
+
+
+缩放需求不同
+数值需要标准化......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2024-01-06
+                    2025-07-07
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                      <a href="/tags/#特征工程" title="特征工程">特征工程</a>
                     
                 </div>
             
@@ -1406,31 +1486,34 @@ rightQualifiedLowerBound (右侧合格下界):
 
         <div class="post-preview">
 
-            <a href="/2023/11/14/Flink-2023-11-14-Flink-Sql-Group类型/">
+            <a href="/2025/06/27/LLM-梯度累积实现/">
                 <h2 class="post-title">
-                    Flink Sql Group类型
+                    梯度累积实现
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Group Aggregation注意事项
-对于流式查询，计算查询结果所需的状态可能会无限增长。状态大小取决于组的数量以及聚合函数的数量和类型。例如，MIN/MAX在状态大小上很重，而COUNT则很便宜。您可以为查询配置提供适当的生存时间（TTL），以防止状态大小过大。请注意，这可能会影响查询结果的正确性
+                    
+🎯 问题背景：我想用“大锅炒菜”，但只有“小锅”假设你要做一道菜，最佳效果是同时炒 8 个鸡蛋（这叫 理想 batch size = 8）。
+ 但你的灶台只配了一个 小锅，一次最多炒 2 个蛋（GPU 显存限制）。怎么办？
 
-语法​    同mysql 语法
-用法举例123SELECT COUNT(*)FRO......
+❌ 直接炒 2 个 → 味道不够（训练不稳定）
+✅ 分 4 次炒，最后把味道“混合”起来 → 等效于炒了 8 个！
+
+这就是 梯度累积的核心思想。
+
+🔬 技术对应......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-11-14
+                    2025-06-27
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                      <a href="/tags/#nlp" title="nlp">nlp</a>
                     
                 </div>
             
@@ -1444,29 +1527,29 @@ rightQualifiedLowerBound (右侧合格下界):
 
         <div class="post-preview">
 
-            <a href="/2023/11/05/Java-2023-11-05-开发中常见图的绘制/">
+            <a href="/2025/06/20/LLM-理解神经网络/">
                 <h2 class="post-title">
-                    开发中常见图的绘制
+                    神经网络的理解小结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    
-参考:https://juejin.cn/post/6844903496542584845
-​        https://blog.csdn.net/qq_41854911/article/details/127063022
+                    理解神经网络
+你这个问题 非常深刻，触及了深度学习的核心哲学和现实困境。你的理解已经非常接近真相了，我们来系统地、诚实地回答你：
+✅ 你的想法大体是对的，但我们可以更精确、更深入地拆解它。✅ 一、你说的“对”的部分（完全正确）
 
-背景​    大家应该在从事软件开发领域工作时间有一段时间之后，就开始有画图的意识，不管是懵懂的学别人还是想更好的让其它人理解自己的一个观点。所谓“一图胜千言”......
+神经网络是“通过降低损失来学习”•  给它数据 + 标签•  定义损失函数（如预测值和真实值的差距）•  反向传播计算梯度•  梯度下降更新权重•  目标：让损失越......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-11-05
+                    2025-06-20
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Java" title="Java">Java</a>
+                      <a href="/tags/#nlp" title="nlp">nlp</a>
                     
                 </div>
             
@@ -1480,29 +1563,33 @@ rightQualifiedLowerBound (右侧合格下界):
 
         <div class="post-preview">
 
-            <a href="/2023/10/11/Flink-2023-10-11-Flink-Sql-Join类型/">
+            <a href="/2025/06/12/LLM-交叉熵损失函数/">
                 <h2 class="post-title">
-                    Flink Sql Join类型
+                    交叉熵损失函数的含义解释
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Regular Joins(普通join)注意事项
-最普通的join 两条流任何一条流更新都会触发计算,为了支持结果的更新，下游目的表需要定义主键。
-运行时需要保留左表和右表的状态，且随着时间的推移，状态会无限增长，最终可能导致作业 OOM 崩溃或异常缓慢。因此我们强烈建议用户在 Flink 参数中设置 table.exec.state.ttl 选项，它可以指定 JOIN 状态的保留时间（定......
+                    ✅ 什么是交叉熵？为什么它能作为损失函数？🌟 一句话总结交叉熵（Cross-Entropy） 是一个衡量“模型预测的概率分布”与“真实标签分布”之间差距的指标。差距越大，损失越大。
+ 模型训练的目标就是：让交叉熵损失尽可能小。
+🎯 一、从一个分类任务说起假设你在做一个图像分类任务：判断一张图是 猫、狗、还是鸟。
+
+真实标签
+这是一只猫 用独热编码表示为：
+[1, 0, 0]
+
+模型预测：......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-10-11
+                    2025-06-12
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                      <a href="/tags/#nlp" title="nlp">nlp</a>
                     
                 </div>
             
@@ -1579,13 +1666,13 @@ rightQualifiedLowerBound (右侧合格下界):
             
         
             
+        
+            
             <a href="/tags/#JVM" title="JVM" rel="13">JVM</a>
             
         
             
-            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
-            
-        
+            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
             
         
             
@@ -1594,6 +1681,22 @@ rightQualifiedLowerBound (右侧合格下界):
         
             
             <a href="/tags/#SSM" title="SSM" rel="7">SSM</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#LINUX" title="LINUX" rel="22">LINUX</a>
             
         
             
@@ -1617,7 +1720,47 @@ rightQualifiedLowerBound (右侧合格下界):
             
         
             
-            <a href="/tags/#Redis" title="Redis" rel="7">Redis</a>
+        
+            
+            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
+            
+        
+            
+            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
+            
+        
+            
+            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
+            
+        
+            
+            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1639,18 +1782,6 @@ rightQualifiedLowerBound (右侧合格下界):
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <a href="/tags/#多线程" title="多线程" rel="8">多线程</a>
             
         
@@ -1658,40 +1789,6 @@ rightQualifiedLowerBound (右侧合格下界):
         
             
         
-            
-            <a href="/tags/#algorithm" title="algorithm" rel="122">algorithm</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#Two Pointers" title="Two Pointers" rel="6">Two Pointers</a>
-            
-        
-            
-            <a href="/tags/#Sliding Window" title="Sliding Window" rel="18">Sliding Window</a>
-            
-        
-            
-            <a href="/tags/#Recursion" title="Recursion" rel="55">Recursion</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Dynamic Programming" title="Dynamic Programming" rel="18">Dynamic Programming</a>
-            
-        
-            
-            <a href="/tags/#Tree" title="Tree" rel="12">Tree</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Trie" title="Trie" rel="37">Trie</a>
             
         
             
@@ -1727,11 +1824,7 @@ rightQualifiedLowerBound (右侧合格下界):
             
         
             
-        
-            
             <a href="/tags/#LinkedList" title="LinkedList" rel="9">LinkedList</a>
-            
-        
             
         
             
@@ -1760,6 +1853,8 @@ rightQualifiedLowerBound (右侧合格下界):
         
             
             <a href="/tags/#LeetCode" title="LeetCode" rel="34">LeetCode</a>
+            
+        
             
         
             
@@ -1838,23 +1933,23 @@ rightQualifiedLowerBound (右侧合格下界):
     <ul>
       
         <li>
-          <a href="/2024/03/21/%E6%BA%90%E7%A0%81-Flink-2024-03-21-DataStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">DataStream源码解析</a>
+          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
         </li>
       
         <li>
-          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink-Rpc%E6%A1%86%E6%9E%B6/">Flink Rpc框架</a>
+          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
         </li>
       
         <li>
-          <a href="/2024/03/19/%E6%BA%90%E7%A0%81-Flink-2024-03-19-Flink%E6%BA%90%E7%A0%81%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-Akka/">Flink源码前置知识-Akka</a>
+          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
         </li>
       
         <li>
-          <a href="/2024/01/14/Flink-2024-01-14-Flink%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%9A%84%E7%B2%BE%E5%87%86%E4%B8%80%E6%AC%A1/">Flink端到端的精准一次</a>
+          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
         </li>
       
         <li>
-          <a href="/2024/01/06/Flink-2024-01-06-Flink-timer%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B8%A9%E5%9D%91/">Flink timer定时器踩坑</a>
+          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
         </li>
       
     </ul>
@@ -1869,7 +1964,7 @@ rightQualifiedLowerBound (右侧合格下界):
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1886,41 +1981,45 @@ rightQualifiedLowerBound (右侧合格下界):
         
           <a href="categories/#HBase"><li>HBase</li></a>
         
+          <a href="categories/#IO"><li>IO</li></a>
+        
           <a href="categories/#jvm"><li>jvm</li></a>
         
-          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+          <a href="categories/#大模型学习"><li>大模型学习</li></a>
         
-          <a href="categories/#docker"><li>docker</li></a>
+          <a href="categories/#大模型"><li>大模型</li></a>
         
           <a href="categories/#Java"><li>Java</li></a>
         
+          <a href="categories/#Redis"><li>Redis</li></a>
+        
+          <a href="categories/#LINUX运维"><li>LINUX运维</li></a>
+        
           <a href="categories/#Mysql"><li>Mysql</li></a>
         
-          <a href="categories/#network"><li>network</li></a>
-        
-          <a href="categories/#IO"><li>IO</li></a>
+          <a href="categories/#docker"><li>docker</li></a>
         
           <a href="categories/#Python"><li>Python</li></a>
         
-          <a href="categories/#Redis"><li>Redis</li></a>
-        
-          <a href="categories/#大数据"><li>大数据</li></a>
+          <a href="categories/#network"><li>network</li></a>
         
           <a href="categories/#分布式算法"><li>分布式算法</li></a>
         
-          <a href="categories/#数据仓库"><li>数据仓库</li></a>
+          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
         
-          <a href="categories/#微服务"><li>微服务</li></a>
+          <a href="categories/#大数据"><li>大数据</li></a>
+        
+          <a href="categories/#数据仓库"><li>数据仓库</li></a>
         
           <a href="categories/#多线程"><li>多线程</li></a>
         
+          <a href="categories/#微服务"><li>微服务</li></a>
+        
           <a href="categories/#算法 - 经典数据结构与算法"><li>算法 - 经典数据结构与算法</li></a>
         
-          <a href="categories/#常见问题"><li>常见问题</li></a>
-        
-          <a href="categories/#算法 - 企业面试题"><li>算法 - 企业面试题</li></a>
-        
           <a href="categories/#设计模式"><li>设计模式</li></a>
+        
+          <a href="categories/#常见问题"><li>常见问题</li></a>
         
           <a href="categories/#算法 - leetcode高频面试题"><li>算法 - leetcode高频面试题</li></a>
         
@@ -1964,7 +2063,7 @@ rightQualifiedLowerBound (右侧合格下界):
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Dante 2024 
+                    Copyright &copy; Dante 2026 
                     <!-- <br>
                     Powered by 
                     <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
@@ -2090,7 +2189,7 @@ rightQualifiedLowerBound (右侧合格下界):
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -2100,21 +2199,6 @@ rightQualifiedLowerBound (右侧合格下界):
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

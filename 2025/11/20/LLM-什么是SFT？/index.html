@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          LLM-什么是SFT？ - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/11/20/LLM-什么是SFT？/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>LLM-什么是SFT？</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-11-20
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1k</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>你问到了一个非常核心且容易混淆的问题！我们来<strong>彻底厘清 SFT、PEFT、微调（Fine-tuning）之间的关系</strong>，并解释为什么 <strong>SFT 不用于 BERT 分类任务</strong>。</p>
+<hr>
+<h2 id="一、先说结论（一句话概括）"><a href="#一、先说结论（一句话概括）" class="headerlink" title="一、先说结论（一句话概括）"></a><strong>一、先说结论（一句话概括）</strong></h2><blockquote>
+<ul>
+<li><strong>PEFT（Parameter-Efficient Fine-Tuning）</strong> 是一类 <strong>“只更新少量参数” 的微调技术总称</strong>（如 LoRA、Adapter、Prefix-Tuning）。</li>
+<li><strong>SFT（Supervised Fine-Tuning）</strong> 是一种 <strong>训练目标/任务类型</strong>：用“指令-回答”对来教模型遵循人类指令。</li>
+<li>所以：<strong>SFT 是“做什么”，PEFT 是“怎么做”</strong> —— 它们不在同一个维度上！</li>
+</ul>
+</blockquote>
+<p>✅ 你可以：</p>
+<ul>
+<li>用 <strong>全参微调做 SFT</strong>（传统做法）</li>
+<li>用 <strong>PEFT（如 LoRA）做 SFT</strong>（现代主流）</li>
+<li>用 <strong>PEFT 微调 BERT 做分类</strong>（但这个任务不叫 SFT）</li>
+</ul>
+<hr>
+<h2 id="二、详细拆解"><a href="#二、详细拆解" class="headerlink" title="二、详细拆解"></a><strong>二、详细拆解</strong></h2><h3 id="1-PEFT-是什么？——-“高效微调方法”"><a href="#1-PEFT-是什么？——-“高效微调方法”" class="headerlink" title="1. PEFT 是什么？—— “高效微调方法”"></a><strong>1.</strong> <strong>PEFT 是什么？—— “高效微调方法”</strong></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>核心思想</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LoRA</strong></td>
+<td>在 Attention 层插入低秩矩阵 A/B，只训 A/B</td>
+<td>LLM 指令微调</td>
+</tr>
+<tr>
+<td><strong>Adapter</strong></td>
+<td>在 FFN 层后插入小型 MLP，只训 Adapter</td>
+<td>BERT 分类、跨任务迁移</td>
+</tr>
+<tr>
+<td><strong>Prefix-Tuning</strong></td>
+<td>在输入前加可学习的 token 前缀</td>
+<td>文本生成、可控生成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>👉 <strong>PEFT 的本质</strong>：</p>
+<blockquote>
+<p><strong>冻结原始大模型权重，只训练新增的少量参数（通常 &lt;1%）</strong>，从而节省显存和计算。</p>
+</blockquote>
+<p>✅ 所以 PEFT 是 <strong>“微调的技术手段”</strong>。</p>
+<hr>
+<h3 id="2-SFT-是什么？——-“监督式指令微调任务”"><a href="#2-SFT-是什么？——-“监督式指令微调任务”" class="headerlink" title="2. SFT 是什么？—— “监督式指令微调任务”"></a><strong>2.</strong> <strong>SFT 是什么？—— “监督式指令微调任务”</strong></h3><p>SFT 特指这样一种数据格式和目标：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"messages"</span>: [</span><br><span class="line">    &#123;<span class="attr">"role"</span>: <span class="string">"user"</span>, <span class="attr">"content"</span>: <span class="string">"如何煮鸡蛋？"</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">"role"</span>: <span class="string">"assistant"</span>, <span class="attr">"content"</span>: <span class="string">"将鸡蛋放入冷水中，煮沸后小火煮8分钟..."</span>&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>🎯 <strong>目标</strong>：让模型学会 <strong>根据用户指令生成有用、安全、连贯的回答</strong>。</p>
+<blockquote>
+<p>💡 SFT 是 <strong>从“预训练语言模型” → “对话助手” 的关键一步</strong>。</p>
+</blockquote>
+<p>所以 SFT 是 <strong>“训练任务的类型”</strong>，不是方法。</p>
+<h2 id="三、为什么-BERT-分类不用-SFT？"><a href="#三、为什么-BERT-分类不用-SFT？" class="headerlink" title="三、为什么 BERT 分类不用 SFT？"></a><strong>三、为什么 BERT 分类不用 SFT？</strong></h2><h3 id="因为-任务性质完全不同！"><a href="#因为-任务性质完全不同！" class="headerlink" title="因为 任务性质完全不同！"></a><strong>因为</strong> <strong>任务性质完全不同</strong>！</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>BERT 分类任务</th>
+<th>SFT（指令微调）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>输入</strong></td>
+<td>一段文本（如“这部电影太棒了！”）</td>
+<td>用户指令（如“情感分析：这部电影太棒了！”）</td>
+</tr>
+<tr>
+<td><strong>输出</strong></td>
+<td>固定类别标签（如 <strong>positive</strong>）</td>
+<td>自由文本（如“情感：正面”）</td>
+</tr>
+<tr>
+<td><strong>模型角色</strong></td>
+<td>判别式模型（classification head）</td>
+<td>生成式模型（auto-regressive decoder）</td>
+</tr>
+<tr>
+<td><strong>典型架构</strong></td>
+<td>BERT（Encoder-only）</td>
+<td>LLaMA/Qwen（Decoder-only）</td>
+</tr>
+<tr>
+<td><strong>是否需要“对话能力”</strong></td>
+<td>❌ 不需要</td>
+<td>✅ 必须学会</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="📌-关键区别："><a href="#📌-关键区别：" class="headerlink" title="📌 关键区别："></a><strong>📌 关键区别：</strong></h3><ul>
+<li><strong>BERT 分类是“封闭任务”</strong>：输出空间有限（几个类别），用标准交叉熵 loss 即可。</li>
+<li><strong>SFT 是“开放生成任务”</strong>：输出是任意长度文本，必须用 <strong>teacher-forcing + next-token prediction</strong> 训练。</li>
+</ul>
+<blockquote>
+<p>🔥 所以：</p>
+<p><strong>你不会对 BERT 做 SFT，因为 BERT 不能生成自由文本！</strong></p>
+<p>同理，你也不会用 LoRA 微调 LLaMA 去做情感分类（虽然技术上可行，但架构不匹配）。</p>
+</blockquote>
+<hr>
+<h2 id="四、术语关系图（帮你理清）"><a href="#四、术语关系图（帮你理清）" class="headerlink" title="四、术语关系图（帮你理清）"></a><strong>四、术语关系图（帮你理清）</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Fine-Tuning（微调）</span><br><span class="line">│</span><br><span class="line">├── 全参数微调（Full FT）</span><br><span class="line">│   ├── 用于 SFT（训练对话模型）</span><br><span class="line">│   └── 用于 BERT 分类</span><br><span class="line">│</span><br><span class="line">└── PEFT（高效微调）</span><br><span class="line">    ├── LoRA &#x2F; QLoRA → 主要用于 SFT（LLM 指令微调）</span><br><span class="line">    ├── Adapter → 主要用于 BERT 分类、跨任务迁移</span><br><span class="line">    └── Prefix-Tuning → 用于可控文本生成</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>✅ <strong>SFT 通常搭配 PEFT（尤其是 LoRA）使用，但 PEFT 不等于 SFT</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="五、举个实际例子"><a href="#五、举个实际例子" class="headerlink" title="五、举个实际例子"></a><strong>五、举个实际例子</strong></h2><h3 id="场景-1：微调-Qwen3-做客服机器人"><a href="#场景-1：微调-Qwen3-做客服机器人" class="headerlink" title="场景 1：微调 Qwen3 做客服机器人"></a><strong>场景 1：微调 Qwen3 做客服机器人</strong></h3><ul>
+<li><strong>任务类型</strong>：SFT（用户提供问题，模型生成回答）</li>
+<li><strong>技术手段</strong>：PEFT（LoRA）</li>
+<li>✅ 正确说法：“我们用 <strong>LoRA 对 Qwen3 进行 SFT</strong>”</li>
+</ul>
+<h3 id="场景-2：微调-BERT-做新闻分类"><a href="#场景-2：微调-BERT-做新闻分类" class="headerlink" title="场景 2：微调 BERT 做新闻分类"></a><strong>场景 2：微调 BERT 做新闻分类</strong></h3><ul>
+<li><strong>任务类型</strong>：文本分类（不是 SFT！）</li>
+<li><strong>技术手段</strong>：PEFT（Adapter）或全参微调</li>
+<li>✅ 正确说法：“我们用 <strong>Adapter 微调 BERT 进行新闻分类</strong>”</li>
+</ul>
+<hr>
+<h2 id="✅-总结"><a href="#✅-总结" class="headerlink" title="✅ 总结"></a><strong>✅ 总结</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PEFT 和 SFT 区别？</strong></td>
+<td>PEFT 是“怎么微调”（技术），SFT 是“微调什么任务”（目标）</td>
+</tr>
+<tr>
+<td><strong>为什么 BERT 分类不用 SFT？</strong></td>
+<td>SFT 要求模型能生成自由文本，BERT 是判别式模型，不支持生成</td>
+</tr>
+<tr>
+<td><strong>SFT 一定要用 PEFT 吗？</strong></td>
+<td>不一定，但现代 LLM 因显存限制，<strong>几乎都用 PEFT（如 LoRA）来做 SFT</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p>如果你现在要写论文或技术文档，可以这样表述：</p>
+<blockquote>
+<p>“We perform <strong>Supervised Fine-Tuning (SFT)</strong> on Qwen3 using <strong>LoRA</strong>, a popular <strong>PEFT</strong> method, to adapt the model to customer service dialogues.”</p>
+</blockquote>
+<p>需要我画一张概念关系图 or 给你对比表格 PDF 吗？欢迎继续问！😊</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比/" data-toggle="tooltip" data-placement="top" title="LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>

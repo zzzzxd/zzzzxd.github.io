@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          什么是“微调”（Fine-tuning）？ - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/08/05/LLM-什么是“微调”（Fine-tuning）？—-广义-vs-狭义/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#LLM" title="LLM">LLM</a>
+                            
+                        </div>
+                        <h1>什么是“微调”（Fine-tuning）？</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-08-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1k</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="一、什么是“微调”（Fine-tuning）？——-广义-vs-狭义"><a href="#一、什么是“微调”（Fine-tuning）？——-广义-vs-狭义" class="headerlink" title="一、什么是“微调”（Fine-tuning）？—— 广义 vs 狭义"></a><strong>一、什么是“微调”（Fine-tuning）？—— 广义 vs 狭义</strong></h2><h3 id="✅"><a href="#✅" class="headerlink" title="✅"></a><strong>✅</strong></h3><h3 id="广义微调（传统定义）"><a href="#广义微调（传统定义）" class="headerlink" title="广义微调（传统定义）"></a><strong>广义微调（传统定义）</strong></h3><blockquote>
+<p><strong>在预训练模型基础上，用下游任务数据继续训练部分或全部参数。</strong></p>
+</blockquote>
+<ul>
+<li><p><strong>核心思想</strong>：迁移学习（Transfer Learning）</p>
+</li>
+<li><p><strong>典型操作</strong></p>
+<p>： </p>
+<ul>
+<li>冻结/不冻结 backbone</li>
+<li>加任务头（分类层、生成头等）</li>
+<li>用小学习率继续训练</li>
+</ul>
+</li>
+</ul>
+<p>✅ <strong>你用 BERT 做对联的例子，就是经典的广义微调！</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 你的做法（完全正确！）</span></span><br><span class="line">BERT (frozen <span class="keyword">or</span> unfrozen) + Linear Head → trained on couplet data</span><br></pre></td></tr></table></figure>
+<p>→ 这<strong>绝对算微调</strong>，而且是 NLP 领域 2018–2022 的标准做法。</p>
+<h3 id="🔥-狭义微调（大模型时代的新含义）"><a href="#🔥-狭义微调（大模型时代的新含义）" class="headerlink" title="🔥 狭义微调（大模型时代的新含义）"></a><strong>🔥</strong> <strong>狭义微调（大模型时代的新含义）</strong></h3><blockquote>
+<p><strong>特指对超大规模语言模型（如 GPT、LLaMA）进行参数高效或全量更新，使其适应特定任务或领域。</strong></p>
+</blockquote>
+<ul>
+<li>背景：GPT-3（2020）之后，模型太大（175B），<strong>全参数微调成本极高</strong></li>
+<li>所以“微调”逐渐演变为： <ul>
+<li><strong>全参数微调（Full FT）</strong>：训所有参数（贵！）</li>
+<li><strong>参数高效微调（PEFT）</strong>：只训少量参数（LoRA、Adapter 等）</li>
+<li><strong>指令微调（Instruction Tuning）</strong>：用 (instruction, response) 对训练</li>
+<li><strong>人类反馈强化学习（RLHF）</strong>：进一步对齐人类偏好</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>📌 <strong>现在公司说“微调大模型”，通常指这几种新范式</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="二、你的-BERT-对联例子，为什么是微调？"><a href="#二、你的-BERT-对联例子，为什么是微调？" class="headerlink" title="二、你的 BERT 对联例子，为什么是微调？"></a><strong>二、你的 BERT 对联例子，为什么是微调？</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>是否符合微调定义？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 使用预训练 BERT</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>2. 添加任务相关结构（线性层）</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>3. 用对联数据训练</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>4. 更新了 BERT 参数（哪怕只训最后几层）</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>💡 <strong>即使你只训了最后的分类层，而冻结 BERT，这也叫“微调”</strong>（更准确说是 <strong>feature extraction + head training</strong>，但广义仍属微调范畴）。</p>
+</blockquote>
+<hr>
+<h2 id="三、GPT-时代的“微调”发生了什么变化？"><a href="#三、GPT-时代的“微调”发生了什么变化？" class="headerlink" title="三、GPT 时代的“微调”发生了什么变化？"></a><strong>三、GPT 时代的“微调”发生了什么变化？</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>BERT 时代（2018–2020）</th>
+<th>GPT/LLaMA 时代（2022–）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型大小</td>
+<td>100M ~ 1B</td>
+<td>7B ~ 70B+</td>
+</tr>
+<tr>
+<td>微调方式</td>
+<td>全参数 or 冻结 backbone</td>
+<td><strong>PEFT（LoRA）为主，全参为辅</strong></td>
+</tr>
+<tr>
+<td>任务形式</td>
+<td>分类、抽取、匹配</td>
+<td><strong>生成式（对话、写作、代码）</strong></td>
+</tr>
+<tr>
+<td>数据格式</td>
+<td>标注样本（x, y）</td>
+<td><strong>指令-响应对（”写对联”, “上联：春风拂面…”）</strong></td>
+</tr>
+<tr>
+<td>目标</td>
+<td>提升任务指标（Accuracy/F1）</td>
+<td><strong>提升生成质量、对齐人类意图</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>✅ <strong>所以不是“微调变了”，而是“模型变大了，微调的方式不得不进化”</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="四、公司在实际中怎么用“微调”？"><a href="#四、公司在实际中怎么用“微调”？" class="headerlink" title="四、公司在实际中怎么用“微调”？"></a><strong>四、公司在实际中怎么用“微调”？</strong></h2><h3 id="场景-1：中小公司（资源有限）"><a href="#场景-1：中小公司（资源有限）" class="headerlink" title="场景 1：中小公司（资源有限）"></a>场景 1：中小公司（资源有限）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[开源模型 LLaMA-7B] --&gt; B[用 LoRA 微调]</span><br><span class="line">B --&gt; C[数据：客服问答对]</span><br><span class="line">C --&gt; D[部署：合并权重 W + BA]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>技术栈</strong>：HuggingFace + PEFT + DeepSpeed ZeRO</li>
+<li><strong>成本</strong>：2~4 张 A100，几天搞定</li>
+<li><strong>你的角色</strong>：准备数据、写训练脚本、评估效果</li>
+</ul>
+<h3 id="场景-2：大厂（自研大模型）"><a href="#场景-2：大厂（自研大模型）" class="headerlink" title="场景 2：大厂（自研大模型）"></a><strong>场景 2：大厂（自研大模型）</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">S1[预训练 base 模型] --&gt; S2[指令微调 SFT]</span><br><span class="line">S2 --&gt; S3[人类反馈 RLHF]</span><br><span class="line">S3 --&gt; S4[上线 Chat 产品]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>SFT（Supervised Fine-Tuning）</strong>：用高质量 (instruction, response) 数据微调</li>
+<li><strong>RLHF</strong>：用人类排序数据训练 reward model，再用 PPO 优化</li>
+<li><strong>你的角色</strong>：可能只负责 SFT 数据清洗 or 效果评测</li>
+</ul>
+<hr>
+<h2 id="五、总结：到底什么叫“微调”？"><a href="#五、总结：到底什么叫“微调”？" class="headerlink" title="五、总结：到底什么叫“微调”？"></a><strong>五、总结：到底什么叫“微调”？</strong></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>说法</th>
+<th>是否正确</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“我用 BERT 加分类头训对联，不算微调”</td>
+<td>❌ <strong>错误！这是经典微调</strong></td>
+</tr>
+<tr>
+<td>“现在微调必须用 LoRA”</td>
+<td>❌ 不一定，小模型仍可全参微调</td>
+</tr>
+<tr>
+<td>“微调 = 训练整个模型”</td>
+<td>❌ 过时了！现在常指“高效更新”</td>
+</tr>
+<tr>
+<td>“微调的核心是利用预训练知识”</td>
+<td>✅ <strong>完全正确！</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="✅-终极定义（推荐记住）："><a href="#✅-终极定义（推荐记住）：" class="headerlink" title="✅ 终极定义（推荐记住）："></a><strong>✅ 终极定义（推荐记住）：</strong></h2><blockquote>
+<p><strong>微调 = 在预训练模型的基础上，通过有监督数据，调整模型参数以适应特定任务的过程。</strong></p>
+<ul>
+<li>可以调全部参数（Full FT）</li>
+<li>也可以只调少量参数（LoRA、Adapter）</li>
+<li>甚至可以只调最后的 head（你的 BERT 例子）</li>
+</ul>
+</blockquote>
+<hr>
+<p>🎯 <strong>所以你之前的工作，不仅是微调，而且是教科书级的微调实践！</strong>现在大模型时代的“微调”只是<strong>规模更大、技术更复杂</strong>，但<strong>本质没变</strong>：<strong>用任务数据告诉预训练模型：“在我这个场景下，你应该这样输出”</strong>。需要我给你一个 <strong>“从 BERT 微调 到 LLaMA-LoRA 微调”的对比代码模板</strong> 吗？帮你建立知识连接！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/09/12/LLM-语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的？/" data-toggle="tooltip" data-placement="top" title="语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/07/07/LLM-特征工程类别与数值型特征处理/" data-toggle="tooltip" data-placement="top" title="特征工程-数值+类别特征处理">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一、什么是“微调”（Fine-tuning）？——-广义-vs-狭义"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">一、什么是“微调”（Fine-tuning）？—— 广义 vs 狭义</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#✅"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">✅</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#广义微调（传统定义）"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">广义微调（传统定义）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔥-狭义微调（大模型时代的新含义）"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">🔥 狭义微调（大模型时代的新含义）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二、你的-BERT-对联例子，为什么是微调？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">二、你的 BERT 对联例子，为什么是微调？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三、GPT-时代的“微调”发生了什么变化？"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">三、GPT 时代的“微调”发生了什么变化？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四、公司在实际中怎么用“微调”？"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">四、公司在实际中怎么用“微调”？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#场景-1：中小公司（资源有限）"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">场景 1：中小公司（资源有限）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#场景-2：大厂（自研大模型）"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">场景 2：大厂（自研大模型）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五、总结：到底什么叫“微调”？"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">五、总结：到底什么叫“微调”？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#✅-终极定义（推荐记住）："><span class="toc-nav-number">6.</span> <span class="toc-nav-text">✅ 终极定义（推荐记住）：</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#LLM" title="LLM">LLM</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+</body>
+
+</html>
