@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          dp定义与递归 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/09/算法总结-dp定义与递归/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>dp定义与递归</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-09
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.9k</span> and
+                                Reading Time <span class="post-count">7</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>你的直觉非常敏锐！<strong>“如何定义 <code>dp[i]</code>”</strong> 和 <strong>“遍历方向（正序还是倒序）”</strong> 确实是动态规划从递归转为迭代时的两个核心难点。</p>
+<p>对于 <strong>LeetCode 198 (打家劫舍)</strong> 这种<strong>线性依赖</strong>（只依赖前两个状态）的题目，<strong>正序</strong>是最自然的。但为了让你彻底掌握 DP 的思维方式，我们需要把“递归思维”和“DP 数组思维”打通。</p>
+<hr>
+<h3 id="1-核心心法：dp-i-的定义必须与递归返回值一致"><a href="#1-核心心法：dp-i-的定义必须与递归返回值一致" class="headerlink" title="1. 核心心法：dp[i] 的定义必须与递归返回值一致"></a>1. 核心心法：<code>dp[i]</code> 的定义必须与递归返回值一致</h3><p>你在上一个问题中悟出的道理：</p>
+<blockquote>
+<p>递归函数 <code>dfs(i)</code> 返回：<strong>从 i 开始往后</strong>能偷到的最大值。</p>
+</blockquote>
+<p>如果要把这个逻辑直接翻译成 DP 数组，有两种定义方式，对应两种遍历方向：</p>
+<h4 id="方案-A：顺推法（正序遍历）——-最常用，最适合本题"><a href="#方案-A：顺推法（正序遍历）——-最常用，最适合本题" class="headerlink" title="方案 A：顺推法（正序遍历）—— 最常用，最适合本题"></a>方案 A：顺推法（正序遍历）—— 最常用，最适合本题</h4><ul>
+<li><strong>定义</strong>：<code>dp[i]</code> = <strong>考虑到第 i 个房子为止</strong>（0 到 i 范围内），能偷到的最大金额。</li>
+<li><strong>含义变化</strong>：注意，这里不再是“从 i 往后”，而是“<strong>截止到 i</strong>”。这是迭代 DP 最常见的定义方式。</li>
+<li><strong>状态转移</strong>：<ul>
+<li>到了第 <code>i</code> 个房子，我有两个选择：<ol>
+<li><strong>不偷 <code>i</code></strong>：那最大金额就是“截止到 <code>i-1</code>”的最大值 -&gt; <code>dp[i-1]</code></li>
+<li><strong>偷 <code>i</code></strong>：那 <code>i-1</code> 不能偷，最大金额就是“截止到 <code>i-2</code>”的最大值 + 当前房子钱 -&gt; <code>dp[i-2] + nums[i]</code></li>
+</ol>
+</li>
+<li>公式：<code>dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i])</code></li>
+</ul>
+</li>
+<li><strong>遍历方向</strong>：<strong>正序 (<code>0 -&gt; n-1</code>)</strong>。<ul>
+<li>因为算 <code>dp[i]</code> 需要知道 <code>dp[i-1]</code> 和 <code>dp[i-2]</code>，所以必须先算出前面的。</li>
+</ul>
+</li>
+<li><strong>最终答案</strong>：<code>dp[n-1]</code>（截止到最后一个房子的最大值）。</li>
+</ul>
+<blockquote>
+<p><strong>这就是你提供的代码的逻辑。</strong> 它是最符合人类直觉的：<strong>“我走到哪，就算到哪的最优解”</strong>。</p>
+</blockquote>
+<hr>
+<h4 id="方案-B：逆推法（倒序遍历）——-完美对应你的递归思维"><a href="#方案-B：逆推法（倒序遍历）——-完美对应你的递归思维" class="headerlink" title="方案 B：逆推法（倒序遍历）—— 完美对应你的递归思维"></a>方案 B：逆推法（倒序遍历）—— 完美对应你的递归思维</h4><p>如果你想严格保持递归时的定义（<strong>从 i 开始往后</strong>），那么 DP 数组就要倒着写。</p>
+<ul>
+<li><strong>定义</strong>：<code>dp[i]</code> = <strong>从第 i 个房子开始往后</strong>（i 到 n-1 范围内），能偷到的最大金额。<ul>
+<li><em>这和你之前的 <code>dfs(i)</code> 返回值完全一样！</em></li>
+</ul>
+</li>
+<li><strong>状态转移</strong>：<ul>
+<li>在第 <code>i</code> 个房子：<ol>
+<li><strong>偷 <code>i</code></strong>：拿到钱，下一个能偷的是 <code>i+2</code> -&gt; <code>nums[i] + dp[i+2]</code></li>
+<li><strong>不偷 <code>i</code></strong>：跳过，下一个能偷的是 <code>i+1</code> -&gt; <code>dp[i+1]</code></li>
+</ol>
+</li>
+<li>公式：<code>dp[i] = Math.max(dp[i+1], nums[i] + dp[i+2])</code></li>
+</ul>
+</li>
+<li><strong>遍历方向</strong>：<strong>倒序 (<code>n-1 -&gt; 0</code>)</strong>。<ul>
+<li>因为算 <code>dp[i]</code> 需要知道 <code>dp[i+1]</code> 和 <code>dp[i+2]</code>，所以必须先算出后面的。</li>
+</ul>
+</li>
+<li><strong>初始化</strong>：需要处理边界 <code>n-1</code> 和 <code>n</code> (视为 0)。</li>
+<li><strong>最终答案</strong>：<code>dp[0]</code>（从第 0 个房子开始往后的最大值）。</li>
+</ul>
+<p><strong>代码示例（倒序版）：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">robReverse</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.length;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// dp[i] 表示从 i 到末尾能偷到的最大值</span></span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">2</span>]; <span class="comment">// 多开两位，避免判断 i+2 越界，默认初始化为 0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 倒序遍历</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        dp[i] = Math.max(dp[i + <span class="number">1</span>], nums[i] + dp[i + <span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>对比发现</strong>：</p>
+<ul>
+<li>正序：<code>dp[i]</code> 依赖 <code>i-1, i-2</code>，答案是 <code>dp[n-1]</code>。</li>
+<li>倒序：<code>dp[i]</code> 依赖 <code>i+1, i+2</code>，答案是 <code>dp[0]</code>。</li>
+<li><strong>本质完全一样</strong>，只是看问题的角度不同（“截止到现在” vs “从现在开始”）。</li>
+</ul>
+<hr>
+<h3 id="2-到底该选正序还是倒序？（决策指南）"><a href="#2-到底该选正序还是倒序？（决策指南）" class="headerlink" title="2. 到底该选正序还是倒序？（决策指南）"></a>2. 到底该选正序还是倒序？（决策指南）</h3><p>在大多数线性 DP 题目中，<strong>正序是首选</strong>，原因如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">维度</th>
+<th style="text-align:left">正序 (Forward)</th>
+<th style="text-align:left">倒序 (Backward)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>思维习惯</strong></td>
+<td style="text-align:left">符合时间流逝：从第 1 天推到第 N 天。</td>
+<td style="text-align:left">符合递归回溯：从终点推回起点。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>代码直观性</strong></td>
+<td style="text-align:left"><code>dp[i]</code> 代表“前 i 个的最优”，容易理解。</td>
+<td style="text-align:left"><code>dp[i]</code> 代表“后 i 个的最优”，稍微绕一点。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>空间优化</strong></td>
+<td style="text-align:left">极易优化为 $O(1)$ (只需存前两个变量)。</td>
+<td style="text-align:left">也可以优化，但变量命名稍显别扭。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>适用场景</strong></td>
+<td style="text-align:left"><strong>绝大多数线性 DP</strong> (背包、爬楼梯、打家劫舍)。</td>
+<td style="text-align:left"><strong>区间 DP</strong> (如石子合并) 或 <strong>记忆化搜索转 DP</strong> 时。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="💡-什么时候必须用倒序？"><a href="#💡-什么时候必须用倒序？" class="headerlink" title="💡 什么时候必须用倒序？"></a>💡 什么时候必须用倒序？</h4><ol>
+<li><strong>题目本身是从后往前依赖的</strong>：比如某些特殊的博弈论题目，已知结局求开局。</li>
+<li><strong>为了强行对应递归逻辑</strong>：当你递归写得特别顺，转 DP 不想改逻辑定义时，可以直接倒序遍历。</li>
+<li><strong>区间 DP</strong>：例如 <code>dp[i][j]</code> 表示区间 <code>[i, j]</code> 的最优解，通常需要先算短区间，再算长区间，循环写法往往是 <code>len</code> 从小到大，或者 <code>i</code> 从大到小，<code>j</code> 从小到大。</li>
+</ol>
+<hr>
+<h3 id="3-如何思考-dp-i-的定义？（通用三步法）"><a href="#3-如何思考-dp-i-的定义？（通用三步法）" class="headerlink" title="3. 如何思考 dp[i] 的定义？（通用三步法）"></a>3. 如何思考 <code>dp[i]</code> 的定义？（通用三步法）</h3><p>当你拿到一个题目，想写出 DP 数组解法时，请按这个流程思考：</p>
+<h4 id="第一步：确定“状态”是什么？"><a href="#第一步：确定“状态”是什么？" class="headerlink" title="第一步：确定“状态”是什么？"></a>第一步：确定“状态”是什么？</h4><p>问自己：<strong>决定未来结果的关键因素有哪些？</strong></p>
+<ul>
+<li>打家劫舍：关键是“当前走到哪个房子了”。 -&gt; 状态是 <code>i</code>。</li>
+<li>背包问题：关键是“当前物品索引”和“剩余容量”。 -&gt; 状态是 <code>i, w</code>。</li>
+</ul>
+<h4 id="第二步：定义-dp-的含义（二选一）"><a href="#第二步：定义-dp-的含义（二选一）" class="headerlink" title="第二步：定义 dp 的含义（二选一）"></a>第二步：定义 <code>dp</code> 的含义（二选一）</h4><p>通常推荐 <strong>“截止到 i”</strong> 的定义（正序）：</p>
+<ul>
+<li><strong>定义 A (推荐)</strong>：<code>dp[i]</code> = 考虑前 <code>i</code> 个元素（或到达位置 <code>i</code>）时的最优解。<ul>
+<li><em>优点</em>：最终答案通常是 <code>dp[n]</code> 或 <code>dp[n-1]</code>，符合“做完所有事”的逻辑。</li>
+</ul>
+</li>
+<li><strong>定义 B (备选)</strong>：<code>dp[i]</code> = 从位置 <code>i</code> 开始到最后的最优解。<ul>
+<li><em>优点</em>：直接对应递归 <code>dfs(i)</code> 的返回值。</li>
+</ul>
+</li>
+</ul>
+<h4 id="第三步：推导转移方程-amp-确定方向"><a href="#第三步：推导转移方程-amp-确定方向" class="headerlink" title="第三步：推导转移方程 &amp; 确定方向"></a>第三步：推导转移方程 &amp; 确定方向</h4><ul>
+<li>如果选了 <strong>定义 A</strong>：<ul>
+<li>想求 <code>dp[i]</code>，我需要知道谁？ -&gt; <code>dp[i-1]</code>, <code>dp[i-2]</code>…</li>
+<li>既然依赖前面的，那就 <strong>正序循环</strong> (<code>0 -&gt; n</code>)。</li>
+</ul>
+</li>
+<li>如果选了 <strong>定义 B</strong>：<ul>
+<li>想求 <code>dp[i]</code>，我需要知道谁？ -&gt; <code>dp[i+1]</code>, <code>dp[i+2]</code>…</li>
+<li>既然依赖后面的，那就 <strong>倒序循环</strong> (<code>n -&gt; 0</code>)。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="🚀-实战演练：打家劫舍的思维流"><a href="#🚀-实战演练：打家劫舍的思维流" class="headerlink" title="🚀 实战演练：打家劫舍的思维流"></a>🚀 实战演练：打家劫舍的思维流</h3><ol>
+<li><strong>状态</strong>：只有房子索引 <code>i</code>。</li>
+<li><p><strong>尝试定义 A (正序)</strong>：</p>
+<ul>
+<li><code>dp[i]</code> = 偷完前 <code>i</code> 个房子能拿到的最大钱。</li>
+<li>怎么算 <code>dp[i]</code>？<ul>
+<li>如果不偷第 <code>i</code> 个，那就是 <code>dp[i-1]</code>。</li>
+<li>如果偷第 <code>i</code> 个，那第 <code>i-1</code> 个不能偷，只能接在 <code>dp[i-2]</code> 后面，即 <code>dp[i-2] + nums[i]</code>。</li>
+</ul>
+</li>
+<li>方程：<code>dp[i] = max(dp[i-1], dp[i-2] + nums[i])</code>。</li>
+<li>依赖前面 -&gt; <strong>正序</strong>。</li>
+<li>答案：<code>dp[n-1]</code>。</li>
+<li><strong>结论</strong>：逻辑通顺，写代码！</li>
+</ul>
+</li>
+<li><p><strong>尝试定义 B (倒序)</strong>：</p>
+<ul>
+<li><code>dp[i]</code> = 从第 <code>i</code> 个房子开始偷能拿到的最大钱。</li>
+<li>怎么算 <code>dp[i]</code>？<ul>
+<li>如果偷第 <code>i</code> 个，接下来从 <code>i+2</code> 开始，即 <code>nums[i] + dp[i+2]</code>。</li>
+<li>如果不偷第 <code>i</code> 个，接下来从 <code>i+1</code> 开始，即 <code>dp[i+1]</code>。</li>
+</ul>
+</li>
+<li>方程：<code>dp[i] = max(dp[i+1], nums[i] + dp[i+2])</code>。</li>
+<li>依赖后面 -&gt; <strong>倒序</strong>。</li>
+<li>答案：<code>dp[0]</code>。</li>
+<li><strong>结论</strong>：逻辑也通顺，但需要处理 <code>i+2</code> 越界问题（虽然不难），且最终答案是 <code>dp[0]</code> 有点反直觉（通常觉得最后算出来的才是答案）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="🏆-总结建议"><a href="#🏆-总结建议" class="headerlink" title="🏆 总结建议"></a>🏆 总结建议</h3><p>对于初学者和 90% 的线性 DP 题目：</p>
+<ol>
+<li><strong>首选正序</strong>。</li>
+<li><strong>定义 <code>dp[i]</code> 为“截止到 i 的最优解”</strong>。</li>
+<li><strong>思考方式</strong>：“我要达到状态 <code>i</code>，上一步可能是从哪来的？”（由前推后）。</li>
+</ol>
+<p>只有当你发现“由前推后”很难找规律，或者你刚写完递归想无脑转 DP 时，才考虑<strong>倒序</strong>和<strong>“从 i 开始”</strong>的定义。</p>
+<p>你提供的代码就是标准的<strong>正序 + 截止定义</strong>，这是最规范、最推荐的写法！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/10/算法总结-双序列dp的状态转移经验/" data-toggle="tooltip" data-placement="top" title="双序列dp状态转移经验">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/09/算法总结-dp定义的思路/" data-toggle="tooltip" data-placement="top" title="dp的定义思路">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-核心心法：dp-i-的定义必须与递归返回值一致"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. 核心心法：dp[i] 的定义必须与递归返回值一致</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#方案-A：顺推法（正序遍历）——-最常用，最适合本题"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">方案 A：顺推法（正序遍历）—— 最常用，最适合本题</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#方案-B：逆推法（倒序遍历）——-完美对应你的递归思维"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">方案 B：逆推法（倒序遍历）—— 完美对应你的递归思维</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-到底该选正序还是倒序？（决策指南）"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. 到底该选正序还是倒序？（决策指南）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#💡-什么时候必须用倒序？"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">💡 什么时候必须用倒序？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-如何思考-dp-i-的定义？（通用三步法）"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3. 如何思考 dp[i] 的定义？（通用三步法）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第一步：确定“状态”是什么？"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">第一步：确定“状态”是什么？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第二步：定义-dp-的含义（二选一）"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">第二步：定义 dp 的含义（二选一）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第三步：推导转移方程-amp-确定方向"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">第三步：推导转移方程 &amp; 确定方向</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🚀-实战演练：打家劫舍的思维流"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">🚀 实战演练：打家劫舍的思维流</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🏆-总结建议"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">🏆 总结建议</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

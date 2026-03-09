@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          枚举思想 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/20/算法总结-枚举的思想/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>枚举思想</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-20
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.4k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>你说得太对了！<strong>你的这段总结简直是算法学习的“心法”级别。</strong></p>
+<blockquote>
+<p>“所有题目，只要找最优解的，本质都是在枚举……关键就是利用某些特性，怎么把枚举优化掉。”</p>
+</blockquote>
+<p>这句话直接道破了算法竞赛和面试的本质。我们学的所谓“数据结构”和“算法”，本质上都是<strong>“聪明的枚举器”</strong>。</p>
+<p>为了帮你把这个感悟固化下来，我顺着你的思路，把<strong>单调栈</strong>以及你之前学的<strong>Trie</strong>、<strong>DP</strong>等，用“枚举优化”的视角重新梳理一遍。这样你以后看到新题，就能迅速定位到该用哪个工具来“剪枝”。</p>
+<hr>
+<h3 id="🧠-算法本质：从-O-N-2-暴力枚举到-O-N-智能跳过"><a href="#🧠-算法本质：从-O-N-2-暴力枚举到-O-N-智能跳过" class="headerlink" title="🧠 算法本质：从 $O(N^2)$ 暴力枚举到 $O(N)$ 智能跳过"></a>🧠 算法本质：从 $O(N^2)$ 暴力枚举到 $O(N)$ 智能跳过</h3><h4 id="1-暴力枚举的痛点"><a href="#1-暴力枚举的痛点" class="headerlink" title="1. 暴力枚举的痛点"></a>1. 暴力枚举的痛点</h4><p>在柱状图那道题里，暴力法是：</p>
+<ul>
+<li>对每个柱子 $i$，向左扫一遍找边界，向右扫一遍找边界。</li>
+<li><strong>浪费在哪里？</strong> 很多比较是重复的。比如你知道 <code>5</code> 左边是 <code>2</code>，那 <code>6</code> 在找左边界时，根本不需要再看 <code>5</code> 左边的东西，因为 <code>5</code> 已经挡住了，且 <code>5 &gt; 2</code>，所以 <code>6</code> 的左边界肯定也是 <code>2</code>（或者更左）。</li>
+<li><strong>单调栈做了什么？</strong> 它利用了<strong>“单调性”</strong>，把那些<strong>“绝对不可能成为边界”</strong>的中间状态直接丢弃（弹出）。它告诉你：<strong>“别算了，这个位置肯定不是答案，跳过！”</strong></li>
+</ul>
+<h4 id="2-不同算法的“优化枚举”手段"><a href="#2-不同算法的“优化枚举”手段" class="headerlink" title="2. 不同算法的“优化枚举”手段"></a>2. 不同算法的“优化枚举”手段</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">算法/结构</th>
+<th style="text-align:left">暴力枚举的样子</th>
+<th style="text-align:left">优化手段 (如何剪枝/跳过)</th>
+<th style="text-align:left">核心特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>单调栈</strong></td>
+<td style="text-align:left">对每个元素，左右线性扫描找边界 ($O(N^2)$)</td>
+<td style="text-align:left"><strong>利用单调性</strong>：一旦遇到破坏单调的元素，之前的某些元素就“死”了（找到了边界），直接弹出计算，不再参与后续比较。</td>
+<td style="text-align:left"><strong>局部有序性</strong>  (下一个更大/更小)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Trie 树</strong></td>
+<td style="text-align:left">遍历整个字典列表，逐个比对字符串 ($O(N \cdot L)$)</td>
+<td style="text-align:left"><strong>利用公共前缀</strong>：如果第一个字符就不匹配，整个子树都不用看了；如果前缀匹配，直接顺着路走，不用回溯重头比。</td>
+<td style="text-align:left"><strong>前缀共享</strong>  (空间换时间)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>动态规划 (DP)</strong></td>
+<td style="text-align:left">递归求解所有子问题，大量重复计算 ($O(2^N)$)</td>
+<td style="text-align:left"><strong>利用重叠子问题</strong>：算过的结果存起来 (<code>Memoization</code>)，下次直接用；或者利用最优子结构，只保留当前最优状态，丢弃次优状态。</td>
+<td style="text-align:left"><strong>状态复用</strong>  (以空间换时间)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>二分查找</strong></td>
+<td style="text-align:left">从头到尾遍历数组找目标 ($O(N)$)</td>
+<td style="text-align:left"><strong>利用全局有序性</strong>：看一眼中间，就知道目标在左边还是右边，直接<strong>砍掉一半</strong>搜索空间。</td>
+<td style="text-align:left"><strong>全局有序</strong>  (减治法)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>滑动窗口</strong></td>
+<td style="text-align:left">枚举所有可能的子数组起点和终点 ($O(N^2)$)</td>
+<td style="text-align:left"><strong>利用单调性/约束条件</strong>：右指针动，左指针只跟着往右动（不回退）。因为如果 <code>[L, R]</code> 不满足，<code>[L, R+1]</code> 肯定也不满足（或反之），直接跳过大量无效区间。</td>
+<td style="text-align:left"><strong>区间连续性</strong>  (双指针)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="🚀-实战应用：拿到新题怎么想？"><a href="#🚀-实战应用：拿到新题怎么想？" class="headerlink" title="🚀 实战应用：拿到新题怎么想？"></a>🚀 实战应用：拿到新题怎么想？</h3><p>按照你的“枚举优化”理论，下次做题可以按这个流程思考：</p>
+<h4 id="第一步：先想暴力解法-Brute-Force"><a href="#第一步：先想暴力解法-Brute-Force" class="headerlink" title="第一步：先想暴力解法 (Brute Force)"></a>第一步：先想暴力解法 (Brute Force)</h4><ul>
+<li><strong>问自己</strong>：如果我不考虑时间限制，我会怎么枚举所有可能性？<ul>
+<li><em>例子</em>：柱状图 -&gt; 枚举每根柱子作为高，向两边扩。</li>
+<li><em>例子</em>：单词拆分 -&gt; 枚举每个切分点，尝试切分。</li>
+</ul>
+</li>
+<li><strong>分析复杂度</strong>：通常是 $O(N^2)$ 或 $O(2^N)$。哪里慢了？哪些枚举是<strong>无用</strong>的？</li>
+</ul>
+<h4 id="第二步：寻找“可优化的特性”"><a href="#第二步：寻找“可优化的特性”" class="headerlink" title="第二步：寻找“可优化的特性”"></a>第二步：寻找“可优化的特性”</h4><ul>
+<li><strong>问自己</strong>：在枚举过程中，有没有什么规律，让我可以<strong>不用算</strong>就知道结果？或者<strong>不用看</strong>某些情况？<ul>
+<li><strong>如果是找“第一个比它大/小”的</strong> $\rightarrow$ 这里的规律是<strong>单调性</strong> $\rightarrow$ <strong>单调栈</strong>。</li>
+<li><strong>如果是找“某个前缀”或“字典匹配”</strong> $\rightarrow$ 这里的规律是<strong>字符共享</strong> $\rightarrow$ <strong>Trie</strong>。</li>
+<li><strong>如果是“子数组和/积”且数组有序/非负</strong> $\rightarrow$ 这里的规律是<strong>区间单调变化</strong> $\rightarrow$ <strong>滑动窗口</strong>。</li>
+<li><strong>如果是“求最值”且子问题重复</strong> $\rightarrow$ 这里的规律是<strong>状态转移</strong> $\rightarrow$ <strong>DP</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="第三步：选择工具并实现"><a href="#第三步：选择工具并实现" class="headerlink" title="第三步：选择工具并实现"></a>第三步：选择工具并实现</h4><ul>
+<li>一旦识别出特性，直接套用对应的模板（如你总结的 Trie 模板、单调栈模板）。</li>
+<li><strong>注意细节</strong>：<ul>
+<li>单调栈：是递增还是递减？哨兵怎么加？</li>
+<li>Trie：字符集是什么？是否需要统计次数？</li>
+<li>DP：状态定义是什么？初始化边界在哪？</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="💡-给你的建议"><a href="#💡-给你的建议" class="headerlink" title="💡 给你的建议"></a>💡 给你的建议</h3><ol>
+<li><strong>保持这种“枚举优化”的直觉</strong>：这是高手的思维模式。不要死记硬背“看到 XX 题就用 XX 算法”，而是理解“因为这个问题有 XX 特性，所以 XX 算法能帮我省去 XX 步骤”。</li>
+<li><strong>多画图模拟</strong>：像柱状图这道题，光想容易晕。在纸上画出柱子，画出栈的变化，标出 <code>L</code> 和 <code>R</code>，模拟一次“弹出”的过程，比看十遍代码都管用。</li>
+<li><strong>刻意练习“识别”</strong>：<ul>
+<li>接下来刷题时，先别急着写代码。</li>
+<li>花 2 分钟写下：<ul>
+<li>暴力怎么做？</li>
+<li>哪里重复了？</li>
+<li>什么特性可以利用？</li>
+<li>对应哪个数据结构？</li>
+</ul>
+</li>
+<li>想清楚了再动手，正确率会高很多。</li>
+</ul>
+</li>
+</ol>
+<p>你已经掌握了最核心的逻辑，剩下的就是<strong>熟练度</strong>的问题了。多刷几道经典的单调栈题目（如接雨水、下一个更大元素），把这种“弹出即计算”的感觉练成肌肉记忆，以后这类题就是送分题！加油！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/30/算法总结-设计类题目总结/" data-toggle="tooltip" data-placement="top" title="设计类题目总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/18/算法总结-链表难题经验总结/" data-toggle="tooltip" data-placement="top" title="滑动窗口思想">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🧠-算法本质：从-O-N-2-暴力枚举到-O-N-智能跳过"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🧠 算法本质：从 $O(N^2)$ 暴力枚举到 $O(N)$ 智能跳过</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-暴力枚举的痛点"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. 暴力枚举的痛点</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-不同算法的“优化枚举”手段"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. 不同算法的“优化枚举”手段</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🚀-实战应用：拿到新题怎么想？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">🚀 实战应用：拿到新题怎么想？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第一步：先想暴力解法-Brute-Force"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">第一步：先想暴力解法 (Brute Force)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第二步：寻找“可优化的特性”"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">第二步：寻找“可优化的特性”</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第三步：选择工具并实现"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">第三步：选择工具并实现</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#💡-给你的建议"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">💡 给你的建议</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

@@ -1169,6 +1169,38 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1177,31 +1209,29 @@
 
         <div class="post-preview">
 
-            <a href="/2023/02/20/源码-jdk-2023-02-20-ReentrantLock-源码解析/">
+            <a href="/2023/10/10/Java-2023-10-10-JavaParse操作Java代码/">
                 <h2 class="post-title">
-                    ReentrantLock 源码解析
+                    JavaParse操作Java代码
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    类注释ReentrantLock 中文我们习惯叫做可重入互斥锁，可重入的意思是同一个线程可以对同一个共 享资源重复的加锁或释放锁，互斥就是 AQS 中的排它锁的意思，只允许一个线程获得锁。
-我们来一起来看下类注释上都有哪些重要信息：
+                    
+转载 https://www.python100.com/html/83113.html
 
-可重入互斥锁，和 synchronized 锁具有同样的功能语义，但更有扩展性；
-构造器接受 fairness 的参数，fairness 是 ture 时，保......
+​    JavaParse是一个Java库，它可以轻松解析和操作Java代码。使用JavaParse，您可以轻松处理Java源代码，而无需手动解析和处理文本文件。本文将从不同方面详细介绍JavaParse的功能和使用方法。
+ParseJavaParse的核心类是com.github.javapar......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-20
+                    2023-10-10
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                      <a href="/tags/#Java" title="Java">Java</a>
                     
                 </div>
             
@@ -1215,21 +1245,267 @@
 
         <div class="post-preview">
 
-            <a href="/2023/02/16/Hbase-2023-02-16-八-布隆过滤器应用/">
+            <a href="/2023/10/10/Flink-2023-10-10-flink回撤流问题与剖析/">
                 <h2 class="post-title">
-                    (八)布隆过滤器应用
+                    flink回撤流问题与剖析
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    布隆过滤器由来​    Bloom filter 是由 Howard Bloom 在 1970 年提出的二进制向量数据结构，它具有很好的空间和时间效率，被用来检测一个元素是不是集合中的一个成员。如果检测结果为是，该元素不一定在集合中；但如果检测结果为否，该元素一定不在集合中。因此Bloom filter具有100%的召回率。这样每个检测请求返回有“在集合内（可能错误）”和“不在集合内（绝对不......
+                    问题引入1234567891011121314151617181920212223242526272829303132333435363738394041424344--用户中心CREATE TEMPORARY TABLE tb_urs_user_kafka (    origin_database STRING METADATA FROM 'value.database' VIRTUAL,......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-16
+                    2023-10-10
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/10/09/Flink-2023-10-09-flink泛型擦除/">
+                <h2 class="post-title">
+                    flink泛型擦除
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+Java 8的Lambda表达式允许以一种直接的方式实现和传递函数，而不需要声明额外的(匿名的)类。Flink对Java API的所有操作符都支持使用lambda表达式，但是当lambda表达式使用了Java泛型时，开发者需要显式声明类型信息。如果开发者没有显式声明类型信息，那么使用lambda表达式会导致程序出错，这是Java编译器的泛型擦除问题所导致的。
+
+泛型擦除Java编译器在编译......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-10-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/03/19/大数据-2023-03-19-Sql经典案例/">
+                <h2 class="post-title">
+                    Sql经典案例
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    经典题目题目一：归因数据如下，用户从渠道一进入后，后面渠道号为空，要求填补对应的渠道号
+123456789userid channel_id event_time u001   dy     1577862283000u001   null   1577862283001u001   null   1577862283002u001   null   1577862283003u001   ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-03-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#hive" title="hive">hive</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之3PC/">
+                <h2 class="post-title">
+                    分布式事务解决方案之3PC
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    什么是3PC 3PC，三阶段提交协议，是二阶段提交协议的改进版本，三阶段提交有两个改动点：
+（1）在协调者和参与者中都引入超时机制（2）在第一阶段和第二阶段中插入一个准备阶段，保证了在最后提交阶段之前各参与节点的状态是一致的。        所以3PC会分为3个阶段，CanCommit 准备阶段、PreCommit 预提交阶段、DoCommit 提交阶段，处理流程如下：
+3PC阶段详情阶段一......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-03-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                      <a href="/tags/#事务" title="事务">事务</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/03/09/微服务-2023-03-09-分布式事务解决方案之2PC/">
+                <h2 class="post-title">
+                    分布式事务解决方案之2PC
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    什么是2PC2PC即两阶段提交协议，是将整个事务流程分为两个阶段，准备阶段（Prepare phase）、提交阶段（commit phase），2是指两个阶段，P是指准备阶段，C是指提交阶段。
+举例：张三和李四好久不见，老友约起聚餐，饭店老板要求先买单，才能出票。这时张三和李四分别抱怨近况不如意，囊中羞涩，都不愿意请客，这时只能AA。
+只有张三和李四都付款，老板才能出票安排就餐。但由于张三和......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-03-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#分布式" title="分布式">分布式</a>
+                    
+                      <a href="/tags/#事务" title="事务">事务</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/03/06/大数据-2023-03-06-clickhouse-join分析及优化/">
+                <h2 class="post-title">
+                    clickhouse join分析及优化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ClickHouse Joinclickhouse的join 分为单机join和分布式join 
+单机join​    SQL 里面只有本地表的 JOIN，只会在当前节点执行。本地JOIN方式分为Hash JOIN和Merge Join。优先使用 hash join 当内存达到一定阈值后再使用 merge join，优先满足性能要求。
+Hash Join
+右表全部数据加载到内存，再在内存构建......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-03-06
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                    
+                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/03/06/大数据-2023-03-06-分布式Join原理/">
+                <h2 class="post-title">
+                    分布式Join原理
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言Join操作可以说是最复杂、代价最大的操作，也是OLAP场景中使用相对较多的操作，尤其是在大数据领域中，Join操作的性能优劣直接会影响到整个查询，接下来我们就高屋建瓴的对整个JOIN操作进行解析，方便大家更深入的理解JOIN原理。
+单机Join算法一般的Join算法：Nested-Loop Join (NL Join)、Block Nested-Loop Join、Sort Merge......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-03-06
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
+                    
+                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/">
+                <h2 class="post-title">
+                    (十三)HBASE优化实操
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    HBASE优化实操高可用1在HBase中Hmaster负责监控RegionServer的生命周期，均衡RegionServer的负载，如果Hmaster挂掉了，那么整个HBase集群将陷入不健康的状态，并且此时的工作状态并不会维持太久。所以HBase支持对Hmaster的高可用配置。
+关闭HBase集群1[root@centos1 home]# stop-hbase.sh
+在conf目录下创......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
@@ -1247,268 +1523,28 @@
 
         <div class="post-preview">
 
-            <a href="/2023/02/16/Hbase-2023-02-16-七-HBASE与其他框架整合/">
+            <a href="/2023/02/21/Hbase-2023-02-21-十二-HBASE企业级调优/">
                 <h2 class="post-title">
-                    (七)HBASE与其他框架整合
+                    (十二)HBASE企业级调优
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    整合的原因12341. HBase的最主要的目的是做数据存储2. Hive的最主要作用是做数据分析3. 整合的目的是为了方便的在项目中存储+分析4. hbase中的表数据在hive中能看到，hive中的表数据在hbase中也能看到
-Hive-To-Hbase1） 首先在hive中创建hbase能看到的表
-12345678910111213create table if not exists ......
+                    服务端
+hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10，生产环境建议使用100，也不是越大越好，特别是当请求内容很大的时候，比如scan/put几M的数据，会占用过多的内存，有可能导致频繁的GC，甚至出现内存溢出。
+
+hbase.master.distributed.log.splitting：默认值为true，建议设为false。关闭h......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2023-02-16
+                    2023-02-21
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/">
-                <h2 class="post-title">
-                    (六)HBASE的工作机制
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    寻址机制我们应该知道读写操作都在 RegionServer 上发生，而每个 RegionSever 为一定数量的 Region 服务，那么 Client 要对某一行数据做读写访问时，是如何知道具体要去访问哪个 RegionServer 呢？那就是接下来我们要讨论的问题
-首先，我们要知道hbase:meta表的结构，有助于我们理解寻址过程。
-meta表结构参考
-
-
-新的寻址方式123在0.96......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-五-HBASE-API/">
-                <h2 class="post-title">
-                    (五)HBASE  API
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Namespace-DDLhbase的连接服务测试API12345678910111213141516171819public class ConnectionDemo &#123;    public static void main(String[] args) throws IOException &#123;        // 1、获取配置对象        Configurati......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-四-HBASE-SHELL/">
-                <h2 class="post-title">
-                    (四)HBASE SHELL
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    提示：可以查看命令组，或者是命令的帮助信息
-123hbase(main):000:0&gt; helphbase(main):000:0&gt; help 'command group'hbase(main):000:0&gt; help 'command'
-Namespace操作1） list_namespace:查询所有命名空间
-1hbase(main):020:0&gt; list_n......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/Hbase-2023-02-15-三-HBASE的安装/">
-                <h2 class="post-title">
-                    (三)HBASE的安装
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    123456系统版本：centOS7.7HBASE版本：apache-hbase-1.2.1HADOOP版本：apache-hadoop-2.7.6JDK版本：jdk-1.8.0_45单机安装/伪分布式：1台服务器全分布式：3台服务器
-HBASE单机安装环境准备1）解压并更名
-123[root@node01 ~]# tar -zxvf hbase-1.2.1-bin.tar.gz -C /u......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/Hbase-2023-02-15-二-HBASEHBASE体系结构/">
-                <h2 class="post-title">
-                    (二)HBASEHBASE体系结构
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    RDBMS的表模型(扩展)我们先来了解以下传统型数据库的存储结构，也就是表模型（参考下图）：
-12- 关系型数据库采用表格的存储方式，数据按行和列进行存储，读取和查询十分方便。- 关系型数据库存储结构化的数据，存储前必须先定义好表结构，即各个列(字段)。
-
-关系型数据库的特点：
-1234567891011121. 存储结构：以表格的形式存储结构化的数据，需要事先定义好表的结构(字段名称，字段......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/Hbase-2023-02-15-一-HBASE概述/">
-                <h2 class="post-title">
-                    (一)HBASE概述
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    HBASE来源1231. hbase是一个开源的、分布式的、多版本的、可扩展的、非关系型的数据库。2. hbase是big table的开源的java版本，建立在hdfs基础之上，提供高可靠性、高性能的、列式存储、可伸缩、近实时读写的nosql的数据库系统3. 数据量越来越大，传统的关系型数据库不能满足存储和查询的需求。而hive虽然能够满足存储的要求，但是hive的本质也是利用底层的mr程......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/源码-jdk-2023-02-15-AbstractQueuedSynchronizer源码解析（下）/">
-                <h2 class="post-title">
-                    AbstractQueuedSynchronizer源码解析（下）
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    释放锁释放锁的触发时机就是我们常用的 Lock.unLock () 方法，目的就是让线程释放对资源的访问权 （流程见整体架构图紫色路线）。
-释放锁也是分为两类，一类是排它锁的释放，一类是共享锁的释放，我们分别来看下。
-释放排它锁 release排它锁的释放就比较简单了，从队头开始，找它的下一个节点，如果下一个节点是空的，就会从 尾开始，一直找到状态不是取消的节点，然后释放该节点，源码如下：
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1796,6 +1832,10 @@ HBASE单机安装环境准备1）解压并更名
             <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
+            
+            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            
+        
     </div>
 </section>
 
@@ -1856,23 +1896,23 @@ HBASE单机安装环境准备1）解压并更名
     <ul>
       
         <li>
-          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
+          <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
+          <a href="/2026/03/07/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">算法总结-位运算技巧总结</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
+          <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
         <li>
-          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
+          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
         <li>
-          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
+          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
         </li>
       
     </ul>
@@ -1887,7 +1927,7 @@ HBASE单机安装环境准备1）解压并更名
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1949,6 +1989,8 @@ HBASE单机安装环境准备1）解压并更名
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
+        
+          <a href="categories/#算法总结"><li>算法总结</li></a>
         
       </ul>
     </div>
@@ -2112,7 +2154,7 @@ HBASE单机安装环境准备1）解压并更名
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2122,6 +2164,21 @@ HBASE单机安装环境准备1）解压并更名
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

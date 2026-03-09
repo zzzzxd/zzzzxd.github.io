@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          双序列dp状态转移经验 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/10/算法总结-双序列dp的状态转移经验/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>双序列dp状态转移经验</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-10
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.4k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="🎯-核心问题：如何找到状态转移的“划分点”？"><a href="#🎯-核心问题：如何找到状态转移的“划分点”？" class="headerlink" title="🎯 核心问题：如何找到状态转移的“划分点”？"></a>🎯 核心问题：如何找到状态转移的“划分点”？</h3><p>你问到了关键点：<strong>“难点在于如何转移方程，到底如何转呢？应该找一个划分…”</strong></p>
+<p>对于<strong>双序列 DP</strong>（两个字符串、两个数组），有一个<strong>万能的结构化思维模型</strong>，叫做 <strong>“最后一步分析法” (Last Step Analysis)</strong>。</p>
+<h4 id="💡-通用套路：盯着“最后一个字符”看"><a href="#💡-通用套路：盯着“最后一个字符”看" class="headerlink" title="💡 通用套路：盯着“最后一个字符”看"></a>💡 通用套路：盯着“最后一个字符”看</h4><p>不要试图一次性想清楚整个字符串怎么变。<br><strong>只关注：</strong> 要把 <code>word1[0...i]</code> 变成 <code>word2[0...j]</code>，<strong>最后一步操作</strong>是什么？</p>
+<p>既然只有三种操作（增、删、改），那么最后一步必然是这三种情况之一。这就自然形成了<strong>三个分支（划分）</strong>：</p>
+<p>假设我们要计算 <code>dp[i][j]</code> （即 <code>word1</code> 前 <code>i</code> 个字符 变 <code>word2</code> 前 <code>j</code> 个字符）：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">最后一步操作</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">之前的状态 (子问题)</th>
+<th style="text-align:left">代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>1. 插入</strong></td>
+<td style="text-align:left">在 <code>word1</code> 末尾插入一个字符，使其匹配 <code>word2[j]</code></td>
+<td style="text-align:left"><code>word1</code> 的前 <code>i</code> 个 已经变成了 <code>word2</code> 的前 <code>j-1</code> 个</td>
+<td style="text-align:left"><code>dp[i][j-1] + 1</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2. 删除</strong></td>
+<td style="text-align:left">把 <code>word1</code> 末尾的字符 <code>word1[i]</code> 删掉</td>
+<td style="text-align:left"><code>word1</code> 的前 <code>i-1</code> 个 已经变成了 <code>word2</code> 的前 <code>j</code> 个</td>
+<td style="text-align:left"><code>dp[i-1][j] + 1</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3. 替换</strong></td>
+<td style="text-align:left">把 <code>word1[i]</code> 改成 <code>word2[j]</code> (或者它们本来就相等)</td>
+<td style="text-align:left"><code>word1</code> 的前 <code>i-1</code> 个 已经变成了 <code>word2</code> 的前 <code>j-1</code> 个</td>
+<td style="text-align:left"><code>dp[i-1][j-1] + cost</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>这就是你要找的“划分点”！</strong><br>所有的双序列 DP，本质上都是在枚举<strong>最后一个元素</strong>的几种处理方式。</p>
+<hr>
+<h3 id="📝-经验总结：双序列-DP-的三大经典模型"><a href="#📝-经验总结：双序列-DP-的三大经典模型" class="headerlink" title="📝 经验总结：双序列 DP 的三大经典模型"></a>📝 经验总结：双序列 DP 的三大经典模型</h3><p>这类题目在 LeetCode 上非常多，它们的转移方程结构几乎一模一样，只是 <code>cost</code> 不同。</p>
+<h4 id="1-编辑距离类-Edit-Distance-本题"><a href="#1-编辑距离类-Edit-Distance-本题" class="headerlink" title="1. 编辑距离类 (Edit Distance) - 本题"></a>1. 编辑距离类 (Edit Distance) - 本题</h4><ul>
+<li><strong>操作</strong>：增、删、改。</li>
+<li><strong>划分逻辑</strong>：<ul>
+<li>如果 <code>word1[i] == word2[j]</code>：不需要操作，直接继承 <code>dp[i-1][j-1]</code>。</li>
+<li>如果 <code>!=</code>：取 <code>min(增, 删, 改) + 1</code>。</li>
+</ul>
+</li>
+<li><strong>方程</strong>：<script type="math/tex; mode=display">dp[i][j] = \begin{cases} dp[i-1][j-1] & \text{if } s1[i] == s2[j] \\ \min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1 & \text{else} \end{cases}</script></li>
+</ul>
+<h4 id="2-最长公共子序列类-LCS"><a href="#2-最长公共子序列类-LCS" class="headerlink" title="2. 最长公共子序列类 (LCS)"></a>2. 最长公共子序列类 (LCS)</h4><ul>
+<li><strong>操作</strong>：只能保留匹配的，不能修改。</li>
+<li><strong>划分逻辑</strong>：<ul>
+<li>如果 <code>s1[i] == s2[j]</code>：这两个字符可以配对，长度 +1。 -&gt; <code>dp[i-1][j-1] + 1</code></li>
+<li>如果 <code>!=</code>：这两个字符没法配对，要么舍弃 <code>s1[i]</code>，要么舍弃 <code>s2[j]</code>。 -&gt; <code>max(dp[i-1][j], dp[i][j-1])</code></li>
+</ul>
+</li>
+<li><strong>方程</strong>：<script type="math/tex; mode=display">dp[i][j] = \begin{cases} dp[i-1][j-1] + 1 & \text{if } s1[i] == s2[j] \\ \max(dp[i-1][j], dp[i][j-1]) & \text{else} \end{cases}</script></li>
+<li><strong>题目</strong>：LeetCode 1143 (LCS), 712 (最小ASCII删除和)。</li>
+</ul>
+<h4 id="3-通配符-正则匹配类-Wildcard-Regex-Matching"><a href="#3-通配符-正则匹配类-Wildcard-Regex-Matching" class="headerlink" title="3. 通配符/正则匹配类 (Wildcard/Regex Matching)"></a>3. 通配符/正则匹配类 (Wildcard/Regex Matching)</h4><ul>
+<li><strong>操作</strong>：<code>*</code> 可以匹配任意，<code>?</code> 匹配单个。</li>
+<li><strong>划分逻辑</strong>：<ul>
+<li>如果是普通字符：同 LCS。</li>
+<li>如果是 <code>*</code>：它可以匹配 0 个（忽略它）或者 匹配 1 个多个（消耗主串）。</li>
+</ul>
+</li>
+<li><strong>方程</strong>：通常涉及 <code>dp[i][j-1]</code> (匹配0个) 或 <code>dp[i-1][j]</code> (匹配多个)。</li>
+<li><strong>题目</strong>：LeetCode 10 (正则), 44 (通配符)。</li>
+</ul>
+<hr>
+<h3 id="🛠️-修正你的代码-标准写法"><a href="#🛠️-修正你的代码-标准写法" class="headerlink" title="🛠️ 修正你的代码 (标准写法)"></a>🛠️ 修正你的代码 (标准写法)</h3><p>你的初始化逻辑太复杂了，标准做法是<strong>增加一行一列表示空串</strong>，这样逻辑极其清晰。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(String word1, String word2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = word1.length();</span><br><span class="line">        <span class="keyword">int</span> n = word2.length();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1. 定义 dp 数组</span></span><br><span class="line">        <span class="comment">// dp[i][j] 表示 word1 的前 i 个字符 转换成 word2 的前 j 个字符 的最少操作数</span></span><br><span class="line">        <span class="comment">// 大小设为 (m+1) x (n+1)，多出来的一行一列代表“空串”</span></span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m + <span class="number">1</span>][n + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 初始化 Base Case (这才是正确的初始化方式！)</span></span><br><span class="line">        <span class="comment">// 情况 A: word1 有 i 个字符，word2 是空串 -&gt; 需要删除 i 次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 情况 B: word1 是空串，word2 有 j 个字符 -&gt; 需要插入 j 次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            dp[<span class="number">0</span>][j] = j;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 状态转移 (核心逻辑)</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                <span class="comment">// 注意：dp 的下标 i 对应 word1 的第 i-1 个字符</span></span><br><span class="line">                <span class="keyword">char</span> c1 = word1.charAt(i - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">char</span> c2 = word2.charAt(j - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (c1 == c2) &#123;</span><br><span class="line">                    <span class="comment">// 字符相同，不需要操作，直接继承左上角</span></span><br><span class="line">                    dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 字符不同，取三种操作的最小值 + 1</span></span><br><span class="line">                    <span class="comment">// dp[i-1][j]: 删除 word1[i]</span></span><br><span class="line">                    <span class="comment">// dp[i][j-1]: 插入 word2[j]</span></span><br><span class="line">                    <span class="comment">// dp[i-1][j-1]: 替换 word1[i] 为 word2[j]</span></span><br><span class="line">                    dp[i][j] = Math.min(</span><br><span class="line">                        Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]), </span><br><span class="line">                        dp[i - <span class="number">1</span>][j - <span class="number">1</span>]</span><br><span class="line">                    ) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="🧠-深度总结：如何训练这种“划分”直觉？"><a href="#🧠-深度总结：如何训练这种“划分”直觉？" class="headerlink" title="🧠 深度总结：如何训练这种“划分”直觉？"></a>🧠 深度总结：如何训练这种“划分”直觉？</h3><p>下次遇到双序列 DP，按以下步骤思考：</p>
+<ol>
+<li><strong>定义状态</strong>：<code>dp[i][j]</code> = <code>S1</code> 前 <code>i</code> 个 和 <code>S2</code> 前 <code>j</code> 个 的解。</li>
+<li><strong>找最后一步</strong>：问自己，“为了达成 <code>dp[i][j]</code>，<strong>最后处理的一定是 <code>S1[i]</code> 和 <code>S2[j]</code> 这两个字符</strong>，它们之间发生了什么？”</li>
+<li><strong>列举可能性</strong>：<ul>
+<li><strong>匹配/相等</strong>：它们俩是不是天生一对？如果是，能不能直接消掉？(<code>i-1, j-1</code>)</li>
+<li><strong>不匹配/操作</strong>：<ul>
+<li>是不是 <code>S1</code> 多了？-&gt; 删 <code>S1</code> (<code>i-1, j</code>)</li>
+<li>是不是 <code>S2</code> 多了（即 <code>S1</code> 少了）？-&gt; 插 <code>S2</code> (<code>i, j-1</code>)</li>
+<li>是不是俩都不对劲？-&gt; 改一下 (<code>i-1, j-1</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>写方程</strong>：把上面几种情况的 <code>dp</code> 值拿来比较（取 <code>min</code> 或 <code>max</code>），加上对应的代价。</li>
+<li><strong>处理边界</strong>：直接用 <code>(m+1)*(n+1)</code> 的数组，第一行第一列填 <code>0, 1, 2, 3...</code>。</li>
+</ol>
+<p><strong>一句话心法</strong>：</p>
+<blockquote>
+<p><strong>双序列 DP 的转移方程，就是枚举两个序列“尾部元素”的所有交互可能性。</strong></p>
+</blockquote>
+<p>只要你抓住了“尾部元素”这个划分点，90% 的双序列 DP 题目都能迎刃而解！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/13/算法总结-Trie应用总结/" data-toggle="tooltip" data-placement="top" title="Trie树应用">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/09/算法总结-dp定义与递归/" data-toggle="tooltip" data-placement="top" title="dp定义与递归">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🎯-核心问题：如何找到状态转移的“划分点”？"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🎯 核心问题：如何找到状态转移的“划分点”？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#💡-通用套路：盯着“最后一个字符”看"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">💡 通用套路：盯着“最后一个字符”看</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#📝-经验总结：双序列-DP-的三大经典模型"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">📝 经验总结：双序列 DP 的三大经典模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-编辑距离类-Edit-Distance-本题"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1. 编辑距离类 (Edit Distance) - 本题</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-最长公共子序列类-LCS"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2. 最长公共子序列类 (LCS)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-通配符-正则匹配类-Wildcard-Regex-Matching"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">3. 通配符&#x2F;正则匹配类 (Wildcard&#x2F;Regex Matching)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🛠️-修正你的代码-标准写法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">🛠️ 修正你的代码 (标准写法)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🧠-深度总结：如何训练这种“划分”直觉？"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">🧠 深度总结：如何训练这种“划分”直觉？</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

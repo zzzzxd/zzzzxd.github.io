@@ -1169,6 +1169,38 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1177,61 +1209,21 @@
 
         <div class="post-preview">
 
-            <a href="/2020/12/03/企业高频算法面试题-2020-12-03-Problem-83-有序矩阵查第k小的数/">
+            <a href="/2021/01/01/企业高频算法面试题-2021-01-01-Problem-99-树链剖分问题/">
                 <h2 class="post-title">
-                    Problem 83 有序矩阵查第k小的数
+                    Problem 99 树链剖分问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给定一个每一行有序、每一列也有序，整体可能无序的二维数组在给定一个正数k，返回二维数组中，最小的第k个数
-Leetcode原题：https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
-题目解析
-需要利用82题的搜索过程，我们取出矩阵中的最小值和最大值，对这区间的数进行二分，每次搜索一个数，得出这个数的最......
+                    题目给定数组father，大小为N，表示一共有N个节点father[i] = j 表示点i的父亲是点j， father表示的树一定是一棵树而不是森林给定数组values，大小为N，values[i]=v表示节点i的权值是v实现如下4个方法，保证4个方法都很快！1)让某个子树所有节点值加上v，入参：int head, int v2)查询某个子树所有节点值的累加和，入参：int head3)在树......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-12-03
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Binary Search" title="Binary Search">Binary Search</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/12/01/企业高频算法面试题-2020-12-01-Problem-81-给数组打补丁问题/">
-                <h2 class="post-title">
-                    Problem 81 给数组打补丁问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：
-https://leetcode.com/problems/patching-array/
-题目解析
-要求添加数字 使得数组内能累加到[1,n]这类题目也挺常见的，假设有[1,2，3],此时可以拿到的最小值是1，最大值是1+2+3 = 6，因为1，2，3是连续的，所以 [1,6]内的任意一个数字都可以拿到。但此时来了一个5，所以现在能拿到的最大值是6+5= 11,......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-12-01
+                    2021-01-01
                 </p>
                 <div class="tags">
                     
@@ -1249,96 +1241,17 @@ https://leetcode.com/problems/patching-array/
 
         <div class="post-preview">
 
-            <a href="/2020/12/01/企业高频算法面试题-2020-12-01-Problem-82-有序矩阵值是否存在问题/">
+            <a href="/2020/12/31/企业高频算法面试题-2020-12-31-Problem-98-回文子序列个数/">
                 <h2 class="post-title">
-                    Problem 82 有序矩阵值是否存在问题
+                    Problem 98 回文子序列个数
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给定一个每一行有序、每一列也有序，整体可能无序的二维数组再给定一个数num，返回二维数组中有没有num这个数
- https://leetcode.com/problems/search-a-2d-matrix-ii/
+                    题目给定一个字符串str，当然可以生成很多子序列返回有多少个子序列是回文子序列，空序列不算回文比如，str = “aba”回文子序列：{a}、{a}、 {a,a}、 {b}、{a,b,a}返回5
 题目解析
-看到有序，先想二分。每次都能去除掉一部分元素，最终就能判定出
-
-代码1234567891011121314151617class Solution &#123; ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-12-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/30/企业高频算法面试题-2020-11-30-Problem-79-不能累加的最小正数/">
-                <h2 class="post-title">
-                    Problem 79 不能累加的最小正数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定一个正数数组arr，返回arr的子集不能累加出的最小正数1）正常怎么做？2）如果arr中肯定有1这个值，怎么做？
-题目解析
-这道题和前面的题目比较像， 都是要求数字连续这个特性。第二问中，如果有1，那么可以做到O(n)的复杂度。假设已经可以达到range了，下一个数字如果是range+1那是没问题的，提升range到range+1,下一个数字如果是大于range+1那么range+1......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-30
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/30/企业高频算法面试题-2020-11-30-Problem-80-挑选子集问题/">
-                <h2 class="post-title">
-                    Problem 80 挑选子集问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定一个有正、有负、有0的数组arr，给定一个整数k，返回arr的子集是否能累加出k1）正常怎么做？2）如果arr中的数值很大，但是arr的长度不大，怎么做？
-题目解析
-1) 正常做法 还是递归，背包思想去凑 k就可以，但是因为有负数，所有dp数组index会出现负数，这时候就得涉及到进行偏移，保证数组index不会出现负数
+定义dp[i][j]表示[i~j]内的回文子序列个数。转移方程为: 
 
 代码...
                 </div>
@@ -1346,7 +1259,43 @@ https://leetcode.com/problems/patching-array/
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-30
+                    2020-12-31
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/29/企业高频算法面试题-2020-12-29-Problem-97-完美洗牌问题/">
+                <h2 class="post-title">
+                    Problem 97 完美洗牌问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目完美洗牌问题给定一个长度为偶数的数组arr，假设长度为N*2, 左部分：arr[L1……Ln]    右部分： arr[R1……Rn]请把arr调整成arr[L1,R1,L2,R2,L3,R3,…,Ln,Rn]要求：时间复杂度O(N)，额外空间复杂度O(1)
+20节
+题目解析代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-29
                 </p>
                 <div class="tags">
                     
@@ -1368,142 +1317,33 @@ https://leetcode.com/problems/patching-array/
 
         <div class="post-preview">
 
-            <a href="/2020/11/26/企业高频算法面试题-2020-11-26-Problem-78-约瑟夫环问题/">
+            <a href="/2020/12/29/企业高频算法面试题-2020-12-29-Problem-96-公共因子的最大连接数量/">
                 <h2 class="post-title">
-                    Problem 78 约瑟夫环问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目约瑟夫环问题
-给定一个链表头节点head，和一个正数m从头开始，每次数到m就杀死当前节点然后被杀节点的下一个节点从1开始重新数，周而复始直到只剩一个节点，返回最后的节点Leetcode :https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
-16节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-26
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/23/企业高频算法面试题-2020-11-23-Problem-77-股票系列问题/">
-                <h2 class="post-title">
-                    Problem 77 股票系列问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目15节
-股票问题1：
-https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
-股票问题2：
-https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
-股票问题3:
-https://leetcode.com/problems/best-time-t......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/23/企业高频算法面试题-2020-11-23-Problem-76-第一个缺失的正数/">
-                <h2 class="post-title">
-                    Problem 76 第一个缺失的正数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    https://leetcode.com/problems/first-missing-positive/
-题目解析
-这类题目使用的一种我管它称作 “占位”的思想
-对于直接判定垃圾值，会占用有效空间，所以减小连续的最大值
-暂时无法判定是否为垃圾值，进行归位。
-
-
-需要用L保证扫描过的是连续空间，否则无法判断当前已经连续到哪个值了
-是从1开始的，......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-23
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/21/企业高频算法面试题-2020-11-21-Problem-75-修复BST/">
-                <h2 class="post-title">
-                    Problem 75 修复BST
+                    Problem 96 公共因子的最大连接数量
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
                     题目Leetcode原题：
-https://leetcode.com/problems/recover-binary-search-tree/
+https://leetcode.com/problems/largest-component-size-by-common-factor/
+20节
 题目解析
-题目中只有两个节点会出错，那么实际中序遍历 要么出现降序一次，要么两次，要是一次只需要交换降序的两个节点，要是两次 需要把第一个降序的节点和最后一个节点交换
+明显就是并查集，只有大于1的公共因子才进行连接，求最大集合的数目
 
-代码12345678910111213141516171819202122232......
+代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-21
+                    2020-12-29
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Union Find" title="Union Find">Union Find</a>
                     
                 </div>
             
@@ -1517,23 +1357,168 @@ https://leetcode.com/problems/recover-binary-search-tree/
 
         <div class="post-preview">
 
-            <a href="/2020/11/21/企业高频算法面试题-2020-11-21-Problem-73/">
+            <a href="/2020/12/28/企业高频算法面试题-2020-12-28-Problem-95-生成后缀数组/">
                 <h2 class="post-title">
-                    Problem 73
+                    Problem 95 生成后缀数组
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目从二叉树的某个节点x开始，往下子节点都要的，叫子树；在二叉树上只要能连起来的任何结构，叫子拓扑结构；返回二叉树上满足搜索二叉树性质的、最大子拓扑结构的节点数
-14节
+                    题目如果只给定一个二叉树前序遍历数组pre和中序遍历数组in，能否不重建树，而直接生成这个二叉树的后序数组并返回已知二叉树中没有重复值
+题目解析
+题目比较简单，利用递归生成即可。注意 为了加快寻找根元素在中序数组中的位置以区分左右子树，可以 事先把元素打入map，存下元素对应的位置。
+
+代码略 
+...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-28
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/24/企业高频算法面试题-2020-12-24-Problem-94-达标扑克方法数/">
+                <h2 class="post-title">
+                    Problem 94 达标扑克方法数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目一张扑克有3个属性，每种属性有3种值（A、B、C）比如”AAA”，第一个属性值A，第二个属性值A，第三个属性值A比如”BCA”，第一个属性值B，第二个属性值C，第三个属性值A给定一个字符串类型的数组cards[]，每一个字符串代表一张扑克从中挑选三张扑克，一个属性达标的条件是：这个属性在三张扑克中全一样，或全不一样挑选的三张扑克达标的要求是：每种属性都满足上面的条件比如：”ABC”、”C......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-24
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/23/企业高频算法面试题-2020-12-23-Problem-93-最小覆盖区间问题/">
+                <h2 class="post-title">
+                    Problem 93 最小覆盖区间问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-23
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/22/企业高频算法面试题-2020-12-22-Problem-92-1-N中1的出现次数问题/">
+                <h2 class="post-title">
+                    Problem 92 1~N中1的出现次数问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个正数N，比如N = 13，在纸上把所有数都列出来如下：1 2 3 4 5 6 7 8 9 10 11 12 13可以数出1这个字符出现了6次给定一个正数N，如果把1~N都列出来，返回1这个字符出现的多少次
+19节
+题目解析
+也是一种数位思想，统计1出现的次数，那就按位置进行统计，统计每一位贡献出来的1
+
+代码...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-22
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                      <a href="/tags/#Dynacmic Programming" title="Dynacmic Programming">Dynacmic Programming</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/20/企业高频算法面试题-2020-12-20-Problem-91-实现LFU/">
+                <h2 class="post-title">
+                    Problem 91 实现LFU
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目leetcode原题：
+ https://leetcode.com/problems/lfu-cache/
+19
 题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-21
+                    2020-12-20
                 </p>
                 <div class="tags">
                     
@@ -1542,6 +1527,44 @@ https://leetcode.com/problems/recover-binary-search-tree/
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
                       <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/17/企业高频算法面试题-2020-12-17-Problem-90-实现LRU/">
+                <h2 class="post-title">
+                    Problem 90 实现LRU
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目leetcode原题：
+https://leetcode.com/problems/lru-cache/
+题目解析
+利用链表增删改的操作是 O(1)，哈希表可用来进行判断是否存在也是O(1)，结合起来。
+可以利用双向链表 实现起来比较简单。重要的是维护好head、last变量。
+
+代码1234567891011121314151617181920212223242526272829303......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-17
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                 </div>
             
@@ -1829,6 +1852,10 @@ https://leetcode.com/problems/recover-binary-search-tree/
             <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
+            
+            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            
+        
     </div>
 </section>
 
@@ -1889,23 +1916,23 @@ https://leetcode.com/problems/recover-binary-search-tree/
     <ul>
       
         <li>
-          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
+          <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
+          <a href="/2026/03/07/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">算法总结-位运算技巧总结</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
+          <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
         <li>
-          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
+          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
         <li>
-          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
+          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
         </li>
       
     </ul>
@@ -1920,7 +1947,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1982,6 +2009,8 @@ https://leetcode.com/problems/recover-binary-search-tree/
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
+        
+          <a href="categories/#算法总结"><li>算法总结</li></a>
         
       </ul>
     </div>
@@ -2145,7 +2174,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2155,6 +2184,21 @@ https://leetcode.com/problems/recover-binary-search-tree/
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

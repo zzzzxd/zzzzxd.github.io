@@ -1169,6 +1169,38 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1177,25 +1209,24 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-72-小于K的最大子数组和/">
+            <a href="/2020/12/13/企业高频算法面试题-2020-12-13-Problem-89-两个有序数组间相加和的Topk问题/">
                 <h2 class="post-title">
-                    Problem 72 小于K的最大子数组和
+                    Problem 89 两个有序数组间相加和的Topk问题 
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    请返回arr中，求子数组的累加和，是&lt;=K的并且是最大的返回这个最大的累加和
-题目解析
-考察的是前缀和的应用！前缀和已经多次提到了，就看你能不能灵活应用了
-
-代码1234567891011121314151617181920// 请返回arr中，求个子数组的累加和，是&lt;=K的，并且是最大的。	// 返回这个最大的累加和	public static int getMa......
+                    题目牛客网原题：
+https://www.nowcoder.com/practice/7201cacf73e7495aa5f88b223bbbf6d1
+18节 堆玩不转还是
+题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-18
+                    2020-12-13
                 </p>
                 <div class="tags">
                     
@@ -1217,25 +1248,25 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-71-最长的有效括号的子串/">
+            <a href="/2020/12/13/企业高频算法面试题-2020-12-13-Problem-88-最大路径和问题/">
                 <h2 class="post-title">
-                    Problem 71 最长的有效括号的子串
+                    Problem 88 最大路径和问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给定一个只由左括号和右括号的字符串返回最长的有效括号子串的长度
+                    题目牛客网原题：https://www.nowcoder.com/questionTerminal/8ecfe02124674e908b2aae65aad4efdf
+18节
 题目解析
-分析题目，dp[i]代表以当前i位置结尾，最长的有效括号的子串长度。
-
-代码123456789101112131415161718192021222324// s只由(和)组成	// 求最长有效括号子串长度	public static int maxLength(String s) &#123;		if (s ==......
+题目的意思两条路径不能走相同的，这个题可以变通一下，变成同时走两条路，只不过走相同的位置只能获取一次，而且任意时刻，走的总格子数肯定是一样的
+用递归是没问题的，但是必须优化，直接写递归可能是4个参数，开辟的缓存......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-18
+                    2020-12-13
                 </p>
                 <div class="tags">
                     
@@ -1253,22 +1284,60 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/15/企业高频算法面试题-2020-11-15-Problem-70-数组调整的逆序对问题/">
+            <a href="/2020/12/10/企业高频算法面试题-2020-12-10-Problem-87-连接岛屿的最短桥问题/">
                 <h2 class="post-title">
-                    Problem 70 数组调整的逆序对问题
+                    Problem 87 连接岛屿的最短桥问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给定整数power，给定一个数组arr，给定一个数组reverse，含义如下：arr的长度一定是2的power次方reverse中的每个值一定都在0~power范围。例如power = 2, arr = {3, 1, 4, 2}，reverse = {0, 1, 0, 2}
-任何一个在前的数字可以和任何一个在后的数组，构成一对数可能是升序关系、相等关系或者降序关系比如arr开始时有如下的......
+                    题目Leetcode 原题：
+https://leetcode.com/problems/shortest-bridge/
+题目解析
+题目含义比较明确，就是有两座孤立的岛屿，然后看看连接起来 需要翻转几个0，显然bfs会很简单。
+
+代码1234567891011121314151617181920212223242526272829303132333435363738394041424344......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-15
+                    2020-12-10
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#BFS" title="BFS">BFS</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/08/企业高频算法面试题-2020-12-08-Problem-86-汉诺塔的状态判断问题/">
+                <h2 class="post-title">
+                    Problem 86 汉诺塔的状态判断问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个数组arr，长度为N，arr中的值只有1，2，3三种arr[i] == 1，代表汉诺塔问题中，从上往下第i个圆盘目前在左arr[i] == 2，代表汉诺塔问题中，从上往下第i个圆盘目前在中arr[i] == 3，代表汉诺塔问题中，从上往下第i个圆盘目前在右那么arr整体就代表汉诺塔游戏过程中的一个状况如果这个状况不是汉诺塔最优解运动过程中的状况，返回-1如果这个状况是汉诺塔最优解......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-08
                 </p>
                 <div class="tags">
                     
@@ -1276,8 +1345,6 @@
                     
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
                 </div>
             
 
@@ -1290,61 +1357,27 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-69-回文对/">
+            <a href="/2020/12/08/企业高频算法面试题-2020-12-08-Problem-85-子序列字面值问题/">
                 <h2 class="post-title">
-                    Problem 69 回文对
+                    Problem 85 子序列字面值问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    https://leetcode.com/problems/palindrome-pairs/
+                    题目
+给定两个字符串S和T ，返回S的所有子序列中 有多少个子序列的字面值等于T
+给定一个字符串Str 返回Str的所有子序列中有多少不同的字面值
+
+​        Leetcode原题：https://leetcode.com/problems/distinct-subsequences-ii/
 题目解析
-这个题简单思路是暴力 能做的。
-提供第二种思路。我们针对每个字符串，要是能直接找出来与之配对能成为回文的，就不需要无脑的匹配再判断是不是回文了。那如果找是关键，是突破口！判断是回文的前缀，将后面逆序放前面则是回文！同理，判断是回文的后缀逆序......
+第一问比较简单,定义dp[i][j]表示，[0~i]上子序列字面值等于t[0~j]......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-68-修复BST/">
-                <h2 class="post-title">
-                    Problem 68 修复BST
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    https://leetcode.com/problems/recover-binary-search-tree/
-题目解析
-题目比较简答，因为BST中序遍历是升序，任意调换两个节点，正常的影响就是把中序中这两个元素进行调换会出现两段降序。case1 还提示了 也会有情况出现一段降序。所以说最多两段降序。我们给交换回来即可。
-用chi[]数组，......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-12
+                    2020-12-08
                 </p>
                 <div class="tags">
                     
@@ -1352,8 +1385,6 @@
                     
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
                     
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
                 </div>
             
 
@@ -1366,32 +1397,27 @@
 
         <div class="post-preview">
 
-            <a href="/2020/11/11/企业高频算法面试题-2020-11-11-Problem-67-打砖块/">
+            <a href="/2020/12/05/企业高频算法面试题-2020-12-05-Problem-84-回文对问题/">
                 <h2 class="post-title">
-                    Problem 67 打砖块
+                    Problem 84 回文对问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
                     题目Leetcode原题：
-https://leetcode.com/problems/bricks-falling-when-hit/
-题目解析
-首先一定要熟悉并查集。此题是并查集的逆运用，思考并查集核心思想在于集合的合并。而击落砖块问的是掉落之后的个数，相当于初始情况是一个大集合，不断的击落砖块时，集合分散之后，那些无连接的集合大小。所以可以，倒过来想，从击落最后一块砖块开始，此时是分散......
+https://leetcode.com/problems/palindrome-pairs/
+题目解析代码...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-11
+                    2020-12-05
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1405,35 +1431,30 @@ https://leetcode.com/problems/bricks-falling-when-hit/
 
         <div class="post-preview">
 
-            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-66-扰乱字符串/">
+            <a href="/2020/12/03/企业高频算法面试题-2020-12-03-Problem-83-有序矩阵查第k小的数/">
                 <h2 class="post-title">
-                    Problem 66. 扰乱字符串
+                    Problem 83 有序矩阵查第k小的数
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目​    Leetcode原题：
-https://leetcode.com/problems/scramble-string/
+                    题目给定一个每一行有序、每一列也有序，整体可能无序的二维数组在给定一个正数k，返回二维数组中，最小的第k个数
+Leetcode原题：https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
 题目解析
-思路比较直接，更加考察编程能力，包括这些位置的推断。以及递归的设计
-普通递归，不去优化会卡在最后连个case上，加上缓存就可以顺利通过。主要是能快速写出来程序，所以没有进一步优化，也可以进一步写成数组严格递归的形式，甚至用斜率优化
-
-代码1234567......
+需要利用82题的搜索过程，我们取出矩阵中的最小值和最大值，对这区间的数进行二分，每次搜索一个数，得出这个数的最......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-08
+                    2020-12-03
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                      <a href="/tags/#Binary Search" title="Binary Search">Binary Search</a>
                     
                 </div>
             
@@ -1447,107 +1468,107 @@ https://leetcode.com/problems/scramble-string/
 
         <div class="post-preview">
 
-            <a href="/2020/11/08/企业高频算法面试题-2020-11-08-Problem-65-超级洗衣机/">
+            <a href="/2020/12/01/企业高频算法面试题-2020-12-01-Problem-81-给数组打补丁问题/">
                 <h2 class="post-title">
-                    Problem 65 超级洗衣机
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目  Leetcode原题：  https://leetcode.com/problems/super-washing-machines/
-题目解析
-考察单点瓶颈问题。诸如此类的还有接雨水问题等 都是考察 ”最短处“，整个问题的解决在于“痛点”。洗衣机每个都可以一次扔一件衣服，因为可以并发进行。那么只要找到需要扔到最多的，问题就解决了。
-
-代码12345678910111213141516......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-08
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/05/企业高频算法面试题-2020-11-05-Problem-64-谷歌抽牌问题/">
-                <h2 class="post-title">
-                    Problem 64 谷歌抽牌问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    谷歌面试题扩展版面值为1~N的牌组成一组，每次你从组里等概率的抽出1~N中的一张下次抽会换一个新的组，有无限组当累加和=a且=b时，你将失败返回获胜的概率，给定的参数为N，a，b
-题目解析
-可能一上来不知道如何下手，这种就想先定义递归含义。依据定义的含义在去写递归体，最后想递归边界，以及优化点。
-这个题想到大概思路之后，还要注意优化，关键在于(a,b)之间的距离
-
-代码1234......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/04/企业高频算法面试题-2020-11-04-Problem-63/">
-                <h2 class="post-title">
-                    Problem 63
+                    Problem 81 给数组打补丁问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
                     题目Leetcode原题：
-https://leetcode.com/problems/regular-expression-matching/
+https://leetcode.com/problems/patching-array/
 题目解析
-好题。考察递归，重点思考后面元素是*或者.，需要对这种特殊清楚进行分析可能性。
-
-代码1234567891011121314151617181920212223242526272829303132333435363738394041424......
+要求添加数字 使得数组内能累加到[1,n]这类题目也挺常见的，假设有[1,2，3],此时可以拿到的最小值是1，最大值是1+2+3 = 6，因为1，2，3是连续的，所以 [1,6]内的任意一个数字都可以拿到。但此时来了一个5，所以现在能拿到的最大值是6+5= 11,......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2020-11-04
+                    2020-12-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/01/企业高频算法面试题-2020-12-01-Problem-82-有序矩阵值是否存在问题/">
+                <h2 class="post-title">
+                    Problem 82 有序矩阵值是否存在问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个每一行有序、每一列也有序，整体可能无序的二维数组再给定一个数num，返回二维数组中有没有num这个数
+ https://leetcode.com/problems/search-a-2d-matrix-ii/
+题目解析
+看到有序，先想二分。每次都能去除掉一部分元素，最终就能判定出
+
+代码1234567891011121314151617class Solution &#123; ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-01
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                       <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/30/企业高频算法面试题-2020-11-30-Problem-79-不能累加的最小正数/">
+                <h2 class="post-title">
+                    Problem 79 不能累加的最小正数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个正数数组arr，返回arr的子集不能累加出的最小正数1）正常怎么做？2）如果arr中肯定有1这个值，怎么做？
+题目解析
+这道题和前面的题目比较像， 都是要求数字连续这个特性。第二问中，如果有1，那么可以做到O(n)的复杂度。假设已经可以达到range了，下一个数字如果是range+1那是没问题的，提升range到range+1,下一个数字如果是大于range+1那么range+1......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-30
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1835,6 +1856,10 @@ https://leetcode.com/problems/regular-expression-matching/
             <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
+            
+            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            
+        
     </div>
 </section>
 
@@ -1895,23 +1920,23 @@ https://leetcode.com/problems/regular-expression-matching/
     <ul>
       
         <li>
-          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
+          <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
+          <a href="/2026/03/07/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">算法总结-位运算技巧总结</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
+          <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
         <li>
-          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
+          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
         <li>
-          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
+          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
         </li>
       
     </ul>
@@ -1926,7 +1951,7 @@ https://leetcode.com/problems/regular-expression-matching/
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1988,6 +2013,8 @@ https://leetcode.com/problems/regular-expression-matching/
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
+        
+          <a href="categories/#算法总结"><li>算法总结</li></a>
         
       </ul>
     </div>
@@ -2151,7 +2178,7 @@ https://leetcode.com/problems/regular-expression-matching/
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2161,6 +2188,21 @@ https://leetcode.com/problems/regular-expression-matching/
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

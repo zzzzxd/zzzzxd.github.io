@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          图相关题目的建模 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/04/算法总结-图论初始化模板/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>图相关题目的建模</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-04
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.3k</span> and
+                                Reading Time <span class="post-count">5</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><strong>图相关题目，往往第一步需要建模。</strong></p>
+<p>绝大多数图论题，题目给你的<strong>并不是</strong>现成的图结构，而是一堆<strong>“关系描述”</strong>。你的首要任务就是把这些文字或数组翻译成计算机能理解的<strong>邻接表</strong>或<strong>邻接矩阵</strong>。</p>
+<p>一旦图建好了，剩下的就是套模板（BFS/DFS/拓扑等）。</p>
+<hr>
+<h3 id="🏗️-图论解题标准流程：三步走"><a href="#🏗️-图论解题标准流程：三步走" class="headerlink" title="🏗️ 图论解题标准流程：三步走"></a>🏗️ 图论解题标准流程：三步走</h3><h4 id="第一步：读题与抽象（最关键）"><a href="#第一步：读题与抽象（最关键）" class="headerlink" title="第一步：读题与抽象（最关键）"></a>第一步：读题与抽象（最关键）</h4><p>你要从题目描述中识别出 <strong>节点（Node）</strong> 和 <strong>边（Edge）</strong>。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">题目类型</th>
+<th style="text-align:left">什么是节点 (Node)？</th>
+<th style="text-align:left">什么是边 (Edge)？</th>
+<th style="text-align:left">有向还是无向？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>课程表/依赖关系</strong></td>
+<td style="text-align:left">课程 (0, 1, 2…)</td>
+<td style="text-align:left">“A 是 B 的先修课” $\rightarrow$ B 依赖 A</td>
+<td style="text-align:left"><strong>有向</strong> (A $\to$ B)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>岛屿/网格问题</strong></td>
+<td style="text-align:left">网格中的坐标 <code>(r, c)</code></td>
+<td style="text-align:left">上下左右相邻的格子</td>
+<td style="text-align:left"><strong>无向</strong> (通常)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>社交网络/连通性</strong></td>
+<td style="text-align:left">人 (ID)</td>
+<td style="text-align:left">“A 和 B 是朋友”</td>
+<td style="text-align:left"><strong>无向</strong> (A-B, B-A)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>单词接龙</strong></td>
+<td style="text-align:left">单词</td>
+<td style="text-align:left">“两个单词只差一个字母”</td>
+<td style="text-align:left"><strong>无向</strong> (通常)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>地图/路径规划</strong></td>
+<td style="text-align:left">城市/路口</td>
+<td style="text-align:left">“A 到 B 的距离是 W”</td>
+<td style="text-align:left"><strong>有向</strong> 或 <strong>无向</strong> (带权)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="第二步：选择数据结构建图"><a href="#第二步：选择数据结构建图" class="headerlink" title="第二步：选择数据结构建图"></a>第二步：选择数据结构建图</h4><p>根据节点数量 $N$ 和边的稀疏程度选择：</p>
+<ol>
+<li><p><strong>邻接表 (<code>List&lt;List&lt;Integer&gt;&gt;</code> 或 <code>ArrayList[]</code>)</strong></p>
+<ul>
+<li><strong>适用</strong>：绝大多数情况（特别是 $N$ 很大，但每个节点连接的边不多，即<strong>稀疏图</strong>）。</li>
+<li><strong>优点</strong>：节省空间，遍历邻居快。</li>
+<li><strong>代码模式</strong>：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;List&lt;Integer&gt;&gt; graph = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) graph.add(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line"><span class="comment">// 加边 (有向)</span></span><br><span class="line">graph.get(u).add(v); </span><br><span class="line"><span class="comment">// 加边 (无向)</span></span><br><span class="line">graph.get(u).add(v);</span><br><span class="line">graph.get(v).add(u);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>邻接矩阵 (<code>boolean[][]</code> 或 <code>int[][]</code>)</strong></p>
+<ul>
+<li><strong>适用</strong>：节点数很少 ($N \le 200$)，或者是<strong>网格题</strong>（本身就是一个矩阵），或者需要频繁判断“两点是否直接相连”。</li>
+<li><strong>优点</strong>：判断连通性 $O(1)$。</li>
+<li><strong>缺点</strong>：空间 $O(N^2)$，遍历邻居慢（必须遍历一整行）。</li>
+</ul>
+</li>
+<li><p><strong>隐式图 (不需要显式建图)</strong></p>
+<ul>
+<li><strong>适用</strong>：网格题（如岛屿数量）、状态搜索（如转盘锁）。</li>
+<li><strong>做法</strong>：不创建 <code>graph</code> 对象。在 BFS/DFS 循环中，直接通过坐标计算 <code>(r+1, c)</code>, <code>(r-1, c)</code> 等来模拟“邻居”。</li>
+</ul>
+</li>
+</ol>
+<h4 id="第三步：套用算法模板"><a href="#第三步：套用算法模板" class="headerlink" title="第三步：套用算法模板"></a>第三步：套用算法模板</h4><p>图建好后，根据问题目标选择算法：</p>
+<ul>
+<li>问“能不能”、“有没有环”、“顺序” $\rightarrow$ <strong>拓扑排序 / DFS 判环</strong></li>
+<li>问“最少步数”、“最短距离” $\rightarrow$ <strong>BFS</strong></li>
+<li>问“连通块数量”、“是否连通” $\rightarrow$ <strong>DFS / BFS / 并查集</strong></li>
+<li>问“最小代价” (带权) $\rightarrow$ <strong>Dijkstra</strong></li>
+</ul>
+<hr>
+<h3 id="🌰-实战演练：如何快速建模？"><a href="#🌰-实战演练：如何快速建模？" class="headerlink" title="🌰 实战演练：如何快速建模？"></a>🌰 实战演练：如何快速建模？</h3><h4 id="案例-1：LeetCode-207-课程表"><a href="#案例-1：LeetCode-207-课程表" class="headerlink" title="案例 1：LeetCode 207 课程表"></a>案例 1：LeetCode 207 课程表</h4><ul>
+<li><strong>输入</strong>：<code>numCourses = 4</code>, <code>prerequisites = [[1,0],[2,0],[3,1],[3,2]]</code></li>
+<li><strong>分析</strong>：<ul>
+<li>节点：0, 1, 2, 3 (课程)</li>
+<li>关系：<code>[1, 0]</code> 表示 1 依赖 0 $\rightarrow$ 边 <code>0 -&gt; 1</code></li>
+<li>类型：有向图</li>
+</ul>
+</li>
+<li><strong>建模动作</strong>：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 初始化</span></span><br><span class="line">List&lt;List&lt;Integer&gt;&gt; graph = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">int</span>[] inDegree = <span class="keyword">new</span> <span class="keyword">int</span>[numCourses];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;numCourses; i++) graph.add(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 填数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span>[] p : prerequisites) &#123;</span><br><span class="line">    <span class="keyword">int</span> from = p[<span class="number">1</span>]; <span class="comment">// 先修课</span></span><br><span class="line">    <span class="keyword">int</span> to = p[<span class="number">0</span>];   <span class="comment">// 当前课</span></span><br><span class="line">    graph.get(from).add(to); <span class="comment">// 建边 from -&gt; to</span></span><br><span class="line">    inDegree[to]++;          <span class="comment">// 统计入度</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3. 接下来直接跑拓扑排序模板</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="案例-2：LeetCode-200-岛屿数量-网格题"><a href="#案例-2：LeetCode-200-岛屿数量-网格题" class="headerlink" title="案例 2：LeetCode 200 岛屿数量 (网格题)"></a>案例 2：LeetCode 200 岛屿数量 (网格题)</h4><ul>
+<li><strong>输入</strong>：<code>char[][] grid</code></li>
+<li><strong>分析</strong>：<ul>
+<li>节点：每个 <code>grid[r][c] == &#39;1&#39;</code> 的格子。</li>
+<li>关系：上下左右相邻且都是 ‘1’。</li>
+<li>类型：无向图（隐式）</li>
+</ul>
+</li>
+<li><strong>建模动作</strong>：<ul>
+<li><strong>不需要</strong>创建 <code>List&lt;List&lt;Integer&gt;&gt;</code>！太慢了且浪费内存。</li>
+<li>直接在 DFS/BFS 里写逻辑：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码：在遍历 neighbors 时</span></span><br><span class="line"><span class="keyword">int</span>[][] dirs = &#123;&#123;<span class="number">1</span>,<span class="number">0</span>&#125;, &#123;-<span class="number">1</span>,<span class="number">0</span>&#125;, &#123;<span class="number">0</span>,<span class="number">1</span>&#125;, &#123;<span class="number">0</span>,-<span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span>[] d : dirs) &#123;</span><br><span class="line">    <span class="keyword">int</span> nr = r + d[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> nc = c + d[<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// 检查边界 &amp;&amp; 检查是否是陆地 &amp;&amp; 检查是否访问过</span></span><br><span class="line">    <span class="keyword">if</span> (nr &gt;= <span class="number">0</span> &amp;&amp; nr &lt; m &amp;&amp; nc &gt;= <span class="number">0</span> &amp;&amp; nc &lt; n &amp;&amp; grid[nr][nc] == <span class="string">'1'</span>) &#123;</span><br><span class="line">        dfs(nr, nc); <span class="comment">// 这就是在访问“邻居节点”</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="案例-3：LeetCode-743-网络延迟时间-带权图"><a href="#案例-3：LeetCode-743-网络延迟时间-带权图" class="headerlink" title="案例 3：LeetCode 743 网络延迟时间 (带权图)"></a>案例 3：LeetCode 743 网络延迟时间 (带权图)</h4><ul>
+<li><strong>输入</strong>：<code>times = [[2,1,1],[2,3,1],[3,4,1]]</code> (u, v, w)</li>
+<li><strong>分析</strong>：<ul>
+<li>节点：1 到 N</li>
+<li>关系：u 到 v 耗时 w</li>
+<li>类型：有向带权图</li>
+</ul>
+</li>
+<li><strong>建模动作</strong>：<ul>
+<li>邻接表存 <code>Pair</code> 或 <code>int[]</code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;List&lt;<span class="keyword">int</span>[]&gt;&gt; graph = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="comment">// 初始化略...</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span>[] t : times) &#123;</span><br><span class="line">    <span class="keyword">int</span> u = t[<span class="number">0</span>], v = t[<span class="number">1</span>], w = t[<span class="number">2</span>];</span><br><span class="line">    graph.get(u).add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;v, w&#125;); <span class="comment">// 存邻居和权重</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 接下来跑 Dijkstra 模板</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="💡-提速小贴士"><a href="#💡-提速小贴士" class="headerlink" title="💡 提速小贴士"></a>💡 提速小贴士</h3><ol>
+<li><strong>看到二维数组 <code>int[][]</code> 代表边</strong> $\rightarrow$ 90% 概率要先转成 <strong>邻接表</strong>。</li>
+<li><strong>看到 <code>char[][]</code> 或 <code>int[][]</code> 网格</strong> $\rightarrow$ 90% 概率是 <strong>隐式图</strong>，直接用坐标偏移量 <code>{1,0}, {-1,0}...</code> 处理，别建表。</li>
+<li><strong>注意方向</strong>：<ul>
+<li>“A 依赖 B” $\rightarrow$ <code>B -&gt; A</code> (B 是先决条件)</li>
+<li>“A 指向 B” $\rightarrow$ <code>A -&gt; B</code></li>
+<li>搞反方向会导致拓扑排序永远算不出结果，或者 BFS 走不通。<strong>读题时务必在草稿纸上画个箭头确认方向！</strong></li>
+</ul>
+</li>
+</ol>
+<p><strong>总结</strong>：你的理解完全正确。<strong>“翻译题目 $\rightarrow$ 建图 $\rightarrow$ 套模板”</strong> 就是图论题的标准流水线。只要建图这一步熟练了（5分钟内搞定），后面就是拼手速了！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/05/算法总结-图论算法小结/" data-toggle="tooltip" data-placement="top" title="图算法总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/03/算法总结-单调栈技巧总结/" data-toggle="tooltip" data-placement="top" title="单调栈技巧总结">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🏗️-图论解题标准流程：三步走"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🏗️ 图论解题标准流程：三步走</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第一步：读题与抽象（最关键）"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">第一步：读题与抽象（最关键）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第二步：选择数据结构建图"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">第二步：选择数据结构建图</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#第三步：套用算法模板"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">第三步：套用算法模板</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🌰-实战演练：如何快速建模？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">🌰 实战演练：如何快速建模？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#案例-1：LeetCode-207-课程表"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">案例 1：LeetCode 207 课程表</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#案例-2：LeetCode-200-岛屿数量-网格题"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">案例 2：LeetCode 200 岛屿数量 (网格题)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#案例-3：LeetCode-743-网络延迟时间-带权图"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">案例 3：LeetCode 743 网络延迟时间 (带权图)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#💡-提速小贴士"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">💡 提速小贴士</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

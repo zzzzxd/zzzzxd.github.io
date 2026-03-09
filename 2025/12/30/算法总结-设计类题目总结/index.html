@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          设计类题目总结 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/30/算法总结-设计类题目总结/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>设计类题目总结</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-30
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.4k</span> and
+                                Reading Time <span class="post-count">8</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><strong>系统设计类题目（Design Problems）</strong> 非常考察数据结构功底</p>
+<hr>
+<h3 id="🛠️-第一部分：设计类题目的“万能公式”"><a href="#🛠️-第一部分：设计类题目的“万能公式”" class="headerlink" title="🛠️ 第一部分：设计类题目的“万能公式”"></a>🛠️ 第一部分：设计类题目的“万能公式”</h3><p>所有设计题，本质上都是 <strong>“场景需求” + “数据结构组合”</strong>。</p>
+<h4 id="1-核心解题步骤-SOP"><a href="#1-核心解题步骤-SOP" class="headerlink" title="1. 核心解题步骤 (SOP)"></a>1. 核心解题步骤 (SOP)</h4><ol>
+<li><strong>明确接口 (API)</strong>：先列出需要实现的函数（如 <code>get</code>, <code>put</code>, <code>follow</code>, <code>postTweet</code>）。</li>
+<li><strong>分析复杂度要求</strong>：<ul>
+<li>通常要求 <code>get/put</code> 为 $O(1)$ 或 $O(\log N)$。</li>
+<li>如果要求 $O(1)$ 查找 $\rightarrow$ <strong>必须用哈希表 (HashMap)</strong>。</li>
+<li>如果要求有序/最值 $\rightarrow$ <strong>考虑 堆 (Heap) 或 平衡树 (TreeMap)</strong>。</li>
+<li>如果要求维持顺序/最近使用 $\rightarrow$ <strong>考虑 链表 (LinkedList) 或 双端队列 (Deque)</strong>。</li>
+</ul>
+</li>
+<li><strong>设计数据结构组合</strong>：<ul>
+<li><strong>单一结构不够用时，就组合！</strong></li>
+<li>经典组合：<code>HashMap + Doubly Linked List</code> (LRU/LFU), <code>HashMap + Heap</code> (TopK), <code>Stack + Stack</code> (Queue).</li>
+</ul>
+</li>
+<li><strong>处理边界与细节</strong>：<ul>
+<li>容量满了怎么办？（淘汰策略）</li>
+<li>Key 不存在怎么办？（返回 -1 或 null）</li>
+<li>重复元素怎么处理？（Set 去重 或 计数 Map）</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-常用数据结构“武器库”"><a href="#2-常用数据结构“武器库”" class="headerlink" title="2. 常用数据结构“武器库”"></a>2. 常用数据结构“武器库”</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据结构</th>
+<th style="text-align:left">核心特性</th>
+<th style="text-align:left">典型应用场景</th>
+<th style="text-align:left">搭配建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>HashMap</strong></td>
+<td style="text-align:left">$O(1)$ 查找/删除/插入</td>
+<td style="text-align:left">快速定位节点、去重、计数</td>
+<td style="text-align:left"><strong>必选</strong>。几乎每个设计题都要用它来做索引。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Doubly Linked List</strong></td>
+<td style="text-align:left">$O(1)$ 插入/删除节点 (已知节点指针)</td>
+<td style="text-align:left">维护顺序、LRU 淘汰、实现队列/栈</td>
+<td style="text-align:left">搭配 HashMap 实现 $O(1)$ 的 LRU/LFU。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Heap (Priority Queue)</strong></td>
+<td style="text-align:left">$O(1)$ 取最值, $O(\log N)$ 插入/删除</td>
+<td style="text-align:left">TopK 问题、定时任务、中位数</td>
+<td style="text-align:left">搭配 HashMap 实现“可删除任意元素的堆”。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Stack / Queue</strong></td>
+<td style="text-align:left">LIFO / FIFO</td>
+<td style="text-align:left">括号匹配、浏览器历史、滑动窗口</td>
+<td style="text-align:left">两个栈实现队列，两个队列实现栈。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Trie (字典树)</strong></td>
+<td style="text-align:left">前缀匹配、字符串统计</td>
+<td style="text-align:left">自动补全、敏感词过滤、IP 路由</td>
+<td style="text-align:left">节点中可存 HashMap 或数组。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Segment Tree / Fenwick</strong></td>
+<td style="text-align:left">区间查询、单点更新</td>
+<td style="text-align:left">区间和、区间最大值、动态排名</td>
+<td style="text-align:left">较难，通常用于高阶设计题。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="💡-第二部分：四大经典设计模式深度解析"><a href="#💡-第二部分：四大经典设计模式深度解析" class="headerlink" title="💡 第二部分：四大经典设计模式深度解析"></a>💡 第二部分：四大经典设计模式深度解析</h3><p>这是你提到的几个题目的核心逻辑，务必吃透。</p>
+<h4 id="1-LRU-Least-Recently-Used-缓存"><a href="#1-LRU-Least-Recently-Used-缓存" class="headerlink" title="1. LRU (Least Recently Used) 缓存"></a>1. LRU (Least Recently Used) 缓存</h4><ul>
+<li><strong>需求</strong>：容量满时，淘汰<strong>最久未使用</strong>的数据。<code>get/put</code> 需 $O(1)$。</li>
+<li><strong>核心矛盾</strong>：HashMap 查找快但无序；链表有序但查找慢。</li>
+<li><strong>解决方案</strong>：<strong>HashMap + 双向链表</strong>。<ul>
+<li><strong>HashMap</strong>：<code>Key -&gt; Node</code>，实现 $O(1)$ 查找。</li>
+<li><strong>双向链表</strong>：维护访问顺序。头结点 = 最近使用，尾结点 = 最久未使用。</li>
+<li><strong>操作逻辑</strong>：<ul>
+<li><code>get</code>: 查 Map $\rightarrow$ 找到节点 $\rightarrow$ <strong>移到链表头</strong>。</li>
+<li><code>put</code>:<ul>
+<li>存在：更新值 $\rightarrow$ <strong>移到链表头</strong>。</li>
+<li>不存在：新建节点 $\rightarrow$ <strong>插到链表头</strong> $\rightarrow$ 放入 Map。</li>
+<li>若超限：删除<strong>链表尾</strong>节点 $\rightarrow$ 从 Map 移除。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>关键点</strong>：双向链表的 <code>addFirst</code>, <code>removeNode</code>, <code>removeLast</code> 操作必须熟练手写。</li>
+</ul>
+<h4 id="2-LFU-Least-Frequently-Used-缓存"><a href="#2-LFU-Least-Frequently-Used-缓存" class="headerlink" title="2. LFU (Least Frequently Used) 缓存"></a>2. LFU (Least Frequently Used) 缓存</h4><ul>
+<li><strong>需求</strong>：容量满时，淘汰<strong>使用频率最低</strong>的数据；若频率相同，淘汰<strong>最久未使用</strong>的。</li>
+<li><strong>核心难点</strong>：不仅要维护频率，还要维护同频率下的时间顺序。</li>
+<li><strong>解决方案</strong>：<strong>HashMap + HashMap + 双向链表</strong> (或者 <code>HashMap + TreeSet</code>)。<ul>
+<li><strong>主 Map</strong>：<code>Key -&gt; Node</code> (存值、当前频率)。</li>
+<li><strong>频率 Map</strong>：<code>freq -&gt; DoublyLinkedList</code> (该频率下的所有节点，按时间排序)。</li>
+<li><strong>最小频率变量</strong>：<code>minFreq</code> (记录当前最小的频率，避免遍历)。</li>
+<li><strong>操作逻辑</strong>：<ul>
+<li><code>get</code>: 查主 Map $\rightarrow$ 节点频率 +1 $\rightarrow$ 从旧频率链表移除 $\rightarrow$ 加入新频率链表头 $\rightarrow$ 更新 <code>minFreq</code>。</li>
+<li><code>put</code>: 类似，若超限，找到 <code>minFreq</code> 对应的链表，删除<strong>尾部</strong>节点。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>关键点</strong>：频率变化时，节点在不同链表间的迁移逻辑。</li>
+</ul>
+<h4 id="3-设计-Twitter-关注系统-信息流"><a href="#3-设计-Twitter-关注系统-信息流" class="headerlink" title="3. 设计 Twitter (关注系统 + 信息流)"></a>3. 设计 Twitter (关注系统 + 信息流)</h4><ul>
+<li><strong>需求</strong>：发推、关注/取关、获取最近 10 条推文（包含自己和关注的人）。</li>
+<li><strong>核心难点</strong>：如何高效合并多个用户的推文流？</li>
+<li><strong>解决方案</strong>：<strong>HashMap + 链表/列表 + 多路归并 (堆)</strong>。<ul>
+<li><strong>用户映射</strong>：<code>userId -&gt; Set&lt;followeeId&gt;</code> (关注列表)。</li>
+<li><strong>推文存储</strong>：<code>userId -&gt; LinkedList&lt;Tweet&gt;</code> (每个用户的推文链表，按时间倒序)。</li>
+<li><strong>全局时间戳</strong>：用一个递增整数模拟时间。</li>
+<li><strong>获取信息流 (<code>getNewsFeed</code>)</strong>：<ul>
+<li>收集自己和所有关注者的推文链表头。</li>
+<li>使用 <strong>最大堆 (Max Heap)</strong> 进行 <strong>多路归并</strong>。</li>
+<li>每次弹出堆顶（最新推文），并将该链表的下一个节点入堆。</li>
+<li>取前 10 个。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>关键点</strong>：多路归并的逻辑，以及关注关系的去重（Set）。</li>
+</ul>
+<h4 id="4-最小栈-Min-Stack"><a href="#4-最小栈-Min-Stack" class="headerlink" title="4. 最小栈 (Min Stack)"></a>4. 最小栈 (Min Stack)</h4><ul>
+<li><strong>需求</strong>：栈的基本操作 + $O(1)$ 时间获取最小值。</li>
+<li><strong>核心难点</strong>：弹出最小值后，如何知道第二小的值？</li>
+<li><strong>解决方案</strong>：<strong>双栈法</strong> 或 <strong>单栈存差值</strong>。<ul>
+<li><strong>双栈法 (推荐)</strong>：<ul>
+<li><code>dataStack</code>: 存正常数据。</li>
+<li><code>minStack</code>: 存对应时刻的最小值。</li>
+<li><code>push(x)</code>: <code>dataStack</code> 压入 x; <code>minStack</code> 压入 <code>min(x, minStack.peek())</code>。</li>
+<li><code>pop()</code>: 两个栈同时弹。</li>
+<li><code>getMin()</code>: 返回 <code>minStack.peek()</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>关键点</strong>：理解辅助栈的作用——“空间换时间”，记录历史状态。</li>
+</ul>
+<hr>
+<h3 id="📝-第三部分：精选设计类题目清单-由浅入深"><a href="#📝-第三部分：精选设计类题目清单-由浅入深" class="headerlink" title="📝 第三部分：精选设计类题目清单 (由浅入深)"></a>📝 第三部分：精选设计类题目清单 (由浅入深)</h3><p>这份清单涵盖了从基础数据结构组合到复杂业务场景模拟。</p>
+<h4 id="🔹-Level-1-基础数据结构增强-必会"><a href="#🔹-Level-1-基础数据结构增强-必会" class="headerlink" title="🔹 Level 1: 基础数据结构增强 (必会)"></a>🔹 Level 1: 基础数据结构增强 (必会)</h4><blockquote>
+<p>考察对标准数据结构的理解和简单组合。</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>题目</th>
+<th>难度</th>
+<th>核心考点</th>
+<th>LeetCode 链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>最小栈</strong></td>
+<td>Medium</td>
+<td>辅助栈、空间换时间</td>
+<td><a href="https://leetcode.cn/problems/min-stack/" target="_blank" rel="noopener">155. 最小栈</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>用栈实现队列</strong></td>
+<td>Easy</td>
+<td>栈的特性 (LIFO vs FIFO)</td>
+<td><a href="https://leetcode.cn/problems/implement-queue-using-stacks/" target="_blank" rel="noopener">232. 用栈实现队列</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>用队列实现栈</strong></td>
+<td>Easy</td>
+<td>队列的旋转操作</td>
+<td><a href="https://leetcode.cn/problems/implement-stack-using-queues/" target="_blank" rel="noopener">225. 用队列实现栈</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>设计哈希集合/映射</strong></td>
+<td>Easy</td>
+<td>哈希原理、链表法解决冲突</td>
+<td><a href="https://leetcode.cn/problems/design-hashset/" target="_blank" rel="noopener">705. 设计哈希集合</a> / <a href="https://leetcode.cn/problems/design-hashmap/" target="_blank" rel="noopener">706</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>击鼓传花 (约瑟夫环变种)</strong></td>
+<td>Easy</td>
+<td>队列模拟</td>
+<td>[LC 相关模拟题]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="🔹-Level-2-缓存与频率管理-高频重点"><a href="#🔹-Level-2-缓存与频率管理-高频重点" class="headerlink" title="🔹 Level 2: 缓存与频率管理 (高频重点)"></a>🔹 Level 2: 缓存与频率管理 (高频重点)</h4><blockquote>
+<p>考察 HashMap 与 链表/堆 的深度组合，字节/腾讯最爱。</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>题目</th>
+<th>难度</th>
+<th>核心考点</th>
+<th>LeetCode 链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td><strong>LRU 缓存</strong></td>
+<td>Medium</td>
+<td><strong>HashMap + 双向链表</strong> (背诵级)</td>
+<td><a href="https://leetcode.cn/problems/lru-cache/" target="_blank" rel="noopener">146. LRU 缓存</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>LFU 缓存</strong></td>
+<td>Hard</td>
+<td><strong>HashMap + 频率链表组</strong> (逻辑复杂)</td>
+<td><a href="https://leetcode.cn/problems/lfu-cache/" target="_blank" rel="noopener">460. LFU 缓存</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>基于时间的键值存储</strong></td>
+<td>Medium</td>
+<td>哈希表 + 二分查找 (版本控制)</td>
+<td><a href="https://leetcode.cn/problems/time-based-key-value-store/" target="_blank" rel="noopener">981. 基于时间的键值存储</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>数据流的中位数</strong></td>
+<td>Hard</td>
+<td><strong>双堆</strong> (大顶堆+小顶堆) 平衡</td>
+<td><a href="https://leetcode.cn/problems/find-median-from-data-stream/" target="_blank" rel="noopener">295. 数据流的中位数</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>前 K 个高频元素 (设计版)</strong></td>
+<td>Medium</td>
+<td>哈希表 + 小顶堆 (固定大小)</td>
+<td><a href="https://leetcode.cn/problems/top-k-frequent-elements/" target="_blank" rel="noopener">347. 前 K 个高频元素</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="🔹-Level-3-业务场景模拟-综合应用"><a href="#🔹-Level-3-业务场景模拟-综合应用" class="headerlink" title="🔹 Level 3: 业务场景模拟 (综合应用)"></a>🔹 Level 3: 业务场景模拟 (综合应用)</h4><blockquote>
+<p>考察将复杂业务拆解为数据结构的能力，贴近实际工作。</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>题目</th>
+<th>难度</th>
+<th>核心考点</th>
+<th>LeetCode 链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11</td>
+<td><strong>设计 Twitter</strong></td>
+<td>Medium</td>
+<td>哈希表 + 链表 + <strong>多路归并 (堆)</strong></td>
+<td><a href="https://leetcode.cn/problems/design-twitter/" target="_blank" rel="noopener">355. 设计推特</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>设计文件共享系统</strong></td>
+<td>Hard</td>
+<td>哈希表 + 优先队列 (资源分配)</td>
+<td>[1507. 转变日期格式 (错) -&gt; 搜 <strong>1622. 奇妙序列</strong> 或 <strong>1579. 保证图可完全遍历</strong> 类似的设计题，推荐 <strong>[1586. 二叉搜索树迭代器 II]</strong>(<a href="https://leetcode.cn/problems/binary-search-tree-iterator-ii/" target="_blank" rel="noopener">https://leetcode.cn/problems/binary-search-tree-iterator-ii/</a>) 或 <strong><a href="https://leetcode.cn/problems/count-submatrices-with-all-ones/" target="_blank" rel="noopener">1504. 统计全 1 子矩形</a></strong> (注: 此处替换为更合适的 <strong><a href="https://leetcode.cn/problems/design-a-file-system/" target="_blank" rel="noopener">1500. 设计一个文件系统</a></strong> )</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>设计浏览器历史记录</strong></td>
+<td>Medium</td>
+<td>双栈 或 双向链表 + 指针</td>
+<td><a href="https://leetcode.cn/problems/design-browser-history/" target="_blank" rel="noopener">1472. 设计浏览器历史记录</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>停车场系统</strong></td>
+<td>Easy</td>
+<td>简单的计数与分类管理</td>
+<td><a href="https://leetcode.cn/problems/design-parking-system/" target="_blank" rel="noopener">1603. 设计停车系统</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Exam Room (考场座位)</strong></td>
+<td>Medium</td>
+<td><strong>TreeSet (有序集合)</strong> 或 链表 + 堆 (最大化距离)</td>
+<td><a href="https://leetcode.cn/problems/exam-room/" target="_blank" rel="noopener">855. 考场就座</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>蛇梯棋 (游戏逻辑)</strong></td>
+<td>Medium</td>
+<td>数组映射 + BFS (游戏状态模拟)</td>
+<td><a href="https://leetcode.cn/problems/snakes-and-ladders/" target="_blank" rel="noopener">909. 蛇梯棋</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>电梯系统 (简化版)</strong></td>
+<td>Medium</td>
+<td>队列 + 状态机 (常作为 System Design 口试题)</td>
+<td>(无直接 LC 题，可尝试 <strong><a href="https://leetcode.cn/problems/best-position-for-a-service-centre/" target="_blank" rel="noopener">1515. 服务中心的最佳位置</a></strong> 替代或自行设计)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>(注：对于第 12 题，LeetCode 上最贴切的是 <strong>1500. Design a File System</strong>，考察路径解析和树/Map 结构)</em></p>
+<hr>
+<h3 id="🚀-第四部分：备战建议与面试技巧"><a href="#🚀-第四部分：备战建议与面试技巧" class="headerlink" title="🚀 第四部分：备战建议与面试技巧"></a>🚀 第四部分：备战建议与面试技巧</h3><ol>
+<li><p><strong>手写双向链表是基本功</strong>：</p>
+<ul>
+<li>LRU/LFU 都依赖它。面试时不要依赖语言自带的 <code>LinkedList</code>（除非允许），最好能自己定义 <code>Node</code> 类并实现 <code>add</code>, <code>remove</code>, <code>moveToHead</code> 方法。这非常加分！</li>
+<li>定义：<code>class Node { int key, val; Node prev, next; }</code></li>
+</ul>
+</li>
+<li><p><strong>注重“一致性”维护</strong>：</p>
+<ul>
+<li>在设计题中，最容易出错的是<strong>两个数据结构不同步</strong>。</li>
+<li>例如：在 LRU 中，从链表删除了节点，却忘了从 HashMap 删除，或者反之。</li>
+<li><strong>口诀</strong>：凡是涉及两个结构的操作，写完一行代码，马上问自己“另一个结构更新了吗？”</li>
+</ul>
+</li>
+<li><p><strong>考虑扩展性 (Follow-up Questions)</strong>：</p>
+<ul>
+<li>面试官常问：“如果数据量太大，内存放不下怎么办？” (提示：分片/Sharding)</li>
+<li>“如果是多线程环境，怎么保证线程安全？” (提示：<code>ReentrantLock</code> 或 <code>ConcurrentHashMap</code>，虽然 LC 不考，但要能说出来)</li>
+<li>“如果要支持过期时间怎么办？” (提示：惰性删除 + 定时任务)</li>
+</ul>
+</li>
+<li><p><strong>代码风格</strong>：</p>
+<ul>
+<li>将功能拆分成私有 helper 方法（如 <code>addNode</code>, <code>removeNode</code>, <code>updateFreq</code>），不要让 <code>put</code> 方法里有几十行逻辑。清晰的模块划分是高级工程师的标志。</li>
+</ul>
+</li>
+</ol>
+<h3 id="🎯-你的下一步行动"><a href="#🎯-你的下一步行动" class="headerlink" title="🎯 你的下一步行动"></a>🎯 你的下一步行动</h3><p>建议按照 <strong>Level 1 -&gt; Level 2 -&gt; Level 3</strong> 的顺序刷题。</p>
+<ul>
+<li><strong>LRU</strong> 和 <strong>最小栈</strong> 必须做到 <strong>15 分钟内 Bug Free 写完</strong>。</li>
+<li><strong>LFU</strong> 和 <strong>Twitter</strong> 要重点理解 <strong>数据流转的逻辑</strong>，可以在纸上画图模拟。</li>
+<li>做完后，尝试自己给题目加条件（比如：给 LRU 加上过期时间），思考怎么改。</li>
+</ul>
+<p>这套设计题专题攻克下来，你在面对大厂的系统设计初阶问题和复杂数据结构题时，绝对能游刃有余！加油！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2026/03/07/LLM-梯度累积-一/" data-toggle="tooltip" data-placement="top" title="LLM-梯度累积-一">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/20/算法总结-枚举的思想/" data-toggle="tooltip" data-placement="top" title="枚举思想">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🛠️-第一部分：设计类题目的“万能公式”"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🛠️ 第一部分：设计类题目的“万能公式”</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-核心解题步骤-SOP"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. 核心解题步骤 (SOP)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-常用数据结构“武器库”"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. 常用数据结构“武器库”</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#💡-第二部分：四大经典设计模式深度解析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">💡 第二部分：四大经典设计模式深度解析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-LRU-Least-Recently-Used-缓存"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1. LRU (Least Recently Used) 缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-LFU-Least-Frequently-Used-缓存"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2. LFU (Least Frequently Used) 缓存</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-设计-Twitter-关注系统-信息流"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">3. 设计 Twitter (关注系统 + 信息流)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-最小栈-Min-Stack"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">4. 最小栈 (Min Stack)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#📝-第三部分：精选设计类题目清单-由浅入深"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">📝 第三部分：精选设计类题目清单 (由浅入深)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#🔹-Level-1-基础数据结构增强-必会"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">🔹 Level 1: 基础数据结构增强 (必会)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#🔹-Level-2-缓存与频率管理-高频重点"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">🔹 Level 2: 缓存与频率管理 (高频重点)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#🔹-Level-3-业务场景模拟-综合应用"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">🔹 Level 3: 业务场景模拟 (综合应用)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🚀-第四部分：备战建议与面试技巧"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">🚀 第四部分：备战建议与面试技巧</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🎯-你的下一步行动"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">🎯 你的下一步行动</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

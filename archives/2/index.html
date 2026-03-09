@@ -1169,6 +1169,38 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1177,51 +1209,328 @@
 
         <div class="post-preview">
 
-            <a href="/2025/06/09/LLM-SGD与全量GD对比/">
+            <a href="/2025/12/09/算法总结-dp定义与递归/">
                 <h2 class="post-title">
-                    BGD与SGD
+                    dp定义与递归
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ✅ SGD vs 全量梯度下降：为什么深度学习都用“小批量”？🎯 核心结论（先看答案）
+                    你的直觉非常敏锐！“如何定义 dp[i]” 和 “遍历方向（正序还是倒序）” 确实是动态规划从递归转为迭代时的两个核心难点。
+对于 LeetCode 198 (打家劫舍) 这种线性依赖（只依赖前两个状态）的题目，正序是最自然的。但为了让你彻底掌握 DP 的思维方式，我们需要把“递归思维”和“DP 数组思维”打通。
+
+1. 核心心法：dp[i] 的定义必须与递归返回值一致你在上一个问题中悟出的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/09/算法总结-dp定义的思路/">
+                <h2 class="post-title">
+                    dp的定义思路
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    “定义成和历史状态无关的”，正是动态规划（DP）和记忆化搜索的灵魂所在。
+在算法圈里，这被称为 “最优子结构” (Optimal Substructure) 的核心体现。
+
+🧠 为什么必须“和历史无关”？1. 递归的本质是“解决子问题”当你调用 dfs(index) 时，你是在问：
+
+“嘿，假设我现在站在 index 这个位置，不管我之前是怎么走到这里的，从现在开始，我能拿到的最大利益是多......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/05/算法总结-图论算法小结/">
+                <h2 class="post-title">
+                    图算法总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    🗺️ 图论刷题全景地图 (熟练度提升指南)
+图论题目看似千变万化，其实核心套路只有 3 种遍历/搜索方式 和 2 种高级算法。掌握以下模板，80% 的中等题都能秒杀。
+1. 基础数据结构 (必须烂熟于心)
+
+
+
+场景
+推荐结构
+代码示例 (Java)
+适用情况
+
+
+
+
+稀疏图 (边少点多)
+邻接表 (最常用)
+List&lt;List&lt;Integer&gt;&gt; adj = ne......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/04/算法总结-图论初始化模板/">
+                <h2 class="post-title">
+                    图相关题目的建模
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    图相关题目，往往第一步需要建模。
+绝大多数图论题，题目给你的并不是现成的图结构，而是一堆“关系描述”。你的首要任务就是把这些文字或数组翻译成计算机能理解的邻接表或邻接矩阵。
+一旦图建好了，剩下的就是套模板（BFS/DFS/拓扑等）。
+
+🏗️ 图论解题标准流程：三步走第一步：读题与抽象（最关键）你要从题目描述中识别出 节点（Node） 和 边（Edge）。
+
+
+
+
+题目类型
+什么是节点 (N......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-04
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/03/算法总结-单调栈技巧总结/">
+                <h2 class="post-title">
+                    单调栈技巧总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    核心逻辑只有一句话：你想找什么样的边界，就维护什么样的单调性。
+单调栈适用于 谷峰 或者 谷底。寻找左边和右边第一个比它大（小）的，或者一侧 右（左面）面比它大(小)
+
+🗺️ 单调栈“决策地图”
+
+
+
+你想找的目标
+需要维护的栈类型
+触发“弹出”的条件
+栈内元素特征 (从底到顶)
+典型题目
+
+
+
+
+右边第一个比它大  (Next Greater)
+单调递减栈
+当前值 &gt; 栈顶值
+大 ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-03
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/01/算法总结-滑动窗口思想/">
+                <h2 class="post-title">
+                    滑动窗口思想
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+“滑动窗口本质都是在枚举以 right 结尾的子串，只不过不需要完全枚举所有”
+
+
+✅为什么这么说？我们来展开这个洞察🧮 枚举所有子串的暴力方法（O(n²)）12345for (int right = 0; right &lt; n; right++) &#123;    for (int left = 0; left &lt;= right; left++) &#123;       ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/11/20/LLM-什么是SFT？/">
+                <h2 class="post-title">
+                    LLM-什么是SFT？
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    你问到了一个非常核心且容易混淆的问题！我们来彻底厘清 SFT、PEFT、微调（Fine-tuning）之间的关系，并解释为什么 SFT 不用于 BERT 分类任务。
+
+一、先说结论（一句话概括）
+
+PEFT（Parameter-Efficient Fine-Tuning） 是一类 “只更新少量参数” 的微调技术总称（如 LoRA、Adapter、Prefix-Tuning）。
+SFT（Sup......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-11-20
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比/">
+                <h2 class="post-title">
+                    LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    非常好！我们来横向对比三大主流 PEFT 实现在 LoRA 和 QLoRA 场景下的使用差异，包括代码结构、性能特点和适用场景。你会清晰看到：
+
+哪个最简单？
+哪个最快？
+哪个适合中文/国产模型？
+
+
+🧩 对比概览表
 
 
 
 特性
-全量梯度下降（Batch GD）
-随机梯度下降（SGD / Mini-batch SGD）
+Hugging Face PEFT（原生）
+Unsloth
+SWIFT（ModelScope）
 
 
 
 
-使用数据
-整个训练集
-一个样本 或 一个小批量（如 32、64）
-
-
-梯度计算
-精确，方向稳定
-有噪声，方向波动
-
-
-更新频率
-每遍历完整个数据集才更新一次
-每个 batch 更新一次
-
-
-训......
+开发方
+Hugging Face
+社区（Daniel Ha......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2025-06-09
+                    2025-11-17
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
                     
                 </div>
             
@@ -1235,25 +1544,34 @@
 
         <div class="post-preview">
 
-            <a href="/2025/06/06/LLM-Adam/">
+            <a href="/2025/11/17/LLM-什么是PEFT？/">
                 <h2 class="post-title">
-                    Adam优化器思想
+                    LLM-什么是PEFT？
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    🎯 核心思想：Adam 是对普通梯度下降的“加权 + 自适应 + 修正”升级普通梯度下降：$ \theta{t} = \theta{t-1} - \alpha \cdot gt $Adam 的更新： $ \theta{t} = \theta_{t-1} - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t $✅ 本质：还是......
+                    你问得非常关键！我们来彻底厘清 “PEFT 是什么”、“有没有框架”、“什么叫原生 PEFT” —— 这是当前大模型微调生态中最容易混淆的概念之一。
+
+一、PEFT 本身不是框架，而是一类技术方法的统称
+✅ 
+PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
+ 它是一个
+概念/范式
+，不是具体软件。
+
+就像：
+
+“深度学习” 是一个概念，而 PyT......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2025-06-06
+                    2025-11-17
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
                     
                 </div>
             
@@ -1267,280 +1585,28 @@
 
         <div class="post-preview">
 
-            <a href="/2025/06/01/LLM-2025-06-12-预测任务与函数优化/">
+            <a href="/2025/09/21/LLM-transformer的多头注意力/">
                 <h2 class="post-title">
-                    预测任务与函数优化
+                    LLM-transformer的多头注意力
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    这是一个无监督优化问题，目标是最小化一个数学函数，而不是拟合数据标签。
-我们来彻底讲清楚：X 是什么？w 是什么？损失函数是什么？它和监督学习的区别是什么？🧩 一、核心区别：这不是“预测任务”，而是“函数优化”| 类型 | 监督学习（如分类/回归） | 本例（函数优化） || 目标 | 让模型输出 ≈ 真实标签 y | 让函数值 $ f(X) $ 尽可能小 || 损失函数 | MSE(ou......
+                    🔍 问题一：Transformer 中的多头注意力，是怎么保证一组 QKV 就能关注到某一组逻辑的？是基于假设吗？
+✅ 简短回答：
+不是“保证”，而是“学习”出来的。多头注意力机制 并不预先保证 每个头会关注某种特定逻辑（如主谓宾、长距离依赖等），而是通过训练，让模型自己学会 不同的注意力模式。它的“能力”来自结构设计，它的“行为”来自数据驱动的学习。
+
+
+🧠 详细解释1. 多头注意力的......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2025-06-01
+                    2025-09-21
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#LLM" title="LLM">LLM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/06/01/LLM-残差链接的案例推导/">
-                <h2 class="post-title">
-                    残差链接的案例推导
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-场景设定：一个极简的 2 层网络我们定义一个超简单的神经网络，包含：
-
-输入：$ x $
-第一层：$ h_1 = f(x) = x^2 $
-第二层（带残差）：$ h_2 = g(h_1) + h_1 $，其中 $ g(h_1) = \sin(h_1) $
-损失函数：$ L = h_2^2 $
-
-目标：计算 $ \frac{\partial L}{\partial x} $，即损失对输入的梯......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-06-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LLM" title="LLM">LLM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2024/03/21/源码-Flink-2024-03-21-DataStream源码解析/">
-                <h2 class="post-title">
-                    DataStream源码解析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    源码流程分析WordCount1234567891011121314151617181920public class WordCount &#123;    	public static void main(String[] args) throws Exception &#123;      StreamExecutionEnvironment env = StreamExecutionE......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2024-03-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2024/03/19/源码-Flink-2024-03-19-Flink-Rpc框架/">
-                <h2 class="post-title">
-                    Flink Rpc框架
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言​    RPC 通信是分布式计算框架的基础，各个组件之间的交互，信息的传递都通过RPC进行，Flink的RPC框架设计比较复杂，本篇重点梳理框架中的各个角色及作用，但需要注意的是IO重点是通信，是工具，不影响业务设计，RPC的合理设计目的就是为了在编写业务代码时，能像调用本地方法一样调用远程方法，例如jobmaster 调用exector的某个方法，代码里看到的是本地方法，对Flink......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2024-03-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2024/03/19/源码-Flink-2024-03-19-Flink源码前置知识-Akka/">
-                <h2 class="post-title">
-                    Flink源码前置知识-Akka
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ​    阅读Flink之前，需要准备一些前置知识，比如IO框架、SPI机制、动态代理等，设计模式和IO知识其它文章都有过记录，也做过深入的研究，本篇重点梳理Akka
-AKKA简介Akka是一个开源工具包，用于构建高并发、分布式和容错系统。它基于Actor模型，其中所有的并发单元是称为”Actor”的轻量级实体。
-Actor模型
-Actor 核心概念ActorSystemActorSyste......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2024-03-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#源码" title="源码">源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2024/01/14/Flink-2024-01-14-Flink端到端的精准一次/">
-                <h2 class="post-title">
-                    Flink端到端的精准一次
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    端到端精确一次​    实际应用中，最难做到、也最希望做到的一致性语义，无疑就是端到端（end-to-end）的“精确一次”（exactly-once）。对于Flink内部来说，检查点机制可以保证故障恢复后数据不丢（在能够重放的前提下），并且只处理一次，所以已经可以做到exactly-once的一致性语义了。
-  需要注意的是，检查点能够保证故障恢复后数据只处理一次，并不是说之前统计过某个数......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2024-01-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2024/01/06/Flink-2024-01-06-Flink-timer定时器踩坑/">
-                <h2 class="post-title">
-                    Flink timer定时器踩坑
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    问题公司同事在开发时，发现任务跑一段时间后 定时器会延迟执行，查看日志如下:
-
-延迟了一个小时,基本上高峰就会出现。
-查看火焰图
-
-​    火焰图中明显看到定时器的处理方法占用大量cpu时间，所以定时器这块多少是有点问题的，但问题到底出在哪，只能进一步结合代码来看。
-
-可以看到代码中是每条数据都会注册定时器，也就是说 同时来100条数据，就会同时注册100个定时器，并且注册的定时器时间都一......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2024-01-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2024/01/06/Flink-2024-01-06-watermark的传递/">
-                <h2 class="post-title">
-                    watermark的传递
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    水位线的传递
-​        在流处理中，上游任务处理完⽔位线、时钟改变之后，要把当前的⽔位线再次发出，⼴ 播给所有的下游⼦任务。⽽当⼀个任务接收到多个上游并⾏任务传递来的⽔位线时，应该以 最⼩的那个作为当前任务的事件时钟。
-​        ⽔位线在上下游任务之间的传递， ⾮常巧妙地避免了分布式系统中没有统⼀时钟的问 题，每个任务都以“处理完之前所有数据”为标准来确定⾃⼰的时钟。
-水位线......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2024-01-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Flink" title="Flink">Flink</a>
-                    
-                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
                     
                 </div>
             
@@ -1828,6 +1894,10 @@ Actor 核心概念ActorSystemActorSyste......
             <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
+            
+            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            
+        
     </div>
 </section>
 
@@ -1888,23 +1958,23 @@ Actor 核心概念ActorSystemActorSyste......
     <ul>
       
         <li>
-          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
+          <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
+          <a href="/2026/03/07/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">算法总结-位运算技巧总结</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
+          <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
         <li>
-          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
+          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
         <li>
-          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
+          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
         </li>
       
     </ul>
@@ -1919,7 +1989,7 @@ Actor 核心概念ActorSystemActorSyste......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1981,6 +2051,8 @@ Actor 核心概念ActorSystemActorSyste......
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
+        
+          <a href="categories/#算法总结"><li>算法总结</li></a>
         
       </ul>
     </div>
@@ -2144,7 +2216,7 @@ Actor 核心概念ActorSystemActorSyste......
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2154,6 +2226,21 @@ Actor 核心概念ActorSystemActorSyste......
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

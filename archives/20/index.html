@@ -1169,6 +1169,38 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1177,21 +1209,61 @@
 
         <div class="post-preview">
 
-            <a href="/2022/03/05/mysql-2022-03-05-优化Mysql数据导入的几种方法/">
+            <a href="/2022/07/06/network-2022-07-06-HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥/">
                 <h2 class="post-title">
-                    优化Mysql数据导入的几种方法
+                    HTTPS、证书机构（CA）、证书、数字签名、私钥、公钥
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    
+本文内容主要来自简书博主olaH的文章，作者对概念之间的联系解释的非常清楚，熟悉这些概念可以对理解SSH协议、Https协议以及证书颁发等打下基础
+原文链接:olaH
+
+对称加密对称加密是指双方持有相同的密钥进行通信，加密速度快，但是有一个安全问题，双方怎样获得相同的密钥？你总不能总是拿着U盘把密钥拷贝给对方吧。
+常见的对称加密算法有DES、3DES、AES等
+非对称加密非对称加密，又称为......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-03-05
+                    2022-07-06
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#https" title="https">https</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/04/17/mysql-2022-04-17-有关事务的使用习惯/">
+                <h2 class="post-title">
+                    有关事务的使用习惯
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言有时好的事务习惯也影响着业务访问速度。接下来我们看一下事务的使用习惯。
+我们先来看看一些不好的事务习惯：
+不好的事务习惯在循环中提交在大多数情况下，MySQL 都是开启自动提交的，如果遇到循环执行 SQL，则相当于每个循环中都会进行一次提交，实际这算一个不好的事务习惯了。下面我创建一张测试表，并定义两个循环写入数据的存储过程：一个是自动提交，另一个是在循环前开启一个事务，在循环后一次性提......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-04-17
                 </p>
                 <div class="tags">
                     
@@ -1209,21 +1281,23 @@
 
         <div class="post-preview">
 
-            <a href="/2022/03/05/mysql-2022-03-05-分析sql执行效率的方法/">
+            <a href="/2022/04/16/mysql-2022-04-16-应用层的优化点总结/">
                 <h2 class="post-title">
-                    分析sql执行效率的方法
+                    应用层的优化点总结
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    ...
+                    前言​    对于数据库的使用，我们不仅仅要考虑 MySQL 本身的优化，还需要考虑应用层的优化。因为有些线上问题，就是由于应用层设置不合理导致的。下面看一下常见的优化点。
+使用连接池MySQL 如果频繁创建和断开连接，那 MySQL 的开销会比较大，可能会占用过多的服务器内存资源，甚至导致响应时间变慢。此时就可以考虑使用连接池来改进性能。
+连接池可以理解为：创建一些持久连接的“池”，新的请......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-03-05
+                    2022-04-16
                 </p>
                 <div class="tags">
                     
@@ -1241,25 +1315,23 @@
 
         <div class="post-preview">
 
-            <a href="/2022/03/01/mysql-2022-03-01-Mysql中Binlog常用命令/">
+            <a href="/2022/04/10/mysql-2022-04-10-设置自增主键的好处/">
                 <h2 class="post-title">
-                    Mysql中Binlog常用命令
+                    设置自增主键的好处
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Binlog使用场景
-主从数据库复制： Mysql Replication在Master端开启Binlog，Master把日志传递给Slavers，以达到    Master-slavers主从数据同步。
-数据恢复： 使用mysqlbinlog工具来恢复数据
-
-Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
+                    前言mysql默认都带有一个id的自增主键，这么做的原因是神马，今天研究一下。
+关于自增主键当我们创建表时，可以定义主键为自增的，具体方法如下：
+1234567CREATE TABLE `t25` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b` char(2) NOT NULL,PRIMARY KEY (`id`)......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-03-01
+                    2022-04-10
                 </p>
                 <div class="tags">
                     
@@ -1277,29 +1349,28 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2021/11/20/Java-2021-11-20-理解UTC、格林威治时间、夏令时等概念/">
+            <a href="/2022/04/08/mysql-2022-04-08-删除大量数据的经验/">
                 <h2 class="post-title">
-                    理解UTC、格林威治时间、夏令时等概念
+                    删除大量数据的经验
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    概念解释GMTGMT（Greenwich Mean Time）， 格林威治平时（也称格林威治时间）。
-它规定太阳每天经过位于英国伦敦郊区的皇家格林威治天文台的时间为中午12点。
-
-格林威治皇家天文台为了海上霸权的扩张计划，在十七世纪就开始进行天体观测。为了天文观测，选择了穿过英国伦敦格林威治天文台子午仪中心的一条经线作为零度参考线，这条线，简称格林威治子午线。
-1884年10月在美国华盛顿召......
+                    前言为了防止单张表过大，很多情况下，我们需要对历史数据做归档或者删除操作。那么如何高效删除大量无用数据呢？今天就来总结一下。
+在聊数据删除前，我们先来看看 MySQL 的共享表空间和独立表空间。
+共享表空间和独立表空间InnoDB 数据是按照表空间进行存放的，其表空间分为共享表空间和独立表空间。
+共享表空间共享表空间：表的数据放在系统共享表空间，也就是跟数据字典放一起。文件名为 ibdata......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-11-20
+                    2022-04-08
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#Java" title="Java">Java</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1313,29 +1384,28 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-128-整数翻转/">
+            <a href="/2022/04/03/mysql-2022-04-03-读写分离注意问题/">
                 <h2 class="post-title">
-                    Problem 128 整数翻转
+                    读写分离注意问题
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给你一个32位的有符号整数x返回将x中的数字部分反转后的结果反转后整数超过 32 位的有符号整数的范围就返回0假设环境不允许存储 64 位整数（有符号或无符号）Leetcode题目：https://leetcode.com/problems/reverse-integer/
-题目解析
-注意，给的就是整数,可以进行翻转溢出的提前判断
-
-代码12345678910111213141516cl......
+                    前言对于高访问量的业务场景，MySQL 读写分离显得格外重要。
+通常我们说的 MySQL 读写分离是指：对于修改操作在主库上执行，而对于查询操作，在从库上执行。主要目的是分担主库的压力。
+但是读写分离有时也会存在问题，比如：主从延迟时，读取的从库数据不是最新的，对应的业务场景比如：
+你网购的一个商品，付完款之后，因为主从延迟，第一时间还查询不到订单（查询的从库），即使等一段时间能看到订单，但......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-03-01
+                    2022-04-03
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1349,31 +1419,38 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-127-两数之和/">
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-间隙锁/">
                 <h2 class="post-title">
-                    Problem 127 两数之和
+                    mysql锁机制-间隙锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目给定一个整数数组 nums 和一个整数目标值 target请你在该数组中找出 和为目标值 target  的那两个整数并返回它们的数组下标你可以假设每种输入只会对应一个答案但是数组中同一个元素在答案里不能重复出现你可以按任意顺序返回答案Leetcode题目：https://leetcode.com/problems/two-sum/
-题目解析
-两数之和，题目简单，写出好的代码也不好想,能......
+                    前言​    上节我们聊到了 RC 隔离级别的各种情况的锁，这节我们就来一起看看 RR 隔离级别各种情况下的锁，同时揭晓间隙锁的意义。
+RC下的幻读下面我们来做一个实验：
+
+
+
+
+session1
+session2
+
+
+
+
+set session transaction_isolation=‘READ-COMMITTED’;/* 设置会话隔离级别为 RC*/
+set session tran......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-03-01
+                    2022-03-29
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1387,31 +1464,30 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2021/02/26/企业高频算法面试题-2021-02-26-Problem-126-企鹅文化衫问题/">
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-行锁/">
                 <h2 class="post-title">
-                    Problem 126 企鹅文化衫问题
+                    mysql锁机制-行锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目企鹅厂活动发文化衫，文化衫有很多种，企鹅们都穿文化衫采访中，企鹅会说还有多少企鹅跟他穿一种文化衫有些企鹅没被采访到将这些回答放在answers数组里，返回活动中企鹅的最少数量Leetcode题目：https://leetcode.com/problems/rabbits-in-forest/
-27
-题目解析代码...
+                    前言MySQL 5.5 之前的默认存储引擎是 MyISAM，5.5 之后改成了 InnoDB。InnoDB 后来居上最主要的原因就是：
+
+InnoDB 支持事务：适合在并发条件下要求数据一致的场景。
+InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
+
+本节就一起来探讨 InnoDB 的行锁。
+在讲解行锁之前，我们首先来看一下两阶段锁协议。
+两阶段锁传统的关系型数据库加锁的一个原则......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-26
+                    2022-03-29
                 </p>
                 <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
                     
                 </div>
             
@@ -1425,25 +1501,34 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2021/02/24/企业高频算法面试题-2021-02-24-Problem-125-乐队演出问题/">
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-全局锁与表锁/">
                 <h2 class="post-title">
-                    Problem 125 乐队演出问题
+                    mysql锁机制-全局锁与表锁
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目每一个项目都有三个数，[a,b,c]表示这个项目a和b乐队参演，花费为c每一个乐队可能在多个项目里都出现了，但是只能被挑一次nums是可以挑选的项目数量，所以一定会有nums2只乐队被挑选出来返回一共挑nums轮(也就意味着一定请到所有的乐队)，最少花费是多少如果怎么都无法在nums轮请到nums2只乐队且每只乐队只能被挑一次返回-1nums&lt;9，programs长度小于500每组......
+                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
+本章就来介绍一下不同场景下的锁机制。
+根据加锁的范围，MySQL 中的锁可分为三类：
+
+全局锁
+表级锁
+行锁
+
+本节来重点讲解一下全局锁和表锁。
+1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-24
+                    2022-03-29
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1457,71 +1542,30 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
 
         <div class="post-preview">
 
-            <a href="/2021/02/21/企业高频算法面试题-2021-02-21-Problem-124-表达式添加运算符/">
+            <a href="/2022/03/28/mysql-2022-03-28-mysql死锁的发生与解决/">
                 <h2 class="post-title">
-                    Problem 124 表达式添加运算符
+                    mysql死锁的发生与解决
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    题目Leetcode 题目 : 
-https://leetcode.com/problems/expression-add-operators/
-自己可以试试普通递归，优化了计算表达式的过程
-26节
-题目解析代码...
+                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
+认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+InnoDB 中解决死锁问题有两种方式：
+
+检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
+等查询的时间达到锁等待超时的设......
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2021-02-21
+                    2022-03-28
                 </p>
                 <div class="tags">
                     
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/02/20/企业高频算法面试题-2021-02-20-Problem-123-单词搜索II/">
-                <h2 class="post-title">
-                    Problem 123 单词搜索II
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode 题目 :https://leetcode.com/problems/word-search-ii/
-题目解析
-BFS + Prefix Tree
-
-代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859c......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-02-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
                     
                 </div>
             
@@ -1809,6 +1853,10 @@ BFS + Prefix Tree
             <a href="/tags/#源码" title="源码" rel="6">源码</a>
             
         
+            
+            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            
+        
     </div>
 </section>
 
@@ -1869,23 +1917,23 @@ BFS + Prefix Tree
     <ul>
       
         <li>
-          <a href="/2025/11/20/LLM-%E4%BB%80%E4%B9%88%E6%98%AFSFT%EF%BC%9F/">LLM-什么是SFT？</a>
+          <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-%E8%AE%AD%E7%BB%83%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94/">LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比</a>
+          <a href="/2026/03/07/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/">算法总结-位运算技巧总结</a>
         </li>
       
         <li>
-          <a href="/2025/11/17/LLM-%E4%BB%80%E4%B9%88%E6%98%AFPEFT%EF%BC%9F/">LLM-什么是PEFT？</a>
+          <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
         <li>
-          <a href="/2025/09/21/LLM-transformer%E7%9A%84%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B/">LLM-transformer的多头注意力</a>
+          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
         <li>
-          <a href="/2025/09/12/LLM-%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E2%80%98%E5%8F%AA%E4%BC%9A%E5%A1%AB%E7%A9%BA%E2%80%99%E5%8F%98%E6%88%90%E2%80%98%E4%BC%BC%E4%B9%8E%E7%90%86%E8%A7%A3%E4%BA%BA%E7%B1%BB%E8%AF%AD%E8%A8%80%E2%80%99%E7%9A%84%EF%BC%9F/">语言模型到底是怎么从‘只会填空’变成‘似乎理解人类语言’的</a>
+          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
         </li>
       
     </ul>
@@ -1900,7 +1948,7 @@ BFS + Prefix Tree
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1962,6 +2010,8 @@ BFS + Prefix Tree
           <a href="categories/#源码 - jdk"><li>源码 - jdk</li></a>
         
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
+        
+          <a href="categories/#算法总结"><li>算法总结</li></a>
         
       </ul>
     </div>
@@ -2125,7 +2175,7 @@ BFS + Prefix Tree
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;Live and learn&#34;,&#34;love life&#34;,&#34;Habit is a second nature&#34;,&#34;Life is a pure flame&#34;,&#34;You have to believe in yourself&#34;,&#34;And forever has no end&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(76,180,198)&#34; ,&#34;rgb(76,150,231)&#34; ,&#34;rgb(76,32,231)&#34; ,&#34;rgb(100,145,231)&#34; ,&#34;rgb(123,115,201)&#34; ,&#34;rgb(143,105,128)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
         
 
         <!-- background effects end -->
@@ -2135,6 +2185,21 @@ BFS + Prefix Tree
     
         <script src="/js/ribbonDynamic.js"></script>
     
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>

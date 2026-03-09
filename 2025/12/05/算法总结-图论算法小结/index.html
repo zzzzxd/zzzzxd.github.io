@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          图算法总结 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/05/算法总结-图论算法小结/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>图算法总结</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-05
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.2k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>🗺️ 图论刷题全景地图 (熟练度提升指南)</p>
+<p>图论题目看似千变万化，其实核心套路只有 <strong>3 种遍历/搜索方式</strong> 和 <strong>2 种高级算法</strong>。掌握以下模板，80% 的中等题都能秒杀。</p>
+<h4 id="1-基础数据结构-必须烂熟于心"><a href="#1-基础数据结构-必须烂熟于心" class="headerlink" title="1. 基础数据结构 (必须烂熟于心)"></a>1. 基础数据结构 (必须烂熟于心)</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">场景</th>
+<th style="text-align:left">推荐结构</th>
+<th style="text-align:left">代码示例 (Java)</th>
+<th style="text-align:left">适用情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>稀疏图</strong> (边少点多)</td>
+<td style="text-align:left"><strong>邻接表</strong> (最常用)</td>
+<td style="text-align:left"><code>List&lt;List&lt;Integer&gt;&gt; adj = new ArrayList&lt;&gt;();</code>  或 <code>ArrayList&lt;Integer&gt;[] adj = new ArrayList[n];</code></td>
+<td style="text-align:left">绝大多数算法题 (BFS, DFS, 拓扑)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>稠密图</strong> (边多点少)</td>
+<td style="text-align:left"><strong>邻接矩阵</strong></td>
+<td style="text-align:left"><code>int[][] grid = new int[n][n];</code></td>
+<td style="text-align:left">网格题 (岛屿问题), 节点数 &lt; 200</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>带权图</strong></td>
+<td style="text-align:left"><strong>邻接表 + Pair</strong></td>
+<td style="text-align:left"><code>List&lt;List&lt;int[]&gt;&gt; adj</code>  <code>int[]{neighbor, weight}</code></td>
+<td style="text-align:left">最短路径 (Dijkstra)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h4 id="2-三大核心算法模板"><a href="#2-三大核心算法模板" class="headerlink" title="2. 三大核心算法模板"></a>2. 三大核心算法模板</h4><h5 id="A-广度优先搜索-BFS-——-求“最短距离”、“层级”"><a href="#A-广度优先搜索-BFS-——-求“最短距离”、“层级”" class="headerlink" title="A. 广度优先搜索 (BFS) —— 求“最短距离”、“层级”"></a>A. 广度优先搜索 (BFS) —— 求“最短距离”、“层级”</h5><ul>
+<li><strong>核心思想</strong>：层层推进，第一次遇到目标时的步数就是最短。</li>
+<li><strong>数据结构</strong>：<code>Queue</code> + <code>visited</code> 数组/集合。</li>
+<li><strong>典型题目</strong>：<ul>
+<li>单词接龙 (LeetCode 127)</li>
+<li>打开转盘锁 (LeetCode 752)</li>
+<li>地图中的最高点 (LeetCode 1765)</li>
+<li><strong>拓扑排序 </strong>：本质也是 BFS，只不过入队条件是 <code>inDegree == 0</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BFS 通用模板</span></span><br><span class="line">Queue&lt;Node&gt; q = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">q.offer(start);</span><br><span class="line">visited[start] = <span class="keyword">true</span>;</span><br><span class="line"><span class="keyword">int</span> step = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (!q.isEmpty()) &#123;</span><br><span class="line">    <span class="keyword">int</span> size = q.size(); <span class="comment">// 关键：记录当前层节点数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">        Node cur = q.poll();</span><br><span class="line">        <span class="keyword">if</span> (cur is target) <span class="keyword">return</span> step;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (Node next : neighbors(cur)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!visited[next]) &#123;</span><br><span class="line">                visited[next] = <span class="keyword">true</span>;</span><br><span class="line">                q.offer(next);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    step++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="B-深度优先搜索-DFS-——-求“连通性”、“所有路径”、“环检测”"><a href="#B-深度优先搜索-DFS-——-求“连通性”、“所有路径”、“环检测”" class="headerlink" title="B. 深度优先搜索 (DFS) —— 求“连通性”、“所有路径”、“环检测”"></a>B. 深度优先搜索 (DFS) —— 求“连通性”、“所有路径”、“环检测”</h5><ul>
+<li><strong>核心思想</strong>：一条路走到黑，撞墙回溯。</li>
+<li><strong>数据结构</strong>：递归栈 (隐式) 或 <code>Stack</code> (显式) + <code>visited</code>。</li>
+<li><strong>典型题目</strong>：<ul>
+<li>岛屿数量 (LeetCode 200)</li>
+<li>被围绕的区域 (LeetCode 130)</li>
+<li>课程表 II (输出顺序)</li>
+<li><strong>环检测 (进阶)</strong>：需要 <code>onPath</code> 数组辅助判断当前递归栈中是否有环。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DFS 通用模板 (递归)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node cur)</span> </span>&#123;</span><br><span class="line">    visited[cur] = <span class="keyword">true</span>;</span><br><span class="line">    onPath[cur] = <span class="keyword">true</span>; <span class="comment">// 用于判环</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (Node next : neighbors(cur)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[next]) &#123;</span><br><span class="line">            dfs(next);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (onPath[next]) &#123;</span><br><span class="line">            <span class="comment">// 发现环！</span></span><br><span class="line">            hasCycle = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    onPath[cur] = <span class="keyword">false</span>; <span class="comment">// 回溯</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="C-并查集-Union-Find-——-求“动态连通性”、“连通分量个数”"><a href="#C-并查集-Union-Find-——-求“动态连通性”、“连通分量个数”" class="headerlink" title="C. 并查集 (Union-Find) —— 求“动态连通性”、“连通分量个数”"></a>C. 并查集 (Union-Find) —— 求“动态连通性”、“连通分量个数”</h5><ul>
+<li><strong>核心思想</strong>：把相连的节点归到一个“老大”底下。</li>
+<li><strong>数据结构</strong>：<code>parent</code> 数组。</li>
+<li><strong>典型题目</strong>：<ul>
+<li>冗余连接 (LeetCode 684)</li>
+<li>省份数量 (LeetCode 547)</li>
+<li>满足交换条件的最大元素 (LeetCode 1202)</li>
+</ul>
+</li>
+<li><strong>优势</strong>：比 BFS/DFS 处理动态连接更高效，代码极短。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并查集模板</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] parent;</span><br><span class="line">    <span class="keyword">int</span> count; <span class="comment">// 连通分量数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UnionFind</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        parent = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        count = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) parent[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(parent[x] != x) parent[x] = find(parent[x]); <span class="comment">// 路径压缩</span></span><br><span class="line">        <span class="keyword">return</span> parent[x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> rootX = find(x), rootY = find(y);</span><br><span class="line">        <span class="keyword">if</span>(rootX != rootY) &#123;</span><br><span class="line">            parent[rootX] = rootY;</span><br><span class="line">            count--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-高级算法-针对带权图"><a href="#3-高级算法-针对带权图" class="headerlink" title="3. 高级算法 (针对带权图)"></a>3. 高级算法 (针对带权图)</h4><ul>
+<li><p><strong>Dijkstra 算法</strong>：求<strong>单源最短路径</strong>（权重非负）。</p>
+<ul>
+<li><strong>数据结构</strong>：<code>PriorityQueue</code> (最小堆) + <code>dist</code> 数组。</li>
+<li><strong>题目</strong>：网络延迟时间 (LeetCode 743), 最小体力消耗路径 (LeetCode 1631)。</li>
+<li><strong>关键点</strong>：每次从堆里取出距离最小的点去更新邻居。</li>
+</ul>
+</li>
+<li><p><strong>拓扑排序 (Topological Sort)</strong>：求<strong>依赖顺序</strong>、<strong>判环</strong>。</p>
+<ul>
+<li><strong>方法一 (Kahn)</strong>：BFS + 入度表 (你做的这个，适合求具体顺序)。</li>
+<li><strong>方法二 (DFS)</strong>：后序遍历反转 + 判环 (适合只判环或需要递归场景)。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="⚡-如何提升做题速度？-训练计划"><a href="#⚡-如何提升做题速度？-训练计划" class="headerlink" title="⚡ 如何提升做题速度？(训练计划)"></a>⚡ 如何提升做题速度？(训练计划)</h3><ol>
+<li><p><strong>肌肉记忆建图</strong>：</p>
+<ul>
+<li>看到 <code>int[][] edges</code> 或 <code>List&lt;List&lt;Integer&gt;&gt; graph</code>，要在 30 秒内写出邻接表的初始化代码。</li>
+<li>分清是有向图还是无向图（无向图要加两次边）。</li>
+</ul>
+</li>
+<li><p><strong>识别题型关键词</strong>：</p>
+<ul>
+<li>“最少次数”、“最短路径” $\rightarrow$ <strong>BFS</strong>。</li>
+<li>“能否到达”、“所有可能”、“岛屿” $\rightarrow$ <strong>DFS</strong>。</li>
+<li>“依赖关系”、“先后顺序”、“有没有环” $\rightarrow$ <strong>拓扑排序</strong>。</li>
+<li>“连通分量”、“分组”、“是否连通” $\rightarrow$ <strong>并查集</strong>。</li>
+<li>“最小代价”、“权重” $\rightarrow$ <strong>Dijkstra</strong> (或 BFS 如果权重为 1)。</li>
+</ul>
+</li>
+<li><p><strong>固定变量命名</strong>：</p>
+<ul>
+<li>别每次都想变量名。统一用：<ul>
+<li><code>adj</code> / <code>graph</code>: 邻接表</li>
+<li><code>visited</code>: 访问标记</li>
+<li><code>inDegree</code>: 入度</li>
+<li><code>dist</code>: 距离</li>
+<li><code>pq</code>: 优先队列</li>
+</ul>
+</li>
+<li>这样你的大脑可以专注于逻辑，而不是语法。</li>
+</ul>
+</li>
+<li><p><strong>专项突破</strong>：</p>
+<ul>
+<li>这周只刷 <strong>BFS</strong> 相关的图论题 (5-10 道)。</li>
+<li>下周只刷 <strong>DFS</strong> 相关的。</li>
+<li>再下周刷 <strong>并查集</strong>。</li>
+<li>集中训练能帮你快速建立模式识别能力。</li>
+</ul>
+</li>
+</ol>
+<h3 id="📝-总结"><a href="#📝-总结" class="headerlink" title="📝 总结"></a>📝 总结</h3><p>你现在的水平已经能够独立解题，接下来的目标是<strong>“标准化”</strong>和<strong>“自动化”</strong>。<br>把上面的 <strong>BFS/DFS/拓扑/并查集</strong> 四个模板背下来（理解着背），下次做题时，先花 1 分钟判断类型，然后直接套用模板填充逻辑。这样你的速度至少能提升一倍！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/09/算法总结-dp定义的思路/" data-toggle="tooltip" data-placement="top" title="dp的定义思路">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/04/算法总结-图论初始化模板/" data-toggle="tooltip" data-placement="top" title="图相关题目的建模">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-基础数据结构-必须烂熟于心"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. 基础数据结构 (必须烂熟于心)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-三大核心算法模板"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. 三大核心算法模板</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#A-广度优先搜索-BFS-——-求“最短距离”、“层级”"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">A. 广度优先搜索 (BFS) —— 求“最短距离”、“层级”</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#B-深度优先搜索-DFS-——-求“连通性”、“所有路径”、“环检测”"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">B. 深度优先搜索 (DFS) —— 求“连通性”、“所有路径”、“环检测”</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#C-并查集-Union-Find-——-求“动态连通性”、“连通分量个数”"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">C. 并查集 (Union-Find) —— 求“动态连通性”、“连通分量个数”</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-高级算法-针对带权图"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3. 高级算法 (针对带权图)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#⚡-如何提升做题速度？-训练计划"><span class="toc-nav-number"></span> <span class="toc-nav-text">⚡ 如何提升做题速度？(训练计划)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#📝-总结"><span class="toc-nav-number"></span> <span class="toc-nav-text">📝 总结</span></a>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
