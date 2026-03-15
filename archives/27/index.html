@@ -1201,9 +1201,129 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/01/企业高频算法面试题-2020-12-01-Problem-81-给数组打补丁问题/">
+                <h2 class="post-title">
+                    Problem 81 给数组打补丁问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目Leetcode原题：
+https://leetcode.com/problems/patching-array/
+题目解析
+要求添加数字 使得数组内能累加到[1,n]这类题目也挺常见的，假设有[1,2，3],此时可以拿到的最小值是1，最大值是1+2+3 = 6，因为1，2，3是连续的，所以 [1,6]内的任意一个数字都可以拿到。但此时来了一个5，所以现在能拿到的最大值是6+5= 11,......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/12/01/企业高频算法面试题-2020-12-01-Problem-82-有序矩阵值是否存在问题/">
+                <h2 class="post-title">
+                    Problem 82 有序矩阵值是否存在问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个每一行有序、每一列也有序，整体可能无序的二维数组再给定一个数num，返回二维数组中有没有num这个数
+ https://leetcode.com/problems/search-a-2d-matrix-ii/
+题目解析
+看到有序，先想二分。每次都能去除掉一部分元素，最终就能判定出
+
+代码1234567891011121314151617class Solution &#123; ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-12-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/30/企业高频算法面试题-2020-11-30-Problem-79-不能累加的最小正数/">
+                <h2 class="post-title">
+                    Problem 79 不能累加的最小正数
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个正数数组arr，返回arr的子集不能累加出的最小正数1）正常怎么做？2）如果arr中肯定有1这个值，怎么做？
+题目解析
+这道题和前面的题目比较像， 都是要求数字连续这个特性。第二问中，如果有1，那么可以做到O(n)的复杂度。假设已经可以达到range了，下一个数字如果是range+1那是没问题的，提升range到range+1,下一个数字如果是大于range+1那么range+1......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-30
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1472,115 +1592,6 @@ https://leetcode.com/problems/recover-binary-search-tree/
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-71-最长的有效括号的子串/">
-                <h2 class="post-title">
-                    Problem 71 最长的有效括号的子串
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定一个只由左括号和右括号的字符串返回最长的有效括号子串的长度
-题目解析
-分析题目，dp[i]代表以当前i位置结尾，最长的有效括号的子串长度。
-
-代码123456789101112131415161718192021222324// s只由(和)组成	// 求最长有效括号子串长度	public static int maxLength(String s) &#123;		if (s ==......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/15/企业高频算法面试题-2020-11-15-Problem-70-数组调整的逆序对问题/">
-                <h2 class="post-title">
-                    Problem 70 数组调整的逆序对问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定整数power，给定一个数组arr，给定一个数组reverse，含义如下：arr的长度一定是2的power次方reverse中的每个值一定都在0~power范围。例如power = 2, arr = {3, 1, 4, 2}，reverse = {0, 1, 0, 2}
-任何一个在前的数字可以和任何一个在后的数组，构成一对数可能是升序关系、相等关系或者降序关系比如arr开始时有如下的......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-69-回文对/">
-                <h2 class="post-title">
-                    Problem 69 回文对
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode原题：
-​    https://leetcode.com/problems/palindrome-pairs/
-题目解析
-这个题简单思路是暴力 能做的。
-提供第二种思路。我们针对每个字符串，要是能直接找出来与之配对能成为回文的，就不需要无脑的匹配再判断是不是回文了。那如果找是关键，是突破口！判断是回文的前缀，将后面逆序放前面则是回文！同理，判断是回文的后缀逆序......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-11-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1642,7 +1653,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1860,7 +1871,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1923,6 +1934,10 @@ https://leetcode.com/problems/recover-binary-search-tree/
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1938,10 +1953,6 @@ https://leetcode.com/problems/recover-binary-search-tree/
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1954,7 +1965,7 @@ https://leetcode.com/problems/recover-binary-search-tree/
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

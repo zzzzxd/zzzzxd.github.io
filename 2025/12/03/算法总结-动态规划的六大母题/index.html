@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          动态规划题型总结 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/03/算法总结-动态规划的六大母题/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>动态规划题型总结</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-03
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.1k</span> and
+                                Reading Time <span class="post-count">8</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="1️⃣-LIS-模型-最长上升子序列及其变种"><a href="#1️⃣-LIS-模型-最长上升子序列及其变种" class="headerlink" title="1️⃣ LIS 模型 (最长上升子序列及其变种)"></a>1️⃣ LIS 模型 (最长上升子序列及其变种)</h3><p><strong>核心逻辑</strong>：维护一个“潜力最大”的序列。要么用 $O(N^2)$ 的线性 DP，要么用 $O(N \log N)$ 的 <strong>贪心 + 二分 (<code>tails</code> 数组)</strong>。<br><strong>状态定义</strong>：</p>
+<ul>
+<li>$O(N^2)$: <code>dp[i]</code> = 以 <code>nums[i]</code> 结尾的最长上升子序列长度。</li>
+<li>$O(N \log N)$: <code>tails[k]</code> = 长度为 <code>k+1</code> 的上升子序列中，<strong>结尾元素最小</strong>的值。</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">频率</th>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">链接</th>
+<th style="text-align:left">核心变化/技巧</th>
+<th>完成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>300. 最长递增子序列</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/longest-increasing-subsequence/" target="_blank" rel="noopener">LC 300</a></td>
+<td style="text-align:left"><strong>母题</strong>。必须掌握 <code>tails</code> + 二分查找写法。</td>
+<td>done</td>
+</tr>
+<tr>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>354. 俄罗斯套娃信封</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/russian-doll-envelopes/" target="_blank" rel="noopener">LC 354</a></td>
+<td style="text-align:left"><strong>二维 LIS</strong>。技巧：先按宽升序，<strong>宽相同则按高降序</strong>，再对高求 LIS。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>673. 最长递增子序列个数</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/number-of-longest-increasing-subsequence/" target="_blank" rel="noopener">LC 673</a></td>
+<td style="text-align:left">LIS + 计数。需维护 <code>count[i]</code> 数组，记录达到 <code>dp[i]</code> 长度的方案数。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>646. 最长数对链</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/maximum-length-of-pair-chain/" target="_blank" rel="noopener">LC 646</a></td>
+<td style="text-align:left">区间贪心或 LIS 变种。按右端点排序后贪心更优，也可转 LIS。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>368. 最大整除子集</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/largest-divisible-subset/" target="_blank" rel="noopener">LC 368</a></td>
+<td style="text-align:left">LIS 变种。条件从 <code>nums[j] &lt; nums[i]</code> 变为 <code>nums[i] % nums[j] == 0</code>。需记录路径还原结果。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>1048. 最长字符串链</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/longest-string-chain/" target="_blank" rel="noopener">LC 1048</a></td>
+<td style="text-align:left">字符串 LIS。按长度排序，判断是否由删除一个字符得到。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>💡 重点总结</strong>：看到“最长…子序列”且数据量 $N &gt; 2000$，立刻想到 <strong><code>tails</code> 数组 + 二分</strong>。如果是二维属性，优先考虑 <strong>排序消维</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="2️⃣-背包模型-Knapsack-Pattern"><a href="#2️⃣-背包模型-Knapsack-Pattern" class="headerlink" title="2️⃣ 背包模型 (Knapsack Pattern)"></a>2️⃣ 背包模型 (Knapsack Pattern)</h3><p><strong>核心逻辑</strong>：在容量限制下做选择。关键在于 <strong>内层循环的顺序</strong> 和 <strong>状态转移方程</strong>。<br><strong>状态定义</strong>：<code>dp[j]</code> = 容量为 <code>j</code> 时的最优解（最大价值/最小个数/是否可行）。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">频率</th>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">链接</th>
+<th style="text-align:left">核心技巧/区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>0-1 背包</strong>(选一次)</td>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>416. 分割等和子集</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">LC 416</a></td>
+<td style="text-align:left">问“能否装满”。`dp[j] = dp[j]</td>
+<td></td>
+<td>dp[j-num]`。<strong>内层倒序</strong>。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>494. 目标和</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/target-sum/" target="_blank" rel="noopener">LC 494</a></td>
+<td style="text-align:left">转化为背包：<code>(sum+target)/2</code> 为正数和。求方案数。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>474. 一和零</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/ones-and-zeroes/" target="_blank" rel="noopener">LC 474</a></td>
+<td style="text-align:left"><strong>二维背包</strong>。<code>dp[m][n]</code>，两个容量限制。双重内层倒序。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>完全背包</strong>(无限次)</td>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>322. 零钱兑换</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/coin-change/" target="_blank" rel="noopener">LC 322</a></td>
+<td style="text-align:left">问“最小个数”。<code>dp[j] = min(dp[j], dp[j-c]+1)</code>。<strong>内层正序</strong>。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>518. 零钱兑换 II</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/coin-change-ii/" target="_blank" rel="noopener">LC 518</a></td>
+<td style="text-align:left">问“组合数”。<code>dp[j] += dp[j-c]</code>。<strong>外层物品，内层容量</strong> (避免排列重复)。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>279. 完全平方数</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/perfect-squares/" target="_blank" rel="noopener">LC 279</a></td>
+<td style="text-align:left">物品是 $1^2, 2^2…$。完全背包求最小个数。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>特殊变种</strong></td>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>377. 组合总和 Ⅳ</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/combination-sum-iv/" target="_blank" rel="noopener">LC 377</a></td>
+<td style="text-align:left">问“排列数”。<strong>外层容量，内层物品</strong> (顺序不同算不同)。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>1449. 数位成本最大数字</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/form-largest-integer-with-digits-that-add-up-to-target/" target="_blank" rel="noopener">LC 1449</a></td>
+<td style="text-align:left">完全背包 + <strong>贪心构造</strong>。先算最大长度，再从高位贪心填数字。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>💡 重点总结</strong>：</p>
+<ul>
+<li><strong>0-1 背包</strong>：内层 <strong>倒序</strong> (<code>for j from target down to num</code>)。</li>
+<li><strong>完全背包</strong>：内层 <strong>正序</strong> (<code>for j from num to target</code>)。</li>
+<li><strong>求组合数</strong>：先遍历物品，再遍历容量。</li>
+<li><strong>求排列数</strong>：先遍历容量，再遍历物品。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="3️⃣-股票状态机模型-Stock-Trading-State-Machine"><a href="#3️⃣-股票状态机模型-Stock-Trading-State-Machine" class="headerlink" title="3️⃣ 股票状态机模型 (Stock Trading State Machine)"></a>3️⃣ 股票状态机模型 (Stock Trading State Machine)</h3><p><strong>核心逻辑</strong>：每天的状态由 <strong>(天数, 交易次数, 是否持有)</strong> 决定。列出所有状态转移的可能（买、卖、休息）。<br><strong>状态定义</strong>：</p>
+<ul>
+<li><code>dp[i][0]</code>: 第 i 天结束，<strong>不持有</strong>股票的最大利润。</li>
+<li><code>dp[i][1]</code>: 第 i 天结束，<strong>持有</strong>股票的最大利润。<br><em>(若有 k 次限制，加一维 <code>k</code>)</em></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">频率</th>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">链接</th>
+<th style="text-align:left">限制条件/状态转移变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>121. 买卖股票最佳时机</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">LC 121</a></td>
+<td style="text-align:left"><strong>只能交易 1 次</strong>。简化为记录 <code>min_price</code> 和 <code>max_profit</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>122. 买卖股票最佳时机 II</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">LC 122</a></td>
+<td style="text-align:left"><strong>不限次数</strong>。<code>dp[i][0] = max(dp[i-1][0], dp[i-1][1]+p)</code>; <code>dp[i][1] = max(dp[i-1][1], dp[i-1][0]-p)</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>309. 含冷冻期</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/" target="_blank" rel="noopener">LC 309</a></td>
+<td style="text-align:left"><strong>卖出后隔一天才能买</strong>。买入时依赖 <code>i-2</code> 的状态：<code>dp[i][1] = max(..., dp[i-2][0]-p)</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>714. 含手续费</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" target="_blank" rel="noopener">LC 714</a></td>
+<td style="text-align:left"><strong>每次交易收手续费</strong>。卖出时减去 <code>fee</code> 或 买入时减去 <code>fee</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>188. 最多 k 次交易</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/" target="_blank" rel="noopener">LC 188</a></td>
+<td style="text-align:left"><strong>通用解法</strong>。需三维 DP 或滚动数组优化。若 $k \ge n/2$ 退化为不限次数。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>123. 最多 2 次交易</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/" target="_blank" rel="noopener">LC 123</a></td>
+<td style="text-align:left">k=2 的特例。可定义 4 个状态变量直接推导，无需数组。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>💡 重点总结</strong>：不要死记硬背每道题的解法。<strong>画出状态转移图</strong>（持有 &lt;-&gt; 不持有），根据题目条件（冷冻期、手续费、k 值）修改箭头上的权重或依赖的天数即可。</p>
+</blockquote>
+<hr>
+<h3 id="4️⃣-区间-DP-模型-Interval-DP"><a href="#4️⃣-区间-DP-模型-Interval-DP" class="headerlink" title="4️⃣ 区间 DP 模型 (Interval DP)"></a>4️⃣ 区间 DP 模型 (Interval DP)</h3><p><strong>核心逻辑</strong>：大区间最优解 = 两个小区间最优解 + 合并代价。通常枚举 <strong>分割点 k</strong> 或 <strong>最后一步操作</strong>。<br><strong>状态定义</strong>：<code>dp[i][j]</code> = 区间 <code>[i, j]</code> 上的最优解。<br><strong>模板</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= n; len++)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - len; i++) &#123;</span><br><span class="line">      <span class="keyword">int</span> j = i + len - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt; j; k++) </span><br><span class="line">          dp[i][j] = min/max(dp[i][j], dp[i][k] + dp[k+<span class="number">1</span>][j] + cost);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">频率</th>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">链接</th>
+<th style="text-align:left">核心技巧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>5. 最长回文子串</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/longest-palindromic-substring/" target="_blank" rel="noopener">LC 5</a></td>
+<td style="text-align:left"><code>dp[i][j] = (s[i]==s[j]) &amp;&amp; dp[i+1][j-1]</code>。注意长度 1 和 2 的初始化。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>647. 回文子串</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/palindromic-substrings/" target="_blank" rel="noopener">LC 647</a></td>
+<td style="text-align:left">统计个数。逻辑同上，计数即可。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>312. 戳气球</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/burst-balloons/" target="_blank" rel="noopener">LC 312</a></td>
+<td style="text-align:left"><strong>逆向思维</strong>。枚举 <strong>最后一个</strong> 戳破的气球 <code>k</code>。<code>dp[i][j] = dp[i][k] + dp[k][j] + nums[i]*nums[k]*nums[j]</code>。边界补 1。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>1000. 合并石头</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/minimum-cost-to-merge-stones/" target="_blank" rel="noopener">LC 1000</a></td>
+<td style="text-align:left">K 堆合并。需判断 <code>(len-1)%(K-1)==0</code> 才能合并。较难。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>486. 预测赢家</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/predict-the-winner/" target="_blank" rel="noopener">LC 486</a></td>
+<td style="text-align:left"><strong>博弈 DP</strong>。<code>dp[i][j]</code> = 先手比后手多得的分数。<code>max(nums[i]-dp[i+1][j], nums[j]-dp[i][j-1])</code>。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>💡 重点总结</strong>：区间 DP 难点在于 <strong>枚举顺序</strong>（必须从小到大枚举长度）和 <strong>分割点/最后一步的定义</strong>。[312. 戳气球] 是此类题目的巅峰，务必亲手推导。</p>
+</blockquote>
+<hr>
+<h3 id="5️⃣-双串-网格-DP-模型-Two-Strings-Grid"><a href="#5️⃣-双串-网格-DP-模型-Two-Strings-Grid" class="headerlink" title="5️⃣ 双串/网格 DP 模型 (Two Strings / Grid)"></a>5️⃣ 双串/网格 DP 模型 (Two Strings / Grid)</h3><p><strong>核心逻辑</strong>：两个指针分别在两个字符串/网格上移动，状态由两个位置共同决定。<br><strong>状态定义</strong>：<code>dp[i][j]</code> = <code>str1</code> 前 <code>i</code> 个字符与 <code>str2</code> 前 <code>j</code> 个字符的匹配结果。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">频率</th>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">链接</th>
+<th style="text-align:left">核心逻辑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">🔥</td>
+<td style="text-align:left"><strong>72. 编辑距离</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/edit-distance/" target="_blank" rel="noopener">LC 72</a></td>
+<td style="text-align:left"><strong>DP 标杆</strong>。增删改三种操作取最小。<code>min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>1143. 最长公共子序列</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/longest-common-subsequence/" target="_blank" rel="noopener">LC 1143</a></td>
+<td style="text-align:left">经典 LCS。相等则 <code>dp[i-1][j-1]+1</code>，不等则 <code>max(dp[i-1][j], dp[i][j-1])</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>97. 交错字符串</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/interleaving-string/" target="_blank" rel="noopener">LC 97</a></td>
+<td style="text-align:left"><code>dp[i][j]</code> 表示 <code>s1[:i]</code> 和 <code>s2[:j]</code> 能否组成 <code>s3[:i+j]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>10. 正则表达式匹配</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/regular-expression-matching/" target="_blank" rel="noopener">LC 10</a></td>
+<td style="text-align:left"><strong>Hard 之王</strong>。处理 <code>.</code> 和 <code>*</code>。<code>*</code> 可匹配 0 次或多次，逻辑复杂，需细致分类讨论。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>64. 最小路径和</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/minimum-path-sum/" target="_blank" rel="noopener">LC 64</a></td>
+<td style="text-align:left">网格基础。<code>dp[i][j] += min(dp[i-1][j], dp[i][j-1])</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>329. 矩阵最长递增路径</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/" target="_blank" rel="noopener">LC 329</a></td>
+<td style="text-align:left"><strong>记忆化搜索 (DFS+DP)</strong>。因为方向不固定（上下左右），不能用循环 DP，必须递归 + 缓存。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>💡 重点总结</strong>：</p>
+<ul>
+<li>字符串 DP 通常需要在开头补一个空字符（索引 0 代表空串），方便处理边界。</li>
+<li>[10. 正则] 和 [329. 矩阵路径] 是区分度极高的题目，建议作为压轴练习。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="6️⃣-其它高频技巧型-DP"><a href="#6️⃣-其它高频技巧型-DP" class="headerlink" title="6️⃣ 其它高频技巧型 DP"></a>6️⃣ 其它高频技巧型 DP</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">频率</th>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">链接</th>
+<th style="text-align:left">技巧点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>96. 不同的二叉搜索树</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/unique-binary-search-trees/" target="_blank" rel="noopener">LC 96</a></td>
+<td style="text-align:left"><strong>卡特兰数</strong>。<code>dp[n] = sum(dp[i]*dp[n-1-i])</code>。枚举根节点。</td>
+</tr>
+<tr>
+<td style="text-align:left">⭐️</td>
+<td style="text-align:left"><strong>221. 最大正方形</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/maximal-square/" target="_blank" rel="noopener">LC 221</a></td>
+<td style="text-align:left"><code>dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1</code>。受限于三个方向的最小值。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>139. 单词拆分</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/word-break/" target="_blank" rel="noopener">LC 139</a></td>
+<td style="text-align:left"><strong>背包思想 + 字符串</strong>。<code>dp[i]</code> 表示前 <code>i</code> 个字符能否拆分。枚举切割点 <code>j</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">💎</td>
+<td style="text-align:left"><strong>338. 比特位计数</strong></td>
+<td style="text-align:left"><a href="https://leetcode.cn/problems/counting-bits/" target="_blank" rel="noopener">LC 338</a></td>
+<td style="text-align:left"><strong>位运算 DP</strong>。<code>dp[i] = dp[i &gt;&gt; 1] + (i &amp; 1)</code> 或 <code>dp[i] = dp[i &amp; (i-1)] + 1</code>。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="📅-复习与刷题策略建议"><a href="#📅-复习与刷题策略建议" class="headerlink" title="📅 复习与刷题策略建议"></a>📅 复习与刷题策略建议</h3><ol>
+<li><p><strong>第一阶段：巩固母题 (3-4 天)</strong></p>
+<ul>
+<li>每天攻克一个模型。</li>
+<li><strong>LIS</strong>: 300 (必写二分版), 354.</li>
+<li><strong>背包</strong>: 416, 322, 518 (对比代码差异).</li>
+<li><strong>股票</strong>: 122, 309 (推导状态转移).</li>
+<li><strong>双串</strong>: 72, 1143.</li>
+</ul>
+</li>
+<li><p><strong>第二阶段：挑战 Hard 与 综合 (3-4 天)</strong></p>
+<ul>
+<li>重点突破：<strong>312 (戳气球)</strong>, <strong>10 (正则)</strong>, <strong>329 (矩阵路径)</strong>, <strong>188 (股票 k 次)</strong>.</li>
+<li>这些题目不仅考 DP，还考思维转换（逆向、记忆化、状态压缩）。</li>
+</ul>
+</li>
+<li><p><strong>第三阶段：模拟面试 (持续)</strong></p>
+<ul>
+<li>随机抽取一道未做过的中等题，限时 20 分钟。</li>
+<li><strong>强制要求</strong>：先口述状态定义和转移方程，再写代码。</li>
+</ul>
+</li>
+</ol>
+<p>这份总结涵盖了 LeetCode 上 90% 的 DP 考点。把这些母题吃透，大厂面试中的 DP 环节你就无敌了！需要我对某个具体题目进行详细的<strong>状态转移推导</strong>吗？</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/03/算法总结-单调栈技巧总结/" data-toggle="tooltip" data-placement="top" title="单调栈技巧总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/01/算法总结-滑动窗口思想/" data-toggle="tooltip" data-placement="top" title="滑动窗口思想">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1️⃣-LIS-模型-最长上升子序列及其变种"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1️⃣ LIS 模型 (最长上升子序列及其变种)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2️⃣-背包模型-Knapsack-Pattern"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2️⃣ 背包模型 (Knapsack Pattern)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3️⃣-股票状态机模型-Stock-Trading-State-Machine"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3️⃣ 股票状态机模型 (Stock Trading State Machine)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4️⃣-区间-DP-模型-Interval-DP"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4️⃣ 区间 DP 模型 (Interval DP)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5️⃣-双串-网格-DP-模型-Two-Strings-Grid"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">5️⃣ 双串&#x2F;网格 DP 模型 (Two Strings &#x2F; Grid)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6️⃣-其它高频技巧型-DP"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">6️⃣ 其它高频技巧型 DP</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#📅-复习与刷题策略建议"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">📅 复习与刷题策略建议</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

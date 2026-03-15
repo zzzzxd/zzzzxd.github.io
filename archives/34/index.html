@@ -1201,9 +1201,124 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/28/企业高频算法面试题-2020-07-28-Problem-11-设计setAll/">
+                <h2 class="post-title">
+                    Problem 11 设计setAll
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    设计有setAll功能的哈希表
+​    put、get、setAll方法，时间复杂度O(1)
+题目解析
+考察思想 “版本”，利用时间戳做版本的思想。
+
+代码12345678910111213141516171819202122232425262728293031323334353637383940public static class MyValue&lt;V&gt; &#1......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-28
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/26/企业高频算法面试题-2020-07-26-Problem-10-司机调度/">
+                <h2 class="post-title">
+                    Problem 10 司机调度
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    现有司机N*2人，调度中心会将所有司机平分给A、B两个区域​            第 i 个司机去A可得收入为income[i][0]，​            第 i 个司机去B可得收入为income[i][1]，返回所有调度方案中能使所有司机总收入最高的方案，是多少钱
+题目解析
+最优解，一般考虑贪心 、dp。这个题实际贪心就可以。主要找出贪心策略，同一个人去A可能钱很多，......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-26
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/07/23/企业高频算法面试题-2020-07-23-Problem-9-数据流问题/">
+                <h2 class="post-title">
+                    Problem 9 数据流问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    已知一个消息流会不断地吐出整数 1~N，但不一定按照顺序依次吐出 如果上次打印的序号为i， 那么当i+1出现时 请打印 i+1 及其之后接收过的并且连续的所有数 直到1~N全部接收并打印完请设计这种接收并打印的结构。
+题目解析
+经典题目。大思路就是构建头链表，构建尾链表，来一个元素就要去头链中 拽出来前面的元素，同时检查这个元素是否在尾链中，同理也要尝试拽尾链中的元素。
+
+代码......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-07-23
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1462,115 +1577,6 @@
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/07/05/企业高频算法面试题-2020-07-05-Problem-1-绳子压点问题/">
-                <h2 class="post-title">
-                    Problem 1 绳子压点问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定一个有序数组arr，代表坐落在X轴上的点，给定一个正数K，代表绳子的长度返回绳子最多压中几个点？注意：即使绳子边缘处盖住点也算盖住。
-题目解析
-有一个比较容易想到的思路就是把绳子看成长度固定的滑动窗口就可以了，依次遍历每个点作为绳子左端点的情况下 能压住几个点即可。
-
-代码12345678910111213public static int maxPoint(int[] arr, i......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-07-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-412-Fizz-Buzz/">
-                <h2 class="post-title">
-                    412. Fizz Buzz 
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/fizz-buzz/    
-题目描述​    Given an integer n, return a string array answer (1-indexed) where:
-
-answer[i] == &quot;FizzBuzz&quot; if i is divisible by 3 and 5.
-a......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-11
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2018/11/11/leetcode-leetcode高频面试题-2018-11-11-395-Longest-Substring-with-At-Least-K-Repeating-Characters/">
-                <h2 class="post-title">
-                    395. Longest Substring with At Least K Repeating Characters
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目链接​    https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
-题目描述​    Given a string s and an integer k, return the length of the longest substring of s such that ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2018-11-11
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
-                    
-                      <a href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1632,7 +1638,7 @@ a......
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1850,7 +1856,7 @@ a......
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1913,6 +1919,10 @@ a......
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1928,10 +1938,6 @@ a......
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1944,7 +1950,7 @@ a......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

@@ -1201,9 +1201,124 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/18/企业高频算法面试题-2020-11-18-Problem-71-最长的有效括号的子串/">
+                <h2 class="post-title">
+                    Problem 71 最长的有效括号的子串
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定一个只由左括号和右括号的字符串返回最长的有效括号子串的长度
+题目解析
+分析题目，dp[i]代表以当前i位置结尾，最长的有效括号的子串长度。
+
+代码123456789101112131415161718192021222324// s只由(和)组成	// 求最长有效括号子串长度	public static int maxLength(String s) &#123;		if (s ==......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-18
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/15/企业高频算法面试题-2020-11-15-Problem-70-数组调整的逆序对问题/">
+                <h2 class="post-title">
+                    Problem 70 数组调整的逆序对问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目给定整数power，给定一个数组arr，给定一个数组reverse，含义如下：arr的长度一定是2的power次方reverse中的每个值一定都在0~power范围。例如power = 2, arr = {3, 1, 4, 2}，reverse = {0, 1, 0, 2}
+任何一个在前的数字可以和任何一个在后的数组，构成一对数可能是升序关系、相等关系或者降序关系比如arr开始时有如下的......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-15
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                      <a href="/tags/#Trie" title="Trie">Trie</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/11/12/企业高频算法面试题-2020-11-12-Problem-69-回文对/">
+                <h2 class="post-title">
+                    Problem 69 回文对
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    Leetcode原题：
+​    https://leetcode.com/problems/palindrome-pairs/
+题目解析
+这个题简单思路是暴力 能做的。
+提供第二种思路。我们针对每个字符串，要是能直接找出来与之配对能成为回文的，就不需要无脑的匹配再判断是不是回文了。那如果找是关键，是突破口！判断是回文的前缀，将后面逆序放前面则是回文！同理，判断是回文的后缀逆序......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-11-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1477,117 +1592,6 @@ https://leetcode.com/problems/longest-consecutive-sequence/
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/31/企业高频算法面试题-2020-10-31-Problem-61-两个有序数整体K小/">
-                <h2 class="post-title">
-                    Problem 61 两个有序数整体K小
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode原题：https://leetcode.com/problems/median-of-two-sorted-arrays/进阶问题：在两个都有序的数组中找整体第K小的数可以做到O(log(Min(M,N)))
-12节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-31
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/28/企业高频算法面试题-2020-10-28-Problem-60-查找种类及个数相同的子串/">
-                <h2 class="post-title">
-                    Problem 60 查找种类及个数相同的子串
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定长度为m的字符串aim，以及一个长度为n的字符串str问能否在str中找到一个长度为m的连续子串，使得这个子串刚好由aim的m个字符组成，顺序无所谓，返回任意满足条件的一个子串的起始位置，未找到返回-1
-Leetcode:567
-题目解析
-题目比较简单 使用滑动窗口+字符表映射就可以解决
-
-代码123456789101112131415161718192021222324252627......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-28
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/10/27/企业高频算法面试题-2020-10-27-Problem-59-切分回文串的最少刀数/">
-                <h2 class="post-title">
-                    Problem 59 切分回文串的最少刀数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    问题一：一个字符串至少要切几刀能让切出来的子串都是回文串
-问题二：返回问题一的其中一种划分结果
-问题三：返回问题一的所有划分结果
-11jie
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-10-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1649,7 +1653,7 @@ Leetcode:567
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1867,7 +1871,7 @@ Leetcode:567
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1930,6 +1934,10 @@ Leetcode:567
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1945,10 +1953,6 @@ Leetcode:567
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1961,7 +1965,7 @@ Leetcode:567
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

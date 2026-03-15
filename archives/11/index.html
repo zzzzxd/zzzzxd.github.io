@@ -1201,9 +1201,156 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux的12位权限体系/">
+                <h2 class="post-title">
+                    Linux的12位权限体系
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    LINUX权限管理也是linux系统管理中很重要的一部分，通过权限管理最终保障系统网站的安全。接下来我们系统的总结一下linux权限相关的知识点，以及遇到权限问题的排查思路，可以应对工作中常见的权限问题。
+LINUX基础权限rwx权限与用户
+
+
+
+权限的字符
+含义与说明
+
+
+
+
+r
+read 读,是否可以读取内容
+
+
+w
+write 写, 是否可以修改内容
+
+
+x
+execut......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/13/LINUX运维-2022-12-13-Linux用户管理/">
+                <h2 class="post-title">
+                    Linux用户管理
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    用户管理体系是linux系统中一样很重要的内容，不同的用户分配不同等级的权限可以保障系统的安全，问题发生以后也方便追溯问题的原因。接下来总结一下与用户管理相关的一些比较重要的内容。
+用户分类
+
+
+
+用户分类
+含义
+uid
+
+
+
+
+root用户
+最高权限用户。
+0
+
+
+虚拟用户（傀儡用 户）
+这种用户存在是用于让一些服务正常运行。一些服务运行需要指定 的用户。
+uid是1-999......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/10/09/大数据-2022-10-09-hive中四种有效的SQL优化/">
+                <h2 class="post-title">
+                    hive中四种有效的SQL优化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    数据准备首先虚拟一张表user，字段为：
+（1）user_id（用户的id）；
+（2）age（用户的年龄）；
+（3）sex（用户的性别）；
+（4）order_id（用户的订单编号，一个用户可能有多个订单编号）。
+另设一张表，叫order，里面包含order_id, order_date两个字段。
+multi-table-insert优化union all原SQL（目标是往一个新表user_n......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-10-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hive" title="Hive">Hive</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1461,121 +1608,6 @@ Socket.send(socket, buf, len);
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/25/IO-2022-09-25-文件IO与PageCache/">
-                <h2 class="post-title">
-                    文件IO与PageCache
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Linux文件系统
-如上图，首先我们从图中得知两点:
-
-PageCache 是属于内核级别的，受到内核的管理
-在用户态，用户可以使用mmap映射，直接访问PageCache，而不必进行内核态的切换。
-
-PageCache概念首先我们要了解一点，现在的内存管理方案中多数是分页管理，也就是内存会划分为4k一页作为一个基本单位。而pagecache呢通常也是4KB，用来缓存文件。提高IO的速度。
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#IO" title="IO">IO</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/25/JVM-2022-09-25-对象布局相关问题/">
-                <h2 class="post-title">
-                    对象布局相关问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言有关对象的创建、对象在内存中的布局，今天我们通过几道面试题来梳理一下。
-请解释一下对象的创建过程？
-class loading
-class linking (verification, preparation, resolution) - 静态变量赋默认值
-class initializing- 静态变量赋初始值
-申请对象内存
-成员变量赋默认值
-调用构造方法
-成员变量顺序赋初始值
-执行构......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/09/25/JVM-2022-09-25-Synchronized锁升级过程/">
-                <h2 class="post-title">
-                    Synchronized锁升级过程
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言Synchronized的经过优化之后，性能提高很多，接下来我们就看一下它的优化原理。
-java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻量级锁和重量级锁。
-在Java HotSpot VM中，每个对象前面都有一个class指针和一个Mark Word。 Mark Word存储了哈希值以及分代年龄和标记位等，通过这些值的变化，JVM可以实现对java对象的不同程度的锁定。
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-09-25
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#JVM" title="JVM">JVM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1637,7 +1669,7 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1855,7 +1887,7 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1918,6 +1950,10 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1933,10 +1969,6 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1949,7 +1981,7 @@ java对象头Java的锁状态其实可以分为三种，分别是偏向锁，轻
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

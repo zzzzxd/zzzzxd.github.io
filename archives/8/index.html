@@ -1201,9 +1201,131 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/13/多线程-2023-02-13-多线程框架Executor家族总结/">
+                <h2 class="post-title">
+                    多线程框架Executor家族总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Executor框架的结构主要包括3个部分
+任务：包括被执行任务需要实现的接口：Runnable接口或Callable接口
+执行(线程池)：
+Executor
+以及继承自Executor的EexcutorService接口
+ExecutorService接口的实现类（ThreadPoolExecutor和ScheduledThreadPoolExecutor）
+
+
+结果：包括接口Future......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/13/多线程-2023-02-13-线程状态Blocked和Waiting/">
+                <h2 class="post-title">
+                    线程状态Blocked和Waiting
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+入口区:    等待获取锁的线程状态为Blocked，获取锁失败，然后线程就排队等待
+等待区:    等待被唤醒的线程状态为Waiting(Time_Waiting)，线程在获取锁后调用自身的wait()方法，然后释放锁，进入等待区等待
+Java线程状态中,有blocked和wating状态，都是阻塞态 但阻塞的原因有所不同，对于等待取，线程A已经获得锁，其它线程 在尝试拿锁时，就会阻塞，......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-13
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/08/设计模式-2023-02-08-UML中的几种关系/">
+                <h2 class="post-title">
+                    UML中的几种关系
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言
+​    开发过程中，画类图 梳理关系，尤其应用设计模式时，经常要使用UML中的这些箭头，这些箭头多种多样并且表示的含义也不一样，今天就梳理一下，方便记忆。
+1 泛化
+概念：泛化表示一个更泛化的元素和一个更具体的元素之间的关系。泛化是用于对继承进行建模的UML元素。在Java中，用extends关键字表示。
+
+表示方式：用实线空心箭头表示。
+
+注意：箭头方向是子类指向父类。
+2 实现
+......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-08
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Design Pattern" title="Design Pattern">Design Pattern</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1482,108 +1604,6 @@ A......
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/01/12/数据仓库-2023-01-12-大数据为什么需要数据湖/">
-                <h2 class="post-title">
-                    大数据为什么需要数据湖？
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ​    当前基于Hive的离线数据仓库已经非常成熟，在传统的离线数据仓库中对记录级别的数据进行更新是非常麻烦的，需要对待更新的数据所属的整个分区，甚至是整个表进行全面覆盖才行，由于离线数仓多级逐层加工的架构设计，数据更新时也需要从贴源层开始逐层反应到后续的派生表中去。
-​    随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-01-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
-                <h2 class="post-title">
-                    数据湖技术的发展
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    数据湖的定义Wikipedia是这样定义的:
-
-数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-01-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
-                <h2 class="post-title">
-                    各大公司实时数仓实践
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    网易实时数仓实践
-​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
-
-突然数据量增多，基于......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-01-10
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1645,7 +1665,7 @@ A......
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1863,7 +1883,7 @@ A......
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1926,6 +1946,10 @@ A......
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1941,10 +1965,6 @@ A......
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1957,7 +1977,7 @@ A......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

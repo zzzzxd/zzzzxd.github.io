@@ -1201,9 +1201,125 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/11/14/Flink-2023-11-14-Flink-Sql-Group类型/">
+                <h2 class="post-title">
+                    Flink Sql Group类型
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Group Aggregation注意事项
+对于流式查询，计算查询结果所需的状态可能会无限增长。状态大小取决于组的数量以及聚合函数的数量和类型。例如，MIN/MAX在状态大小上很重，而COUNT则很便宜。您可以为查询配置提供适当的生存时间（TTL），以防止状态大小过大。请注意，这可能会影响查询结果的正确性
+
+语法​    同mysql 语法
+用法举例123SELECT COUNT(*)FRO......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-11-14
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/11/05/Java-2023-11-05-开发中常见图的绘制/">
+                <h2 class="post-title">
+                    开发中常见图的绘制
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+参考:https://juejin.cn/post/6844903496542584845
+​        https://blog.csdn.net/qq_41854911/article/details/127063022
+
+背景​    大家应该在从事软件开发领域工作时间有一段时间之后，就开始有画图的意识，不管是懵懂的学别人还是想更好的让其它人理解自己的一个观点。所谓“一图胜千言”......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-11-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Java" title="Java">Java</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/10/11/Flink-2023-10-11-Flink-Sql-Join类型/">
+                <h2 class="post-title">
+                    Flink Sql Join类型
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    Regular Joins(普通join)注意事项
+最普通的join 两条流任何一条流更新都会触发计算,为了支持结果的更新，下游目的表需要定义主键。
+运行时需要保留左表和右表的状态，且随着时间的推移，状态会无限增长，最终可能导致作业 OOM 崩溃或异常缓慢。因此我们强烈建议用户在 Flink 参数中设置 table.exec.state.ttl 选项，它可以指定 JOIN 状态的保留时间（定......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-10-11
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Flink" title="Flink">Flink</a>
+                    
+                      <a href="/tags/#Flink sql" title="Flink sql">Flink sql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1450,110 +1566,6 @@ Hash Join
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/03/06/大数据-2023-03-06-分布式Join原理/">
-                <h2 class="post-title">
-                    分布式Join原理
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言Join操作可以说是最复杂、代价最大的操作，也是OLAP场景中使用相对较多的操作，尤其是在大数据领域中，Join操作的性能优劣直接会影响到整个查询，接下来我们就高屋建瓴的对整个JOIN操作进行解析，方便大家更深入的理解JOIN原理。
-单机Join算法一般的Join算法：Nested-Loop Join (NL Join)、Block Nested-Loop Join、Sort Merge......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-03-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#分布式算法" title="分布式算法">分布式算法</a>
-                    
-                      <a href="/tags/#OLAP" title="OLAP">OLAP</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/">
-                <h2 class="post-title">
-                    (十三)HBASE优化实操
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    HBASE优化实操高可用1在HBase中Hmaster负责监控RegionServer的生命周期，均衡RegionServer的负载，如果Hmaster挂掉了，那么整个HBase集群将陷入不健康的状态，并且此时的工作状态并不会维持太久。所以HBase支持对Hmaster的高可用配置。
-关闭HBase集群1[root@centos1 home]# stop-hbase.sh
-在conf目录下创......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/21/Hbase-2023-02-21-十二-HBASE企业级调优/">
-                <h2 class="post-title">
-                    (十二)HBASE企业级调优
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    服务端
-hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10，生产环境建议使用100，也不是越大越好，特别是当请求内容很大的时候，比如scan/put几M的数据，会占用过多的内存，有可能导致频繁的GC，甚至出现内存溢出。
-
-hbase.master.distributed.log.splitting：默认值为true，建议设为false。关闭h......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1615,7 +1627,7 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1833,7 +1845,7 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1896,6 +1908,10 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1911,10 +1927,6 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1927,7 +1939,7 @@ hbase.master.distributed.log.splitting：默认值为true，建议设为false。
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

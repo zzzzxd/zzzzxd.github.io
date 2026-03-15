@@ -1201,9 +1201,130 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-行锁/">
+                <h2 class="post-title">
+                    mysql锁机制-行锁
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言MySQL 5.5 之前的默认存储引擎是 MyISAM，5.5 之后改成了 InnoDB。InnoDB 后来居上最主要的原因就是：
+
+InnoDB 支持事务：适合在并发条件下要求数据一致的场景。
+InnoDB 支持行锁：有效降低由于删除或者更新导致的锁定。
+
+本节就一起来探讨 InnoDB 的行锁。
+在讲解行锁之前，我们首先来看一下两阶段锁协议。
+两阶段锁传统的关系型数据库加锁的一个原则......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-29
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-全局锁与表锁/">
+                <h2 class="post-title">
+                    mysql锁机制-全局锁与表锁
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
+本章就来介绍一下不同场景下的锁机制。
+根据加锁的范围，MySQL 中的锁可分为三类：
+
+全局锁
+表级锁
+行锁
+
+本节来重点讲解一下全局锁和表锁。
+1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-29
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/28/mysql-2022-03-28-mysql死锁的发生与解决/">
+                <h2 class="post-title">
+                    mysql死锁的发生与解决
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
+认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+InnoDB 中解决死锁问题有两种方式：
+
+检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
+等查询的时间达到锁等待超时的设......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-28
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1438,110 +1559,6 @@ Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启�
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/03/05/mysql-2022-03-05-分析sql执行效率的方法/">
-                <h2 class="post-title">
-                    分析sql执行效率的方法
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-03-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/03/01/mysql-2022-03-01-Mysql中Binlog常用命令/">
-                <h2 class="post-title">
-                    Mysql中Binlog常用命令
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Binlog使用场景
-主从数据库复制： Mysql Replication在Master端开启Binlog，Master把日志传递给Slavers，以达到    Master-slavers主从数据同步。
-数据恢复： 使用mysqlbinlog工具来恢复数据
-
-Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-03-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/11/20/Java-2021-11-20-理解UTC、格林威治时间、夏令时等概念/">
-                <h2 class="post-title">
-                    理解UTC、格林威治时间、夏令时等概念
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    概念解释GMTGMT（Greenwich Mean Time）， 格林威治平时（也称格林威治时间）。
-它规定太阳每天经过位于英国伦敦郊区的皇家格林威治天文台的时间为中午12点。
-
-格林威治皇家天文台为了海上霸权的扩张计划，在十七世纪就开始进行天体观测。为了天文观测，选择了穿过英国伦敦格林威治天文台子午仪中心的一条经线作为零度参考线，这条线，简称格林威治子午线。
-1884年10月在美国华盛顿召......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-11-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Java" title="Java">Java</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1603,7 +1620,7 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1821,7 +1838,7 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1884,6 +1901,10 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1899,10 +1920,6 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1915,7 +1932,7 @@ Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>

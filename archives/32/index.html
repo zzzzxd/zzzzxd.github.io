@@ -1201,9 +1201,127 @@
 
     
 
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/06/企业高频算法面试题-2020-09-06-Problem-31-编辑距离问题/">
+                <h2 class="post-title">
+                    Problem 31 编辑距离问题
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​    一个字符串 可以有插入（insert）、删除（delete）、替换（replace）操作，每种操作都有对应的代价。求一个字符串变成另一个最小的代价。
+题目解析
+经典的题目。动态规划中的行列模型。列举所有的可能性。
+
+代码123456789101112131415161718192021222324&#x2F;&#x2F;方法：编辑距离问题，考察代价最小的最优解 ，典型的行列模型......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-06
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Dynamic Programming" title="Dynamic Programming">Dynamic Programming</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-30-相等子树/">
+                <h2 class="post-title">
+                    Problem 30 相等子树
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目如果一个节点X，它左树结构和右树结构完全一样,那么我们说以X为头的树是相等树。给定一棵二叉树的头节点head ，返回head整棵树上有多少棵相等子树
+题目解析
+既然是比较树是不是一样的，那我们可以通过序列化的方式来描述一棵树。运用二叉树的递归套路，返回以head为头节点有多少个相等树，同时返回序列化结果。那么当拿到左右孩子的info信息时，便可以决定当前节点的相等子树个数。此外，比较序列......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Sliding Window" title="Sliding Window">Sliding Window</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2020/09/05/企业高频算法面试题-2020-09-05-Problem-29-BST先序构造树/">
+                <h2 class="post-title">
+                    Problem 29 BST先序构造树
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    题目​        已知一棵搜索二叉树上没有重复值的节点，现在有一个数组arr，是这棵搜索二叉树先序遍历的结果请根据arr生成整棵树并返回头节点
+题目解析
+就是递归在区间l-r中创建树,寻找左子树，右子树时候，因为是寻找第一个大于的,用二分正好，总体就是nlogn的
+
+代码12345678910111213141516171819202122232425262728293031323334......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2020-09-05
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
+                    
+                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1458,112 +1576,6 @@
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/19/企业高频算法面试题-2020-08-19-Problem-21-设计查询区间上目标数个数/">
-                <h2 class="post-title">
-                    Problem 21 设计查询区间上目标数个数
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目数组为{3, 2, 2, 3, 1}，查询为(0, 3, 2)，意思是在数组里下标0~3这个范围上，有几个2？答案返回2。假设给你一个数组arr，对这个数组的查询非常频繁，都给出来。
-请返回 所有查询的结果
-题目解析
-数据结构的题目 通常都是考察某种思想，而且这种思想 在工作中，碰到的各种组建都会有应用到的地方，是可以落地使用的。
-此题可以用一种反向索引表，也就是key是待查的元素，v是......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/18/企业高频算法面试题-2020-08-18-Problem-20-距离K的树节点/">
-                <h2 class="post-title">
-                    Problem 20 距离K的树节点
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定三个参数：二叉树的头节点head，树上某个节点target，正数K从target开始，可以向上走或者向下走，返回与target的距离是K的所有节点    
-题目解析
-可以往上走，那就是3个方向，找距离为K的，那不就是图的bfs吗。所以说思路要打开。树是不带父亲的路径的，需要自己用有序表存一下。
-
-代码123456789101112131415161718192021222324252......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-18
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Tree" title="Tree">Tree</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/08/14/企业高频算法面试题-2020-08-14-Problem-19-自由之路/">
-                <h2 class="post-title">
-                    Problem 19
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目​    Leetcode 自由之路
-​    https://leetcode.com/problems/freedom-trail/
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2020-08-14
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1625,7 +1637,7 @@
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="13">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
             
         
             
@@ -1843,7 +1855,7 @@
             
         
             
-            <a href="/tags/#算法" title="算法" rel="13">算法</a>
+            <a href="/tags/#算法" title="算法" rel="14">算法</a>
             
         
     </div>
@@ -1906,6 +1918,10 @@
     <ul>
       
         <li>
+          <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/07/LLM-pytorch%E6%A2%AF%E5%BA%A6%E6%B8%85%E9%9B%B6/">LLM-pytorch梯度清零</a>
         </li>
       
@@ -1921,10 +1937,6 @@
           <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
         </li>
       
-        <li>
-          <a href="/2025/12/20/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%80%9D%E6%83%B3/">枚举思想</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1937,7 +1949,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
