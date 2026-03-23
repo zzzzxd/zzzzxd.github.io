@@ -1207,9 +1207,59 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2026/03/23/算法总结-滑动窗口的思考/">
+                <h2 class="post-title">
+                    算法总结-滑动窗口的思考
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    滑动窗口的本质
+不管窗口定长还是变长，首先明确本质是在枚举以i结尾的子串，这个子串有几种情况
+1） 不满足条件，比如对于定长窗口，窗口长度不够。再比如 对于变长来说，还没有包含目标map集合 等等，此时都说明以i结尾的子窗口 当前没有解。如何理解当前没有解，对于定长窗口来说 因为长度不够，压根没有解这没问题。对于可变窗口来说，[l,i] 不成立 ，就没有以i的解吗？其实也不能这么想， 比如你......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2026-03-23
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1387,6 +1437,42 @@
 
         <div class="post-preview">
 
+            <a href="/2025/12/25/大数据-经典的留存的3种场景题/">
+                <h2 class="post-title">
+                    典型的3道留存
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    📊 题目一：经典的“次日留存率” (基础必考)来源：字节跳动 / 美团难度：⭐⭐核心考点：自连接 (Self-Join) 或 窗口函数 LEAD，去重逻辑。
+1. 题目描述有一张用户登录表 user_login (user_id, login_date)。请计算每一天的次日留存率。
+
+定义：某日的新增用户中，在第二天也登录了的用户比例。
+注意：这里通常指“该日首次登录的用户”（即新增用户）......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-25
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#hive" title="hive">hive</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
             <a href="/2025/12/20/算法总结-枚举的思想/">
                 <h2 class="post-title">
                     枚举思想
@@ -1491,76 +1577,6 @@
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/12/16/算法总结-接雨水问题的思考/">
-                <h2 class="post-title">
-                    接雨水问题的思考
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    接雨水问题的一点思考，接雨水问题考虑复杂了，使用单调栈去解决，但是这个题用单调栈纯属炫技，一步步分析题目，用最基础的方法并且高效率的解决才是好方法 不应该追求多全面的解题技巧，而是具备极强的分析能力和优化思维。
-
-🧠 思维推导链：从 $O(N^2)$ 到 $O(N)$ 的进化1. 第一步：翻译题目（建立数学模型）不要想代码，先想物理现象。
-
-问题：每个位置 i 能接多少水？
-物理规律：水往......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-12-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#算法" title="算法">算法</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/12/13/算法总结-Trie应用总结/">
-                <h2 class="post-title">
-                    Trie树应用
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    🌳 一、Trie 树通用模板 (Java 实现)这份模板采用了数组实现子节点（适用于小写字母），这是面试中最常用、效率最高的方式。如果是包含数字或特殊字符，可以改用 HashMap。
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-12-13
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#算法" title="算法">算法</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1618,7 +1634,7 @@
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="15">Flink</a>
             
         
             
@@ -1634,7 +1650,7 @@
             
         
             
-            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
+            <a href="/tags/#nlp" title="nlp" rel="7">nlp</a>
             
         
             
@@ -1836,7 +1852,9 @@
             
         
             
-            <a href="/tags/#算法" title="算法" rel="14">算法</a>
+            <a href="/tags/#算法" title="算法" rel="15">算法</a>
+            
+        
             
         
     </div>
@@ -1899,6 +1917,10 @@
     <ul>
       
         <li>
+          <a href="/2026/03/23/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%80%9D%E8%80%83/">算法总结-滑动窗口的思考</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
         </li>
       
@@ -1914,10 +1936,6 @@
           <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
-        <li>
-          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1930,7 +1948,7 @@
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1994,6 +2012,8 @@
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
           <a href="categories/#算法总结"><li>算法总结</li></a>
+        
+          <a href="categories/#机器学习"><li>机器学习</li></a>
         
       </ul>
     </div>

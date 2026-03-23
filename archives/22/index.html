@@ -1207,6 +1207,24 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
@@ -1215,9 +1233,288 @@
 
         <div class="post-preview">
 
-            <a href="/2022/03/05/mysql-2022-03-05-分析sql执行效率的方法/">
+            <a href="/2022/03/29/mysql-2022-03-29-mysql锁机制-全局锁与表锁/">
                 <h2 class="post-title">
-                    分析sql执行效率的方法
+                    mysql锁机制-全局锁与表锁
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言mysql有两大类内存一块是索引，主要是提高检索查询能力，另一大块就是锁，MySQL 中，锁就是协调多个用户或者客户端并发访问某一资源的机制，保证数据并发访问时的一致性和有效性。
+本章就来介绍一下不同场景下的锁机制。
+根据加锁的范围，MySQL 中的锁可分为三类：
+
+全局锁
+表级锁
+行锁
+
+本节来重点讲解一下全局锁和表锁。
+1 全局锁MySQL 全局锁会关闭所有打开的表，并使用全局读锁锁......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-29
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/28/mysql-2022-03-28-mysql死锁的发生与解决/">
+                <h2 class="post-title">
+                    mysql死锁的发生与解决
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言有了锁的基础之后，我们来了解一下死锁的产生和解决。
+认识死锁死锁是指两个或者多个事务在同一资源上相互占用，并请求锁定对方占用的资源，从而导致恶性循环的现象。
+InnoDB 中解决死锁问题有两种方式：
+
+检测到死锁的循环依赖，立即返回一个错误（这个报错内容请看下面的实验），将参数 innodb_deadlock_detect 设置为 on 表示开启这个逻辑；
+等查询的时间达到锁等待超时的设......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-28
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/19/mysql-2022-03-19-mvcc实现/">
+                <h2 class="post-title">
+                    mvcc实现
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言​    本节跟大家一起聊聊 MVCC。
+什么是 MVCC？在说 MVCC 之前，大家先看看下面这个例子。
+首先创建表并写入测试数据：
+1234567891011use muke;drop table if exists t20;CREATE TABLE `t20` (`id` int(11) NOT NULL AUTO_INCREMENT,`a` int(11) NOT NULL,`b......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/18/mysql-2022-03-18-事务与事务持久化/">
+                <h2 class="post-title">
+                    事务与事务持久化
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言 思考两个问题，数据库突然断电会丢失数据吗？数据库中的事务是如何记录的？带着两个疑问，我们继续往下看。
+什么是事务？根据《高性能 MySQL》第 3 版 1.3 事务一节中定义：
+
+事务就是一组原子性的 SQL 查询，或者说一个独立的工作单元。如果数据库引擎能够成功地对数据库应用该组查询的全部语句，那么就执行该组查询。如果其中有任何一条语句因为崩溃或其他原因无法执行，那么所有的语句都不会......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-18
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/12/mysql-2022-03-12-Mysql-DateTime与Timestamp区别/">
+                <h2 class="post-title">
+                    Mysql DateTime与Timestamp区别
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ...
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-12
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/12/mysql-2022-03-12-Mysql-dump-命令/">
+                <h2 class="post-title">
+                    Mysql dump 命令
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    命令及解释123456789mysqldump -ubackup -p123456 -h 192.168.1.2 backup_test &gt; D:\bak\bakcup.sql 	在这段命令中：mysqldump 是myqldump的程序名了；  -u 是数据库的用户名，后面紧跟着用户名backup；  -p 是数据库的密码，后面同样紧跟着密码，注意是-p和密码之间不能有空格；  -h......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/09/mysql-2022-03-09-Mysql-创建用户相关操作常用命令/">
+                <h2 class="post-title">
+                    Mysql 创建用户相关操作常用命令
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    创建用户
+1CREATE USER &#39;username&#39;@&#39;%&#39; IDENTIFIED BY &#39;password&#39;;
+eg:
+1234CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#3......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/06/mysql-2022-03-06-linux-停止启动mysql常用命令/">
+                <h2 class="post-title">
+                    linux 停止启动mysql常用命令
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    查看mysql版本方法一：status;
+方法二：select version();
+Mysql启动、停止、重启常用命令1234567891011121314151617181920a、启动方式1、使用 service 启动：    [root@localhost &#x2F;]# service mysqld start (5.0版本是mysqld)    [root@szxdb etc]......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-03-06
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#mysql" title="mysql">mysql</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/03/05/mysql-2022-03-05-优化Mysql数据导入的几种方法/">
+                <h2 class="post-title">
+                    优化Mysql数据导入的几种方法
                 </h2>
                 <h3 class="post-subtitle">
                     
@@ -1247,321 +1544,25 @@
 
         <div class="post-preview">
 
-            <a href="/2022/03/01/mysql-2022-03-01-Mysql中Binlog常用命令/">
+            <a href="/2022/03/05/mysql-2022-03-05-分析sql执行效率的方法/">
                 <h2 class="post-title">
-                    Mysql中Binlog常用命令
+                    分析sql执行效率的方法
                 </h2>
                 <h3 class="post-subtitle">
                     
                 </h3>
                 <div class="post-content-preview">
-                    Binlog使用场景
-主从数据库复制： Mysql Replication在Master端开启Binlog，Master把日志传递给Slavers，以达到    Master-slavers主从数据同步。
-数据恢复： 使用mysqlbinlog工具来恢复数据
-
-Binlog常用命令 1234567891011121314151617181920212223242526272829303132......
+                    ...
                 </div>
             </a>
             
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
-                    2022-03-01
+                    2022-03-05
                 </p>
                 <div class="tags">
                     
                       <a href="/tags/#mysql" title="mysql">mysql</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/11/20/Java-2021-11-20-理解UTC、格林威治时间、夏令时等概念/">
-                <h2 class="post-title">
-                    理解UTC、格林威治时间、夏令时等概念
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    概念解释GMTGMT（Greenwich Mean Time）， 格林威治平时（也称格林威治时间）。
-它规定太阳每天经过位于英国伦敦郊区的皇家格林威治天文台的时间为中午12点。
-
-格林威治皇家天文台为了海上霸权的扩张计划，在十七世纪就开始进行天体观测。为了天文观测，选择了穿过英国伦敦格林威治天文台子午仪中心的一条经线作为零度参考线，这条线，简称格林威治子午线。
-1884年10月在美国华盛顿召......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-11-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Java" title="Java">Java</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-128-整数翻转/">
-                <h2 class="post-title">
-                    Problem 128 整数翻转
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给你一个32位的有符号整数x返回将x中的数字部分反转后的结果反转后整数超过 32 位的有符号整数的范围就返回0假设环境不允许存储 64 位整数（有符号或无符号）Leetcode题目：https://leetcode.com/problems/reverse-integer/
-题目解析
-注意，给的就是整数,可以进行翻转溢出的提前判断
-
-代码12345678910111213141516cl......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-03-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/03/01/企业高频算法面试题-2021-03-01-Problem-127-两数之和/">
-                <h2 class="post-title">
-                    Problem 127 两数之和
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目给定一个整数数组 nums 和一个整数目标值 target请你在该数组中找出 和为目标值 target  的那两个整数并返回它们的数组下标你可以假设每种输入只会对应一个答案但是数组中同一个元素在答案里不能重复出现你可以按任意顺序返回答案Leetcode题目：https://leetcode.com/problems/two-sum/
-题目解析
-两数之和，题目简单，写出好的代码也不好想,能......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-03-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/02/26/企业高频算法面试题-2021-02-26-Problem-126-企鹅文化衫问题/">
-                <h2 class="post-title">
-                    Problem 126 企鹅文化衫问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目企鹅厂活动发文化衫，文化衫有很多种，企鹅们都穿文化衫采访中，企鹅会说还有多少企鹅跟他穿一种文化衫有些企鹅没被采访到将这些回答放在answers数组里，返回活动中企鹅的最少数量Leetcode题目：https://leetcode.com/problems/rabbits-in-forest/
-27
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-02-26
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/02/24/企业高频算法面试题-2021-02-24-Problem-125-乐队演出问题/">
-                <h2 class="post-title">
-                    Problem 125 乐队演出问题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目每一个项目都有三个数，[a,b,c]表示这个项目a和b乐队参演，花费为c每一个乐队可能在多个项目里都出现了，但是只能被挑一次nums是可以挑选的项目数量，所以一定会有nums2只乐队被挑选出来返回一共挑nums轮(也就意味着一定请到所有的乐队)，最少花费是多少如果怎么都无法在nums轮请到nums2只乐队且每只乐队只能被挑一次返回-1nums&lt;9，programs长度小于500每组......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-02-24
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/02/21/企业高频算法面试题-2021-02-21-Problem-124-表达式添加运算符/">
-                <h2 class="post-title">
-                    Problem 124 表达式添加运算符
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode 题目 : 
-https://leetcode.com/problems/expression-add-operators/
-自己可以试试普通递归，优化了计算表达式的过程
-26节
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-02-21
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                      <a href="/tags/#Trie" title="Trie">Trie</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/02/20/企业高频算法面试题-2021-02-20-Problem-123-单词搜索II/">
-                <h2 class="post-title">
-                    Problem 123 单词搜索II
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode 题目 :https://leetcode.com/problems/word-search-ii/
-题目解析
-BFS + Prefix Tree
-
-代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859c......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-02-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
-                    
-                      <a href="/tags/#Recursion" title="Recursion">Recursion</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/02/20/企业高频算法面试题-2021-02-20-Problem-122-最窄区间变形题/">
-                <h2 class="post-title">
-                    Problem 122 最窄区间变形题
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    题目Leetcode 题目 :https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/—最窄区间变形有三个有序数组，分别在三个数组中挑出3个数，x、y、z返回 |x-y| + |y-z| + |z-x|最小是多少？
-26
-题目解析代码...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2021-02-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#algorithm" title="algorithm">algorithm</a>
                     
                 </div>
             
@@ -1632,7 +1633,7 @@ BFS + Prefix Tree
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="15">Flink</a>
             
         
             
@@ -1648,7 +1649,7 @@ BFS + Prefix Tree
             
         
             
-            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
+            <a href="/tags/#nlp" title="nlp" rel="7">nlp</a>
             
         
             
@@ -1850,7 +1851,9 @@ BFS + Prefix Tree
             
         
             
-            <a href="/tags/#算法" title="算法" rel="14">算法</a>
+            <a href="/tags/#算法" title="算法" rel="15">算法</a>
+            
+        
             
         
     </div>
@@ -1913,6 +1916,10 @@ BFS + Prefix Tree
     <ul>
       
         <li>
+          <a href="/2026/03/23/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%80%9D%E8%80%83/">算法总结-滑动窗口的思考</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
         </li>
       
@@ -1928,10 +1935,6 @@ BFS + Prefix Tree
           <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
-        <li>
-          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1944,7 +1947,7 @@ BFS + Prefix Tree
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -2008,6 +2011,8 @@ BFS + Prefix Tree
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
           <a href="categories/#算法总结"><li>算法总结</li></a>
+        
+          <a href="categories/#机器学习"><li>机器学习</li></a>
         
       </ul>
     </div>

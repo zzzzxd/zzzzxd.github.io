@@ -1207,9 +1207,360 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-十三-HBASE优化实操/">
+                <h2 class="post-title">
+                    (十三)HBASE优化实操
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    HBASE优化实操高可用1在HBase中Hmaster负责监控RegionServer的生命周期，均衡RegionServer的负载，如果Hmaster挂掉了，那么整个HBase集群将陷入不健康的状态，并且此时的工作状态并不会维持太久。所以HBase支持对Hmaster的高可用配置。
+关闭HBase集群1[root@centos1 home]# stop-hbase.sh
+在conf目录下创......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-十二-HBASE企业级调优/">
+                <h2 class="post-title">
+                    (十二)HBASE企业级调优
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    服务端
+hbase.regionserver.handler.count：rpc请求的线程数量，默认值是10，生产环境建议使用100，也不是越大越好，特别是当请求内容很大的时候，比如scan/put几M的数据，会占用过多的内存，有可能导致频繁的GC，甚至出现内存溢出。
+
+hbase.master.distributed.log.splitting：默认值为true，建议设为false。关闭h......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-十一-HBASE的协处理器/">
+                <h2 class="post-title">
+                    (十一)HBASE的协处理器
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    简介Hbase作为列族数据库最经常被人诟病的特性包括：无法轻易建立“二级索引”，难以执行求和、计数、排序等操作。
+1比如，在旧版本的(&lt;0.92)Hbase 中，统计数据表的总行数，需要使用 Counter 方法，执行一次 MapReduce Job 才能得到。虽然HBase在数据存储层中集成了MapReduce，能够有效用于数据表的分布式计算。然而在很多情况下，做一些简单的相加或者聚......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-十-HBASE的二级索引/">
+                <h2 class="post-title">
+                    (十)HBASE的二级索引
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    说明当涉及到了HBase的多条件组合查询时，要把多条件组合查询的字段都拼接在RowKey中显然不太可能，这个时候，我们可以通过设计HBase的二级索引来解决这个问题.
+设计原理
+二级索引的本质就是建立各列值与行键之间的映射关系
+如图，当要对F:C1这列建立索引时，只需要建立F:C1各列值到其对应行键的映射关系，如C11-&gt;RK1等，这样就完成了对F:C1列值的二级索引的构建，当要查询符......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/Hbase-2023-02-21-九-rowkey设计原则和案例/">
+                <h2 class="post-title">
+                    (九)rowkey设计原则和案例
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    热点问题当大量客户端的访问定向到群集的一个节点或仅几个节点时，就会发生热点。此访问可能是读取、可能是写入。大量的访问使负责管理该region的单台计算机不堪重负，从而导致性能下降并可能导致region不可用。这也可能对由同一regionserver管理的其他region产生不利影响，因为该主机无法满足请求的负载。设计数据访问模式非常重要，这样才能充分，均匀地利用群集。
+rowkey的重要性H......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/21/多线程-2023-02-21-线程池使用详解/">
+                <h2 class="post-title">
+                    线程池使用详解
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    背景为什么使用线程池问题一：反复创建线程开销大
+问题二：过多的线程会占用太多内存
+解决以上两个问题的思路
+
+用少量的线程——避免内存占用过多
+
+让这部分线程都保持工作，且可以反复执行任务——避免生命周期 的损耗
+
+
+使用线程池的好处
+加快响应速度 
+合理利用CPU和内存 
+统一管理
+
+线程池的使用场景
+服务器接收到大量请求时，使用线程池技术是非常合适的，它可 以大大减少线程的创建和销毁次数，......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#多线程" title="多线程">多线程</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/20/源码-jdk-2023-02-20-ThreadLocal-源码解析/">
+                <h2 class="post-title">
+                    ThreadLocal 源码解析
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    ThreadLocal 提供了一种方式，让在多线程环境下，每个线程都可以拥有自己独特的数据，并 且可以在整个线程执行过程中，从上而下的传递。
+用法演示1234567891011121314151617181920212223242526272829303132public class ThreadLocalTest &#123;    public static ThreadLocal&lt......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/20/源码-jdk-2023-02-20-ThreadPoolExecutor-源码解析/">
+                <h2 class="post-title">
+                    ThreadPoolExecutor 源码解析
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    整体架构图
+类结构首先我们来看一下 ThreadPoolExecutor 的类结构，如下图：
+
+接下来我们大概的看下这几个类的大概 含义：
+
+Executor：定义 execute 方法来执行任务，入参是 Runnable，无出参：
+
+
+ExecutorService：Executor 的功能太弱，ExecutorService 丰富了对任务的执行和管理 的功能，主要代码如下：
+123456......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/02/20/源码-jdk-2023-02-20-ReentrantLock-源码解析/">
+                <h2 class="post-title">
+                    ReentrantLock 源码解析
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    类注释ReentrantLock 中文我们习惯叫做可重入互斥锁，可重入的意思是同一个线程可以对同一个共 享资源重复的加锁或释放锁，互斥就是 AQS 中的排它锁的意思，只允许一个线程获得锁。
+我们来一起来看下类注释上都有哪些重要信息：
+
+可重入互斥锁，和 synchronized 锁具有同样的功能语义，但更有扩展性；
+构造器接受 fairness 的参数，fairness 是 ture 时，保......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-02-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#java" title="java">java</a>
+                    
+                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1234,322 +1585,6 @@
                 <div class="tags">
                     
                       <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-七-HBASE与其他框架整合/">
-                <h2 class="post-title">
-                    (七)HBASE与其他框架整合
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    整合的原因12341. HBase的最主要的目的是做数据存储2. Hive的最主要作用是做数据分析3. 整合的目的是为了方便的在项目中存储+分析4. hbase中的表数据在hive中能看到，hive中的表数据在hbase中也能看到
-Hive-To-Hbase1） 首先在hive中创建hbase能看到的表
-12345678910111213create table if not exists ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-六-HBASE的工作机制/">
-                <h2 class="post-title">
-                    (六)HBASE的工作机制
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    寻址机制我们应该知道读写操作都在 RegionServer 上发生，而每个 RegionSever 为一定数量的 Region 服务，那么 Client 要对某一行数据做读写访问时，是如何知道具体要去访问哪个 RegionServer 呢？那就是接下来我们要讨论的问题
-首先，我们要知道hbase:meta表的结构，有助于我们理解寻址过程。
-meta表结构参考
-
-
-新的寻址方式123在0.96......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-五-HBASE-API/">
-                <h2 class="post-title">
-                    (五)HBASE  API
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    Namespace-DDLhbase的连接服务测试API12345678910111213141516171819public class ConnectionDemo &#123;    public static void main(String[] args) throws IOException &#123;        // 1、获取配置对象        Configurati......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/16/Hbase-2023-02-16-四-HBASE-SHELL/">
-                <h2 class="post-title">
-                    (四)HBASE SHELL
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    提示：可以查看命令组，或者是命令的帮助信息
-123hbase(main):000:0&gt; helphbase(main):000:0&gt; help 'command group'hbase(main):000:0&gt; help 'command'
-Namespace操作1） list_namespace:查询所有命名空间
-1hbase(main):020:0&gt; list_n......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-16
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/Hbase-2023-02-15-三-HBASE的安装/">
-                <h2 class="post-title">
-                    (三)HBASE的安装
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    123456系统版本：centOS7.7HBASE版本：apache-hbase-1.2.1HADOOP版本：apache-hadoop-2.7.6JDK版本：jdk-1.8.0_45单机安装/伪分布式：1台服务器全分布式：3台服务器
-HBASE单机安装环境准备1）解压并更名
-123[root@node01 ~]# tar -zxvf hbase-1.2.1-bin.tar.gz -C /u......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/Hbase-2023-02-15-二-HBASEHBASE体系结构/">
-                <h2 class="post-title">
-                    (二)HBASEHBASE体系结构
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    RDBMS的表模型(扩展)我们先来了解以下传统型数据库的存储结构，也就是表模型（参考下图）：
-12- 关系型数据库采用表格的存储方式，数据按行和列进行存储，读取和查询十分方便。- 关系型数据库存储结构化的数据，存储前必须先定义好表结构，即各个列(字段)。
-
-关系型数据库的特点：
-1234567891011121. 存储结构：以表格的形式存储结构化的数据，需要事先定义好表的结构(字段名称，字段......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/Hbase-2023-02-15-一-HBASE概述/">
-                <h2 class="post-title">
-                    (一)HBASE概述
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    HBASE来源1231. hbase是一个开源的、分布式的、多版本的、可扩展的、非关系型的数据库。2. hbase是big table的开源的java版本，建立在hdfs基础之上，提供高可靠性、高性能的、列式存储、可伸缩、近实时读写的nosql的数据库系统3. 数据量越来越大，传统的关系型数据库不能满足存储和查询的需求。而hive虽然能够满足存储的要求，但是hive的本质也是利用底层的mr程......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#Hbase" title="Hbase">Hbase</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/源码-jdk-2023-02-15-AbstractQueuedSynchronizer源码解析（下）/">
-                <h2 class="post-title">
-                    AbstractQueuedSynchronizer源码解析（下）
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    释放锁释放锁的触发时机就是我们常用的 Lock.unLock () 方法，目的就是让线程释放对资源的访问权 （流程见整体架构图紫色路线）。
-释放锁也是分为两类，一类是排它锁的释放，一类是共享锁的释放，我们分别来看下。
-释放排它锁 release排它锁的释放就比较简单了，从队头开始，找它的下一个节点，如果下一个节点是空的，就会从 尾开始，一直找到状态不是取消的节点，然后释放该节点，源码如下：
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2023/02/15/源码-jdk-2023-02-15-AbstractQueuedSynchronizer源码解析（上）/">
-                <h2 class="post-title">
-                    AbstractQueuedSynchronizer源码解析（上）
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的方法 ，juc包中的很多锁都是利用AQS实现，如下图。如果我们掌握了AQS原理 也能实现一个锁。AQS方法较多 ，对于源码学习而言，一定要先熟悉原理，从原理入手，串通整个流程，放眼观全局，一定不要掉入到某个细节之中。
-
-
-整体结构
-这个图总结了 AQS 整体架构的组成，和部分场景的动态流向，图中两个点说明一下，方便大家 观看。
-
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2023-02-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#java" title="java">java</a>
-                    
-                      <a href="/tags/#jdk源码" title="jdk源码">jdk源码</a>
                     
                 </div>
             
@@ -1620,7 +1655,7 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="15">Flink</a>
             
         
             
@@ -1636,7 +1671,7 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
             
         
             
-            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
+            <a href="/tags/#nlp" title="nlp" rel="7">nlp</a>
             
         
             
@@ -1838,7 +1873,9 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
             
         
             
-            <a href="/tags/#算法" title="算法" rel="14">算法</a>
+            <a href="/tags/#算法" title="算法" rel="15">算法</a>
+            
+        
             
         
     </div>
@@ -1901,6 +1938,10 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
     <ul>
       
         <li>
+          <a href="/2026/03/23/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%80%9D%E8%80%83/">算法总结-滑动窗口的思考</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
         </li>
       
@@ -1916,10 +1957,6 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
           <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
-        <li>
-          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1932,7 +1969,7 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -1996,6 +2033,8 @@ AQS 同步器 是一种模版方法的设计，事先准备了一些锁相关的
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
           <a href="categories/#算法总结"><li>算法总结</li></a>
+        
+          <a href="categories/#机器学习"><li>机器学习</li></a>
         
       </ul>
     </div>

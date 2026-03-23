@@ -1207,9 +1207,381 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/12/数据仓库-2023-01-12-数据湖技术的发展/">
+                <h2 class="post-title">
+                    数据湖技术的发展
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    数据湖的定义Wikipedia是这样定义的:
+
+数据湖是一类存储数据自然/原始格式的系统或存储，通常是对象块或者文件。数据湖通常是企业中全量数据的单一存储 。全量数据包括原始系统所产生的原始数据拷贝以及为了各类任务而产生的转换数据，各类任务包括报表、可视化、高级分析和机器学习。数据湖中包括来自于关系型数据库中的结构化数据(行和列)、半结构化数据(如CSV、日志、XML、JSON)、非结构化数......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-12
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/10/数据仓库-2023-01-10-各大公司实时数仓实践/">
+                <h2 class="post-title">
+                    各大公司实时数仓实践
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    网易实时数仓实践
+​    此架构是基于Kudu的实时数据数仓，通过Data Stream自己写的数据采集工具来采集日志数据写入Kafka，使用NDC(类似CDC)服务可以将binlog数据推送到Kafka，通过Flink读取Kafka数据结果写入Kudu,基于Kudu构建实时数仓好处就是延迟低（毫秒/秒级）；支持upsert；支持水平扩展。但是也存在一些问题，例如：
+
+突然数据量增多，基于......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-10
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/10/数据仓库-2023-01-10-实时数仓的发展趋势-流批一体/">
+                <h2 class="post-title">
+                    实时数仓的发展趋势-流批一体
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    实时数仓现状当前基于Hive的离线数据仓库已经非常成熟，随着实时计算引擎的不断发展以及业务对于实时报表的产出需求不断膨胀，业界最近几年就一直聚焦并探索于实时数仓建设。根据数仓架构演变过程，在Lambda架构中含有离线处理与实时处理两条链路，其架构图如下：
+
+​    正是由于两条链路处理数据导致数据不一致等一些列问题所以才有了Kappa架构，Kappa架构如下：
+
+​        Kapp......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-10
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/09/数据仓库-2023-01-09-实时数仓建设思考/">
+                <h2 class="post-title">
+                    实时数仓建设思考
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    离线数仓与实时数仓区别
+
+
+
+对比方面
+离线数仓
+实时数仓
+
+
+
+
+架构选择
+传统大数据架构
+Kappa架构
+
+
+建设方法
+传统数仓主题建模理论
+传统数仓主题建模理论
+
+
+准确性
+准确度高
+准确度随着技术发展，准确度高
+
+
+实时性
+T+1
+分钟级别、秒级别
+
+
+稳定性
+稳定性好，方便重算
+对数据敏感稳定性差，需要考虑数据重新计算
+
+
+数据存储
+HDFS/Hive
+Kafka/HBase/Re......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2023/01/09/数据仓库-2023-01-09-数据仓库的架构演变/">
+                <h2 class="post-title">
+                    数据仓库的架构演变
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    数据仓库演变​        20世纪70年代，MIT(麻省理工)的研究员致力于研究一种优化的技术架构，该架构试图将业务处理系统和分析系统分开，即将业务处理和分析处理分为不同层次，针对各自的特点采取不同的架构设计原则，MIT的研究员认为这两种信息处理的方式具有显著差别，以至于必须采取完全不同的架构和设计方法。但受限于当时的信息处理能力，这个研究仅仅停留在理论层面。
+​        1991......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2023-01-09
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#实时数仓" title="实时数仓">实时数仓</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/21/LINUX运维-2022-12-21-CI、CD系列四之质量检测SonarQube/">
+                <h2 class="post-title">
+                    CI、CD系列四之质量检测SonarQube
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    前言SonarQube是代码质量检测的利器，可以说自动化运维工具必备，下面我们就使用它对开源项目进行检测，观察一下。
+环境准备123[root@linx01 sonarqube-7.7]# pwd/opt/apps/sonarqube-7.7[root@linx01 conf]# vim sonar.properties
+
+123[sonar@localhost linux-x86-64]$......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-21
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/20/LINUX运维-2022-12-20-CI、CD系列三之全流程部署开源项目zrlog/">
+                <h2 class="post-title">
+                    CI、CD系列三之全流程部署开源项目zrlog
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    概述​    我们以java开源项目zrlog为例，进行一次完整的部署，实现一套完整的CICD流程。
+​    整个过程如下：
+
+开发提交代码至gitlab
+
+jenkins拉取获取代码
+
+代码的质量检测;
+
+代码的编译;
+
+发布。
+
+
+环境准备源码准备123[root@localhost code]# git clone https://gitee.com/94fzb/zrlog.git[......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-20
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列二之实现CD/">
+                <h2 class="post-title">
+                    CI、CD系列二之实现CD
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    概述​    上篇文章我们对CI、CD的概念进行了大致的解释，这次我们就用Jenkins 利用脚本的方式进行自动化部署。在这之前我们再来解释一下。所谓CI就是持续集成，说白了就是你的代码存放在哪，现在企业中gitlab用的较多。我们将一个静态网页项目放在gitlab中。CD就是持续交付，持续部署。这次我们演示持续部署，即如何自动化的将代码从gitlab中拉取然后部署到服务器上。
+环境准备​ ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2022/12/19/LINUX运维-2022-12-19-CI、CD系列一之实现方式/">
+                <h2 class="post-title">
+                    CI、CD系列一之实现方式
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    CI、CD概述​    CI、CD是现在互联网公司中很普遍的技术了。它指的是持续集成，持续交付，持续部署。所谓的持续，说白了就是让开发，测试，上线部署整个过程能像流水一样持续的进行下去。假如没有CI、CD ，那项目的开发，开发完成后的测试，那这个过程涉及到的源码就需要我们手动拷贝，等测试完成后，代码上线部署，依然需要我们打包，编译最终传到服务器部署，将是一个完全靠人力的过程，费时费力。而CI......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2022-12-19
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1234,350 +1606,6 @@
                 <p class="post-meta" style="margin: 10px 0;">
                     Posted by Dante on
                     2022-12-19
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/15/LINUX运维-2022-12-15-系统负载高的原因及排查思路/">
-                <h2 class="post-title">
-                    系统负载高的原因及排查思路
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    平均负载概述系统负载反映机器的压力情况，是日常工作中需要重点关注的指标，利用uptime命令可以进行查看如下 ：
-12[root@linx01 ~]# uptime 21:45:08 up  4:51,  2 users,  load average: 0.08, 0.04, 0.05
-从左到右含义依次是 当前时间、系统运行时间、正在登录用户数。过去 1 分钟、5 分钟、15 分钟的平均负载......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-15
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘使用的全流程/">
-                <h2 class="post-title">
-                    磁盘使用流程及企业分区方案
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    磁盘使用流程概述其实磁盘的使用，主要就是三个步骤，分区、格式化、挂载
-
-磁盘分区 :有了一块地,划分隔断. fdisk/parted
-
-格式化（创建文件系统） :对房间进行装修. mkfs
-
-挂载 :安装门窗,可以入住与使用. mount Linux下面设备必须要挂载才能访问与使用,没有挂载相当于房子没 有门窗. 挂载相当于给设备设置了一个入口.
-
-
-实战演示磁盘分区 对新添加的sdb磁盘划......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘空间不足案例分析/">
-                <h2 class="post-title">
-                    磁盘空间不足案例分析
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言 工作中可能会遇到no space left on device 这个问题  也就是磁盘满了，原因有很多种，下面进行分析并对问题进行复现，最后对排查问题的方法以及使用到的命令进行总结。
-原因大文件造成block不足这种算是真实的磁盘用满了
-复现1234567891011121314151617181920[root@linx01 ~]# df -h文件系统        容量  已用  ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-磁盘分区实战/">
-                <h2 class="post-title">
-                    fdisk磁盘分区实战
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    环境准备​    此次我们在虚拟机上添加磁盘进行操作。具体的添加操作，由于不同的虚拟机添加方法不一样就不在叙述了。
-添加完磁盘后，使用lsblk命令可以查看所以的块设备
-
-可以看到，当前虚拟机上共有三块设备，两块硬盘，一块光盘，只要能看到自己添加的硬盘即可。
-磁盘分区fdisk分区指令1fdisk [选项][参数]
-​    fdisk 指令是 Linux 下通用的磁盘分区工具，它可以操纵硬......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-SWAP分区实战/">
-                <h2 class="post-title">
-                    SWAP分区实战
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    概述swap 交换分区.内存不足的时候临时充当内存.
-创建swap分区通过文件创建swap分区12345678910111213141516171819[root@linx01 ~]# dd if=/dev/zero of=/tmp/t count=100 bs=10M记录了100+0 的读入记录了100+0 的写出1048576000字节(1.0 GB)已复制，1.28384 秒，817 ......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux的磁盘管理体系/">
-                <h2 class="post-title">
-                    Linux的磁盘管理体系
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    　前言磁盘相关的知识是Linux系统中的重头戏，需要了解的点比较多。但现在随着云计算的兴起，在很多企业中很少碰到物理服务器了也就不会接触到屋里磁盘。所以更多的是停留在使用的层面。下面我们就系统的回顾一下linux的磁盘知识。
-磁盘管理基础磁盘分类与接口磁盘分类:
-
-机械硬盘HDD
-固态硬盘SSD
-
-磁盘接口分类:
-
-
-
-
-类型
-磁盘类型
-适应场景
-
-
-
-
-sata
-机械、固态
-家用更多
-
-
-......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LINUX" title="LINUX">LINUX</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-sed、awk的混合使用/">
-                <h2 class="post-title">
-                    sed、awk的混合使用
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux中的正则表达式/">
-                <h2 class="post-title">
-                    Linux中的正则表达式
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ...
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
-                </p>
-                <div class="tags">
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2022/12/14/LINUX运维-2022-12-14-Linux的特殊符号总结/">
-                <h2 class="post-title">
-                    Linux的特殊符号总结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    前言linux系统中充满着各种各式的符号，尤其是在书写shell脚本时候，更是明显，今天索性把所有常见的符号进行总结，方便记忆。
-引号
-
-
-
-符号
-含义
-
-
-
-
-反引号:`` 或 $()
-优先执行,先执行里面的命令. 一般创建/打包的时候给文件名加上个日期.
-
-
-单引号: ‘’
-所见即所得,单引号里面的内容会原封不动的输出.
-
-
-双引号: “”
-与单引号类似,但是对引号的里面特殊符号会进行解......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2022-12-14
                 </p>
                 <div class="tags">
                     
@@ -1652,7 +1680,7 @@ sata
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="15">Flink</a>
             
         
             
@@ -1668,7 +1696,7 @@ sata
             
         
             
-            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
+            <a href="/tags/#nlp" title="nlp" rel="7">nlp</a>
             
         
             
@@ -1870,7 +1898,9 @@ sata
             
         
             
-            <a href="/tags/#算法" title="算法" rel="14">算法</a>
+            <a href="/tags/#算法" title="算法" rel="15">算法</a>
+            
+        
             
         
     </div>
@@ -1933,6 +1963,10 @@ sata
     <ul>
       
         <li>
+          <a href="/2026/03/23/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%80%9D%E8%80%83/">算法总结-滑动窗口的思考</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
         </li>
       
@@ -1948,10 +1982,6 @@ sata
           <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
-        <li>
-          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -1964,7 +1994,7 @@ sata
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -2028,6 +2058,8 @@ sata
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
           <a href="categories/#算法总结"><li>算法总结</li></a>
+        
+          <a href="categories/#机器学习"><li>机器学习</li></a>
         
       </ul>
     </div>

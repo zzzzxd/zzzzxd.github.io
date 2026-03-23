@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Flink的四类场景题目 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/16/大数据-Flink的四类场景/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                            
+                        </div>
+                        <h1>Flink的四类场景题目</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-16
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">3.4k</span> and
+                                Reading Time <span class="post-count">13</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>Flink 面试中的场景题，核心永远在考这三个矛盾：</p>
+<ol>
+<li><strong>状态大小 vs. 处理延迟</strong>（数据来了要存多久？存哪里？）</li>
+<li><strong>乱序 vs. 准确性</strong>（数据晚到了怎么办？窗口怎么关？）</li>
+<li><strong>Exactly-Once vs. 性能</strong>（故障恢复后数据会不会重复？怎么保证不重不漏？）</li>
+</ol>
+<p>下面是4种常见的场景题目，核心就是这4种</p>
+<hr>
+<h3 id="题目一：实时打宽（流join-维表join）"><a href="#题目一：实时打宽（流join-维表join）" class="headerlink" title="题目一：实时打宽（流join+维表join）"></a>题目一：实时打宽（流join+维表join）</h3><p><strong>场景描述：</strong><br>订单表和支付表打款，一笔订单，多笔支付，但可能间隔10天，订单10天之后才支付。</p>
+<ul>
+<li><strong>输入流</strong>：订单创建流 (<code>order_id</code>, <code>create_time</code>, <code>amount</code>) 和 支付成功流 (<code>order_id</code>, <code>pay_time</code>)。</li>
+<li><strong>要求</strong>：<ol>
+<li>支付要关联上所有的订单</li>
+<li>订单可能延迟，要考虑延迟情况</li>
+<li>不能占满内存</li>
+</ol>
+</li>
+</ul>
+<p><strong>解题思路</strong></p>
+<p>一: 把订单看成维表【把先来的当成维表，后来的当主流】</p>
+<p>可以先双流join  拉1h窗口 【防止订单出现延迟，支付来了订单还没来】，关联到就打宽写入。关联不到，再查订单表补充历史数据。打宽写入。</p>
+<p>二：两边同步查，谁后来谁补充。【还是得先join。再查历史】</p>
+<p>订单来了，查支付表，关联支付数据，打宽【这样就防止订单延迟，导致支付没关联上】，维护好订单实时数据。同理支付来了， 先查订单表，补充订单数据，维护好<br>实时的支付数据。但是这样当时查不到，延迟的数据来了 查到就补上了。就担心一种非常极端的情况，正好两份数据来了，支付查订单还没查到，对应订单查支付没查到，【==背压情况 或者并发情况==】</p>
+<p>所以还是得开窗口，先开1h窗口，应对并发，被压情况，join完，再去查对应表 补充。<br>比如订单延迟一小时以内，支付来了等你一小时，窗口内就解决了，不用查订单表。<br>或者 支付来了等一小时吗，没关联上，需要查订单表，发现是历史订单 ，一样打宽<br>或者 支付来了等一小时 没关联上，查订单表 也没查到，正常维护支付表就行。<br>等延迟订单来了，等一小时，没有交易数据。或者 有交易数据【可能支付多次】，所以还得查支付表，关联所有的支付 打宽。</p>
+<p>所以总结，拉宽一小时，订单来了，join完，查订单表 补充所有交易（防止它延迟），交易来了，join完，有关联的订单就打宽结束，没有订单，得查订单表补充历史<br>然后结束。</p>
+<p>所以其实就是看权衡，正常就是join，join完支付查订单就可以，但是要不要考虑延迟一小时的订单，如果要考虑，延迟的订单还得查支付，这可能产生大量无效的查询【正常订单，也有可能未支付的】，也可以判断一下是延迟一小时的订单进行侧输出。</p>
+<h3 id="题目二：电商“支付超时未付”监控（状态-TTL-与定时器）"><a href="#题目二：电商“支付超时未付”监控（状态-TTL-与定时器）" class="headerlink" title="题目二：电商“支付超时未付”监控（状态 TTL 与定时器）"></a>题目二：电商“支付超时未付”监控（状态 TTL 与定时器）</h3><p><strong>场景描述：</strong><br>用户下单后，需要在 <strong>30 分钟</strong> 内完成支付。如果 30 分钟后仍未支付，系统需要自动取消订单并发送通知。</p>
+<ul>
+<li><strong>输入流</strong>：订单创建流 (<code>order_id</code>, <code>create_time</code>, <code>amount</code>) 和 支付成功流 (<code>order_id</code>, <code>pay_time</code>)。</li>
+<li><strong>要求</strong>：<ol>
+<li>实时识别出哪些订单超时未付。</li>
+<li>如果用户在第 29 分钟支付了，不能误报取消。</li>
+<li>数据量极大（百万级订单/分钟），不能把所有未支付订单一直存在内存里直到超时。</li>
+</ol>
+</li>
+</ul>
+<p><strong>❓ 挑战点：</strong></p>
+<ul>
+<li>如果用 <code>IntervalJoin</code> 等待 30 分钟，状态会爆炸吗？</li>
+<li>如果支付流比订单流晚到（乱序），怎么处理？</li>
+<li>如何高效地清理那些已经支付的订单状态，防止内存泄漏？</li>
+</ul>
+<p><strong>核心考点：</strong> <code>ProcessFunction</code> + <code>EventTime Timer</code> + <code>State TTL</code></p>
+<p><strong>解题思路：</strong></p>
+<p>订单</p>
+<ol>
+<li>订单来，查支付状态 <pre><code>   1) 查到了，说明订单晚来，就直接取消订单状态，取消支付状态，取消定时器
+   2） 没查到，支付没来，正常注册 订单状态TTL 35，30min定时器2.定时器触发
+</code></pre></li>
+<li><p>触发时候，发送判定，不要直接删除订单状态，而是修改这个状态的判定标识，是否上报，用于支付流来判定</p>
+</li>
+<li><p>支付来了查订单状态</p>
+<p>1）查到了，未上报，那属于正常，就取消定时器，清楚 订单状态，支付状态 都取消即可。<br>2）查到了，上报了，那就侧输出</p>
+<p>3）没查到。 说明订单延迟，那就直接存支付状态TTL 35(取决对订单延迟的容忍)</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 先分别 keyBy (必须保证 Key 类型一致)</span></span><br><span class="line">KeyedStream&lt;Order, String&gt; keyedOrders = orderStream.keyBy(o -&gt; o.orderId);</span><br><span class="line">KeyedStream&lt;Pay, String&gt; keyedPays = payStream.keyBy(p -&gt; p.orderId);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 连接两条流</span></span><br><span class="line">ConnectedStreams&lt;Order, Pay&gt; connectedStreams = keyedOrders.connect(keyedPays);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 使用 CoProcessFunction 处理</span></span><br><span class="line"><span class="comment">// 这个函数有两个输入方法：processElement1 (订单) 和 processElement2 (支付)</span></span><br><span class="line">DataStream&lt;String&gt; result = connectedStreams.process(<span class="keyword">new</span> CoProcessFunction&lt;Order, Pay, String&gt;() &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义共享状态 (这就是“查”的关键)</span></span><br><span class="line">    <span class="keyword">private</span> ValueState&lt;Pay&gt; payState; </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(Configuration parameters)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 初始化状态</span></span><br><span class="line">        payState = getRuntimeContext().getState(<span class="keyword">new</span> ValueStateDescriptor&lt;&gt;(<span class="string">"pay-state"</span>, Pay<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 【订单流】进来时，在这里查支付状态</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processElement1</span><span class="params">(Order order, Context ctx, Collector&lt;String&gt; out)</span> </span>&#123;</span><br><span class="line">        Pay pay = payState.value(); <span class="comment">// &lt;--- 看！这里就能查到支付流刚才存的数据</span></span><br><span class="line">        <span class="keyword">if</span> (pay != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 查到了：说明支付先来，订单晚到 -&gt; 匹配成功</span></span><br><span class="line">            out.collect(<span class="string">"Matched!"</span>);</span><br><span class="line">            payState.clear(); <span class="comment">// 用完清除</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 没查到：说明支付还没来 -&gt; 存订单，等支付</span></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 【支付流】进来时</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processElement2</span><span class="params">(Pay pay, Context ctx, Collector&lt;String&gt; out)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 同理，这里也可以查订单状态</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        payState.update(pay); <span class="comment">// 把支付存进去，让上面的 processElement1 能查到</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>一句话总结：</strong> 用 Timer 做“延迟检测”，用 State 做“中间暂存”，用支付事件做“提前消警”。</p>
+<hr>
+<h3 id="题目三：实时-GMV-去重统计（乱序与窗口关闭）"><a href="#题目三：实时-GMV-去重统计（乱序与窗口关闭）" class="headerlink" title="题目三：实时 GMV 去重统计（乱序与窗口关闭）"></a>题目三：实时 GMV 去重统计（乱序与窗口关闭）</h3><p><strong>场景描述：</strong><br>需要实时计算每个小时的 <strong>GMV (交易总额)</strong> 和 <strong>UV (独立访客数)</strong>。</p>
+<ul>
+<li><strong>输入流</strong>：交易流 (<code>user_id</code>, <code>order_id</code>, <code>amount</code>, <code>event_time</code>)。</li>
+<li><strong>痛点</strong>：<ol>
+<li>网络波动导致数据严重乱序，有的数据可能晚到 <strong>5 分钟</strong>。</li>
+<li>业务要求：<strong>每小时整点必须产出一次数据</strong>给大屏展示，不能等 5 分钟。</li>
+<li>但如果 5 分钟后迟到的数据来了，之前的整点数据需要 <strong>修正</strong>。</li>
+</ol>
+</li>
+</ul>
+<p><strong>❓ 挑战点：</strong></p>
+<ul>
+<li>如何在“准时输出”和“数据准确”之间做平衡？</li>
+<li>Flink 的 <code>Allowed Lateness</code> 和 <code>Side Output</code> 怎么用在这里？</li>
+<li>下游（如 MySQL/Redis）如何支持“修正”操作？</li>
+</ul>
+<p><strong>核心考点：</strong> <code>WindowFunction</code> + <code>Allowed Lateness</code> + <code>Side Output</code> + <code>Upsert</code></p>
+<p><strong>解题思路：</strong></p>
+<ol>
+<li><strong>主窗口设置</strong>：<ul>
+<li>使用 <code>TumblingEventTimeWindows(1 hour)</code>。</li>
+<li>设置 <code>allowedLateness(Time.minutes(5))</code>。</li>
+<li><strong>效果</strong>：窗口在整点触发第一次计算（产出初版数据），但窗口状态不立即销毁，继续保留 5 分钟。这 5 分钟内来的迟到数据会自动累加，并<strong>再次触发</strong>窗口计算，输出修正后的结果。</li>
+</ul>
+</li>
+<li><strong>侧输出兜底（极度迟到）</strong>：<ul>
+<li>设置 <code>.sideOutputLateData(lateTag)</code>。</li>
+<li>超过 5 分钟的数据会被打入侧输出流。</li>
+<li>单独起一个作业处理侧输出流：将这些极晚的数据聚合后，发送到 <strong>Kafka 修正 Topic</strong> 或直接 <strong>Upsert</strong> 到下游数据库。</li>
+</ul>
+</li>
+<li><strong>下游存储设计</strong>：<ul>
+<li>下游（如 MySQL/HBase）的主键设计为 <code>(time_window, dimension)</code>。</li>
+<li>Flink 开启 <strong>Checkpoint</strong> 保证 Exactly-Once。</li>
+<li>当窗口二次触发时，Flink 会发送新的聚合值，下游执行 <code>INSERT ON DUPLICATE KEY UPDATE</code> (MySQL) 或 <code>Put</code> (HBase)，实现<strong>自动修正</strong>。</li>
+</ul>
+</li>
+<li><strong>UV 去重难点</strong>：<ul>
+<li>不能用 <code>SUM</code>，要用 <code>HyperLogLog</code> (近似去重) 或者 <code>BitMap</code>。</li>
+<li>如果在允许迟到时间内，BitMap 需要合并。Flink 有现成的 <code>AggregateFunction</code> 支持 BitMap 合并。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SingleOutputStreamOperator&lt;Result&gt; resultStream = stream</span><br><span class="line">    .keyBy(order -&gt; <span class="string">"global"</span>) <span class="comment">// 全局统计 GMV/UV，或者按业务维度 keyBy</span></span><br><span class="line">    .window(TumblingEventTimeWindows.of(Time.hours(<span class="number">1</span>)))</span><br><span class="line">    <span class="comment">// 1. 设置允许迟到时间 (窗口触发后，继续接收数据的时间)</span></span><br><span class="line">    .allowedLateness(Time.minutes(<span class="number">2</span>)) </span><br><span class="line">    <span class="comment">// 2. 设置侧输出，处理超过 allowedLateness 的数据</span></span><br><span class="line">    .sideOutputLateData(lateOutputTag) </span><br><span class="line">    .process(<span class="keyword">new</span> MyWindowProcessFunction()); <span class="comment">// 自定义处理逻辑 (累加 GMV, Bitmap 去重 UV)</span></span><br></pre></td></tr></table></figure>
+<p>补充hll的使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.clearspring.analytics.stream.cardinality.HyperLogLog;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.ValueState;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.ValueStateDescriptor;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.configuration.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.functions.ProcessWindowFunction;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.windowing.windows.TimeWindow;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.util.Collector;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UvHyperLogLogFunction</span> <span class="keyword">extends</span> <span class="title">ProcessWindowFunction</span>&lt;<span class="title">Order</span>, <span class="title">UvResult</span>, <span class="title">String</span>, <span class="title">TimeWindow</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义状态：存储 HyperLogLog 对象</span></span><br><span class="line">    <span class="comment">// 注意：HLL 对象需要序列化，或者只存字节数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> ValueState&lt;<span class="keyword">byte</span>[]&gt; hllState;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(Configuration parameters)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 存储 HLL 的字节数组，因为 HLL 对象本身可能不好序列化，转成 byte[] 最稳</span></span><br><span class="line">        hllState = getRuntimeContext().getState(</span><br><span class="line">            <span class="keyword">new</span> ValueStateDescriptor&lt;&gt;(<span class="string">"hll-state"</span>, <span class="keyword">byte</span>[]<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">        )</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(String key, Context context, Iterable&lt;Order&gt; elements, Collector&lt;UvResult&gt; out)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1. 从状态中恢复 HLL (如果是第一次，则新建)</span></span><br><span class="line">            <span class="keyword">byte</span>[] currentBytes = hllState.value();</span><br><span class="line">            HyperLogLog hll;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (currentBytes != <span class="keyword">null</span>) &#123;</span><br><span class="line">                hll = HyperLogLog.build(currentBytes);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 初始化：p=14 (精度), 占用内存约 2^14 * 1 byte = 16KB, 误差 ~0.8%</span></span><br><span class="line">                <span class="comment">// p 越大越准，内存越大。p=14 是常用平衡点。</span></span><br><span class="line">                hll = <span class="keyword">new</span> HyperLogLog(<span class="number">14</span>); </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 2. 遍历窗口内的所有数据，添加到 HLL</span></span><br><span class="line">            <span class="keyword">for</span> (Order order : elements) &#123;</span><br><span class="line">                <span class="comment">// HLL 直接接受 String 或 Long，内部会自动 Hash</span></span><br><span class="line">                hll.offer(order.user_id); </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 3. 更新状态 (将新的 HLL 转回 byte[] 存回去)</span></span><br><span class="line">            <span class="comment">// 注意：某些 HLL 库支持原地修改，这里为了安全重新序列化</span></span><br><span class="line">            hllState.update(hll.getBytes());</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 4. 窗口结束时输出结果</span></span><br><span class="line">            <span class="keyword">long</span> estimatedUv = hll.count();</span><br><span class="line">            </span><br><span class="line">            out.collect(<span class="keyword">new</span> UvResult(</span><br><span class="line">                key, </span><br><span class="line">                context.window().getStart(), </span><br><span class="line">                context.window().getEnd(), </span><br><span class="line">                estimatedUv,</span><br><span class="line">                <span class="string">"HLL_Estimated"</span></span><br><span class="line">            ));</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"HLL processing error"</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果 POJO</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UvResult</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String dimensionKey;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> windowStart;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> windowEnd;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> uv;</span><br><span class="line">    <span class="keyword">public</span> String method;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UvResult</span><span class="params">(String k, <span class="keyword">long</span> s, <span class="keyword">long</span> e, <span class="keyword">long</span> uv, String m)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dimensionKey = k; <span class="keyword">this</span>.windowStart = s; <span class="keyword">this</span>.windowEnd = e; <span class="keyword">this</span>.uv = uv; <span class="keyword">this</span>.method = m;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> String.format(<span class="string">"Window[%d-%d] Key=%s UV=%d (%s)"</span>, windowStart, windowEnd, dimensionKey, uv, method);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>一句话总结：</strong> 利用 <code>Allowed Lateness</code> 换取“准实时修正”，利用 <code>Side Output</code> 处理“极端异常”，下游依靠主键更新实现最终一致。</p>
+<hr>
+<h3 id="题目四：动态规则风控引擎（广播状态与配置热更）"><a href="#题目四：动态规则风控引擎（广播状态与配置热更）" class="headerlink" title="题目四：动态规则风控引擎（广播状态与配置热更）"></a>题目四：动态规则风控引擎（广播状态与配置热更）</h3><p><strong>场景描述：</strong><br>交易反欺诈系统。需要根据一套<strong>动态规则</strong>拦截可疑交易。</p>
+<ul>
+<li><strong>规则示例</strong>：<ul>
+<li>“单笔金额 &gt; 5000”</li>
+<li>“同一用户 1 分钟内交易次数 &gt; 3”</li>
+<li>“特定黑名单 IP”</li>
+</ul>
+</li>
+<li><strong>特点</strong>：<ol>
+<li>规则由运营人员在后台配置，<strong>随时可能变更</strong>（新增、修改、删除）。</li>
+<li>交易流量巨大（十万级 QPS），不能每来一笔交易就去查数据库。</li>
+<li>规则变更后，必须<strong>秒级生效</strong>。</li>
+</ol>
+</li>
+</ul>
+<p><strong>❓ 挑战点：</strong></p>
+<ul>
+<li>如何将“静态的交易流”和“动态变化的规则流”关联起来？</li>
+<li>如何保证所有并行子任务（Parallelism）的规则是<strong>一致</strong>的？</li>
+<li>如果规则包含“1 分钟内次数 &gt; 3”这种状态依赖，怎么算？</li>
+</ul>
+<p><strong>核心考点：</strong> <code>Broadcast Stream</code> + <code>BroadcastProcessFunction</code> + <code>MapState</code></p>
+<p><strong>解题思路：</strong></p>
+<ol>
+<li><strong>双流架构</strong>：<ul>
+<li><strong>交易流 (Data Stream)</strong>：正常处理，无状态或仅维护用户行为状态。</li>
+<li><strong>规则流 (Broadcast Stream)</strong>：来自 Kafka 的配置 Topic，设置为 <strong>Broadcast</strong>。</li>
+</ul>
+</li>
+<li><strong>广播状态 (Broadcast State)</strong>：<ul>
+<li>使用 <code>connect()</code> 连接两流。</li>
+<li>规则流的数据会被广播到<strong>每一个并行子任务</strong>。</li>
+<li>在 <code>BroadcastProcessFunction</code> 中，将规则解析并存入 <code>MapState&lt;String, Rule&gt;</code> (Key 是规则 ID，Value 是规则对象)。</li>
+<li><strong>优势</strong>：规则变更时，所有子任务瞬间更新内存中的规则，无需查库，零延迟生效。</li>
+</ul>
+</li>
+<li><strong>交易处理逻辑</strong>：<ul>
+<li>当交易事件到来时，从 <code>Broadcast State</code> 中读取<strong>最新</strong>的所有规则。</li>
+<li>遍历规则进行匹配。</li>
+<li>如果是“频次类规则”（如 1 分钟 &gt; 3 次）：需要在 <code>ValueState</code> 中维护该用户的滑动计数窗口，每次匹配时更新计数并判断。</li>
+</ul>
+</li>
+<li><strong>一致性保障</strong>：<ul>
+<li>Flink 的 Checkpoint 机制会同时保存交易状态和广播规则状态。</li>
+<li>故障恢复时，规则和状态会一起恢复，保证不会漏判或误判。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 准备流</span></span><br><span class="line">DataStream&lt;Transaction&gt; transactionStream = ...; <span class="comment">// 主流</span></span><br><span class="line">DataStream&lt;Rule&gt; ruleStream = ...; <span class="comment">// 规则流 (来自 Kafka/MySQL CDC)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 广播规则流</span></span><br><span class="line">BroadcastStream&lt;Rule&gt; broadcastRuleStream = ruleStream.broadcast(RULE_STATE_DESC);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 连接流 (Connect)</span></span><br><span class="line"><span class="comment">// 注意：transactionStream 可以 keyBy，但 broadcastRuleStream 不能 keyBy</span></span><br><span class="line">ConnectedStreams&lt;Transaction, Rule&gt; connectedStreams = transactionStream</span><br><span class="line">    .connect(broadcastRuleStream);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 处理连接后的流</span></span><br><span class="line">SingleOutputStreamOperator&lt;Alert&gt; result = connectedStreams.process(</span><br><span class="line">    <span class="keyword">new</span> KeyedBroadcastProcessFunction&lt;String, Transaction, Rule, Alert&gt;() &#123; </span><br><span class="line">        <span class="comment">// 注意：这里用了 KeyedBroadcastProcessFunction，因为主流需要 keyed state (统计次数)</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// --- 部分 A: 处理主流数据 (交易) ---</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processElement</span><span class="params">(Transaction tx, ReadOnlyContext ctx, Collector&lt;Alert&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            <span class="comment">// 1. 从广播状态获取最新规则 (只读)</span></span><br><span class="line">            MapState&lt;String, Rule&gt; rulesState = ctx.getBroadcastState(RULE_STATE_DESC);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 2. 遍历所有规则，检查当前交易是否命中</span></span><br><span class="line">            <span class="keyword">for</span> (Map.Entry&lt;String, Rule&gt; entry : rulesState.entries()) &#123;</span><br><span class="line">                Rule rule = entry.getValue();</span><br><span class="line">                <span class="keyword">if</span> (checkRule(tx, rule, ctx)) &#123; <span class="comment">// 自定义检查逻辑</span></span><br><span class="line">                    out.collect(<span class="keyword">new</span> Alert(tx.orderId, rule.ruleId, <span class="string">"拦截!"</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// --- 部分 B: 处理广播流数据 (规则变更) ---</span></span><br><span class="line">        <span class="comment">// 在 KeyedBroadcastProcessFunction 中，也可以处理规则变更，逻辑同上面的 RuleBroadcastProcessFunction</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processBroadcastElement</span><span class="params">(Rule rule, Context ctx, Collector&lt;Alert&gt; out)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">            MapState&lt;String, Rule&gt; rulesState = ctx.getBroadcastState(RULE_STATE_DESC);</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"DELETE"</span>.equals(rule.action)) &#123;</span><br><span class="line">                rulesState.remove(rule.ruleId);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                rulesState.put(rule.ruleId, rule);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ... 其他方法 (onTimer 等)</span></span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>一句话总结：</strong> 用 <strong>Broadcast Stream</strong> 解决“大流量关联小维度动态配置”的问题，实现配置热更与高性能匹配的完美结合。</p>
+<hr>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/17/算法总结-快慢指针技巧/" data-toggle="tooltip" data-placement="top" title="快慢指针技巧">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/16/算法总结-接雨水问题的思考/" data-toggle="tooltip" data-placement="top" title="接雨水问题的思考">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目一：实时打宽（流join-维表join）"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目一：实时打宽（流join+维表join）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目二：电商“支付超时未付”监控（状态-TTL-与定时器）"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">题目二：电商“支付超时未付”监控（状态 TTL 与定时器）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目三：实时-GMV-去重统计（乱序与窗口关闭）"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">题目三：实时 GMV 去重统计（乱序与窗口关闭）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#题目四：动态规则风控引擎（广播状态与配置热更）"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">题目四：动态规则风控引擎（广播状态与配置热更）</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Flink" title="Flink">Flink</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

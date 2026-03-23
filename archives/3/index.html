@@ -1207,9 +1207,271 @@
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/03/算法总结-单调栈技巧总结/">
+                <h2 class="post-title">
+                    单调栈技巧总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    核心逻辑只有一句话：你想找什么样的边界，就维护什么样的单调性。
+单调栈适用于 谷峰 或者 谷底。寻找左边和右边第一个比它大（小）的，或者一侧 右（左面）面比它大(小)
+
+🗺️ 单调栈“决策地图”
+
+
+
+你想找的目标
+需要维护的栈类型
+触发“弹出”的条件
+栈内元素特征 (从底到顶)
+典型题目
+
+
+
+
+右边第一个比它大  (Next Greater)
+单调递减栈
+当前值 &gt; 栈顶值
+大 ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-03
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/03/算法总结-动态规划的六大母题/">
+                <h2 class="post-title">
+                    动态规划题型总结
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    1️⃣ LIS 模型 (最长上升子序列及其变种)核心逻辑：维护一个“潜力最大”的序列。要么用 $O(N^2)$ 的线性 DP，要么用 $O(N \log N)$ 的 贪心 + 二分 (tails 数组)。状态定义：
+
+$O(N^2)$: dp[i] = 以 nums[i] 结尾的最长上升子序列长度。
+$O(N \log N)$: tails[k] = 长度为 k+1 的上升子序列中，结尾元素......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-03
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/02/LLM-原生peft与unsloth对比/">
+                <h2 class="post-title">
+                    原生peft和unsloth对比
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    核心差异记忆点：
+
+导入包不同：原生用 transformers，Unsloth 用 unsloth。
+模型加载不同：原生是 AutoModel...，Unsloth 是 FastLanguageModel（且必须指定 max_seq_length, load_in_4bit）。
+配置对象不同：原生手动拼凑 LoraConfig + BitsAndBytesConfig，Unsloth 直接......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-02
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#nlp" title="nlp">nlp</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/12/01/算法总结-滑动窗口思想/">
+                <h2 class="post-title">
+                    滑动窗口思想
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+“滑动窗口本质都是在枚举以 right 结尾的子串，只不过不需要完全枚举所有”
+
+
+✅为什么这么说？我们来展开这个洞察🧮 枚举所有子串的暴力方法（O(n²)）12345for (int right = 0; right &lt; n; right++) &#123;    for (int left = 0; left &lt;= right; left++) &#123;       ......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-12-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#算法" title="算法">算法</a>
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/11/20/LLM-什么是SFT？/">
+                <h2 class="post-title">
+                    LLM-什么是SFT？
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    你问到了一个非常核心且容易混淆的问题！我们来彻底厘清 SFT、PEFT、微调（Fine-tuning）之间的关系，并解释为什么 SFT 不用于 BERT 分类任务。
+
+一、先说结论（一句话概括）
+
+PEFT（Parameter-Efficient Fine-Tuning） 是一类 “只更新少量参数” 的微调技术总称（如 LoRA、Adapter、Prefix-Tuning）。
+SFT（Sup......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-11-20
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/11/17/LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比/">
+                <h2 class="post-title">
+                    LLM-PEFT-vs-Unsloth-vs-SWIFT-训练框架对比
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    非常好！我们来横向对比三大主流 PEFT 实现在 LoRA 和 QLoRA 场景下的使用差异，包括代码结构、性能特点和适用场景。你会清晰看到：
+
+哪个最简单？
+哪个最快？
+哪个适合中文/国产模型？
+
+
+🧩 对比概览表
+
+
+
+特性
+Hugging Face PEFT（原生）
+Unsloth
+SWIFT（ModelScope）
+
+
+
+
+开发方
+Hugging Face
+社区（Daniel Ha......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-11-17
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -1243,6 +1505,57 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
                     2025-11-17
                 </p>
                 <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2025/11/02/LLM-需要掌握的模型/">
+                <h2 class="post-title">
+                    工程师需要掌握的LLM
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                    
+✅ 一、终极建议：掌握 “5+3” 模型矩阵
+
+
+
+类别
+必掌握（5个）
+可选了解（3个）
+
+
+
+
+中文 NLP
+BERT / RoBERTa / ChatGLM / Qwen / bge
+ERNIE / MacBERT / NEZHA
+
+
+英文 NLP
+BERT / RoBERTa / Llama3 / T5 / sentence-transformers
+GPT-2 / XLNet /......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dante on
+                    2025-11-02
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#LLM" title="LLM">LLM</a>
                     
                 </div>
             
@@ -1329,318 +1642,6 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/08/05/LLM-什么是“微调”（Fine-tuning）？—-广义-vs-狭义/">
-                <h2 class="post-title">
-                    什么是“微调”（Fine-tuning）？
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    一、什么是“微调”（Fine-tuning）？—— 广义 vs 狭义✅广义微调（传统定义）
-在预训练模型基础上，用下游任务数据继续训练部分或全部参数。
-
-
-核心思想：迁移学习（Transfer Learning）
-
-典型操作
-： 
-
-冻结/不冻结 backbone
-加任务头（分类层、生成头等）
-用小学习率继续训练
-
-
-
-✅ 你用 BERT 做对联的例子，就是经典的广义微调！
-12# 你的做法......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-08-05
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#LLM" title="LLM">LLM</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/07/07/LLM-特征工程类别与数值型特征处理/">
-                <h2 class="post-title">
-                    特征工程-数值+类别特征处理
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    特征工程 数值 + 类别特征处理这是 机器学习项目中最常见的预处理模式，尤其适用于：
-
-结构化数据（如 CSV、数据库表）
-混合了数值和文本/类别特征
-使用线性模型、SVM、神经网络等
-
-🎯 为什么这么做？核心原因
-
-
-
-问题
-解决方案
-
-
-
-
-数值特征和类别特征处理方式不同
-不能用同一套规则
-
-
-缺失值处理策略不同
-数值用均值/中位数，类别用“缺失”标签
-
-
-缩放需求不同
-数值需要标准化......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-07-07
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#特征工程" title="特征工程">特征工程</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/06/27/LLM-梯度累积实现/">
-                <h2 class="post-title">
-                    梯度累积实现
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    
-🎯 问题背景：我想用“大锅炒菜”，但只有“小锅”假设你要做一道菜，最佳效果是同时炒 8 个鸡蛋（这叫 理想 batch size = 8）。
- 但你的灶台只配了一个 小锅，一次最多炒 2 个蛋（GPU 显存限制）。怎么办？
-
-❌ 直接炒 2 个 → 味道不够（训练不稳定）
-✅ 分 4 次炒，最后把味道“混合”起来 → 等效于炒了 8 个！
-
-这就是 梯度累积的核心思想。
-
-🔬 技术对应......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-06-27
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/06/20/LLM-理解神经网络/">
-                <h2 class="post-title">
-                    神经网络的理解小结
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    理解神经网络
-你这个问题 非常深刻，触及了深度学习的核心哲学和现实困境。你的理解已经非常接近真相了，我们来系统地、诚实地回答你：
-✅ 你的想法大体是对的，但我们可以更精确、更深入地拆解它。✅ 一、你说的“对”的部分（完全正确）
-
-神经网络是“通过降低损失来学习”•  给它数据 + 标签•  定义损失函数（如预测值和真实值的差距）•  反向传播计算梯度•  梯度下降更新权重•  目标：让损失越......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-06-20
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/06/12/LLM-交叉熵损失函数/">
-                <h2 class="post-title">
-                    交叉熵损失函数的含义解释
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ✅ 什么是交叉熵？为什么它能作为损失函数？🌟 一句话总结交叉熵（Cross-Entropy） 是一个衡量“模型预测的概率分布”与“真实标签分布”之间差距的指标。差距越大，损失越大。
- 模型训练的目标就是：让交叉熵损失尽可能小。
-🎯 一、从一个分类任务说起假设你在做一个图像分类任务：判断一张图是 猫、狗、还是鸟。
-
-真实标签
-这是一只猫 用独热编码表示为：
-[1, 0, 0]
-
-模型预测：......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-06-12
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/06/09/LLM-SGD与全量GD对比/">
-                <h2 class="post-title">
-                    BGD与SGD
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    ✅ SGD vs 全量梯度下降：为什么深度学习都用“小批量”？🎯 核心结论（先看答案）
-
-
-
-特性
-全量梯度下降（Batch GD）
-随机梯度下降（SGD / Mini-batch SGD）
-
-
-
-
-使用数据
-整个训练集
-一个样本 或 一个小批量（如 32、64）
-
-
-梯度计算
-精确，方向稳定
-有噪声，方向波动
-
-
-更新频率
-每遍历完整个数据集才更新一次
-每个 batch 更新一次
-
-
-训......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-06-09
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2025/06/06/LLM-Adam/">
-                <h2 class="post-title">
-                    Adam优化器思想
-                </h2>
-                <h3 class="post-subtitle">
-                    
-                </h3>
-                <div class="post-content-preview">
-                    🎯 核心思想：Adam 是对普通梯度下降的“加权 + 自适应 + 修正”升级普通梯度下降：$ \theta{t} = \theta{t-1} - \alpha \cdot gt $Adam 的更新： $ \theta{t} = \theta_{t-1} - \frac{\alpha}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t $✅ 本质：还是......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dante on
-                    2025-06-06
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#nlp" title="nlp">nlp</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -1702,7 +1703,7 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
     <div class="tags">
         
             
-            <a href="/tags/#Flink" title="Flink" rel="14">Flink</a>
+            <a href="/tags/#Flink" title="Flink" rel="15">Flink</a>
             
         
             
@@ -1718,7 +1719,7 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
             
         
             
-            <a href="/tags/#nlp" title="nlp" rel="6">nlp</a>
+            <a href="/tags/#nlp" title="nlp" rel="7">nlp</a>
             
         
             
@@ -1920,7 +1921,9 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
             
         
             
-            <a href="/tags/#算法" title="算法" rel="14">算法</a>
+            <a href="/tags/#算法" title="算法" rel="15">算法</a>
+            
+        
             
         
     </div>
@@ -1983,6 +1986,10 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
     <ul>
       
         <li>
+          <a href="/2026/03/23/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%80%9D%E8%80%83/">算法总结-滑动窗口的思考</a>
+        </li>
+      
+        <li>
           <a href="/2026/03/15/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E5%8F%8C%E6%8C%87%E9%92%88%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%BA%94%E7%94%A8/">算法总结-双指针模板及应用</a>
         </li>
       
@@ -1998,10 +2005,6 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
           <a href="/2026/03/07/LLM-%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF-%E4%B8%80/">LLM-梯度累积-一</a>
         </li>
       
-        <li>
-          <a href="/2025/12/30/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93-%E8%AE%BE%E8%AE%A1%E7%B1%BB%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/">设计类题目总结</a>
-        </li>
-      
     </ul>
   </div>
 
@@ -2014,7 +2017,7 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">46</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">126</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">97</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">137</span></li></ul>
     </div>
 
         <hr>
@@ -2078,6 +2081,8 @@ PEFT = Parameter-Efficient Fine-Tuning（参数高效微调）
           <a href="categories/#源码 - Flink"><li>源码 - Flink</li></a>
         
           <a href="categories/#算法总结"><li>算法总结</li></a>
+        
+          <a href="categories/#机器学习"><li>机器学习</li></a>
         
       </ul>
     </div>

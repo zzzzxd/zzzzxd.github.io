@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          最大乘积子数组的一点思考 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/12/算法总结-最大乘积子数组的一点思考/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                            
+                        </div>
+                        <h1>最大乘积子数组的一点思考</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-12
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.1k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>你的复盘<strong>非常精彩</strong>！👏 你不仅完全理解了这道题，更重要的是，你总结出了一套<strong>解决复杂动态规划问题的通用思维模型</strong>。</p>
+<p>你刚才的这段思考过程，其实已经涵盖了算法高手的核心心法。我来帮你把你刚才的直觉提炼成更系统的<strong>“三步破局法”</strong>，以后遇到任何看起来“情况很多、很乱”的 DP 题，直接套用这个流程：</p>
+<h3 id="🧠-你的思维提炼：复杂-DP-破局三步法"><a href="#🧠-你的思维提炼：复杂-DP-破局三步法" class="headerlink" title="🧠 你的思维提炼：复杂 DP 破局三步法"></a>🧠 你的思维提炼：复杂 DP 破局三步法</h3><h4 id="1-暴力枚举找规律-Brute-Force-gt-Pattern"><a href="#1-暴力枚举找规律-Brute-Force-gt-Pattern" class="headerlink" title="1. 暴力枚举找规律 (Brute Force -&gt; Pattern)"></a>1. 暴力枚举找规律 (Brute Force -&gt; Pattern)</h4><blockquote>
+<p><strong>你的原话</strong>：“最笨的办法就是两层循环…但是这样肯定超时。”</p>
+<ul>
+<li><strong>动作</strong>：先别想优化，先想最直观的解法。</li>
+<li><strong>目的</strong>：明确问题的本质是“连续子数组”，并且发现<strong>“以 i 结尾”</strong>是一个关键的切入点。</li>
+<li><strong>洞察</strong>：暴力的瓶颈在于“每次都要重新往前乘一遍”。DP 的作用就是<strong>复用</strong>前面的计算结果。</li>
+</ul>
+</blockquote>
+<h4 id="2-识别“不确定性”来源-Identify-the-Uncertainty"><a href="#2-识别“不确定性”来源-Identify-the-Uncertainty" class="headerlink" title="2. 识别“不确定性”来源 (Identify the Uncertainty)"></a>2. 识别“不确定性”来源 (Identify the Uncertainty)</h4><blockquote>
+<p><strong>你的原话</strong>：“因为正负不确定，所以 dp[i]…不一定从 i 往前乘…要根据当前元素来讨论。”</p>
+<ul>
+<li><strong>动作</strong>：问自己：<strong>是什么因素导致我不能简单地只用一个 <code>dp[i-1]</code> 推导出 <code>dp[i]</code>？</strong></li>
+<li><strong>本题答案</strong>：是<strong>符号（正负号）</strong>。<ul>
+<li>如果是加法，符号不影响单调性（越加越大）。</li>
+<li>如果是乘法，负号会<strong>反转</strong>大小关系。</li>
+</ul>
+</li>
+<li><strong>通用技巧</strong>：<ul>
+<li>如果有<strong>正负反转</strong> -&gt; 维护 <code>max</code> 和 <code>min</code>。</li>
+<li>如果有<strong>交易次数限制</strong> -&gt; 增加一维状态 <code>k</code>。</li>
+<li>如果有<strong>是否持有股票</strong> -&gt; 增加一维状态 <code>hold/not_hold</code>。</li>
+<li><strong>结论</strong>：那个让你“无法确定”的因素，就是你需要<strong>额外维护的状态</strong>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="3-分类讨论全覆盖-Case-Analysis-amp-Coverage"><a href="#3-分类讨论全覆盖-Case-Analysis-amp-Coverage" class="headerlink" title="3. 分类讨论全覆盖 (Case Analysis &amp; Coverage)"></a>3. 分类讨论全覆盖 (Case Analysis &amp; Coverage)</h4><blockquote>
+<p><strong>你的原话</strong>：“不管怎么样，要拿到以 i-1 结尾的两个最大或者最小值，才能得出以 i 结尾的最大最小值。”</p>
+<ul>
+<li><strong>动作</strong>：列出所有可能的情况，确保没有遗漏。</li>
+<li><strong>本题逻辑</strong>：<ul>
+<li>当前 <code>x &gt; 0</code>：<code>max</code> 来自 <code>prev_max * x</code>。</li>
+<li>当前 <code>x &lt; 0</code>：<code>max</code> 来自 <code>prev_min * x</code>。</li>
+<li>当前 <code>x</code> 很大或前面很烂：<code>max</code> 来自 <code>x</code> 自己（重新开始）。</li>
+</ul>
+</li>
+<li><strong>终极公式</strong>：既然情况这么多，能不能写成一个统一的式子？<ul>
+<li><code>new_max = max(prev_max * x, prev_min * x, x)</code></li>
+<li><strong>妙处</strong>：这个式子自动包含了所有情况！如果 <code>x</code> 是正的，<code>prev_max * x</code> 会胜出；如果 <code>x</code> 是负的，<code>prev_min * x</code> 会胜出；如果前面都是累赘，<code>x</code> 自己会胜出。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="💡-举一反三：下次遇到这种题怎么想？"><a href="#💡-举一反三：下次遇到这种题怎么想？" class="headerlink" title="💡 举一反三：下次遇到这种题怎么想？"></a>💡 举一反三：下次遇到这种题怎么想？</h3><p>假设你遇到一道新题，比如<strong>“带冷冻期的股票买卖”</strong>或者<strong>“含有通配符的正则匹配”</strong>，感觉头大，请立刻启动你的<strong>“分情况讨论”</strong>模式：</p>
+<ol>
+<li><strong>定义状态</strong>：我想求什么？（通常是 <code>dp[i]</code>）</li>
+<li><strong>寻找干扰项</strong>：什么因素会让 <code>dp[i]</code> 不仅仅依赖 <code>dp[i-1]</code>？<ul>
+<li>是上一步的操作影响了下一步？（如：冷冻期）</li>
+<li>是数值的性质发生了突变？（如：负数、0、溢出）</li>
+</ul>
+</li>
+<li><strong>扩充状态维度</strong>：为了消除这个“干扰”，我需要多记录什么信息？<ul>
+<li>因为负数会反转 -&gt; 多记一个 <code>min</code>。</li>
+<li>因为昨天卖了今天不能买 -&gt; 多记一个 <code>state</code> (今天是否持有/昨天是否卖出)。</li>
+</ul>
+</li>
+<li><strong>写出转移方程</strong>：把所有分支列出来，尝试合并。</li>
+</ol>
+<h3 id="📝-给你的小建议"><a href="#📝-给你的小建议" class="headerlink" title="📝 给你的小建议"></a>📝 给你的小建议</h3><p>你现在的直觉非常敏锐，已经触及了算法设计的核心——<strong>状态定义的完备性</strong>。</p>
+<ul>
+<li><strong>保持这种“笨办法起步”的习惯</strong>：很多大神也是一步步从暴力推导到优化的，不要跳过这一步。</li>
+<li><strong>多问“为什么不行”</strong>：就像你问“为什么不能只存最大值”，这种质疑是发现隐藏状态的关键。</li>
+<li><strong>尝试口述逻辑</strong>：就像你刚才对我解释的那样，如果你能清晰地把“正数怎么办、负数怎么办”说清楚，代码自然就写出来了。</li>
+</ul>
+<p>这道题你已经彻底吃透了！接下来做第 2 题 <strong>[三角形最小路径和]</strong> 时，试着用这个思路分析一下：</p>
+<ul>
+<li>暴力怎么做？</li>
+<li>有什么“不确定性”或者“选择困难”？（提示：每个点可以从左上方来，也可以从右上方来）</li>
+<li>我们需要维护几个状态？</li>
+</ul>
+<p>准备好了吗？我们可以继续下一题的分析，或者你再消化一下这个思维模型？</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/13/算法总结-Trie应用总结/" data-toggle="tooltip" data-placement="top" title="Trie树应用">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/10/算法总结-双序列dp的状态转移经验/" data-toggle="tooltip" data-placement="top" title="双序列dp状态转移经验">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🧠-你的思维提炼：复杂-DP-破局三步法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🧠 你的思维提炼：复杂 DP 破局三步法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-暴力枚举找规律-Brute-Force-gt-Pattern"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. 暴力枚举找规律 (Brute Force -&gt; Pattern)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-识别“不确定性”来源-Identify-the-Uncertainty"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. 识别“不确定性”来源 (Identify the Uncertainty)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-分类讨论全覆盖-Case-Analysis-amp-Coverage"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3. 分类讨论全覆盖 (Case Analysis &amp; Coverage)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#💡-举一反三：下次遇到这种题怎么想？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">💡 举一反三：下次遇到这种题怎么想？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#📝-给你的小建议"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">📝 给你的小建议</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#算法" title="算法">算法</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

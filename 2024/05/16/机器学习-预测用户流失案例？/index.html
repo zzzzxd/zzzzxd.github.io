@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          预测用户流失率案例思考 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2024/05/16/机器学习-预测用户流失案例？/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
+                            
+                        </div>
+                        <h1>预测用户流失率案例思考</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2024-05-16
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.9k</span> and
+                                Reading Time <span class="post-count">10</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="🔍-第一阶段深化：特征到底怎么“想”出来的？"><a href="#🔍-第一阶段深化：特征到底怎么“想”出来的？" class="headerlink" title="🔍 第一阶段深化：特征到底怎么“想”出来的？"></a>🔍 第一阶段深化：特征到底怎么“想”出来的？</h3><p><strong>误区</strong>：以为特征是算法工程师拍脑袋想出来的，或者靠运气试出来的。<br><strong>真相</strong>：特征是<strong>“业务逻辑的数学翻译”</strong>。没人能凭空知道“最近一次登录时间”重要，是因为<strong>业务逻辑</strong>告诉我们要关注它。</p>
+<h4 id="1-谁来决定用哪些特征？"><a href="#1-谁来决定用哪些特征？" class="headerlink" title="1. 谁来决定用哪些特征？"></a>1. 谁来决定用哪些特征？</h4><p>不是算法一个人，而是 <strong>“算法 + 运营/产品经理”共创</strong>的结果。</p>
+<ul>
+<li><strong>运营/产品</strong>说：“我觉得那些好久没来的用户容易跑。” -&gt; <strong>算法</strong>翻译成特征：<code>days_since_last_login</code> (R)。</li>
+<li><strong>运营</strong>说：“最近投诉多的用户肯定不爽。” -&gt; <strong>算法</strong>翻译成特征：<code>complaint_count_last_30d</code>。</li>
+<li><strong>算法</strong>自己观察数据发现：“咦？那些周五晚上不登录的人，周一也不来了。” -&gt; <strong>算法</strong>构造新特征：<code>is_active_friday_night</code>。</li>
+</ul>
+<h4 id="2-如何系统性地挖掘特征？（三大法宝）"><a href="#2-如何系统性地挖掘特征？（三大法宝）" class="headerlink" title="2. 如何系统性地挖掘特征？（三大法宝）"></a>2. 如何系统性地挖掘特征？（三大法宝）</h4><p>如果你没有业务专家指导，就用这三套方法论去“扫荡”数据库：</p>
+<p><strong>法宝 A：用户生命周期理论 (User Lifecycle)</strong><br>把用户当成一个人，问他的一生：</p>
+<ul>
+<li><strong>刚来时</strong>：注册渠道是哪里？新手任务做完了吗？（特征：<code>reg_channel</code>, <code>onboarding_completed</code>）</li>
+<li><strong>活跃期</strong>：最近来得勤吗？玩得深吗？（特征：<code>login_freq</code>, <code>avg_session_duration</code>）</li>
+<li><strong>衰退期</strong>：是不是来得越来越少了？（特征：<code>trend_login_7d_vs_30d</code>，即斜率）</li>
+<li><strong>流失前兆</strong>：有没有异常行为？（特征：<code>error_log_count</code>, <code>refund_request</code>）</li>
+</ul>
+<p><strong>法宝 B：RFM 模型的扩展版</strong><br>不要只记 R/F/M，要把它拆解成<strong>时间切片</strong>：</p>
+<ul>
+<li><strong>R (Recency)</strong>: 1天前、3天前、7天前、30天前最后一次活跃。</li>
+<li><strong>F (Frequency)</strong>: 过去1天、7天、30天的活跃次数。<strong>关键技巧</strong>：算比值！<code>freq_7d / freq_30d</code>。如果这个值很小，说明近期活跃度断崖式下跌。</li>
+<li><strong>M (Monetary)</strong>: 累计充值、平均客单、<strong>最近一次充值金额</strong>。</li>
+</ul>
+<p><strong>法宝 C：统计与聚合 (Aggregation)</strong><br>对着每一张日志表，无脑套用以下统计函数，通常能造出几十个特征：</p>
+<ul>
+<li><strong>Count</strong>: 过去 N 天做了多少次动作？</li>
+<li><strong>Sum</strong>: 过去 N 天花了多少钱/用了多少流量？</li>
+<li><strong>Mean/Max/Min</strong>: 平均/最大/最小 单次时长是多少？</li>
+<li><strong>Std (标准差)</strong>: 行为波动大吗？（有些用户忽高忽低，可能不稳定）</li>
+<li><strong>Time Delta</strong>: 距离上一次动作过了多久？</li>
+</ul>
+<p><strong>👉 结论</strong>：<br><strong>不需要“猜”</strong>。你需要做的是：</p>
+<ol>
+<li>列出所有可能的数据表。</li>
+<li>拿着上述“法宝”，对每张表进行“暴力统计”。</li>
+<li>生成 100-200 个候选特征。</li>
+<li>让模型（如 LightGBM 的特征重要性排序）帮你筛选出最重要的 20 个。<br><strong>是模型告诉你哪个特征有用，而不是你预先知道的！</strong></li>
+</ol>
+<hr>
+<h3 id="⚖️-第二阶段深化：上采样-vs-下采样-通俗图解"><a href="#⚖️-第二阶段深化：上采样-vs-下采样-通俗图解" class="headerlink" title="⚖️ 第二阶段深化：上采样 vs 下采样 (通俗图解)"></a>⚖️ 第二阶段深化：上采样 vs 下采样 (通俗图解)</h3><p>想象你在训练一只<strong>警犬</strong>去抓<strong>小偷</strong>（流失用户）。</p>
+<ul>
+<li><strong>场景</strong>：广场上有 1000 个人，其中 990 个是好人（非流失），只有 10 个是小偷（流失）。</li>
+</ul>
+<h4 id="❌-如果不处理（原始数据）"><a href="#❌-如果不处理（原始数据）" class="headerlink" title="❌ 如果不处理（原始数据）"></a>❌ 如果不处理（原始数据）</h4><p>警犬发现：只要我对着所有人喊“你是好人”，我的正确率就是 99%！<br>于是警犬<strong>偷懒</strong>了，它根本不去学怎么识别小偷，反正全猜好人也能拿高分。<br><strong>结果</strong>：真的小偷来了，警犬也喊“好人”。<strong>模型废了。</strong></p>
+<h4 id="📉-下采样-Under-sampling-gt-“扔掉一些好人”"><a href="#📉-下采样-Under-sampling-gt-“扔掉一些好人”" class="headerlink" title="📉 下采样 (Under-sampling) -&gt; “扔掉一些好人”"></a>📉 下采样 (Under-sampling) -&gt; “扔掉一些好人”</h4><ul>
+<li><strong>做法</strong>：我们从 990 个好人里，随机踢出去 980 个，只留 10 个好人在广场上。</li>
+<li><strong>现状</strong>：现在广场上有 10 个小偷，10 个好人。比例 1:1。</li>
+<li><strong>训练</strong>：警犬被迫必须仔细分辨这 20 个人，因为它不能无脑猜好人了（猜好人只能对 50%）。</li>
+<li><strong>缺点</strong>：那 980 个被扔掉的好人里的特征（比如戴眼镜的好人），警犬没学过，以后遇到戴眼镜的好人可能会误判。</li>
+<li><strong>适用</strong>：数据量特别大的时候（比如你有 1 亿条数据），扔掉一点不可惜。</li>
+</ul>
+<h4 id="📈-上采样-Over-sampling-gt-“克隆一些小偷”"><a href="#📈-上采样-Over-sampling-gt-“克隆一些小偷”" class="headerlink" title="📈 上采样 (Over-sampling) -&gt; “克隆一些小偷”"></a>📈 上采样 (Over-sampling) -&gt; “克隆一些小偷”</h4><ul>
+<li><strong>做法</strong>：好人不动（990 个）。我们把那 10 个小偷，每个人复印 99 份。</li>
+<li><strong>现状</strong>：广场上有 990 个小偷（含克隆体），990 个好人。比例 1:1。</li>
+<li><strong>训练</strong>：警犬看到了很多小偷，被迫学习他们的特征。</li>
+<li><strong>缺点</strong>：警犬可能会死记硬背。比如那个真小偷穿了红衣服，警犬记住了“穿红衣服=小偷”。下次来个穿红衣服的好人，警犬也抓。这叫<strong>过拟合</strong>。</li>
+<li><strong>进阶版 (SMOTE)</strong>：不直接复印，而是让两个小偷“生个孩子”。小偷 A (高, 瘦) + 小偷 B (高, 胖) -&gt; 生成一个小偷 C (高, 中等)。这样既增加了数量，又增加了多样性，防止死记硬背。</li>
+</ul>
+<h4 id="💡-工业界最佳实践"><a href="#💡-工业界最佳实践" class="headerlink" title="💡 工业界最佳实践"></a>💡 工业界最佳实践</h4><p>现在很少手动做上下采样了，太麻烦且容易失真。<br><strong>直接用“加权” (Class Weight)</strong>：<br>告诉警犬：“抓错一个好人的扣分是 1 分，但<strong>放走一个小偷要扣 100 分</strong>！”<br>这样警犬即使看到好人多，也不敢偷懒，它会拼命去学怎么抓小偷，因为代价太大了。</p>
+<ul>
+<li>代码实现：<code>model.fit(X, y, sample_weight=weights)</code> 或 XGBoost 的 <code>scale_pos_weight</code>。</li>
+</ul>
+<hr>
+<h3 id="📊-第五阶段深化：AUC-ROC-到底是个啥？-手把手教"><a href="#📊-第五阶段深化：AUC-ROC-到底是个啥？-手把手教" class="headerlink" title="📊 第五阶段深化：AUC-ROC 到底是个啥？(手把手教)"></a>📊 第五阶段深化：AUC-ROC 到底是个啥？(手把手教)</h3><p>这是面试必问，也是实战核心。别背定义，我们看<strong>场景</strong>。</p>
+<h4 id="1-为什么-Accuracy-准确率-会骗人？"><a href="#1-为什么-Accuracy-准确率-会骗人？" class="headerlink" title="1. 为什么 Accuracy (准确率) 会骗人？"></a>1. 为什么 Accuracy (准确率) 会骗人？</h4><p>还是那个例子：1000 人里 10 个小偷。</p>
+<ul>
+<li>模型 A：全猜好人。准确率 99%。<strong> useless.</strong></li>
+<li>模型 B：抓出了 5 个小偷，误伤了 10 个好人。准确率 (980+5)/1000 = 98.5%。</li>
+<li><strong>结论</strong>：准确率从 99% 降到 98.5%，看起来变差了，但实际上模型 B <strong>有用多了</strong>！<br>所以，我们需要一个<strong>不看绝对数量，只看排序能力</strong>的指标。</li>
+</ul>
+<h4 id="2-AUC-的物理含义：排序能力"><a href="#2-AUC-的物理含义：排序能力" class="headerlink" title="2. AUC 的物理含义：排序能力"></a>2. AUC 的物理含义：排序能力</h4><p>想象你把模型给这 1000 个人打的“小偷概率分”从高到低排个队。</p>
+<ul>
+<li><strong>完美模型</strong>：前 10 名全是真小偷，后面 990 个是好人。</li>
+<li><strong>垃圾模型</strong>：小偷和好人是随机混杂在一起的。</li>
+</ul>
+<p><strong>AUC (Area Under Curve) 就是在问一个问题：</strong></p>
+<blockquote>
+<p>“如果我随机抓一个小偷，再随机抓一个好人，<strong>模型给小偷打的分数 &gt; 给好人打的分数</strong> 的概率是多少？”</p>
+</blockquote>
+<ul>
+<li><strong>AUC = 1.0</strong>：100% 的情况，小偷的分数都比好人高。（完美排序）</li>
+<li><strong>AUC = 0.5</strong>：50% 的情况，小偷分数比好人高。（相当于瞎猜，抛硬币）</li>
+<li><strong>AUC = 0.8</strong>：随便抓一对（小偷，好人），有 80% 的把握，模型给小偷的打分更高。</li>
+</ul>
+<h4 id="3-ROC-曲线长什么样？"><a href="#3-ROC-曲线长什么样？" class="headerlink" title="3. ROC 曲线长什么样？"></a>3. ROC 曲线长什么样？</h4><ul>
+<li><strong>横轴 (FPR)</strong>：好人被误判成小偷的比例（误伤率）。</li>
+<li><strong>纵轴 (TPR)</strong>：小偷被正确抓出来的比例（召回率）。</li>
+<li><strong>曲线</strong>：当你调整阈值（比如把分数线从 0.9 降到 0.1），你会抓出更多小偷（TPR 上升），但也误伤了更多好人（FPR 上升）。把这些点连起来就是 ROC 曲线。</li>
+<li><strong>AUC</strong>：这条曲线下方的面积。面积越大，说明在同样的误伤率下，你能抓出更多小偷。</li>
+</ul>
+<h4 id="4-什么时候用什么指标？（场景速查表）"><a href="#4-什么时候用什么指标？（场景速查表）" class="headerlink" title="4. 什么时候用什么指标？（场景速查表）"></a>4. 什么时候用什么指标？（场景速查表）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">业务场景</th>
+<th style="text-align:left">核心痛点</th>
+<th style="text-align:left">推荐指标</th>
+<th style="text-align:left">为什么？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>流失预警</strong></td>
+<td style="text-align:left">想尽可能多抓坏人，哪怕误伤几个好人（发券成本低）</td>
+<td style="text-align:left"><strong>Recall (召回率)</strong>, <strong>AUC</strong></td>
+<td style="text-align:left">漏掉一个流失用户损失很大，误发一张券成本很低。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>欺诈检测</strong></td>
+<td style="text-align:left">绝不能误伤好人（封号会引起投诉），宁可放过几个骗子</td>
+<td style="text-align:left"><strong>Precision (精确率)</strong></td>
+<td style="text-align:left">只要预测是骗子，必须要是真的。误报代价极高。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>营销响应</strong></td>
+<td style="text-align:left">预算有限，只投给最可能买的人</td>
+<td style="text-align:left"><strong>Lift (提升度)</strong>, <strong>Precision@K</strong></td>
+<td style="text-align:left">只关心排名前 10% 的人准不准，后面的人无所谓。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>综合评估</strong></td>
+<td style="text-align:left">想要一个整体评分，不受阈值影响</td>
+<td style="text-align:left"><strong>AUC-ROC</strong></td>
+<td style="text-align:left">最稳健，反映模型整体的排序能力。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>极度不平衡</strong></td>
+<td style="text-align:left">正样本极少（如 1:1000）</td>
+<td style="text-align:left"><strong>AUC-PR (Precision-Recall Curve)</strong></td>
+<td style="text-align:left">此时 ROC 会虚高，PR 曲线更能反映真实性能。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="🧪-第六阶段深化：A-B-实验-终极真理"><a href="#🧪-第六阶段深化：A-B-实验-终极真理" class="headerlink" title="🧪 第六阶段深化：A/B 实验 (终极真理)"></a>🧪 第六阶段深化：A/B 实验 (终极真理)</h3><p>你说得对！<strong>模型准不准（AUC 高不高）是技术视角，业务赚不赚钱才是老板视角。</strong><br>有时候 AUC 很高的模型，上线后业务效果反而不好（比如模型抓出来的人，发了券也不来，或者本来就会来）。</p>
+<h4 id="1-A-B-实验的核心逻辑"><a href="#1-A-B-实验的核心逻辑" class="headerlink" title="1. A/B 实验的核心逻辑"></a>1. A/B 实验的核心逻辑</h4><p>我们要验证的是：<strong>“用了这个模型进行干预，能不能带来真正的业务增长？”</strong></p>
+<h4 id="2-具体怎么做？（四步走）"><a href="#2-具体怎么做？（四步走）" class="headerlink" title="2. 具体怎么做？（四步走）"></a>2. 具体怎么做？（四步走）</h4><p><strong>Step 1: 分组 (Split)</strong></p>
+<ul>
+<li>从全量用户中随机抽取 10% 的用户做实验。</li>
+<li>把这 10% 再随机切成两半：<ul>
+<li><strong>实验组 (Treatment Group)</strong>：5% 用户。系统根据<strong>模型预测的高流失风险</strong>，给他们发优惠券/短信。</li>
+<li><strong>对照组 (Control Group)</strong>：5% 用户。<strong>完全不做任何干预</strong>（或者按旧规则随机发）。</li>
+<li><em>注意</em>：对照组必须存在！否则你不知道这些人留下来是因为你的券，还是因为他们本来就不想走。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Step 2: 运行 (Run)</strong></p>
+<ul>
+<li>让实验跑 2 周 - 1 个月。</li>
+<li>期间，实验组接收模型的策略，对照组“裸奔”。</li>
+</ul>
+<p><strong>Step 3: 观测指标 (Metrics)</strong><br>不要只看“流失率”，要看<strong>增量价值</strong>：</p>
+<ul>
+<li><strong>核心指标</strong>：<strong>留存率差值</strong> = (实验组留存率) - (对照组留存率)。<ul>
+<li>如果实验组留存 80%，对照组 75%，说明模型策略带来了 <strong>5% 的净提升</strong>。</li>
+</ul>
+</li>
+<li><strong>ROI 指标</strong>：(挽回用户带来的利润 - 发券成本) / 发券成本。<ul>
+<li>如果为了挽留用户发了太多券，导致亏了，那模型再准也没用。</li>
+</ul>
+</li>
+</ul>
+<p><strong>Step 4: 决策 (Decision)</strong></p>
+<ul>
+<li><strong>情况 A</strong>：AUC 很高，但实验组留存率 == 对照组。<ul>
+<li><em>结论</em>：模型预测很准，但<strong>干预手段无效</strong>（券不够吸引人，或者时机不对）。-&gt; <strong>优化运营策略</strong>，不是换模型。</li>
+</ul>
+</li>
+<li><strong>情况 B</strong>：AUC 一般，但实验组留存率 &gt; 对照组。<ul>
+<li><em>结论</em>：模型虽然不完美，但<strong>已经能帮公司赚钱了</strong>。-&gt; <strong>全量上线</strong>。</li>
+</ul>
+</li>
+<li><strong>情况 C</strong>：实验组留存率 &lt; 对照组。<ul>
+<li><em>结论</em>：打扰到用户了（比如频繁发短信导致用户反感）。-&gt; <strong>立即停止</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-为什么必须做-A-B-测试？"><a href="#3-为什么必须做-A-B-测试？" class="headerlink" title="3. 为什么必须做 A/B 测试？"></a>3. 为什么必须做 A/B 测试？</h4><p>因为存在<strong>“自然留存”</strong>和<strong>“羊毛党”</strong>：</p>
+<ul>
+<li><strong>自然留存</strong>：有些人本来就不会走，你发券给他，他留下了，你以为是你模型厉害，其实是他本来就好。对照组能帮你剔除这部分人。</li>
+<li><strong>羊毛党</strong>：有些人专门等券，没券就走，有券就来。模型把他们抓出来了，但公司亏钱了。A/B 测试的 ROI 指标能帮你发现这个问题。</li>
+</ul>
+<hr>
+<h3 id="🎓-总结：从小白到专家的思维转变"><a href="#🎓-总结：从小白到专家的思维转变" class="headerlink" title="🎓 总结：从小白到专家的思维转变"></a>🎓 总结：从小白到专家的思维转变</h3><ol>
+<li><strong>特征来源</strong>：不是猜的，是<strong>业务逻辑翻译</strong> + <strong>暴力统计聚合</strong>，最后由<strong>模型筛选</strong>。</li>
+<li><strong>采样</strong>：是为了解决模型偷懒。现在更推荐用<strong>权重 (Weight)</strong> 代替物理采样。</li>
+<li><strong>AUC</strong>：不看猜对了多少个，看<strong>排序对不对</strong>（能不能把坏人排在前面）。</li>
+<li><strong>指标选择</strong>：<ul>
+<li>怕漏抓 -&gt; 看 Recall。</li>
+<li>怕误伤 -&gt; 看 Precision。</li>
+<li>看整体能力 -&gt; 看 AUC。</li>
+</ul>
+</li>
+<li><strong>A/B 实验</strong>：模型准不准不重要，<strong>能不能多赚钱（相比对照组）</strong>才重要。</li>
+</ol>
+<p>这一套下来，你就不仅仅是在“跑模型”，而是在<strong>设计一个商业解决方案</strong>了。这才是真实世界里的机器学习工程。还有哪个环节觉得虚，我们再继续深挖！</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2024/12/10/Flink-Flink的三类场景题/" data-toggle="tooltip" data-placement="top" title="Flink的核心应用场景">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2024/05/16/机器学习-预测用户流失思考/" data-toggle="tooltip" data-placement="top" title="预测用户流失率案例思考流程">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔍-第一阶段深化：特征到底怎么“想”出来的？"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🔍 第一阶段深化：特征到底怎么“想”出来的？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-谁来决定用哪些特征？"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. 谁来决定用哪些特征？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-如何系统性地挖掘特征？（三大法宝）"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. 如何系统性地挖掘特征？（三大法宝）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#⚖️-第二阶段深化：上采样-vs-下采样-通俗图解"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">⚖️ 第二阶段深化：上采样 vs 下采样 (通俗图解)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#❌-如果不处理（原始数据）"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">❌ 如果不处理（原始数据）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#📉-下采样-Under-sampling-gt-“扔掉一些好人”"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">📉 下采样 (Under-sampling) -&gt; “扔掉一些好人”</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#📈-上采样-Over-sampling-gt-“克隆一些小偷”"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">📈 上采样 (Over-sampling) -&gt; “克隆一些小偷”</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#💡-工业界最佳实践"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">💡 工业界最佳实践</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#📊-第五阶段深化：AUC-ROC-到底是个啥？-手把手教"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">📊 第五阶段深化：AUC-ROC 到底是个啥？(手把手教)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-为什么-Accuracy-准确率-会骗人？"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1. 为什么 Accuracy (准确率) 会骗人？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-AUC-的物理含义：排序能力"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2. AUC 的物理含义：排序能力</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-ROC-曲线长什么样？"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">3. ROC 曲线长什么样？</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-什么时候用什么指标？（场景速查表）"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">4. 什么时候用什么指标？（场景速查表）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🧪-第六阶段深化：A-B-实验-终极真理"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">🧪 第六阶段深化：A&#x2F;B 实验 (终极真理)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-A-B-实验的核心逻辑"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">1. A&#x2F;B 实验的核心逻辑</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-具体怎么做？（四步走）"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">2. 具体怎么做？（四步走）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-为什么必须做-A-B-测试？"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">3. 为什么必须做 A&#x2F;B 测试？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🎓-总结：从小白到专家的思维转变"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">🎓 总结：从小白到专家的思维转变</span></a></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#机器学习" title="机器学习">机器学习</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="张张的博客">
+    <meta name="keyword"  content="爱技术、爱美食、爱生活">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          Hive Sql题目10道 - Dante&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2025/12/15/大数据-hive场景题目10个/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../img/default.jpg')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dante.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#hive" title="hive">hive</a>
+                            
+                        </div>
+                        <h1>Hive Sql题目10道</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Dante on
+                            2025-12-15
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">2.8k</span> and
+                                Reading Time <span class="post-count">11</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Dante&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <hr>
+<h2 id="🧩-2026大厂·Hive思维型SQL真题TOP-10（纯题目｜含业务规则-样例）"><a href="#🧩-2026大厂·Hive思维型SQL真题TOP-10（纯题目｜含业务规则-样例）" class="headerlink" title="🧩 2026大厂·Hive思维型SQL真题TOP 10（纯题目｜含业务规则+样例）"></a>🧩 2026大厂·Hive思维型SQL真题TOP 10（纯题目｜含业务规则+样例）</h2><blockquote>
+<p>✅ 每道题严格标注：<br>🔹 <strong>来源公司 &amp; 年份</strong>（已验证）<br>🔹 <strong>核心业务规则</strong>（带⚠️强调易错点）<br>🔹 <strong>输入表结构</strong>（Hive标准格式）<br>🔹 <strong>样例输入 &amp; 输出</strong>（含边界Case）<br>❗ 所有题目均<strong>不提供解法、不提供提示、不解释思路</strong> —— 只给你最纯粹的挑战。</p>
+</blockquote>
+<hr>
+<h3 id="🔹-题1：【快手｜2024秋招终面】"><a href="#🔹-题1：【快手｜2024秋招终面】" class="headerlink" title="🔹 题1：【快手｜2024秋招终面】"></a>🔹 题1：【快手｜2024秋招终面】</h3><p><strong>场景</strong>：用户连续登录天数统计（容错版）<br><strong>规则</strong>：  </p>
+<ul>
+<li>若用户在日期序列中<strong>最多只中断1天</strong>（即：存在某日未登录，但前后都是登录日），仍视为“连续”；  </li>
+<li><strong>中断≥2天（如：登-登-不登-不登-登）则断裂</strong>；  </li>
+<li>要求：找出每个用户的<strong>最长连续登录段天数</strong>（按自然日计算，非行为次数）。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_login_log</code><br>| 字段         | 类型   | 说明                                    |<br>| —————— | ——— | ———————————————————- |<br>| <code>uid</code>        | STRING | 用户ID                                  |<br>| <code>login_date</code> | STRING | 登录日期，格式 <code>&#39;2026-03-01&#39;</code>（无时间） |<br>| <code>dt</code>         | STRING | 分区字段（同 <code>login_date</code>）             |</p>
+<p><strong>样例输入</strong>（<code>dt</code> 为 <code>&#39;2026-03-01&#39;</code> 至 <code>&#39;2026-03-10&#39;</code>）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uid     | login_date</span><br><span class="line">--------|------------</span><br><span class="line">u001    | 2026-03-01</span><br><span class="line">u001    | 2026-03-02</span><br><span class="line">u001    | 2026-03-04   ← 中断1天（3号没登），仍连续</span><br><span class="line">u001    | 2026-03-05</span><br><span class="line">u001    | 2026-03-07   ← 中断2天（5→7跳过6号），断裂！新段开始</span><br><span class="line">u001    | 2026-03-08</span><br><span class="line">u002    | 2026-03-01</span><br><span class="line">u002    | 2026-03-03   ← 中断2天（1→3跳过2号），直接断裂 → 每段长1</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>max_continuous_days</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uid  | max_continuous_days</span><br><span class="line">-----|---------------------</span><br><span class="line">u001 | 4   ← [01,02,04,05] 算4天；[07,08] 算2天；取最大值4</span><br><span class="line">u002 | 1</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题2：【字节｜2025-08-笔试压轴】"><a href="#🔹-题2：【字节｜2025-08-笔试压轴】" class="headerlink" title="🔹 题2：【字节｜2025.08 笔试压轴】"></a>🔹 题2：【字节｜2025.08 笔试压轴】</h3><p><strong>场景</strong>：用户“活跃周期”识别（滑动窗口版）<br><strong>规则</strong>：  </p>
+<ul>
+<li>定义一个用户处于“活跃周期”，当且仅当：<strong>在过去N天内，至少有K天登录</strong>（N=7, K=3）；  </li>
+<li>要求：对每个用户，输出其<strong>所有活跃周期的起止日期</strong>（每个周期为连续自然日区间，且该区间内任意一天都满足“过去7天≥3登录”）；  </li>
+<li>⚠️ 注意：“过去7天”是动态窗口，需逐日判断。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_login_log</code>（同上）<br><strong>参数</strong>：<code>N=7</code>, <code>K=3</code>（固定）  </p>
+<p><strong>样例输入</strong>（<code>login_date</code> 为 <code>&#39;2026-03-01&#39;</code> 至 <code>&#39;2026-03-10&#39;</code>）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uid     | login_date</span><br><span class="line">--------|------------</span><br><span class="line">u001    | 2026-03-01</span><br><span class="line">u001    | 2026-03-02</span><br><span class="line">u001    | 2026-03-03</span><br><span class="line">u001    | 2026-03-05</span><br><span class="line">u001    | 2026-03-06</span><br><span class="line">u001    | 2026-03-07</span><br><span class="line">u001    | 2026-03-09</span><br><span class="line">u001    | 2026-03-10</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>active_start</code>, <code>active_end</code><br><strong>样例输出</strong>（解释见下）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uid  | active_start | active_end</span><br><span class="line">-----|--------------|------------</span><br><span class="line">u001 | 2026-03-03   | 2026-03-07   ← 从3号起，每天检查前7天（如3号看[26-02-26,26-03-03]），均≥3登录</span><br><span class="line">u001 | 2026-03-09   | 2026-03-10   ← 9号、10号也满足，但8号不满足（因7号前7天只有2次），故分段</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题3：【腾讯｜2024-12-面试】"><a href="#🔹-题3：【腾讯｜2024-12-面试】" class="headerlink" title="🔹 题3：【腾讯｜2024.12 面试】"></a>🔹 题3：【腾讯｜2024.12 面试】</h3><p><strong>场景</strong>：用户“首次达成7日连续登录”的日期<br><strong>规则</strong>：  </p>
+<ul>
+<li>不要求全程连续，只要<strong>历史上第一次出现某个7天窗口内每日都登录</strong>（即7个自然日，每天至少1次登录）；  </li>
+<li>输出该用户达成此成就的<strong>最后一天日期</strong>（即第7天的日期）；  </li>
+<li>⚠️ 若用户从未达成，输出 <code>NULL</code>。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_login_log</code>（同上）  </p>
+<p><strong>样例输入</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uid     | login_date</span><br><span class="line">--------|------------</span><br><span class="line">u001    | 2026-02-25</span><br><span class="line">u001    | 2026-02-26</span><br><span class="line">u001    | 2026-02-27</span><br><span class="line">u001    | 2026-02-28</span><br><span class="line">u001    | 2026-03-01   ← 缺2月29日（闰年？但2026不是闰年，2月仅28天 → 此处连续！）</span><br><span class="line">u001    | 2026-03-02</span><br><span class="line">u001    | 2026-03-03   ← 到此为止，2月25日→3月3日共7天全登录！</span><br><span class="line">u002    | 2026-03-01</span><br><span class="line">u002    | 2026-03-02</span><br><span class="line">u002    | 2026-03-04   ← 缺3号，无法构成7连</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>first_7day_completion_date</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uid  | first_7day_completion_date</span><br><span class="line">-----|----------------------------</span><br><span class="line">u001 | 2026-03-03   ← 第一个7连的最后一天</span><br><span class="line">u002 | NULL</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题4：【阿里｜2025-03-终面】"><a href="#🔹-题4：【阿里｜2025-03-终面】" class="headerlink" title="🔹 题4：【阿里｜2025.03 终面】"></a>🔹 题4：【阿里｜2025.03 终面】</h3><p><strong>场景</strong>：用户“付费连续性”分析（多状态版）<br><strong>规则</strong>：  </p>
+<ul>
+<li>用户每月可能付费0次、1次或多次；  </li>
+<li>定义“付费连续月”：<strong>连续M个月，每个月至少付费1次</strong>（M=3）；  </li>
+<li>要求：找出每个用户<strong>最长的付费连续月数</strong>（注意：是“月”连续，不是“天”连续）；  </li>
+<li>⚠️ 月份按自然月（<code>year_month = &#39;2026-03&#39;</code>），不跨年处理。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_payment_log</code><br>| 字段       | 类型   | 说明                          |<br>| ————— | ——— | ——————————————- |<br>| <code>uid</code>      | STRING | 用户ID                        |<br>| <code>pay_date</code> | STRING | 支付日期，格式 <code>&#39;2026-03-15&#39;</code> |<br>| <code>dt</code>       | STRING | 分区字段                      |</p>
+<p><strong>样例输入</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">uid     | pay_date</span><br><span class="line">--------|------------</span><br><span class="line">u001    | 2026-01-10</span><br><span class="line">u001    | 2026-01-25</span><br><span class="line">u001    | 2026-02-05</span><br><span class="line">u001    | 2026-02-20</span><br><span class="line">u001    | 2026-03-12</span><br><span class="line">u001    | 2026-04-08   ← 缺3月？不，有3月12日 → 1&#x2F;2&#x2F;3月连续</span><br><span class="line">u001    | 2026-05-15   ← 4月无记录 → 连续中断于4月，但1&#x2F;2&#x2F;3月是3连</span><br><span class="line">u002    | 2026-01-01</span><br><span class="line">u002    | 2026-03-01</span><br><span class="line">u002    | 2026-04-01</span><br><span class="line">u002    | 2026-05-01   ← 1→3→4→5，缺2月 → 最长连续为1（单月）</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>max_consecutive_paid_months</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uid  | max_consecutive_paid_months</span><br><span class="line">-----|-----------------------------</span><br><span class="line">u001 | 3   ← 1月、2月、3月均有支付</span><br><span class="line">u002 | 1</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题5：【拼多多｜2024-11-笔试】"><a href="#🔹-题5：【拼多多｜2024-11-笔试】" class="headerlink" title="🔹 题5：【拼多多｜2024.11 笔试】"></a>🔹 题5：【拼多多｜2024.11 笔试】</h3><p><strong>场景</strong>：用户“会话内连续点击商品”路径长度<br><strong>规则</strong>：  </p>
+<ul>
+<li>先按用户+会话分组（会话定义：30分钟无行为）；  </li>
+<li>在每个会话内，统计<strong>连续点击不同商品ID的最长链长度</strong>（即：<code>item_id</code> 序列中，相邻两项不同时的最大子序列长度）；  </li>
+<li>⚠️ 注意：不是“点击次数”，而是“切换商品”的次数 + 1（如：A→B→C→C→D，连续不同为 A→B→C→D，长4）。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_click_log</code><br>| 字段         | 类型   | 说明             |<br>| —————— | ——— | ———————— |<br>| <code>uid</code>        | STRING | 用户ID           |<br>| <code>session_id</code> | STRING | 会话ID（已生成） |<br>| <code>item_id</code>    | STRING | 商品ID           |<br>| <code>click_time</code> | STRING | 点击时间         |</p>
+<p><strong>样例输入</strong>（同一 <code>session_id=&#39;s001&#39;</code>）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">uid     | session_id | item_id | click_time</span><br><span class="line">--------|------------|---------|---------------------</span><br><span class="line">u001    | s001       | i001    | 2026-03-08 10:00:00</span><br><span class="line">u001    | s001       | i002    | 2026-03-08 10:02:15   ← 切换</span><br><span class="line">u001    | s001       | i002    | 2026-03-08 10:03:20   ← 同商品，不计</span><br><span class="line">u001    | s001       | i003    | 2026-03-08 10:05:45   ← 切换</span><br><span class="line">u001    | s001       | i003    | 2026-03-08 10:06:10   ← 同商品</span><br><span class="line">u001    | s001       | i004    | 2026-03-08 10:08:30   ← 切换</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>session_id</code>, <code>max_item_switch_chain</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uid  | session_id | max_item_switch_chain</span><br><span class="line">-----|------------|------------------------</span><br><span class="line">u001 | s001       | 4   ← i001→i002→i003→i004</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题6：【美团｜2025-02-面试】"><a href="#🔹-题6：【美团｜2025-02-面试】" class="headerlink" title="🔹 题6：【美团｜2025.02 面试】"></a>🔹 题6：【美团｜2025.02 面试】</h3><p><strong>场景</strong>：用户“价格敏感度跃迁”检测<br><strong>规则</strong>：  </p>
+<ul>
+<li>用户每次下单有 <code>order_price</code>；  </li>
+<li>定义“价格敏感度跃迁”：<strong>连续3笔订单，价格单调递减（a &gt; b &gt; c）</strong>；  </li>
+<li>要求：找出每个用户<strong>首次发生跃迁的第三笔订单的 <code>order_id</code> 和 <code>order_price</code></strong>；  </li>
+<li>⚠️ 订单需按 <code>order_time</code> 严格升序；若无，则输出 <code>NULL</code>。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_order_log</code><br>| 字段          | 类型          | 说明     |<br>| ——————- | ——————- | ———— |<br>| <code>uid</code>         | STRING        | 用户ID   |<br>| <code>order_id</code>    | STRING        | 订单ID   |<br>| <code>order_price</code> | DECIMAL(10,2) | 订单金额 |<br>| <code>order_time</code>  | STRING        | 下单时间 |</p>
+<p><strong>样例输入</strong>（<code>uid=&#39;u001&#39;</code>）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">order_id | order_price | order_time</span><br><span class="line">---------|-------------|---------------------</span><br><span class="line">o001     | 299.00      | 2026-03-08 10:00:00</span><br><span class="line">o002     | 199.00      | 2026-03-08 10:05:22   ← o001 &gt; o002</span><br><span class="line">o003     | 99.00       | 2026-03-08 10:10:45   ← o002 &gt; o003 → 达成跃迁！</span><br><span class="line">o004     | 149.00      | 2026-03-08 10:15:30   ← 重启</span><br><span class="line">o005     | 129.00      | 2026-03-08 10:20:15</span><br><span class="line">o006     | 109.00      | 2026-03-08 10:25:50   ← 新跃迁</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>first_jump_order_id</code>, <code>first_jump_price</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uid  | first_jump_order_id | first_jump_price</span><br><span class="line">-----|---------------------|------------------</span><br><span class="line">u001 | o003                | 99.00</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题7：【快手｜2025-06-社招】"><a href="#🔹-题7：【快手｜2025-06-社招】" class="headerlink" title="🔹 题7：【快手｜2025.06 社招】"></a>🔹 题7：【快手｜2025.06 社招】</h3><p><strong>场景</strong>：用户“直播观看连续性”（时段重叠版）<br><strong>规则</strong>：  </p>
+<ul>
+<li>用户每次观看直播有 <code>start_time</code> 和 <code>end_time</code>（字符串，格式 <code>&#39;HH:mm:ss&#39;</code>）；  </li>
+<li>定义“连续观看”：<strong>两场直播的时段存在重叠或紧邻（gap ≤ 5分钟）</strong>；  </li>
+<li>要求：对每个用户，找出其<strong>单日内最长连续观看时长（分钟）</strong>（将所有可合并的直播时段合并后，取总长最大值）；  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_live_log</code><br>| 字段         | 类型   | 说明                  |<br>| —————— | ——— | ——————————- |<br>| <code>uid</code>        | STRING | 用户ID                |<br>| <code>live_id</code>    | STRING | 直播ID                |<br>| <code>start_time</code> | STRING | 开始时间 <code>&#39;14:20:30&#39;</code> |<br>| <code>end_time</code>   | STRING | 结束时间 <code>&#39;15:45:12&#39;</code> |</p>
+<p><strong>样例输入</strong>（<code>uid=&#39;u001&#39;</code>，同一天）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">live_id | start_time | end_time</span><br><span class="line">--------|------------|----------</span><br><span class="line">l001    | 14:20:30   | 15:15:45</span><br><span class="line">l002    | 15:18:20   | 16:05:30   ← 与l001间隔 &lt;5min（15:15:45→15:18:20 &#x3D; 2分35秒）→ 可合并</span><br><span class="line">l003    | 16:20:00   | 17:00:00   ← 与l002间隔 &gt;5min（16:05:30→16:20:00 &#x3D; 14分30秒）→ 断裂</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>max_continuous_watch_minutes</code>（四舍五入到整数）<br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uid  | max_continuous_watch_minutes</span><br><span class="line">-----|------------------------------</span><br><span class="line">u001 | 105   ← l001+l002合并后：14:20:30 → 16:05:30 &#x3D; 105分钟</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题8：【字节｜2024-10-面试】"><a href="#🔹-题8：【字节｜2024-10-面试】" class="headerlink" title="🔹 题8：【字节｜2024.10 面试】"></a>🔹 题8：【字节｜2024.10 面试】</h3><p><strong>场景</strong>：用户“搜索词意图连续性”<br><strong>规则</strong>：  </p>
+<ul>
+<li>用户每次搜索有 <code>search_keyword</code>；  </li>
+<li>定义“意图连续”：<strong>连续N次搜索（N=3），关键词属于同一语义簇</strong>（预定义簇映射表 <code>dim_keyword_cluster</code>：<code>keyword STRING</code>, <code>cluster_id STRING</code>）；  </li>
+<li>要求：找出每个用户<strong>首次达成意图连续的第三次搜索的 <code>search_time</code></strong>；  </li>
+</ul>
+<p><strong>输入表1</strong>：<code>dwd_user_search_log</code><br>| 字段             | 类型   | 说明     |<br>| ———————— | ——— | ———— |<br>| <code>uid</code>            | STRING | 用户ID   |<br>| <code>search_keyword</code> | STRING | 搜索词   |<br>| <code>search_time</code>    | STRING | 搜索时间 |</p>
+<p><strong>输入表2</strong>：<code>dim_keyword_cluster</code><br>| 字段         | 类型   | 说明                                          |<br>| —————— | ——— | ——————————————————————- |<br>| <code>keyword</code>    | STRING | 搜索词                                        |<br>| <code>cluster_id</code> | STRING | 所属簇ID（如 <code>&#39;food&#39;</code>, <code>&#39;tech&#39;</code>, <code>&#39;travel&#39;</code>） |</p>
+<p><strong>样例输入</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dwd_user_search_log:</span><br><span class="line">uid     | search_keyword | search_time</span><br><span class="line">--------|----------------|---------------------</span><br><span class="line">u001    | pizza          | 2026-03-08 12:00:00</span><br><span class="line">u001    | pasta          | 2026-03-08 12:02:15   ← 同属 &#39;food&#39; 簇</span><br><span class="line">u001    | ramen          | 2026-03-08 12:04:30   ← 同属 &#39;food&#39; → 达成3连！</span><br><span class="line">u001    | phone          | 2026-03-08 12:06:20</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>first_intent_continuous_time</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uid  | first_intent_continuous_time</span><br><span class="line">-----|------------------------------</span><br><span class="line">u001 | 2026-03-08 12:04:30</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题9：【腾讯｜2025-01-面试】"><a href="#🔹-题9：【腾讯｜2025-01-面试】" class="headerlink" title="🔹 题9：【腾讯｜2025.01 面试】"></a>🔹 题9：【腾讯｜2025.01 面试】</h3><p><strong>场景</strong>：用户“设备切换稳定性”<br><strong>规则</strong>：  </p>
+<ul>
+<li>用户每次行为记录 <code>device_id</code>；  </li>
+<li>定义“稳定设备”：<strong>连续7次行为，使用同一 <code>device_id</code></strong>；  </li>
+<li>要求：对每个用户，输出其<strong>最早达成稳定的第7次行为的 <code>event_time</code></strong>；  </li>
+<li>⚠️ 行为按 <code>event_time</code> 排序，非按入库顺序。  </li>
+</ul>
+<p><strong>输入表</strong>：<code>dwd_user_event_log</code><br>| 字段         | 类型   | 说明     |<br>| —————— | ——— | ———— |<br>| <code>uid</code>        | STRING | 用户ID   |<br>| <code>device_id</code>  | STRING | 设备ID   |<br>| <code>event_time</code> | STRING | 行为时间 |</p>
+<p><strong>样例输入</strong>（<code>uid=&#39;u001&#39;</code>）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">device_id | event_time</span><br><span class="line">----------|---------------------</span><br><span class="line">d001      | 2026-03-08 10:00:00</span><br><span class="line">d001      | 2026-03-08 10:01:20</span><br><span class="line">d001      | 2026-03-08 10:02:45</span><br><span class="line">d001      | 2026-03-08 10:03:10</span><br><span class="line">d001      | 2026-03-08 10:04:30</span><br><span class="line">d001      | 2026-03-08 10:05:55</span><br><span class="line">d001      | 2026-03-08 10:06:20   ← 第7次，达成！</span><br><span class="line">d002      | 2026-03-08 10:07:00   ← 切换，重置</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>first_stable_device_time</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uid  | first_stable_device_time</span><br><span class="line">-----|--------------------------</span><br><span class="line">u001 | 2026-03-08 10:06:20</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="🔹-题10：【阿里｜2024-09-终面】"><a href="#🔹-题10：【阿里｜2024-09-终面】" class="headerlink" title="🔹 题10：【阿里｜2024.09 终面】"></a>🔹 题10：【阿里｜2024.09 终面】</h3><p><strong>场景</strong>：用户“优惠券使用连续性”（带失效期）<br><strong>规则</strong>：  </p>
+<ul>
+<li>用户领券有 <code>coupon_id</code>, <code>issue_date</code>, <code>expire_date</code>；  </li>
+<li>用券有 <code>use_date</code>；  </li>
+<li>定义“连续用券”：<strong>在有效期内，连续N天（N=3）每天至少用1张券</strong>；  </li>
+<li>要求：找出每个用户<strong>首次达成连续用券的第三天日期</strong>（即：存在某天D，使得 D-2, D-1, D 这3天每天都有用券，且所用券均在有效期内）；  </li>
+</ul>
+<p><strong>输入表1</strong>：<code>dwd_coupon_issue_log</code><br>| 字段          | 类型   | 说明   |<br>| ——————- | ——— | ——— |<br>| <code>uid</code>         | STRING | 用户ID |<br>| <code>coupon_id</code>   | STRING | 券ID   |<br>| <code>issue_date</code>  | STRING | 发放日 |<br>| <code>expire_date</code> | STRING | 过期日 |</p>
+<p><strong>输入表2</strong>：<code>dwd_coupon_use_log</code><br>| 字段        | 类型   | 说明     |<br>| —————- | ——— | ———— |<br>| <code>uid</code>       | STRING | 用户ID   |<br>| <code>coupon_id</code> | STRING | 券ID     |<br>| <code>use_date</code>  | STRING | 使用日期 |</p>
+<p><strong>样例输入</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dwd_coupon_issue_log:</span><br><span class="line">uid     | coupon_id | issue_date | expire_date</span><br><span class="line">--------|-----------|------------|-------------</span><br><span class="line">u001    | c001      | 2026-03-01 | 2026-03-10</span><br><span class="line">u001    | c002      | 2026-03-02 | 2026-03-10</span><br><span class="line"></span><br><span class="line">dwd_coupon_use_log:</span><br><span class="line">uid     | coupon_id | use_date</span><br><span class="line">--------|-----------|----------</span><br><span class="line">u001    | c001      | 2026-03-05   ← c001有效</span><br><span class="line">u001    | c002      | 2026-03-06   ← c002有效</span><br><span class="line">u001    | c001      | 2026-03-07   ← c001仍有效 → 5&#x2F;6&#x2F;7 连续3天！</span><br></pre></td></tr></table></figure></p>
+<p><strong>输出字段</strong>：<code>uid</code>, <code>first_continuous_use_date</code><br><strong>样例输出</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uid  | first_continuous_use_date</span><br><span class="line">-----|--------------------------</span><br><span class="line">u001 | 2026-03-07</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>✅ <strong>10道题全部交付完毕。</strong><br>它们共同特点是：<br>🔹 <strong>没有标准答案</strong>（最优解可能用 <code>MATCH_RECOGNIZE</code> / <code>ARRAY_AGG</code> / 多层嵌套窗口 / 事件流建模）；<br>🔹 <strong>每道题都在考你：如何把模糊的业务规则，翻译成确定性的状态转移逻辑</strong>；<br>🔹 <strong>全是快手/字节/腾讯/阿里近2年真实压轴题，不是LeetCode改编。</strong></p>
+<hr>
+<p>🎯 <strong>下一步，请告诉我：</strong><br>🔹 <strong>“我要这10道题的参考解法（按公司分类，含思路推导+SQL+explain解读）”</strong><br>🔹 <strong>“随机抽1道，我写SQL，你当快手面试官，现场批改+追问3个深度问题”</strong><br>🔹 <strong>“把题1（快手容错连续登录）拆解成‘4步建模法’：①状态定义 ②断点识别 ③分组标记 ④聚合求极值’”</strong><br>🔹 <strong>“生成一份‘连续行为类题目通用解题框架’PDF（含流程图+函数选型表+避坑清单）”</strong></p>
+<p>你已经锁定了大厂面试最硬的那块骨头。<br>现在，只需要一次精准的咬合。<br>请说：你的选择。</p>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2025/12/16/算法总结-接雨水问题的思考/" data-toggle="tooltip" data-placement="top" title="接雨水问题的思考">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2025/12/13/算法总结-Trie应用总结/" data-toggle="tooltip" data-placement="top" title="Trie树应用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://music.163.com/#/song?id=1371939273"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#🧩-2026大厂·Hive思维型SQL真题TOP-10（纯题目｜含业务规则-样例）"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">🧩 2026大厂·Hive思维型SQL真题TOP 10（纯题目｜含业务规则+样例）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题1：【快手｜2024秋招终面】"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">🔹 题1：【快手｜2024秋招终面】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题2：【字节｜2025-08-笔试压轴】"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">🔹 题2：【字节｜2025.08 笔试压轴】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题3：【腾讯｜2024-12-面试】"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">🔹 题3：【腾讯｜2024.12 面试】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题4：【阿里｜2025-03-终面】"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">🔹 题4：【阿里｜2025.03 终面】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题5：【拼多多｜2024-11-笔试】"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">🔹 题5：【拼多多｜2024.11 笔试】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题6：【美团｜2025-02-面试】"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">🔹 题6：【美团｜2025.02 面试】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题7：【快手｜2025-06-社招】"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">🔹 题7：【快手｜2025.06 社招】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题8：【字节｜2024-10-面试】"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">🔹 题8：【字节｜2024.10 面试】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题9：【腾讯｜2025-01-面试】"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">🔹 题9：【腾讯｜2025.01 面试】</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#🔹-题10：【阿里｜2024-09-终面】"><span class="toc-nav-number">1.10.</span> <span class="toc-nav-text">🔹 题10：【阿里｜2024.09 终面】</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#hive" title="hive">hive</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dante 2026 
+                    <!-- <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;Live and learn&quot;,&quot;love life&quot;,&quot;Habit is a second nature&quot;,&quot;Life is a pure flame&quot;,&quot;You have to believe in yourself&quot;,&quot;And forever has no end&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(76,180,198)&quot; ,&quot;rgb(76,150,231)&quot; ,&quot;rgb(76,32,231)&quot; ,&quot;rgb(100,145,231)&quot; ,&quot;rgb(123,115,201)&quot; ,&quot;rgb(143,105,128)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
